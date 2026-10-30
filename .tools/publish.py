@@ -14,6 +14,7 @@ from issues import ISSUES, LABELS, MILESTONES  # noqa: E402
 ORG = "aromapacifico-platform"
 REPO = f"{ORG}/planning"
 PROJECT_TITLE = "Kanban Board"
+PROJECT_NUMBER = 2
 DRY = "--dry-run" in sys.argv
 
 STATUS = ["Backlog", "Ready", "In progress", "In review", "Done"]
@@ -110,7 +111,7 @@ def ensure_issues():
 
 def ensure_project():
     projects = json.loads(gh("project", "list", "--owner", ORG, "--format", "json"))["projects"]
-    project = next((p for p in projects if p["title"] == PROJECT_TITLE), None)
+    project = next((p for p in projects if p["number"] == PROJECT_NUMBER), None)
     if project is None:
         project = json.loads(gh("project", "create", "--owner", ORG, "--title", PROJECT_TITLE,
                                 "--format", "json"))

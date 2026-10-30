@@ -19,4 +19,4 @@ Los nombres de carpeta van en inglés (rutas/slugs); el contenido de cada docume
 | `docs/presentation/` | Presentación, banco de preguntas y ensayo (Tarea 5) |
 | `docs/cross-cutting/` | Registro de supuestos, revisión final y checklist de entrega |
 
-El tablero de tareas vive en el [Project #1](https://github.com/orgs/aromapacifico-platform/projects/1).
+El tablero de tareas vive en el [Project #2](https://github.com/orgs/aromapacifico-platform/projects/2).
