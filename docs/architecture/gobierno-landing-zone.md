@@ -48,7 +48,7 @@ flowchart TD
 Para evitar que los dominios criticos compartan el mismo entorno operativo y prevenir que un incidente en desarrollo comprometa la telemetria o la seguridad del grano, se establece una separacion formal en cinco cuentas distribuidas en dos Unidades Organizativas principales, mas la cuenta de gestion:
 
 | Nivel Jerarquico | Cuenta / OU | ID Logico de Cuenta | Proposito Operativo y Cargas Asignadas |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Raiz (Root) | Management Account | `AromaPacifico-Root` | Facturacion consolidada, gobernanza de AWS Organizations, despliegue de SCPs raiz, directorio IAM Identity Center y AWS Budgets Master. Prohibido desplegar recursos de computo o aplicaciones operativas. |
 | OU Core | Seguridad y Auditoria | `AromaPacifico-Security` | Centralizacion de registros de auditoria inmutables (CloudTrail, VPC Flow Logs, logs de IoT Core), agregacion de AWS Config, deteccion de amenazas con Amazon GuardDuty y gestion de llaves maestras KMS. |
 | OU Core | Red Compartida | `AromaPacifico-Network` | Concentracion del AWS Transit Gateway, terminacion de tuneles IPsec VPN hacia los centros de acopio (10.41.0.0/16, 10.42.0.0/16, 10.43.0.0/16), AWS Network Firewall e inspeccion centralizada, y VPC Endpoints privados para servicios AWS. |
@@ -244,7 +244,7 @@ Para alimentar con precision el costeo desagregado por componentes que exige el 
 ### 5.1 Matriz de Dimensiones de Etiquetado
 
 | Clave de Etiqueta (Tag Key) | Tipo de Dato | Descripcion de Negocio | Valores Permitidos / Patron de Validacion |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `FincaID` | String | Identificador unico de la finca cafetera asociada | `FINCA-001` a `FINCA-200` o `GLOBAL` para recursos compartidos |
 | `DronID` | String | Identificador de la aeronave o mision especifica | `DRON-CAUCA-01`, `DRON-HUILA-01`, `DRON-TOLIMA-01` o `NO-APLICA` |
 | `AcopioID` | String | Centro de acopio departamental que procesa el flujo | `ACOPIO-CAUCA`, `ACOPIO-HUILA`, `ACOPIO-TOLIMA` o `MULTICENTRO` |
@@ -266,7 +266,7 @@ La administracion y operacion de la plataforma en la nube sigue el principio de 
 ### 6.1 Matriz de Acceso y Conjuntos de Permisos (Permission Sets)
 
 | Perfil de Ingenieria | Canal de Autenticacion | Factor de Autenticacion | Cuentas Asignadas | Permission Set / Privilegios Asignados |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | **DevOps Lead / Operador Plataforma** | IAM Identity Center | MFA Obligatorio (FIDO2 / WebAuthn) | `AromaPacifico-Dev`, `AromaPacifico-Test`, `AromaPacifico-Prod` | Administracion de IaC (Terraform) y canalizaciones en Dev/Test. En Prod, despliegue restringido mediante pipelines CI/CD y acceso solo de lectura/diagnostico para incidentes. |
 | **Ingeniero de Seguridad / Auditor** | IAM Identity Center | MFA Obligatorio (FIDO2 / WebAuthn) | `AromaPacifico-Security` (Primaria), Lectura en resto | Solo lectura e inspeccion forense de logs en S3, CloudTrail y agregadores de AWS Config. Sin permisos de mutacion de recursos. |
 | **Ingeniero de Redes y Conectividad** | IAM Identity Center | MFA Obligatorio (FIDO2 / WebAuthn) | `AromaPacifico-Network` | Administracion de Transit Gateway, tuneles VPN IPsec con centros de acopio y reglas de AWS Network Firewall. |
@@ -288,7 +288,7 @@ Es una decision de arquitectura critica destacar que los perfiles operativos de 
 Para controlar el gasto operativo del piloto bajo criterios de moderacion financiera, se establecen presupuestos mensuales con base en cotizaciones actualizadas a 2026:
 
 | Cuenta AWS | Presupuesto Mensual Estimado | Principales Componentes de Gasto Cubiertos |
-|---|---|---|
+| --- | --- | --- |
 | `AromaPacifico-Security` | **$50 USD** | Ingesta y almacenamiento en S3 Standard/Glacier de CloudTrail Organization Trail, VPC Flow Logs y reglas de AWS Config. |
 | `AromaPacifico-Network` | **$120 USD** | Horas activas de AWS Transit Gateway, tuneles VPN IPsec hacia Cauca, Huila y Tolima, y VPC Endpoints privados. |
 | `AromaPacifico-Prod` | **$180 USD** (Mes normal)<br>**$450 USD** (Mes de cosecha pico) | AWS IoT Core (telemetria de 200 fincas y drones), DynamoDB On-Demand, invocaciones Lambda, Amazon Rekognition para confirmacion de plagas y egreso de datos para consulta web. |
@@ -313,6 +313,7 @@ En la operacion agronomica y logistica de la Federacion Nacional de Cafeteros ap
 > Ante la superacion de cualquier umbral presupuestal (incluso por encima del 120%), **esta terminantemente prohibido suspender, apagar o estrangular los servicios de ingesta de telemetria IoT de las 200 fincas o el portal de consulta publica del saco**.
 
 **Sustentacion Tecnica y Operativa**:
+
 - La interrupcion de la ingesta de telemetria impediria capturar alertas tempranas de humedad y temperatura en los lotes de secado, conllevando al riesgo inminente de fermentacion o perdida irreparable de cientos de sacos de cafe de alta calidad.
 - El bloqueo de la consulta publica de sacos violaria el compromiso de trazabilidad con compradores en Buenaventura y en el exterior, afectando la reputacion comercial del cafe colombiano.
 - Accion correctiva permitida: En la cuenta de **Desarrollo**, ante una alerta critica, se autoriza la ejecucion de scripts que destruyan recursos ociosos no productivos (ej. instancias de prueba huérfanas). En **Produccion** y **Red**, la remediacion de sobrecostos se realiza exclusivamente mediante auditoria analitica y optimizacion de politicas, manteniendo la continuidad del servicio en todo momento.
@@ -326,7 +327,7 @@ A continuacion se sustenta formalmente por que la arquitectura adoptada es super
 ### 8.1 Landing Zone: AWS Organizations con Terraform vs. AWS Control Tower vs. Cuenta Unica
 
 | Criterio de Evaluacion | Opcion Seleccionada: AWS Organizations + IaC | Alternativa 1: AWS Control Tower | Alternativa 2: Cuenta Unica Mono-Ambiente |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Control Granular y Transparencia en Codigo | Maximo. Todo el gobierno se declara en Terraform de forma modular y auditable. | Bajo. Despliega recursos no visibles ni parametrizables facilmente. | Minimo. Todo convive en un unico espacio sin barreras reales. |
 | Complejidad y Timebox (Limite de 100 Horas) | Totalmente compatible con el limite de 100h / 2 semanas de la Epica 6. | Alta sobrecarga. Requiere resolver dependencias opacas del servicio. | Inviable en seguridad. No cumple los 7 puntos del pliego oficial. |
 | Costo Fijo Mensual en Infraestructura | $0 USD en reposo. Servicios de gobierno nativos sin sobretasa. | ~$150-$280 USD fijos en Config aggregators y logs redundantes. | $0 USD pero con alto riesgo de colision y gasto incontrolado. |
@@ -337,7 +338,7 @@ A continuacion se sustenta formalmente por que la arquitectura adoptada es super
 ### 8.2 Optimizacion de Trafico FinOps: VPC Endpoints Centralizados vs. NAT Gateways por Cuenta
 
 | Enfoque Evaluado | Opcion Seleccionada: Gateway/Interface Endpoints en Shared-Network | Alternativa 1: NAT Gateway en cada Cuenta y VPC | Alternativa 2: Salida Publica con IPs Elasticas Directas |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Costo por Trafico de Telemetria e Imagenes | $0 USD/GB para S3 y DynamoDB via Gateway Endpoints. Cero costo de procesamiento NAT. | $0,045 USD/GB + $0,045 USD/hora/NAT (~$135 USD/mes/NAT). | $0,00 USD pero exige exponer subredes a internet publica. |
 | Seguridad y Privacidad (Ley 1581 de 2012) | Trafico no abandona la red troncal privada de AWS. | Trafico sale hacia internet publica de AWS. | Critica vulnerabilidad de exposicion de IPs y datos en claro. |
 
