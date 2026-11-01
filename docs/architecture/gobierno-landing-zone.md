@@ -32,21 +32,6 @@ A continuación se presenta el diagrama canónico del árbol organizacional de c
 
 > Fuente editable en formato Draw.io XML descomprimido disponible en: [`diagrams/arbol-organizacional.drawio`](diagrams/arbol-organizacional.drawio).
 
-```mermaid
-flowchart TD
-    ROOT["Cuenta Raíz (Management Account)\nFacturación Consolidada | AWS Organizations Master\nIAM Identity Center | AWS Budgets Master | Repositorio SCPs"]
-    
-    ROOT -->|"Unidad Organizativa"| OU_CORE["Unidad Organizativa: Core (Core-OU)"]
-    ROOT -->|"Unidad Organizativa"| OU_WORKLOADS["Unidad Organizativa: Cargas de Trabajo (Workloads-OU)"]
-    
-    OU_CORE --> ACC_SEC["Cuenta: Seguridad y Auditoría (Security-Audit)\n- CloudTrail Organization Trail\n- S3 Central WORM (Object Lock 5 Años)\n- GuardDuty + Security Hub + AWS Config"]
-    OU_CORE --> ACC_NET["Cuenta: Red Compartida (Shared-Network)\n- AWS Transit Gateway Hub\n- VPNs Acopio (Cauca 10.41 / Huila 10.42 / Tolima 10.43)\n- AWS Network Firewall + VPC Endpoints FinOps"]
-    
-    OU_WORKLOADS --> ACC_DEV["Cuenta: Desarrollo (Workload-Dev)\n- Sandboxes IaC (Terraform) y emuladores IoT\n- Prototipos de inferencia\n- Apagado no laboral FinOps ($50 USD/mes)"]
-    OU_WORKLOADS --> ACC_TEST["Cuenta: Pruebas y Staging (Workload-Test)\n- Réplica de producción y validación CI/CD\n- Pruebas de estrés de consulta del saco\n- Homologación de umbrales FNC ($80 USD/mes)"]
-    OU_WORKLOADS --> ACC_PROD["Cuenta: Producción (Workload-Prod)\n- AWS IoT Core (200 Fincas, MQTT/TLS)\n- DynamoDB On-Demand + S3 + Rekognition\n- Apps y Consulta Pública (RPO 15m / RTO 4h)"]
-```
-
 ---
 
 ## 3. Jerarquía de Unidades Organizativas y Cuentas AWS
