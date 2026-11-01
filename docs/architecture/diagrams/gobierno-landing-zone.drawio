@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" compressed="false">
+  <diagram id="landing-zone-org" name="Estructura AWS Organizations Landing Zone">
+    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1300" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TITULO PRINCIPAL -->
+        <mxCell id="title" value="AromaPacifico - Arquitectura de Landing Zone en AWS Organizations" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="350" y="30" width="900" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Estructura Jerarquica de Cuentas, Politicas de Control de Servicio (SCP), Identidad Centralizada, Etiquetas FinOps y Presupuestos" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
+          <mxGeometry x="350" y="70" width="900" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- PANEL LATERAL IZQUIERDO: POLÍTICAS SCP Y ETIQUETAS FINOPS -->
+        <mxCell id="sec-scps" value="POLITICAS DE CONTROL DE SERVICIO (SCPs)&#xa;Aplicadas desde la Raiz de AWS Organizations&#xa;&#xa;1. deny-unapproved-regions&#xa;   Deniega crear recursos fuera de us-east-1 y us-east-2.&#xa;   Exencion: servicios globales IAM, Route53, CloudFront.&#xa;&#xa;2. protect-audit-and-security&#xa;   Bloquea borrado y modificacion de CloudTrail, Config,&#xa;   GuardDuty y politicas S3 Object Lock (5 anos WORM).&#xa;&#xa;3. deny-untagged-workload-resources&#xa;   Deniega creacion de recursos si faltan etiquetas obligatorias&#xa;   (FincaID, DronID, AcopioID, ViajeID, Ambiente, Propietario).&#xa;&#xa;4. deny-unencrypted-and-public-storage&#xa;   Exige cifrado KMS/AES-256 e impide buckets S3 publicos." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#D93F0B;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=15;spacingTop=12;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="50" y="120" width="380" height="270" as="geometry" />
+        </mxCell>
+
+        <mxCell id="sec-tags" value="TAXONOMIA DE ETIQUETAS FINOPS (Tag Policy)&#xa;Dimensiones Mandatorias para Costeo del Reto&#xa;&#xa;- FincaID: FINCA-001 a FINCA-200 | GLOBAL&#xa;- DronID: DRON-CAUCA-01, DRON-HUILA-01 | NO-APLICA&#xa;- AcopioID: ACOPIO-CAUCA, ACOPIO-HUILA, TOLIMA | MULTI&#xa;- ViajeID: VIAJE-XXXX | NO-APLICA&#xa;- Ambiente: produccion | pruebas | desarrollo | compartido&#xa;- Propietario: devops-fnc | seguridad-cloud | datos&#xa;- Proyecto: AromaPacifico (Constante)&#xa;&#xa;Objetivo: Costeo 100% auditable por finca, dron, acopio y viaje." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#0E8A16;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=15;spacingTop=12;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="50" y="410" width="380" height="240" as="geometry" />
+        </mxCell>
+
+        <!-- PANEL LATERAL DERECHO: IDENTIDAD Y PRESUPUESTOS -->
+        <mxCell id="sec-identity" value="GESTION DE IDENTIDADES (IAM Identity Center)&#xa;Acceso Federado SSO con MFA Obligatorio&#xa;&#xa;Perfiles y Permission Sets Asignados:&#xa;&#xa;1. Operador Plataforma / DevOps Lead:&#xa;   - Acceso con MFA obligatorio a cuentas de la organizacion.&#xa;   - Permisos de despliegue IaC en Dev/Test y aprobacion en Prod.&#xa;&#xa;2. Ingeniero de Seguridad / Auditor Forense:&#xa;   - Acceso de solo lectura de auditoria en Cuenta Security.&#xa;&#xa;3. Ingeniero de Red:&#xa;   - Gestion de TGW, VPNs de Acopio y Network Firewall.&#xa;&#xa;Nota: Caficultores, transportadores y compradores NO tienen&#xa;acceso a consola AWS (usan Cognito y consulta web publica)." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#1D76DB;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=15;spacingTop=12;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="120" width="380" height="270" as="geometry" />
+        </mxCell>
+
+        <mxCell id="sec-budgets" value="AWS BUDGETS Y POLITICA DE DISPONIBILIDAD&#xa;Presupuestos Mensuales y Alertas por Cuenta&#xa;&#xa;Presupuestos Base Mensuales:&#xa;- Cuenta Seguridad y Auditoria: $50 USD / mes&#xa;- Cuenta Red Compartida: $120 USD / mes&#xa;- Cuenta Produccion: $180 USD normal / $450 USD cosecha&#xa;- Cuenta Pruebas: $80 USD / mes&#xa;- Cuenta Desarrollo: $50 USD / mes&#xa;&#xa;Umbrales de Notificacion: 80% (Info), 100% (Warning), 120% (Critica)&#xa;&#xa;POLITICA INNEGOCIABLE DE DISPONIBILIDAD:&#xa;Ante sobrecosto o superacion de umbral: AVISAR, NUNCA APAGAR.&#xa;Prohibido suspender la ingesta IoT de fincas o la consulta del saco." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#FBCA04;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=15;spacingTop=12;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="410" width="380" height="260" as="geometry" />
+        </mxCell>
+
+        <!-- COLUMNA CENTRAL: JERARQUÍA DE AWS ORGANIZATIONS -->
+        <!-- CUENTA RAIZ / MANAGEMENT ACCOUNT -->
+        <mxCell id="root-account" value="Cuenta Raiz (Management Account)&#xa;ID Logico: AromaPacifico-Root&#xa;&#xa;- Facturacion Consolidada (Consolidated Billing)&#xa;- Administracion de AWS Organizations y OUs&#xa;- AWS IAM Identity Center (Directorio y SSO)&#xa;- Repositorio Central de SCPs y Tag Policies Raiz&#xa;- AWS Budgets Master y Cost Anomaly Detection&#xa;(Sin cargas de trabajo operativas en esta cuenta)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#232F3E;strokeColor=#FF9900;strokeWidth=3;fontColor=#FFFFFF;fontSize=13;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="500" y="130" width="600" height="150" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR: OU INFRAESTRUCTURA Y SERVICIOS COMPARTIDOS -->
+        <mxCell id="ou-core-container" value="Unidad Organizativa: Infraestructura y Core (Core-OU)" style="swimlane;startSize=30;horizontal=1;fillColor=#EAEDED;strokeColor=#545B64;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="470" y="340" width="660" height="290" as="geometry" />
+        </mxCell>
+
+        <!-- CUENTA SEGURIDAD Y AUDITORIA -->
+        <mxCell id="acc-security" value="Cuenta: Seguridad y Auditoria (Security-Audit)&#xa;ID Logico: AromaPacifico-Security&#xa;&#xa;- AWS CloudTrail Organization Trail (Multi-region)&#xa;- S3 Bucket Central de Auditoria con Object Lock (5 Anos WORM)&#xa;- AWS Config Aggregator para cumplimiento continuo&#xa;- Amazon GuardDuty + AWS Security Hub Centralizado&#xa;- AWS KMS Multi-Region Keys para cifrado de reposo" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="ou-core-container">
+          <mxGeometry x="25" y="45" width="295" height="225" as="geometry" />
+        </mxCell>
+
+        <!-- CUENTA RED COMPARTIDA -->
+        <mxCell id="acc-network" value="Cuenta: Red Compartida (Shared-Network)&#xa;ID Logico: AromaPacifico-Network&#xa;&#xa;- AWS Transit Gateway / VPC Hub Inter-cuentas&#xa;- Terminacion VPN IPsec para 3 Centros de Acopio:&#xa;  * Cauca (10.41.0.0/16)&#xa;  * Huila (10.42.0.0/16)&#xa;  * Tolima (10.43.0.0/16)&#xa;- AWS Network Firewall para inspeccion centralizada&#xa;- VPC Endpoints Privados (S3, DynamoDB) FinOps&#xa;- Route 53 Resolver Privado Hibrido" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="ou-core-container">
+          <mxGeometry x="340" y="45" width="295" height="225" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR: OU CARGAS DE TRABAJO -->
+        <mxCell id="ou-workloads-container" value="Unidad Organizativa: Cargas de Trabajo de Negocio (Workloads-OU)" style="swimlane;startSize=30;horizontal=1;fillColor=#EAEDED;strokeColor=#545B64;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="100" y="690" width="1400" height="340" as="geometry" />
+        </mxCell>
+
+        <!-- CUENTA DESARROLLO -->
+        <mxCell id="acc-dev" value="Cuenta: Desarrollo (Workload-Dev)&#xa;Ambiente: desarrollo&#xa;&#xa;- Sandbox y prototipado rapido de IaC (Terraform)&#xa;- Validacion de firmware de nodos y emuladores IoT&#xa;- Prototipos de funciones serverless de inferencia&#xa;- Sin enlace directo a redes locales de acopio&#xa;- Horario controlado: apagado nocturno FinOps&#xa;- Presupuesto acotado: $50 USD / mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="ou-workloads-container">
+          <mxGeometry x="30" y="50" width="410" height="260" as="geometry" />
+        </mxCell>
+
+        <!-- CUENTA PRUEBAS / STAGING -->
+        <mxCell id="acc-test" value="Cuenta: Pruebas y Homologacion (Workload-Test)&#xa;Ambiente: pruebas&#xa;&#xa;- Replica de arquitectura previa a produccion&#xa;- Pruebas de integracion continua CI/CD (GitHub Actions)&#xa;- Validacion de ingestores y drenado de buffer 24h&#xa;- Homologacion de umbrales agronomicos de la FNC&#xa;- Pruebas de carga (picos de 30 lecturas/min en saco)&#xa;- Simulacion de misiones offline de drones&#xa;- Presupuesto mensual: $80 USD / mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FBCA04;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="ou-workloads-container">
+          <mxGeometry x="480" y="50" width="430" height="260" as="geometry" />
+        </mxCell>
+
+        <!-- CUENTA PRODUCCIÓN -->
+        <mxCell id="acc-prod" value="Cuenta: Produccion (Workload-Prod)&#xa;Ambiente: produccion | Regiones: us-east-1 (standby us-east-2)&#xa;&#xa;- AWS IoT Core (200 Fincas, certificados X.509, MQTT/TLS)&#xa;- Amazon DynamoDB On-Demand (Telemetria, Sacos, Drones)&#xa;- Amazon S3 (Fotos de Drones, Modelos, Mapas, GeoJSON)&#xa;- Inferencia Serverless: AWS Lambda + Amazon Rekognition&#xa;- API Gateway + App Runner para las 3 Aplicaciones:&#xa;  * App Caficultor | App Transportador | Consulta Publica&#xa;- Proteccion de Privacidad: Anonimizacion estricta Ley 1581&#xa;- Ventana de Congelamiento: Sin cambios 05:00-18:00 en cosecha" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="ou-workloads-container">
+          <mxGeometry x="950" y="50" width="420" height="260" as="geometry" />
+        </mxCell>
+
+        <!-- CONECTORES Y FLECHAS DE JERARQUÍA -->
+        <!-- Raiz a Core OU -->
+        <mxCell id="edge-root-core" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#232F3E;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="root-account" target="ou-core-container">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Raiz a Workloads OU -->
+        <mxCell id="edge-root-workloads" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#232F3E;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="root-account" target="ou-workloads-container">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="800" y="310" />
+              <mxPoint x="450" y="310" />
+              <mxPoint x="450" y="660" />
+              <mxPoint x="800" y="660" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Panel SCP a Raiz -->
+        <mxCell id="edge-scps-root" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D93F0B;strokeWidth=2;dashed=1;fontSize=12;" edge="1" parent="1" source="sec-scps" target="root-account">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Panel Tags a Raiz -->
+        <mxCell id="edge-tags-root" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0E8A16;strokeWidth=2;dashed=1;fontSize=12;" edge="1" parent="1" source="sec-tags" target="root-account">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="450" y="530" />
+              <mxPoint x="450" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Panel Identity a Raiz -->
+        <mxCell id="edge-identity-root" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D76DB;strokeWidth=2;dashed=1;fontSize=12;" edge="1" parent="1" source="sec-identity" target="root-account">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Panel Budgets a Raiz -->
+        <mxCell id="edge-budgets-root" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FBCA04;strokeWidth=2;dashed=1;fontSize=12;" edge="1" parent="1" source="sec-budgets" target="root-account">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1150" y="540" />
+              <mxPoint x="1150" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- NOTA PIE DE PAGINA -->
+        <mxCell id="footer-note" value="Invariantes Clave: Segregacion total de blast radius | Region permitida: us-east-1 y us-east-2 | Cifrado KMS obligatorio en reposo | Retencion 5 anos WORM" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=2;fontColor=#5A6B7C;" vertex="1" parent="1">
+          <mxGeometry x="400" y="1050" width="800" height="30" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
