@@ -32,8 +32,8 @@
 
   <rect width="1650" height="920" fill="#F8F9FA" />
 
-  <text x="825" y="40" class="title">AromaPacifico - Diagrama de Secuencia: Deteccion de Plaga, Autorizacion Humana y Verificacion</text>
-  <text x="825" y="65" class="subtitle">Flujo Extremo a Extremo con Inferencia Serverless (AWS Rekognition) y Compuerta Innegociable de Aprobacion Humana</text>
+  <text x="825" y="40" class="title">AromaPacífico - Diagrama de Secuencia: Detección de Plaga, Autorización Humana y Verificación</text>
+  <text x="825" y="65" class="subtitle">Flujo Extremo a Extremo con Inferencia Serverless (AWS Rekognition) y Compuerta Innegociable de Aprobación Humana</text>
 
   <!-- LINEAS DE VIDA -->
   <line x1="130" y1="150" x2="130" y2="860" stroke="#BDC3C7" stroke-width="1.5" stroke-dasharray="4,4" />
@@ -55,15 +55,15 @@
   <!-- 2. NUBE -->
   <g transform="translate(280, 95)" filter="url(#shadow)">
     <rect width="170" height="52" rx="6" fill="#1D76DB" stroke="#1D76DB" stroke-width="2" />
-    <text x="85" y="24" class="actor-title">Nube AromaPacifico</text>
+    <text x="85" y="24" class="actor-title">Nube AromaPacífico</text>
     <text x="85" y="42" class="actor-title" font-weight="normal" font-size="11px">(IoT Core / DynamoDB)</text>
   </g>
 
   <!-- 3. DRON S2 -->
   <g transform="translate(515, 95)" filter="url(#shadow)">
     <rect width="170" height="52" rx="6" fill="#0E8A16" stroke="#0E8A16" stroke-width="2" />
-    <text x="85" y="24" class="actor-title">Dron Tactico S2</text>
-    <text x="85" y="42" class="actor-title" font-weight="normal" font-size="11px">(Confirmacion Foco)</text>
+    <text x="85" y="24" class="actor-title">Dron Táctico S2</text>
+    <text x="85" y="42" class="actor-title" font-weight="normal" font-size="11px">(Confirmación Foco)</text>
   </g>
 
   <!-- 4. INFERENCIA -->
@@ -76,7 +76,7 @@
   <!-- 5. AGRONOMO -->
   <g transform="translate(985, 95)" filter="url(#shadow)">
     <rect width="170" height="52" rx="6" fill="#FF9900" stroke="#FF9900" stroke-width="2" />
-    <text x="85" y="24" class="actor-title" fill="#232F3E">Agronomo FNC</text>
+    <text x="85" y="24" class="actor-title" fill="#232F3E">Agrónomo FNC</text>
     <text x="85" y="42" class="actor-title" fill="#232F3E" font-weight="normal" font-size="11px">(Compuerta Humana MFA)</text>
   </g>
 
@@ -90,21 +90,21 @@
   <!-- 7. DRON VERIFICACION -->
   <g transform="translate(1455, 95)" filter="url(#shadow)">
     <rect width="170" height="52" rx="6" fill="#0E8A16" stroke="#0E8A16" stroke-width="2" />
-    <text x="85" y="24" class="actor-title">Dron Tactico S4</text>
-    <text x="85" y="42" class="actor-title" font-weight="normal" font-size="11px">(Verificacion Post-Fumigar)</text>
+    <text x="85" y="24" class="actor-title">Dron Táctico S4</text>
+    <text x="85" y="42" class="actor-title" font-weight="normal" font-size="11px">(Verificación Post-Fumigar)</text>
   </g>
 
   <!-- PASO 1 -->
   <path d="M 130 185 L 365 185" fill="none" stroke="#D93F0B" stroke-width="2" marker-end="url(#arr-red)" />
-  <text x="145" y="178" class="msg-text" fill="#D93F0B">1. Telemetria anomala: humedad alta, temp &gt; 22 C, GPS foco del lote</text>
+  <text x="145" y="178" class="msg-text" fill="#D93F0B">1. Telemetría anómala: humedad alta, temp &gt; 22 C, GPS foco del lote</text>
 
   <!-- PASO 2 -->
   <path d="M 365 235 L 600 235" fill="none" stroke="#1D76DB" stroke-width="2" marker-end="url(#arr-blue)" />
-  <text x="380" y="228" class="msg-text">2. Asigna orden tactica S2 con coordenadas del foco (mision offline)</text>
+  <text x="380" y="228" class="msg-text">2. Asigna orden táctica S2 con coordenadas del foco (misión offline)</text>
 
   <!-- PASO 3 -->
   <path d="M 600 285 L 835 285" fill="none" stroke="#0E8A16" stroke-width="2" marker-end="url(#arr-green)" />
-  <text x="615" y="278" class="msg-text">3. Despega al foco, toma foto de alta resolucion y entrega objeto a S3</text>
+  <text x="615" y="278" class="msg-text">3. Despega al foco, toma foto de alta resolución y entrega objeto a S3</text>
 
   <!-- PASO 4 -->
   <path d="M 835 335 L 365 335" fill="none" stroke="#5319E7" stroke-width="2" marker-end="url(#arr-purple)" />
@@ -112,43 +112,42 @@
 
   <!-- PASO 5 -->
   <path d="M 365 385 L 1070 385" fill="none" stroke="#FF9900" stroke-width="2" marker-end="url(#arr-orange)" />
-  <text x="385" y="378" class="msg-text" fill="#B08800">5. Alerta a Agronomo FNC con expediente digital (Prohibido autorizar por IA)</text>
+  <text x="385" y="378" class="msg-text" fill="#B08800">5. Alerta a Agrónomo FNC con expediente digital (Prohibido autorizar por IA)</text>
 
   <!-- NOTA EVALUACION HUMANA -->
   <g transform="translate(930, 415)" filter="url(#shadow)">
     <rect width="280" height="85" rx="6" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" />
     <text x="12" y="20" class="note-text" font-weight="bold" fill="#B08800">COMPUERTA HUMANA ZERO TRUST:</text>
-    <text x="12" y="38" class="note-text">Agronomo valida evidencia fotografica,</text>
-    <text x="12" y="54" class="note-text">poligono delimitado, zonas No-Fly y</text>
-    <text x="12" y="70" class="note-text">lote de agroquimico registrado ICA con MFA.</text>
+    <text x="12" y="38" class="note-text">Agrónomo valida evidencia fotográfica,</text>
+    <text x="12" y="54" class="note-text">polígono delimitado, zonas No-Fly y</text>
+    <text x="12" y="70" class="note-text">lote de agroquímico registrado ICA con MFA.</text>
   </g>
 
   <!-- PASO 6 -->
   <path d="M 1070 530 L 365 530" fill="none" stroke="#0E8A16" stroke-width="2" marker-end="url(#arr-green)" />
-  <text x="400" y="522" class="msg-text" fill="#0E8A16">6. Firma y emite Orden de Fumigacion digital (Finca, Lote, Ventana horaria, Insumo ICA)</text>
+  <text x="400" y="522" class="msg-text" fill="#0E8A16">6. Firma y emite Orden de Fumigación digital (Finca, Lote, Ventana horaria, Insumo ICA)</text>
 
   <!-- PASO 7 -->
   <path d="M 365 580 L 1305 580" fill="none" stroke="#D93F0B" stroke-width="2" marker-end="url(#arr-red)" />
-  <text x="400" y="572" class="msg-text">7. Cuadrilla UAS carga mision offline en acopio (Cumplimiento RAC 100 Aerocivil)</text>
+  <text x="400" y="572" class="msg-text">7. Cuadrilla UAS carga misión offline en acopio (Cumplimiento RAC 100 Aerocivil)</text>
 
   <!-- PASO 8 -->
   <path d="M 1305 635 L 365 635" fill="none" stroke="#0E8A16" stroke-width="2" marker-end="url(#arr-green)" />
-  <text x="400" y="627" class="msg-text">8. Aspersion ultra-localizada ejecutada; bitacora persistida: 'Pendiente Verificacion'</text>
+  <text x="400" y="627" class="msg-text">8. Aspersión ultra-localizada ejecutada; bitácora persistida: 'Pendiente Verificación'</text>
 
   <!-- PASO 9 -->
   <path d="M 365 690 L 1540 690" fill="none" stroke="#1D76DB" stroke-width="2" marker-end="url(#arr-blue)" />
-  <text x="400" y="682" class="msg-text">9. Ventana cumplida (7-10 dias): Genera orden tactica de verificacion S4</text>
+  <text x="400" y="682" class="msg-text">9. Ventana cumplida (7-10 días): Genera orden táctica de verificación S4</text>
 
   <!-- PASO 10 -->
   <path d="M 1540 745 L 835 745" fill="none" stroke="#0E8A16" stroke-width="2" marker-end="url(#arr-green)" />
-  <text x="860" y="737" class="msg-text">10. Dron S4 toma foto de resolucion del foco post-aspersor y sube a S3</text>
+  <text x="860" y="737" class="msg-text">10. Dron S4 toma foto de resolución del foco post-aspersor y sube a S3</text>
 
   <!-- PASO 11 -->
   <path d="M 835 800 L 365 800" fill="none" stroke="#0E8A16" stroke-width="3" marker-end="url(#arr-green)" />
-  <text x="400" y="792" class="msg-text" fill="#0E8A16" font-weight="bold">11. Inferencia valida recuperacion foliar; persiste estado 'CERRADO' en DynamoDB</text>
+  <text x="400" y="792" class="msg-text" fill="#0E8A16" font-weight="bold">11. Inferencia valida recuperación foliar; persiste estado 'CERRADO' en DynamoDB</text>
 
   <!-- PASO 12 -->
   <path d="M 365 845 L 1070 845" fill="none" stroke="#545B64" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arr-gray)" />
-  <text x="400" y="837" class="msg-text" fill="#545B64">12. Notificacion de caso CERRADO a agronomia federativa y caficultor</text>
+  <text x="400" y="837" class="msg-text" fill="#545B64">12. Notificación de caso CERRADO a agronomía federativa y caficultor (retención 5 años)</text>
 </svg>
-

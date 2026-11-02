@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mxfile host="Electron" compressed="false">
-  <diagram id="secuencia-fumigacion" name="Secuencia de Alerta Agronomica a Fumigacion y Cierre">
+  <diagram id="secuencia-fumigacion" name="Secuencia de Alerta Agronómica a Fumigación y Cierre">
     <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1300" background="#FFFFFF">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
 
         <!-- TITULO -->
-        <mxCell id="seq-title" value="AromaPacifico - Diagrama de Secuencia: Deteccion de Plaga, Autorizacion Humana y Verificacion" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+        <mxCell id="seq-title" value="AromaPacífico - Diagrama de Secuencia: Detección de Plaga, Autorización Humana y Verificación" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
           <mxGeometry x="300" y="25" width="1050" height="35" as="geometry" />
         </mxCell>
-        <mxCell id="seq-subtitle" value="Flujo Extremo a Extremo con Inferencia Serverless (AWS Rekognition) y Compuerta Innegociable de Aprobacion Humana" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
+        <mxCell id="seq-subtitle" value="Flujo Extremo a Extremo con Inferencia Serverless (AWS Rekognition) y Compuerta Innegociable de Aprobación Humana" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
           <mxGeometry x="300" y="60" width="1050" height="20" as="geometry" />
         </mxCell>
 
@@ -26,7 +26,7 @@
         </mxCell>
 
         <!-- 2. NUBE IOT Y PERSISTENCIA -->
-        <mxCell id="part-cloud" value="Nube AromaPacifico&#xa;(IoT Core / DynamoDB)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1D76DB;strokeColor=#1D76DB;fontSize=12;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
+        <mxCell id="part-cloud" value="Nube AromaPacífico&#xa;(IoT Core / DynamoDB)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1D76DB;strokeColor=#1D76DB;fontSize=12;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
           <mxGeometry x="270" y="100" width="170" height="50" as="geometry" />
         </mxCell>
         <mxCell id="line-cloud" value="" style="endArrow=none;dashed=1;html=1;strokeWidth=1;strokeColor=#545B64;fontSize=12;" edge="1" parent="1" source="part-cloud">
@@ -36,7 +36,7 @@
         </mxCell>
 
         <!-- 3. DRON CONFIRMACIÓN -->
-        <mxCell id="part-dron-tact" value="Dron Tactico S2&#xa;(Confirmacion Foco)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0E8A16;strokeColor=#0E8A16;fontSize=12;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
+        <mxCell id="part-dron-tact" value="Dron Táctico S2&#xa;(Confirmación Foco)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0E8A16;strokeColor=#0E8A16;fontSize=12;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
           <mxGeometry x="500" y="100" width="160" height="50" as="geometry" />
         </mxCell>
         <mxCell id="line-dron-tact" value="" style="endArrow=none;dashed=1;html=1;strokeWidth=1;strokeColor=#545B64;fontSize=12;" edge="1" parent="1" source="part-dron-tact">
@@ -56,7 +56,7 @@
         </mxCell>
 
         <!-- 5. AGRÓNOMO HUMANO -->
-        <mxCell id="part-agro" value="Agronomo FNC&#xa;(Compuerta Humana MFA)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9900;strokeColor=#FF9900;fontSize=12;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+        <mxCell id="part-agro" value="Agrónomo FNC&#xa;(Compuerta Humana MFA)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9900;strokeColor=#FF9900;fontSize=12;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
           <mxGeometry x="950" y="100" width="170" height="50" as="geometry" />
         </mxCell>
         <mxCell id="line-agro" value="" style="endArrow=none;dashed=1;html=1;strokeWidth=1;strokeColor=#545B64;fontSize=12;" edge="1" parent="1" source="part-agro">
@@ -76,7 +76,7 @@
         </mxCell>
 
         <!-- 7. DRON VERIFICACIÓN S4 -->
-        <mxCell id="part-verif" value="Dron Tactico S4&#xa;(Verificacion Post-Fumigar)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0E8A16;strokeColor=#0E8A16;fontSize=12;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
+        <mxCell id="part-verif" value="Dron Táctico S4&#xa;(Verificación Post-Fumigar)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0E8A16;strokeColor=#0E8A16;fontSize=12;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
           <mxGeometry x="1410" y="100" width="180" height="50" as="geometry" />
         </mxCell>
         <mxCell id="line-verif" value="" style="endArrow=none;dashed=1;html=1;strokeWidth=1;strokeColor=#545B64;fontSize=12;" edge="1" parent="1" source="part-verif">
@@ -86,7 +86,7 @@
         </mxCell>
 
         <!-- PASO 1: TELEMETRÍA ANOMALA -->
-        <mxCell id="msg1" value="1. Publica telemetria anomala (humedad alta, temp &gt; 22 C, GPS foco)" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;rounded=0;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
+        <mxCell id="msg1" value="1. Publica telemetría anómala (humedad alta, temp &gt; 22 C, GPS foco)" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;rounded=0;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="130" y="180" as="sourcePoint" />
             <mxPoint x="355" y="180" as="targetPoint" />
@@ -94,7 +94,7 @@
         </mxCell>
 
         <!-- PASO 2: ORDEN CONFIRMACION S2 -->
-        <mxCell id="msg2" value="2. Crea orden tactica S2 con coordenadas del foco (mision offline)" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;rounded=0;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
+        <mxCell id="msg2" value="2. Crea orden táctica S2 con coordenadas del foco (misión offline)" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;rounded=0;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="355" y="230" as="sourcePoint" />
             <mxPoint x="580" y="230" as="targetPoint" />
@@ -110,7 +110,7 @@
         </mxCell>
 
         <!-- PASO 4: DISPARO S3 -> LAMBDA -> REKOGNITION -->
-        <mxCell id="msg4" value="4. Evento S3 invoca Lambda -> Rekognition evalua presencia de roya/plaga" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;rounded=0;strokeColor=#5319E7;strokeWidth=2;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
+        <mxCell id="msg4" value="4. Evento S3 invoca Lambda -> Rekognition evalúa presencia de roya/plaga" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;rounded=0;strokeColor=#5319E7;strokeWidth=2;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="805" y="330" as="sourcePoint" />
             <mxPoint x="355" y="330" as="targetPoint" />
@@ -118,7 +118,7 @@
         </mxCell>
 
         <!-- PASO 5: NOTIFICACIÓN A AGRONOMO -->
-        <mxCell id="msg5" value="5. Persiste resultado (confianza 89%) y alerta a agronomo (NO autoriza)" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;rounded=0;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
+        <mxCell id="msg5" value="5. Persiste resultado (confianza 89%) y alerta a agrónomo (NO autoriza)" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;rounded=0;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="355" y="380" as="sourcePoint" />
             <mxPoint x="1035" y="380" as="targetPoint" />
@@ -126,12 +126,12 @@
         </mxCell>
 
         <!-- PASO 6: EVALUACIÓN HUMANA Y FIRMA -->
-        <mxCell id="box-eval" value="COMPUERTA HUMANA ZERO TRUST:&#xa;Agronomo revisa evidencia foliar, verifica delimitacion de lote&#xa;y No-Fly zones, selecciona lote de agroquimico registrado ICA&#xa;y autoriza orden S3 firmando con MFA." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingLeft=10;spacingTop=6;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
+        <mxCell id="box-eval" value="COMPUERTA HUMANA ZERO TRUST:&#xa;Agrónomo revisa evidencia foliar, verifica delimitación de lote&#xa;y No-Fly zones, selecciona lote de agroquímico registrado ICA&#xa;y autoriza orden S3 firmando con MFA." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingLeft=10;spacingTop=6;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
           <mxGeometry x="880" y="420" width="310" height="85" as="geometry" />
         </mxCell>
 
         <!-- PASO 7: ENTREGA ORDEN A CUADRILLA -->
-        <mxCell id="msg7" value="6. Emite Orden de Fumigacion digital firmada (Finca, Lote, Ventana, ICA)" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;rounded=0;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
+        <mxCell id="msg7" value="6. Emite Orden de Fumigación digital firmada (Finca, Lote, Ventana, ICA)" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;rounded=0;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1035" y="530" as="sourcePoint" />
             <mxPoint x="355" y="530" as="targetPoint" />
@@ -147,7 +147,7 @@
         </mxCell>
 
         <!-- PASO 9: EJECUCIÓN ASPERSIÓN -->
-        <mxCell id="msg9" value="8. Ejecuta aspersion localizada sobre foco y persiste logs en buffer local" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;rounded=0;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
+        <mxCell id="msg9" value="8. Ejecuta aspersión localizada sobre foco y persiste logs en buffer local" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;rounded=0;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1265" y="620" as="sourcePoint" />
             <mxPoint x="355" y="620" as="targetPoint" />
@@ -155,7 +155,7 @@
         </mxCell>
 
         <!-- PASO 10: DISPARO VERIFICACIÓN POST-7 DÍAS -->
-        <mxCell id="msg10" value="9. Ventana cumplida (7-10 dias): Genera orden tactica de verificacion S4" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;rounded=0;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
+        <mxCell id="msg10" value="9. Ventana cumplida (7-10 días): Genera orden táctica de verificación S4" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;rounded=0;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="355" y="670" as="sourcePoint" />
             <mxPoint x="1500" y="670" as="targetPoint" />
@@ -171,7 +171,7 @@
         </mxCell>
 
         <!-- PASO 12: INFERENCIA CIERRE -->
-        <mxCell id="msg12" value="11. Inferencia valida recuperacion foliar; persiste cierre de caso en DynamoDB" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;rounded=0;strokeColor=#0E8A16;strokeWidth=3;fontSize=12;fontColor=#0E8A16;fontStyle=1;" edge="1" parent="1">
+        <mxCell id="msg12" value="11. Inferencia valida recuperación foliar; persiste cierre de caso en DynamoDB" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;rounded=0;strokeColor=#0E8A16;strokeWidth=3;fontSize=12;fontColor=#0E8A16;fontStyle=1;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="805" y="770" as="sourcePoint" />
             <mxPoint x="355" y="770" as="targetPoint" />
@@ -179,7 +179,7 @@
         </mxCell>
 
         <!-- PASO 13: NOTIFICACION CIERRE A AGRONOMO -->
-        <mxCell id="msg13" value="12. Notifica expediente CERRADO a agronomo y caficultor" style="html=1;verticalAlign=bottom;endArrow=block;dashed=1;edgeStyle=elbowEdgeStyle;elbow=vertical;rounded=0;strokeColor=#545B64;strokeWidth=2;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
+        <mxCell id="msg13" value="12. Notifica expediente CERRADO a agrónomo y caficultor (retención WORM 5 años)" style="html=1;verticalAlign=bottom;endArrow=block;dashed=1;edgeStyle=elbowEdgeStyle;elbow=vertical;rounded=0;strokeColor=#545B64;strokeWidth=2;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="355" y="810" as="sourcePoint" />
             <mxPoint x="1035" y="810" as="targetPoint" />
@@ -190,4 +190,3 @@
     </mxGraphModel>
   </diagram>
 </mxfile>
-
