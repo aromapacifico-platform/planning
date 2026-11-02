@@ -160,11 +160,16 @@ En los departamentos de Cauca, Huila y Tolima, la fenología cafetera se distrib
    $$\text{Vuelos}_{S5} = 200\text{ fincas} \times 2\text{ cosechas/año} = 400\text{ vuelos/año}$$
 
 3. **Servicio 2 (Campañas de Revisión y Confirmación de Alerta de Foco)**:
-   - En cosecha: 1 campaña mensual $\times$ 6 meses = 6 campañas. En cada campaña, los sensores reportan alertas de focos sospechosos en aproximadamente el 20% de las fincas ($200 \times 0,20 = 40\text{ fincas/mes}$):
-   $$\text{Vuelos Cosecha}_{S2} = 40\text{ fincas/mes} \times 6\text{ meses} = 240\text{ vuelos}$$
-   - Fuera de cosecha: 1 campaña cada 3 meses = 2 campañas en 6 meses. La incidencia baja al 10% ($200 \times 0,10 = 20\text{ fincas/campaña}$):
-   $$\text{Vuelos Fuera Cosecha}_{S2} = 20\text{ fincas/campaña} \times 2\text{ campañas} = 40\text{ vuelos}$$
-   $$\text{Total Vuelos}_{S2} = 240 + 40 = 280\text{ vuelos/año}$$
+
+   - En cosecha: 1 campaña mensual $\times$ 6 meses = 6 campañas. En cada campaña, los sensores reportan alertas de focos sospechosos en aproximadamente el 20% de las fincas ($200 \times 0{,}20 = 40\text{ fincas/mes}$):
+
+     $$\text{Vuelos Cosecha}_{S2} = 40\text{ fincas/mes} \times 6\text{ meses} = 240\text{ vuelos}$$
+
+   - Fuera de cosecha: 1 campaña cada 3 meses = 2 campañas en 6 meses. La incidencia baja al 10% ($200 \times 0{,}10 = 20\text{ fincas/campaña}$):
+
+     $$\text{Vuelos Fuera Cosecha}_{S2} = 20\text{ fincas/campaña} \times 2\text{ campañas} = 40\text{ vuelos}$$
+
+     $$\text{Total Vuelos}_{S2} = 240 + 40 = 280\text{ vuelos/año}$$
 
 4. **Servicio 3 (Fumigación de Precisión)**:
    - De los focos inspeccionados en el Servicio 2, la combinación de inferencia y evaluación agronómica confirma presencia de plaga que amerita aspersión en el 75% de los casos (el 25% restante corresponde a deficiencias nutricionales o falsas alarmas):
