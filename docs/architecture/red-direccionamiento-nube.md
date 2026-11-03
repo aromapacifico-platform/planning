@@ -213,23 +213,17 @@ El sistema impone una regla arquitectónica estricta: si un vuelo de confirmaci�
 
 El pliego del caso de estudio exige demostrar que el patrón de red y de ingesta escala de 200 a 1.000 fincas sin rediseñar el direccionamiento ni el punto de ingesta. A continuación se sustenta formalmente dicha capacidad con base en métricas cuantitativas:
 
-```
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│                     ANÁLISIS CUANTITATIVO DE ESCALABILIDAD EN LA NUBE                  │
-├──────────────────────────────────┬──────────────────────┬──────────────────────────────┤
-│ Dimensión Técnica y Operativa    │ Piloto (200 Fincas)  │ Escalado (1.000 Fincas)      │
-├──────────────────────────────────┼──────────────────────┼──────────────────────────────┤
-│ Telemetría de Cultivo Diaria     │ 1.200 lecturas/día   │ 6.000 lecturas/día           │
-│ Telemetría de Secado en Cosecha  │ 2.400 lecturas/día   │ 12.000 lecturas/día          │
-│ Transacciones Totales Diarias    │ 3.600 lecturas/día   │ 18.000 lecturas/día          │
-│ Rendimiento Promedio Sostenido   │ ~0,042 TPS           │ ~0,21 TPS                    │
-│ Ráfaga Máxima (Drenado 24h)      │ ~15 mensajes/segundo │ ~50 mensajes/segundo         │
-│ Límite Estándar AWS IoT Core     │ 20.000 TPS nativas   │ 20.000 TPS nativas           │
-│ Uso Porcentual de Cuota IoT Core │ 0,075% de la cuota   │ 0,25% de la cuota            │
-│ Ancho de Banda Agregado Ingesta  │ &lt; 9 bytes/segundo   │ &lt; 42 bytes/segundo           │
-│ Consumo de IPs Privadas en VPC   │ 0 IPs por finca      │ 0 IPs por finca              │
-└──────────────────────────────────┴──────────────────────┴──────────────────────────────┘
-```
+| Dimensión Técnica y Operativa | Piloto (200 Fincas) | Escalado (1.000 Fincas) |
+|---|---|---|
+| Telemetría de Cultivo Diaria | 1.200 lecturas/día | 6.000 lecturas/día |
+| Telemetría de Secado en Cosecha | 2.400 lecturas/día | 12.000 lecturas/día |
+| Transacciones Totales Diarias | 3.600 lecturas/día | 18.000 lecturas/día |
+| Rendimiento Promedio Sostenido | ~0,042 TPS | ~0,21 TPS |
+| Ráfaga Máxima (Drenado 24h) | ~15 mensajes/segundo | ~50 mensajes/segundo |
+| Límite Estándar AWS IoT Core | 20.000 TPS nativas | 20.000 TPS nativas |
+| Uso Porcentual de Cuota IoT Core | 0,075% de la cuota | 0,25% de la cuota |
+| Ancho de Banda Agregado Ingesta | &lt; 9 bytes/segundo | &lt; 42 bytes/segundo |
+| Consumo de IPs Privadas en VPC | 0 IPs por finca | 0 IPs por finca |
 
 ### Sustentación de Ingeniería:
 
