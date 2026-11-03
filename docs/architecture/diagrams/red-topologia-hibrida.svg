@@ -94,16 +94,16 @@
   <!-- ==================== COLUMNA CENTRAL: AWS TRANSIT GATEWAY HUB ==================== -->
   <g transform="translate(680, 110)" filter="url(#shadow)">
     <rect width="700" height="1340" rx="8" fill="#FFFFFF" stroke="#232F3E" stroke-width="2.5" />
-    <rect width="700" height="40" rx="8" fill="#232F3E" />
-    <text x="15" y="26" class="lane-title">AWS TRANSIT GATEWAY HUB (AromaPacifico-Network) - ASN 64512</text>
+    <rect width="700" height="40" rx="8" fill="#F0F4F8" />
+    <text x="15" y="26" class="lane-title" fill="#232F3E">AWS TRANSIT GATEWAY HUB (AromaPacifico-Network) - ASN 64512</text>
 
     <!-- Nucleo TGW -->
     <g transform="translate(25, 55)">
-      <rect width="650" height="120" rx="6" fill="#232F3E" stroke="#FF9900" stroke-width="2" />
-      <text x="20" y="30" class="card-title" fill="#FF9900">NÚCLEO TGW (AWS TRANSIT GATEWAY)</text>
-      <text x="20" y="55" class="body-text" fill="#FFFFFF">• Enrutador Centralizado Multi-Cuenta y Multi-VPC</text>
-      <text x="20" y="75" class="body-text" fill="#FFFFFF">• Soporta hasta 50 Gbps de rendimiento por VPC Attachment</text>
-      <text x="20" y="95" class="body-text" fill="#FFFFFF">• Opera con 3 Tablas de Rutas Segregadas para evitar fugas de tráfico</text>
+      <rect width="650" height="120" rx="6" fill="#FFFFFF" stroke="#FF9900" stroke-width="2" />
+      <text x="20" y="30" class="card-title" fill="#232F3E">NÚCLEO TGW (AWS TRANSIT GATEWAY)</text>
+      <text x="20" y="55" class="body-text" fill="#232F3E">• Enrutador Centralizado Multi-Cuenta y Multi-VPC</text>
+      <text x="20" y="75" class="body-text" fill="#232F3E">• Soporta hasta 50 Gbps de rendimiento por VPC Attachment</text>
+      <text x="20" y="95" class="body-text" fill="#232F3E">• Opera con 3 Tablas de Rutas Segregadas para evitar fugas de tráfico</text>
     </g>
 
     <!-- TGW RT 1: On-Premises Route Table -->

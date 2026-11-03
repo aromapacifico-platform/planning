@@ -110,18 +110,18 @@
   <!-- ==================== COLUMNA CENTRAL: RED HUB TRANSIT GATEWAY ==================== -->
   <g transform="translate(540, 110)" filter="url(#shadow)">
     <rect width="460" height="1440" rx="8" fill="#FFFFFF" stroke="#232F3E" stroke-width="2.5" />
-    <rect width="460" height="40" rx="8" fill="#232F3E" />
-    <text x="15" y="26" class="header-box" fill="#FFFFFF">CUENTA RED COMPARTIDA (AromaPacifico-Network)</text>
+    <rect width="460" height="40" rx="8" fill="#F0F4F8" />
+    <text x="15" y="26" class="header-box" fill="#232F3E">CUENTA RED COMPARTIDA (AromaPacifico-Network)</text>
 
     <!-- TGW Box -->
     <g transform="translate(20, 55)">
-      <rect width="420" height="150" rx="6" fill="#232F3E" stroke="#FF9900" stroke-width="2.5" />
-      <text x="20" y="30" class="header-box" fill="#FF9900">AWS TRANSIT GATEWAY CENTRALIZADO</text>
-      <text x="20" y="50" class="mono-text" fill="#FFFFFF">ID Lógico: tgw-aromapacifico-core (ASN 64512)</text>
-      <text x="20" y="75" class="body-text" fill="#FFFFFF">• Tablas de Enrutamiento Segregadas (Hub, Spokes, On-Prem)</text>
-      <text x="20" y="95" class="body-text" fill="#FFFFFF">• 3 Túneles IPsec VPN BGP hacia Cauca, Huila y Tolima</text>
-      <text x="20" y="115" class="body-text" fill="#FFFFFF">• Attachments directos hacia VPC Dev, Test, Prod y Hub</text>
-      <text x="20" y="135" class="body-text" fill="#FFFFFF">• Rendimiento de hasta 50 Gbps por VPC Attachment</text>
+      <rect width="420" height="150" rx="6" fill="#FFFFFF" stroke="#FF9900" stroke-width="2.5" />
+      <text x="20" y="30" class="header-box" fill="#232F3E">AWS TRANSIT GATEWAY CENTRALIZADO</text>
+      <text x="20" y="50" class="mono-text" fill="#FF9900">ID Lógico: tgw-aromapacifico-core (ASN 64512)</text>
+      <text x="20" y="75" class="body-text" fill="#232F3E">• Tablas de Enrutamiento Segregadas (Hub, Spokes, On-Prem)</text>
+      <text x="20" y="95" class="body-text" fill="#232F3E">• 3 Túneles IPsec VPN BGP hacia Cauca, Huila y Tolima</text>
+      <text x="20" y="115" class="body-text" fill="#232F3E">• Attachments directos hacia VPC Dev, Test, Prod y Hub</text>
+      <text x="20" y="135" class="body-text" fill="#232F3E">• Rendimiento de hasta 50 Gbps por VPC Attachment</text>
     </g>
 
     <!-- Subredes Hub -->
@@ -185,8 +185,8 @@
   <!-- ==================== COLUMNA DERECHA: VPC PRODUCCIÓN ==================== -->
   <g transform="translate(1040, 110)" filter="url(#shadow)">
     <rect width="1320" height="660" rx="8" fill="#FFFFFF" stroke="#FF9900" stroke-width="2.5" />
-    <rect width="1320" height="40" rx="8" fill="#232F3E" />
-    <text x="15" y="26" class="header-box" fill="#FFFFFF">CUENTA PRODUCCIÓN (AromaPacifico-Prod) - VPC Producción: 10.70.0.0/16 (us-east-1)</text>
+    <rect width="1320" height="40" rx="8" fill="#FFF8E7" />
+    <text x="15" y="26" class="header-box" fill="#232F3E">CUENTA PRODUCCIÓN (AromaPacifico-Prod) - VPC Producción: 10.70.0.0/16 (us-east-1)</text>
 
     <!-- AZ-a Produccion -->
     <g transform="translate(20, 55)">

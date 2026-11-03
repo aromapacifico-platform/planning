@@ -45,7 +45,7 @@
           <mxGeometry x="540" y="120" width="460" height="1420" as="geometry" />
         </mxCell>
 
-        <mxCell id="card-tgw" value="AWS TRANSIT GATEWAY (TGW) CENTRALIZADO&#xa;ID Lógico: tgw-aromapacifico-core&#xa;&#xa;- Tablas de Enrutamiento Segregadas (Hub, Spokes, On-Prem)&#xa;- Terminación VPN IPsec con Cauca, Huila y Tolima (BGP / Estático)&#xa;- Attachments dedicados hacia VPC Dev, Test, Prod y Hub&#xa;- Aislamiento estricto de tráfico entre ambientes no autorizados" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#232F3E;strokeColor=#FF9900;strokeWidth=2.5;fontSize=12;align=left;spacingLeft=12;fontColor=#FFFFFF;" vertex="1" parent="box-hub-network">
+        <mxCell id="card-tgw" value="AWS TRANSIT GATEWAY (TGW) CENTRALIZADO&#xa;ID Lógico: tgw-aromapacifico-core&#xa;&#xa;- Tablas de Enrutamiento Segregadas (Hub, Spokes, On-Prem)&#xa;- Terminación VPN IPsec con Cauca, Huila y Tolima (BGP / Estático)&#xa;- Attachments dedicados hacia VPC Dev, Test, Prod y Hub&#xa;- Aislamiento estricto de tráfico entre ambientes no autorizados" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FF9900;strokeWidth=2.5;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-hub-network">
           <mxGeometry x="25" y="55" width="410" height="150" as="geometry" />
         </mxCell>
 

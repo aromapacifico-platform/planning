@@ -71,16 +71,16 @@
 
     <!-- Caja 3: Ingesta Cloud IoT Core -->
     <g transform="translate(790, 60)">
-      <rect width="340" height="260" rx="6" fill="#232F3E" stroke="#FF9900" stroke-width="2" />
-      <text x="15" y="25" class="card-title" fill="#FF9900">AWS IoT Core (us-east-1)</text>
-      <text x="15" y="45" class="card-sub" fill="#FFFFFF">Punto de Ingesta Centralizado</text>
-      <text x="15" y="75" class="body-text" fill="#FFFFFF">• Certificado X.509 individual por nodo sensor</text>
-      <text x="15" y="95" class="body-text" fill="#FFFFFF">• Broker MQTT sobre TLS 1.3 (Puerto 8883)</text>
-      <text x="15" y="115" class="body-text" fill="#FFFFFF">• Topic: $aws/rules/finca_telemetry_rule</text>
-      <text x="15" y="135" class="body-text" fill="#FFFFFF">• Basic Ingest: bypass de cargos de broker</text>
-      <text x="15" y="155" class="body-text" fill="#FFFFFF">• Reglas IoT evalúan umbrales dinámicos</text>
-      <text x="15" y="185" class="mono-text" fill="#FF9900">Latencia de Alerta: &lt; 5 min con señal</text>
-      <text x="15" y="205" class="body-text" fill="#FFFFFF">Revocación instantánea ante robo de nodo</text>
+      <rect width="340" height="260" rx="6" fill="#FFFFFF" stroke="#FF9900" stroke-width="2" />
+      <text x="15" y="25" class="card-title" fill="#232F3E">AWS IoT Core (us-east-1)</text>
+      <text x="15" y="45" class="card-sub" fill="#FF9900">Punto de Ingesta Centralizado</text>
+      <text x="15" y="75" class="body-text" fill="#232F3E">• Certificado X.509 individual por nodo sensor</text>
+      <text x="15" y="95" class="body-text" fill="#232F3E">• Broker MQTT sobre TLS 1.3 (Puerto 8883)</text>
+      <text x="15" y="115" class="body-text" fill="#232F3E">• Topic: $aws/rules/finca_telemetry_rule</text>
+      <text x="15" y="135" class="body-text" fill="#232F3E">• Basic Ingest: bypass de cargos de broker</text>
+      <text x="15" y="155" class="body-text" fill="#232F3E">• Reglas IoT evalúan umbrales dinámicos</text>
+      <text x="15" y="185" class="mono-text" fill="#0E8A16">Latencia de Alerta: &lt; 5 min con señal</text>
+      <text x="15" y="205" class="body-text" fill="#555555">Revocación instantánea ante robo de nodo</text>
     </g>
 
     <!-- Flecha 3 -->
@@ -176,15 +176,15 @@
 
     <!-- Caja 3: API Gateway -->
     <g transform="translate(790, 60)">
-      <rect width="340" height="260" rx="6" fill="#232F3E" stroke="#FF9900" stroke-width="2" />
-      <text x="15" y="25" class="card-title" fill="#FF9900">Amazon API Gateway / NLB</text>
-      <text x="15" y="45" class="card-sub" fill="#FFFFFF">VPC Subred App: 10.70.10.0/24</text>
-      <text x="15" y="75" class="body-text" fill="#FFFFFF">• Endpoint REST privado y público protegido</text>
-      <text x="15" y="95" class="body-text" fill="#FFFFFF">• AWS WAFv2 con filtrado de anomalías</text>
-      <text x="15" y="115" class="body-text" fill="#FFFFFF">• Validación estricta de esquema JSON</text>
-      <text x="15" y="135" class="body-text" fill="#FFFFFF">• Enmascaramiento de cédula de conductor</text>
-      <text x="15" y="155" class="body-text" fill="#FFFFFF">• Ruteo interno hacia microservicio de tracking</text>
-      <text x="15" y="185" class="mono-text" fill="#FF9900">Protección estricta Ley 1581 de 2012</text>
+      <rect width="340" height="260" rx="6" fill="#FFFFFF" stroke="#FF9900" stroke-width="2" />
+      <text x="15" y="25" class="card-title" fill="#232F3E">Amazon API Gateway / NLB</text>
+      <text x="15" y="45" class="card-sub" fill="#FF9900">VPC Subred App: 10.70.10.0/24</text>
+      <text x="15" y="75" class="body-text" fill="#232F3E">• Endpoint REST privado y público protegido</text>
+      <text x="15" y="95" class="body-text" fill="#232F3E">• AWS WAFv2 con filtrado de anomalías</text>
+      <text x="15" y="115" class="body-text" fill="#232F3E">• Validación estricta de esquema JSON</text>
+      <text x="15" y="135" class="body-text" fill="#232F3E">• Enmascaramiento de cédula de conductor</text>
+      <text x="15" y="155" class="body-text" fill="#232F3E">• Ruteo interno hacia microservicio de tracking</text>
+      <text x="15" y="185" class="mono-text" fill="#0E8A16">Protección estricta Ley 1581 de 2012</text>
     </g>
 
     <!-- Flecha 3 -->
@@ -285,16 +285,16 @@
 
     <!-- Caja 3: S3 Bucket -->
     <g transform="translate(790, 60)">
-      <rect width="340" height="400" rx="6" fill="#232F3E" stroke="#FF9900" stroke-width="2" />
-      <text x="15" y="25" class="card-title" fill="#FF9900">Amazon S3 (Drone Objects Bucket)</text>
-      <text x="15" y="45" class="card-sub" fill="#FFFFFF">VPC Subred Object Storage: 10.70.30.0/24</text>
-      <text x="15" y="75" class="body-text" fill="#FFFFFF">• Bucket inmutable con S3 Object Lock activo</text>
-      <text x="15" y="95" class="body-text" fill="#FFFFFF">• Acceso exclusivo vía VPC Gateway Endpoint</text>
-      <text x="15" y="115" class="body-text" fill="#FFFFFF">• Cero costo de transferencia ($0 USD/GB)</text>
-      <text x="15" y="135" class="body-text" fill="#FFFFFF">• Bloqueo absoluto de acceso público (SCP 4)</text>
-      <text x="15" y="155" class="body-text" fill="#FFFFFF">• EventBridge dispara procesamiento automático</text>
-      <text x="15" y="185" class="mono-text" fill="#FF9900">Retención de fotos: 5 años</text>
-      <text x="15" y="205" class="body-text" fill="#FFFFFF">Transición a Glacier Flexible a los 90 días</text>
+      <rect width="340" height="400" rx="6" fill="#FFFFFF" stroke="#FF9900" stroke-width="2" />
+      <text x="15" y="25" class="card-title" fill="#232F3E">Amazon S3 (Drone Objects Bucket)</text>
+      <text x="15" y="45" class="card-sub" fill="#FF9900">VPC Subred Object Storage: 10.70.30.0/24</text>
+      <text x="15" y="75" class="body-text" fill="#232F3E">• Bucket inmutable con S3 Object Lock activo</text>
+      <text x="15" y="95" class="body-text" fill="#232F3E">• Acceso exclusivo vía VPC Gateway Endpoint</text>
+      <text x="15" y="115" class="body-text" fill="#232F3E">• Cero costo de transferencia ($0 USD/GB)</text>
+      <text x="15" y="135" class="body-text" fill="#232F3E">• Bloqueo absoluto de acceso público (SCP 4)</text>
+      <text x="15" y="155" class="body-text" fill="#232F3E">• EventBridge dispara procesamiento automático</text>
+      <text x="15" y="185" class="mono-text" fill="#0E8A16">Retención de fotos: 5 años</text>
+      <text x="15" y="205" class="body-text" fill="#555555">Transición a Glacier Flexible a los 90 días</text>
     </g>
 
     <!-- Flecha 3 -->
@@ -323,14 +323,14 @@
 
     <!-- Caja 5: Rekognition -->
     <g transform="translate(1590, 60)">
-      <rect width="330" height="175" rx="6" fill="#232F3E" stroke="#FF9900" stroke-width="2" />
-      <text x="15" y="25" class="card-title" fill="#FF9900">Amazon Rekognition Managed AI</text>
-      <text x="15" y="45" class="card-sub" fill="#FFFFFF">Inferencia Serverless en us-east-1</text>
-      <text x="15" y="70" class="body-text" fill="#FFFFFF">• Detección de plagas y focos de roya</text>
-      <text x="15" y="90" class="body-text" fill="#FFFFFF">• Retorna porcentaje de confianza y foco</text>
-      <text x="15" y="110" class="body-text" fill="#FFFFFF">• Costo: $1,00 USD / 1.000 imágenes</text>
-      <text x="15" y="130" class="mono-text" fill="#FF9900">Cero modelos propios que entrenar</text>
-      <text x="15" y="150" class="body-text" fill="#FFFFFF">Uso de API administrada por evento</text>
+      <rect width="330" height="175" rx="6" fill="#FFFFFF" stroke="#FF9900" stroke-width="2" />
+      <text x="15" y="25" class="card-title" fill="#232F3E">Amazon Rekognition Managed AI</text>
+      <text x="15" y="45" class="card-sub" fill="#FF9900">Inferencia Serverless en us-east-1</text>
+      <text x="15" y="70" class="body-text" fill="#232F3E">• Detección de plagas y focos de roya</text>
+      <text x="15" y="90" class="body-text" fill="#232F3E">• Retorna porcentaje de confianza y foco</text>
+      <text x="15" y="110" class="body-text" fill="#232F3E">• Costo: $1,00 USD / 1.000 imágenes</text>
+      <text x="15" y="130" class="mono-text" fill="#0E8A16">Cero modelos propios que entrenar</text>
+      <text x="15" y="150" class="body-text" fill="#555555">Uso de API administrada por evento</text>
     </g>
 
     <!-- Flecha hacia compuerta -->

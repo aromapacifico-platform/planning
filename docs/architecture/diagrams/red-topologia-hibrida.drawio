@@ -44,7 +44,7 @@
           <mxGeometry x="680" y="120" width="700" height="1320" as="geometry" />
         </mxCell>
 
-        <mxCell id="card-tgw-engine" value="NÚCLEO TGW (AWS TRANSIT GATEWAY)&#xa;Enrutador Centralizado Multi-Cuenta y Multi-VPC&#xa;&#xa;- Soporta hasta 50 Gbps de rendimiento por VPC Attachment.&#xa;- Elimina la sobrecarga de conexiones punto a punto en malla completa.&#xa;- Opera con 3 Tablas de Rutas Segregadas para evitar fugas de tráfico." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#232F3E;strokeColor=#FF9900;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#FFFFFF;" vertex="1" parent="lane-tgw-hub">
+        <mxCell id="card-tgw-engine" value="NÚCLEO TGW (AWS TRANSIT GATEWAY)&#xa;Enrutador Centralizado Multi-Cuenta y Multi-VPC&#xa;&#xa;- Soporta hasta 50 Gbps de rendimiento por VPC Attachment.&#xa;- Elimina la sobrecarga de conexiones punto a punto en malla completa.&#xa;- Opera con 3 Tablas de Rutas Segregadas para evitar fugas de tráfico." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FF9900;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="lane-tgw-hub">
           <mxGeometry x="25" y="55" width="650" height="120" as="geometry" />
         </mxCell>
 
