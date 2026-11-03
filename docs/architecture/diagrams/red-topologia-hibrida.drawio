@@ -15,7 +15,7 @@
         </mxCell>
 
         <!-- COLUMNA IZQUIERDA: CENTROS DE ACOPIO Y ENRUTAMIENTO LOCAL -->
-        <mxCell id="lane-acopios" value="CENTROS DE ACOPIO (ON-PREMISES) - SEGMENTACIÓN VLAN Y ENLACE WAN (100 Mbps)" style="swimlane;startSize=35;horizontal=1;fillColor=#F8F9FA;strokeColor=#D93F0B;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+        <mxCell id="lane-acopios" value="CENTROS DE ACOPIO (ON-PREMISES) - SEGMENTACIÓN VLAN Y ENLACE WAN (100 Mbps)" style="swimlane;startSize=35;horizontal=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
           <mxGeometry x="40" y="120" width="600" height="1320" as="geometry" />
         </mxCell>
 
@@ -30,7 +30,7 @@
         </mxCell>
 
         <!-- Tabla de Rutas Local Acopio -->
-        <mxCell id="card-rt-acopio" value="TABLA DE ENRUTAMIENTO LOCAL (ROUTER / FIREWALL ACOPIO CAUCA)&#xa;&#xa;Destino           | Próximo Salto (Next Hop) | Interfaz / Comentario&#xa;----------------------------------------------------------------&#xa;10.41.0.0/16      | Local                    | Inter-VLAN Routing local&#xa;10.70.0.0/16 (Prod)| Túnel VPN 1 / Túnel VPN 2 | IPsec hacia AWS Transit Gateway&#xa;10.80.0.0/16 (Hub) | Túnel VPN 1 / Túnel VPN 2 | IPsec hacia Inspection VPC&#xa;0.0.0.0/0         | WAN ISP (100 Mbps)       | Salida Internet directa (NAT)&#xa;&#xa;Nota de Huila y Tolima: Sustituir 10.41.0.0/16 por 10.42 o 10.43." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#D93F0B;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-acopios">
+        <mxCell id="card-rt-acopio" value="TABLA DE ENRUTAMIENTO LOCAL (ROUTER / FIREWALL ACOPIO CAUCA)&#xa;&#xa;Destino           | Próximo Salto (Next Hop) | Interfaz / Comentario&#xa;----------------------------------------------------------------&#xa;10.41.0.0/16      | Local                    | Inter-VLAN Routing local&#xa;10.70.0.0/16 (Prod)| Túnel VPN 1 / Túnel VPN 2 | IPsec hacia AWS Transit Gateway&#xa;10.80.0.0/16 (Hub) | Túnel VPN 1 / Túnel VPN 2 | IPsec hacia Inspection VPC&#xa;0.0.0.0/0         | WAN ISP (100 Mbps)       | Salida Internet directa (NAT)&#xa;&#xa;Nota de Huila y Tolima: Sustituir 10.41.0.0/16 por 10.42 o 10.43." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-acopios">
           <mxGeometry x="20" y="645" width="560" height="200" as="geometry" />
         </mxCell>
 
@@ -40,7 +40,7 @@
         </mxCell>
 
         <!-- COLUMNA CENTRAL: AWS TRANSIT GATEWAY Y TABLAS DE RUTAS NUBE -->
-        <mxCell id="lane-tgw-hub" value="AWS TRANSIT GATEWAY HUB (AromaPacifico-Network) - ASN 64512" style="swimlane;startSize=35;horizontal=1;fillColor=#EAEDED;strokeColor=#232F3E;strokeWidth=2.5;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+        <mxCell id="lane-tgw-hub" value="AWS TRANSIT GATEWAY HUB (AromaPacifico-Network) - ASN 64512" style="swimlane;startSize=35;horizontal=1;fillColor=#FFFFFF;strokeColor=#232F3E;strokeWidth=2.5;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
           <mxGeometry x="680" y="120" width="700" height="1320" as="geometry" />
         </mxCell>
 
@@ -64,12 +64,12 @@
         </mxCell>
 
         <!-- VPC Hub Inspection & PrivateLink -->
-        <mxCell id="card-hub-vpc-arch" value="VPC HUB DE INSPECCIÓN Y SERVICIOS COMPARTIDOS (10.80.0.0/16)&#xa;&#xa;- AWS Network Firewall para inspección Stateful de paquetes entrantes/salientes.&#xa;- PrivateLink Interface Endpoints Compartidos para servicios AWS (KMS, CloudWatch, SSM).&#xa;- Amazon Route 53 Inbound/Outbound Resolvers para resolución de nombres split-horizon.&#xa;- Ahorro FinOps: 1 solo par de Interface Endpoints compartido por todas las cuentas." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="lane-tgw-hub">
+        <mxCell id="card-hub-vpc-arch" value="VPC HUB DE INSPECCIÓN Y SERVICIOS COMPARTIDOS (10.80.0.0/16)&#xa;&#xa;- AWS Network Firewall para inspección Stateful de paquetes entrantes/salientes.&#xa;- PrivateLink Interface Endpoints Compartidos para servicios AWS (KMS, CloudWatch, SSM).&#xa;- Amazon Route 53 Inbound/Outbound Resolvers para resolución de nombres split-horizon.&#xa;- Ahorro FinOps: 1 solo par de Interface Endpoints compartido por todas las cuentas." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="lane-tgw-hub">
           <mxGeometry x="25" y="805" width="650" height="160" as="geometry" />
         </mxCell>
 
         <!-- COLUMNA DERECHA: VPC PRODUCCIÓN, ENDPOINTS Y SALIDAS -->
-        <mxCell id="lane-vpc-prod" value="CUENTA PRODUCCIÓN (AromaPacifico-Prod) - VPC PRODUCCIÓN (10.70.0.0/16)" style="swimlane;startSize=35;horizontal=1;fillColor=#EAEDED;strokeColor=#FF9900;strokeWidth=2.5;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+        <mxCell id="lane-vpc-prod" value="CUENTA PRODUCCIÓN (AromaPacifico-Prod) - VPC PRODUCCIÓN (10.70.0.0/16)" style="swimlane;startSize=35;horizontal=1;fillColor=#FFFFFF;strokeColor=#FF9900;strokeWidth=2.5;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
           <mxGeometry x="1420" y="120" width="940" height="1320" as="geometry" />
         </mxCell>
 
@@ -82,7 +82,7 @@
           <mxGeometry x="25" y="225" width="890" height="230" as="geometry" />
         </mxCell>
 
-        <mxCell id="card-nacl-matrix" value="MATRIZ DE NETWORK ACLs (DEFENSA EN PROFUNDIDAD STATELESS)&#xa;&#xa;Subred            | Regla Entrada Permitida      | Regla Salida Permitida&#xa;----------------------------------------------------------------&#xa;Ingesta Telemetría| TCP 443, 8883 desde IoT      | Efímeros (1024-65535) a Backend&#xa;Ingesta Drones    | HTTPS 443 desde Acopios/S3   | TCP 443 hacia Rekognition / S3&#xa;Aplicación        | TCP 8080/443 desde Ingesta   | TCP 443 hacia Datos y TGW&#xa;Capa de Datos     | TCP 443 hacia Endpoints DB   | Solo retorno autorizado&#xa;Consulta Pública  | HTTP 80 / HTTPS 443 público  | TCP 8080 hacia Subred Aplicación&#xa;Administración    | SSH/HTTPS solo desde Red Hub | Denegado hacia internet público" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-vpc-prod">
+        <mxCell id="card-nacl-matrix" value="MATRIZ DE NETWORK ACLs (DEFENSA EN PROFUNDIDAD STATELESS)&#xa;&#xa;Subred            | Regla Entrada Permitida      | Regla Salida Permitida&#xa;----------------------------------------------------------------&#xa;Ingesta Telemetría| TCP 443, 8883 desde IoT      | Efímeros (1024-65535) a Backend&#xa;Ingesta Drones    | HTTPS 443 desde Acopios/S3   | TCP 443 hacia Rekognition / S3&#xa;Aplicación        | TCP 8080/443 desde Ingesta   | TCP 443 hacia Datos y TGW&#xa;Capa de Datos     | TCP 443 hacia Endpoints DB   | Solo retorno autorizado&#xa;Consulta Pública  | HTTP 80 / HTTPS 443 público  | TCP 8080 hacia Subred Aplicación&#xa;Administración    | SSH/HTTPS solo desde Red Hub | Denegado hacia internet público" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-vpc-prod">
           <mxGeometry x="25" y="475" width="890" height="200" as="geometry" />
         </mxCell>
 

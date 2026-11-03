@@ -15,7 +15,7 @@
   </defs>
 
   <!-- FONDO -->
-  <rect width="2400" height="1600" fill="#F8F9FA" />
+  <rect width="2400" height="1600" fill="#FFFFFF" />
 
   <!-- TITULO -->
   <text x="1200" y="45" class="title">AromaPacífico - Plan de Direccionamiento de Red Cloud y Subredes Multizona (AWS VPCs)</text>
@@ -109,7 +109,7 @@
 
   <!-- ==================== COLUMNA CENTRAL: RED HUB TRANSIT GATEWAY ==================== -->
   <g transform="translate(540, 110)" filter="url(#shadow)">
-    <rect width="460" height="1440" rx="8" fill="#EAEDED" stroke="#232F3E" stroke-width="2.5" />
+    <rect width="460" height="1440" rx="8" fill="#FFFFFF" stroke="#232F3E" stroke-width="2.5" />
     <rect width="460" height="40" rx="8" fill="#232F3E" />
     <text x="15" y="26" class="header-box" fill="#FFFFFF">CUENTA RED COMPARTIDA (AromaPacifico-Network)</text>
 
@@ -117,7 +117,7 @@
     <g transform="translate(20, 55)">
       <rect width="420" height="150" rx="6" fill="#232F3E" stroke="#FF9900" stroke-width="2.5" />
       <text x="20" y="30" class="header-box" fill="#FF9900">AWS TRANSIT GATEWAY CENTRALIZADO</text>
-      <text x="20" y="50" class="mono-text" fill="#EAEDED">ID Lógico: tgw-aromapacifico-core (ASN 64512)</text>
+      <text x="20" y="50" class="mono-text" fill="#FFFFFF">ID Lógico: tgw-aromapacifico-core (ASN 64512)</text>
       <text x="20" y="75" class="body-text" fill="#FFFFFF">• Tablas de Enrutamiento Segregadas (Hub, Spokes, On-Prem)</text>
       <text x="20" y="95" class="body-text" fill="#FFFFFF">• 3 Túneles IPsec VPN BGP hacia Cauca, Huila y Tolima</text>
       <text x="20" y="115" class="body-text" fill="#FFFFFF">• Attachments directos hacia VPC Dev, Test, Prod y Hub</text>
@@ -184,60 +184,60 @@
 
   <!-- ==================== COLUMNA DERECHA: VPC PRODUCCIÓN ==================== -->
   <g transform="translate(1040, 110)" filter="url(#shadow)">
-    <rect width="1320" height="660" rx="8" fill="#EAEDED" stroke="#FF9900" stroke-width="2.5" />
+    <rect width="1320" height="660" rx="8" fill="#FFFFFF" stroke="#FF9900" stroke-width="2.5" />
     <rect width="1320" height="40" rx="8" fill="#232F3E" />
     <text x="15" y="26" class="header-box" fill="#FFFFFF">CUENTA PRODUCCIÓN (AromaPacifico-Prod) - VPC Producción: 10.70.0.0/16 (us-east-1)</text>
 
     <!-- AZ-a Produccion -->
     <g transform="translate(20, 55)">
       <rect width="630" height="585" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" />
-      <rect width="630" height="30" rx="6" fill="#F8F9FA" />
+      <rect width="630" height="30" rx="6" fill="#FFFFFF" />
       <text x="15" y="20" class="subhead-box">Zona us-east-1a (Subredes Primarias)</text>
 
       <g transform="translate(15, 40)">
-        <rect width="600" height="68" rx="4" fill="#F8F9FA" stroke="#1D76DB" />
+        <rect width="600" height="68" rx="4" fill="#FFFFFF" stroke="#1D76DB" />
         <text x="10" y="20" class="header-box" font-size="12px">1. Subred Ingreso Telemetría: 10.70.1.0/24 (251 IPs utilizables)</text>
         <text x="10" y="40" class="body-text">ENIs de Lambda Ingesta IoT, balanceadores internos de telemetría.</text>
         <text x="10" y="58" class="mono-text" fill="#555555">Ruta: 10.70.0.0/16 Local | Endpoints DynamoDB/S3 ($0 USD/GB)</text>
       </g>
 
       <g transform="translate(15, 115)">
-        <rect width="600" height="68" rx="4" fill="#F8F9FA" stroke="#1D76DB" />
+        <rect width="600" height="68" rx="4" fill="#FFFFFF" stroke="#1D76DB" />
         <text x="10" y="20" class="header-box" font-size="12px">2. Subred Ingreso Objetos Dron: 10.70.2.0/24 (251 IPs utilizables)</text>
         <text x="10" y="40" class="body-text">Procesamiento de ortomosaicos, ENIs para funciones de visión IA.</text>
         <text x="10" y="58" class="mono-text" fill="#555555">Ruta: Endpoint S3 Gateway para fotos | Rekognition Endpoint</text>
       </g>
 
       <g transform="translate(15, 190)">
-        <rect width="600" height="68" rx="4" fill="#F8F9FA" stroke="#0E8A16" />
+        <rect width="600" height="68" rx="4" fill="#FFFFFF" stroke="#0E8A16" />
         <text x="10" y="20" class="header-box" font-size="12px">3. Subred Aplicación Backend: 10.70.10.0/24 (251 IPs utilizables)</text>
         <text x="10" y="40" class="body-text">Microservicios de negocio, registro de sacos de 60 kg, tracking.</text>
         <text x="10" y="58" class="mono-text" fill="#555555">Ruta: TGW hacia Acopios (10.41/42/43) y subredes internas</text>
       </g>
 
       <g transform="translate(15, 265)">
-        <rect width="600" height="68" rx="4" fill="#F8F9FA" stroke="#D93F0B" />
+        <rect width="600" height="68" rx="4" fill="#FFFFFF" stroke="#D93F0B" />
         <text x="10" y="20" class="header-box" font-size="12px">4. Subred Capa de Datos: 10.70.20.0/24 (251 IPs utilizables)</text>
         <text x="10" y="40" class="body-text">VPC Endpoints DynamoDB, cache ElastiCache y tablas de sacos.</text>
         <text x="10" y="58" class="mono-text" fill="#555555">Aislamiento total: Sin acceso a internet ni entrada no autenticada</text>
       </g>
 
       <g transform="translate(15, 340)">
-        <rect width="600" height="68" rx="4" fill="#F8F9FA" stroke="#545B64" />
+        <rect width="600" height="68" rx="4" fill="#FFFFFF" stroke="#545B64" />
         <text x="10" y="20" class="header-box" font-size="12px">5. Subred Object Storage Endpoints: 10.70.30.0/24 (251 IPs)</text>
         <text x="10" y="40" class="body-text">Gateway Endpoints S3 para ortomosaicos, fotos y Glacier.</text>
         <text x="10" y="58" class="mono-text" fill="#555555">Prefijo pl-s3 vía Gateway Endpoint nativo sin sobrecosto NAT</text>
       </g>
 
       <g transform="translate(15, 415)">
-        <rect width="600" height="68" rx="4" fill="#F8F9FA" stroke="#545B64" />
+        <rect width="600" height="68" rx="4" fill="#FFFFFF" stroke="#545B64" />
         <text x="10" y="20" class="header-box" font-size="12px">6. Subred Administración y TGW: 10.70.40.0/24 (251 IPs utilizables)</text>
         <text x="10" y="40" class="body-text">ENI Transit Gateway Attachment AZ-a para enlace híbrido acopios.</text>
         <text x="10" y="58" class="mono-text" fill="#555555">Ruta hacia túneles IPsec de Cauca, Huila y Tolima vía TGW</text>
       </g>
 
       <g transform="translate(15, 490)">
-        <rect width="600" height="68" rx="4" fill="#F8F9FA" stroke="#FBCA04" />
+        <rect width="600" height="68" rx="4" fill="#FFFFFF" stroke="#FBCA04" />
         <text x="10" y="20" class="header-box" font-size="12px">7. Subred Consulta Pública del Saco: 10.70.50.0/24 (251 IPs)</text>
         <text x="10" y="40" class="body-text">Application Load Balancer público para compradores internacionales.</text>
         <text x="10" y="58" class="mono-text" fill="#555555">Ruta: 0.0.0.0/0 -&gt; Internet Gateway (igw) | WAF con rate-limiting</text>
@@ -247,53 +247,53 @@
     <!-- AZ-b Produccion -->
     <g transform="translate(670, 55)">
       <rect width="630" height="585" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" />
-      <rect width="630" height="30" rx="6" fill="#F8F9FA" />
+      <rect width="630" height="30" rx="6" fill="#FFFFFF" />
       <text x="15" y="20" class="subhead-box">Zona us-east-1b (Subredes Secundarias / Alta Disponibilidad)</text>
 
       <g transform="translate(15, 40)">
-        <rect width="600" height="68" rx="4" fill="#F8F9FA" stroke="#1D76DB" />
+        <rect width="600" height="68" rx="4" fill="#FFFFFF" stroke="#1D76DB" />
         <text x="10" y="20" class="header-box" font-size="12px">1. Subred Ingreso Telemetría AZ-b: 10.70.101.0/24 (251 IPs)</text>
         <text x="10" y="40" class="body-text">ENIs secundarias de Lambda Ingesta IoT, failover automático.</text>
         <text x="10" y="58" class="mono-text" fill="#555555">Paridad estricta con AZ-a para tolerancia a caídas de zona</text>
       </g>
 
       <g transform="translate(15, 115)">
-        <rect width="600" height="68" rx="4" fill="#F8F9FA" stroke="#1D76DB" />
+        <rect width="600" height="68" rx="4" fill="#FFFFFF" stroke="#1D76DB" />
         <text x="10" y="20" class="header-box" font-size="12px">2. Subred Ingreso Objetos Dron AZ-b: 10.70.102.0/24 (251 IPs)</text>
         <text x="10" y="40" class="body-text">Procesamiento redundante de imágenes multiespectrales.</text>
         <text x="10" y="58" class="mono-text" fill="#555555">Alta disponibilidad para campañas mensuales de drones</text>
       </g>
 
       <g transform="translate(15, 190)">
-        <rect width="600" height="68" rx="4" fill="#F8F9FA" stroke="#0E8A16" />
+        <rect width="600" height="68" rx="4" fill="#FFFFFF" stroke="#0E8A16" />
         <text x="10" y="20" class="header-box" font-size="12px">3. Subred Aplicación Backend AZ-b: 10.70.110.0/24 (251 IPs)</text>
         <text x="10" y="40" class="body-text">Cómputo serverless y balanceo multi-AZ de microservicios.</text>
         <text x="10" y="58" class="mono-text" fill="#555555">Rutas simétricas hacia TGW y acopios departamentales</text>
       </g>
 
       <g transform="translate(15, 265)">
-        <rect width="600" height="68" rx="4" fill="#F8F9FA" stroke="#D93F0B" />
+        <rect width="600" height="68" rx="4" fill="#FFFFFF" stroke="#D93F0B" />
         <text x="10" y="20" class="header-box" font-size="12px">4. Subred Capa de Datos AZ-b: 10.70.120.0/24 (251 IPs utilizables)</text>
         <text x="10" y="40" class="body-text">VPC Endpoints redundantes y cache replicada multi-AZ.</text>
         <text x="10" y="58" class="mono-text" fill="#555555">Garantía de RPO de 15 minutos en eventos de sacos</text>
       </g>
 
       <g transform="translate(15, 340)">
-        <rect width="600" height="68" rx="4" fill="#F8F9FA" stroke="#545B64" />
+        <rect width="600" height="68" rx="4" fill="#FFFFFF" stroke="#545B64" />
         <text x="10" y="20" class="header-box" font-size="12px">5. Subred Object Storage Endpoints AZ-b: 10.70.130.0/24 (251 IPs)</text>
         <text x="10" y="40" class="body-text">Enlace secundario de alta velocidad hacia S3 Bucket y Glacier.</text>
         <text x="10" y="58" class="mono-text" fill="#555555">Prefijo pl-s3 vía Gateway Endpoint nativo sin costo NAT</text>
       </g>
 
       <g transform="translate(15, 415)">
-        <rect width="600" height="68" rx="4" fill="#F8F9FA" stroke="#545B64" />
+        <rect width="600" height="68" rx="4" fill="#FFFFFF" stroke="#545B64" />
         <text x="10" y="20" class="header-box" font-size="12px">6. Subred Administración y TGW AZ-b: 10.70.140.0/24 (251 IPs)</text>
         <text x="10" y="40" class="body-text">ENI secundaria Transit Gateway Attachment AZ-b para failover.</text>
         <text x="10" y="58" class="mono-text" fill="#555555">Soporte y diagnóstico seguro sin exposición pública</text>
       </g>
 
       <g transform="translate(15, 490)">
-        <rect width="600" height="68" rx="4" fill="#F8F9FA" stroke="#FBCA04" />
+        <rect width="600" height="68" rx="4" fill="#FFFFFF" stroke="#FBCA04" />
         <text x="10" y="20" class="header-box" font-size="12px">7. Subred Consulta Pública AZ-b: 10.70.150.0/24 (251 IPs)</text>
         <text x="10" y="40" class="body-text">Nodo secundario ALB público para absorber picos de cosecha.</text>
         <text x="10" y="58" class="mono-text" fill="#555555">Ruta: 0.0.0.0/0 -&gt; Internet Gateway (igw) | Anonimización Ley 1581</text>
@@ -305,7 +305,7 @@
   <g transform="translate(1040, 790)" filter="url(#shadow)">
     <!-- Pruebas -->
     <g transform="translate(0, 0)">
-      <rect width="640" height="760" rx="8" fill="#EAEDED" stroke="#1D76DB" stroke-width="2" />
+      <rect width="640" height="760" rx="8" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
       <rect width="640" height="40" rx="8" fill="#1D76DB" />
       <text x="15" y="26" class="header-box" fill="#FFFFFF">CUENTA PRUEBAS (AromaPacifico-Test) - VPC: 10.60.0.0/16</text>
 
@@ -334,7 +334,7 @@
 
     <!-- Desarrollo -->
     <g transform="translate(680, 0)">
-      <rect width="640" height="760" rx="8" fill="#EAEDED" stroke="#0E8A16" stroke-width="2" />
+      <rect width="640" height="760" rx="8" fill="#FFFFFF" stroke="#0E8A16" stroke-width="2" />
       <rect width="640" height="40" rx="8" fill="#0E8A16" />
       <text x="15" y="26" class="header-box" fill="#FFFFFF">CUENTA DESARROLLO (AromaPacifico-Dev) - VPC: 10.50.0.0/16</text>
 

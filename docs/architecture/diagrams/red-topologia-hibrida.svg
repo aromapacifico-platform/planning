@@ -15,7 +15,7 @@
   </defs>
 
   <!-- FONDO -->
-  <rect width="2400" height="1500" fill="#F8F9FA" />
+  <rect width="2400" height="1500" fill="#FFFFFF" />
 
   <!-- TITULO -->
   <text x="1200" y="45" class="title">AromaPacífico - Topología de Interconexión Híbrida y Enrutamiento (Hub-and-Spoke con AWS Transit Gateway)</text>
@@ -23,7 +23,7 @@
 
   <!-- ==================== COLUMNA IZQUIERDA: CENTROS DE ACOPIO ==================== -->
   <g transform="translate(40, 110)" filter="url(#shadow)">
-    <rect width="600" height="1340" rx="8" fill="#F8F9FA" stroke="#D93F0B" stroke-width="2" />
+    <rect width="600" height="1340" rx="8" fill="#FFFFFF" stroke="#D93F0B" stroke-width="2" />
     <rect width="600" height="40" rx="8" fill="#D93F0B" />
     <text x="15" y="26" class="lane-title">CENTROS DE ACOPIO (ON-PREMISES) - SEGMENTACIÓN Y RUTAS LOCALES</text>
 
@@ -93,7 +93,7 @@
 
   <!-- ==================== COLUMNA CENTRAL: AWS TRANSIT GATEWAY HUB ==================== -->
   <g transform="translate(680, 110)" filter="url(#shadow)">
-    <rect width="700" height="1340" rx="8" fill="#EAEDED" stroke="#232F3E" stroke-width="2.5" />
+    <rect width="700" height="1340" rx="8" fill="#FFFFFF" stroke="#232F3E" stroke-width="2.5" />
     <rect width="700" height="40" rx="8" fill="#232F3E" />
     <text x="15" y="26" class="lane-title">AWS TRANSIT GATEWAY HUB (AromaPacifico-Network) - ASN 64512</text>
 
@@ -161,7 +161,7 @@
 
   <!-- ==================== COLUMNA DERECHA: VPC PRODUCCIÓN Y REGLAS ==================== -->
   <g transform="translate(1420, 110)" filter="url(#shadow)">
-    <rect width="940" height="1340" rx="8" fill="#EAEDED" stroke="#FF9900" stroke-width="2.5" />
+    <rect width="940" height="1340" rx="8" fill="#FFFFFF" stroke="#FF9900" stroke-width="2.5" />
     <rect width="940" height="40" rx="8" fill="#FF9900" />
     <text x="15" y="26" class="lane-title" fill="#232F3E">CUENTA PRODUCCIÓN (AromaPacifico-Prod) - VPC PRODUCCIÓN (10.70.0.0/16)</text>
 

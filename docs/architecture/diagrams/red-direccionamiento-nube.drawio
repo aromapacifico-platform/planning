@@ -15,7 +15,7 @@
         </mxCell>
 
         <!-- PANEL IZQUIERDO: REDES ON-PREMISES CENTROS DE ACOPIO -->
-        <mxCell id="box-onprem-container" value="CENTROS DE ACOPIO DEPARTAMENTALES (ON-PREMISES)&#xa;Bloques Reservados Inmutables (7 VLANs por Centro)" style="swimlane;startSize=35;horizontal=1;fillColor=#F8F9FA;strokeColor=#D93F0B;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+        <mxCell id="box-onprem-container" value="CENTROS DE ACOPIO DEPARTAMENTALES (ON-PREMISES)&#xa;Bloques Reservados Inmutables (7 VLANs por Centro)" style="swimlane;startSize=35;horizontal=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
           <mxGeometry x="40" y="120" width="460" height="700" as="geometry" />
         </mxCell>
 
@@ -32,7 +32,7 @@
         </mxCell>
 
         <!-- PANEL INFERIOR IZQUIERDO: REGLAS Y VERIFICACION DE NO-SOLAPE -->
-        <mxCell id="box-verif-container" value="VERIFICACIÓN DE NO-SOLAPAMIENTO Y FINOPS" style="swimlane;startSize=30;horizontal=1;fillColor=#F8F9FA;strokeColor=#0E8A16;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+        <mxCell id="box-verif-container" value="VERIFICACIÓN DE NO-SOLAPAMIENTO Y FINOPS" style="swimlane;startSize=30;horizontal=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
           <mxGeometry x="40" y="850" width="460" height="690" as="geometry" />
         </mxCell>
 
@@ -41,7 +41,7 @@
         </mxCell>
 
         <!-- COLUMNA CENTRAL: CUENTA RED COMPARTIDA (TRANSIT GATEWAY HUB) -->
-        <mxCell id="box-hub-network" value="CUENTA RED COMPARTIDA (AromaPacifico-Network) - Región us-east-1&#xa;VPC Hub de Inspección y Tránsito: 10.80.0.0/16" style="swimlane;startSize=35;horizontal=1;fillColor=#EAEDED;strokeColor=#232F3E;strokeWidth=2.5;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+        <mxCell id="box-hub-network" value="CUENTA RED COMPARTIDA (AromaPacifico-Network) - Región us-east-1&#xa;VPC Hub de Inspección y Tránsito: 10.80.0.0/16" style="swimlane;startSize=35;horizontal=1;fillColor=#FFFFFF;strokeColor=#232F3E;strokeWidth=2.5;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
           <mxGeometry x="540" y="120" width="460" height="1420" as="geometry" />
         </mxCell>
 
@@ -53,7 +53,7 @@
           <mxGeometry x="25" y="235" width="410" height="260" as="geometry" />
         </mxCell>
 
-        <mxCell id="card-data-paths-summary" value="RUTAS DE DATOS (DATA PATHS) DESACOPLADAS&#xa;&#xa;1. TELEMETRÍA DE CULTIVO Y SECADO (IoT Edge):&#xa;   Fincas (ESP32-S3) -&gt; Celular (LTE-M/NB-IoT) -&gt;&#xa;   AWS IoT Core (MQTT/TLS 1.3) -&gt; Basic Ingest Rule -&gt;&#xa;   DynamoDB Hot Tier -&gt; TTL (90d) -&gt; S3 Glacier Deep Archive.&#xa;   Buffer Local: 24 horas store-and-forward en memoria flash.&#xa;&#xa;2. SEGUIMIENTO DE TRANSPORTADORES (GPS Móvil):&#xa;   60 Transportadores -&gt; Smartphone App -&gt; Red Celular -&gt;&#xa;   API Gateway / IoT Endpoint (HTTPS/WSS) -&gt; VPC Subred App -&gt;&#xa;   Lambda Ingest -&gt; DynamoDB Tracking (Ping cada 5 min).&#xa;   Sin señal: persistencia SQLite local en smartphone.&#xa;&#xa;3. OBJETOS MULTIMEDIA DE DRONES (Vuelo e Inferencia):&#xa;   Dron agrícola -&gt; Buffer local -&gt; Estación Wi-Fi Acopio/Cabecera -&gt;&#xa;   S3 Ingest Bucket (HTTPS TLS 1.3 multipart presigned URL) -&gt;&#xa;   S3 Event Notification -&gt; Lambda Trigger (us-east-1a/b) -&gt;&#xa;   Amazon Rekognition -&gt; Expediente Agronómico en DynamoDB.&#xa;   Compuerta: Firma humana obligatoria para autorizar fumigación." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-hub-network">
+        <mxCell id="card-data-paths-summary" value="RUTAS DE DATOS (DATA PATHS) DESACOPLADAS&#xa;&#xa;1. TELEMETRÍA DE CULTIVO Y SECADO (IoT Edge):&#xa;   Fincas (ESP32-S3) -&gt; Celular (LTE-M/NB-IoT) -&gt;&#xa;   AWS IoT Core (MQTT/TLS 1.3) -&gt; Basic Ingest Rule -&gt;&#xa;   DynamoDB Hot Tier -&gt; TTL (90d) -&gt; S3 Glacier Deep Archive.&#xa;   Buffer Local: 24 horas store-and-forward en memoria flash.&#xa;&#xa;2. SEGUIMIENTO DE TRANSPORTADORES (GPS Móvil):&#xa;   60 Transportadores -&gt; Smartphone App -&gt; Red Celular -&gt;&#xa;   API Gateway / IoT Endpoint (HTTPS/WSS) -&gt; VPC Subred App -&gt;&#xa;   Lambda Ingest -&gt; DynamoDB Tracking (Ping cada 5 min).&#xa;   Sin señal: persistencia SQLite local en smartphone.&#xa;&#xa;3. OBJETOS MULTIMEDIA DE DRONES (Vuelo e Inferencia):&#xa;   Dron agrícola -&gt; Buffer local -&gt; Estación Wi-Fi Acopio/Cabecera -&gt;&#xa;   S3 Ingest Bucket (HTTPS TLS 1.3 multipart presigned URL) -&gt;&#xa;   S3 Event Notification -&gt; Lambda Trigger (us-east-1a/b) -&gt;&#xa;   Amazon Rekognition -&gt; Expediente Agronómico en DynamoDB.&#xa;   Compuerta: Firma humana obligatoria para autorizar fumigación." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-hub-network">
           <mxGeometry x="25" y="525" width="410" height="420" as="geometry" />
         </mxCell>
 
@@ -62,7 +62,7 @@
         </mxCell>
 
         <!-- PANEL DERECHO SUPERIOR: VPC PRODUCCIÓN (10.70.0.0/16) -->
-        <mxCell id="box-vpc-prod" value="CUENTA PRODUCCIÓN (AromaPacifico-Prod) - VPC Producción: 10.70.0.0/16 (us-east-1)" style="swimlane;startSize=35;horizontal=1;fillColor=#EAEDED;strokeColor=#FF9900;strokeWidth=2.5;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+        <mxCell id="box-vpc-prod" value="CUENTA PRODUCCIÓN (AromaPacifico-Prod) - VPC Producción: 10.70.0.0/16 (us-east-1)" style="swimlane;startSize=35;horizontal=1;fillColor=#FFFFFF;strokeColor=#FF9900;strokeWidth=2.5;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
           <mxGeometry x="1040" y="120" width="1320" height="640" as="geometry" />
         </mxCell>
 
@@ -71,31 +71,31 @@
           <mxGeometry x="20" y="50" width="630" height="565" as="geometry" />
         </mxCell>
 
-        <mxCell id="sub-p-az1-ingest" value="1. Subred Ingreso Telemetría (AZ a): 10.70.1.0/24 (251 IPs utilizables)&#xa;   Propósito: ENIs de Lambda Ingesta IoT, balanceadores internos de telemetría." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#1D76DB;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-aza">
+        <mxCell id="sub-p-az1-ingest" value="1. Subred Ingreso Telemetría (AZ a): 10.70.1.0/24 (251 IPs utilizables)&#xa;   Propósito: ENIs de Lambda Ingesta IoT, balanceadores internos de telemetría." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-aza">
           <mxGeometry x="15" y="35" width="600" height="65" as="geometry" />
         </mxCell>
 
-        <mxCell id="sub-p-az1-dron" value="2. Subred Ingreso Objetos Dron (AZ a): 10.70.2.0/24 (251 IPs utilizables)&#xa;   Propósito: Procesamiento de ortomosaicos, ENIs para funciones de visión IA." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#1D76DB;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-aza">
+        <mxCell id="sub-p-az1-dron" value="2. Subred Ingreso Objetos Dron (AZ a): 10.70.2.0/24 (251 IPs utilizables)&#xa;   Propósito: Procesamiento de ortomosaicos, ENIs para funciones de visión IA." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-aza">
           <mxGeometry x="15" y="110" width="600" height="65" as="geometry" />
         </mxCell>
 
-        <mxCell id="sub-p-az1-app" value="3. Subred Aplicación Backend (AZ a): 10.70.10.0/24 (251 IPs utilizables)&#xa;   Propósito: Microservicios de negocio, registro de sacos, validación de umbrales." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#0E8A16;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-aza">
+        <mxCell id="sub-p-az1-app" value="3. Subred Aplicación Backend (AZ a): 10.70.10.0/24 (251 IPs utilizables)&#xa;   Propósito: Microservicios de negocio, registro de sacos, validación de umbrales." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-aza">
           <mxGeometry x="15" y="185" width="600" height="65" as="geometry" />
         </mxCell>
 
-        <mxCell id="sub-p-az1-data" value="4. Subred Capa de Datos (AZ a): 10.70.20.0/24 (251 IPs utilizables)&#xa;   Propósito: VPC Endpoints para DynamoDB, nodos de cache y bases transaccionales." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#D93F0B;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-aza">
+        <mxCell id="sub-p-az1-data" value="4. Subred Capa de Datos (AZ a): 10.70.20.0/24 (251 IPs utilizables)&#xa;   Propósito: VPC Endpoints para DynamoDB, nodos de cache y bases transaccionales." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-aza">
           <mxGeometry x="15" y="260" width="600" height="65" as="geometry" />
         </mxCell>
 
-        <mxCell id="sub-p-az1-s3" value="5. Subred Object Storage Endpoints (AZ a): 10.70.30.0/24 (251 IPs utilizables)&#xa;   Propósito: Gateway Endpoints S3 para fotos de drones y archivo histórico." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#545B64;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-aza">
+        <mxCell id="sub-p-az1-s3" value="5. Subred Object Storage Endpoints (AZ a): 10.70.30.0/24 (251 IPs utilizables)&#xa;   Propósito: Gateway Endpoints S3 para fotos de drones y archivo histórico." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-aza">
           <mxGeometry x="15" y="335" width="600" height="65" as="geometry" />
         </mxCell>
 
-        <mxCell id="sub-p-az1-adm" value="6. Subred Administración y TGW (AZ a): 10.70.40.0/24 (251 IPs utilizables)&#xa;   Propósito: ENI Transit Gateway Attachment, puntos de enlace para túneles y soporte." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#545B64;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-aza">
+        <mxCell id="sub-p-az1-adm" value="6. Subred Administración y TGW (AZ a): 10.70.40.0/24 (251 IPs utilizables)&#xa;   Propósito: ENI Transit Gateway Attachment, puntos de enlace para túneles y soporte." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-aza">
           <mxGeometry x="15" y="410" width="600" height="65" as="geometry" />
         </mxCell>
 
-        <mxCell id="sub-p-az1-pub" value="7. Subred Consulta Pública del Saco (AZ a): 10.70.50.0/24 (251 IPs utilizables)&#xa;   Propósito: Application Load Balancer público, API de consulta para compradores." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#FBCA04;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-aza">
+        <mxCell id="sub-p-az1-pub" value="7. Subred Consulta Pública del Saco (AZ a): 10.70.50.0/24 (251 IPs utilizables)&#xa;   Propósito: Application Load Balancer público, API de consulta para compradores." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FBCA04;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-aza">
           <mxGeometry x="15" y="485" width="600" height="65" as="geometry" />
         </mxCell>
 
@@ -104,36 +104,36 @@
           <mxGeometry x="670" y="50" width="630" height="565" as="geometry" />
         </mxCell>
 
-        <mxCell id="sub-p-az2-ingest" value="1. Subred Ingreso Telemetría (AZ b): 10.70.101.0/24 (251 IPs utilizables)&#xa;   Propósito: ENIs redundantes Lambda Ingesta IoT, failover automático." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#1D76DB;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-azb">
+        <mxCell id="sub-p-az2-ingest" value="1. Subred Ingreso Telemetría (AZ b): 10.70.101.0/24 (251 IPs utilizables)&#xa;   Propósito: ENIs redundantes Lambda Ingesta IoT, failover automático." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-azb">
           <mxGeometry x="15" y="35" width="600" height="65" as="geometry" />
         </mxCell>
 
-        <mxCell id="sub-p-az2-dron" value="2. Subred Ingreso Objetos Dron (AZ b): 10.70.102.0/24 (251 IPs utilizables)&#xa;   Propósito: Procesamiento redundante de imágenes multiespectrales y misiones." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#1D76DB;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-azb">
+        <mxCell id="sub-p-az2-dron" value="2. Subred Ingreso Objetos Dron (AZ b): 10.70.102.0/24 (251 IPs utilizables)&#xa;   Propósito: Procesamiento redundante de imágenes multiespectrales y misiones." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-azb">
           <mxGeometry x="15" y="110" width="600" height="65" as="geometry" />
         </mxCell>
 
-        <mxCell id="sub-p-az2-app" value="3. Subred Aplicación Backend (AZ b): 10.70.110.0/24 (251 IPs utilizables)&#xa;   Propósito: Cómputo serverless de contingencia y balanceo de carga." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#0E8A16;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-azb">
+        <mxCell id="sub-p-az2-app" value="3. Subred Aplicación Backend (AZ b): 10.70.110.0/24 (251 IPs utilizables)&#xa;   Propósito: Cómputo serverless de contingencia y balanceo de carga." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-azb">
           <mxGeometry x="15" y="185" width="600" height="65" as="geometry" />
         </mxCell>
 
-        <mxCell id="sub-p-az2-data" value="4. Subred Capa de Datos (AZ b): 10.70.120.0/24 (251 IPs utilizables)&#xa;   Propósito: Conexión secundaria a almacenes y persistencia transaccional." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#D93F0B;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-azb">
+        <mxCell id="sub-p-az2-data" value="4. Subred Capa de Datos (AZ b): 10.70.120.0/24 (251 IPs utilizables)&#xa;   Propósito: Conexión secundaria a almacenes y persistencia transaccional." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-azb">
           <mxGeometry x="15" y="260" width="600" height="65" as="geometry" />
         </mxCell>
 
-        <mxCell id="sub-p-az2-s3" value="5. Subred Object Storage Endpoints (AZ b): 10.70.130.0/24 (251 IPs utilizables)&#xa;   Propósito: Enlace de alta disponibilidad hacia S3 Bucket y almacenamiento." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#545B64;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-azb">
+        <mxCell id="sub-p-az2-s3" value="5. Subred Object Storage Endpoints (AZ b): 10.70.130.0/24 (251 IPs utilizables)&#xa;   Propósito: Enlace de alta disponibilidad hacia S3 Bucket y almacenamiento." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-azb">
           <mxGeometry x="15" y="335" width="600" height="65" as="geometry" />
         </mxCell>
 
-        <mxCell id="sub-p-az2-adm" value="6. Subred Administración y TGW (AZ b): 10.70.140.0/24 (251 IPs utilizables)&#xa;   Propósito: ENI secundaria Transit Gateway Attachment para balanceo y redundancia." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#545B64;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-azb">
+        <mxCell id="sub-p-az2-adm" value="6. Subred Administración y TGW (AZ b): 10.70.140.0/24 (251 IPs utilizables)&#xa;   Propósito: ENI secundaria Transit Gateway Attachment para balanceo y redundancia." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-azb">
           <mxGeometry x="15" y="410" width="600" height="65" as="geometry" />
         </mxCell>
 
-        <mxCell id="sub-p-az2-pub" value="7. Subred Consulta Pública del Saco (AZ b): 10.70.150.0/24 (251 IPs utilizables)&#xa;   Propósito: Nodo secundario ALB público para soporte de picos de 30 req/min." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#FBCA04;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-azb">
+        <mxCell id="sub-p-az2-pub" value="7. Subred Consulta Pública del Saco (AZ b): 10.70.150.0/24 (251 IPs utilizables)&#xa;   Propósito: Nodo secundario ALB público para soporte de picos de 30 req/min." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FBCA04;fontSize=12;align=left;spacingLeft=8;fontColor=#232F3E;" vertex="1" parent="box-prod-azb">
           <mxGeometry x="15" y="485" width="600" height="65" as="geometry" />
         </mxCell>
 
         <!-- PANEL DERECHO INFERIOR: PRUEBAS (10.60.0.0/16) Y DESARROLLO (10.50.0.0/16) -->
-        <mxCell id="box-vpc-test" value="CUENTA PRUEBAS (AromaPacifico-Test) - VPC Pruebas: 10.60.0.0/16 (us-east-1)" style="swimlane;startSize=30;horizontal=1;fillColor=#EAEDED;strokeColor=#1D76DB;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+        <mxCell id="box-vpc-test" value="CUENTA PRUEBAS (AromaPacifico-Test) - VPC Pruebas: 10.60.0.0/16 (us-east-1)" style="swimlane;startSize=30;horizontal=1;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
           <mxGeometry x="1040" y="790" width="640" height="750" as="geometry" />
         </mxCell>
 
@@ -141,7 +141,7 @@
           <mxGeometry x="20" y="45" width="600" height="680" as="geometry" />
         </mxCell>
 
-        <mxCell id="box-vpc-dev" value="CUENTA DESARROLLO (AromaPacifico-Dev) - VPC Dev: 10.50.0.0/16 (us-east-1)" style="swimlane;startSize=30;horizontal=1;fillColor=#EAEDED;strokeColor=#0E8A16;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+        <mxCell id="box-vpc-dev" value="CUENTA DESARROLLO (AromaPacifico-Dev) - VPC Dev: 10.50.0.0/16 (us-east-1)" style="swimlane;startSize=30;horizontal=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
           <mxGeometry x="1720" y="790" width="640" height="750" as="geometry" />
         </mxCell>
 

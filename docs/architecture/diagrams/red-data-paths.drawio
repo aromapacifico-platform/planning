@@ -15,7 +15,7 @@
         </mxCell>
 
         <!-- ==================== RUTA 1: TELEMETRÍA DE CULTIVO Y SECADO ==================== -->
-        <mxCell id="lane-dp1" value="RUTA 1: TELEMETRÍA DE CULTIVO Y SECADO EN FINCAS (Cadencia 4h y 1h / Buffer 24h)" style="swimlane;startSize=35;horizontal=1;fillColor=#EAEDED;strokeColor=#1D76DB;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+        <mxCell id="lane-dp1" value="RUTA 1: TELEMETRÍA DE CULTIVO Y SECADO EN FINCAS (Cadencia 4h y 1h / Buffer 24h)" style="swimlane;startSize=35;horizontal=1;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
           <mxGeometry x="40" y="120" width="2320" height="340" as="geometry" />
         </mxCell>
 
@@ -57,7 +57,7 @@
         <mxCell id="c1-5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#1D76DB;strokeWidth=2;" edge="1" source="dp1-dynamo" target="dp1-glacier" parent="lane-dp1" />
 
         <!-- ==================== RUTA 2: SEGUIMIENTO DE TRANSPORTADORES ==================== -->
-        <mxCell id="lane-dp2" value="RUTA 2: SEGUIMIENTO EN RUTA DE TRANSPORTADORES (Cadencia 5 min / Persistencia Móvil)" style="swimlane;startSize=35;horizontal=1;fillColor=#EAEDED;strokeColor=#0E8A16;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+        <mxCell id="lane-dp2" value="RUTA 2: SEGUIMIENTO EN RUTA DE TRANSPORTADORES (Cadencia 5 min / Persistencia Móvil)" style="swimlane;startSize=35;horizontal=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
           <mxGeometry x="40" y="500" width="2320" height="340" as="geometry" />
         </mxCell>
 
@@ -93,7 +93,7 @@
         <mxCell id="c2-5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#0E8A16;strokeWidth=2;" edge="1" source="dp2-dynamo" target="dp2-terminal" parent="lane-dp2" />
 
         <!-- ==================== RUTA 3: OBJETOS DE DRONES E INFERENCIA ==================== -->
-        <mxCell id="lane-dp3" value="RUTA 3: OBJETOS MULTIMEDIA DE DRONES, INFERENCIA IA Y COMPUERTA HUMANA (5 Servicios)" style="swimlane;startSize=35;horizontal=1;fillColor=#EAEDED;strokeColor=#D93F0B;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+        <mxCell id="lane-dp3" value="RUTA 3: OBJETOS MULTIMEDIA DE DRONES, INFERENCIA IA Y COMPUERTA HUMANA (5 Servicios)" style="swimlane;startSize=35;horizontal=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
           <mxGeometry x="40" y="880" width="2320" height="460" as="geometry" />
         </mxCell>
 
