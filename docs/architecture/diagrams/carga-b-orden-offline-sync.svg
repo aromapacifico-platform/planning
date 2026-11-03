@@ -1,0 +1,296 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1980 1080" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; fill: #5A6B7C; text-anchor: middle; }
+      .col-header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; }
+      .card-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; }
+      .card-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
+      .edge-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; }
+      .edge-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 500; }
+    </style>
+
+    <filter id="card-shadow" x="-3%" y="-3%" width="106%" height="106%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.06" />
+    </filter>
+
+    <marker id="arr-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1D76DB" />
+    </marker>
+    <marker id="arr-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0E8A16" />
+    </marker>
+    <marker id="arr-orange" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#FF9900" />
+    </marker>
+    <marker id="arr-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#B60205" />
+    </marker>
+  </defs>
+
+  <!-- BACKGROUND -->
+  <rect width="1980" height="1080" fill="#F8F9FA" />
+
+  <!-- HEADER -->
+  <text x="990" y="45" class="title">AromaPacífico - Arquitectura de Preposicionamiento Offline y Sincronización de Vuelo</text>
+  <text x="990" y="75" class="subtitle">Flujo de Carga en Acopio, Operación Desconectada en Parcela (Store-and-Forward), Drenado Criptográfico SHA-256 y Cierre WORM</text>
+
+  <!-- ================= COLUMNA 1: CLOUD AWS ================= -->
+  <g transform="translate(40, 110)">
+    <rect width="440" height="930" rx="10" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" filter="url(#card-shadow)" />
+    <rect width="440" height="40" rx="10" fill="#E8F0FE" />
+    <text x="20" y="26" class="col-header" fill="#1D76DB">1. PLATAFORMA CLOUD AWS (us-east-1)</text>
+
+    <!-- CARD: IAM IDENTITY CENTER -->
+    <g transform="translate(20, 55)">
+      <rect width="400" height="85" rx="6" fill="#F8F9FA" stroke="#1D76DB" stroke-width="1" />
+      <text x="15" y="22" class="card-title" fill="#1D76DB">IAM Identity Center (Agrónomo FNC)</text>
+      <text x="15" y="44" class="card-body">- Autenticación con MFA obligatorio (FIDO2 / WebAuthn).</text>
+      <text x="15" y="62" class="card-body">- Genera firma digital criptográfica de autorización.</text>
+      <text x="15" y="78" class="card-body">- Asocia lote químico ICA, dosis y ventana horaria.</text>
+    </g>
+
+    <!-- CARD: API GATEWAY -->
+    <g transform="translate(20, 155)">
+      <rect width="400" height="95" rx="6" fill="#F8F9FA" stroke="#1D76DB" stroke-width="1" />
+      <text x="15" y="22" class="card-title" fill="#1D76DB">Amazon API Gateway (REST HTTPS)</text>
+      <text x="15" y="44" class="card-body">- /api/v1/orders/{id}/download (Token efímero de cuadrilla).</text>
+      <text x="15" y="62" class="card-body">- Entrega URLs pre-firmadas para polígono GeoJSON.</text>
+      <text x="15" y="80" class="card-body">- Endpoint de sincronización y subida de bitácoras.</text>
+    </g>
+
+    <!-- CARD: DYNAMODB -->
+    <g transform="translate(20, 265)">
+      <rect width="400" height="95" rx="6" fill="#F8F9FA" stroke="#1D76DB" stroke-width="1" />
+      <text x="15" y="22" class="card-title" fill="#1D76DB">Amazon DynamoDB (On-Demand)</text>
+      <text x="15" y="44" class="card-body">- Tabla: AromaPacifico-FumigationOrders.</text>
+      <text x="15" y="62" class="card-body">- PK: ORDEN#ID | SK: METADATA.</text>
+      <text x="15" y="80" class="card-body">- Cifrado en reposo con llaves administradas AWS KMS.</text>
+    </g>
+
+    <!-- CARD: S3 OBJECT STORAGE -->
+    <g transform="translate(20, 375)">
+      <rect width="400" height="100" rx="6" fill="#F8F9FA" stroke="#1D76DB" stroke-width="1" />
+      <text x="15" y="22" class="card-title" fill="#1D76DB">Amazon S3 Object Storage (WORM Lock)</text>
+      <text x="15" y="44" class="card-body">- aromapacifico-drone-missions (GeoJSON No-Fly).</text>
+      <text x="15" y="62" class="card-body">- aromapacifico-flight-logs (Telemetría .bin).</text>
+      <text x="15" y="80" class="card-body">- Retención legal inmutable de 5 años (S3 Object Lock).</text>
+    </g>
+
+    <!-- CARD: LAMBDA WORKER -->
+    <g transform="translate(20, 490)">
+      <rect width="400" height="95" rx="6" fill="#F8F9FA" stroke="#1D76DB" stroke-width="1" />
+      <text x="15" y="22" class="card-title" fill="#1D76DB">AWS Lambda Worker (Graviton2 Arm64)</text>
+      <text x="15" y="44" class="card-body">- Disparado por evento S3 ObjectCreated en /logs/.</text>
+      <text x="15" y="62" class="card-body">- Validación integridad hash SHA-256 de vuelo.</text>
+      <text x="15" y="80" class="card-body">- Muta estado en DynamoDB a VOLADA_REGISTRO_PERSISTIDO.</text>
+    </g>
+
+    <!-- CARD: REKOGNITION -->
+    <g transform="translate(20, 600)">
+      <rect width="400" height="95" rx="6" fill="#F8F9FA" stroke="#1D76DB" stroke-width="1" />
+      <text x="15" y="22" class="card-title" fill="#1D76DB">Amazon Rekognition (Inferencia S4)</text>
+      <text x="15" y="44" class="card-body">- Verificación post-fumigación a los 7-10 días.</text>
+      <text x="15" y="62" class="card-body">- Filtro anti-PII: bloquea imágenes con personas.</text>
+      <text x="15" y="80" class="card-body">- Evalúa contención y desvanecimiento de roya/plaga.</text>
+    </g>
+
+    <!-- CARD: KMS & AUDIT -->
+    <g transform="translate(20, 710)">
+      <rect width="400" height="75" rx="6" fill="#EBF3FB" stroke="#1D76DB" stroke-width="1" />
+      <text x="15" y="22" class="card-title" fill="#1D76DB">KMS CMK &amp; CloudTrail Trail</text>
+      <text x="15" y="44" class="card-body">- Trazabilidad no repudiable de firmas y hashes.</text>
+      <text x="15" y="62" class="card-body">- Registro transferido a la cuenta AromaPacifico-Security.</text>
+    </g>
+  </g>
+
+  <!-- ================= COLUMNA 2: CENTRO DE ACOPIO ================= -->
+  <g transform="translate(520, 110)">
+    <rect width="440" height="930" rx="10" fill="#FFFFFF" stroke="#0E8A16" stroke-width="2" filter="url(#card-shadow)" />
+    <rect width="440" height="40" rx="10" fill="#E8F5E9" />
+    <text x="20" y="26" class="col-header" fill="#0E8A16">2. CENTRO DE ACOPIO (Cauca, Huila, Tolima)</text>
+
+    <!-- CARD: FIREWALL & VPN -->
+    <g transform="translate(20, 55)">
+      <rect width="400" height="95" rx="6" fill="#F8F9FA" stroke="#0E8A16" stroke-width="1" />
+      <text x="15" y="22" class="card-title" fill="#0E8A16">Firewall Perímetro / Túnel IPsec VPN</text>
+      <text x="15" y="44" class="card-body">- Subred de Enlace WAN: 10.X.20.0/24.</text>
+      <text x="15" y="62" class="card-body">- WAN 100 Mbps simétricos hacia Transit Gateway.</text>
+      <text x="15" y="80" class="card-body">- Cero solapamiento: 10.41/16, 10.42/16, 10.43/16.</text>
+    </g>
+
+    <!-- CARD: WIFI 6 OPERACIONES -->
+    <g transform="translate(20, 165)">
+      <rect width="400" height="95" rx="6" fill="#F8F9FA" stroke="#0E8A16" stroke-width="1" />
+      <text x="15" y="22" class="card-title" fill="#0E8A16">Wi-Fi 6 Corporativo de Cuadrillas</text>
+      <text x="15" y="44" class="card-body">- SSID Operaciones UAS aislado de visitantes.</text>
+      <text x="15" y="62" class="card-body">- WPA3-Enterprise con certificados 802.1X.</text>
+      <text x="15" y="80" class="card-body">- Descarga ultrarrápida de capas GeoJSON pesadas.</text>
+    </g>
+
+    <!-- CARD: SERVIDOR CACHE LOCAL -->
+    <g transform="translate(20, 275)">
+      <rect width="400" height="95" rx="6" fill="#F8F9FA" stroke="#0E8A16" stroke-width="1" />
+      <text x="15" y="22" class="card-title" fill="#0E8A16">Servidor Local de Acopio (10.X.10.0/24)</text>
+      <text x="15" y="44" class="card-body">- Caché de misiones y polígonos del departamento.</text>
+      <text x="15" y="62" class="card-body">- Buffer local intermedio si cae el enlace WAN.</text>
+      <text x="15" y="80" class="card-body">- Respaldo de firmas y bitácoras de cuadrilla.</text>
+    </g>
+
+    <!-- CARD: CUADRILLA RAC 100 -->
+    <g transform="translate(20, 385)">
+      <rect width="400" height="110" rx="6" fill="#E8F5E9" stroke="#0E8A16" stroke-width="1" />
+      <text x="15" y="22" class="card-title" fill="#0E8A16">Cuadrilla Especializada FNC (RAC 100)</text>
+      <text x="15" y="44" class="card-body">- 2 Operadores: Piloto al Mando + Auxiliar Aplicador.</text>
+      <text x="15" y="62" class="card-body">- Licencia Aerocivil UAS categoría específica.</text>
+      <text x="15" y="80" class="card-body">- Carnet de aplicador de plaguicidas ICA vigente.</text>
+      <text x="15" y="98" class="card-body">- Vehículo 4x4 con generador y estación de mezcla.</text>
+    </g>
+
+    <!-- CARD: DOCKING Y BATERIAS -->
+    <g transform="translate(20, 510)">
+      <rect width="400" height="95" rx="6" fill="#F8F9FA" stroke="#0E8A16" stroke-width="1" />
+      <text x="15" y="22" class="card-title" fill="#0E8A16">Estación de Carga y Mantenimiento</text>
+      <text x="15" y="44" class="card-body">- Cargador industrial inteligente para celdas LiPo.</text>
+      <text x="15" y="62" class="card-body">- Balanceo de baterías para prolongar vida útil.</text>
+      <text x="15" y="80" class="card-body">- Taller de calibración de boquillas y sensores.</text>
+    </g>
+  </g>
+
+  <!-- ================= COLUMNA 3: ESTACION GCS TABLET ================= -->
+  <g transform="translate(1000, 110)">
+    <rect width="440" height="930" rx="10" fill="#FFFFFF" stroke="#FF9900" stroke-width="2" filter="url(#card-shadow)" />
+    <rect width="440" height="40" rx="10" fill="#FFF8E1" />
+    <text x="20" y="26" class="col-header" fill="#FF9900">3. ESTACIÓN TERRESTRE EN CAMPO (GCS)</text>
+
+    <!-- CARD: AGENTE SYNC -->
+    <g transform="translate(20, 55)">
+      <rect width="400" height="95" rx="6" fill="#F8F9FA" stroke="#FF9900" stroke-width="1" />
+      <text x="15" y="22" class="card-title" fill="#FF9900">Agente de Sincronización Local</text>
+      <text x="15" y="44" class="card-body">- Almacena token de autorización (Lease 48h).</text>
+      <text x="15" y="62" class="card-body">- Valida firma del agrónomo antes de habilitar vuelo.</text>
+      <text x="15" y="80" class="card-body">- Calcula hash criptográfico SHA-256 de bitácora.</text>
+    </g>
+
+    <!-- CARD: ALMACENAMIENTO CIFRADO -->
+    <g transform="translate(20, 165)">
+      <rect width="400" height="95" rx="6" fill="#F8F9FA" stroke="#FF9900" stroke-width="1" />
+      <text x="15" y="22" class="card-title" fill="#FF9900">Almacenamiento Local Cifrado (AES-256)</text>
+      <text x="15" y="44" class="card-body">- Tableta robusta militar (IP67) de cuadrilla.</text>
+      <text x="15" y="62" class="card-body">- Polígonos GeoJSON de lotes y geocercas No-Fly.</text>
+      <text x="15" y="80" class="card-body">- Buffer Store-and-Forward hasta 24 horas.</text>
+    </g>
+
+    <!-- CARD: SOFTWARE CONTROL DE VUELO -->
+    <g transform="translate(20, 275)">
+      <rect width="400" height="110" rx="6" fill="#F8F9FA" stroke="#FF9900" stroke-width="1" />
+      <text x="15" y="22" class="card-title" fill="#FF9900">Software GCS de Vuelo (Offline)</text>
+      <text x="15" y="44" class="card-body">- Compila cuadrícula de aspersión y waypoints.</text>
+      <text x="15" y="62" class="card-body">- Carga geocercas No-Fly al autopiloto de la nave.</text>
+      <text x="15" y="80" class="card-body">- Monitoreo en línea de vista (VLOS) en radio 915 MHz.</text>
+      <text x="15" y="98" class="card-body">- Cero dependencia de cobertura celular en predio.</text>
+    </g>
+
+    <!-- CARD: COMPORTAMIENTO SIN SENAL -->
+    <g transform="translate(20, 400)">
+      <rect width="400" height="110" rx="6" fill="#EFEBE9" stroke="#8D6E63" stroke-width="2" />
+      <text x="15" y="22" class="card-title" fill="#4E342E">COMPORTAMIENTO ANTE CORTE CELULAR</text>
+      <text x="15" y="44" class="card-body">- La pérdida de señal celular no detiene el vuelo.</text>
+      <text x="15" y="62" class="card-body">- El autopiloto ejecuta la misión precargada.</text>
+      <text x="15" y="80" class="card-body">- Bitácora y caudal persisten en memoria flash.</text>
+      <text x="15" y="98" class="card-body">- Drenado automático al retornar a base con señal.</text>
+    </g>
+  </g>
+
+  <!-- ================= COLUMNA 4: AERONAVE UAS EN PARCELA ================= -->
+  <g transform="translate(1480, 110)">
+    <rect width="460" height="930" rx="10" fill="#FFFFFF" stroke="#B60205" stroke-width="2" filter="url(#card-shadow)" />
+    <rect width="460" height="40" rx="10" fill="#FDE8E8" />
+    <text x="20" y="26" class="col-header" fill="#B60205">4. AERONAVE UAS ASPERSORA (Borde Desconectado)</text>
+
+    <!-- CARD: AUTOPILOTO GNSS RTK -->
+    <g transform="translate(20, 55)">
+      <rect width="420" height="110" rx="6" fill="#F8F9FA" stroke="#B60205" stroke-width="1" />
+      <text x="15" y="22" class="card-title" fill="#B60205">Autopiloto de Navegación (PX4 / ArduPilot)</text>
+      <text x="15" y="44" class="card-body">- Posicionamiento GNSS RTK centimétrico dual.</text>
+      <text x="15" y="62" class="card-body">- Misión autónoma preprogramada en memoria EPROM.</text>
+      <text x="15" y="80" class="card-body">- Failsafe autónomo: RTH por batería crítica o fallo motor.</text>
+      <text x="15" y="98" class="card-body">- No aborta por falta de enlace celular.</text>
+    </g>
+
+    <!-- CARD: SISTEMA ASPERSION -->
+    <g transform="translate(20, 180)">
+      <rect width="420" height="110" rx="6" fill="#F8F9FA" stroke="#B60205" stroke-width="1" />
+      <text x="15" y="22" class="card-title" fill="#B60205">Sistema de Aspersión y Válvulas No-Fly</text>
+      <text x="15" y="44" class="card-body">- Boquillas centrífugas rotativas (gota controlada).</text>
+      <text x="15" y="62" class="card-body">- Sensor de caudal segundo a segundo (litros/ha).</text>
+      <text x="15" y="80" class="card-body">- Corte instantáneo automático al sobrevolar No-Fly.</text>
+      <text x="15" y="98" class="card-body">- Dosis calibrada según prescripción de agrónomo.</text>
+    </g>
+
+    <!-- CARD: BUFFER FLASH LOCAL -->
+    <g transform="translate(20, 305)">
+      <rect width="420" height="110" rx="6" fill="#F8F9FA" stroke="#B60205" stroke-width="1" />
+      <text x="15" y="22" class="card-title" fill="#B60205">Buffer Flash Local de Vuelo (SPI / MicroSD)</text>
+      <text x="15" y="44" class="card-body">- Bitácora binaria completa: flight_log.bin (20-40 MB).</text>
+      <text x="15" y="62" class="card-body">- Coordenadas GPS, altitud AGL, marcas de tiempo UTC.</text>
+      <text x="15" y="80" class="card-body">- Registro de descarga del agroquímico por coordenada.</text>
+      <text x="15" y="98" class="card-body">- Capacidad para &gt; 30 misiones continuas sin red.</text>
+    </g>
+
+    <!-- CARD: GEOFENCING EN HARDWARE -->
+    <g transform="translate(20, 430)">
+      <rect width="420" height="110" rx="6" fill="#FDE8E8" stroke="#B60205" stroke-width="2" />
+      <text x="15" y="22" class="card-title" fill="#9C1A1A">GEOCERCAS NO-FLY ACTIVAS EN HARDWARE</text>
+      <text x="15" y="44" class="card-body">- Casas campesinas y escuelas: Buffer de 100 m.</text>
+      <text x="15" y="62" class="card-body">- Ríos, quebradas y nacimientos: Buffer de 100 m.</text>
+      <text x="15" y="80" class="card-body">- Vías públicas y linderos: Buffer de 50 m.</text>
+      <text x="15" y="98" class="card-body">- La nave rechaza penetrar la geocerca (freno automático).</text>
+    </g>
+
+    <!-- CARD: ATERRIZAJE Y VOLCADO -->
+    <g transform="translate(20, 555)">
+      <rect width="420" height="85" rx="6" fill="#E8F5E9" stroke="#0E8A16" stroke-width="1" />
+      <text x="15" y="22" class="card-title" fill="#1B5E20">Aterrizaje en Parcela y Extracción Local</text>
+      <text x="15" y="44" class="card-body">- Vuelo concluido con éxito en la vereda.</text>
+      <text x="15" y="62" class="card-body">- Volcado por Wi-Fi de campo o USB a la tableta GCS.</text>
+      <text x="15" y="78" class="card-body">- Estado de la orden pasa a VOLADA_REGISTRO_PENDIENTE.</text>
+    </g>
+  </g>
+
+  <!-- ================= FLECHAS DE FLUJO Y SECUENCIA ================= -->
+
+  <!-- FLUJO 1: CLOUD API -> ACOPIO VPN -->
+  <path d="M 480 200 L 520 200" fill="none" stroke="#1D76DB" stroke-width="3" marker-end="url(#arr-blue)" />
+  <rect x="470" y="175" width="45" height="20" fill="#EBF3FB" rx="4" />
+  <text x="492" y="190" class="edge-num" fill="#1D76DB" text-anchor="middle">1</text>
+
+  <!-- FLUJO 2: ACOPIO WIFI -> GCS TABLET -->
+  <path d="M 960 210 L 1000 210" fill="none" stroke="#0E8A16" stroke-width="3" marker-end="url(#arr-green)" />
+  <rect x="955" y="185" width="45" height="20" fill="#E8F5E9" rx="4" />
+  <text x="977" y="200" class="edge-num" fill="#0E8A16" text-anchor="middle">2</text>
+
+  <!-- FLUJO 3: GCS -> UAS AUTOPILOT -->
+  <path d="M 1440 330 L 1480 230" fill="none" stroke="#FF9900" stroke-width="3" marker-end="url(#arr-orange)" />
+  <rect x="1435" y="270" width="45" height="20" fill="#FFF8E1" rx="4" />
+  <text x="1457" y="285" class="edge-num" fill="#FF9900" text-anchor="middle">3</text>
+
+  <!-- FLUJO 4: UAS ASPERSION -> FLASH BUFFER -->
+  <path d="M 1700 290 L 1700 305" fill="none" stroke="#B60205" stroke-width="2" marker-end="url(#arr-red)" />
+
+  <!-- FLUJO 5: UAS ATERRIZAJE -> GCS TABLET (RETORNO DE LOG) -->
+  <path d="M 1480 600 L 1440 450" fill="none" stroke="#FF9900" stroke-width="3" marker-end="url(#arr-orange)" />
+  <rect x="1435" y="515" width="45" height="20" fill="#FFF8E1" rx="4" />
+  <text x="1457" y="530" class="edge-num" fill="#FF9900" text-anchor="middle">4</text>
+
+  <!-- FLUJO 6: GCS RETORNO -> SUBIDA S3 / LAMBDA -->
+  <path d="M 1000 500 Q 740 650 480 540" fill="none" stroke="#0E8A16" stroke-width="3" stroke-dasharray="6,4" marker-end="url(#arr-green)" />
+  <rect x="710" y="590" width="160" height="34" fill="#FFFFFF" stroke="#0E8A16" stroke-width="1" rx="6" />
+  <text x="790" y="605" class="edge-num" fill="#0E8A16" text-anchor="middle">5. Sincronización en Acopio</text>
+  <text x="790" y="618" class="edge-desc" fill="#0E8A16" text-anchor="middle">Subida con Hash SHA-256 a S3</text>
+
+  <!-- FLUJO 7: S3 EVENT -> LAMBDA -> DYNAMODB -->
+  <path d="M 280 475 L 280 490" fill="none" stroke="#1D76DB" stroke-width="2" marker-end="url(#arr-blue)" />
+  <path d="M 280 585 L 280 600" fill="none" stroke="#1D76DB" stroke-width="2" marker-end="url(#arr-blue)" />
+
+</svg>
