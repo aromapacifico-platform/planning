@@ -200,7 +200,7 @@ Una vez culminada la aspersión y tras el aterrizaje seguro, el autopiloto vuelc
 
 ### 6.3 Fase C: Retorno a Conectividad y Sincronización Probatoria
 
-Al finalizar la jornada en las veredas, la cuadrilla regresa al Centro de Acopio o a un sector con cobertura de telecomunicaciones. El agente de sincronización de la tableta computa el hash criptográfico del archivo de bitácora mediante la función $\text{SHA-256}(\text{flight\_log.bin})$ e invoca el endpoint `/api/v1/orders/{id}/sync-log`.
+Al finalizar la jornada en las veredas, la cuadrilla regresa al Centro de Acopio o a un sector con cobertura de telecomunicaciones. El agente de sincronización de la tableta computa el hash criptográfico del archivo de bitácora mediante la función $\text{SHA-256}(\mathtt{flight\_log.bin})$ e invoca el endpoint `/api/v1/orders/{id}/sync-log`.
 
 API Gateway responde con una URL pre-firmada de carga directa hacia el bucket `aromapacifico-flight-logs-prod`. La bitácora se transmite por HTTPS hacia Amazon S3, disparando de inmediato la función serverless **AWS Lambda Worker**. La función descarga la cabecera, corrobora la coincidencia exacta del hash SHA-256, extrae los litros efectivos de agroquímico dispersados y actualiza el expediente en DynamoDB al estado `VOLADA_REGISTRO_PERSISTIDO`. Con este paso, la orden queda formalmente lista para ingresar a la ventana de verificación fotográfica del Servicio 4.
 
