@@ -4,39 +4,31 @@
 
 ---
 
-## 1. Resumen Ejecutivo y Propósito del Documento
+## 1. Resumen Ejecutivo y Propósito Arquitectónico
 
-El presente documento establece el diseño técnico exhaustivo del **Plan de Direccionamiento de Red en la Nube (AWS VPCs)**, la topología de interconexión híbrida y el desacoplamiento de las rutas de datos (**Data Paths**) para la plataforma cafetera **AromaPacífico**, modernización del proyecto de trazabilidad de la Federación Nacional de Cafeteros (FNC) en convenio con la Universidad Icesi para la vigencia 2026.
+El presente documento define la arquitectura de red en la nube, el plan de direccionamiento CIDR y el desacoplamiento de las rutas de datos para la plataforma cafetera **AromaPacífico**, proyecto impulsado por la Federación Nacional de Cafeteros (FNC) en convenio académico con la Universidad Icesi para la vigencia 2026.
 
-El diseño resuelve de manera definitiva las falacias de conectividad y omisiones del modelo conceptual formulado en el año 2020:
-1. Establece un esquema de direccionamiento privado en la nube bajo el estándar RFC 1918 que **garantiza matemáticamente cero solapamiento** con los bloques inmutables reservados para los centros de acopio departamentales de **Cauca (`10.41.0.0/16`)**, **Huila (`10.42.0.0/16`)** y **Tolima (`10.43.0.0/16`)**, así como un aislamiento binario absoluto entre los ambientes de **Desarrollo (`10.50.0.0/16`)**, **Pruebas (`10.60.0.0/16`)** y **Producción (`10.70.0.0/16`)**.
-2. Despliega las **siete subredes mínimas requeridas por el pliego del reto** con distribución simétrica en dos Zonas de Disponibilidad (`us-east-1a` y `us-east-1b`), asegurando alta disponibilidad, tolerancia a particiones y paridad estructural entre entornos.
-3. Desacopla las tres rutas críticas de datos (**telemetría de cultivo y secado**, **posición de transportadores** y **objetos multimedia de drones**), definiendo sus protocolos, mecanismos de almacenamiento en el borde (*store-and-forward* de hasta 24 horas), compuertas de seguridad y modelos de persistencia.
-4. Demuestra cuantitativamente la capacidad del patrón de red e ingesta para **escalar de 200 a 1.000 fincas cafeteras sin rediseñar el direccionamiento IP ni el punto de ingesta**.
-5. Aplica un análisis de ingeniería financiera (**FinOps**) que optimiza el costo de transferencia y procesamiento de datos mediante el uso intensivo de *Gateway VPC Endpoints* gratuitos para Amazon S3 y DynamoDB, suprimiendo la necesidad de múltiples *NAT Gateways* redundantes y ahorrando más de $270 USD mensuales en la factura cloud.
+En el diseño original formulado en el año 2020 se asumió una conectividad celular ubicua y homogénea en las fincas cafeteras, careciendo de un diseño formal de red local para los centros de acopio y sin contemplar un plan de direccionamiento privado que evitara solapamientos con los servicios en la nube. Para el despliegue del piloto en los departamentos de **Cauca, Huila y Tolima** (abarcando 200 fincas, 3 centros de acopio, 60 transportadores y la entrega en el puerto de Buenaventura), se adopta una topología híbrida en estrella (*Hub-and-Spoke*) articulada mediante **AWS Transit Gateway** y Virtual Private Clouds (VPCs) en Amazon Web Services.
+
+La solución garantiza el aislamiento categórico y matemáticamente comprobado entre los ambientes de Desarrollo, Pruebas y Producción bajo el estándar RFC 1918, asegura cero solapamiento frente a los bloques inmutables de los centros de acopio (`10.41.0.0/16`, `10.42.0.0/16` y `10.43.0.0/16`), desacopla los flujos de telemetría de cultivo, transporte y drones mediante almacenamiento en el borde (*store-and-forward* de hasta 24 horas), y optimiza la eficiencia financiera (FinOps) mediante el uso de *Gateway VPC Endpoints* gratuitos para S3 y DynamoDB, demostrando escalabilidad determinista para crecer de 200 a 1.000 fincas sin rediseñar el direccionamiento ni los puntos de ingesta.
 
 ---
 
 ## 2. Diagramas Oficiales de la Arquitectura de Red
 
-En cumplimiento de los estándares del proyecto y las directrices del Agente de Diagramas (`diagram-agent`), se elaboraron tres modelos visuales en formato Draw.io XML descomprimido (`compressed="false"`), con tipografía superior a 12 pt, rótulos en español, iconografía oficial de AWS y exportaciones vectoriales SVG autónomas:
+La representación visual de la infraestructura de red ilustra el plan de direccionamiento en la nube, la topología de interconexión híbrida entre los centros de acopio y las VPCs mediante AWS Transit Gateway, y el aislamiento estricto de subredes.
 
-### 2.1 Diagrama Principal: Plan de Direccionamiento Cloud y Subredes Multizona
-Ilustra la distribución de las VPCs por ambiente, la segmentación en 7 subredes por Zona de Disponibilidad, los bloques reservados de los centros de acopio y la interconexión centralizada con la cuenta de Red Compartida.
+### 2.1 Vista Gráfica del Plan de Direccionamiento Cloud y Subredes
+
+A continuación se presenta el diagrama canónico del plan de direccionamiento en AWS Organizations, la distribución de subredes por Zona de Disponibilidad y la verificación binaria de no-solapamiento:
 
 ![Plan de Direccionamiento Cloud y Subredes](diagrams/red-direccionamiento-nube.svg)
 
 > Fuente editable en formato Draw.io XML descomprimido disponible en: [`diagrams/red-direccionamiento-nube.drawio`](diagrams/red-direccionamiento-nube.drawio).
 
-### 2.2 Diagrama Secundario 1: Arquitectura de Rutas de Datos Desacopladas (Data Paths)
-Detalla el flujo independiente de extremo a extremo para la telemetría de finca, la posición de los 60 transportadores y la carga de objetos multimedia de drones, incluyendo buffers locales, políticas de reintento y la compuerta humana obligatoria para fumigación.
+### 2.2 Representación Gráfica de la Topología Híbrida y Enrutamiento (Hub-and-Spoke)
 
-![Rutas de Datos Desacopladas](diagrams/red-data-paths.svg)
-
-> Fuente editable en formato Draw.io XML descomprimido disponible en: [`diagrams/red-data-paths.drawio`](diagrams/red-data-paths.drawio).
-
-### 2.3 Diagrama Secundario 2: Topología de Interconexión Híbrida y Enrutamiento (Hub-and-Spoke)
-Modela la arquitectura de enrutamiento con AWS Transit Gateway, tablas de rutas segregadas (On-Premises, Spokes, Hub), túneles IPsec VPN duales con BGP, segmentación 802.1Q en acopios y aislamiento estricto de la VLAN de visitantes.
+A continuación se presenta el diagrama de arquitectura de la topología híbrida, tablas de rutas del Transit Gateway, túneles IPsec VPN y segmentación en los centros de acopio:
 
 ![Topología Híbrida y Enrutamiento](diagrams/red-topologia-hibrida.svg)
 
@@ -150,34 +142,19 @@ Esta separación física y lógica garantiza que:
 
 ## 6. Arquitectura de Rutas de Datos (Data Paths) Desacopladas
 
-En estricta observancia del pliego oficial, la plataforma desacopla la transmisión de datos en tres rutas independientes, con protocolos, buffers y mecanismos de resiliencia especializados:
+En estricta observancia del pliego oficial, la plataforma desacopla la transmisión de datos en tres rutas independientes, con protocolos, buffers y mecanismos de resiliencia especializados.
 
-```mermaid
-flowchart LR
-    subgraph DP1["Ruta 1: Telemetría de Finca"]
-        F1["Sensor ESP32-S3"] -->|"MQTT/TLS 1.3"| IOT["AWS IoT Core"]
-        IOT -->|"Basic Ingest"| DYN1["DynamoDB Hot Tier"]
-        DYN1 -->|"TTL 90 días"| S3G["S3 Glacier Deep Archive"]
-    end
+### 6.1 Representación Gráfica de las Tres Rutas de Datos Desacopladas
 
-    subgraph DP2["Ruta 2: Posición de Transportadores"]
-        TR["App Móvil Conductor"] -->|"HTTPS / REST"| APIGW["API Gateway / NLB"]
-        APIGW -->|"Lambda Tracking"| DYN2["DynamoDB Viajes"]
-        DYN2 -->|"Evento Entrega"| BUEN["Puerto Buenaventura"]
-    end
+A continuación se presenta el diagrama canónico de las rutas de datos desacopladas de extremo a extremo, estructurado con el estándar oficial de Draw.io y publicado en formato SVG autónomo:
 
-    subgraph DP3["Ruta 3: Objetos de Drones"]
-        DR["Dron Agrícola"] -->|"Wi-Fi Acopio"| S3D["S3 Drone Bucket"]
-        S3D -->|"EventBridge"| LMD["Lambda Inferencia"]
-        LMD -->|"DetectFaces"| REK["Amazon Rekognition"]
-        REK -->|"Foco Confirmado"| GATE{"Firma Humana Agrónomo"}
-        GATE -->|"Orden Aprobada"| EXP["Expediente Agronómico"]
-    end
-```
+![Arquitectura de Rutas de Datos Desacopladas](diagrams/red-data-paths.svg)
+
+> Fuente editable en formato Draw.io XML descomprimido disponible en: [`diagrams/red-data-paths.drawio`](diagrams/red-data-paths.drawio).
 
 ---
 
-### 6.1 Ruta de Datos 1: Telemetría de Cultivo y Secado en Fincas
+### 6.2 Ruta de Datos 1: Telemetría de Cultivo y Secado en Fincas
 
 La telemetría agronómica representa el flujo continuo de mayor volumen telemático en la plataforma. Su diseño garantiza que ninguna lectura se pierda durante los frecuentes cortes de señal celular en las zonas rurales cafeteras.
 
@@ -195,7 +172,7 @@ El microcontrolador ESP32-S3 permanece en estado de suspensión profunda (*Deep 
 
 ---
 
-### 6.2 Ruta de Datos 2: Seguimiento en Ruta de Transportadores
+### 6.3 Ruta de Datos 2: Seguimiento en Ruta de Transportadores
 
 El rastreo logístico garantiza la trazabilidad continua de los sacos estándar de 60 kg durante su tránsito terrestre entre fincas, centros de acopio y el muelle de exportación.
 
@@ -213,7 +190,7 @@ La aplicación del transportador opera de manera asíncrona. Si el vehículo tra
 
 ---
 
-### 6.3 Ruta de Datos 3: Objetos Multimedia de Drones, Inferencia IA y Compuerta Humana
+### 6.4 Ruta de Datos 3: Objetos Multimedia de Drones, Inferencia IA y Compuerta Humana
 
 La gestión de aeronaves no tripuladas en la plataforma responde a un servicio aeronáutico formal estructurado en cinco prestaciones que combinan agricultura de precisión y agricultura de áreas:
 
