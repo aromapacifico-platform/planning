@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" compressed="false">
+  <diagram id="red-data-paths-diagram" name="Rutas de Datos Desacopladas Data Paths">
+    <mxGraphModel dx="2000" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2400" pageHeight="1400" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TITULO Y SUBTITULO -->
+        <mxCell id="dp-title" value="AromaPacífico - Arquitectura de Rutas de Datos Desacopladas (Data Paths)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=22;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="400" y="30" width="1600" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="dp-subtitle" value="Flujos Independientes de Telemetría de Finca, Posición de Transportadores y Carga Multimedia de Drones con Políticas Offline y Seguridad" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
+          <mxGeometry x="400" y="70" width="1600" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== RUTA 1: TELEMETRÍA DE CULTIVO Y SECADO ==================== -->
+        <mxCell id="lane-dp1" value="RUTA 1: TELEMETRÍA DE CULTIVO Y SECADO EN FINCAS (Cadencia 4h y 1h / Buffer 24h)" style="swimlane;startSize=35;horizontal=1;fillColor=#EAEDED;strokeColor=#1D76DB;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="40" y="120" width="2320" height="340" as="geometry" />
+        </mxCell>
+
+        <!-- Nodo de Borde -->
+        <mxCell id="dp1-node" value="Nodo IoT en Finca (200 Fincas)&#xa;ESP32-S3 + SIM7080G&#xa;&#xa;- Sensor RS485 Modbus (NPK, pH, T, H)&#xa;- Sensor SHT35 en Secadero (T, H)&#xa;- Alimentación Solar 15W + LiFePO4&#xa;- Consumo Deep Sleep: &lt; 50 µA&#xa;- Almacenamiento Flash SPI: 16 MB&#xa;(Retiene hasta 24h store-and-forward)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-dp1">
+          <mxGeometry x="30" y="55" width="280" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- Enlace de Acceso -->
+        <mxCell id="dp1-comm" value="Red Celular / Satelital&#xa;LTE-M / NB-IoT (B4, B5, B28)&#xa;&#xa;- Paquete CBOR / JSON ~180 bytes&#xa;- Conexión efímera TLS 1.3&#xa;- Cero dependencia 2G/3G&#xa;- Fincas sin cobertura: enlace satelital&#xa;  IoT directo o malla de largo alcance" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-dp1">
+          <mxGeometry x="380" y="55" width="280" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- Ingesta Cloud -->
+        <mxCell id="dp1-ingest" value="AWS IoT Core (us-east-1)&#xa;Punto de Ingesta Centralizado&#xa;&#xa;- Certificado X.509 individual por nodo&#xa;- Broker MQTT sobre TLS 1.3 (Puerto 8883)&#xa;- Topic: $aws/rules/finca_telemetry_rule&#xa;- Basic Ingest: bypass de costo de broker&#xa;- Regla de Topic evalúa umbrales dinámicos&#xa;- Despacho inmediato de alertas (&lt; 5 min)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#232F3E;strokeColor=#FF9900;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#FFFFFF;" vertex="1" parent="lane-dp1">
+          <mxGeometry x="740" y="55" width="310" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- Procesamiento y Alertas -->
+        <mxCell id="dp1-lambda" value="Evaluación Serverless (AWS Lambda)&#xa;VPC Subred Ingesta: 10.70.1.0/24&#xa;&#xa;- Filtro de umbrales federativos configurables&#xa;- Generación de Alerta de Secado (T &gt; 40 C)&#xa;- Notificación push al caficultor (Amazon SNS)&#xa;- Detección de anomalías en NPK y humedad&#xa;- Dead-Letter Queue (SQS DLQ) para reintentos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-dp1">
+          <mxGeometry x="1130" y="55" width="320" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- Persistencia Hot -->
+        <mxCell id="dp1-dynamo" value="Amazon DynamoDB (Hot Tier)&#xa;VPC Subred Datos: 10.70.20.0/24&#xa;&#xa;- Capacidad On-Demand (pago por uso)&#xa;- Partition Key: FincaID | Sort Key: Timestamp&#xa;- Atributo TTL activo (expiración a 90 días)&#xa;- Acceso vía Gateway VPC Endpoint ($0 USD/GB)&#xa;- Cifrado KMS con clave administrada de cliente" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-dp1">
+          <mxGeometry x="1530" y="55" width="330" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- Archivo Cold -->
+        <mxCell id="dp1-glacier" value="Amazon S3 Glacier Deep Archive&#xa;Retención Legal 5 Años (Cold Tier)&#xa;&#xa;- DynamoDB Streams captura registros expirados&#xa;- Lotes compactados en formato Apache Parquet&#xa;- S3 Lifecycle: transición inmediata a Deep Archive&#xa;- Costo: $0,00099 USD/GB-mes (&lt; $0,02 USD/mes)&#xa;- Protección inmutable WORM con S3 Object Lock" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-dp1">
+          <mxGeometry x="1940" y="55" width="340" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- Conexiones Ruta 1 -->
+        <mxCell id="c1-1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#1D76DB;strokeWidth=2;" edge="1" source="dp1-node" target="dp1-comm" parent="lane-dp1" />
+        <mxCell id="c1-2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#1D76DB;strokeWidth=2;" edge="1" source="dp1-comm" target="dp1-ingest" parent="lane-dp1" />
+        <mxCell id="c1-3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#1D76DB;strokeWidth=2;" edge="1" source="dp1-ingest" target="dp1-lambda" parent="lane-dp1" />
+        <mxCell id="c1-4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#1D76DB;strokeWidth=2;" edge="1" source="dp1-lambda" target="dp1-dynamo" parent="lane-dp1" />
+        <mxCell id="c1-5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#1D76DB;strokeWidth=2;" edge="1" source="dp1-dynamo" target="dp1-glacier" parent="lane-dp1" />
+
+        <!-- ==================== RUTA 2: SEGUIMIENTO DE TRANSPORTADORES ==================== -->
+        <mxCell id="lane-dp2" value="RUTA 2: SEGUIMIENTO EN RUTA DE TRANSPORTADORES (Cadencia 5 min / Persistencia Móvil)" style="swimlane;startSize=35;horizontal=1;fillColor=#EAEDED;strokeColor=#0E8A16;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="40" y="500" width="2320" height="340" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dp2-mobile" value="Flota de Transporte (60 Vehículos)&#xa;App Conductor en Smartphone&#xa;&#xa;- Captura GPS cada 5 minutos en ruta (10h/día)&#xa;- Carga útil liviana: Lat, Lon, Vel, Timestamp, SacoIDs&#xa;- Almacenamiento local SQLite en el teléfono&#xa;- Sin cobertura: acumulación sin límite en ruta&#xa;- Vaciado en ráfaga al tocar cabecera municipal" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-dp2">
+          <mxGeometry x="30" y="55" width="280" height="180" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dp2-comm" value="Red Móvil Comercial 4G / LTE&#xa;Cobertura Vía Principal / Cabecera&#xa;&#xa;- Conexión HTTPS segura sobre TLS 1.3&#xa;- Autenticación OAuth2 / JWT (Amazon Cognito)&#xa;- Permiso restringido a su vehículo y sacos&#xa;- Transmisión en ráfaga ordenada por timestamp" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-dp2">
+          <mxGeometry x="380" y="55" width="280" height="180" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dp2-gw" value="Amazon API Gateway / NLB&#xa;VPC Subred App: 10.70.10.0/24&#xa;&#xa;- Endpoint REST / WebSocket privado y público&#xa;- Validación estricta de esquema OpenAPI 3.0&#xa;- WAF con rate-limiting contra ataques DDoS&#xa;- Ruteo hacia microservicio de tracking&#xa;- Enmascaramiento de identidad de conductores" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#232F3E;strokeColor=#FF9900;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#FFFFFF;" vertex="1" parent="lane-dp2">
+          <mxGeometry x="740" y="55" width="310" height="180" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dp2-lambda" value="Lambda Procesador de Tracking&#xa;VPC Subred App: 10.70.10.0/24&#xa;&#xa;- Cálculo de velocidad y geocercas de acopios&#xa;- Actualización de estado de sacos: 'En viaje'&#xa;- Notificación a patio de maniobras en acopio&#xa;- Registro de evento de salida y de custodia&#xa;- Cumplimiento estricto: cero datos en claro" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-dp2">
+          <mxGeometry x="1130" y="55" width="320" height="180" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dp2-dynamo" value="Amazon DynamoDB (Tracking Table)&#xa;VPC Subred Datos: 10.70.20.0/24&#xa;&#xa;- Tabla Particionada: TransportadorID#Fecha&#xa;- RPO estricto: 15 minutos en eventos de saco&#xa;- Vista de Acopio: Solo visualiza el viaje en curso&#xa;- Vista Pública de Comprador: RUTA ANONIMIZADA&#xa;  (Comprador no puede reconstruir el recorrido)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-dp2">
+          <mxGeometry x="1530" y="55" width="330" height="180" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dp2-terminal" value="Entrega Final en Buenaventura&#xa;Registro de Custodia sin Infraestructura&#xa;&#xa;- Puerto de Buenaventura: Naviera conserva GPS&#xa;- Plataforma registra únicamente evento entrega&#xa;- Cambio formal de estado: 'Entregado en puerto'&#xa;- Auditoría inmutable de pesaje de 60 kg&#xa;- Retención de trazabilidad: 5 años completos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-dp2">
+          <mxGeometry x="1940" y="55" width="340" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- Conexiones Ruta 2 -->
+        <mxCell id="c2-1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#0E8A16;strokeWidth=2;" edge="1" source="dp2-mobile" target="dp2-comm" parent="lane-dp2" />
+        <mxCell id="c2-2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#0E8A16;strokeWidth=2;" edge="1" source="dp2-comm" target="dp2-gw" parent="lane-dp2" />
+        <mxCell id="c2-3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#0E8A16;strokeWidth=2;" edge="1" source="dp2-gw" target="dp2-lambda" parent="lane-dp2" />
+        <mxCell id="c2-4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#0E8A16;strokeWidth=2;" edge="1" source="dp2-lambda" target="dp2-dynamo" parent="lane-dp2" />
+        <mxCell id="c2-5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#0E8A16;strokeWidth=2;" edge="1" source="dp2-dynamo" target="dp2-terminal" parent="lane-dp2" />
+
+        <!-- ==================== RUTA 3: OBJETOS DE DRONES E INFERENCIA ==================== -->
+        <mxCell id="lane-dp3" value="RUTA 3: OBJETOS MULTIMEDIA DE DRONES, INFERENCIA IA Y COMPUERTA HUMANA (5 Servicios)" style="swimlane;startSize=35;horizontal=1;fillColor=#EAEDED;strokeColor=#D93F0B;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="40" y="880" width="2320" height="460" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dp3-drone" value="Servicio de Drones Agrícolas&#xa;5 Servicios Obligatorios&#xa;&#xa;1. Delimitar lote (Polígono + No-Fly Zones)&#xa;2. Confirmar alerta de sensor en campo&#xa;3. Fumigación de precisión (requiere firma)&#xa;4. Verificar post-fumigación (foto cierre)&#xa;5. Estimar cosecha (área 1 vez/cosecha)&#xa;&#xa;Operación Offline: Misión precargada en acopio;&#xa;buffer interno retiene ortomosaicos y bitácoras." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-dp3">
+          <mxGeometry x="30" y="55" width="280" height="230" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dp3-station" value="Descarga en Acopio / Cabecera&#xa;Conexión Wi-Fi / WAN 100 Mbps&#xa;&#xa;- Cuadrilla aterriza y sincroniza en LAN Acopio&#xa;- Subred Borde / Logística: 10.4X.3.0/24&#xa;- Solicitud de URL prefirmada S3 (Presigned)&#xa;- Carga HTTPS TLS 1.3 por partes (Multipart)&#xa;- Cifrado KMS mandatorio con llave por dpto&#xa;- Registro de operador, dron y hora de subida" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-dp3">
+          <mxGeometry x="380" y="55" width="280" height="230" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dp3-s3" value="Amazon S3 (Drone Objects Bucket)&#xa;VPC Subred Object Storage: 10.70.30.0/24&#xa;&#xa;- Almacén de objetos: ortomosaicos y bitácoras&#xa;- S3 Object Lock activo para custodia legal&#xa;- Acceso exclusivo vía VPC Gateway Endpoint&#xa;- Disparo de EventBridge al completar carga&#xa;- Bloqueo absoluto de acceso público por SCP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#232F3E;strokeColor=#FF9900;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#FFFFFF;" vertex="1" parent="lane-dp3">
+          <mxGeometry x="740" y="55" width="310" height="230" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dp3-lambda-filter" value="Lambda Inferencia y Filtro Ético&#xa;VPC Subred Dron: 10.70.2.0/24&#xa;&#xa;- Disparada por evento de objeto en S3&#xa;- Invoca Amazon Rekognition (DetectFaces)&#xa;- FILTRO ÉTICO DE PRIVACIDAD:&#xa;  Si detecta personas &gt; 80% confianza:&#xa;  Aborta inferencia agronómica, cifra el objeto&#xa;  con KMS de Privacidad y registra en auditoría&#xa;- Invocación de visión para detección de plaga" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-dp3">
+          <mxGeometry x="1130" y="55" width="320" height="230" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dp3-rekognition" value="Amazon Rekognition Managed AI&#xa;Inferencia en us-east-1&#xa;&#xa;- Clasificación de roya y deficiencias foliares&#xa;- Devuelve nivel de confianza y foco geográfico&#xa;- Costo: $1,00 USD / 1.000 imágenes&#xa;- Sin entrenamiento propio (modelo administrado)&#xa;- Solo imágenes de cultivo; personas excluidas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#232F3E;strokeColor=#FF9900;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#FFFFFF;" vertex="1" parent="lane-dp3">
+          <mxGeometry x="1530" y="55" width="330" height="150" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dp3-gate" value="COMPUERTA HUMANA INNEGOCIABLE&#xa;Autorización Formal de Fumigación&#xa;&#xa;- Ninguna IA ni trigger autoriza fumigar&#xa;- Agrónomo revisa confirmación con MFA&#xa;- Valida: Polígono previo + Cierre bitácora&#xa;- Firma orden con ID insumo y ventana&#xa;- Sin firma humana: LA ORDEN NO SALE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5F5;strokeColor=#D93F0B;strokeWidth=2.5;fontSize=12;fontStyle=1;align=left;spacingLeft=10;fontColor=#D93F0B;" vertex="1" parent="lane-dp3">
+          <mxGeometry x="1530" y="225" width="330" height="150" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dp3-expediente" value="Expediente Agronómico en DynamoDB&#xa;VPC Subred Datos: 10.70.20.0/24&#xa;&#xa;- Registro consolidado: Finca, Lote, Fecha, Dron&#xa;- Estado de fumigación: 'Abierto' / 'Cerrado'&#xa;- Condición de cierre: Foto de verificación post-vuelo&#xa;- Estimación de sacos notificada a acopios&#xa;- Retención inmutable WORM de 5 años" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-dp3">
+          <mxGeometry x="1940" y="55" width="340" height="320" as="geometry" />
+        </mxCell>
+
+        <!-- Conexiones Ruta 3 -->
+        <mxCell id="c3-1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#D93F0B;strokeWidth=2;" edge="1" source="dp3-drone" target="dp3-station" parent="lane-dp3" />
+        <mxCell id="c3-2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#D93F0B;strokeWidth=2;" edge="1" source="dp3-station" target="dp3-s3" parent="lane-dp3" />
+        <mxCell id="c3-3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#D93F0B;strokeWidth=2;" edge="1" source="dp3-s3" target="dp3-lambda-filter" parent="lane-dp3" />
+        <mxCell id="c3-4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#D93F0B;strokeWidth=2;" edge="1" source="dp3-lambda-filter" target="dp3-rekognition" parent="lane-dp3" />
+        <mxCell id="c3-5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#D93F0B;strokeWidth=2;" edge="1" source="dp3-rekognition" target="dp3-gate" parent="lane-dp3" />
+        <mxCell id="c3-6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#0E8A16;strokeWidth=2.5;" edge="1" source="dp3-gate" target="dp3-expediente" parent="lane-dp3" />
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
