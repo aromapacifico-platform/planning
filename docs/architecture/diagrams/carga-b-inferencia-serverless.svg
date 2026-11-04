@@ -1,0 +1,170 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 720" width="100%" height="100%">
+  <defs>
+    <style>
+      .main-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
+      .sub-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #5A6B7C; text-anchor: middle; }
+      .card-header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
+      .card-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: bold; fill: #555555; }
+      .card-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
+      .gate-header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
+      .inv-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
+      .inv-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
+      .flow-line { stroke: #545B64; stroke-width: 2; fill: none; }
+      .flow-line-accent { stroke: #1D76DB; stroke-width: 2; fill: none; }
+      .flow-line-danger { stroke: #D93F0B; stroke-width: 2.5; fill: none; }
+      .flow-line-success { stroke: #0E8A16; stroke-width: 2.5; fill: none; }
+      .branch-label-danger { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #D93F0B; }
+      .branch-label-success { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #0E8A16; }
+    </style>
+    <filter id="box-shadow" x="-2%" y="-2%" width="104%" height="106%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.08" />
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#545B64" />
+    </marker>
+    <marker id="arrow-danger" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#D93F0B" />
+    </marker>
+    <marker id="arrow-success" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0E8A16" />
+    </marker>
+  </defs>
+
+  <!-- FONDO -->
+  <rect width="1600" height="720" fill="#FFFFFF" />
+
+  <!-- ENCABEZADO -->
+  <text x="800" y="38" class="main-title">AromaPacífico - Inferencia Serverless y Protección de Privacidad (Ley 1581 de 2012)</text>
+  <text x="800" y="62" class="sub-title">Pipeline Serverless Desacoplado: Ingesta de Imágenes, Filtro Ético Anti-PII, Detección de Plagas y Expediente Fitosanitario</text>
+
+  <!-- LÍNEAS DE FLUJO SUPERIOR -->
+  <path d="M 280 185 L 340 185" class="flow-line" marker-end="url(#arrow)" />
+  <path d="M 580 185 L 640 185" class="flow-line" marker-end="url(#arrow)" />
+  <path d="M 890 185 L 950 185" class="flow-line" marker-end="url(#arrow)" />
+  <path d="M 1210 185 L 1260 185" class="flow-line" marker-end="url(#arrow)" />
+
+  <!-- LÍNEAS DESDE COMPUERTA -->
+  <!-- Rama Peligro / Sí a Cuarentena -->
+  <path d="M 1370 260 L 1370 360" class="flow-line-danger" marker-end="url(#arrow-danger)" />
+  <text x="1380" y="315" class="branch-label-danger">SÍ (Persona Detectada)</text>
+
+  <!-- Rama Éxito / No a Custom Labels -->
+  <path d="M 1370 260 L 1370 310 L 955 310 L 955 360" class="flow-line-success" marker-end="url(#arrow-success)" />
+  <text x="1090" y="300" class="branch-label-success">NO (Solo Cultivo)</text>
+
+  <!-- De Custom Labels a DynamoDB -->
+  <path d="M 780 440 L 700 440" class="flow-line-success" marker-end="url(#arrow-success)" />
+
+  <!-- De DynamoDB a SNS -->
+  <path d="M 380 440 L 330 440" class="flow-line-accent" marker-end="url(#arrow)" />
+
+  <!-- 1. DRON / CUADRILLA UAS -->
+  <g transform="translate(50, 110)" filter="url(#box-shadow)">
+    <rect width="230" height="150" rx="8" fill="#232F3E" stroke="#FF9900" stroke-width="2" />
+    <text x="115" y="30" class="card-header" fill="#FFFFFF" text-anchor="middle">Dron / Cuadrilla UAS</text>
+    <text x="115" y="50" class="card-sub" fill="#FF9900" text-anchor="middle">Estación de Campo / Tableta</text>
+    <text x="18" y="80" class="card-body" fill="#FFFFFF">• Captura RGB / Multiespectral.</text>
+    <text x="18" y="103" class="card-body" fill="#FFFFFF">• Buffer local (hasta 24 horas).</text>
+    <text x="18" y="126" class="card-body" fill="#FFFFFF">• Drenado Wi-Fi seguro al acopio.</text>
+  </g>
+
+  <!-- 2. AMAZON S3 RAW -->
+  <g transform="translate(340, 110)" filter="url(#box-shadow)">
+    <rect width="240" height="150" rx="8" fill="#FFFFFF" stroke="#D93F0B" stroke-width="2" />
+    <rect width="240" height="34" rx="8" fill="#FFF5F5" />
+    <text x="14" y="23" class="card-header" fill="#D93F0B">Amazon S3</text>
+    <text x="14" y="55" class="card-sub">Bucket: raw-images/</text>
+    <text x="14" y="80" class="card-body">• Carga fotográfica de foco.</text>
+    <text x="14" y="103" class="card-body">• Cifrado SSE-KMS obligatorio.</text>
+    <text x="14" y="126" class="card-body">• Evento: s3:ObjectCreated.</text>
+  </g>
+
+  <!-- 3. AWS LAMBDA FILTRO -->
+  <g transform="translate(640, 110)" filter="url(#box-shadow)">
+    <rect width="250" height="150" rx="8" fill="#FFFFFF" stroke="#FF9900" stroke-width="2" />
+    <rect width="250" height="34" rx="8" fill="#FFF8E1" />
+    <text x="14" y="23" class="card-header" fill="#B08800">AWS Lambda</text>
+    <text x="14" y="55" class="card-sub">Función: ProcessDroneImage</text>
+    <text x="14" y="80" class="card-body">• Ejecución serverless Pay-As-You-Go.</text>
+    <text x="14" y="103" class="card-body">• Extrae metadatos EXIF (GPS foco).</text>
+    <text x="14" y="126" class="card-body">• Orquesta validación de privacidad.</text>
+  </g>
+
+  <!-- 4. REKOGNITION FILTRO PERSONAS -->
+  <g transform="translate(950, 110)" filter="url(#box-shadow)">
+    <rect width="260" height="150" rx="8" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
+    <rect width="260" height="34" rx="8" fill="#F0F7FF" />
+    <text x="14" y="23" class="card-header" fill="#1D76DB">Amazon Rekognition</text>
+    <text x="14" y="55" class="card-sub">Filtro Ético (DetectFaces)</text>
+    <text x="14" y="80" class="card-body">• Escaneo de rostros y personas.</text>
+    <text x="14" y="103" class="card-body">• Cumplimiento Ley 1581 de 2012.</text>
+    <text x="14" y="126" class="card-body">• Previene exposición de datos.</text>
+  </g>
+
+  <!-- 5. COMPUERTA ÉTICA -->
+  <g transform="translate(1260, 110)" filter="url(#box-shadow)">
+    <polygon points="110,0 220,75 110,150 0,75" fill="#EAEDED" stroke="#545B64" stroke-width="2" />
+    <text x="110" y="70" class="gate-header">¿Persona</text>
+    <text x="110" y="90" class="gate-header">Detectada?</text>
+  </g>
+
+  <!-- 6. CUARENTENA PII (RAMA SÍ) -->
+  <g transform="translate(1210, 360)" filter="url(#box-shadow)">
+    <rect width="340" height="160" rx="8" fill="#FFFFFF" stroke="#D93F0B" stroke-width="2" />
+    <rect width="340" height="34" rx="8" fill="#FFF5F5" />
+    <text x="14" y="23" class="card-header" fill="#D93F0B">Cuarentena de Privacidad PII</text>
+    <text x="14" y="55" class="card-sub">Bucket S3: quarantine-pii/</text>
+    <text x="14" y="80" class="card-body">• Acceso exclusivo a Oficial de Seguridad.</text>
+    <text x="14" y="103" class="card-body">• Imagen EXCLUIDA de inferencia agrícola.</text>
+    <text x="14" y="126" class="card-body">• Registro de auditoría en CloudTrail.</text>
+    <text x="14" y="146" class="card-body">• Cero exposición en expedientes públicos.</text>
+  </g>
+
+  <!-- 7. REKOGNITION CUSTOM LABELS (RAMA NO) -->
+  <g transform="translate(780, 360)" filter="url(#box-shadow)">
+    <rect width="350" height="160" rx="8" fill="#FFFFFF" stroke="#0E8A16" stroke-width="2" />
+    <rect width="350" height="34" rx="8" fill="#F4FBF5" />
+    <text x="14" y="23" class="card-header" fill="#0E8A16">Rekognition: Custom Labels</text>
+    <text x="14" y="55" class="card-sub">Diagnóstico Fitosanitario de Foco</text>
+    <text x="14" y="80" class="card-body">• Clasificación de patologías foliares:</text>
+    <text x="24" y="100" class="card-body">- Roya del café (Hemileia vastatrix)</text>
+    <text x="24" y="120" class="card-body">- Broca del fruto (Hypothenemus hampei)</text>
+    <text x="14" y="144" class="card-body">• Reporta porcentaje de confianza y marcas.</text>
+  </g>
+
+  <!-- 8. DYNAMODB EXPEDIENTE -->
+  <g transform="translate(380, 360)" filter="url(#box-shadow)">
+    <rect width="320" height="160" rx="8" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
+    <rect width="320" height="34" rx="8" fill="#F0F7FF" />
+    <text x="14" y="23" class="card-header" fill="#1D76DB">Amazon DynamoDB</text>
+    <text x="14" y="55" class="card-sub">Tabla: ExpedienteFitosanitario</text>
+    <text x="14" y="80" class="card-body">• Registro inmutable del foco fitosanitario.</text>
+    <text x="14" y="103" class="card-body">• Atributos: FincaID, LoteID, Confianza.</text>
+    <text x="14" y="126" class="card-body">• Estado: PENDIENTE_EVALUACION.</text>
+    <text x="14" y="146" class="card-body">• Almacena URL de imagen aprobada.</text>
+  </g>
+
+  <!-- 9. NOTIFICACIÓN Y COMPUERTA HUMANA -->
+  <g transform="translate(50, 360)" filter="url(#box-shadow)">
+    <rect width="280" height="160" rx="8" fill="#FFFFFF" stroke="#FF9900" stroke-width="2" />
+    <rect width="280" height="34" rx="8" fill="#FFF8E1" />
+    <text x="14" y="23" class="card-header" fill="#B08800">Agrónomo FNC (MFA)</text>
+    <text x="14" y="55" class="card-sub">Notificación SNS + Panel Web</text>
+    <text x="14" y="80" class="card-body">• Alerta con evidencia fotográfica.</text>
+    <text x="14" y="103" class="card-body">• PROHIBIDO autorizar por IA.</text>
+    <text x="14" y="126" class="card-body">• Requiere firma humana con MFA.</text>
+    <text x="14" y="146" class="card-body">• Genera orden formal Servicio 3.</text>
+  </g>
+
+  <!-- PANEL DE INVARIANTES Y DIRECTIVAS -->
+  <g transform="translate(50, 550)" filter="url(#box-shadow)">
+    <rect width="1500" height="90" rx="8" fill="#F8F9FA" stroke="#232F3E" stroke-width="1" />
+    <text x="20" y="26" class="inv-title">Directivas e Invariantes de Arquitectura Serverless y Privacidad:</text>
+    <text x="20" y="48" class="inv-body">1. Protección de Datos (Ley 1581 de 2012): Ninguna fotografía con personas identificables entra a la canalización de inferencia agrícola ni a registros públicos.</text>
+    <text x="20" y="66" class="inv-body">2. Cero Cómputo Ocioso FinOps: Arquitectura 100% serverless Pay-As-You-Go. Costo mensual en AWS Rekognition menor a $2,00 USD en cosecha pico.</text>
+    <text x="20" y="84" class="inv-body">3. Trazabilidad Inmutable: Registros y expedientes archivados con retención WORM de 5 años en Amazon S3 Object Lock y DynamoDB.</text>
+  </g>
+
+  <!-- PIE DE PAGINA -->
+  <text x="800" y="690" class="sub-title" font-size="12px">Federación Nacional de Cafeteros - AromaPacífico 2026 | Inferencia Serverless y Privacidad en AWS</text>
+</svg>

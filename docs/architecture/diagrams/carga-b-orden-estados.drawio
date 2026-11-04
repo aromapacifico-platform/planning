@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" compressed="false">
+  <diagram id="maquina-estados-orden" name="Maquina de Estados de la Orden de Fumigacion">
+    <mxGraphModel dx="1800" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2000" pageHeight="1500" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TITULO -->
+        <mxCell id="title" value="AromaPacífico - Máquina de Estados de la Orden de Fumigación y Protocolos de Cierre" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=22;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="400" y="30" width="1200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Ciclo de Vida de la Orden, Invariante Zero Trust de Autorización Humana, Resiliencia Offline y Cierre Probatorio WORM" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
+          <mxGeometry x="400" y="70" width="1200" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- INICIO: DISPARADOR -->
+        <mxCell id="start-node" value="Inicio del Flujo&#xa;Alerta Fitosanitaria Confirmada (S2)&#xa;o Detección en Lote" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#1D76DB;strokeWidth=2;align=center;verticalAlign=middle;fontSize=12;fontColor=#1D76DB;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="160" width="220" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ESTADO 1: CREADA -->
+        <mxCell id="st-creada" value="ESTADO: CREADA&#xa;&#xa;- Orden borrador generada en DynamoDB.&#xa;- Asocia FincaID, LoteID y foco GPS.&#xa;- Diagnóstico fitosanitario (roya/plaga).&#xa;- Pendiente de verificación de polígono." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#1D76DB;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="340" y="140" width="250" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- DECISION 1: VALIDACION POLIGONO -->
+        <mxCell id="dec-delim" value="Validación de Geocerca&#xa;¿Existe Polígono Lote&#xa;y Zonas No-Fly (S1)?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#EAEDED;strokeColor=#545B64;strokeWidth=2;align=center;verticalAlign=middle;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="650" y="130" width="220" height="140" as="geometry" />
+        </mxCell>
+
+        <!-- ERROR 1: RECHAZADA SIN DELIMITACION -->
+        <mxCell id="err-no-delim" value="ESTADO: RECHAZADA_SIN_DELIMITACION&#xa;&#xa;- Bloqueo inquebrantable del pliego FNC.&#xa;- Prohibida aspersión sin geocercas previas.&#xa;- Orden terminada; se exige Servicio 1." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE8E8;strokeColor=#B60205;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;fontSize=12;fontColor=#9C1A1A;" vertex="1" parent="1">
+          <mxGeometry x="650" y="330" width="220" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- ESTADO 2: VALIDADA_PRECONDICIONES -->
+        <mxCell id="st-validada" value="ESTADO: VALIDADA_PRECONDICIONES&#xa;&#xa;- Polígono productivo GeoJSON verificado.&#xa;- Zonas No-Fly (casas, ríos, vías) activas.&#xa;- Insumo químico preseleccionado.&#xa;- Lista para revisión técnica agronómica." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#1D76DB;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="930" y="140" width="250" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- DECISION 2: COMPUERTA HUMANA AGRONOMO -->
+        <mxCell id="dec-humano" value="COMPUERTA HUMANA MANDATORIA&#xa;Agrónomo Colegiado FNC (MFA)&#xa;&#xa;Zero Trust: Prohibido autorizar por IA.&#xa;Revisa dosis, químico ICA, ventana,&#xa;meteorología y asigna piloto UAS." style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=3;align=center;verticalAlign=middle;fontSize=12;fontColor=#232F3E;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="115" width="270" height="170" as="geometry" />
+        </mxCell>
+
+        <!-- ERROR 2: RECHAZADA AGRONOMO -->
+        <mxCell id="err-rech-agro" value="ESTADO: RECHAZADA_AGRONOMO&#xa;&#xa;- Falsa alarma, toxicidad excesiva o inviable.&#xa;- Motivo registrado formalmente.&#xa;- Expediente archivado en DynamoDB." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE8E8;strokeColor=#B60205;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;fontSize=12;fontColor=#9C1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1570" y="90" width="240" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- ERROR 3: CANCELADA METEOROLOGIA -->
+        <mxCell id="err-canc-met" value="ESTADO: CANCELADA_METEOROLOGIA&#xa;&#xa;- Viento superior a 15 km/h o lluvia activa.&#xa;- Riesgo crítico de deriva hacia fuentes hídricas.&#xa;- Orden cancelada para reprogramación." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3CD;strokeColor=#FBCA04;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;fontSize=12;fontColor=#856404;" vertex="1" parent="1">
+          <mxGeometry x="1570" y="210" width="240" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- ESTADO 3: AUTORIZADA -->
+        <mxCell id="st-autorizada" value="ESTADO: AUTORIZADA&#xa;&#xa;- Firma digital criptográfica con MFA del agrónomo.&#xa;- Asigna: Lote químico ICA, ventana, piloto al mando.&#xa;- Genera token de preposicionamiento (Lease 48h).&#xa;- Habilitada para sincronización offline en Acopio." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EBF3FB;strokeColor=#1D76DB;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;fontSize=12;fontColor=#232F3E;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="350" width="270" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- ESTADO 4: ENTREGADA PREPOSICIONADA -->
+        <mxCell id="st-entregada" value="ESTADO: ENTREGADA_PREPOSICIONADA&#xa;&#xa;- Descargada en Acopio/Cabecera vía Wi-Fi 6 seguro.&#xa;- Plan de vuelo y polígonos No-Fly en tableta GCS.&#xa;- Autopiloto UAS precargado con misiones autónomas.&#xa;- Lista para desplazamiento y despegue en campo." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#0E8A16;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="930" y="350" width="260" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- ESTADO 5: EN VUELO -->
+        <mxCell id="st-en-vuelo" value="ESTADO: EN_VUELO&#xa;&#xa;- Despegue autónomo en lote de la finca.&#xa;- Corte de señal celular en vereda: operación nominal.&#xa;- Aspersión focalizada con corte automático en No-Fly.&#xa;- Telemetría y marcas de tiempo en buffer flash UAS." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;fontSize=12;fontColor=#232F3E;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="610" y="520" width="280" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- ERROR 4: ABORTO EMERGENCIA -->
+        <mxCell id="err-aborto" value="ESTADO: ABORTO_EMERGENCIA_RTH&#xa;&#xa;- Falla de hardware, obstáculo, pájaro o batería crítica.&#xa;- Failsafe ejecuta Retorno al Hogar (RTH / RTL).&#xa;- Registro de incidente abierto; revisión de seguridad." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE8E8;strokeColor=#B60205;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;fontSize=12;fontColor=#9C1A1A;" vertex="1" parent="1">
+          <mxGeometry x="610" y="690" width="280" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- ESTADO 6: VOLADA REGISTRO PENDIENTE -->
+        <mxCell id="st-volada-pend" value="ESTADO: VOLADA_REGISTRO_PENDIENTE&#xa;&#xa;- Aterrizaje exitoso en la finca.&#xa;- Sin cobertura celular: logs retenidos en tableta GCS.&#xa;- Prohibido cerrar orden sin subir registros.&#xa;- Cuadrilla regresa a zona de conectividad." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#FF9900;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="960" y="520" width="260" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- ERROR 5: ERROR INTEGRIDAD REGISTRO -->
+        <mxCell id="err-sync-hash" value="ESTADO: ERROR_INTEGRIDAD_REGISTRO&#xa;&#xa;- Discrepancia en checksum SHA-256 o log corrupto.&#xa;- Se activa extracción física directa vía USB/MicroSD.&#xa;- Re-sincronización manual supervisada." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3CD;strokeColor=#FBCA04;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;fontSize=12;fontColor=#856404;" vertex="1" parent="1">
+          <mxGeometry x="960" y="690" width="260" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- ESTADO 7: VOLADA REGISTRO PERSISTIDO -->
+        <mxCell id="st-volada-pers" value="ESTADO: VOLADA_REGISTRO_PERSISTIDO&#xa;&#xa;- Reingreso a Acopio: subida vía HTTPS / S3 presigned.&#xa;- Bitácora de vuelo validada criptográficamente (SHA-256).&#xa;- Volumen dispersado y telemetría en DynamoDB y S3.&#xa;- Desbloquea la fase de verificación obligatoria S4." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#0E8A16;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;fontSize=12;fontColor=#232F3E;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="520" width="280" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- ESTADO 8: VERIFICACION PENDIENTE -->
+        <mxCell id="st-verif-pend" value="ESTADO: VERIFICACION_PENDIENTE&#xa;&#xa;- Espera ventana fenológica de 7 a 10 días calendario.&#xa;- Acción sistémica del fungicida/pesticida en follaje.&#xa;- Programa vuelo de inspección fotográfica (Servicio 4).&#xa;- Si archivo S4 no llega: la orden sigue abierta." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#1D76DB;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="700" width="280" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- ERROR 6: EXPIRADA VENTANA -->
+        <mxCell id="err-expirada" value="ESTADO: EXPIRADA_VENTANA&#xa;&#xa;- Superados 15 días sin vuelo de verificación S4.&#xa;- Alarma automática en CloudWatch / Dashboard Ops.&#xa;- Convoca investigación operativa y agronómica." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3CD;strokeColor=#FBCA04;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;fontSize=12;fontColor=#856404;" vertex="1" parent="1">
+          <mxGeometry x="1630" y="710" width="240" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- DECISION 3: VALIDACION VERIFICACION -->
+        <mxCell id="dec-verif" value="Evaluación Post-Tratamiento (S4)&#xa;¿Foto cargada y foco erradicado/contenido?&#xa;Inferencia S3 -&gt; Lambda -&gt; Rekognition&#xa;+ Dictamen Técnico del Agrónomo" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=3;align=center;verticalAlign=middle;fontSize=12;fontColor=#232F3E;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1275" y="880" width="310" height="160" as="geometry" />
+        </mxCell>
+
+        <!-- ERROR 7: FALLO VERIFICACION REINSPECCION -->
+        <mxCell id="err-fallo-verif" value="ESTADO: VERIFICACION_FALLIDA_REINSPECCION&#xa;&#xa;- Plaga persiste o imagen no concluyente.&#xa;- Agrónomo rechaza cierre y programa re-evaluación.&#xa;- Se genera nuevo expediente fitosanitario." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE8E8;strokeColor=#B60205;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;fontSize=12;fontColor=#9C1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1650" y="910" width="250" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- ESTADO 9: VERIFICADA -->
+        <mxCell id="st-verificada" value="ESTADO: VERIFICADA&#xa;&#xa;- Evidencia fotográfica de recuperación aprobada.&#xa;- Índice de infección inferior al umbral crítico.&#xa;- Aprobación final registrada por el agrónomo.&#xa;- Lista para sellado criptográfico WORM." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#0E8A16;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="930" y="900" width="260" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- ESTADO 10: CERRADA -->
+        <mxCell id="st-cerrada" value="ESTADO FINAL TERMINAL: CERRADA&#xa;&#xa;- Expediente digital íntegro sellado de por vida.&#xa;- Contiene: delimitación, autorización humana MFA,&#xa;  bitácora de vuelo con hash SHA-256 y foto de cierre.&#xa;- Inmutabilidad WORM asegurada en S3 Object Lock (5 años).&#xa;- Auditoría legal y ambiental completa para FNC e ICA." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#0E8A16;strokeWidth=3;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontSize=12;fontColor=#1B5E20;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="890" width="310" height="140" as="geometry" />
+        </mxCell>
+
+        <!-- TRANSICIONES / FLECHAS -->
+        <!-- Start -> Creada -->
+        <mxCell id="e-start-creada" value="Detección foco" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#1D76DB;" edge="1" parent="1" source="start-node" target="st-creada">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Creada -> Decision Delimitacion -->
+        <mxCell id="e-creada-dec" value="Verifica precondiciones" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#545B64;strokeWidth=2;fontSize=12;fontColor=#545B64;" edge="1" parent="1" source="st-creada" target="dec-delim">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Decision Delim -> Error Sin Delim -->
+        <mxCell id="e-dec-nodelim" value="NO tiene polígono" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#B60205;strokeWidth=2;fontSize=12;fontColor=#B60205;" edge="1" parent="1" source="dec-delim" target="err-no-delim">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Decision Delim -> Validada -->
+        <mxCell id="e-dec-validada" value="SÍ tiene polígono" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#0E8A16;" edge="1" parent="1" source="dec-delim" target="st-validada">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Validada -> Compuerta Humana -->
+        <mxCell id="e-validada-humano" value="Solicitud de firma" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#FF9900;" edge="1" parent="1" source="st-validada" target="dec-humano">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Compuerta Humana -> Rechazo Agronomo -->
+        <mxCell id="e-humano-rech" value="Dictamen negativo" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#B60205;strokeWidth=2;fontSize=12;fontColor=#B60205;" edge="1" parent="1" source="dec-humano" target="err-rech-agro">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Compuerta Humana -> Cancelacion Clima -->
+        <mxCell id="e-humano-clima" value="Viento/Lluvia" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.7;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#FBCA04;strokeWidth=2;fontSize=12;fontColor=#856404;" edge="1" parent="1" source="dec-humano" target="err-canc-met">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Compuerta Humana -> Autorizada -->
+        <mxCell id="e-humano-auto" value="Aprobado con firma MFA" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#0E8A16;" edge="1" parent="1" source="dec-humano" target="st-autorizada">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Autorizada -> Entregada Preposicionada -->
+        <mxCell id="e-auto-entregada" value="Sincroniza misión en Acopio/Cabecera" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#0E8A16;" edge="1" parent="1" source="st-autorizada" target="st-entregada">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Entregada -> En Vuelo -->
+        <mxCell id="e-entregada-vuelo" value="Desplazamiento a finca y despegue" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.2;exitY=1;exitDx=0;exitDy=0;entryX=0.8;entryY=0;entryDx=0;entryDy=0;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#FF9900;" edge="1" parent="1" source="st-entregada" target="st-en-vuelo">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- En Vuelo -> Aborto Emergencia -->
+        <mxCell id="e-vuelo-aborto" value="Incidente / Batería crítica" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#B60205;strokeWidth=2;fontSize=12;fontColor=#B60205;" edge="1" parent="1" source="st-en-vuelo" target="err-aborto">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- En Vuelo -> Volada Registro Pendiente -->
+        <mxCell id="e-vuelo-volada" value="Aspersión completada; aterriza en finca" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#FF9900;" edge="1" parent="1" source="st-en-vuelo" target="st-volada-pend">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Volada Pendiente -> Error Integridad -->
+        <mxCell id="e-volada-error" value="Checksum inválido" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#FBCA04;strokeWidth=2;fontSize=12;fontColor=#856404;" edge="1" parent="1" source="st-volada-pend" target="err-sync-hash">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Volada Pendiente -> Volada Registro Persistido -->
+        <mxCell id="e-volada-pers" value="Retorno a Acopio; sube log con SHA-256" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#0E8A16;" edge="1" parent="1" source="st-volada-pend" target="st-volada-pers">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Volada Persistido -> Verificacion Pendiente -->
+        <mxCell id="e-pers-verifpend" value="Espera biológica (7-10 días)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#1D76DB;" edge="1" parent="1" source="st-volada-pers" target="st-verif-pend">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Verificacion Pendiente -> Expirada Ventana -->
+        <mxCell id="e-verifpend-expirada" value="Tiempo &gt; 15 días" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#FBCA04;strokeWidth=2;fontSize=12;fontColor=#856404;" edge="1" parent="1" source="st-verif-pend" target="err-expirada">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Verificacion Pendiente -> Decision Verificacion -->
+        <mxCell id="e-verifpend-dec" value="Ejecución vuelo S4 y foto" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#FF9900;" edge="1" parent="1" source="st-verif-pend" target="dec-verif">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Decision Verificacion -> Fallo Verificacion -->
+        <mxCell id="e-decverif-fallo" value="Plaga activa o foto no concluyente" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#B60205;strokeWidth=2;fontSize=12;fontColor=#B60205;" edge="1" parent="1" source="dec-verif" target="err-fallo-verif">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Decision Verificacion -> Verificada -->
+        <mxCell id="e-decverif-ok" value="Recuperación foliar validada" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#0E8A16;" edge="1" parent="1" source="dec-verif" target="st-verificada">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Verificada -> Cerrada -->
+        <mxCell id="e-verificada-cerrada" value="Sellado probatorio WORM" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#0E8A16;strokeWidth=3;fontSize=12;fontColor=#0E8A16;" edge="1" parent="1" source="st-verificada" target="st-cerrada">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
