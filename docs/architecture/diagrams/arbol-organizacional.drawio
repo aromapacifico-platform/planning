@@ -15,7 +15,7 @@
         </mxCell>
 
         <!-- CUENTA RAIZ / MANAGEMENT ACCOUNT -->
-        <mxCell id="root-account" value="Cuenta Raíz (Management Account)&#xa;ID Lógico: AromaPacifico-Root&#xa;&#xa;• Facturación Consolidada y Administración de AWS Organizations&#xa;• Directorio Central IAM Identity Center (SSO + MFA Mandatorio)&#xa;• Repositorio Central de Políticas SCP y Tag Policies Raíz&#xa;• AWS Budgets Master y Detección de Anomalías de Costos&#xa;(Sin cargas de cómputo operativas en esta cuenta)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#232F3E;strokeColor=#FF9900;strokeWidth=3;fontColor=#FFFFFF;fontSize=13;fontStyle=1;align=center;verticalAlign=middle;spacing=10;" vertex="1" parent="1">
+        <mxCell id="root-account" value="Cuenta Raíz (Management Account)&#xa;ID Lógico: AromaPacifico-Root&#xa;&#xa;• Facturación Consolidada y Administración de AWS Organizations&#xa;• Directorio Central IAM Identity Center (SSO + MFA Mandatorio)&#xa;• Repositorio Central de Políticas SCP y Tag Policies Raíz&#xa;• AWS Budgets Master y Detección de Anomalías de Costos&#xa;(Sin cargas de cómputo operativas en esta cuenta)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FF9900;strokeWidth=3;fontColor=#232F3E;fontSize=13;fontStyle=1;align=center;verticalAlign=middle;spacing=10;" vertex="1" parent="1">
           <mxGeometry x="380" y="110" width="640" height="150" as="geometry" />
         </mxCell>
 

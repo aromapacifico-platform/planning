@@ -5,7 +5,7 @@
       .sub-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #5A6B7C; text-anchor: middle; }
       .root-header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 15px; font-weight: bold; fill: #FFFFFF; text-anchor: middle; }
       .root-id { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #FF9900; text-anchor: middle; }
-      .root-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #EAEDED; text-anchor: middle; }
+      .root-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; text-anchor: middle; }
       .ou-header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
       .ou-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #555555; text-anchor: middle; }
       .card-header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
@@ -45,7 +45,7 @@
 
   <!-- CUENTA RAIZ / MANAGEMENT ACCOUNT -->
   <g transform="translate(430, 110)" filter="url(#box-shadow)">
-    <rect width="640" height="150" rx="8" fill="#232F3E" stroke="#FF9900" stroke-width="3" />
+    <rect width="640" height="150" rx="8" fill="#FFFFFF" stroke="#FF9900" stroke-width="3" />
     <text x="320" y="32" class="root-header">Cuenta Raíz (Management Account)</text>
     <text x="320" y="52" class="root-id">ID Lógico: AromaPacifico-Root</text>
     <text x="320" y="78" class="root-desc">• Facturación Consolidada y Administración de AWS Organizations</text>
