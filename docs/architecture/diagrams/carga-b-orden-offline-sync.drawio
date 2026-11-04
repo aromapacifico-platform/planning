@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" compressed="false">
+  <diagram id="arquitectura-offline-sync" name="Arquitectura de Preposicionamiento y Sincronizacion Offline">
+    <mxGraphModel dx="1800" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2000" pageHeight="1500" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TITULO -->
+        <mxCell id="title" value="AromaPacífico - Arquitectura de Preposicionamiento Offline y Sincronización de Vuelo" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=22;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="350" y="30" width="1300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Flujo de Carga en Acopio, Operación Desconectada en Parcela (Store-and-Forward), Drenado Criptográfico SHA-256 y Cierre WORM" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
+          <mxGeometry x="350" y="70" width="1300" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR 1: PLATAFORMA CLOUD AWS (us-east-1) -->
+        <mxCell id="box-cloud" value="1. PLATAFORMA CLOUD AWS (us-east-1 / us-east-2)&#xa;Landing Zone Corporativa FNC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#1D76DB;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=15;spacingTop=10;fontSize=14;fontStyle=1;fontColor=#1D76DB;" vertex="1" parent="1">
+          <mxGeometry x="50" y="120" width="420" height="880" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cloud-sso" value="IAM Identity Center&#xa;Agrónomo FNC&#xa;MFA Obligatorio (FIDO2)&#xa;Firma Digital no repudiable" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=1;fontSize=12;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="80" y="180" width="360" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cloud-api" value="Amazon API Gateway (REST API)&#xa;- /api/v1/orders/{id}/download (mTLS)&#xa;- /api/v1/orders/{id}/sync-log&#xa;Autenticación JWT efímero cuadrilla" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=1;fontSize=12;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="80" y="290" width="360" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cloud-db" value="Amazon DynamoDB (On-Demand)&#xa;Tabla: AromaPacifico-FumigationOrders&#xa;PK: ORDEN#ID | SK: METADATA&#xa;Cifrado KMS con llaves rotativas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=1;fontSize=12;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="80" y="410" width="360" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cloud-s3" value="Amazon S3 Object Storage&#xa;Buckets: aromapacifico-drone-missions&#xa;y aromapacifico-flight-logs&#xa;Políticas WORM: S3 Object Lock (5 años)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=1;fontSize=12;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="80" y="530" width="360" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cloud-lambda" value="AWS Lambda Worker Serverless&#xa;- Validación integridad SHA-256&#xa;- Extracción telemetría de aspersor&#xa;- Transición a VOLADA_REGISTRO_PERSISTIDO" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=1;fontSize=12;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="80" y="650" width="360" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cloud-rekog" value="Amazon Rekognition Serverless&#xa;Inferencia de Verificación (S4)&#xa;Evaluación foliar libre de personas&#xa;Confirmación erradicación de foco" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=1;fontSize=12;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="80" y="770" width="360" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cloud-kms" value="AWS KMS &amp; CloudTrail Organization Trail&#xa;Auditoría inmutable de accesos, hashes y firmas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EBF3FB;strokeColor=#1D76DB;strokeWidth=1;fontSize=12;fontColor=#1D76DB;align=center;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="890" width="360" height="70" as="geometry" />
+        </mxCell>
+
+
+        <!-- CONTENEDOR 2: CENTRO DE ACOPIO / BASE DE OPERACIONES -->
+        <mxCell id="box-acopio" value="2. CENTRO DE ACOPIO DEPARTAMENTAL (Base)&#xa;Cauca (10.41/16), Huila (10.42/16), Tolima (10.43/16)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#0E8A16;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=15;spacingTop=10;fontSize=14;fontStyle=1;fontColor=#0E8A16;" vertex="1" parent="1">
+          <mxGeometry x="510" y="120" width="420" height="880" as="geometry" />
+        </mxCell>
+
+        <mxCell id="acopio-vpn" value="Firewall Borde / Túnel IPsec VPN&#xa;Subred Borde: 10.X.20.0/24&#xa;Salida WAN 100 Mbps Simétricos&#xa;Conexión cifrada hacia Transit Gateway AWS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=1;fontSize=12;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="540" y="180" width="360" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="acopio-wifi" value="Wi-Fi 6 Corporativo para Cuadrillas&#xa;SSID Dedicado de Operaciones Aéreas&#xa;WPA3-Enterprise con VLAN segmentada&#xa;QoS garantizado para sincronización" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=1;fontSize=12;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="540" y="300" width="360" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="acopio-server" value="Servidor Local de Caché de Misiones&#xa;Subred Servidores Locales: 10.X.10.0/24&#xa;Caché de polígonos GeoJSON y firmas&#xa;Buffer de respaldo ante caída de WAN" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=1;fontSize=12;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="540" y="420" width="360" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="acopio-crew" value="Cuadrilla de Vuelo FNC (2 Operadores)&#xa;- Piloto al Mando (Licencia RAC 100)&#xa;- Operador auxiliar de carga / aplicador ICA&#xa;Vehículo todo terreno con estación de carga" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#0E8A16;strokeWidth=1;fontSize=12;fontColor=#0E8A16;align=center;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="550" width="360" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="acopio-sync-dock" value="Estación de Descarga y Carga Rápida&#xa;- Conexión Gigabit Ethernet / USB 3.0&#xa;- Cargador industrial de baterías LiPo/LiFePO4&#xa;- Generador eléctrico portátil para campo" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=1;fontSize=12;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="540" y="680" width="360" height="90" as="geometry" />
+        </mxCell>
+
+
+        <!-- CONTENEDOR 3: ESTACION TERRESTRE EN CAMPO (GCS) -->
+        <mxCell id="box-gcs" value="3. ESTACIÓN TERRESTRE EN CAMPO (GCS)&#xa;Tableta Robusta / Laptop de Cuadrilla (Desconectada)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#FF9900;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=15;spacingTop=10;fontSize=14;fontStyle=1;fontColor=#FF9900;" vertex="1" parent="1">
+          <mxGeometry x="970" y="120" width="450" height="880" as="geometry" />
+        </mxCell>
+
+        <mxCell id="gcs-sync-agent" value="Agente de Sincronización Local&#xa;- Valida token de autorización (Lease 48h)&#xa;- Almacena orden, parámetros y dosis ICA&#xa;- Cálculo de hash criptográfico SHA-256" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FF9900;strokeWidth=1;fontSize=12;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1005" y="180" width="380" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="gcs-nvme" value="Almacenamiento Local Cifrado (AES-256)&#xa;- Caché de polígonos GeoJSON de finca&#xa;- Capas vectoriales de Zonas No-Fly (WPL)&#xa;- Buffer Store-and-Forward de hasta 24 horas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FF9900;strokeWidth=1;fontSize=12;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1005" y="300" width="380" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="gcs-app" value="Software de Control de Vuelo GCS&#xa;(QGroundControl / Mission Planner adaptado)&#xa;- Compilación de waypoints de aspersión&#xa;- Inyección de geocercas No-Fly al autopiloto&#xa;- Telemetría de radioenlace local (915 MHz)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FF9900;strokeWidth=1;fontSize=12;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1005" y="420" width="380" height="110" as="geometry" />
+        </mxCell>
+
+        <mxCell id="gcs-radio" value="Radio módem Telemetría de Campo (915 MHz / 2.4 GHz)&#xa;Enlace bidireccional punto a punto con UAS en línea de vista&#xa;Independiente 100% de la red celular móvil" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=1;fontSize=12;fontColor=#232F3E;align=center;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1005" y="560" width="380" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="gcs-offline-state" value="COMPORTAMIENTO ANTE CORTE CELULAR:&#xa;La cuadrilla opera en predio desconectado.&#xa;El software valida que el plan esté firmado,&#xa;permite el despegue y retiene bitácoras en cola." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFEBE9;strokeColor=#8D6E63;strokeWidth=2;fontSize=12;fontColor=#4E342E;align=center;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1005" y="670" width="380" height="90" as="geometry" />
+        </mxCell>
+
+
+        <!-- CONTENEDOR 4: AERONAVE UAS EN PARCELA (BORDE OFFLINE) -->
+        <mxCell id="box-uas" value="4. AERONAVE UAS ASPERSORA (Borde Offline)&#xa;Finca Cafetera en Cauca, Huila o Tolima (Cero Señal Celular)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#B60205;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=15;spacingTop=10;fontSize=14;fontStyle=1;fontColor=#B60205;" vertex="1" parent="1">
+          <mxGeometry x="1460" y="120" width="480" height="880" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uas-autopilot" value="Autopiloto de Navegación (PX4 / ArduPilot)&#xa;- Receptor GNSS RTK centimétrico dual&#xa;- Ejecución autónoma de cuadrícula de vuelo&#xa;- Zonas No-Fly quemadas en memoria de vuelo&#xa;- Failsafe autónomo: RTH por batería crítica" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B60205;strokeWidth=1;fontSize=12;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1495" y="180" width="410" height="110" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uas-spray" value="Sistema de Aspersión y Control de Flujo&#xa;- Tanque de agroquímico con sensor ultrasónico&#xa;- Bomba centrífuga y atomizadores rotativos&#xa;- Corte instantáneo automático al pisar geocerca No-Fly&#xa;- Sensor de caudal integrado con registro de litros" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B60205;strokeWidth=1;fontSize=12;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1495" y="320" width="410" height="110" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uas-flash" value="Buffer Local de Bitácora de Vuelo (Flash SPI / MicroSD)&#xa;- Registro de telemetría completa: flight_log.bin&#xa;- Coordenadas GPS, altitud AGL, marcas de tiempo UTC&#xa;- Caudal segundo a segundo y volumen dispersado&#xa;- Retención local de 24 horas sin pérdida de datos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B60205;strokeWidth=1;fontSize=12;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1495" y="460" width="410" height="110" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uas-geofence" value="ZONAS NO-FLY ACTIVAS EN HARDWARE (VUELO):&#xa;- Casas y escuelas: Buffer de 100 metros&#xa;- Quebradas, ríos y nacimientos: Buffer de 100 metros&#xa;- Vías públicas y caminos: Buffer de 50 metros&#xa;Si el UAS se acerca al borde: freno automático y desvío." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE8E8;strokeColor=#B60205;strokeWidth=2;fontSize=12;fontColor=#9C1A1A;align=center;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1495" y="600" width="410" height="110" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uas-landing" value="Aterrizaje en Parcela y Extracción:&#xa;La misión concluye con éxito.&#xa;El log se transfiere a la tableta GCS vía cable/Wi-Fi.&#xa;La orden queda en 'VOLADA_REGISTRO_PENDIENTE'." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#0E8A16;strokeWidth=1;fontSize=12;fontColor=#1B5E20;align=center;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1495" y="740" width="410" height="85" as="geometry" />
+        </mxCell>
+
+
+        <!-- CONEXIONES Y FLUJOS NUMERADOS -->
+        <!-- 1. Autorizacion Cloud -> Acopio -->
+        <mxCell id="f-1" value="1. Misión firmada por Agrónomo MFA&#xa;Descarga GeoJSON y No-Fly por S3 URL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#1D76DB;" edge="1" parent="1" source="cloud-api" target="acopio-vpn">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 2. Acopio -> GCS Tablet -->
+        <mxCell id="f-2" value="2. Sincroniza tableta GCS&#xa;Wi-Fi 6 seguro 10.X.20.0/24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#0E8A16;" edge="1" parent="1" source="acopio-wifi" target="gcs-sync-agent">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 3. GCS -> UAS Autopilot -->
+        <mxCell id="f-3" value="3. Inyecta plan de vuelo WPL&#xa;y Geocercas No-Fly" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#FF9900;" edge="1" parent="1" source="gcs-app" target="uas-autopilot">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 4. UAS Vuelo -> Buffer Flash -->
+        <mxCell id="f-4" value="4. Aspersión autónoma&#xa;Log persistido en flash local" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#B60205;strokeWidth=2;fontSize=12;fontColor=#B60205;" edge="1" parent="1" source="uas-spray" target="uas-flash">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 5. UAS Aterrizaje -> GCS Tablet -->
+        <mxCell id="f-5" value="5. Volcado post-vuelo en parcela&#xa;(Wi-Fi local de campo o USB)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#FF9900;" edge="1" parent="1" source="uas-landing" target="gcs-nvme">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1470" y="780" />
+              <mxPoint x="1470" y="345" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- 6. Retorno Acopio -> Subida Cloud -->
+        <mxCell id="f-6" value="6. Retorno a base; cálculo SHA-256&#xa;Subida a S3 Pre-signed URL / Lambda" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0E8A16;strokeWidth=3;fontSize=12;fontColor=#0E8A16;" edge="1" parent="1" source="gcs-sync-agent" target="cloud-s3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="950" y="225" />
+              <mxPoint x="950" y="575" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- 7. S3 Event -> Lambda -> DynamoDB -->
+        <mxCell id="f-7" value="7. Dispara Lambda: valida SHA-256&#xa;Actualiza DynamoDB a VOLADA_REGISTRO_PERSISTIDO" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#1D76DB;" edge="1" parent="1" source="cloud-s3" target="cloud-lambda">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

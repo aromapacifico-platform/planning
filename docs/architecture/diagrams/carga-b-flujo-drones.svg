@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 860" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 22px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; fill: #5A6B7C; text-anchor: middle; }
+      .header-box { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; }
+      .body-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
+      .footer-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-style: italic; fill: #5A6B7C; text-anchor: middle; }
+      .label-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: bold; }
+    </style>
+    <filter id="shadow" x="-3%" y="-3%" width="106%" height="106%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.08" />
+    </filter>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1D76DB" />
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0E8A16" />
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#D93F0B" />
+    </marker>
+    <marker id="arrow-gray" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#545B64" />
+    </marker>
+  </defs>
+
+  <rect width="1600" height="860" fill="#F8F9FA" />
+
+  <text x="800" y="45" class="title">AromaPacífico - Arquitectura de Flujo Operativo de los 5 Servicios de Drones</text>
+  <text x="800" y="75" class="subtitle">Transición de Estados, Modo Combinado (Áreas y Precisión), Compuerta Humana Mandatoria y Cierre de Expediente</text>
+
+  <!-- SERVICIO 1 -->
+  <g transform="translate(60, 120)" filter="url(#shadow)">
+    <rect width="320" height="190" rx="8" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
+    <rect width="320" height="35" rx="8" fill="#F4F8FD" />
+    <text x="15" y="24" class="header-box" fill="#1D76DB">SERVICIO 1: Delimitar Lote (Áreas)</text>
+    <text x="15" y="58" class="body-text">- Vuelo inicial ortomosaico de la finca.</text>
+    <text x="15" y="78" class="body-text">- Genera geometría poligonal GeoJSON.</text>
+    <text x="15" y="98" class="body-text">- Identifica y persiste Zonas No-Fly:</text>
+    <text x="25" y="118" class="body-text">* Casas, beneficiadero, vías, fuentes hídricas.</text>
+    <text x="15" y="142" class="body-text" fill="#D93F0B">- Condición bloqueante de negocio:</text>
+    <text x="25" y="162" class="body-text" fill="#D93F0B">Sin polígono NO se autoriza fumigación.</text>
+  </g>
+
+  <!-- VALIDACION DELIMITACION -->
+  <g transform="translate(430, 145)" filter="url(#shadow)">
+    <polygon points="120,0 240,70 120,140 0,70" fill="#EAEDED" stroke="#545B64" stroke-width="2" />
+    <text x="120" y="65" class="header-box" fill="#232F3E" font-size="12px" text-anchor="middle">Validación de Lote</text>
+    <text x="120" y="85" class="body-text" text-anchor="middle">¿Existe Polígono y No-Fly?</text>
+  </g>
+
+  <!-- DISPARADOR SENSOR -->
+  <g transform="translate(60, 360)" filter="url(#shadow)">
+    <rect width="320" height="130" rx="8" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" />
+    <text x="160" y="30" class="header-box" fill="#D93F0B" text-anchor="middle">Disparador IoT de Campo</text>
+    <text x="160" y="52" class="body-text" text-anchor="middle" font-weight="bold">Sensor de Suelo / Clima</text>
+    <text x="160" y="75" class="body-text" text-anchor="middle">Lectura anómala fuera de umbral (NPK, humedad, temp).</text>
+    <text x="160" y="95" class="body-text" text-anchor="middle">Genera coordenada GPS del foco detectado.</text>
+    <text x="160" y="115" class="body-text" text-anchor="middle" fill="#D93F0B">Latencia menor a 5 min hacia acopio/nube.</text>
+  </g>
+
+  <!-- SERVICIO 2 -->
+  <g transform="translate(430, 350)" filter="url(#shadow)">
+    <rect width="320" height="160" rx="8" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
+    <rect width="320" height="35" rx="8" fill="#F4F8FD" />
+    <text x="15" y="24" class="header-box" fill="#1D76DB">SERVICIO 2: Confirmar Alerta (Precisión)</text>
+    <text x="15" y="58" class="body-text">- Vuelo táctico directo al foco del sensor.</text>
+    <text x="15" y="78" class="body-text">- No recorre toda la finca (ahorro batería/costo).</text>
+    <text x="15" y="98" class="body-text">- Captura foto de alta resolución del follaje.</text>
+    <text x="15" y="118" class="body-text">- S3 -> Lambda -> Rekognition (Inferencia IA).</text>
+    <text x="15" y="138" class="body-text">- Persiste probabilidad de plaga en expediente.</text>
+  </g>
+
+  <!-- COMPUERTA HUMANA -->
+  <g transform="translate(800, 330)" filter="url(#shadow)">
+    <polygon points="160,0 320,100 160,200 0,100" fill="#FFF8E1" stroke="#FF9900" stroke-width="3" />
+    <text x="160" y="75" class="header-box" fill="#B08800" text-anchor="middle">COMPUERTA HUMANA</text>
+    <text x="160" y="95" class="header-box" fill="#232F3E" font-size="12px" text-anchor="middle">Agrónomo Registrado FNC</text>
+    <text x="160" y="115" class="body-text" text-anchor="middle">Firma digital obligatoria (MFA)</text>
+    <text x="160" y="132" class="body-text" text-anchor="middle">Valida Lote Insumo ICA</text>
+    <text x="160" y="148" class="body-text" text-anchor="middle" fill="#D93F0B" font-weight="bold">Ninguna IA autoriza aspersiones</text>
+  </g>
+
+  <!-- RECHAZO / FALSA ALARMA -->
+  <g transform="translate(840, 180)" filter="url(#shadow)">
+    <rect width="240" height="70" rx="6" fill="#EAEDED" stroke="#545B64" stroke-width="1" />
+    <text x="120" y="30" class="header-box" fill="#545B64" font-size="12px" text-anchor="middle">Caso Desestimado / Falsa Alarma</text>
+    <text x="120" y="50" class="body-text" text-anchor="middle">Expediente archivado (Retención 5 años)</text>
+  </g>
+
+  <!-- SERVICIO 3 -->
+  <g transform="translate(1180, 350)" filter="url(#shadow)">
+    <rect width="340" height="160" rx="8" fill="#FFFFFF" stroke="#0E8A16" stroke-width="2" />
+    <rect width="340" height="35" rx="8" fill="#F4FBF5" />
+    <text x="15" y="24" class="header-box" fill="#0E8A16">SERVICIO 3: Fumigación de Precisión</text>
+    <text x="15" y="58" class="body-text">- Dron aspersor bajo marco RAC 100 Aerocivil.</text>
+    <text x="15" y="78" class="body-text">- Misión precargada offline en cabecera/acopio.</text>
+    <text x="15" y="98" class="body-text">- Aspersión ultra-focalizada en foco aprobado.</text>
+    <text x="15" y="118" class="body-text">- Respeta buffer perimetral en Zonas No-Fly.</text>
+    <text x="15" y="138" class="body-text">- Bitácora en buffer: 'Pendiente Verificación'.</text>
+  </g>
+
+  <!-- SERVICIO 4 -->
+  <g transform="translate(1180, 560)" filter="url(#shadow)">
+    <rect width="340" height="160" rx="8" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
+    <rect width="340" height="35" rx="8" fill="#F4F8FD" />
+    <text x="15" y="24" class="header-box" fill="#1D76DB">SERVICIO 4: Verificar Post-Fumigar</text>
+    <text x="15" y="58" class="body-text">- Vuelo táctico a los 7-10 días del tratamiento.</text>
+    <text x="15" y="78" class="body-text">- Captura foto o video de recuperación vegetal.</text>
+    <text x="15" y="98" class="body-text">- Inferencia IA confirma evolución del follaje.</text>
+    <text x="15" y="118" class="body-text" fill="#D93F0B">- Si el archivo no llega: caso sigue ABIERTO.</text>
+    <text x="15" y="138" class="body-text">- Descarga de telemetría al conectar en acopio.</text>
+  </g>
+
+  <!-- CIERRE EXPEDIENTE -->
+  <g transform="translate(800, 600)" filter="url(#shadow)">
+    <rect width="320" height="90" rx="8" fill="#E8F5E9" stroke="#0E8A16" stroke-width="2" />
+    <text x="160" y="32" class="header-box" fill="#0E8A16" text-anchor="middle">CIERRE FORMAL DEL EXPEDIENTE</text>
+    <text x="160" y="52" class="body-text" text-anchor="middle" font-weight="bold">Estado: CERRADO</text>
+    <text x="160" y="72" class="body-text" text-anchor="middle">Evidencia fotográfica y bitácora de vuelo WORM</text>
+  </g>
+
+  <!-- SERVICIO 5 -->
+  <g transform="translate(60, 560)" filter="url(#shadow)">
+    <rect width="690" height="160" rx="8" fill="#FFFFFF" stroke="#5319E7" stroke-width="2" />
+    <rect width="690" height="35" rx="8" fill="#F8F6FE" />
+    <text x="15" y="24" class="header-box" fill="#5319E7">SERVICIO 5: Estimar Cosecha (Áreas - Independiente de Plagas)</text>
+    <text x="15" y="58" class="body-text">- Vuelo de área fotogramétrico ejecutado 1 vez por ciclo de cosecha sobre las 200 fincas.</text>
+    <text x="15" y="78" class="body-text">- Conteo volumétrico y densidad de grano maduro en cafetales mediante visión artificial.</text>
+    <text x="15" y="98" class="body-text">- Inferencia IA: calcula proyección de sacos de 60 kg esperados para la temporada.</text>
+    <text x="15" y="118" class="body-text">- Notificación logística anticipada a centros de acopio (Cauca, Huila, Tolima).</text>
+    <text x="15" y="138" class="body-text" fill="#D93F0B">- Prohibición estricta de diseño: Este servicio NO transporta ni aplica agroquímicos.</text>
+  </g>
+
+  <!-- FLECHAS Y CONEXIONES -->
+  <!-- Srv1 a Validacion -->
+  <path d="M 380 215 L 430 215" fill="none" stroke="#1D76DB" stroke-width="2" marker-end="url(#arrow-blue)" />
+
+  <!-- Validacion a Srv2 -->
+  <path d="M 550 285 L 550 350" fill="none" stroke="#0E8A16" stroke-width="2" marker-end="url(#arrow-green)" />
+  <text x="560" y="320" class="label-text" fill="#0E8A16">Polígono Activo</text>
+
+  <!-- Sensor a Srv2 -->
+  <path d="M 380 425 L 430 425" fill="none" stroke="#D93F0B" stroke-width="2" marker-end="url(#arrow-red)" />
+  <text x="385" y="415" class="label-text" fill="#D93F0B">Foco GPS</text>
+
+  <!-- Srv2 a Compuerta -->
+  <path d="M 750 430 L 800 430" fill="none" stroke="#1D76DB" stroke-width="2" marker-end="url(#arrow-blue)" />
+  <text x="755" y="420" class="label-text" fill="#1D76DB">Evidencia IA</text>
+
+  <!-- Compuerta a Rechazo -->
+  <path d="M 960 330 L 960 250" fill="none" stroke="#545B64" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrow-gray)" />
+  <text x="965" y="295" class="label-text" fill="#545B64">No Autorizada</text>
+
+  <!-- Compuerta a Srv3 -->
+  <path d="M 1120 430 L 1180 430" fill="none" stroke="#0E8A16" stroke-width="3" marker-end="url(#arrow-green)" />
+  <text x="1125" y="420" class="label-text" fill="#0E8A16">AUTORIZADA</text>
+
+  <!-- Srv3 a Srv4 -->
+  <path d="M 1350 510 L 1350 560" fill="none" stroke="#1D76DB" stroke-width="2" marker-end="url(#arrow-blue)" />
+  <text x="1355" y="538" class="label-text" fill="#1D76DB">Fumigado (7-10d)</text>
+
+  <!-- Srv4 a Cierre -->
+  <path d="M 1180 645 L 1120 645" fill="none" stroke="#0E8A16" stroke-width="2" marker-end="url(#arrow-green)" />
+  <text x="1125" y="635" class="label-text" fill="#0E8A16">Foto Válida</text>
+
+  <text x="800" y="790" class="footer-text">Invariantes Clave: Ningún servicio sustituye a otro | Sin autorización humana no hay aspersión | Misiones offline en cabecera/acopio | Buffer 24h garantizado</text>
+</svg>

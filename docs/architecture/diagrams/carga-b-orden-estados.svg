@@ -1,0 +1,362 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1150" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; fill: #5A6B7C; text-anchor: middle; }
+      .state-header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; }
+      .state-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
+      .state-body-err { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #9C1A1A; }
+      .state-body-warn { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #856404; }
+      .state-body-closed { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #1B5E20; font-weight: 500; }
+      .edge-label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 600; text-anchor: middle; }
+      .gate-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; text-anchor: middle; }
+      .gate-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; text-anchor: middle; fill: #232F3E; }
+    </style>
+
+    <filter id="card-shadow" x="-3%" y="-3%" width="106%" height="106%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.06" />
+    </filter>
+
+    <marker id="arr-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1D76DB" />
+    </marker>
+    <marker id="arr-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0E8A16" />
+    </marker>
+    <marker id="arr-orange" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#FF9900" />
+    </marker>
+    <marker id="arr-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#B60205" />
+    </marker>
+    <marker id="arr-gold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#FBCA04" />
+    </marker>
+    <marker id="arr-gray" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#545B64" />
+    </marker>
+  </defs>
+
+  <!-- BACKGROUND -->
+  <rect width="1920" height="1150" fill="#F8F9FA" />
+
+  <!-- HEADER -->
+  <text x="960" y="45" class="title">AromaPacífico - Máquina de Estados de la Orden de Fumigación y Protocolos de Cierre</text>
+  <text x="960" y="75" class="subtitle">Ciclo de Vida de la Orden, Invariante Zero Trust de Autorización Humana, Resiliencia Offline y Cierre Probatorio WORM (5 Años)</text>
+
+  <!-- ================= FILA 1: DESDE INICIO HASTA COMPUERTA HUMANA ================= -->
+
+  <!-- INICIO -->
+  <g transform="translate(40, 140)">
+    <ellipse cx="110" cy="55" rx="110" ry="45" fill="#E8F0FE" stroke="#1D76DB" stroke-width="2" filter="url(#card-shadow)" />
+    <text x="110" y="45" class="state-header" fill="#1D76DB" text-anchor="middle">Inicio del Flujo</text>
+    <text x="110" y="65" class="state-body" text-anchor="middle">Alerta Fitosanitaria Confirmada (S2)</text>
+    <text x="110" y="80" class="state-body" text-anchor="middle">Detección de Foco de Roya / Plaga</text>
+  </g>
+
+  <!-- FLECHA: INICIO -> CREADA -->
+  <path d="M 260 195 L 320 195" fill="none" stroke="#1D76DB" stroke-width="2" marker-end="url(#arr-blue)" />
+  <rect x="265" y="180" width="50" height="18" fill="#F8F9FA" rx="4" />
+  <text x="290" y="193" class="edge-label" fill="#1D76DB">Foco</text>
+
+  <!-- ESTADO 1: CREADA -->
+  <g transform="translate(320, 135)" filter="url(#card-shadow)">
+    <rect width="250" height="120" rx="8" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
+    <rect width="250" height="30" rx="8" fill="#E8F0FE" />
+    <text x="15" y="21" class="state-header" fill="#1D76DB">ESTADO: CREADA</text>
+    <text x="15" y="50" class="state-body">- Orden borrador en DynamoDB.</text>
+    <text x="15" y="70" class="state-body">- Asocia FincaID, LoteID y foco GPS.</text>
+    <text x="15" y="90" class="state-body">- Diagnóstico fitosanitario (roya/plaga).</text>
+    <text x="15" y="110" class="state-body">- Pendiente verificación de geocercas.</text>
+  </g>
+
+  <!-- FLECHA: CREADA -> DECISION DELIMITACION -->
+  <path d="M 570 195 L 640 195" fill="none" stroke="#545B64" stroke-width="2" marker-end="url(#arr-gray)" />
+  <rect x="580" y="180" width="50" height="18" fill="#F8F9FA" rx="4" />
+  <text x="605" y="193" class="edge-label" fill="#545B64">Evalúa</text>
+
+  <!-- DECISION 1: VALIDACION DELIMITACION -->
+  <g transform="translate(640, 125)">
+    <polygon points="110,0 220,70 110,140 0,70" fill="#EAEDED" stroke="#545B64" stroke-width="2" filter="url(#card-shadow)" />
+    <text x="110" y="55" class="gate-title" fill="#232F3E">¿Existe Polígono</text>
+    <text x="110" y="72" class="gate-title" fill="#232F3E">y No-Fly Zones (S1)?</text>
+    <text x="110" y="90" class="gate-desc">Verifica base de datos</text>
+  </g>
+
+  <!-- FLECHA: NO -> RECHAZADA SIN DELIMITACION -->
+  <path d="M 750 265 L 750 330" fill="none" stroke="#B60205" stroke-width="2" marker-end="url(#arr-red)" />
+  <rect x="710" y="285" width="80" height="18" fill="#F8F9FA" rx="4" />
+  <text x="750" y="298" class="edge-label" fill="#B60205">NO tiene S1</text>
+
+  <!-- ERROR 1: RECHAZADA SIN DELIMITACION -->
+  <g transform="translate(625, 330)" filter="url(#card-shadow)">
+    <rect width="250" height="100" rx="8" fill="#FDE8E8" stroke="#B60205" stroke-width="2" />
+    <rect width="250" height="26" rx="8" fill="#FBD5D5" />
+    <text x="12" y="18" class="state-header" fill="#9C1A1A">RECHAZADA_SIN_DELIMITACION</text>
+    <text x="12" y="44" class="state-body-err">- Bloqueo estricto del pliego FNC.</text>
+    <text x="12" y="62" class="state-body-err">- Prohibida aspersión sin geocercas.</text>
+    <text x="12" y="80" class="state-body-err">- Exige completar primero Servicio 1.</text>
+  </g>
+
+  <!-- FLECHA: SI -> VALIDADA PRECONDICIONES -->
+  <path d="M 860 195 L 920 195" fill="none" stroke="#0E8A16" stroke-width="2" marker-end="url(#arr-green)" />
+  <rect x="865" y="180" width="50" height="18" fill="#F8F9FA" rx="4" />
+  <text x="890" y="193" class="edge-label" fill="#0E8A16">SÍ tiene</text>
+
+  <!-- ESTADO 2: VALIDADA_PRECONDICIONES -->
+  <g transform="translate(920, 135)" filter="url(#card-shadow)">
+    <rect width="260" height="120" rx="8" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
+    <rect width="260" height="30" rx="8" fill="#E8F0FE" />
+    <text x="15" y="21" class="state-header" fill="#1D76DB">ESTADO: VALIDADA_PRECONDICIONES</text>
+    <text x="15" y="50" class="state-body">- Polígono GeoJSON verificado.</text>
+    <text x="15" y="70" class="state-body">- No-Fly: casas, ríos y vías activos.</text>
+    <text x="15" y="90" class="state-body">- Insumo químico preseleccionado.</text>
+    <text x="15" y="110" class="state-body">- Lista para evaluación humana.</text>
+  </g>
+
+  <!-- FLECHA: VALIDADA -> COMPUERTA HUMANA -->
+  <path d="M 1180 195 L 1250 195" fill="none" stroke="#FF9900" stroke-width="2" marker-end="url(#arr-orange)" />
+  <rect x="1185" y="180" width="60" height="18" fill="#F8F9FA" rx="4" />
+  <text x="1215" y="193" class="edge-label" fill="#FF9900">Solicitud</text>
+
+  <!-- COMPUERTA 2: HUMANA MANDATORIA (MFA) -->
+  <g transform="translate(1250, 110)">
+    <polygon points="140,0 280,85 140,170 0,85" fill="#FFF8E1" stroke="#FF9900" stroke-width="3" filter="url(#card-shadow)" />
+    <text x="140" y="55" class="gate-title" fill="#232F3E">COMPUERTA HUMANA</text>
+    <text x="140" y="72" class="gate-title" fill="#FF9900">Agrónomo FNC (MFA)</text>
+    <text x="140" y="92" class="gate-desc">Zero Trust: Prohibido por IA</text>
+    <text x="140" y="108" class="gate-desc">Asigna producto ICA, dosis,</text>
+    <text x="140" y="124" class="gate-desc">ventana horaria y piloto UAS</text>
+  </g>
+
+  <!-- FLECHAS DESDE COMPUERTA HUMANA -->
+  <!-- A) RECHAZADA AGRONOMO -->
+  <path d="M 1530 155 L 1600 135" fill="none" stroke="#B60205" stroke-width="2" marker-end="url(#arr-red)" />
+  <text x="1565" y="135" class="edge-label" fill="#B60205">Rechaza</text>
+
+  <g transform="translate(1600, 95)" filter="url(#card-shadow)">
+    <rect width="270" height="85" rx="8" fill="#FDE8E8" stroke="#B60205" stroke-width="2" />
+    <rect width="270" height="24" rx="8" fill="#FBD5D5" />
+    <text x="12" y="17" class="state-header" fill="#9C1A1A">RECHAZADA_AGRONOMO</text>
+    <text x="12" y="42" class="state-body-err">- Falsa alarma o toxicidad excesiva.</text>
+    <text x="12" y="60" class="state-body-err">- Motivo registrado formalmente.</text>
+    <text x="12" y="76" class="state-body-err">- Expediente archivado en DynamoDB.</text>
+  </g>
+
+  <!-- B) CANCELADA METEOROLOGIA -->
+  <path d="M 1530 235 L 1600 245" fill="none" stroke="#FBCA04" stroke-width="2" marker-end="url(#arr-gold)" />
+  <text x="1565" y="230" class="edge-label" fill="#856404">Clima adverso</text>
+
+  <g transform="translate(1600, 205)" filter="url(#card-shadow)">
+    <rect width="270" height="85" rx="8" fill="#FFF3CD" stroke="#FBCA04" stroke-width="2" />
+    <rect width="270" height="24" rx="8" fill="#FFEBAA" />
+    <text x="12" y="17" class="state-header" fill="#856404">CANCELADA_METEOROLOGIA</text>
+    <text x="12" y="42" class="state-body-warn">- Viento &gt; 15 km/h o lluvia activa.</text>
+    <text x="12" y="60" class="state-body-warn">- Riesgo crítico de deriva a fuentes de agua.</text>
+    <text x="12" y="76" class="state-body-warn">- Orden cancelada para reprogramación.</text>
+  </g>
+
+  <!-- C) APROBADA CON FIRMA MFA -> AUTORIZADA -->
+  <path d="M 1390 280 L 1390 350" fill="none" stroke="#0E8A16" stroke-width="3" marker-end="url(#arr-green)" />
+  <rect x="1340" y="305" width="100" height="18" fill="#F8F9FA" rx="4" />
+  <text x="1390" y="318" class="edge-label" fill="#0E8A16">Firma con MFA</text>
+
+
+  <!-- ================= FILA 2: AUTORIZADA HASTA VOLADA REGISTRO PERSISTIDO ================= -->
+
+  <!-- ESTADO 3: AUTORIZADA -->
+  <g transform="translate(1250, 350)" filter="url(#card-shadow)">
+    <rect width="280" height="120" rx="8" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
+    <rect width="280" height="30" rx="8" fill="#EBF3FB" />
+    <text x="15" y="21" class="state-header" fill="#1D76DB">ESTADO: AUTORIZADA</text>
+    <text x="15" y="50" class="state-body">- Firma digital criptográfica no repudiable.</text>
+    <text x="15" y="70" class="state-body">- Lote químico ICA asignado con ventana.</text>
+    <text x="15" y="90" class="state-body">- Token de preposicionamiento (Lease 48h).</text>
+    <text x="15" y="110" class="state-body">- Lista para descarga offline en Acopio.</text>
+  </g>
+
+  <!-- FLECHA: AUTORIZADA -> ENTREGADA PREPOSICIONADA -->
+  <path d="M 1250 410 L 1180 410" fill="none" stroke="#0E8A16" stroke-width="2" marker-end="url(#arr-green)" />
+  <rect x="1185" y="395" width="60" height="18" fill="#F8F9FA" rx="4" />
+  <text x="1215" y="408" class="edge-label" fill="#0E8A16">Descarga</text>
+
+  <!-- ESTADO 4: ENTREGADA PREPOSICIONADA -->
+  <g transform="translate(900, 350)" filter="url(#card-shadow)">
+    <rect width="280" height="120" rx="8" fill="#FFFFFF" stroke="#0E8A16" stroke-width="2" />
+    <rect width="280" height="30" rx="8" fill="#E8F5E9" />
+    <text x="15" y="21" class="state-header" fill="#0E8A16">ESTADO: ENTREGADA_PREPOSICIONADA</text>
+    <text x="15" y="50" class="state-body">- Descargada en Acopio vía Wi-Fi 6 seguro.</text>
+    <text x="15" y="70" class="state-body">- Misión y No-Fly zones en tableta GCS.</text>
+    <text x="15" y="90" class="state-body">- Autopiloto UAS precargado offline.</text>
+    <text x="15" y="110" class="state-body">- Cuadrilla parte a la vereda remota.</text>
+  </g>
+
+  <!-- FLECHA: ENTREGADA -> EN VUELO -->
+  <path d="M 900 440 L 760 520" fill="none" stroke="#FF9900" stroke-width="2" marker-end="url(#arr-orange)" />
+  <rect x="785" y="465" width="85" height="18" fill="#F8F9FA" rx="4" />
+  <text x="827" y="478" class="edge-label" fill="#FF9900">Despegue en lote</text>
+
+  <!-- ESTADO 5: EN VUELO -->
+  <g transform="translate(540, 520)" filter="url(#card-shadow)">
+    <rect width="280" height="120" rx="8" fill="#FFFFFF" stroke="#FF9900" stroke-width="2" />
+    <rect width="280" height="30" rx="8" fill="#FFF8E1" />
+    <text x="15" y="21" class="state-header" fill="#FF9900">ESTADO: EN_VUELO</text>
+    <text x="15" y="50" class="state-body">- Aspersión autónoma en lote delimitado.</text>
+    <text x="15" y="70" class="state-body">- Sin red celular en vereda: nominal.</text>
+    <text x="15" y="90" class="state-body">- Corte automático de válvula en No-Fly.</text>
+    <text x="15" y="110" class="state-body">- Logs de vuelo y spray en buffer flash.</text>
+  </g>
+
+  <!-- ERROR 4: ABORTO EMERGENCIA -->
+  <path d="M 680 640 L 680 700" fill="none" stroke="#B60205" stroke-width="2" marker-end="url(#arr-red)" />
+  <rect x="635" y="658" width="90" height="18" fill="#F8F9FA" rx="4" />
+  <text x="680" y="671" class="edge-label" fill="#B60205">Falla / Batería</text>
+
+  <g transform="translate(540, 700)" filter="url(#card-shadow)">
+    <rect width="280" height="95" rx="8" fill="#FDE8E8" stroke="#B60205" stroke-width="2" />
+    <rect width="280" height="24" rx="8" fill="#FBD5D5" />
+    <text x="12" y="17" class="state-header" fill="#9C1A1A">ABORTO_EMERGENCIA_RTH</text>
+    <text x="12" y="40" class="state-body-err">- Falla UAS, colisión o viento súbito.</text>
+    <text x="12" y="58" class="state-body-err">- Failsafe ejecuta Retorno al Hogar (RTH).</text>
+    <text x="12" y="76" class="state-body-err">- Caso retenido para informe técnico.</text>
+  </g>
+
+  <!-- FLECHA: EN VUELO -> VOLADA REGISTRO PENDIENTE -->
+  <path d="M 820 580 L 920 580" fill="none" stroke="#FF9900" stroke-width="2" marker-end="url(#arr-orange)" />
+  <rect x="830" y="565" width="80" height="18" fill="#F8F9FA" rx="4" />
+  <text x="870" y="578" class="edge-label" fill="#FF9900">Aterrizaje</text>
+
+  <!-- ESTADO 6: VOLADA REGISTRO PENDIENTE -->
+  <g transform="translate(920, 520)" filter="url(#card-shadow)">
+    <rect width="280" height="120" rx="8" fill="#FFFFFF" stroke="#FF9900" stroke-width="2" />
+    <rect width="280" height="30" rx="8" fill="#FFF8E1" />
+    <text x="15" y="21" class="state-header" fill="#FF9900">VOLADA_REGISTRO_PENDIENTE</text>
+    <text x="15" y="50" class="state-body">- Misión física concluida en la parcela.</text>
+    <text x="15" y="70" class="state-body">- Sin cobertura: log en buffer GCS (24h).</text>
+    <text x="15" y="90" class="state-body">- Prohibido cerrar orden sin bitácora.</text>
+    <text x="15" y="110" class="state-body">- Retorno a base para sincronización.</text>
+  </g>
+
+  <!-- ERROR 5: ERROR INTEGRIDAD REGISTRO -->
+  <path d="M 1060 640 L 1060 700" fill="none" stroke="#FBCA04" stroke-width="2" marker-end="url(#arr-gold)" />
+  <rect x="1010" y="658" width="100" height="18" fill="#F8F9FA" rx="4" />
+  <text x="1060" y="671" class="edge-label" fill="#856404">Hash inválido</text>
+
+  <g transform="translate(920, 700)" filter="url(#card-shadow)">
+    <rect width="280" height="95" rx="8" fill="#FFF3CD" stroke="#FBCA04" stroke-width="2" />
+    <rect width="280" height="24" rx="8" fill="#FFEBAA" />
+    <text x="12" y="17" class="state-header" fill="#856404">ERROR_INTEGRIDAD_REGISTRO</text>
+    <text x="12" y="40" class="state-body-warn">- Discrepancia en checksum SHA-256.</text>
+    <text x="12" y="58" class="state-body-warn">- Archivo corrupto durante transmisión.</text>
+    <text x="12" y="76" class="state-body-warn">- Activa volcado físico vía MicroSD/USB.</text>
+  </g>
+
+  <!-- FLECHA: VOLADA PENDIENTE -> VOLADA REGISTRO PERSISTIDO -->
+  <path d="M 1200 580 L 1300 580" fill="none" stroke="#0E8A16" stroke-width="2" marker-end="url(#arr-green)" />
+  <rect x="1210" y="565" width="80" height="18" fill="#F8F9FA" rx="4" />
+  <text x="1250" y="578" class="edge-label" fill="#0E8A16">Sync Acopio</text>
+
+  <!-- ESTADO 7: VOLADA REGISTRO PERSISTIDO -->
+  <g transform="translate(1300, 520)" filter="url(#card-shadow)">
+    <rect width="280" height="120" rx="8" fill="#FFFFFF" stroke="#0E8A16" stroke-width="2" />
+    <rect width="280" height="30" rx="8" fill="#E8F5E9" />
+    <text x="15" y="21" class="state-header" fill="#0E8A16">VOLADA_REGISTRO_PERSISTIDO</text>
+    <text x="15" y="50" class="state-body">- Subida por HTTPS / S3 Pre-signed URL.</text>
+    <text x="15" y="70" class="state-body">- Validación criptográfica hash SHA-256.</text>
+    <text x="15" y="90" class="state-body">- Volumen y telemetría en DynamoDB.</text>
+    <text x="15" y="110" class="state-body">- Habilita fase de verificación (S4).</text>
+  </g>
+
+
+  <!-- ================= FILA 3: VERIFICACION POST-FUMIGACION Y CIERRE ================= -->
+
+  <!-- FLECHA: REGISTRO PERSISTIDO -> VERIFICACION PENDIENTE -->
+  <path d="M 1440 640 L 1440 730" fill="none" stroke="#1D76DB" stroke-width="2" marker-end="url(#arr-blue)" />
+  <rect x="1390" y="675" width="100" height="18" fill="#F8F9FA" rx="4" />
+  <text x="1440" y="688" class="edge-label" fill="#1D76DB">Espera 7-10 días</text>
+
+  <!-- ESTADO 8: VERIFICACION PENDIENTE -->
+  <g transform="translate(1300, 730)" filter="url(#card-shadow)">
+    <rect width="280" height="120" rx="8" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
+    <rect width="280" height="30" rx="8" fill="#E8F0FE" />
+    <text x="15" y="21" class="state-header" fill="#1D76DB">ESTADO: VERIFICACION_PENDIENTE</text>
+    <text x="15" y="50" class="state-body">- Ventana biológica de absorción foliar.</text>
+    <text x="15" y="70" class="state-body">- Programa vuelo fotográfico (Servicio 4).</text>
+    <text x="15" y="90" class="state-body">- Si la foto no llega: caso sigue ABIERTO.</text>
+    <text x="15" y="110" class="state-body">- Alerta automática a los 10 días.</text>
+  </g>
+
+  <!-- ERROR 6: EXPIRADA VENTANA -->
+  <path d="M 1580 790 L 1650 790" fill="none" stroke="#FBCA04" stroke-width="2" marker-end="url(#arr-gold)" />
+  <text x="1615" y="780" class="edge-label" fill="#856404">&gt; 15 días</text>
+
+  <g transform="translate(1650, 745)" filter="url(#card-shadow)">
+    <rect width="240" height="90" rx="8" fill="#FFF3CD" stroke="#FBCA04" stroke-width="2" />
+    <rect width="240" height="24" rx="8" fill="#FFEBAA" />
+    <text x="12" y="17" class="state-header" fill="#856404">EXPIRADA_VENTANA</text>
+    <text x="12" y="42" class="state-body-warn">- Superados 15 días sin vuelo S4.</text>
+    <text x="12" y="60" class="state-body-warn">- Alarma automática en CloudWatch.</text>
+    <text x="12" y="78" class="state-body-warn">- Escalamiento a jefe agronómico.</text>
+  </g>
+
+  <!-- FLECHA: VERIFICACION PENDIENTE -> DECISION VERIFICACION -->
+  <path d="M 1440 850 L 1440 920" fill="none" stroke="#FF9900" stroke-width="2" marker-end="url(#arr-orange)" />
+  <rect x="1395" y="875" width="90" height="18" fill="#F8F9FA" rx="4" />
+  <text x="1440" y="888" class="edge-label" fill="#FF9900">Vuelo S4 foto</text>
+
+  <!-- DECISION 3: EVALUACION S4 POST-TRATAMIENTO -->
+  <g transform="translate(1290, 920)">
+    <polygon points="150,0 300,75 150,150 0,75" fill="#FFF8E1" stroke="#FF9900" stroke-width="3" filter="url(#card-shadow)" />
+    <text x="150" y="48" class="gate-title" fill="#232F3E">Evaluación Post-Tratamiento (S4)</text>
+    <text x="150" y="66" class="gate-title" fill="#FF9900">¿Foco Erradicado/Contenido?</text>
+    <text x="150" y="86" class="gate-desc">Inferencia S3 -&gt; Rekognition</text>
+    <text x="150" y="102" class="gate-desc">+ Confirmación de Agrónomo FNC</text>
+  </g>
+
+  <!-- ERROR 7: FALLO VERIFICACION REINSPECCION -->
+  <path d="M 1590 995 L 1650 995" fill="none" stroke="#B60205" stroke-width="2" marker-end="url(#arr-red)" />
+  <text x="1620" y="985" class="edge-label" fill="#B60205">Plaga activa</text>
+
+  <g transform="translate(1650, 950)" filter="url(#card-shadow)">
+    <rect width="250" height="95" rx="8" fill="#FDE8E8" stroke="#B60205" stroke-width="2" />
+    <rect width="250" height="24" rx="8" fill="#FBD5D5" />
+    <text x="12" y="17" class="state-header" fill="#9C1A1A">VERIFICACION_FALLIDA</text>
+    <text x="12" y="40" class="state-body-err">- Plaga persiste o daño foliar alto.</text>
+    <text x="12" y="58" class="state-body-err">- Agrónomo rechaza cierre de orden.</text>
+    <text x="12" y="76" class="state-body-err">- Genera nuevo expediente fitosanitario.</text>
+  </g>
+
+  <!-- FLECHA: DECISION VERIFICACION -> VERIFICADA -->
+  <path d="M 1290 995 L 1190 995" fill="none" stroke="#0E8A16" stroke-width="2" marker-end="url(#arr-green)" />
+  <rect x="1200" y="980" width="80" height="18" fill="#F8F9FA" rx="4" />
+  <text x="1240" y="993" class="edge-label" fill="#0E8A16">Foco erradicado</text>
+
+  <!-- ESTADO 9: VERIFICADA -->
+  <g transform="translate(920, 935)" filter="url(#card-shadow)">
+    <rect width="270" height="120" rx="8" fill="#FFFFFF" stroke="#0E8A16" stroke-width="2" />
+    <rect width="270" height="30" rx="8" fill="#E8F5E9" />
+    <text x="15" y="21" class="state-header" fill="#0E8A16">ESTADO: VERIFICADA</text>
+    <text x="15" y="50" class="state-body">- Evidencia fotográfica aprobada.</text>
+    <text x="15" y="70" class="state-body">- Índice de infección bajo umbral crítico.</text>
+    <text x="15" y="90" class="state-body">- Dictamen favorable del agrónomo.</text>
+    <text x="15" y="110" class="state-body">- Lista para sellado inmutable WORM.</text>
+  </g>
+
+  <!-- FLECHA: VERIFICADA -> CERRADA -->
+  <path d="M 920 995 L 820 995" fill="none" stroke="#0E8A16" stroke-width="3" marker-end="url(#arr-green)" />
+  <rect x="830" y="980" width="80" height="18" fill="#F8F9FA" rx="4" />
+  <text x="870" y="993" class="edge-label" fill="#0E8A16">Sellado WORM</text>
+
+  <!-- ESTADO 10: CERRADA (FINAL TERMINAL) -->
+  <g transform="translate(480, 925)" filter="url(#card-shadow)">
+    <rect width="340" height="140" rx="8" fill="#C8E6C9" stroke="#0E8A16" stroke-width="3" />
+    <rect width="340" height="32" rx="8" fill="#A5D6A7" />
+    <text x="15" y="22" class="state-header" fill="#1B5E20">ESTADO FINAL TERMINAL: CERRADA</text>
+    <text x="15" y="54" class="state-body-closed">- Expediente digital íntegro sellado de por vida.</text>
+    <text x="15" y="74" class="state-body-closed">- Contiene: delimitación, firma humana MFA,</text>
+    <text x="15" y="92" class="state-body-closed">  bitácora de vuelo con SHA-256 y foto de cierre.</text>
+    <text x="15" y="110" class="state-body-closed">- Inmutabilidad WORM en S3 Object Lock (5 años).</text>
+    <text x="15" y="128" class="state-body-closed">- Auditoría legal y ambiental completa para FNC e ICA.</text>
+  </g>
+
+</svg>
