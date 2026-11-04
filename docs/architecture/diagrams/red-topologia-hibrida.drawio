@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" compressed="false">
+  <diagram id="red-hybrid-topology-diagram" name="Topologia Hibrida y Tablas de Enrutamiento">
+    <mxGraphModel dx="2000" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2400" pageHeight="1500" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TITULO Y SUBTITULO -->
+        <mxCell id="th-title" value="AromaPacífico - Topología de Interconexión Híbrida y Enrutamiento (Hub-and-Spoke con AWS Transit Gateway)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=22;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="350" y="30" width="1700" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="th-subtitle" value="Tablas de Rutas TGW, Túneles IPsec VPN Duales con BGP, Aislamiento de VLAN de Visitantes y Políticas de Inspección Perimetral" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
+          <mxGeometry x="350" y="70" width="1700" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- COLUMNA IZQUIERDA: CENTROS DE ACOPIO Y ENRUTAMIENTO LOCAL -->
+        <mxCell id="lane-acopios" value="CENTROS DE ACOPIO (ON-PREMISES) - SEGMENTACIÓN VLAN Y ENLACE WAN (100 Mbps)" style="swimlane;startSize=35;horizontal=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="40" y="120" width="600" height="1320" as="geometry" />
+        </mxCell>
+
+        <!-- Matriz de VLANs -->
+        <mxCell id="card-vlan-policy" value="POLÍTICA DE SEGMENTACIÓN 802.1Q (CAUCA, HUILA, TOLIMA)&#xa;&#xa;VLAN ID | Nombre       | Subred Cauca   | Enrutamiento Permitido&#xa;---------------------------------------------------------------&#xa;VLAN 10 | Gerencia     | 10.41.1.0/24   | WAN Internet, Servidores, Cloud&#xa;VLAN 20 | Soporte      | 10.41.2.0/24   | WAN Internet, Gestión de Red&#xa;VLAN 30 | Logística    | 10.41.3.0/24   | Servidores, App Cloud Pesaje&#xa;VLAN 40 | Transporte   | 10.41.4.0/24   | Solo API Recepción Sacos&#xa;VLAN 50 | Visitantes   | 10.41.5.0/24   | AISLADA: Solo Salida Internet&#xa;VLAN 60 | Servidores   | 10.41.10.0/24  | Impresión etiquetas, DNS local&#xa;VLAN 70 | Borde WAN    | 10.41.20.0/24  | Terminación IPsec VPN con AWS&#xa;&#xa;REGLA DE AISLAMIENTO INQUEBRANTABLE:&#xa;VLAN 50 (Visitantes) NO tiene ruta hacia Logística (VLAN 30),&#xa;ni Gerencia (VLAN 10), ni servidores locales, ni túneles hacia la nube." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-acopios">
+          <mxGeometry x="20" y="55" width="560" height="300" as="geometry" />
+        </mxCell>
+
+        <!-- Equipos Fisicos por Centro -->
+        <mxCell id="card-hw-acopio" value="EQUIPAMIENTO DE RED POR CENTRO DE ACOPIO (PATRÓN ÚNICO)&#xa;&#xa;1. Firewall de Borde: FortiGate 40F / pfSense Plus&#xa;   - 2 Túneles IPsec activos/pasivos hacia AWS TGW.&#xa;   - BGP Dinámico con ASN propio por departamento:&#xa;     Cauca: ASN 65041 | Huila: ASN 65042 | Tolima: ASN 65043.&#xa;   - QoS perimetral: 2 Mbps bajada / 0,5 Mbps subida por cliente.&#xa;   - Bloqueo de Capa 7 contra tráfico recreativo (P2P, streaming).&#xa;&#xa;2. Switch Gestionado PoE+ de 24 Puertos (Aruba / UniFi)&#xa;   - Trunk 802.1Q con las 7 VLANs etiquetadas hacia APs y puestos.&#xa;&#xa;3. Access Points Wi-Fi 6 (UniFi U6-Pro / Aruba AP22)&#xa;   - SSIDs dedicados mapeados a cada VLAN (WPA3 Enterprise)." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-acopios">
+          <mxGeometry x="20" y="375" width="560" height="250" as="geometry" />
+        </mxCell>
+
+        <!-- Tabla de Rutas Local Acopio -->
+        <mxCell id="card-rt-acopio" value="TABLA DE ENRUTAMIENTO LOCAL (ROUTER / FIREWALL ACOPIO CAUCA)&#xa;&#xa;Destino           | Próximo Salto (Next Hop) | Interfaz / Comentario&#xa;----------------------------------------------------------------&#xa;10.41.0.0/16      | Local                    | Inter-VLAN Routing local&#xa;10.70.0.0/16 (Prod)| Túnel VPN 1 / Túnel VPN 2 | IPsec hacia AWS Transit Gateway&#xa;10.80.0.0/16 (Hub) | Túnel VPN 1 / Túnel VPN 2 | IPsec hacia Inspection VPC&#xa;0.0.0.0/0         | WAN ISP (100 Mbps)       | Salida Internet directa (NAT)&#xa;&#xa;Nota de Huila y Tolima: Sustituir 10.41.0.0/16 por 10.42 o 10.43." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-acopios">
+          <mxGeometry x="20" y="645" width="560" height="200" as="geometry" />
+        </mxCell>
+
+        <!-- WAN y Enlaces Submarinos -->
+        <mxCell id="card-wan-subsea" value="ENLACE WAN Y LATENCIA HACIA NUBE (COLOMBIA -&gt; US-EAST-1)&#xa;&#xa;- Salida Internacional: Cables submarinos del Caribe (Miami -&gt; Virginia).&#xa;- Latencia de Tránsito p50: ~58 ms desde Cali/Popayán hasta us-east-1.&#xa;- Ancho de Banda WAN: 100 Mbps simétricos garantizados por centro.&#xa;- Capacidad de Recepción: Hasta 400 sacos/día (menos de 20 Kbps promedio).&#xa;- Resiliencia: Failover automático entre túnel IPsec primario y secundario." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-acopios">
+          <mxGeometry x="20" y="865" width="560" height="190" as="geometry" />
+        </mxCell>
+
+        <!-- COLUMNA CENTRAL: AWS TRANSIT GATEWAY Y TABLAS DE RUTAS NUBE -->
+        <mxCell id="lane-tgw-hub" value="AWS TRANSIT GATEWAY HUB (AromaPacifico-Network) - ASN 64512" style="swimlane;startSize=35;horizontal=1;fillColor=#FFFFFF;strokeColor=#232F3E;strokeWidth=2.5;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="680" y="120" width="700" height="1320" as="geometry" />
+        </mxCell>
+
+        <mxCell id="card-tgw-engine" value="NÚCLEO TGW (AWS TRANSIT GATEWAY)&#xa;Enrutador Centralizado Multi-Cuenta y Multi-VPC&#xa;&#xa;- Soporta hasta 50 Gbps de rendimiento por VPC Attachment.&#xa;- Elimina la sobrecarga de conexiones punto a punto en malla completa.&#xa;- Opera con 3 Tablas de Rutas Segregadas para evitar fugas de tráfico." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FF9900;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="lane-tgw-hub">
+          <mxGeometry x="25" y="55" width="650" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- TGW RT 1: On-Premises Route Table -->
+        <mxCell id="card-tgw-rt-onprem" value="1. TGW ROUTE TABLE: ON-PREMISES (Asociada a VPNs de Acopio)&#xa;&#xa;Ruta CIDR Destino  | Attachment Próximo Salto | Propósito&#xa;----------------------------------------------------------------&#xa;10.70.0.0/16 (Prod)| vpc-attach-prod          | Tráfico hacia Backend Producción&#xa;10.80.0.0/16 (Hub) | vpc-attach-hub           | Tráfico hacia Servicios Centrales&#xa;10.60.0.0/16 (Test)| Blackhole (Denegado)     | Acopios NO acceden a ambiente Test&#xa;10.50.0.0/16 (Dev) | Blackhole (Denegado)     | Acopios NO acceden a ambiente Dev" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="lane-tgw-hub">
+          <mxGeometry x="25" y="195" width="650" height="170" as="geometry" />
+        </mxCell>
+
+        <!-- TGW RT 2: Production Spoke Route Table -->
+        <mxCell id="card-tgw-rt-prod" value="2. TGW ROUTE TABLE: PRODUCCIÓN (Asociada a VPC Producción)&#xa;&#xa;Ruta CIDR Destino  | Attachment Próximo Salto | Propósito&#xa;----------------------------------------------------------------&#xa;10.41.0.0/16       | vpn-attach-cauca         | Retorno hacia Acopio Cauca&#xa;10.42.0.0/16       | vpn-attach-huila         | Retorno hacia Acopio Huila&#xa;10.43.0.0/16       | vpn-attach-tolima        | Retorno hacia Acopio Tolima&#xa;10.80.0.0/16 (Hub) | vpc-attach-hub           | Salida a inspección y endpoints&#xa;10.50.0.0/16 (Dev) | Blackhole (Denegado)     | Producción aislada de Desarrollo&#xa;10.60.0.0/16 (Test)| Blackhole (Denegado)     | Producción aislada de Pruebas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FF9900;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="lane-tgw-hub">
+          <mxGeometry x="25" y="385" width="650" height="190" as="geometry" />
+        </mxCell>
+
+        <!-- TGW RT 3: Non-Production Route Table -->
+        <mxCell id="card-tgw-rt-nonprod" value="3. TGW ROUTE TABLE: NO-PRODUCCIÓN (Asociada a VPCs Dev y Test)&#xa;&#xa;Ruta CIDR Destino  | Attachment Próximo Salto | Propósito&#xa;----------------------------------------------------------------&#xa;10.80.0.0/16 (Hub) | vpc-attach-hub           | Endpoints compartidos y DNS&#xa;10.70.0.0/16 (Prod)| Blackhole (Denegado)     | Dev/Test NO acceden a Producción&#xa;10.4X.0.0/16 (Acop)| Blackhole (Denegado)     | Dev/Test NO tocan Acopios físicos&#xa;&#xa;Regla de Seguridad: Los entornos de prueba no pueden enviar paquetes a los&#xa;firewalls ni a las impresoras de etiquetas de los centros de acopio reales." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="lane-tgw-hub">
+          <mxGeometry x="25" y="595" width="650" height="190" as="geometry" />
+        </mxCell>
+
+        <!-- VPC Hub Inspection & PrivateLink -->
+        <mxCell id="card-hub-vpc-arch" value="VPC HUB DE INSPECCIÓN Y SERVICIOS COMPARTIDOS (10.80.0.0/16)&#xa;&#xa;- AWS Network Firewall para inspección Stateful de paquetes entrantes/salientes.&#xa;- PrivateLink Interface Endpoints Compartidos para servicios AWS (KMS, CloudWatch, SSM).&#xa;- Amazon Route 53 Inbound/Outbound Resolvers para resolución de nombres split-horizon.&#xa;- Ahorro FinOps: 1 solo par de Interface Endpoints compartido por todas las cuentas." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="lane-tgw-hub">
+          <mxGeometry x="25" y="805" width="650" height="160" as="geometry" />
+        </mxCell>
+
+        <!-- COLUMNA DERECHA: VPC PRODUCCIÓN, ENDPOINTS Y SALIDAS -->
+        <mxCell id="lane-vpc-prod" value="CUENTA PRODUCCIÓN (AromaPacifico-Prod) - VPC PRODUCCIÓN (10.70.0.0/16)" style="swimlane;startSize=35;horizontal=1;fillColor=#FFFFFF;strokeColor=#FF9900;strokeWidth=2.5;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="1420" y="120" width="940" height="1320" as="geometry" />
+        </mxCell>
+
+        <!-- Tablas de Rutas de Subredes en VPC Producción -->
+        <mxCell id="card-rt-prod-public" value="1. TABLA DE RUTAS: SUBREDES CONSULTA PÚBLICA (10.70.50.0/24 y 10.70.150.0/24)&#xa;&#xa;Destino           | Próximo Salto (Target)   | Propósito&#xa;----------------------------------------------------------------&#xa;10.70.0.0/16      | Local                    | Comunicación intra-VPC&#xa;0.0.0.0/0         | Internet Gateway (igw)   | Salida directa para compradores web&#xa;&#xa;Seguridad: Protegido por AWS WAFv2 con reglas de rate-limiting (30 req/min)." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FBCA04;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-vpc-prod">
+          <mxGeometry x="25" y="55" width="890" height="150" as="geometry" />
+        </mxCell>
+
+        <mxCell id="card-rt-prod-private" value="2. TABLA DE RUTAS: SUBREDES PRIVADAS (Ingesta, Drones, Aplicación, Datos)&#xa;&#xa;Destino           | Próximo Salto (Target)   | Propósito&#xa;----------------------------------------------------------------&#xa;10.70.0.0/16      | Local                    | Tráfico interno de la aplicación&#xa;10.41.0.0/16      | Transit Gateway (tgw)    | Ruta hacia Acopio Cauca&#xa;10.42.0.0/16      | Transit Gateway (tgw)    | Ruta hacia Acopio Huila&#xa;10.43.0.0/16      | Transit Gateway (tgw)    | Ruta hacia Acopio Tolima&#xa;10.80.0.0/16      | Transit Gateway (tgw)    | Ruta hacia VPC Hub e inspección&#xa;pl-s3-endpoint    | vpce-gateway-s3          | Tráfico directo S3 ($0 USD/GB)&#xa;pl-dynamo-endpoint| vpce-gateway-dynamodb    | Tráfico directo DynamoDB ($0 USD/GB)&#xa;0.0.0.0/0         | Transit Gateway (tgw)    | Salida a internet inspeccionada" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-vpc-prod">
+          <mxGeometry x="25" y="225" width="890" height="230" as="geometry" />
+        </mxCell>
+
+        <mxCell id="card-nacl-matrix" value="MATRIZ DE NETWORK ACLs (DEFENSA EN PROFUNDIDAD STATELESS)&#xa;&#xa;Subred            | Regla Entrada Permitida      | Regla Salida Permitida&#xa;----------------------------------------------------------------&#xa;Ingesta Telemetría| TCP 443, 8883 desde IoT      | Efímeros (1024-65535) a Backend&#xa;Ingesta Drones    | HTTPS 443 desde Acopios/S3   | TCP 443 hacia Rekognition / S3&#xa;Aplicación        | TCP 8080/443 desde Ingesta   | TCP 443 hacia Datos y TGW&#xa;Capa de Datos     | TCP 443 hacia Endpoints DB   | Solo retorno autorizado&#xa;Consulta Pública  | HTTP 80 / HTTPS 443 público  | TCP 8080 hacia Subred Aplicación&#xa;Administración    | SSH/HTTPS solo desde Red Hub | Denegado hacia internet público" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-vpc-prod">
+          <mxGeometry x="25" y="475" width="890" height="200" as="geometry" />
+        </mxCell>
+
+        <mxCell id="card-security-groups" value="SECURITY GROUPS STATEFUL POR CAPA Y MÍNIMO PRIVILEGIO&#xa;&#xa;- sg-alb-public: Ingress 443/80 desde 0.0.0.0/0 | Egress hacia sg-app-backend en puerto 8080.&#xa;- sg-app-backend: Ingress 8080 solo desde sg-alb-public | Egress hacia sg-data en puerto 443.&#xa;- sg-iot-lambda: Ingress denegado | Egress solo hacia S3/DynamoDB Gateway Endpoints.&#xa;- sg-dron-inference: Ingress denegado | Egress solo hacia Amazon Rekognition vía Endpoint." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-vpc-prod">
+          <mxGeometry x="25" y="695" width="890" height="150" as="geometry" />
+        </mxCell>
+
+        <mxCell id="card-contingency-dr" value="CONTINGENCIA MULTIRREGIÓN EN US-EAST-2 (OHIO) - RTO 4H / RPO 15 MIN&#xa;&#xa;- VPC Contingencia: 10.71.0.0/16 en us-east-2 (sin colisión con us-east-1 ni acopios).&#xa;- DynamoDB Global Tables: Replicación asíncrona multirregión con RPO &lt; 1 segundo.&#xa;- Route 53 DNS Failover: Redirección automática de la Consulta Pública del Saco.&#xa;- Infraestructura en reposo: $0 USD en cómputo (escalado a cero hasta activación)." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="lane-vpc-prod">
+          <mxGeometry x="25" y="865" width="890" height="150" as="geometry" />
+        </mxCell>
+
+        <!-- CONECTORES GENERALES DE TOPOLOGIA -->
+        <mxCell id="conn-th-acopio-tgw" value="Túneles IPsec VPN (10.41 / 10.42 / 10.43)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#D93F0B;strokeWidth=3;fontSize=12;fontColor=#D93F0B;" edge="1" source="card-rt-acopio" target="card-tgw-rt-onprem" parent="1" />
+        <mxCell id="conn-th-tgw-prod" value="TGW Attachment (10.70.0.0/16)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#FF9900;strokeWidth=3;fontSize=12;fontColor=#232F3E;" edge="1" source="card-tgw-rt-prod" target="card-rt-prod-private" parent="1" />
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
+
