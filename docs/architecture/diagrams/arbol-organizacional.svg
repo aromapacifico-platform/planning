@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 950" width="100%" height="100%">
+  <defs>
+    <style>
+      .main-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 22px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
+      .sub-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #5A6B7C; text-anchor: middle; }
+      .root-header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 15px; font-weight: bold; fill: #FFFFFF; text-anchor: middle; }
+      .root-id { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #FF9900; text-anchor: middle; }
+      .root-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #EAEDED; text-anchor: middle; }
+      .ou-header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
+      .ou-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #555555; text-anchor: middle; }
+      .card-header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
+      .card-id { font-family: "SFMono-Regular", Consolas, Menlo, monospace; font-size: 11px; font-weight: bold; fill: #555555; }
+      .card-item { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
+      .card-budget { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #0073BB; }
+      .inv-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
+      .inv-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
+      .conn-line { stroke: #545B64; stroke-width: 2; fill: none; }
+      .conn-line-main { stroke: #232F3E; stroke-width: 2.5; fill: none; }
+    </style>
+    <filter id="box-shadow" x="-2%" y="-2%" width="104%" height="106%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <!-- FONDO -->
+  <rect width="1500" height="950" fill="#FFFFFF" />
+
+  <!-- ENCABEZADO -->
+  <text x="750" y="45" class="main-title">AromaPacífico - Árbol Organizacional de AWS Organizations</text>
+  <text x="750" y="72" class="sub-title">Jerarquía de Unidades Organizativas (OUs), Cuentas Aisladas y Segregación de Responsabilidades para el Piloto 2026</text>
+
+  <!-- LINEAS CONECTORAS PRINCIPALES -->
+  <!-- De Raiz a OUs -->
+  <path d="M 750 260 L 750 290 L 355 290 L 355 320" class="conn-line-main" />
+  <path d="M 750 260 L 750 290 L 1050 290 L 1050 320" class="conn-line-main" />
+
+  <!-- De Core-OU a cuentas Core -->
+  <path d="M 355 400 L 355 420 L 200 420 L 200 440" class="conn-line" />
+  <path d="M 355 400 L 355 420 L 510 420 L 510 440" class="conn-line" />
+
+  <!-- De Workloads-OU a cuentas Workloads -->
+  <path d="M 1050 400 L 1050 420 L 820 420 L 820 440" class="conn-line" />
+  <path d="M 1050 400 L 1050 440" class="conn-line" />
+  <path d="M 1050 400 L 1050 420 L 1277 420 L 1277 440" class="conn-line" />
+
+  <!-- CUENTA RAIZ / MANAGEMENT ACCOUNT -->
+  <g transform="translate(430, 110)" filter="url(#box-shadow)">
+    <rect width="640" height="150" rx="8" fill="#232F3E" stroke="#FF9900" stroke-width="3" />
+    <text x="320" y="32" class="root-header">Cuenta Raíz (Management Account)</text>
+    <text x="320" y="52" class="root-id">ID Lógico: AromaPacifico-Root</text>
+    <text x="320" y="78" class="root-desc">• Facturación Consolidada y Administración de AWS Organizations</text>
+    <text x="320" y="98" class="root-desc">• Directorio Central IAM Identity Center (SSO + MFA Mandatorio)</text>
+    <text x="320" y="118" class="root-desc">• Repositorio Central de Políticas SCP y Tag Policies Raíz</text>
+    <text x="320" y="138" class="root-desc">• AWS Budgets Master y Detección de Anomalías de Costos (Sin cómputo de apps)</text>
+  </g>
+
+  <!-- OU CORE: INFRAESTRUCTURA Y SEGURIDAD -->
+  <g transform="translate(60, 320)" filter="url(#box-shadow)">
+    <rect width="590" height="80" rx="8" fill="#EAEDED" stroke="#545B64" stroke-width="2" />
+    <text x="295" y="35" class="ou-header">Unidad Organizativa: Core e Infraestructura (Core-OU)</text>
+    <text x="295" y="58" class="ou-desc">Servicios Compartidos, Conectividad de Red y Auditoría Centralizada</text>
+  </g>
+
+  <!-- CUENTA SEGURIDAD Y AUDITORIA -->
+  <g transform="translate(60, 440)" filter="url(#box-shadow)">
+    <rect width="280" height="270" rx="8" fill="#FFFFFF" stroke="#D93F0B" stroke-width="2" />
+    <rect width="280" height="34" rx="8" fill="#FFF5F5" />
+    <text x="14" y="23" class="card-header" fill="#D93F0B">Seguridad y Auditoría</text>
+    <text x="14" y="55" class="card-id">ID: AromaPacifico-Security</text>
+    <text x="14" y="80" class="card-item">• CloudTrail Org Trail Multi-Región</text>
+    <text x="14" y="103" class="card-item">• S3 Central WORM (Object Lock 5 Años)</text>
+    <text x="14" y="126" class="card-item">• Amazon GuardDuty + Security Hub</text>
+    <text x="14" y="149" class="card-item">• AWS Config Multi-Account Aggregator</text>
+    <text x="14" y="172" class="card-item">• Gestión de Llaves Maestras AWS KMS</text>
+    <text x="14" y="195" class="card-item">• Retención Probatoria Inmutable</text>
+    <line x1="14" y1="218" x2="266" y2="218" stroke="#E1E4E8" stroke-width="1" />
+    <text x="14" y="245" class="card-budget">Presupuesto: $50 USD / mes</text>
+  </g>
+
+  <!-- CUENTA RED COMPARTIDA -->
+  <g transform="translate(370, 440)" filter="url(#box-shadow)">
+    <rect width="280" height="270" rx="8" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
+    <rect width="280" height="34" rx="8" fill="#F0F7FF" />
+    <text x="14" y="23" class="card-header" fill="#1D76DB">Red Compartida</text>
+    <text x="14" y="55" class="card-id">ID: AromaPacifico-Network</text>
+    <text x="14" y="80" class="card-item">• AWS Transit Gateway Hub Central</text>
+    <text x="14" y="103" class="card-item">• Túneles VPN IPsec Centros Acopio:</text>
+    <text x="24" y="123" class="card-item">- Cauca: 10.41.0.0/16</text>
+    <text x="24" y="143" class="card-item">- Huila: 10.42.0.0/16 | Tolima: 10.43.0.0/16</text>
+    <text x="14" y="166" class="card-item">• AWS Network Firewall Inspección</text>
+    <text x="14" y="189" class="card-item">• VPC Endpoints Privados S3 y DynamoDB</text>
+    <line x1="14" y1="218" x2="266" y2="218" stroke="#E1E4E8" stroke-width="1" />
+    <text x="14" y="245" class="card-budget">Presupuesto: $120 USD / mes</text>
+  </g>
+
+  <!-- OU WORKLOADS: CARGAS DE TRABAJO -->
+  <g transform="translate(720, 320)" filter="url(#box-shadow)">
+    <rect width="660" height="80" rx="8" fill="#EAEDED" stroke="#545B64" stroke-width="2" />
+    <text x="330" y="35" class="ou-header">Unidad Organizativa: Cargas de Trabajo (Workloads-OU)</text>
+    <text x="330" y="58" class="ou-desc">Ciclo de Vida de Software, Ingesta IoT Agronómica y Trazabilidad del Grano</text>
+  </g>
+
+  <!-- CUENTA DESARROLLO -->
+  <g transform="translate(720, 440)" filter="url(#box-shadow)">
+    <rect width="200" height="270" rx="8" fill="#FFFFFF" stroke="#0E8A16" stroke-width="2" />
+    <rect width="200" height="34" rx="8" fill="#F4FBF5" />
+    <text x="12" y="23" class="card-header" fill="#0E8A16">Desarrollo</text>
+    <text x="12" y="55" class="card-id">AromaPacifico-Dev</text>
+    <text x="12" y="80" class="card-item">• Sandboxes Terraform</text>
+    <text x="12" y="103" class="card-item">• Emuladores nodos IoT</text>
+    <text x="12" y="126" class="card-item">• Prototipos Lambda</text>
+    <text x="12" y="149" class="card-item">• Sin enlace a acopios</text>
+    <text x="12" y="172" class="card-item">• Apagado fuera laboral</text>
+    <text x="12" y="195" class="card-item">• Aislamiento blast radius</text>
+    <line x1="12" y1="218" x2="188" y2="218" stroke="#E1E4E8" stroke-width="1" />
+    <text x="12" y="245" class="card-budget">Presupuesto: $50 USD</text>
+  </g>
+
+  <!-- CUENTA PRUEBAS -->
+  <g transform="translate(945, 440)" filter="url(#box-shadow)">
+    <rect width="205" height="270" rx="8" fill="#FFFFFF" stroke="#FBCA04" stroke-width="2" />
+    <rect width="205" height="34" rx="8" fill="#FEFDF5" />
+    <text x="12" y="23" class="card-header" fill="#B08800">Pruebas / Staging</text>
+    <text x="12" y="55" class="card-id">AromaPacifico-Test</text>
+    <text x="12" y="80" class="card-item">• Réplica pre-producción</text>
+    <text x="12" y="103" class="card-item">• Pipelines CI/CD</text>
+    <text x="12" y="126" class="card-item">• Drenado buffer 24h</text>
+    <text x="12" y="149" class="card-item">• Estrés consulta saco</text>
+    <text x="12" y="172" class="card-item">• Umbrales FNC</text>
+    <text x="12" y="195" class="card-item">• Validación offline drones</text>
+    <line x1="12" y1="218" x2="193" y2="218" stroke="#E1E4E8" stroke-width="1" />
+    <text x="12" y="245" class="card-budget">Presupuesto: $80 USD</text>
+  </g>
+
+  <!-- CUENTA PRODUCCION -->
+  <g transform="translate(1175, 440)" filter="url(#box-shadow)">
+    <rect width="205" height="270" rx="8" fill="#FFFFFF" stroke="#D93F0B" stroke-width="2" />
+    <rect width="205" height="34" rx="8" fill="#FFF5F5" />
+    <text x="12" y="23" class="card-header" fill="#D93F0B">Producción</text>
+    <text x="12" y="55" class="card-id">AromaPacifico-Prod</text>
+    <text x="12" y="80" class="card-item">• IoT Core (200 Fincas)</text>
+    <text x="12" y="103" class="card-item">• DynamoDB + S3</text>
+    <text x="12" y="126" class="card-item">• Inferencia Rekognition</text>
+    <text x="12" y="149" class="card-item">• App Caficultor/Drones</text>
+    <text x="12" y="172" class="card-item">• Consulta Buenaventura</text>
+    <text x="12" y="195" class="card-item">• Congelamiento 5h-18h</text>
+    <line x1="12" y1="218" x2="193" y2="218" stroke="#E1E4E8" stroke-width="1" />
+    <text x="12" y="245" class="card-budget">$180 norm / $450 pico</text>
+  </g>
+
+  <!-- PANEL DE INVARIANTES Y DIRECTIVAS -->
+  <g transform="translate(60, 740)" filter="url(#box-shadow)">
+    <rect width="1320" height="90" rx="8" fill="#F8F9FA" stroke="#232F3E" stroke-width="1" />
+    <text x="20" y="26" class="inv-title">Directivas e Invariantes de Gobernanza Organizacional:</text>
+    <text x="20" y="48" class="inv-body">1. Políticas SCP aplicadas desde la Raíz restringen regiones a us-east-1 y us-east-2, y exigen etiquetas de costeo (FincaID, DronID, AcopioID, ViajeID, Ambiente, Propietario).</text>
+    <text x="20" y="66" class="inv-body">2. Acceso federado de ingenieros exclusivo mediante IAM Identity Center con MFA mandatorio. Usuarios de campo usan Cognito y consulta pública web.</text>
+    <text x="20" y="84" class="inv-body">3. Regla mandatoria presupuestal (AWS Budgets): Avisar, nunca apagar servicios críticos de ingesta IoT de 200 fincas ni consulta del saco de 60 kg.</text>
+  </g>
+
+  <!-- PIE DE PAGINA -->
+  <text x="750" y="880" class="sub-title" font-size="12px">Federación Nacional de Cafeteros - AromaPacífico 2026 | Arquitectura de Árbol Organizacional en AWS Organizations</text>
+</svg>

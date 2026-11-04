@@ -1,0 +1,251 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1150" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 22px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; fill: #5A6B7C; text-anchor: middle; }
+      .header-box { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #232F3E; }
+      .subhead-box { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #555555; }
+      .body-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
+      .mono-text { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; font-size: 12px; fill: #111111; }
+      .root-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #FFFFFF; text-anchor: middle; }
+      .root-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #FF9900; text-anchor: middle; }
+      .root-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #EAEDED; text-anchor: middle; }
+      .ou-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #232F3E; }
+      .acc-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
+      .badge-tag { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: bold; fill: #FFFFFF; }
+    </style>
+    <filter id="shadow" x="-3%" y="-3%" width="106%" height="106%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <!-- FONDO GENERAL -->
+  <rect width="1600" height="1150" fill="#F8F9FA" />
+
+  <!-- TITULO Y SUBTITULO -->
+  <text x="800" y="45" class="title">AromaPacífico - Arquitectura de Landing Zone en AWS Organizations</text>
+  <text x="800" y="75" class="subtitle">Estructura Jerárquica de Cuentas, Políticas de Control de Servicio (SCP), Identidad Centralizada, Etiquetas FinOps y Presupuestos</text>
+
+  <!-- ==================== COLUMNA IZQUIERDA: POLÍTICAS SCP Y ETIQUETAS ==================== -->
+  <!-- SCPs -->
+  <g transform="translate(40, 110)" filter="url(#shadow)">
+    <rect width="360" height="300" rx="8" fill="#FFFFFF" stroke="#D93F0B" stroke-width="2" />
+    <rect width="360" height="35" rx="8" fill="#FFF5F5" />
+    <text x="15" y="24" class="header-box" fill="#D93F0B">POLÍTICAS SCP (Service Control Policies)</text>
+    <text x="15" y="55" class="subhead-box">Aplicadas desde la Raíz de Organizations</text>
+
+    <text x="15" y="80" class="header-box" font-size="12px">1. deny-unapproved-regions</text>
+    <text x="25" y="98" class="body-text">Restringe despliegues a us-east-1 y us-east-2.</text>
+    <text x="25" y="114" class="body-text">Exención: IAM, Route53, CloudFront.</text>
+
+    <text x="15" y="140" class="header-box" font-size="12px">2. protect-audit-and-security</text>
+    <text x="25" y="158" class="body-text">Bloquea borrado/alteración de CloudTrail, Config,</text>
+    <text x="25" y="174" class="body-text">GuardDuty y Object Lock en S3 (5 años WORM).</text>
+
+    <text x="15" y="200" class="header-box" font-size="12px">3. deny-untagged-workload-resources</text>
+    <text x="25" y="218" class="body-text">Exige tags de costeo antes de aprovisionar.</text>
+
+    <text x="15" y="244" class="header-box" font-size="12px">4. deny-unencrypted-and-public-storage</text>
+    <text x="25" y="262" class="body-text">Exige cifrado KMS/AES-256 e impide buckets S3</text>
+    <text x="25" y="278" class="body-text">con acceso público en toda la organización.</text>
+  </g>
+
+  <!-- TAGGING POLICY -->
+  <g transform="translate(40, 430)" filter="url(#shadow)">
+    <rect width="360" height="310" rx="8" fill="#FFFFFF" stroke="#0E8A16" stroke-width="2" />
+    <rect width="360" height="35" rx="8" fill="#F4FBF5" />
+    <text x="15" y="24" class="header-box" fill="#0E8A16">TAXONOMÍA DE ETIQUETAS FINOPS (Tag Policy)</text>
+    <text x="15" y="55" class="subhead-box">Cinco Dimensiones Mandatorias para Costeo</text>
+
+    <text x="15" y="80" class="mono-text">FincaID: FINCA-001 ... FINCA-200 | GLOBAL</text>
+    <text x="15" y="105" class="mono-text">DronID: DRON-CAUCA-01 ... | NO-APLICA</text>
+    <text x="15" y="130" class="mono-text">AcopioID: ACOPIO-CAUCA | HUILA | TOLIMA</text>
+    <text x="15" y="155" class="mono-text">ViajeID: VIAJE-XXXX | NO-APLICA</text>
+    <text x="15" y="180" class="mono-text">Ambiente: producción | pruebas | desarrollo</text>
+    <text x="15" y="205" class="mono-text">Propietario: devops-fnc | seguridad-cloud</text>
+    <text x="15" y="230" class="mono-text">Proyecto: AromaPacífico (Constante)</text>
+
+    <line x1="15" y1="245" x2="345" y2="245" stroke="#E1E4E8" stroke-width="1" />
+    <text x="15" y="268" class="body-text">Permite repartir el 100% de los costos en</text>
+    <text x="15" y="286" class="body-text">AWS Cost Explorer por lote, vehículo y finca.</text>
+  </g>
+
+  <!-- ==================== COLUMNA DERECHA: IDENTIDAD Y PRESUPUESTOS ==================== -->
+  <!-- IAM Identity Center -->
+  <g transform="translate(1200, 110)" filter="url(#shadow)">
+    <rect width="360" height="300" rx="8" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
+    <rect width="360" height="35" rx="8" fill="#F4F8FD" />
+    <text x="15" y="24" class="header-box" fill="#1D76DB">IAM IDENTITY CENTER (SSO Y ACCESO)</text>
+    <text x="15" y="55" class="subhead-box">Autenticación Federada y Mínimo Privilegio</text>
+
+    <text x="15" y="80" class="header-box" font-size="12px">1. DevOps Lead / Operador Plataforma:</text>
+    <text x="25" y="98" class="body-text">- MFA FIDO2/TOTP obligatorio.</text>
+    <text x="25" y="114" class="body-text">- Despliegues IaC en Dev/Test y aprobación en Prod.</text>
+
+    <text x="15" y="140" class="header-box" font-size="12px">2. Ingeniero de Seguridad / Auditor:</text>
+    <text x="25" y="158" class="body-text">- MFA obligatorio. Acceso de solo lectura a logs.</text>
+    <text x="25" y="174" class="body-text">- Acceso forense en Security-Audit Account.</text>
+
+    <text x="15" y="200" class="header-box" font-size="12px">3. Ingeniero de Red:</text>
+    <text x="25" y="218" class="body-text">- MFA obligatorio. Gestión de TGW y VPNs.</text>
+
+    <line x1="15" y1="235" x2="345" y2="235" stroke="#E1E4E8" stroke-width="1" />
+    <text x="15" y="258" class="body-text">Caficultores, transportadores y compradores</text>
+    <text x="15" y="276" class="body-text">usan Cognito y web pública (sin consola AWS).</text>
+  </g>
+
+  <!-- AWS Budgets -->
+  <g transform="translate(1200, 430)" filter="url(#shadow)">
+    <rect width="360" height="310" rx="8" fill="#FFFFFF" stroke="#FBCA04" stroke-width="2" />
+    <rect width="360" height="35" rx="8" fill="#FFFCF0" />
+    <text x="15" y="24" class="header-box" fill="#B08800">AWS BUDGETS Y FINOPS</text>
+    <text x="15" y="55" class="subhead-box">Asignación y Notificación Mensual por Cuenta</text>
+
+    <text x="15" y="80" class="body-text">- Seguridad y Auditoría: $50 USD / mes</text>
+    <text x="15" y="102" class="body-text">- Red Compartida: $120 USD / mes</text>
+    <text x="15" y="124" class="body-text">- Producción: $180 USD normal | $450 cosecha</text>
+    <text x="15" y="146" class="body-text">- Pruebas: $80 USD / mes</text>
+    <text x="15" y="168" class="body-text">- Desarrollo: $50 USD / mes</text>
+
+    <line x1="15" y1="185" x2="345" y2="185" stroke="#E1E4E8" stroke-width="1" />
+    <text x="15" y="208" class="header-box" fill="#D93F0B" font-size="12px">POLÍTICA INNEGOCIABLE DE NEGOCIO:</text>
+    <text x="15" y="230" class="body-text">Alertas en 80%, 100% y 120% del presupuesto.</text>
+    <text x="15" y="250" class="header-box" font-size="12px">REGLA: AVISAR, NUNCA APAGAR.</text>
+    <text x="15" y="270" class="body-text">Prohibido suspender ingesta de fincas o</text>
+    <text x="15" y="288" class="body-text">la consulta pública de sacos ante sobrecostos.</text>
+  </g>
+
+  <!-- ==================== COLUMNA CENTRAL: ORGANIZACIÓN DE CUENTAS ==================== -->
+  <!-- CUENTA RAIZ / MANAGEMENT ACCOUNT -->
+  <g transform="translate(440, 110)" filter="url(#shadow)">
+    <rect width="720" height="150" rx="8" fill="#232F3E" stroke="#FF9900" stroke-width="3" />
+    <text x="360" y="32" class="root-title">Cuenta Raíz (Management Account)</text>
+    <text x="360" y="52" class="root-sub">ID Lógico: AromaPacifico-Root | Facturación Consolidada</text>
+
+    <line x1="30" y1="65" x2="690" y2="65" stroke="#485766" stroke-width="1" />
+
+    <text x="360" y="85" class="root-desc">AWS Organizations (Master)  -  IAM Identity Center (SSO Central)</text>
+    <text x="360" y="105" class="root-desc">Repositorio Central de SCPs  -  Tag Policies  -  AWS Budgets Master</text>
+    <text x="360" y="130" class="root-sub">Sin recursos de aplicación o cómputo operativo en esta cuenta</text>
+  </g>
+
+  <!-- FLECHAS DESDE RAIZ A OUs -->
+  <!-- Flecha a Core OU -->
+  <path d="M 620 260 L 620 310" fill="none" stroke="#232F3E" stroke-width="2" marker-end="url(#arrow)" />
+  <!-- Flecha a Workloads OU -->
+  <path d="M 980 260 L 980 640" fill="none" stroke="#232F3E" stroke-width="2" />
+
+  <!-- DEFINICION DE MARCADOR FLECHA -->
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#232F3E" />
+    </marker>
+  </defs>
+
+  <!-- UNIDAD ORGANIZATIVA CORE -->
+  <g transform="translate(440, 310)" filter="url(#shadow)">
+    <rect width="720" height="300" rx="8" fill="#EAEDED" stroke="#545B64" stroke-width="2" />
+    <rect width="720" height="32" rx="8" fill="#D5DBDB" />
+    <text x="15" y="22" class="ou-title">Unidad Organizativa: Infraestructura y Core (Core-OU)</text>
+
+    <!-- CUENTA SEGURIDAD Y AUDITORÍA -->
+    <g transform="translate(20, 50)">
+      <rect width="325" height="230" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="2" />
+      <rect width="325" height="30" rx="6" fill="#FFF5F5" />
+      <text x="15" y="20" class="acc-title" fill="#D93F0B">Seguridad y Auditoría</text>
+      <text x="15" y="45" class="subhead-box">Cuenta: AromaPacifico-Security</text>
+      <text x="15" y="70" class="body-text">- AWS CloudTrail Organization Trail</text>
+      <text x="15" y="92" class="body-text">- S3 Bucket Central de Auditoría WORM</text>
+      <text x="25" y="110" class="body-text" fill="#D93F0B">* Object Lock en modo Compliance 5 años</text>
+      <text x="15" y="132" class="body-text">- AWS Config Aggregator Central</text>
+      <text x="15" y="154" class="body-text">- Amazon GuardDuty + AWS Security Hub</text>
+      <text x="15" y="176" class="body-text">- AWS KMS Multi-Region Customer Keys</text>
+      <text x="15" y="205" class="subhead-box">Cero acceso de modificación para Prod</text>
+    </g>
+
+    <!-- CUENTA RED COMPARTIDA -->
+    <g transform="translate(375, 50)">
+      <rect width="325" height="230" rx="6" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
+      <rect width="325" height="30" rx="6" fill="#F4F8FD" />
+      <text x="15" y="20" class="acc-title" fill="#1D76DB">Red Compartida</text>
+      <text x="15" y="45" class="subhead-box">Cuenta: AromaPacifico-Network</text>
+      <text x="15" y="70" class="body-text">- AWS Transit Gateway (TGW Hub)</text>
+      <text x="15" y="92" class="body-text">- VPN IPsec hacia 3 Centros de Acopio:</text>
+      <text x="25" y="110" class="mono-text">* Cauca 10.41.0.0/16 | Huila 10.42.0.0/16</text>
+      <text x="25" y="126" class="mono-text">* Tolima 10.43.0.0/16 (7 VLANs/acopio)</text>
+      <text x="15" y="148" class="body-text">- AWS Network Firewall Inspección</text>
+      <text x="15" y="170" class="body-text">- VPC Endpoints (S3, DynamoDB) FinOps</text>
+      <text x="15" y="205" class="subhead-box">Subredes cloud sin solapamiento local</text>
+    </g>
+  </g>
+
+  <!-- UNIDAD ORGANIZATIVA WORKLOADS -->
+  <g transform="translate(40, 650)" filter="url(#shadow)">
+    <rect width="1520" height="420" rx="8" fill="#EAEDED" stroke="#545B64" stroke-width="2" />
+    <rect width="1520" height="32" rx="8" fill="#D5DBDB" />
+    <text x="15" y="22" class="ou-title">Unidad Organizativa: Cargas de Trabajo de Negocio (Workloads-OU)</text>
+
+    <!-- CUENTA DESARROLLO -->
+    <g transform="translate(20, 50)">
+      <rect width="460" height="345" rx="6" fill="#FFFFFF" stroke="#0E8A16" stroke-width="2" />
+      <rect width="460" height="32" rx="6" fill="#F4FBF5" />
+      <text x="15" y="22" class="acc-title" fill="#0E8A16">Desarrollo (Workload-Dev)</text>
+      <text x="15" y="52" class="subhead-box">Ambiente: desarrollo | Presupuesto: $50 USD/mes</text>
+
+      <text x="15" y="80" class="body-text">- Sandbox aislado para módulos de Terraform (IaC).</text>
+      <text x="15" y="105" class="body-text">- Pruebas de integración rápida con emuladores IoT.</text>
+      <text x="15" y="130" class="body-text">- Prototipos de funciones serverless de inferencia.</text>
+      <text x="15" y="155" class="body-text">- Sin enlace VPN directo a las redes de los acopios.</text>
+      <text x="15" y="180" class="body-text">- Aislamiento total de blast radius para errores de código.</text>
+
+      <line x1="15" y1="205" x2="445" y2="205" stroke="#E1E4E8" stroke-width="1" />
+      <text x="15" y="230" class="header-box" fill="#0E8A16" font-size="12px">Reglas FinOps de la Cuenta:</text>
+      <text x="15" y="255" class="body-text">- Apagado automático de recursos fuera de horario laboral</text>
+      <text x="25" y="275" class="body-text">(Lunes a Viernes de 08:00 a 18:00 únicamente).</text>
+      <text x="15" y="300" class="body-text">- Previene colisión de estado .tfstate con Pruebas.</text>
+    </g>
+
+    <!-- CUENTA PRUEBAS / STAGING -->
+    <g transform="translate(530, 50)">
+      <rect width="460" height="345" rx="6" fill="#FFFFFF" stroke="#FBCA04" stroke-width="2" />
+      <rect width="460" height="32" rx="6" fill="#FFFCF0" />
+      <text x="15" y="22" class="acc-title" fill="#B08800">Pruebas / Staging (Workload-Test)</text>
+      <text x="15" y="52" class="subhead-box">Ambiente: pruebas | Presupuesto: $80 USD/mes</text>
+
+      <text x="15" y="80" class="body-text">- Réplica fiel de arquitectura de producción a escala reducida.</text>
+      <text x="15" y="105" class="body-text">- Pipeline automatizado CI/CD en GitHub Actions.</text>
+      <text x="15" y="130" class="body-text">- Pruebas de estrés de consulta del saco (picos 30 req/min).</text>
+      <text x="15" y="155" class="body-text">- Validación de drenado de buffer store-and-forward (24h).</text>
+      <text x="15" y="180" class="body-text">- Homologación de umbrales agronómicos configurables FNC.</text>
+
+      <line x1="15" y1="205" x2="445" y2="205" stroke="#E1E4E8" stroke-width="1" />
+      <text x="15" y="230" class="header-box" fill="#B08800" font-size="12px">Control de Calidad y Promoción:</text>
+      <text x="15" y="255" class="body-text">- Gate obligatorio antes de promocionar a producción.</text>
+      <text x="15" y="280" class="body-text">- Simulación de pérdida celular y recuperación de señal.</text>
+      <text x="15" y="305" class="body-text">- Verificación de tiempo de alerta agrónoma menor a 5 min.</text>
+    </g>
+
+    <!-- CUENTA PRODUCCIÓN -->
+    <g transform="translate(1040, 50)">
+      <rect width="460" height="345" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="2" />
+      <rect width="460" height="32" rx="6" fill="#FFF5F5" />
+      <text x="15" y="22" class="acc-title" fill="#D93F0B">Producción (Workload-Prod)</text>
+      <text x="15" y="52" class="subhead-box">Ambiente: producción | us-east-1 (Respaldo us-east-2)</text>
+
+      <text x="15" y="80" class="body-text">- AWS IoT Core: 200 fincas, certificados X.509, MQTT/TLS.</text>
+      <text x="15" y="105" class="body-text">- DynamoDB On-Demand: telemetría, sacos, órdenes de vuelo.</text>
+      <text x="15" y="130" class="body-text">- Amazon S3: fotos, ortomosaicos, logs de vuelo de drones.</text>
+      <text x="15" y="155" class="body-text">- Inferencia Serverless: AWS Lambda + Amazon Rekognition.</text>
+      <text x="15" y="180" class="body-text">- API Gateway + App Runner: apps de campo y consulta web.</text>
+
+      <line x1="15" y1="205" x2="445" y2="205" stroke="#E1E4E8" stroke-width="1" />
+      <text x="15" y="230" class="header-box" fill="#D93F0B" font-size="12px">Reglas Operativas Críticas:</text>
+      <text x="15" y="255" class="body-text">- Ventana de Congelamiento: Sin cambios 05:00-18:00 en cosecha.</text>
+      <text x="15" y="280" class="body-text">- Anonimización estricta de cédula de caficultores (Ley 1581).</text>
+      <text x="15" y="305" class="body-text">- SLO de Consulta: 99.9% disponib., RPO 15 min, RTO 4h.</text>
+    </g>
+  </g>
+
+  <!-- PIE DE PAGINA -->
+  <text x="800" y="1110" class="subtitle" font-size="12px">Federación Nacional de Cafeteros - AromaPacífico 2026 | Arquitectura de Landing Zone en AWS Organizations</text>
+</svg>
