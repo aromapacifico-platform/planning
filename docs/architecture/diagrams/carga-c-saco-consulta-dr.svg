@@ -1,0 +1,229 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1760 1280" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 22px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #5A6B7C; text-anchor: middle; }
+      .swim-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
+      .box-head { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
+      .subhead { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #555555; }
+      .body-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
+      .bold-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #232F3E; }
+      .mono-txt { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; font-size: 11px; fill: #111111; }
+      .accent-green { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #1B5E20; }
+      .accent-blue { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #1D76DB; }
+      .accent-purple { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #7B1FA2; }
+    </style>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <!-- FONDO GENERAL -->
+  <rect width="1760" height="1280" fill="#F8F9FA" />
+
+  <!-- TITULO Y SUBTITULO -->
+  <text x="880" y="40" class="title">AromaPacífico - Arquitectura de Consulta Pública del Saco y Recuperación ante Desastres (DR)</text>
+  <text x="880" y="68" class="subtitle">Único Punto Abierto a Internet, Protección Perimetral CloudFront/WAF y Cumplimiento Estricto de RPO 15 min y RTO 4 h</text>
+
+  <!-- PANEL IZQUIERDO: EL UNICO PUNTO ABIERTO A INTERNET -->
+  <g transform="translate(35, 95)" filter="url(#shadow)">
+    <rect width="810" height="735" rx="8" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
+    <rect width="810" height="35" rx="8" fill="#EBF3FB" />
+    <text x="20" y="23" class="swim-title" fill="#1D76DB">ARQUITECTURA DEL ÚNICO PUNTO ABIERTO A INTERNET: CONSULTA PÚBLICA</text>
+
+    <!-- CLIENTE EXTERNO -->
+    <g transform="translate(20, 50)">
+      <rect width="770" height="60" rx="5" fill="#FFFFFF" stroke="#1D76DB" stroke-width="1.5" />
+      <text x="385" y="26" class="bold-txt" text-anchor="middle" fill="#1D76DB">Comprador Internacional (Navegador Web / App Externa)</text>
+      <text x="385" y="46" class="body-txt" text-anchor="middle">Ubicación Global: Tokio, Berlín, Nueva York | Picos de hasta 30 consultas por minuto</text>
+    </g>
+
+    <!-- DNS ROUTE 53 -->
+    <g transform="translate(20, 120)">
+      <rect width="770" height="80" rx="5" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" />
+      <text x="15" y="22" class="box-head">1. Amazon Route 53 (DNS Global y Control de Conmutación)</text>
+      <text x="15" y="42" class="body-txt">- Enrutamiento por Latencia (Latency-based Routing) hacia el Edge más cercano</text>
+      <text x="15" y="60" class="body-txt">- Application Recovery Controller (ARC): Health Checks continuos cada 10 s sobre us-east-1</text>
+      <text x="15" y="78" class="body-txt">- Conmutación Failover en menos de 60 segundos hacia us-east-2 ante falla de región</text>
+    </g>
+
+    <!-- CLOUDFRONT CDN -->
+    <g transform="translate(20, 210)">
+      <rect width="770" height="110" rx="5" fill="#FFFFFF" stroke="#FF9900" stroke-width="2" />
+      <text x="15" y="22" class="box-head" fill="#FF9900">2. Amazon CloudFront (CDN Perimetral con 600+ PoPs Globales)</text>
+      <text x="15" y="42" class="body-txt">- Protocolo Obligatorio: HTTPS sobre TLS 1.3 con certificado ACM público oficial</text>
+      <text x="15" y="60" class="body-txt">- Edge Caching con TTL de 60 segundos por código de saco: absorbe totalmente los</text>
+      <text x="15" y="78" class="body-txt">  picos de 30 lecturas por minuto sin impactar el cómputo del backend</text>
+      <text x="15" y="96" class="body-txt">- Latencia global sub-45 ms; compresión automática Brotli/Gzip (payload &lt; 2 KB)</text>
+    </g>
+
+    <!-- AWS WAFV2 -->
+    <g transform="translate(20, 330)">
+      <rect width="770" height="130" rx="5" fill="#FFFFFF" stroke="#D93F0B" stroke-width="2" />
+      <text x="15" y="22" class="box-head" fill="#D93F0B">3. AWS WAFv2 (Web Application Firewall en el Edge de CloudFront)</text>
+      <text x="15" y="42" class="body-txt">- Rate Limiting Estricto por IP: Máximo 60 peticiones/minuto por IP origen;</text>
+      <text x="15" y="60" class="body-txt">  mitiga ataques de fuerza bruta, escaneo masivo y scraping no autorizado</text>
+      <text x="15" y="78" class="body-txt">- AWS Managed Rules (Core Rule Set CRS, SQLi, Known Bad Inputs, Bot Control)</text>
+      <text x="15" y="96" class="body-txt">- Validación de Patrón Regex en Path: ^SACO-202[6-9]-(CAU|HUI|TOL)-[A-F0-9]{8}$</text>
+      <text x="15" y="114" class="bold-txt" fill="#D93F0B">- Rechazo Perimetral: Peticiones fuera de formato se bloquean en el Edge (HTTP 403)</text>
+    </g>
+
+    <!-- API GATEWAY Y LAMBDA PUBLICA -->
+    <g transform="translate(20, 470)">
+      <rect width="770" height="110" rx="5" fill="#FFFFFF" stroke="#0E8A16" stroke-width="2" />
+      <text x="15" y="22" class="box-head" fill="#0E8A16">4. Amazon API Gateway Público y AWS Lambda Resolver (Solo Lectura)</text>
+      <text x="15" y="42" class="body-txt">- API Gateway Regional: Acepta únicamente peticiones validadas con cabecera de CloudFront</text>
+      <text x="15" y="60" class="body-txt">- Lambda Resolver Público: Función Python 3.12 (256 MB, timeout 3 s, rol IAM restringido)</text>
+      <text x="15" y="78" class="body-txt">- Aislamiento Perimetral Total: Carece de ENI en la VPC de producción; no tiene conectividad</text>
+      <text x="15" y="96" class="bold-txt" fill="#0E8A16">  física hacia la red interna ni acceso a sacos_cafe. Consulta solo sacos_publicos</text>
+    </g>
+
+    <!-- PAYLOAD VISTA DEL COMPRADOR -->
+    <g transform="translate(20, 590)">
+      <rect width="770" height="125" rx="5" fill="#F0FFF4" stroke="#2E7D32" stroke-width="1.5" />
+      <text x="15" y="22" class="accent-green">5. Estructura de la Vista Pública Anonimizada del Comprador (JSON Seguro):</text>
+      <text x="15" y="44" class="mono-txt">{ "SacoID": "SACO-2026-CAU-7F3A9C12", "Departamento": "Cauca", "AltitudAprox": "1750 msnm",</text>
+      <text x="15" y="62" class="mono-txt">  "Variedad": "Castillo", "Secado": { "Metodo": "Lavado", "HumedadFinal": 11.2, "TempMedia": 21 },</text>
+      <text x="15" y="80" class="mono-txt">  "CalificacionSCA": 84.5, "Estado": "ENTREGADO_PUERTO", "PuertoDestino": "Buenaventura",</text>
+      <text x="15" y="98" class="mono-txt">  "Fechas": { "Cosecha": "2026-05-10", "Secado": "2026-05-18", "LlegadaPuerto": "2026-05-24" } }</text>
+      <text x="15" y="118" class="bold-txt" fill="#1B5E20">CERO CÉDULAS, CERO NOMBRES, CERO COORDENADAS SUBMÉTRICAS, CERO RUTAS GPS</text>
+    </g>
+  </g>
+
+  <!-- PANEL DERECHO: DISASTER RECOVERY RPO 15 MIN Y RTO 4 H -->
+  <g transform="translate(865, 95)" filter="url(#shadow)">
+    <rect width="860" height="735" rx="8" fill="#FFFFFF" stroke="#7B1FA2" stroke-width="2" />
+    <rect width="860" height="35" rx="8" fill="#F3E5F5" />
+    <text x="20" y="23" class="swim-title" fill="#7B1FA2">ESTRATEGIA DE RECUPERACIÓN ANTE DESASTRES (DR): us-east-1 Y us-east-2</text>
+
+    <!-- REGION PRIMARIA: US-EAST-1 -->
+    <g transform="translate(20, 50)">
+      <rect width="395" height="420" rx="6" fill="#F4F8FD" stroke="#1D76DB" stroke-width="1.5" />
+      <rect width="395" height="30" rx="6" fill="#EBF3FB" />
+      <text x="15" y="20" class="bold-txt" fill="#1D76DB">REGIÓN PRIMARIA: us-east-1 (N. Virginia)</text>
+      <text x="15" y="44" class="subhead">Operación Activa de Producción</text>
+
+      <rect x="12" y="55" width="371" height="185" rx="5" fill="#FFFFFF" stroke="#1D76DB" stroke-width="1.5" />
+      <text x="20" y="75" class="bold-txt" fill="#1D76DB">DynamoDB Global Tables (Primaria):</text>
+      <text x="20" y="95" class="body-txt">- sacos_publicos (Read Model Público)</text>
+      <text x="20" y="115" class="body-txt">- sacos_eventos (Event Store Inmutable)</text>
+      <text x="20" y="135" class="body-txt">- sacos_cafe (Maestro Transaccional)</text>
+      <text x="20" y="155" class="body-txt">- Capacidad: On-Demand automática</text>
+      <text x="20" y="175" class="body-txt">- Cifrado: KMS CMK dedicado</text>
+      <text x="20" y="195" class="body-txt">- PITR: Habilitado a nivel de segundo</text>
+      <text x="20" y="215" class="bold-txt" fill="#0E8A16">Replicación a us-east-2: &lt; 2 segundos</text>
+
+      <rect x="12" y="250" width="371" height="155" rx="5" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" />
+      <text x="20" y="270" class="bold-txt">Cómputo e Ingesta Privada:</text>
+      <text x="20" y="290" class="body-txt">- VPC Producción (10.70.0.0/16)</text>
+      <text x="20" y="310" class="body-txt">- Túneles IPsec VPN a 3 Acopios</text>
+      <text x="20" y="330" class="body-txt">- SQS FIFO + Lambda Ingesta</text>
+      <text x="20" y="350" class="body-txt">- S3 CRR con RTC hacia us-east-2</text>
+      <text x="20" y="370" class="body-txt">  (SLA de replicación &lt; 15 min)</text>
+      <text x="20" y="390" class="bold-txt" fill="#1D76DB">AWS Backup WORM hacia cuenta Security</text>
+    </g>
+
+    <!-- REGION CONTINGENCIA: US-EAST-2 -->
+    <g transform="translate(435, 50)">
+      <rect width="405" height="420" rx="6" fill="#FAF5FB" stroke="#7B1FA2" stroke-width="1.5" />
+      <rect width="405" height="30" rx="6" fill="#F3E5F5" />
+      <text x="15" y="20" class="bold-txt" fill="#7B1FA2">REGIÓN CONTINGENCIA: us-east-2 (Ohio)</text>
+      <text x="15" y="44" class="subhead">Warm Standby / Pilot Light DR</text>
+
+      <rect x="12" y="55" width="381" height="185" rx="5" fill="#FFFFFF" stroke="#7B1FA2" stroke-width="1.5" />
+      <text x="20" y="75" class="bold-txt" fill="#7B1FA2">DynamoDB Global Tables (Réplica):</text>
+      <text x="20" y="95" class="body-txt">- sacos_publicos (Copia activa)</text>
+      <text x="20" y="115" class="body-txt">- sacos_eventos (Copia sincronizada)</text>
+      <text x="20" y="135" class="body-txt">- sacos_cafe (Copia sincronizada)</text>
+      <text x="20" y="155" class="body-txt">- Estado: Permanentemente caliente</text>
+      <text x="20" y="175" class="body-txt">- Cifrado: KMS CMK Multi-Región</text>
+      <text x="20" y="195" class="body-txt">- PITR: Habilitado localmente en Ohio</text>
+      <text x="20" y="215" class="bold-txt" fill="#0E8A16">RPO CUMPLIDO: &lt; 2 s (&lt;&lt; 15 min)</text>
+
+      <rect x="12" y="250" width="381" height="155" rx="5" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" />
+      <text x="20" y="270" class="bold-txt">Cómputo en Reposo (IaC Warm Standby):</text>
+      <text x="20" y="290" class="body-txt">- VPC Contingencia (10.71.0.0/16)</text>
+      <text x="20" y="310" class="body-txt">- Terraform IaC pre-compilado en Git</text>
+      <text x="20" y="330" class="body-txt">- API Pública pre-desplegada en Ohio</text>
+      <text x="20" y="350" class="body-txt">- Route 53 conmuta en &lt; 60 s</text>
+      <text x="20" y="370" class="bold-txt" fill="#0E8A16">RTO Consulta: &lt; 60 s | RTO Ingesta: &lt; 45 m</text>
+      <text x="20" y="390" class="bold-txt" fill="#7B1FA2">RTO CUMPLIDO: &lt; 45 min (&lt;&lt; 4 horas)</text>
+    </g>
+
+    <!-- SUBPANEL DEMOSTRACION RPO / RTO -->
+    <g transform="translate(20, 480)">
+      <rect width="820" height="235" rx="6" fill="#F0FFF4" stroke="#0E8A16" stroke-width="2" />
+      <text x="20" y="25" class="box-head" fill="#0E8A16">MATRIZ DE CUMPLIMIENTO RIGUROSO DE OBJETIVOS DE CONTINUIDAD</text>
+      <text x="20" y="52" class="bold-txt">1. Mecanismo Concreto de Cumplimiento de RPO = 15 minutos:</text>
+      <text x="35" y="72" class="body-txt">- DynamoDB Global Tables replica a nivel de almacenamiento con latencia &lt; 2 segundos (RPO real &lt; 2 s).</text>
+      <text x="35" y="92" class="body-txt">- S3 Cross-Region Replication (CRR) con RTC ofrece SLA vinculante de replicación en menos de 15 minutos.</text>
+      <text x="35" y="112" class="body-txt">- Point-in-Time Recovery (PITR) continuo permite rebobinar a cualquier segundo de los últimos 35 días.</text>
+      <text x="20" y="140" class="bold-txt">2. Mecanismo Concreto de Cumplimiento de RTO = 4 horas:</text>
+      <text x="35" y="160" class="body-txt">- Consulta Pública: RTO &lt; 60 segundos; la tabla sacos_publicos ya está activa en Ohio y Route 53 desvía el DNS.</text>
+      <text x="35" y="180" class="body-txt">- Ingesta de Acopios y Móvil: RTO &lt; 45 minutos ejecutando el pipeline de Terraform IaC en el repo environments/dr.</text>
+      <text x="35" y="200" class="body-txt">- Túneles VPN de Contingencia: Pre-configurados en Transit Gateway de us-east-2 con activación BGP de respaldo.</text>
+      <text x="35" y="220" class="bold-txt" fill="#0E8A16">Conclusión: Tanto RPO como RTO se cumplen con un margen de holgura superior al 75% del límite del pliego.</text>
+    </g>
+  </g>
+
+  <!-- PANEL INFERIOR: GESTIÓN DE ERRORES, OBSERVABILIDAD Y AUTO-RECUPERACIÓN -->
+  <g transform="translate(35, 850)" filter="url(#shadow)">
+    <rect width="1690" height="395" rx="8" fill="#FFFFFF" stroke="#545B64" stroke-width="2" />
+    <rect width="1690" height="35" rx="8" fill="#EAEDED" />
+    <text x="20" y="23" class="swim-title">GESTIÓN INTEGRAL DE ERRORES, OBSERVABILIDAD Y AUTO-RECUPERACIÓN (Self-Healing Architecture)</text>
+
+    <!-- COLUMNA 1: DETECCION AUTOMATICA -->
+    <g transform="translate(20, 50)">
+      <rect width="525" height="325" rx="6" fill="#F4F8FD" stroke="#1D76DB" stroke-width="1.5" />
+      <text x="15" y="24" class="box-head" fill="#1D76DB">1. Detección Automática de Fallas (Observabilidad Proactiva)</text>
+      <text x="15" y="52" class="bold-txt">- Alarmas de CloudWatch en Capa de Ingesta:</text>
+      <text x="25" y="72" class="body-txt">* Tasa de errores 5xx &gt; 1% durante 3 minutos consecutivos</text>
+      <text x="25" y="92" class="body-txt">* Profundidad de Dead Letter Queue (DLQ) &gt; 0 activa incidente P1</text>
+      <text x="25" y="112" class="body-txt">* Latencia p99 de API Gateway &gt; 800 ms dispara alerta de estrangulamiento</text>
+      <text x="15" y="140" class="bold-txt">- Route 53 Application Recovery Controller (ARC):</text>
+      <text x="25" y="160" class="body-txt">* Tests sintéticos HTTPS cada 10 s desde 8 regiones globales</text>
+      <text x="25" y="180" class="body-txt">* 3 fallos consecutivos declaran degradación de la región us-east-1</text>
+      <text x="15" y="208" class="bold-txt">- Trazabilidad Distribuida de Extremo a Extremo (AWS X-Ray):</text>
+      <text x="25" y="228" class="body-txt">* Cada petición genera un TraceID propagado en cabeceras W3C</text>
+      <text x="25" y="248" class="body-txt">* Mapeo visual de latencias entre CloudFront, API Gateway, Lambdas y KMS</text>
+      <text x="15" y="278" class="bold-txt">- Amazon CloudWatch Synthetics (Canaries):</text>
+      <text x="25" y="298" class="body-txt">* Script headless que ejecuta consultas reales cada 60 s verificando SLA</text>
+    </g>
+
+    <!-- COLUMNA 2: CONTENCION Y TOLERANCIA -->
+    <g transform="translate(565, 50)">
+      <rect width="540" height="325" rx="6" fill="#FFF9F4" stroke="#FF9900" stroke-width="1.5" />
+      <text x="15" y="24" class="box-head" fill="#BF360C">2. Contención y Tolerancia a Fallos (Circuit Breakers &amp; Jitter)</text>
+      <text x="15" y="52" class="bold-txt">- Circuit Breakers en el Edge de CloudFront:</text>
+      <text x="25" y="72" class="body-txt">* Si el backend responde 500/503, CloudFront sirve respuesta cacheada</text>
+      <text x="25" y="92" class="body-txt">* Evita saturación en cascada del cómputo durante incidentes</text>
+      <text x="15" y="120" class="bold-txt">- Exponential Backoff con Full Jitter en Clientes Móviles y Nodos:</text>
+      <text x="25" y="140" class="body-txt">* Algoritmo estandarizado: t = min(t_max, t_base * 2^intento) * rand(0, 1)</text>
+      <text x="25" y="160" class="body-txt">* Desincroniza reintentos masivos tras reconexiones celulares</text>
+      <text x="15" y="188" class="bold-txt">- Aislamiento Estricto por Blast Radius:</text>
+      <text x="25" y="208" class="body-txt">* La caída del punto de consulta pública jamás impacta la ingesta</text>
+      <text x="25" y="228" class="body-txt">* Las bases transaccionales corren en subredes privadas sin ruta a internet</text>
+      <text x="15" y="258" class="bold-txt">- Amortiguación Asíncrona SQS FIFO:</text>
+      <text x="25" y="278" class="body-txt">* Soporta ráfagas imprevistas de pesaje y retiene mensajes hasta 14 días</text>
+      <text x="25" y="298" class="body-txt">* Concurrencia de Lambda acotada para proteger DynamoDB contra picos</text>
+    </g>
+
+    <!-- COLUMNA 3: AUTO-RECUPERACION Y REPLAY -->
+    <g transform="translate(1125, 50)">
+      <rect width="545" height="325" rx="6" fill="#F0FFF4" stroke="#0E8A16" stroke-width="1.5" />
+      <text x="15" y="24" class="box-head" fill="#0E8A16">3. Auto-Recuperación y Replay de Información (Self-Healing)</text>
+      <text x="15" y="52" class="bold-txt">- Replay Automatizado de Eventos desde Dead Letter Queue (DLQ):</text>
+      <text x="25" y="72" class="body-txt">* Superada la degradación, una Lambda Redrive reinyecta los eventos</text>
+      <text x="25" y="92" class="body-txt">* Cero intervención manual ni pérdida de registros operacionales</text>
+      <text x="15" y="120" class="bold-txt">- Idempotencia Determinista en Toda la Cadena:</text>
+      <text x="25" y="140" class="body-txt">* Todo evento incorpora EventoID (UUID v4) y SacoID en clave primaria</text>
+      <text x="25" y="160" class="body-txt">* Expresiones condicionales impiden insertar o duplicar un mismo evento</text>
+      <text x="15" y="188" class="bold-txt">- Reconstrucción Determinista de Read Models:</text>
+      <text x="25" y="208" class="body-txt">* Si sacos_publicos se corrompe, se re-escanea sacos_eventos</text>
+      <text x="25" y="228" class="body-txt">* El log inmutable regenera el estado consistente en minutos</text>
+      <text x="15" y="258" class="bold-txt">- Drenado Prioritario de Buffers Locales:</text>
+      <text x="25" y="278" class="body-txt">* Tras corte celular de hasta 24 h, los dispositivos transmiten</text>
+      <text x="25" y="298" class="body-txt">  en orden cronológico estricto garantizando la secuencia de estados</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" compressed="false">
+  <diagram id="saco-estados-eventos" name="Maquina de Estados del Saco y Event Sourcing">
+    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1300" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TITULO PRINCIPAL -->
+        <mxCell id="title" value="AromaPacífico - Máquina de Estados del Saco de Café (60 kg) y Event Sourcing Transaccional" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="250" y="25" width="1300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Ciclo de Vida Operativo, Responsables Atribuibles, Invariantes de Calidad y Base Transaccional de Cero Pérdida" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
+          <mxGeometry x="250" y="65" width="1300" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR 1: CICLO DE VIDA Y MAQUINA DE ESTADOS -->
+        <mxCell id="box-lifecycle" value="CICLO DE VIDA DEL SACO DE CAFÉ: CINCO ESTADOS Y ACTORES RESPONSABLES" style="swimlane;startSize=30;horizontal=1;fillColor=#EAEDED;strokeColor=#545B64;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="40" y="105" width="1720" height="570" as="geometry" />
+        </mxCell>
+
+        <!-- FASE 1: FINCA CAFETERA -->
+        <mxCell id="phase-finca" value="FASE 1: FINCA CAFETERA&#xa;Responsable: Caficultor (App Móvil / Cognito)" style="swimlane;startSize=25;fillColor=#EBF3FB;strokeColor=#1D76DB;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#1D76DB;" vertex="1" parent="box-lifecycle">
+          <mxGeometry x="20" y="45" width="310" height="495" as="geometry" />
+        </mxCell>
+        <mxCell id="state-prep" value="ESTADO 1: EN_PREPARACION&#xa;&#xa;- Ubicación: Finca cafetera (Cauca/Huila/Tolima)&#xa;- Lote Cosechado: Grano maduro recolectado&#xa;- Variables de Secado Registradas:&#xa;  * Humedad final: 10.0% a 12.0%&#xa;  * Método: Lavado / Honey / Natural&#xa;  * Temperatura media en secadero (grados C)&#xa;  * Fecha y hora de finalización de secado&#xa;- Ensacado: Saco estándar de fique de 60.0 kg&#xa;- Pesaje inicial en báscula de finca&#xa;- Generación de Identificador Canónico:&#xa;  Token criptográfico HMAC-SHA-256:&#xa;  SACO-2026-[DEPTO]-[HASH8] (Sin PII)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="phase-finca">
+          <mxGeometry x="15" y="40" width="280" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="event-alta" value="EVENTO: EVENTO_ALTA_FINCA&#xa;Atribuible a: Caficultor (JWT Cognito sub)&#xa;Firma: Hash criptográfico local&#xa;Buffer: Store-and-forward si no hay señal" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;strokeWidth=1.5;fontSize=12;align=center;fontStyle=1;fontColor=#274E13;" vertex="1" parent="phase-finca">
+          <mxGeometry x="15" y="345" width="280" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- FASE 2: TRANSPORTE RURAL -->
+        <mxCell id="phase-transp-rural" value="FASE 2: TRANSPORTE RURAL&#xa;Responsable: Transportador Rural (App / Cognito)" style="swimlane;startSize=25;fillColor=#FDF6E2;strokeColor=#D99B00;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#B27B00;" vertex="1" parent="box-lifecycle">
+          <mxGeometry x="350" y="45" width="310" height="495" as="geometry" />
+        </mxCell>
+        <mxCell id="state-viaje-acopio" value="ESTADO 2: EN_VIAJE_ACOPIO&#xa;&#xa;- Ubicación: En tránsito por vía terciaria&#xa;- Handshake Digital en Finca:&#xa;  * Escaneo QR del saco por transportador&#xa;  * Confirmación de entrega por caficultor&#xa;- Asignación de Viaje Rural: VIAJE-RURAL-XXX&#xa;- Vehículo: Campero rural veredal&#xa;- Condiciones de Red: Vía sin señal celular&#xa;- Buffer Local en App: SQLite cifrado&#xa;  retiene evento hasta llegar a cobertura&#xa;- Invariante: El saco no puede viajar sin&#xa;  evento previo de alta formal en finca" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D99B00;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="phase-transp-rural">
+          <mxGeometry x="15" y="40" width="280" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="event-despacho-rural" value="EVENTO: EVENTO_DESPACHO_RURAL&#xa;Atribuible a: Caficultor + Transportador&#xa;Datos: Placa, ConductorID, HoraSalida&#xa;Seguridad: Cero datos personales expuestos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;strokeWidth=1.5;fontSize=12;align=center;fontStyle=1;fontColor=#274E13;" vertex="1" parent="phase-transp-rural">
+          <mxGeometry x="15" y="345" width="280" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- FASE 3: CENTRO DE ACOPIO -->
+        <mxCell id="phase-acopio" value="FASE 3: CENTRO DE ACOPIO (Cauca, Huila, Tolima)&#xa;Responsable: Operario de Acopio (LAN Acopio / MFA TOTP)" style="swimlane;startSize=25;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#7B1FA2;" vertex="1" parent="box-lifecycle">
+          <mxGeometry x="680" y="45" width="360" height="495" as="geometry" />
+        </mxCell>
+        <mxCell id="state-acopio-base" value="ESTADO 3: EN_ACOPIO&#xa;&#xa;- Evento Entrada: EVENTO_LLEGADA_ACOPIO&#xa;- Báscula Certificada: Pesaje 60.0 kg +/- 0.2 kg&#xa;- Laboratorio de Calidad y Catación:&#xa;  * Prueba de Humedad: 10.5% a 11.5% optimo&#xa;  * Protocolo SCA: Catación física y sensorial&#xa;  * Registro de puntaje de taza (SCA Score)&#xa;  * Verificación de defectos primarios y broca" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#7B1FA2;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="phase-acopio">
+          <mxGeometry x="15" y="40" width="330" height="175" as="geometry" />
+        </mxCell>
+        <mxCell id="state-acopio-aceptado" value="SUB-ESTADO: EN_ACOPIO (ACEPTADO)&#xa;Evento: EVENTO_RECEPCION_ACEPTADA&#xa;- Cumple: Humedad &lt;= 12.0% y Taza SCA &gt;= 80&#xa;- Acción: Ingresa al inventario exportable&#xa;- Atribuible: Catador Certificado (MFA)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#1B5E20;fontStyle=1;" vertex="1" parent="phase-acopio">
+          <mxGeometry x="15" y="235" width="330" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="state-acopio-rechazado" value="SUB-ESTADO: EN_ACOPIO (RECHAZADO)&#xa;Evento: EVENTO_RECEPCION_RECHAZADA&#xa;- Causa: Humedad &gt; 12.5% o defectos graves&#xa;- Acción: Devolución o venta mercado nacional&#xa;- Estado terminal de cadena de exportación" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#B71C1C;fontStyle=1;" vertex="1" parent="phase-acopio">
+          <mxGeometry x="15" y="370" width="330" height="105" as="geometry" />
+        </mxCell>
+
+        <!-- FASE 4: TRANSPORTE TRONCAL -->
+        <mxCell id="phase-transp-troncal" value="FASE 4: TRANSPORTE TRONCAL A PUERTO&#xa;Responsable: Transportador Troncal (App / Cognito)" style="swimlane;startSize=25;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#BF360C;" vertex="1" parent="box-lifecycle">
+          <mxGeometry x="1060" y="45" width="310" height="495" as="geometry" />
+        </mxCell>
+        <mxCell id="state-viaje-puerto" value="ESTADO 4: EN_VIAJE_PUERTO&#xa;&#xa;- Ubicación: Corredor troncal hacia el Pacífico&#xa;- Consolidación de Carga: Lote de hasta 200 sacos&#xa;- Precinto Digital de Seguridad: Nro de precinto&#xa;- Asignación de Viaje Troncal: VIAJE-TRONCAL-XXX&#xa;- Monitoreo Satelital y Celular:&#xa;  * Reporte de posición GPS cada 5 minutos&#xa;  * Registro continuo de velocidad y paradas&#xa;- Privacidad por Diseño:&#xa;  * Las coordenadas GPS intermedias jamás&#xa;    se exponen al comprador internacional&#xa;  * Solo el acopio monitorea el recorrido" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E65100;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="phase-transp-troncal">
+          <mxGeometry x="15" y="40" width="280" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="event-despacho-troncal" value="EVENTO: EVENTO_DESPACHO_PUERTO&#xa;Atribuible a: Operario Acopio + Chofer Troncal&#xa;Condición: Saco previamente ACEPTADO&#xa;Seguridad: Precinto electrónico auditado" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;strokeWidth=1.5;fontSize=12;align=center;fontStyle=1;fontColor=#274E13;" vertex="1" parent="phase-transp-troncal">
+          <mxGeometry x="15" y="345" width="280" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- FASE 5: PUERTO DE BUENAVENTURA -->
+        <mxCell id="phase-puerto" value="FASE 5: PUERTO DE BUENAVENTURA&#xa;Responsable: Operario Portuario / Agente FNC (MFA)" style="swimlane;startSize=25;fillColor=#E0F2F1;strokeColor=#00796B;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#004D40;" vertex="1" parent="box-lifecycle">
+          <mxGeometry x="1390" y="45" width="310" height="495" as="geometry" />
+        </mxCell>
+        <mxCell id="state-puerto-base" value="ESTADO 5: ENTREGADO_PUERTO&#xa;&#xa;- Evento Entrada: EVENTO_LLEGADA_PUERTO&#xa;- Ubicación: Sociedad Portuaria / Aguadulce&#xa;- Sin infraestructura fija propia de la FNC&#xa;- Recepción en bodega portuaria concesionada&#xa;- Verificación de integridad de precinto digital&#xa;- Inspección aduanera Dian y fitosanitaria ICA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#00796B;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="phase-puerto">
+          <mxGeometry x="15" y="40" width="280" height="175" as="geometry" />
+        </mxCell>
+        <mxCell id="state-puerto-aceptado" value="SUB-ESTADO: ENTREGADO (ACEPTADO)&#xa;Evento: EVENTO_ENTREGA_ACEPTADA&#xa;- Dictamen: Aprobado para exportación&#xa;- Acción: Estiba en contenedor marítimo&#xa;- Fin de trazabilidad en tierra de FNC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#1B5E20;fontStyle=1;" vertex="1" parent="phase-puerto">
+          <mxGeometry x="15" y="235" width="280" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="state-puerto-rechazado" value="SUB-ESTADO: ENTREGADO (RECHAZADO)&#xa;Evento: EVENTO_ENTREGA_RECHAZADA&#xa;- Causa: Avería en viaje, humedad o rotura&#xa;- Acción: Reclamo a aseguradora de carga&#xa;- Estado terminal de contingencia" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#B71C1C;fontStyle=1;" vertex="1" parent="phase-puerto">
+          <mxGeometry x="15" y="370" width="280" height="105" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR 2: BASE TRANSACCIONAL EVENT SOURCING (CERO PERDIDA) -->
+        <mxCell id="box-eventsourcing" value="BASE TRANSACCIONAL DE EVENT SOURCING Y PROYECCIÓN ASÍNCRONA (Zero Data Loss on Deployments)" style="swimlane;startSize=30;horizontal=1;fillColor=#F8F9FA;strokeColor=#1D76DB;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="40" y="695" width="1720" height="565" as="geometry" />
+        </mxCell>
+
+        <!-- SUBPANEL: INGESTA Y DESACOPLAMIENTO CON DLQ -->
+        <mxCell id="box-ingesta-dlq" value="1. Ingesta Transaccional y Cola de Desacoplamiento (DLQ)&#xa;Protección Absoluta contra Pérdida de Eventos en Despliegues&#xa;&#xa;- API Gateway HTTPS TLS 1.3 con validación de schema OpenAPI 3.0&#xa;- Autenticación estricta: Cognito JWT (móvil) o IAM SigV4 (acopios)&#xa;- Amazon SQS Buffer FIFO: Cola con MessageDeduplicationId;&#xa;  absorbe picos de cosecha de hasta 1.200 sacos/día y tráfico ráfaga&#xa;- AWS Lambda Ingesta: Ejecución con concurrencia reservada;&#xa;  procesa micro-lotes de eventos con reintentos exponenciales automáticos&#xa;- Amazon SQS Dead Letter Queue (DLQ): Mensajes fallidos retenidos 14 días;&#xa;  alarma CloudWatch inmediata ante DLQ &gt; 0; cero eventos descartados" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FF9900;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-eventsourcing">
+          <mxGeometry x="25" y="50" width="510" height="230" as="geometry" />
+        </mxCell>
+
+        <!-- SUBPANEL: ALMACEN INMUTABLE DE EVENTOS (EVENT STORE) -->
+        <mxCell id="box-event-store" value="2. Almacén Inmutable de Eventos (Event Store): sacos_eventos&#xa;Amazon DynamoDB con Cifrado KMS CMK y Retención 5 Años WORM&#xa;&#xa;- Clave de Partición (PK): SacoID (Token SACO-2026-CAU-7F3A9C12)&#xa;- Clave de Ordenamiento (SK): TimestampISO#Version (ej. 2026-11-06T10:15:00Z#001)&#xa;- Modelo Append-Only: Quedan estrictamente prohibidos los UpdateItem;&#xa;  cada cambio operativo se inserta como un nuevo ítem inmutable&#xa;- Atributos por Evento: EventoID, TipoEvento, ActorID, RolActor, UbicacionID,&#xa;  DatosEvento (JSON cifrado), HashCriptografico, FirmaDigital&#xa;- Point-in-Time Recovery (PITR): Activado para RPO a nivel de segundo&#xa;- Retención Legal: Atributo TTL a 1.825 días (5 años bajo Ley 1581)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-eventsourcing">
+          <mxGeometry x="560" y="50" width="560" height="230" as="geometry" />
+        </mxCell>
+
+        <!-- SUBPANEL: PROYECCIONES DESACOPLADAS (READ MODELS) -->
+        <mxCell id="box-projections" value="3. Proyecciones Asíncronas (DynamoDB Streams + Lambda)&#xa;Segregación Física de Vistas Operativas y de Consulta Pública&#xa;&#xa;- DynamoDB Streams en sacos_eventos: Emite registro NEW_IMAGE&#xa;- AWS Lambda Proyector (cuenta Prod): Actualiza materializaciones:&#xa;  * sacos_cafe (Vista Transaccional Interna): Aloja el estado actual&#xa;    consolidado del saco para acopios, caficultor y transportador.&#xa;  * sacos_publicos (Vista Proyectada del Comprador): Tabla NoSQL&#xa;    físicamente desprovista de columnas de datos personales (sin cédula,&#xa;    sin nombre, sin coordenadas submétricas, sin tracking intermedio).&#xa;- Replay Idempotente: Si se recompila una proyección, se reprocesan&#xa;  todos los eventos desde el origen sin inconsistencias ni duplicaciones" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-eventsourcing">
+          <mxGeometry x="1145" y="50" width="550" height="230" as="geometry" />
+        </mxCell>
+
+        <!-- SUBPANEL INFERIOR: RESILIENCIA EN DESPLIEGUES Y ZERO DATA LOSS -->
+        <mxCell id="box-resilience-deploy" value="POLÍTICA DE DESPLIEGUES DE CERO PÉRDIDA DE DATOS Y GOBERNANZA OPERACIONAL&#xa;&#xa;1. Despliegues Inmutables Canary y Blue/Green: Toda actualización de Lambdas o microservicios se realiza mediante AWS CodeDeploy con tráfico progresivo (Canary10Percent5Minutes). Si se detecta un error 5xx, el despliegue revierte de forma automática en menos de 30 segundos.&#xa;2. Persistencia Garantizada en Despliegue: Durante el corte o actualización de una Lambda consumidora, los eventos entrantes se acumulan en Amazon SQS o en el log de DynamoDB Streams (retención garantizada de hasta 24 horas). Ningún evento de pesaje o cambio de estado se pierde.&#xa;3. Idempotencia Rigurosa: Todo evento transporta un identificador único (EventoID UUID v4). La base transaccional aplica expresiones condicionales (attribute_not_exists(SK)) impidiendo duplicar transacciones ante reintentos de red en campo.&#xa;4. Ventana de Congelamiento en Cosecha: Quedan terminantemente prohibidos los despliegues no emergentes a producción entre las 05:00 y las 18:00 horas durante las semanas de cosecha cafetera en Cauca, Huila y Tolima." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=15;spacingTop=10;fontColor=#232F3E;" vertex="1" parent="box-eventsourcing">
+          <mxGeometry x="25" y="300" width="1670" height="235" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

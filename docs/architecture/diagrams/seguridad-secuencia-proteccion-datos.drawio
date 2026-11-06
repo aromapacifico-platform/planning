@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" compressed="false">
+  <diagram id="secuencia-proteccion-datos" name="Secuencia de Proteccion de Datos y Consulta del Saco">
+    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1400" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TITULO PRINCIPAL -->
+        <mxCell id="title" value="AromaPacífico - Diagrama de Secuencia: Ciclo de Protección de Datos, Tokenización y Consulta del Saco" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="250" y="30" width="1300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Flujo End-to-End desde Alta en Finca, Tokenización HMAC-SHA-256 sin PII, Proyección Pública Segregada y Consulta Web bajo Ley 1581" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
+          <mxGeometry x="250" y="70" width="1300" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- PANEL DE RESUMEN NORMATIVO -->
+        <mxCell id="box-norm" value="INVARIANTES DEL FLUJO DE DATOS Y PRIVACIDAD DEL PRODUCTOR (Ley Estatutaria 1581 de 2012)&#xa;1. Generación Unidireccional del Código de Saco: SACO-YYYY-DEPTO-HASH8 generado mediante HMAC-SHA-256 + Salt secreta rotada en KMS. Imposible revertir a cédula o finca.&#xa;2. Proyección Segregada Asíncrona: La tabla de consulta pública es físicamente independiente de la tabla maestra; DynamoDB Streams sanitiza y purga toda PII en tiempo real.&#xa;3. Consulta Pública Protegida: Comprador internacional visualiza exclusivamente calidad de secado, variedad, origen departamental y estado logístico final." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#0E8A16;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=15;spacingTop=10;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="50" y="110" width="1700" height="95" as="geometry" />
+        </mxCell>
+
+        <!-- PARTICIPANTES DEL DIAGRAMA DE SECUENCIA (LIFELINES) -->
+        <!-- 1. CAFICULTOR -->
+        <mxCell id="p1-head" value="Caficultor&#xa;(App Móvil Finca)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="70" y="230" width="160" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-line" value="" style="endArrow=none;dashed=1;strokeColor=#0E8A16;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="150" y="285" as="sourcePoint" />
+            <mxPoint x="150" y="1320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- 2. API GATEWAY / INGESTA -->
+        <mxCell id="p2-head" value="API Gateway / Ingesta&#xa;(HTTPS TLS 1.3)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="290" y="230" width="180" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-line" value="" style="endArrow=none;dashed=1;strokeColor=#1D76DB;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="380" y="285" as="sourcePoint" />
+            <mxPoint x="380" y="1320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- 3. TOKENIZADOR CRIPTOGRAFICO & KMS -->
+        <mxCell id="p3-head" value="Tokenizador &amp; KMS&#xa;(Lambda + HMAC-SHA-256)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="540" y="230" width="190" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-line" value="" style="endArrow=none;dashed=1;strokeColor=#FF9900;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="635" y="285" as="sourcePoint" />
+            <mxPoint x="635" y="1320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- 4. DYNAMODB MASTER SACOS -->
+        <mxCell id="p4-head" value="DynamoDB Master&#xa;(Tabla sacos_cafe - Cifrada)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="790" y="230" width="190" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="p4-line" value="" style="endArrow=none;dashed=1;strokeColor=#FF9900;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="885" y="285" as="sourcePoint" />
+            <mxPoint x="885" y="1320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- 5. DYNAMODB STREAMS & PROYECCION -->
+        <mxCell id="p5-head" value="Streams &amp; Sanitizador&#xa;(Lambda Proyección PII)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="230" width="190" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="p5-line" value="" style="endArrow=none;dashed=1;strokeColor=#D93F0B;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1135" y="285" as="sourcePoint" />
+            <mxPoint x="1135" y="1320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- 6. DYNAMODB PROYECCION PUBLICA -->
+        <mxCell id="p6-head" value="DynamoDB Pública&#xa;(Tabla sacos_publicos)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="230" width="180" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="p6-line" value="" style="endArrow=none;dashed=1;strokeColor=#0E8A16;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1380" y="285" as="sourcePoint" />
+            <mxPoint x="1380" y="1320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- 7. COMPRADOR INTERNACIONAL -->
+        <mxCell id="p7-head" value="Comprador / Web&#xa;(Internet Pública)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="1530" y="230" width="170" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="p7-line" value="" style="endArrow=none;dashed=1;strokeColor=#1D76DB;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1615" y="285" as="sourcePoint" />
+            <mxPoint x="1615" y="1320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- MENSAJES DE SECUENCIA PASO A PASO -->
+        <!-- FASE 1: REGISTRO Y TOKENIZACION -->
+        <!-- PASO 1 -->
+        <mxCell id="msg-1" value="1. POST /api/v1/sacos (Peso: 60 kg, Lote, Variedad, Secado: 12%, Cédula) [HTTPS TLS 1.3]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
+          <mxGeometry x="0.05" y="10" relative="1" as="geometry">
+            <mxPoint x="150" y="320" as="sourcePoint" />
+            <mxPoint x="380" y="320" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- PASO 2 -->
+        <mxCell id="msg-2" value="2. Solicitar Tokenización Segura (FincaID, Depto, LoteID, Timestamp, Nonce)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
+          <mxGeometry x="0.05" y="10" relative="1" as="geometry">
+            <mxPoint x="380" y="370" as="sourcePoint" />
+            <mxPoint x="635" y="370" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- PASO 3: CAJA DE PROCESO CRIPTOGRAFICO EN TOKENIZADOR -->
+        <mxCell id="box-hmac" value="Cálculo Criptográfico Unidireccional:&#xa;Digest = HMAC-SHA-256(Salt_KMS, FincaID || LoteID || Timestamp || Nonce)&#xa;Hash8 = Substring(Hex(Digest), 0, 8)&#xa;Código Canónico: SACO-2026-CAU-7F3A9C12&#xa;(Irreversible: No se puede deducir la cédula ni coordenadas de finca)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="500" y="415" width="460" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- PASO 4 -->
+        <mxCell id="msg-3" value="3. Retornar Código Canónico SACO-2026-CAU-7F3A9C12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FF9900;strokeWidth=2;dashed=1;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
+          <mxGeometry x="0.05" y="-10" relative="1" as="geometry">
+            <mxPoint x="635" y="550" as="sourcePoint" />
+            <mxPoint x="380" y="550" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- PASO 5: PERSISTENCIA MASTER -->
+        <mxCell id="msg-4" value="4. PutItem (Master: Código, FincaID, Cédula Enmascarada CC *****4821, Secado, Peso) [KMS CMK]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
+          <mxGeometry x="0.05" y="10" relative="1" as="geometry">
+            <mxPoint x="380" y="600" as="sourcePoint" />
+            <mxPoint x="885" y="600" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- PASO 6: RESPUESTA AL CAFICULTOR -->
+        <mxCell id="msg-5" value="5. 201 Created (Código Generado: SACO-2026-CAU-7F3A9C12 registrado exitosamente)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0E8A16;strokeWidth=2;dashed=1;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
+          <mxGeometry x="0.05" y="-10" relative="1" as="geometry">
+            <mxPoint x="380" y="650" as="sourcePoint" />
+            <mxPoint x="150" y="650" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- FASE 2: PROYECCION ASINCRONA Y SANITIZACION PII -->
+        <!-- PASO 7 -->
+        <mxCell id="msg-6" value="6. DynamoDB Stream Event (INSERT NewImage)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
+          <mxGeometry x="0.05" y="10" relative="1" as="geometry">
+            <mxPoint x="885" y="700" as="sourcePoint" />
+            <mxPoint x="1135" y="700" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- CAJA DE SANITIZACION -->
+        <mxCell id="box-sanitizer" value="Filtro Sanitizador de Privacidad (Ley 1581 de 2012):&#xa;- Extracción de atributos seguros: Código, Depto (Cauca), Municipio (Popayán),&#xa;  Variedad (Castillo), Humedad (11.8%), Temperatura (21 grados Celsius), Estado (En Preparación).&#xa;- Purga Absoluta: Se eliminan cedula_caficultor, nombre, telefono, coordenadas_gps.&#xa;- Proyección Sanitizada lista para consumo abierto en internet." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5F5;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="740" width="460" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- PASO 8 -->
+        <mxCell id="msg-7" value="7. PutItem (Proyección Pública Segregada: sacos_publicos) [Cero PII]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
+          <mxGeometry x="0.05" y="10" relative="1" as="geometry">
+            <mxPoint x="1135" y="875" as="sourcePoint" />
+            <mxPoint x="1380" y="875" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- FASE 3: CONSULTA PUBLICA DEL COMPRADOR INTERNACIONAL -->
+        <!-- PASO 9 -->
+        <mxCell id="msg-8" value="8. GET /v1/sacos/SACO-2026-CAU-7F3A9C12 (Consulta Pública Internacional) [HTTPS TLS 1.3]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
+          <mxGeometry x="0.05" y="10" relative="1" as="geometry">
+            <mxPoint x="1615" y="935" as="sourcePoint" />
+            <mxPoint x="380" y="935" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- PASO 10 -->
+        <mxCell id="msg-9" value="9. GetItem (Consulta directa y exclusiva a tabla sacos_publicos)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
+          <mxGeometry x="0.05" y="10" relative="1" as="geometry">
+            <mxPoint x="380" y="985" as="sourcePoint" />
+            <mxPoint x="1380" y="985" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- PASO 11 -->
+        <mxCell id="msg-10" value="10. Retornar Entidad Sanitizada (Origen: Cauca/Popayán, Humedad: 11.8%, Estado: Aceptado)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0E8A16;strokeWidth=2;dashed=1;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
+          <mxGeometry x="0.05" y="-10" relative="1" as="geometry">
+            <mxPoint x="1380" y="1035" as="sourcePoint" />
+            <mxPoint x="380" y="1035" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- PASO 12 -->
+        <mxCell id="msg-11" value="11. 200 OK (JSON Limpio de Vista de Comprador: CERO Cédula, CERO Rutas de Transportador)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D76DB;strokeWidth=2;dashed=1;fontSize=12;fontColor=#232F3E;" edge="1" parent="1">
+          <mxGeometry x="0.05" y="-10" relative="1" as="geometry">
+            <mxPoint x="380" y="1085" as="sourcePoint" />
+            <mxPoint x="1615" y="1085" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- PANEL DE VERIFICACION FINAL INFERIOR -->
+        <mxCell id="box-verif" value="PROPIEDADES PROBATORIAS DEL SISTEMA DE PRIVACIDAD:&#xa;1. Segregación de Vistas por Perfil: El Caficultor visualiza sus fincas; el Acopio visualiza el viaje del transportador; el Comprador visualiza solo calidad y origen.&#xa;2. Inmutabilidad y Auditoría: Modificaciones de estado en acopio generan versión inmutable preservada por 5 años (1.825 días) bajo S3 Object Lock en cuenta Security.&#xa;3. Resiliencia RTO / RPO: Réplica en región us-east-2 (Ohio) garantiza RPO de 15 minutos y RTO de 4 horas para la consulta pública del saco." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAEDED;strokeColor=#545B64;strokeWidth=2;fontSize=12;align=left;spacingLeft=15;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="50" y="1170" width="1700" height="95" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
