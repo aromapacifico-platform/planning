@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" compressed="false">
+  <diagram id="matriz-campos-vistas" name="Matriz de Campos y Vistas Segregadas del Saco">
+    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1300" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TITULO PRINCIPAL -->
+        <mxCell id="title" value="AromaPacífico - Matriz de Segregación de Campos del Saco y Vistas por Perfil" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="300" y="30" width="1200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Protección de Datos Personales (Ley 1581 de 2012): Segregación de Atributos entre Comprador, Centro de Acopio y Caficultor" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
+          <mxGeometry x="300" y="70" width="1200" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- PANEL IZQUIERDO: ESPECIFICACION DE TOKENIZACION DEL CODIGO -->
+        <mxCell id="sec-token" value="ESTRUCTURA Y TOKENIZACIÓN DEL CÓDIGO DE SACO (60 KG)&#xa;Algoritmo Criptográfico Unidireccional sin Exposición de Cédula ni Finca&#xa;&#xa;Formato Canónico Oficial:&#xa;SACO-[AÑO]-[DEPTO]-[HASH8]  -->  Ejemplo: SACO-2026-CAU-7F3A9C12&#xa;&#xa;Fórmula Criptográfica:&#xa;Digest = HMAC-SHA-256( Salt_KMS, FincaID || LoteID || Timestamp || Nonce )&#xa;Hash8  = Substring( Hex(Digest), 0, 8 )&#xa;&#xa;Propiedades de Seguridad:&#xa;1. Irreversibilidad Matemática: Es imposible deducir la cédula o coordenadas a partir del hash.&#xa;2. Resistencia a Colisiones: 2^32 combinaciones únicas por departamento y año (> 4.290 millones).&#xa;3. No-Correlación Pública: Dos sacos de la misma finca poseen identificadores completamente disjuntos." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#1D76DB;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=15;spacingTop=12;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="50" y="115" width="820" height="235" as="geometry" />
+        </mxCell>
+
+        <!-- PANEL DERECHO: PRINCIPIO DE ACCESO SEGMENTADO -->
+        <mxCell id="sec-segregation" value="PRINCIPIOS DE ACCESO SEGMENTADO (Privacy by Design)&#xa;Garantía Legal de Privacidad bajo la Ley Estatutaria 1581 de 2012&#xa;&#xa;1. Vista del Comprador Internacional (Web Pública):&#xa;   - Acceso exclusivo a calidad agronómica: variedad, humedad de secado, procedencia regional.&#xa;   - Bloqueo categórico de PII: ni cédula, ni nombre, ni coordenadas GPS, ni rutas de transporte.&#xa;&#xa;2. Vista del Centro de Acopio (LAN Operativa con MFA):&#xa;   - Acceso operativo a pesaje, estado del saco, viaje asignado e historial de secado del lote.&#xa;   - Cédula de caficultor enmascarada (solo últimos 4 dígitos visibles para verificación documental).&#xa;&#xa;3. Vista del Caficultor (App Móvil en Finca):&#xa;   - Visualización íntegra de sus propias fincas, lotes, sacos creados y alertas fitosanitarias.&#xa;   - Aislamiento absoluto: denegación estricta de acceso a fincas de otros productores." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#0E8A16;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=15;spacingTop=12;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="900" y="115" width="850" height="235" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR PRINCIPAL: MATRIZ DE CAMPOS VS PERFILES -->
+        <mxCell id="box-matrix" value="MATRIZ DETALLADA DE CAMPOS DEL EXPEDIENTE DEL SACO VS PERFILES AUTORIZADOS" style="swimlane;startSize=30;horizontal=1;fillColor=#EAEDED;strokeColor=#545B64;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="50" y="375" width="1700" height="865" as="geometry" />
+        </mxCell>
+
+        <!-- ENCABEZADOS DE LA MATRIZ -->
+        <mxCell id="th-campo" value="Atributo / Campo de Datos" style="rounded=0;fillColor=#232F3E;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="20" y="45" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="th-tipo" value="Clasificación Legal" style="rounded=0;fillColor=#232F3E;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="310" y="45" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="th-comprador" value="Comprador Internacional&#xa;(Web Pública / API)" style="rounded=0;fillColor=#1D76DB;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="520" y="45" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="th-acopio" value="Operario Centro Acopio&#xa;(LAN Privada + MFA)" style="rounded=0;fillColor=#D93F0B;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="810" y="45" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="th-caficultor" value="Caficultor Propietario&#xa;(App Móvil en Finca)" style="rounded=0;fillColor=#0E8A16;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="1100" y="45" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="th-justif" value="Regla de Control y Justificación" style="rounded=0;fillColor=#232F3E;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="1390" y="45" width="290" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- FILAS DE LA MATRIZ -->
+        <!-- 1. CODIGO DE SACO -->
+        <mxCell id="f1-nom" value="codigo_saco (Token Canónico)" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;fontStyle=1;" vertex="1" parent="box-matrix">
+          <mxGeometry x="20" y="80" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f1-tip" value="Dato Público Industrial" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="310" y="80" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f1-com" value="VISIBLE (SACO-2026-CAU-7F3A9C12)" style="rounded=0;fillColor=#EBF3FB;fontSize=12;align=center;fontStyle=1;fontColor=#1D76DB;" vertex="1" parent="box-matrix">
+          <mxGeometry x="520" y="80" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f1-aco" value="VISIBLE (Lectura código de barras)" style="rounded=0;fillColor=#FFF5F5;fontSize=12;align=center;fontStyle=1;fontColor=#D93F0B;" vertex="1" parent="box-matrix">
+          <mxGeometry x="810" y="80" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f1-caf" value="VISIBLE (Sacos de su beneficiadero)" style="rounded=0;fillColor=#F0FFF4;fontSize=12;align=center;fontStyle=1;fontColor=#0E8A16;" vertex="1" parent="box-matrix">
+          <mxGeometry x="1100" y="80" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f1-jus" value="Clave primaria universal del expediente" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-matrix">
+          <mxGeometry x="1390" y="80" width="290" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- 2. ORIGEN REGIONAL -->
+        <mxCell id="f2-nom" value="departamento / municipio" style="rounded=0;fillColor=#F8F9FA;fontSize=12;align=left;spacingLeft=8;fontStyle=1;" vertex="1" parent="box-matrix">
+          <mxGeometry x="20" y="125" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f2-tip" value="Dato Público de Origen" style="rounded=0;fillColor=#F8F9FA;fontSize=12;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="310" y="125" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f2-com" value="VISIBLE (Cauca / Popayán)" style="rounded=0;fillColor=#EBF3FB;fontSize=12;align=center;fontStyle=1;fontColor=#1D76DB;" vertex="1" parent="box-matrix">
+          <mxGeometry x="520" y="125" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f2-aco" value="VISIBLE (Asignación departamental)" style="rounded=0;fillColor=#FFF5F5;fontSize=12;align=center;fontStyle=1;fontColor=#D93F0B;" vertex="1" parent="box-matrix">
+          <mxGeometry x="810" y="125" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f2-caf" value="VISIBLE (Municipio de su finca)" style="rounded=0;fillColor=#F0FFF4;fontSize=12;align=center;fontStyle=1;fontColor=#0E8A16;" vertex="1" parent="box-matrix">
+          <mxGeometry x="1100" y="125" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f2-jus" value="Indicación geográfica y denominación origen" style="rounded=0;fillColor=#F8F9FA;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-matrix">
+          <mxGeometry x="1390" y="125" width="290" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- 3. VARIABLES DE SECADO -->
+        <mxCell id="f3-nom" value="humedad_secado / temp_secado" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;fontStyle=1;" vertex="1" parent="box-matrix">
+          <mxGeometry x="20" y="170" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f3-tip" value="Dato Técnico Agronómico" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="310" y="170" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f3-com" value="VISIBLE (11.8% / 21 grados Celsius)" style="rounded=0;fillColor=#EBF3FB;fontSize=12;align=center;fontStyle=1;fontColor=#1D76DB;" vertex="1" parent="box-matrix">
+          <mxGeometry x="520" y="170" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f3-aco" value="VISIBLE (Control de calidad de lote)" style="rounded=0;fillColor=#FFF5F5;fontSize=12;align=center;fontStyle=1;fontColor=#D93F0B;" vertex="1" parent="box-matrix">
+          <mxGeometry x="810" y="170" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f3-caf" value="VISIBLE (Curva de secado de lote)" style="rounded=0;fillColor=#F0FFF4;fontSize=12;align=center;fontStyle=1;fontColor=#0E8A16;" vertex="1" parent="box-matrix">
+          <mxGeometry x="1100" y="170" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f3-jus" value="Certificación de humedad cercana al 12%" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-matrix">
+          <mxGeometry x="1390" y="170" width="290" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- 4. ESTADOS DEL SACO -->
+        <mxCell id="f4-nom" value="estado_saco (5 Estados)" style="rounded=0;fillColor=#F8F9FA;fontSize=12;align=left;spacingLeft=8;fontStyle=1;" vertex="1" parent="box-matrix">
+          <mxGeometry x="20" y="215" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f4-tip" value="Dato Operativo Público" style="rounded=0;fillColor=#F8F9FA;fontSize=12;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="310" y="215" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f4-com" value="VISIBLE (Entregado Puerto - Aceptado)" style="rounded=0;fillColor=#EBF3FB;fontSize=12;align=center;fontStyle=1;fontColor=#1D76DB;" vertex="1" parent="box-matrix">
+          <mxGeometry x="520" y="215" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f4-aco" value="VISIBLE Y MUTABLE (Pesaje/Aceptado)" style="rounded=0;fillColor=#FFF5F5;fontSize=12;align=center;fontStyle=1;fontColor=#D93F0B;" vertex="1" parent="box-matrix">
+          <mxGeometry x="810" y="215" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f4-caf" value="VISIBLE (Tracking de entrega)" style="rounded=0;fillColor=#F0FFF4;fontSize=12;align=center;fontStyle=1;fontColor=#0E8A16;" vertex="1" parent="box-matrix">
+          <mxGeometry x="1100" y="215" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f4-jus" value="Trazabilidad del ciclo de vida del grano" style="rounded=0;fillColor=#F8F9FA;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-matrix">
+          <mxGeometry x="1390" y="215" width="290" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- 5. CEDULA CAFICULTOR -->
+        <mxCell id="f5-nom" value="cedula_caficultor (PII Sensible)" style="rounded=0;fillColor=#FFF5F5;fontSize=12;align=left;spacingLeft=8;fontStyle=1;fontColor=#D93F0B;" vertex="1" parent="box-matrix">
+          <mxGeometry x="20" y="260" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f5-tip" value="Dato Personal (Ley 1581)" style="rounded=0;fillColor=#FFF5F5;fontSize=12;align=center;fontColor=#D93F0B;" vertex="1" parent="box-matrix">
+          <mxGeometry x="310" y="260" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f5-com" value="BLOQUEADO (Cero Visibilidad)" style="rounded=0;fillColor=#FFEBEE;fontSize=12;align=center;fontStyle=1;fontColor=#C62828;" vertex="1" parent="box-matrix">
+          <mxGeometry x="520" y="260" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f5-aco" value="ENMASCARADO (CC *****4821)" style="rounded=0;fillColor=#FFF3E0;fontSize=12;align=center;fontStyle=1;fontColor=#EF6C00;" vertex="1" parent="box-matrix">
+          <mxGeometry x="810" y="260" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f5-caf" value="VISIBLE (Su propia cédula)" style="rounded=0;fillColor=#F0FFF4;fontSize=12;align=center;fontStyle=1;fontColor=#0E8A16;" vertex="1" parent="box-matrix">
+          <mxGeometry x="1100" y="260" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f5-jus" value="Prohibición estricta de exposición pública" style="rounded=0;fillColor=#FFF5F5;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-matrix">
+          <mxGeometry x="1390" y="260" width="290" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- 6. FINCA_ID Y COORDENADAS GPS -->
+        <mxCell id="f6-nom" value="finca_id / coordenadas_gps" style="rounded=0;fillColor=#FFF5F5;fontSize=12;align=left;spacingLeft=8;fontStyle=1;fontColor=#D93F0B;" vertex="1" parent="box-matrix">
+          <mxGeometry x="20" y="305" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f6-tip" value="Dato Privado de Ubicación" style="rounded=0;fillColor=#FFF5F5;fontSize=12;align=center;fontColor=#D93F0B;" vertex="1" parent="box-matrix">
+          <mxGeometry x="310" y="305" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f6-com" value="BLOQUEADO (Cero Visibilidad)" style="rounded=0;fillColor=#FFEBEE;fontSize=12;align=center;fontStyle=1;fontColor=#C62828;" vertex="1" parent="box-matrix">
+          <mxGeometry x="520" y="305" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f6-aco" value="SEUDONIMIZADO (FINCA-CAUCA-012)" style="rounded=0;fillColor=#FFF3E0;fontSize=12;align=center;fontStyle=1;fontColor=#EF6C00;" vertex="1" parent="box-matrix">
+          <mxGeometry x="810" y="305" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f6-caf" value="VISIBLE (Nombre y linderos propios)" style="rounded=0;fillColor=#F0FFF4;fontSize=12;align=center;fontStyle=1;fontColor=#0E8A16;" vertex="1" parent="box-matrix">
+          <mxGeometry x="1100" y="305" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f6-jus" value="Protección de seguridad física del productor" style="rounded=0;fillColor=#FFF5F5;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-matrix">
+          <mxGeometry x="1390" y="305" width="290" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- 7. DATOS DE TRANSPORTE Y VIAJE -->
+        <mxCell id="f7-nom" value="transportador_id / ruta_gps" style="rounded=0;fillColor=#FFF5F5;fontSize=12;align=left;spacingLeft=8;fontStyle=1;fontColor=#D93F0B;" vertex="1" parent="box-matrix">
+          <mxGeometry x="20" y="350" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f7-tip" value="Dato Logístico Privado" style="rounded=0;fillColor=#FFF5F5;fontSize=12;align=center;fontColor=#D93F0B;" vertex="1" parent="box-matrix">
+          <mxGeometry x="310" y="350" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f7-com" value="BLOQUEADO (Cero Visibilidad)" style="rounded=0;fillColor=#FFEBEE;fontSize=12;align=center;fontStyle=1;fontColor=#C62828;" vertex="1" parent="box-matrix">
+          <mxGeometry x="520" y="350" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f7-aco" value="VISIBLE (Viaje, camión, conductor)" style="rounded=0;fillColor=#FFF5F5;fontSize=12;align=center;fontStyle=1;fontColor=#D93F0B;" vertex="1" parent="box-matrix">
+          <mxGeometry x="810" y="350" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f7-caf" value="BLOQUEADO (Solo ve estado en viaje)" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=center;fontColor=#555555;" vertex="1" parent="box-matrix">
+          <mxGeometry x="1100" y="350" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f7-jus" value="Seguridad logística en carretera nacional" style="rounded=0;fillColor=#FFF5F5;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-matrix">
+          <mxGeometry x="1390" y="350" width="290" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- PANEL DE RESUMEN INFERIOR -->
+        <mxCell id="box-audit-summary" value="POLÍTICA DE RETENCIÓN Y AUDITORÍA INMUTABLE:&#xa;1. Retención Legal Obligatoria: 5 años (1.825 días) inmutables en DynamoDB y S3 Object Lock en cuenta Security.&#xa;2. Anonimización por Separación Física: La tabla sacos_publicos jamás aloja columnas de PII; el modelo previene fugas por errores de serialización.&#xa;3. Respaldo y RPO: Eventos de saco cuentan con RPO de 15 minutos mediante réplica cruzada hacia us-east-2 (Ohio)." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#545B64;strokeWidth=2;fontSize=12;align=left;spacingLeft=15;fontColor=#232F3E;" vertex="1" parent="box-matrix">
+          <mxGeometry x="20" y="405" width="1660" height="90" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
