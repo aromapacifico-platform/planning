@@ -19,7 +19,7 @@ El servicio cubre las 200 fincas cafeteras distribuidas en los departamentos de 
 El pliego del reto define cinco servicios obligatorios que articulan la totalidad del ciclo de vida agronómico del cultivo. Cada servicio cumple un propósito funcional específico e independiente; **ningún servicio sustituye, reemplaza o anula a otro**:
 
 | ID | Nombre del Servicio | Modo de Vuelo | Disparador Operativo | Entregable Técnico en Plataforma | Regla Bloqueante de Negocio |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | **S1** | **Delimitar el Lote** | Agricultura de Áreas | Onboarding de finca o modificación de linderos | Ortomosaico georreferenciado, perímetro GeoJSON y capas de zonas No-Fly | Sin delimitación aprobada en base de datos, queda terminantemente bloqueada cualquier orden de fumigación. |
 | **S2** | **Confirmar Alerta de Sensor** | Agricultura de Precisión | Lectura fuera de umbral emitida por sensor de suelo/clima (foco GPS) | Fotografía multiespectral o RGB de alta resolución del follaje en S3 | El dron vuela exclusivamente a las coordenadas del sensor; no sobrevuela la finca entera. |
 | **S3** | **Fumigación de Precisión** | Agricultura de Precisión | Orden digital formal autorizada y firmada por agrónomo con MFA | Registro telemático de aspersión, volumen dispersado y cierre de vuelo | Requiere lote delimitado, identificador de lote de agroquímico registrado ICA y firma humana obligatoria. |
@@ -29,20 +29,26 @@ El pliego del reto define cinco servicios obligatorios que articulan la totalida
 ### 2.1 Descripción Técnica Detallada por Servicio
 
 #### Servicio 1: Delimitación de Lote (Mapeo Inicial y Geocercas)
+
 El primer vuelo sobre cada una de las 200 fincas ejecuta una misión fotogramétrica con patrón de doble cuadrícula (grid) a una altura constante de 60 metros sobre el terreno (AGL), capturando imágenes ortogonales con solapamiento frontal del 75% y lateral del 70%. El procesamiento digital genera el ortomosaico de la finca y extrae dos conjuntos de geometrías:
+
 1. **Polígono Productivo del Lote**: Delimita con precisión submétrica la extensión sembrada en cafeto.
 2. **Zonas de Exclusión Aérea (No-Fly Zones)**: Geocercas obligatorias donde queda terminantemente prohibido el sobrevuelo rasante y la aspersión: viviendas campesinas, beneficiaderos de café, escuelas rurales, vías públicas y amortiguadores de 100 metros alrededor de cuerpos hídricos (quebradas, ríos y nacimientos). Estas coordenadas deben persistir en Amazon S3 y DynamoDB antes del despegue de cualquier misión posterior.
 
 #### Servicio 2: Confirmación de Alerta de Sensor (Vuelo Táctico Focalizado)
+
 Cuando un nodo IoT de campo reporta lecturas continuas fuera de rango (por ejemplo, humedad foliar superior al 85% durante 72 horas con temperatura media de 23 grados Celsius, condiciones que potencian la proliferación de *Hemileia vastatrix* o roya del café), la plataforma genera un vector de navegación táctico. El dron se desplaza a velocidad crucero directamente hacia las coordenadas GPS del nodo emisor y desciende a 5 metros de altura sobre el dosel vegetal para capturar tomas macro del haz y envés de las hojas. Este enfoque puntual minimiza el tiempo de vuelo a menos de 6 minutos, preservando la batería de la aeronave.
 
 #### Servicio 3: Fumigación de Precisión (Aspersión Ultra-Localizada)
+
 Aeronaves especializadas de aplicación de insumos (UAS con capacidad de carga útil de 20 a 40 litros de mezcla, con boquillas centrífugas de gota controlada por atomización rotativa) ejecutan la misión sobre el foco delimitado. La aplicación se restringe estrictamente al radio de afectación determinado por el agrónomo (típicamente de 0,2 a 0,5 hectáreas por foco), manteniendo apagadas las electroválvulas de paso al sobrevolar zonas de tránsito y respetando las geocercas No-Fly. El equipo registra el consumo de batería, la dosis por hectárea y el volumen total aplicado.
 
 #### Servicio 4: Verificación Post-Fumigación (Evidencia de Cierre de Caso)
+
 Cumplida la ventana de acción biológica del agroquímico (estandarizada entre 7 y 10 días calendario tras la aspersión), se despacha un vuelo de inspección para evaluar la contención de la esporulación de la plaga. La imagen capturada es procesada por el motor de inferencia serverless; si la densidad de signos visibles de infección decae por debajo del umbral crítico, el sistema propone el cierre. Si el archivo fotográfico no es transmitido por la cuadrilla o la inferencia arroja anomalías persistentes, la orden de fumigación no muta a estado cerrado y se convoca a re-inspección.
 
 #### Servicio 5: Estimación de Cosecha (Inteligencia Logística de Acopio)
+
 Aproximadamente 4 a 6 semanas antes del inicio de la recolección principal, se ejecuta un vuelo de área sobre las fincas del departamento con sensores multiespectrales o RGB de alta definición. Los algoritmos de clasificación identifican la tasa de frutos en maduración (grano cereza maduro vs. grano verde) y la densidad de carga por hectárea. Con estos parámetros, la plataforma calcula el número proyectado de sacos estándar de 60 kg que recibirá cada uno de los tres centros de acopio (Cauca, Huila y Tolima), permitiendo planificar con antelación el personal de patio, el inventario de sacos de fique, las hojas de rotulado y las rutas de transporte terrestre hacia el puerto de Buenaventura.
 
 ---
@@ -72,13 +78,14 @@ El enunciado exige seleccionar y sustentar la modalidad operativa entre agricult
 ### 4.1 Decisión: Modo Combinado (Híbrido Jerárquico)
 
 Se adopta formalmente el **Modo Combinado**:
+
 - **Agricultura de Áreas**: Empleada exclusivamente para el levantamiento inicial de delimitación (Servicio 1) y para la estimación de cosecha volumétrica (Servicio 5).
 - **Agricultura de Precisión**: Empleada para la confirmación táctica de la alerta (Servicio 2), la aspersión localizada del agroquímico (Servicio 3) y la verificación fotográfica de cierre (Servicio 4).
 
 ### 4.2 Matriz Comparativa de Modos de Operación
 
 | Criterio de Análisis | Opción A: Precisión Pura | Opción B: Áreas Pura | Opción Seleccionada: Modo Combinado |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Consumo de Agroquímicos y Toxicidad** | Mínimo. Aplica solo en foco delimitado (0,2 - 0,5 ha). | Inaceptable. Bañaría la finca completa con químicos innecesarios. | **Óptimo**. Aspersión focalizada al 100% en zonas afectadas. |
 | **Gasto Energético y Baterías UAS** | Muy bajo en plagas; insuficiente para planificar cosechas. | Excesivo. Requiere múltiples bancos de batería LiPo para cubrir 200 fincas. | **Equilibrado**. Vuelo extenso solo 2 veces al año; vuelos cortos para incidentes. |
 | **Capacidad de Estimación de Cosecha** | Nula. Un vuelo puntual no permite proyectar sacos por departamento. | Óptima. Cubre la totalidad de hectáreas del piloto. | **Completa**. Mapea volumen de sacos con Servicio 5 sin dispersar químicos. |
@@ -105,6 +112,7 @@ El diseño responde explícitamente a las restricciones no técnicas del pliego:
 ### 5.1 Marco Normativo de la Aeronáutica Civil de Colombia (UAEAC)
 
 Las operaciones de aeronaves no tripuladas en Colombia se rigen por el **Reglamento Aeronáutico de Colombia (RAC 100)**:
+
 - **Clasificación de la Operación**: Se inscribe bajo la **Categoría Específica (Specific Category)**. Esta categorización es mandatoria debido a:
   1. *Masa Máxima de Despegue (MTOW)*: Las aeronaves de aspersión cargadas superan el límite de 25 kg (por ejemplo, equipos estándar de la industria como DJI Agras T40 / T50 o XAG P100 alcanzan entre 40 y 55 kg al despegue con tanque lleno).
   2. *Dispersión de Sustancias*: Transporte y aplicación de plaguicidas agrícolas, actividad tipificada como operación especial bajo supervisión de la autoridad aeronáutica y sanitaria.
@@ -115,7 +123,7 @@ Las operaciones de aeronaves no tripuladas en Colombia se rigen por el **Reglame
 ### 5.2 Modelo Operativo: Cuadrilla Especializada por Centro de Acopio
 
 | Criterio de Evaluación | Opción Seleccionada: Cuadrilla FNC en Acopios | Alternativa 1: Dron por Caficultor | Alternativa 2: Tercerización Libre No Coordinada |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Inversión por Finca (CapEx Caficultor) | $0 USD en hardware aéreo para el productor. | Inviable ($15.000-$25.000 USD estimados por finca según cotizaciones preliminares 2026; insumo a consolidar en Issue #30). | Variable y costosa por visita privada. |
 | Mantenimiento y Baterías | Centralizado en taller de acopio departamental con generador y cargador industrial. | Alto riesgo de falla, mala manipulación y degradación acelerada de celdas LiPo. | No estandarizado; sin trazabilidad de calibración de sensores. |
 | Cumplimiento Legal RAC 100 y Licencias ICA | 100% garantizado bajo pilotos colegiados FNC y póliza de seguro corporativa. | Imposible certificar y renovar licencias de 200 caficultores individuales. | Difícil auditoría de pilotos externos y riesgo de suspensión aeronáutica. |
@@ -130,6 +138,7 @@ Las operaciones de aeronaves no tripuladas en Colombia se rigen por el **Reglame
 > Queda terminantemente prohibido que un algoritmo de visión artificial, función Lambda o disparador serverless autorice una orden de fumigación. La autorización es **atribuible de forma exclusiva y no repudiable a una identidad humana registrada**: el **Agrónomo de la Federación Nacional de Cafeteros**.
 
 La orden digital emitida por el agrónomo a través de la plataforma incluye:
+
 1. `FincaID` y `LoteID` con polígonos verificados.
 2. Diagnóstico técnico y reporte de confianza de la inferencia IA.
 3. Identificador único del lote de agroquímico registrado ante el ICA y fecha de vencimiento.
@@ -146,6 +155,7 @@ A partir de las cifras oficiales del caso (200 fincas, 3 centros de acopio, camp
 ### 6.1 Calendario y Temporadas Agronómicas en Colombia
 
 En los departamentos de Cauca, Huila y Tolima, la fenología cafetera se distribuye típicamente en dos semestres:
+
 - **Temporada de Cosecha (Cosecha Principal y Mitaca)**: 6 meses al año (ejemplo: Abril a Junio, y Septiembre a Noviembre).
 - **Temporada Fuera de Cosecha (Mantenimiento y Desarrollo)**: 6 meses al año.
 
@@ -187,11 +197,11 @@ En los departamentos de Cauca, Huila y Tolima, la fenología cafetera se distrib
 ### 6.3 Matriz Consolidada de Vuelos Anuales y Mensuales
 
 | Servicio de Dron | Año 1 (Total) | Mes Pico Cosecha (200 Fincas) | Mes Fuera Cosecha (Línea Base Bajo Demanda) | Mes Fuera Cosecha (Campaña Concentrada) | Promedio por Acopio / Mes Pico |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | **S1. Delimitación Lote** | 200 | 0 (Completada) | 0 | 0 | 0 |
 | **S2. Confirmar Alerta** | 280 | 40 | ~6-7 | 20 | ~13 |
-| **S3. Fumigación Precisión**| 210 | 30 | ~5 | 15 | 10 |
-| **S4. Verificar Fumigación**| 210 | 30 | ~5 | 15 | 10 |
+| **S3. Fumigación Precisión** | 210 | 30 | ~5 | 15 | 10 |
+| **S4. Verificar Fumigación** | 210 | 30 | ~5 | 15 | 10 |
 | **S5. Estimar Cosecha** | 400 | ~67 (200 / 3 meses) | 0 | 0 | ~22 |
 | **Total Operaciones Aéreas** | **1.300** | **~167 vuelos/mes** | **~16-17 vuelos/mes** | **50 vuelos/mes** | **~55 vuelos/mes/acopio** |
 
@@ -223,7 +233,9 @@ La arquitectura de inferencia sigue un patrón serverless desacoplado sin servid
 > El diseño detallado del pipeline de inferencia, la configuración de eventos disparadores en S3, los mecanismos de reintento, colas de mensajes fallidos DLQ y el análisis de soberanía transfronteriza bajo la Ley 1581 de 2012 son objeto específico de las Historias de Usuario #16 (`e-funciones`) y #17 (`e-inferencia`). La presente sección define exclusivamente la compuerta perimetral de filtrado PII para garantizar que ninguna imagen con rostros o figuras humanas ingrese al pipeline fitosanitario de drones.
 
 #### Tratamiento Ético de Imágenes (Filtro Anti-PII)
+
 En cumplimiento estricto del régimen de protección de datos personales de Colombia (Ley Estatutaria 1581 de 2012):
+
 - Toda imagen capturada por drones ingresa a una función Lambda previa de filtrado que ejecuta la detección de rostros o personas (`DetectFaces` / `DetectLabels` con etiqueta `Person`).
 - Si una imagen contiene personas identificables (caficultores, jornaleros o transeúntes en vías adyacentes), **la imagen se excluye automáticamente del pipeline de inferencia agronómica** y es redirigida a un bucket en cuarentena con acceso restringido exclusivamente al oficial de seguridad de datos. No se almacena en el expediente público ni se transfiere fuera de la cuenta de seguridad.
 

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" compressed="false">
+  <diagram id="seguridad-personas" name="Arquitectura de Identidades de Personas y MFA">
+    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1300" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TITULO PRINCIPAL -->
+        <mxCell id="title" value="AromaPacífico - Arquitectura de Identidades de Personas, Autenticación y Control de Acceso" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="350" y="30" width="1100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Segregación de Perfiles Humanos: Amazon Cognito User Pool (Aplicaciones) vs AWS IAM Identity Center (Gobernanza Cloud) con MFA Obligatorio" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
+          <mxGeometry x="350" y="70" width="1100" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- PANEL SUPERIOR: COMPARATIVA Y GOBERNANZA DE IDENTIDADES -->
+        <mxCell id="sec-gov" value="GOBERNANZA DE IDENTIDADES HUMANAS (Zero Trust)&#xa;Segregación Categórica entre Usuarios de Aplicación y Operadores de Nube&#xa;&#xa;1. Amazon Cognito User Pool (Cuenta Producción):&#xa;   - Maneja los 5 perfiles operacionales de campo y clientes de negocio.&#xa;   - Tokens JWT estándar (ID Token, Access Token, Refresh Token) con expiración de 60 minutos.&#xa;   - Integración nativa con Amazon API Gateway y Application Load Balancers.&#xa;&#xa;2. AWS IAM Identity Center (Cuenta Raíz - Management):&#xa;   - Control de acceso exclusivo para ingenieros de plataforma, DevOps y auditores de seguridad.&#xa;   - Federación SAML 2.0 / OIDC con directorio corporativo y Permission Sets mínimos.&#xa;   - Sesiones temporales mediante AWS STS (máximo 4 horas) y trazabilidad total en CloudTrail." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#1D76DB;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=15;spacingTop=12;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="50" y="115" width="820" height="215" as="geometry" />
+        </mxCell>
+
+        <mxCell id="sec-mfa-policy" value="POLÍTICA DE AUTENTICACIÓN MULTIFACTOR (MFA)&#xa;Aplicación Mandatoria según Evaluación de Riesgo de Negocio&#xa;&#xa;Perfiles con MFA Obligatorio (Sin excepciones):&#xa;1. Operario de Acopio (Cognito): Previene manipulación de pesaje y recepción de sacos (hasta 400 sacos/día).&#xa;2. Operador de Drones (Cognito): Previene ejecución no autorizada de vuelos y firma de fumigación (RAC 100).&#xa;3. Operador de Plataforma (IAM Identity Center): Previene modificaciones perimetrales y de infraestructura IaC.&#xa;&#xa;Tecnología Seleccionada: Aplicaciones de Autenticación TOTP (RFC 6238) y Llaves de Seguridad FIDO2 / WebAuthn.&#xa;Justificación: Se rechaza SMS OTP por vulnerabilidad a SIM Swapping y nula cobertura celular en campo." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#D93F0B;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=15;spacingTop=12;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="900" y="115" width="850" height="215" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR PRINCIPAL: LOS SEIS PERFILES Y SUS RUTAS DE ACCESO -->
+        <mxCell id="box-profiles" value="MATRIZ DE PERFILES HUMANOS, AUTENTICACIÓN Y ROLES DE ACCESO SIN COMODINES" style="swimlane;startSize=30;horizontal=1;fillColor=#EAEDED;strokeColor=#545B64;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="50" y="355" width="1700" height="885" as="geometry" />
+        </mxCell>
+
+        <!-- FILA 1: PERFILES DE APLICACION MOVIL (CAFICULTOR Y TRANSPORTADOR) -->
+        <!-- PERFIL 1: CAFICULTOR -->
+        <mxCell id="prof-caficultor" value="1. Caficultor&#xa;App Caficultor (Móvil / Web)&#xa;&#xa;- Autenticación: Amazon Cognito&#xa;- MFA: Opcional (Recomendado)&#xa;- Credenciales: JWT Scopes&#xa;- Lectura: Telemetría de sus fincas,&#xa;  historial de alertas, estado de sus sacos.&#xa;- Escritura: Alta de sacos de 60 kg en finca.&#xa;- Restricción: No accede a fincas ajenas&#xa;  ni a consola AWS. Identidad sujeta a Ley 1581." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="box-profiles">
+          <mxGeometry x="25" y="45" width="255" height="210" as="geometry" />
+        </mxCell>
+
+        <!-- PERFIL 2: TRANSPORTADOR -->
+        <mxCell id="prof-transportador" value="2. Transportador&#xa;App Transportador (Móvil en Ruta)&#xa;&#xa;- Autenticación: Amazon Cognito&#xa;- MFA: Opcional (Recomendado)&#xa;- Credenciales: JWT Scopes&#xa;- Lectura: Rutas asignadas, sacos asignados&#xa;  a su vehículo, manifiestos de transporte.&#xa;- Escritura: Posición GPS cada 5 min, evento&#xa;  de custodia del saco en finca y acopio.&#xa;- Restricción: No visualiza datos personales&#xa;  del comprador ni umbrales agronómicos." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="box-profiles">
+          <mxGeometry x="305" y="45" width="255" height="210" as="geometry" />
+        </mxCell>
+
+        <!-- PERFIL 3: OPERARIO DE ACOPIO (CON MFA) -->
+        <mxCell id="prof-acopio" value="3. Operario de Acopio&#xa;Portal de Recepción en Acopio (LAN)&#xa;&#xa;- Autenticación: Amazon Cognito&#xa;- MFA: OBLIGATORIO (TOTP / WebAuthn)&#xa;- Credenciales: JWT con reclamo mfa=true&#xa;- Lectura: Manifiestos de entrada, datos de&#xa;  viaje, telemetría de secado del lote.&#xa;- Escritura: Recepción física, pesaje de sacos,&#xa;  aceptación/rechazo, impresión de etiquetas.&#xa;- Restricción: Conexión restringida a la&#xa;  VLAN de Logística (10.X.3.0/24) del acopio." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=3;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="box-profiles">
+          <mxGeometry x="585" y="45" width="255" height="210" as="geometry" />
+        </mxCell>
+
+        <!-- PERFIL 4: COMPRADOR INTERNACIONAL (SOLO LECTURA) -->
+        <mxCell id="prof-comprador" value="4. Comprador Internacional&#xa;Portal Web de Consulta Pública (Internet)&#xa;&#xa;- Autenticación: Cognito / Acceso Público&#xa;- MFA: No requerido (Consulta Pública)&#xa;- Credenciales: Token de lectura acotado&#xa;- Lectura: Código de saco, departamento/municipio,&#xa;  fechas de proceso, estado final y secado.&#xa;- Escritura: NINGUNA (Solo Lectura Estricta).&#xa;- Restricción: PROHIBIDO serializar cédula del&#xa;  caficultor ni geolocalización de transportador." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="box-profiles">
+          <mxGeometry x="865" y="45" width="255" height="210" as="geometry" />
+        </mxCell>
+
+        <!-- PERFIL 5: OPERADOR DE DRONES (CON MFA) -->
+        <mxCell id="prof-drones" value="5. Operador de Drones / Agrónomo&#xa;Tableta GCS y Estación de Vuelo (Field)&#xa;&#xa;- Autenticación: Amazon Cognito&#xa;- MFA: OBLIGATORIO (TOTP / FIDO2)&#xa;- Credenciales: JWT con rol drone_operator&#xa;- Lectura: Órdenes autorizadas, polígonos GeoJSON,&#xa;  zonas No-Fly, resultados de inferencia.&#xa;- Escritura: Carga de bitácoras de vuelo S3,&#xa;  subida de fotos S4, solicitud de cierre.&#xa;- Restricción: Prohibido autorizar órdenes sin&#xa;  firma de agrónomo colegiado FNC." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=3;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="box-profiles">
+          <mxGeometry x="1145" y="45" width="255" height="210" as="geometry" />
+        </mxCell>
+
+        <!-- PERFIL 6: OPERADOR DE PLATAFORMA / DEVOPS (CON MFA) -->
+        <mxCell id="prof-plataforma" value="6. Operador de Plataforma / DevOps&#xa;Consola AWS y CLI (Infraestructura)&#xa;&#xa;- Autenticación: AWS IAM Identity Center&#xa;- MFA: OBLIGATORIO (WebAuthn / YubiKey)&#xa;- Credenciales: Sesión STS asumida (máx 4h)&#xa;- Lectura: Métricas, CloudWatch, Config, VPCs.&#xa;- Escritura: Ejecución de Terraform plan/apply&#xa;  (con aprobación en Prod), rotación de llaves.&#xa;- Restricción: No accede a datos transaccionales&#xa;  directos ni puede eludir las SCPs de raíz." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FF9900;strokeWidth=3;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="box-profiles">
+          <mxGeometry x="1425" y="45" width="250" height="210" as="geometry" />
+        </mxCell>
+
+        <!-- CAPA INTERMEDIA: COMPUERTAS DE AUTENTICACION Y SERVICIOS AWS -->
+        <mxCell id="box-cognito" value="SERVICIO DE IDENTIDAD DE APLICACIÓN: AMAZON COGNITO USER POOL&#xa;Cuenta AWS: AromaPacifico-Prod (us-east-1) | Integración con Amazon API Gateway y ALB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EBF3FB;strokeColor=#1D76DB;strokeWidth=2;fontSize=13;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="box-profiles">
+          <mxGeometry x="25" y="280" width="1375" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box-sso" value="SERVICIO DE IDENTIDAD CLOUD: AWS IAM IDENTITY CENTER&#xa;Cuenta AWS: AromaPacifico-Root (Management) | Acceso Federado SSO Multi-Cuenta" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;fontSize=13;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="box-profiles">
+          <mxGeometry x="1425" y="280" width="250" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- MATRIZ DETALLADA DE RECURSOS Y OPERACIONES PERMITIDAS -->
+        <mxCell id="box-matrix" value="MATRIZ DETALLADA DE PERMISOS POR RECURSO Y ROL (POLÍTICAS SIN COMODINES)" style="swimlane;startSize=25;horizontal=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1;rounded=1;fontSize=12;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="box-profiles">
+          <mxGeometry x="25" y="375" width="1650" height="485" as="geometry" />
+        </mxCell>
+
+        <!-- ENCABEZADOS DE LA TABLA GRÁFICA -->
+        <mxCell id="th-rol" value="Perfil / Rol" style="rounded=0;fillColor=#232F3E;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="15" y="35" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="th-auth" value="Proveedor Auth" style="rounded=0;fillColor=#232F3E;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="180" y="35" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="th-mfa" value="MFA Exigido" style="rounded=0;fillColor=#232F3E;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="325" y="35" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="th-read" value="Acciones de Lectura Permitidas (Get / Query)" style="rounded=0;fillColor=#232F3E;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="460" y="35" width="370" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="th-write" value="Acciones de Escritura Permitidas (Put / Post / Update)" style="rounded=0;fillColor=#232F3E;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="835" y="35" width="410" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="th-recurso" value="ARN del Recurso Acotado (Cero Comodines * en Acciones)" style="rounded=0;fillColor=#232F3E;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="1250" y="35" width="385" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- FILA CAFICULTOR -->
+        <mxCell id="r1-rol" value="Caficultor" style="rounded=0;fillColor=#F8F9FA;fontSize=12;align=left;spacingLeft=8;fontStyle=1;" vertex="1" parent="box-matrix">
+          <mxGeometry x="15" y="70" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r1-auth" value="Cognito User Pool" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="180" y="70" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r1-mfa" value="Opcional&#xa;(Recomendado)" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="325" y="70" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r1-read" value="dynamodb:GetItem, dynamodb:Query&#xa;s3:GetObject (Pre-signed URL fotos lote)" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-matrix">
+          <mxGeometry x="460" y="70" width="370" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r1-write" value="dynamodb:PutItem (Registro inicial de saco de 60 kg)&#xa;execute-api:Invoke (Crear evento finca)" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-matrix">
+          <mxGeometry x="835" y="70" width="410" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r1-recurso" value="arn:aws:dynamodb:us-east-1:*:table/telemetria_cultivo&#xa;arn:aws:dynamodb:us-east-1:*:table/sacos_cafe (FincaID=${sub})" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=6;" vertex="1" parent="box-matrix">
+          <mxGeometry x="1250" y="70" width="385" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- FILA TRANSPORTADOR -->
+        <mxCell id="r2-rol" value="Transportador" style="rounded=0;fillColor=#F8F9FA;fontSize=12;align=left;spacingLeft=8;fontStyle=1;" vertex="1" parent="box-matrix">
+          <mxGeometry x="15" y="135" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r2-auth" value="Cognito User Pool" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="180" y="135" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r2-mfa" value="Opcional&#xa;(Recomendado)" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="325" y="135" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r2-read" value="dynamodb:GetItem (Manifiesto de carga)&#xa;execute-api:Invoke (Consultar sacos asignados)" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-matrix">
+          <mxGeometry x="460" y="135" width="370" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r2-write" value="iot:Publish ( aromapacifico/transportador/${sub}/gps )&#xa;dynamodb:UpdateItem (Custodia saco en viaje)" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-matrix">
+          <mxGeometry x="835" y="135" width="410" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r2-recurso" value="arn:aws:iot:us-east-1:*:topic/aromapacifico/transportador/${sub}/*&#xa;arn:aws:dynamodb:us-east-1:*:table/viajes_transporte" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=6;" vertex="1" parent="box-matrix">
+          <mxGeometry x="1250" y="135" width="385" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- FILA OPERARIO DE ACOPIO -->
+        <mxCell id="r3-rol" value="Operario de Acopio" style="rounded=0;fillColor=#F8F9FA;fontSize=12;align=left;spacingLeft=8;fontStyle=1;" vertex="1" parent="box-matrix">
+          <mxGeometry x="15" y="200" width="160" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="r3-auth" value="Cognito User Pool" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="180" y="200" width="140" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="r3-mfa" value="MANDATORIO&#xa;(TOTP / WebAuthn)" style="rounded=0;fillColor=#FFF5F5;fontSize=12;align=center;fontStyle=1;fontColor=#D93F0B;" vertex="1" parent="box-matrix">
+          <mxGeometry x="325" y="200" width="130" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="r3-read" value="dynamodb:Query, dynamodb:GetItem&#xa;(Sacos recibidos, variables secado lote, pesaje)" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-matrix">
+          <mxGeometry x="460" y="200" width="370" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="r3-write" value="dynamodb:UpdateItem (Estado acopio aceptado/rechazado)&#xa;sqs:SendMessage (Cola de impresión códigos de saco)" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-matrix">
+          <mxGeometry x="835" y="200" width="410" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="r3-recurso" value="arn:aws:dynamodb:us-east-1:*:table/sacos_cafe&#xa;arn:aws:sqs:us-east-1:*:cola_impresion_acopio_${AcopioID}" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=6;" vertex="1" parent="box-matrix">
+          <mxGeometry x="1250" y="200" width="385" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- FILA COMPRADOR -->
+        <mxCell id="r4-rol" value="Comprador" style="rounded=0;fillColor=#F8F9FA;fontSize=12;align=left;spacingLeft=8;fontStyle=1;" vertex="1" parent="box-matrix">
+          <mxGeometry x="15" y="270" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r4-auth" value="Cognito / Público" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="180" y="270" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r4-mfa" value="No Requerido&#xa;(Solo Lectura)" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="325" y="270" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r4-read" value="execute-api:Invoke (Endpoint público GET /sacos/{id})&#xa;dynamodb:GetItem (Vista anonimizada Proyectada)" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-matrix">
+          <mxGeometry x="460" y="270" width="370" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r4-write" value="NINGUNA (Acceso de solo lectura categórico)&#xa;Bloqueado a nivel de API Gateway y Policy" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-matrix">
+          <mxGeometry x="835" y="270" width="410" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r4-recurso" value="arn:aws:execute-api:us-east-1:*:api-id/*/GET/v1/sacos/*&#xa;(Respuesta sin cédula de caficultor ni rutas transportador)" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=6;" vertex="1" parent="box-matrix">
+          <mxGeometry x="1250" y="270" width="385" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- FILA OPERADOR DE DRONES -->
+        <mxCell id="r5-rol" value="Operador Drones" style="rounded=0;fillColor=#F8F9FA;fontSize=12;align=left;spacingLeft=8;fontStyle=1;" vertex="1" parent="box-matrix">
+          <mxGeometry x="15" y="335" width="160" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="r5-auth" value="Cognito User Pool" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="180" y="335" width="140" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="r5-mfa" value="MANDATORIO&#xa;(TOTP / FIDO2)" style="rounded=0;fillColor=#FFF5F5;fontSize=12;align=center;fontStyle=1;fontColor=#D93F0B;" vertex="1" parent="box-matrix">
+          <mxGeometry x="325" y="335" width="130" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="r5-read" value="dynamodb:GetItem (Órdenes asignadas y GeoJSON)&#xa;s3:GetObject (Descargar misiones offline precargadas)" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-matrix">
+          <mxGeometry x="460" y="335" width="370" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="r5-write" value="s3:PutObject (Carga de bitácoras .bin y fotos S4)&#xa;dynamodb:UpdateItem (Estado vuelo completado)" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-matrix">
+          <mxGeometry x="835" y="335" width="410" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="r5-recurso" value="arn:aws:s3:::aromapacifico-drones-prod/misiones/*&#xa;arn:aws:dynamodb:us-east-1:*:table/ordenes_fumigacion" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=6;" vertex="1" parent="box-matrix">
+          <mxGeometry x="1250" y="335" width="385" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- FILA OPERADOR DE PLATAFORMA -->
+        <mxCell id="r6-rol" value="Operador Plataforma" style="rounded=0;fillColor=#F8F9FA;fontSize=12;align=left;spacingLeft=8;fontStyle=1;" vertex="1" parent="box-matrix">
+          <mxGeometry x="15" y="405" width="160" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="r6-auth" value="IAM Identity Center" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=center;" vertex="1" parent="box-matrix">
+          <mxGeometry x="180" y="405" width="140" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="r6-mfa" value="MANDATORIO&#xa;(FIDO2 WebAuthn)" style="rounded=0;fillColor=#FFF5F5;fontSize=12;align=center;fontStyle=1;fontColor=#D93F0B;" vertex="1" parent="box-matrix">
+          <mxGeometry x="325" y="405" width="130" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="r6-read" value="cloudwatch:Get*, logs:FilterLogEvents, config:Get*&#xa;ec2:Describe*, s3:ListBucket (Sin acceso a PII)" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-matrix">
+          <mxGeometry x="460" y="405" width="370" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="r6-write" value="Gestion de IaC Terraform via Pipeline CI/CD,&#xa;Rotacion de KMS, Desactivacion de certificados IoT" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-matrix">
+          <mxGeometry x="835" y="405" width="410" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="r6-recurso" value="arn:aws:iam::*:role/AromaPacifico-DevOps-ExecutionRole&#xa;arn:aws:iot:us-east-1:*:cert/* (Revocación explícita)" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=6;" vertex="1" parent="box-matrix">
+          <mxGeometry x="1250" y="405" width="385" height="65" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
