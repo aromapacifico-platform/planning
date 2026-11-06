@@ -1,0 +1,217 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1760 1380" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 22px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #5A6B7C; text-anchor: middle; }
+      .header-box { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #232F3E; }
+      .subhead-box { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #555555; }
+      .body-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
+      .mono-text { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; font-size: 12px; fill: #111111; }
+      .actor-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
+      .actor-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; fill: #5A6B7C; text-anchor: middle; }
+      .msg-text { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; font-size: 11.5px; fill: #232F3E; }
+      .msg-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; }
+    </style>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.08" />
+    </filter>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1D76DB" />
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#FF9900" />
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0E8A16" />
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#D93F0B" />
+    </marker>
+  </defs>
+
+  <!-- FONDO GENERAL -->
+  <rect width="1760" height="1380" fill="#F8F9FA" />
+
+  <!-- TITULO Y SUBTITULO -->
+  <text x="880" y="45" class="title">AromaPacífico - Diagrama de Secuencia: Ciclo de Protección de Datos, Tokenización y Consulta del Saco</text>
+  <text x="880" y="75" class="subtitle">Flujo End-to-End desde Alta en Finca, Tokenización HMAC-SHA-256 sin PII, Proyección Pública Segregada y Consulta Web bajo Ley 1581</text>
+
+  <!-- PANEL SUPERIOR: GOBERNANZA NORMATIVA -->
+  <g transform="translate(50, 105)" filter="url(#shadow)">
+    <rect width="1660" height="95" rx="8" fill="#FFFFFF" stroke="#0E8A16" stroke-width="2" />
+    <rect width="1660" height="28" rx="8" fill="#F0FFF4" />
+    <text x="20" y="20" class="header-box" fill="#0E8A16">INVARIANTES DEL FLUJO DE DATOS Y PRIVACIDAD DEL PRODUCTOR (Ley Estatutaria 1581 de 2012)</text>
+    <text x="20" y="48" class="body-text">1. Generación Unidireccional del Código de Saco: SACO-YYYY-DEPTO-HASH8 generado con HMAC-SHA-256 + Salt secreta en KMS. Imposible revertir a cédula o finca.</text>
+    <text x="20" y="68" class="body-text">2. Proyección Segregada Asíncrona: Tabla de consulta pública sacos_publicos físicamente independiente de la tabla maestra; DynamoDB Streams purga toda PII.</text>
+    <text x="20" y="88" class="body-text">3. Consulta Pública Protegida: Comprador internacional visualiza exclusivamente calidad de secado, variedad, origen departamental y estado logístico final.</text>
+  </g>
+
+  <!-- LINEAS DE VIDA (LIFELINES) DE PARTICIPANTES -->
+  <!-- 1. CAFICULTOR (x=140) -->
+  <line x1="140" y1="275" x2="140" y2="1240" stroke="#0E8A16" stroke-width="2" stroke-dasharray="5,5" />
+  <!-- 2. API GATEWAY (x=380) -->
+  <line x1="380" y1="275" x2="380" y2="1240" stroke="#1D76DB" stroke-width="2" stroke-dasharray="5,5" />
+  <!-- 3. TOKENIZADOR KMS (x=635) -->
+  <line x1="635" y1="275" x2="635" y2="1240" stroke="#FF9900" stroke-width="2" stroke-dasharray="5,5" />
+  <!-- 4. DYNAMODB MASTER (x=885) -->
+  <line x1="885" y1="275" x2="885" y2="1240" stroke="#FF9900" stroke-width="2" stroke-dasharray="5,5" />
+  <!-- 5. STREAMS SANITIZADOR (x=1135) -->
+  <line x1="1135" y1="275" x2="1135" y2="1240" stroke="#D93F0B" stroke-width="2" stroke-dasharray="5,5" />
+  <!-- 6. DYNAMODB PUBLICA (x=1380) -->
+  <line x1="1380" y1="275" x2="1380" y2="1240" stroke="#0E8A16" stroke-width="2" stroke-dasharray="5,5" />
+  <!-- 7. COMPRADOR / WEB (x=1615) -->
+  <line x1="1615" y1="275" x2="1615" y2="1240" stroke="#1D76DB" stroke-width="2" stroke-dasharray="5,5" />
+
+  <!-- ENCABEZADOS DE PARTICIPANTES -->
+  <!-- 1. CAFICULTOR -->
+  <g transform="translate(60, 220)" filter="url(#shadow)">
+    <rect width="160" height="55" rx="6" fill="#FFFFFF" stroke="#0E8A16" stroke-width="2" />
+    <text x="80" y="25" class="actor-title" fill="#0E8A16">Caficultor</text>
+    <text x="80" y="43" class="actor-sub">App Móvil en Finca</text>
+  </g>
+
+  <!-- 2. API GATEWAY -->
+  <g transform="translate(290, 220)" filter="url(#shadow)">
+    <rect width="180" height="55" rx="6" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
+    <text x="90" y="25" class="actor-title" fill="#1D76DB">API Gateway Ingesta</text>
+    <text x="90" y="43" class="actor-sub">HTTPS TLS 1.3 / Auth</text>
+  </g>
+
+  <!-- 3. TOKENIZADOR KMS -->
+  <g transform="translate(540, 220)" filter="url(#shadow)">
+    <rect width="190" height="55" rx="6" fill="#FFFFFF" stroke="#FF9900" stroke-width="2" />
+    <text x="95" y="25" class="actor-title" fill="#FF9900">Tokenizador Cripto</text>
+    <text x="95" y="43" class="actor-sub">Lambda + KMS CMK</text>
+  </g>
+
+  <!-- 4. DYNAMODB MASTER -->
+  <g transform="translate(790, 220)" filter="url(#shadow)">
+    <rect width="190" height="55" rx="6" fill="#FFFFFF" stroke="#FF9900" stroke-width="2" />
+    <text x="95" y="25" class="actor-title" fill="#FF9900">DynamoDB Master</text>
+    <text x="95" y="43" class="actor-sub">Tabla sacos_cafe (KMS)</text>
+  </g>
+
+  <!-- 5. STREAMS SANITIZADOR -->
+  <g transform="translate(1040, 220)" filter="url(#shadow)">
+    <rect width="190" height="55" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="2" />
+    <text x="95" y="25" class="actor-title" fill="#D93F0B">Streams &amp; Sanitizador</text>
+    <text x="95" y="43" class="actor-sub">Lambda Purga de PII</text>
+  </g>
+
+  <!-- 6. DYNAMODB PUBLICA -->
+  <g transform="translate(1285, 220)" filter="url(#shadow)">
+    <rect width="190" height="55" rx="6" fill="#FFFFFF" stroke="#0E8A16" stroke-width="2" />
+    <text x="95" y="25" class="actor-title" fill="#0E8A16">DynamoDB Pública</text>
+    <text x="95" y="43" class="actor-sub">Tabla sacos_publicos</text>
+  </g>
+
+  <!-- 7. COMPRADOR WEB -->
+  <g transform="translate(1520, 220)" filter="url(#shadow)">
+    <rect width="190" height="55" rx="6" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
+    <text x="95" y="25" class="actor-title" fill="#1D76DB">Comprador / Web</text>
+    <text x="95" y="43" class="actor-sub">Internet Pública (WAF)</text>
+  </g>
+
+  <!-- MENSAJES Y PASOS DE SECUENCIA -->
+  <!-- PASO 1: CAFICULTOR A API GATEWAY -->
+  <g>
+    <line x1="140" y1="310" x2="375" y2="310" stroke="#1D76DB" stroke-width="2" marker-end="url(#arrow-blue)" />
+    <text x="145" y="303" class="msg-text"><tspan class="msg-num" fill="#1D76DB">1.</tspan> POST /api/v1/sacos (Peso: 60 kg, Lote, Variedad: Castillo, Humedad: 12%, Cédula) [HTTPS TLS 1.3]</text>
+  </g>
+
+  <!-- PASO 2: API GATEWAY A TOKENIZADOR -->
+  <g>
+    <line x1="380" y1="355" x2="630" y2="355" stroke="#FF9900" stroke-width="2" marker-end="url(#arrow-orange)" />
+    <text x="385" y="348" class="msg-text"><tspan class="msg-num" fill="#FF9900">2.</tspan> Invocación Tokenizador (FincaID, Depto: Cauca, LoteID, Timestamp, Nonce)</text>
+  </g>
+
+  <!-- CAJA HMAC PROCESO -->
+  <g transform="translate(480, 385)" filter="url(#shadow)">
+    <rect width="470" height="100" rx="6" fill="#FFF8E1" stroke="#FF9900" stroke-width="1.5" />
+    <text x="15" y="22" class="header-box" fill="#FF9900">Función Criptográfica Unidireccional (Tokenización Sin PII):</text>
+    <text x="15" y="42" class="mono-text">Digest = HMAC-SHA-256(Salt_KMS, FincaID || LoteID || Timestamp || Nonce)</text>
+    <text x="15" y="60" class="mono-text">Hash8 = Substring(Hex(Digest), 0, 8) -> 7F3A9C12</text>
+    <text x="15" y="78" class="body-text" font-weight="bold">Código Canónico: SACO-2026-CAU-7F3A9C12 (Irreversible)</text>
+    <text x="15" y="94" class="body-text">Matemáticamente imposible deducir la cédula o coordenadas de la finca.</text>
+  </g>
+
+  <!-- PASO 3: TOKENIZADOR A API GATEWAY -->
+  <g>
+    <line x1="635" y1="515" x2="385" y2="515" stroke="#FF9900" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrow-orange)" />
+    <text x="390" y="508" class="msg-text"><tspan class="msg-num" fill="#FF9900">3.</tspan> Retornar Código Canónico SACO-2026-CAU-7F3A9C12</text>
+  </g>
+
+  <!-- PASO 4: API GATEWAY A DYNAMODB MASTER -->
+  <g>
+    <line x1="380" y1="560" x2="880" y2="560" stroke="#FF9900" stroke-width="2" marker-end="url(#arrow-orange)" />
+    <text x="385" y="553" class="msg-text"><tspan class="msg-num" fill="#FF9900">4.</tspan> PutItem (Master: Código, FincaID, Cédula Enmascarada CC *****4821, Secado, Peso) [KMS CMK]</text>
+  </g>
+
+  <!-- PASO 5: RESPUESTA AL CAFICULTOR -->
+  <g>
+    <line x1="380" y1="605" x2="145" y2="605" stroke="#0E8A16" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrow-green)" />
+    <text x="150" y="598" class="msg-text"><tspan class="msg-num" fill="#0E8A16">5.</tspan> 201 Created (Código Generado: SACO-2026-CAU-7F3A9C12 registrado en beneficiadero)</text>
+  </g>
+
+  <!-- PASO 6: DYNAMODB MASTER A STREAMS SANITIZADOR -->
+  <g>
+    <line x1="885" y1="660" x2="1130" y2="660" stroke="#D93F0B" stroke-width="2" marker-end="url(#arrow-red)" />
+    <text x="890" y="653" class="msg-text"><tspan class="msg-num" fill="#D93F0B">6.</tspan> DynamoDB Streams Event (INSERT NewImage del saco registrado)</text>
+  </g>
+
+  <!-- CAJA SANITIZADOR -->
+  <g transform="translate(980, 690)" filter="url(#shadow)">
+    <rect width="470" height="105" rx="6" fill="#FFF5F5" stroke="#D93F0B" stroke-width="1.5" />
+    <text x="15" y="22" class="header-box" fill="#D93F0B">Filtro Perimetral Sanitizador de Privacidad (Ley 1581 de 2012):</text>
+    <text x="15" y="42" class="body-text">- Atributos Copiados: Código, Depto (Cauca), Municipio (Popayán), Variedad (Castillo),</text>
+    <text x="25" y="58" class="body-text">Humedad Secado (11.8%), Temperatura (21 grados Celsius), Estado (En Preparación).</text>
+    <text x="15" y="76" class="body-text" font-weight="bold" fill="#D93F0B">- Purga Absoluta: Cédula caficultor, nombre propio, teléfono y coordenadas GPS.</text>
+    <text x="15" y="94" class="body-text">Entidad sanitizada lista para persistencia en tabla pública disjunta.</text>
+  </g>
+
+  <!-- PASO 7: SANITIZADOR A DYNAMODB PUBLICA -->
+  <g>
+    <line x1="1135" y1="825" x2="1375" y2="825" stroke="#0E8A16" stroke-width="2" marker-end="url(#arrow-green)" />
+    <text x="1140" y="818" class="msg-text"><tspan class="msg-num" fill="#0E8A16">7.</tspan> PutItem (Proyección Pública: sacos_publicos) [Segregación Física Cero PII]</text>
+  </g>
+
+  <!-- PASO 8: COMPRADOR A API GATEWAY (CONSULTA) -->
+  <g>
+    <line x1="1615" y1="885" x2="385" y2="885" stroke="#1D76DB" stroke-width="2" marker-end="url(#arrow-blue)" />
+    <text x="390" y="878" class="msg-text"><tspan class="msg-num" fill="#1D76DB">8.</tspan> GET /v1/sacos/SACO-2026-CAU-7F3A9C12 (Consulta Pública Internacional vía ALB/CloudFront)</text>
+  </g>
+
+  <!-- PASO 9: API GATEWAY A DYNAMODB PUBLICA -->
+  <g>
+    <line x1="380" y1="940" x2="1375" y2="940" stroke="#0E8A16" stroke-width="2" marker-end="url(#arrow-green)" />
+    <text x="390" y="933" class="msg-text"><tspan class="msg-num" fill="#0E8A16">9.</tspan> GetItem (Consulta directa y exclusiva a tabla pública sacos_publicos)</text>
+  </g>
+
+  <!-- PASO 10: DYNAMODB PUBLICA A API GATEWAY -->
+  <g>
+    <line x1="1380" y1="995" x2="385" y2="995" stroke="#0E8A16" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrow-green)" />
+    <text x="390" y="988" class="msg-text"><tspan class="msg-num" fill="#0E8A16">10.</tspan> Retornar Entidad Sanitizada (Origen: Cauca/Popayán, Humedad: 11.8%, Estado: Aceptado)</text>
+  </g>
+
+  <!-- PASO 11: API GATEWAY A COMPRADOR -->
+  <g>
+    <line x1="380" y1="1055" x2="1610" y2="1055" stroke="#1D76DB" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrow-blue)" />
+    <text x="390" y="1048" class="msg-text"><tspan class="msg-num" fill="#1D76DB">11.</tspan> 200 OK (JSON Limpio de Vista de Comprador: CERO Cédula, CERO Georutas de Transporte)</text>
+  </g>
+
+  <!-- PASO 12: OPERARIO ACOPIO (LAN VPN) CONSULTA OPERATIVA -->
+  <g>
+    <line x1="380" y1="1120" x2="880" y2="1120" stroke="#FF9900" stroke-width="2" marker-end="url(#arrow-orange)" />
+    <text x="390" y="1113" class="msg-text"><tspan class="msg-num" fill="#FF9900">12.</tspan> Operario Acopio (LAN 10.X.3.0/24 + MFA): Consulta sacos_cafe y recibe viaje para pesaje</text>
+  </g>
+
+  <!-- PANEL INFERIOR: RESUMEN DE PROPIEDADES -->
+  <g transform="translate(50, 1180)" filter="url(#shadow)">
+    <rect width="1660" height="95" rx="8" fill="#FFFFFF" stroke="#545B64" stroke-width="2" />
+    <rect width="1660" height="28" rx="8" fill="#EAEDED" />
+    <text x="20" y="20" class="header-box">PROPIEDADES PROBATORIAS DEL SISTEMA DE PRIVACIDAD Y TRAZABILIDAD</text>
+    <text x="20" y="48" class="body-text">1. Segregación de Vistas por Perfil: El Caficultor visualiza sus fincas; el Acopio visualiza el viaje del transportador; el Comprador visualiza solo calidad y origen.</text>
+    <text x="20" y="68" class="body-text">2. Inmutabilidad y Auditoría: Modificaciones de estado en acopio generan versión inmutable preservada por 5 años (1.825 días) bajo S3 Object Lock en cuenta Security.</text>
+    <text x="20" y="88" class="body-text">3. Resiliencia RTO / RPO: Réplica en región us-east-2 (Ohio) garantiza RPO de 15 minutos y RTO de 4 horas para la consulta pública del saco.</text>
+  </g>
+</svg>
