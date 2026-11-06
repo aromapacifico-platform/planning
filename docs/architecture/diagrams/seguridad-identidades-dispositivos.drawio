@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" compressed="false">
+  <diagram id="seguridad-dispositivos" name="Arquitectura de Identidades de Dispositivos IoT y Drones">
+    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1300" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TITULO PRINCIPAL -->
+        <mxCell id="title" value="AromaPacífico - Arquitectura de Identidades Criptográficas de Dispositivos (IoT y Drones)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="300" y="30" width="1200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Autenticación Mutua TLS (mTLS) con Certificados X.509 Individuales, Thing Registry y Políticas IoT de Mínimo Privilegio sin Comodines" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
+          <mxGeometry x="300" y="70" width="1200" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- PANEL IZQUIERDO: FUNDAMENTOS CRIPTOGRAFICOS DE BORDE -->
+        <mxCell id="sec-crypto" value="MODELO CRIPTOGRÁFICO DE BORDE (Hardware Vault)&#xa;Aislamiento de Claves y Protección Física del Dispositivo&#xa;&#xa;1. Elemento Seguro de Hardware (Hardware Secure Element):&#xa;   - Clave privada RSA 2048-bit / ECC P-256 generada internamente en chip (ATECC608A o eFuse ESP32-S3).&#xa;   - La clave privada jamás puede ser extraída ni leída por software, protegiendo el dispositivo ante robo físico.&#xa;&#xa;2. Certificado X.509 Único por Dispositivo:&#xa;   - Emitido por la Autoridad Certificadora (CA) de AWS IoT Core o CA subordinada de la Federación.&#xa;   - Vinculado estrictamente al identificador unívoco: FincaID (Nodos) o DronID (Aeronaves).&#xa;&#xa;3. Protocolo de Transporte Cifrado:&#xa;   - Comunicación exclusiva vía MQTT sobre TLS 1.3 / TLS 1.2 (puerto estándar 8883 o 443 vía ALPN).&#xa;   - Handshake mTLS bidireccional: el broker autentica al nodo y el nodo autentica al broker de AWS." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#0E8A16;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=15;spacingTop=12;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="50" y="115" width="820" height="235" as="geometry" />
+        </mxCell>
+
+        <!-- PANEL DERECHO: POLÍTICA IOT CORE ZERO WILDCARD -->
+        <mxCell id="sec-iot-policy" value="POLÍTICA DE IOT CORE SIN COMODINES (Zero Wildcard Policy)&#xa;Uso Obligatorio de Variables de Sustitución de Identidad&#xa;&#xa;Variables de Contexto Mandatorias en la Política:&#xa;- ${iot:Connection.Thing.ThingName} : Garantiza que solo publique con su nombre registrado.&#xa;- ${iot:ClientId} : Exige que el ClientId del handshake coincida exactamente con el ThingName.&#xa;&#xa;Reglas de Conectividad Estrictas:&#xa;1. iot:Connect -> Permitido únicamente con ClientId idéntico al ThingName (Deniega suplantación).&#xa;2. iot:Publish -> Acotado al topic exacto: aromapacifico/fincas/${iot:Connection.Thing.ThingName}/telemetria&#xa;3. iot:Subscribe -> Acotado al topic exacto de configuración: aromapacifico/fincas/${iot:Connection.Thing.ThingName}/config&#xa;4. iot:Receive -> Acotado al topic exacto de entrega de mensajes entrantes de configuración.&#xa;&#xa;Efecto Bloqueante: Si un nodo de Cauca es vulnerado, no puede publicar ni espiar datos de Huila o Tolima." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#1D76DB;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=15;spacingTop=12;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="900" y="115" width="850" height="235" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR PRINCIPAL: ARQUITECTURA DE FLUJO DE IDENTIDAD DE DISPOSITIVOS -->
+        <mxCell id="box-flow" value="ARQUITECTURA DE COMUNICACIÓN SEGURA Y REGISTRO DE DISPOSITIVOS EN AWS IOT CORE" style="swimlane;startSize=30;horizontal=1;fillColor=#EAEDED;strokeColor=#545B64;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="50" y="375" width="1700" height="865" as="geometry" />
+        </mxCell>
+
+        <!-- COLUMNA 1: DISPOSITIVOS FISICOS EN CAMPO -->
+        <mxCell id="box-hardware" value="Dispositivos Físicos en Campo (Edge Hardware)" style="swimlane;startSize=25;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="box-flow">
+          <mxGeometry x="30" y="50" width="370" height="780" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dev-cultivo" value="1. Nodos de Cultivo (200 Fincas)&#xa;ID: FINCA-CAUCA-001 a FINCA-TOLIMA-200&#xa;&#xa;- Hardware: ESP32-S3 + SIM7080G (LTE-M/NB-IoT)&#xa;- Sensor 7 en 1 (NPK, humedad, temp suelo/aire)&#xa;- Batería LiFePO4 + Panel Solar 15W&#xa;- Clave Privada en eFuse criptográfico&#xa;- Certificado X.509 individual instalado en fábrica&#xa;- Buffer Flash local de hasta 24 horas&#xa;- Cadencia: Lectura y publicación cada 4 horas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-hardware">
+          <mxGeometry x="20" y="45" width="330" height="215" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dev-secado" value="2. Nodos de Secado (~100 en Cosecha)&#xa;ID: FINCA-SECADO-001 a FINCA-SECADO-100&#xa;&#xa;- Hardware: Microcontrolador industrial IP67&#xa;- Sonda de humedad de grano y temperatura&#xa;- Conexión LTE-M / Gateway local beneficiadero&#xa;- Certificado X.509 específico de secado&#xa;- Buffer Flash local de hasta 24 horas&#xa;- Cadencia: Lectura y publicación cada 1 hora&#xa;- Alerta inmediata si grano supera 40 grados Celsius" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-hardware">
+          <mxGeometry x="20" y="285" width="330" height="215" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dev-drone" value="3. Drones Agrícolas (6 Aeronaves UAS)&#xa;ID: DRON-CAUCA-01, DRON-HUILA-01, TOLIMA&#xa;&#xa;- Hardware: Autopiloto PX4 / ArduPilot con TPM&#xa;- Certificado X.509 para telemetría de vuelo&#xa;- Carga de bitácoras .bin firmadas con SHA-256&#xa;- Cámara multiespectral / RGB alta resolución&#xa;- Operación en cuadrillas FNC bajo RAC 100&#xa;- Buffer local offline para misiones en cañones&#xa;- Transmisión mTLS al conectar en acopio" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-hardware">
+          <mxGeometry x="20" y="525" width="330" height="225" as="geometry" />
+        </mxCell>
+
+        <!-- COLUMNA 2: CANAL SEGURO DE TRANSPORTE Y MTLS -->
+        <mxCell id="box-transport" value="Canal de Transporte Cifrado (mTLS Handshake)" style="swimlane;startSize=25;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="box-flow">
+          <mxGeometry x="440" y="50" width="370" height="780" as="geometry" />
+        </mxCell>
+
+        <mxCell id="net-mtls" value="Handshake Criptográfico Mutuo (mTLS):&#xa;&#xa;Paso 1: Cliente inicia conexión TCP al puerto 8883.&#xa;Paso 2: Broker AWS envía Certificado de Servidor.&#xa;Paso 3: Dispositivo valida CA raíz de Amazon.&#xa;Paso 4: Broker solicita Certificado de Cliente X.509.&#xa;Paso 5: Dispositivo presenta su Certificado Único.&#xa;Paso 6: Dispositivo firma desafío con su Clave Privada.&#xa;Paso 7: Broker valida contra AWS IoT Device Registry.&#xa;Paso 8: Establecimiento de túnel cifrado TLS 1.3 / 1.2.&#xa;&#xa;Propiedad Clave: Cero transmisión de claves en texto&#xa;plano y rechazo instantáneo de certificados inactivos." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-transport">
+          <mxGeometry x="20" y="45" width="330" height="340" as="geometry" />
+        </mxCell>
+
+        <mxCell id="net-buffer" value="Comportamiento ante Caída Celular (Offline):&#xa;&#xa;- Si la señal celular se pierde en lote o ruta:&#xa;  1. Dispositivo conmuta a modo Store-and-Forward.&#xa;  2. Lecturas se codifican en CBOR diferencial.&#xa;  3. Buffer Flash almacena hasta 24 horas continuas.&#xa;  4. Al reconectar senal, renegocia mTLS de inmediato.&#xa;  5. Drena primero alertas criticas y luego historicos.&#xa;  6. Si pasan mas de 24 horas sin senal, se genera&#xa;     alerta de perdida de enlace en CloudWatch." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#FBCA04;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-transport">
+          <mxGeometry x="20" y="415" width="330" height="335" as="geometry" />
+        </mxCell>
+
+        <!-- COLUMNA 3: AWS IOT CORE BROKER Y EVALUACION DE POLITICA -->
+        <mxCell id="box-broker" value="AWS IoT Core Engine (Cuenta Producción us-east-1)" style="swimlane;startSize=25;fillColor=#FFFFFF;strokeColor=#FF9900;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="box-flow">
+          <mxGeometry x="850" y="50" width="410" height="780" as="geometry" />
+        </mxCell>
+
+        <mxCell id="broker-registry" value="AWS IoT Device Registry (Thing Registry):&#xa;&#xa;- Cada dispositivo registrado como Thing:&#xa;  * ThingName: FINCA-CAUCA-001&#xa;  * ThingType: SensorCultivo / SensorSecado / DronUAS&#xa;  * ThingGroup: AcopioCauca / AcopioHuila / AcopioTolima&#xa;  * Atributos: Latitud, Longitud, Altitud, FechaInstalación&#xa;&#xa;- Vinculación Criptográfica:&#xa;  El Certificado X.509 está asociado (Attached)&#xa;  exclusivamente al ThingName correspondiente.&#xa;  No es posible reusar un certificado en otro Thing." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#FF9900;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-broker">
+          <mxGeometry x="20" y="45" width="370" height="240" as="geometry" />
+        </mxCell>
+
+        <mxCell id="broker-engine" value="Motor de Evaluación de Políticas IoT (Policy Engine):&#xa;&#xa;1. Validación de Conexión:&#xa;   Condition: StringEquals { iot:ClientId: ${iot:Connection.Thing.ThingName} }&#xa;   Resultado: Bloquea intentos de suplantar otro ClientId.&#xa;&#xa;2. Validación de Publicación:&#xa;   Resource: arn:aws:iot:us-east-1:*:topic/aromapacifico/fincas/${iot:Connection.Thing.ThingName}/*&#xa;   Resultado: Solo permite escribir en su propio árbol de topics.&#xa;&#xa;3. Registro de Shadow del Dispositivo (Device Shadow):&#xa;   Guarda último estado reportado y sincroniza configuración&#xa;   de umbrales de alerta al recuperar conectividad." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#FF9900;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-broker">
+          <mxGeometry x="20" y="310" width="370" height="260" as="geometry" />
+        </mxCell>
+
+        <mxCell id="broker-metrics" value="Telemetría de Seguridad y Detección de Anomalías:&#xa;&#xa;- Métrica Connect.AuthError : Intentos fallidos de mTLS.&#xa;- Métrica PublishIn.AuthError : Intentos de publicar en topics prohibidos.&#xa;- Detección con AWS IoT Device Defender: Alerta si un nodo&#xa;  intenta escanear la red o publicar fuera de su cadencia usual." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-broker">
+          <mxGeometry x="20" y="595" width="370" height="155" as="geometry" />
+        </mxCell>
+
+        <!-- COLUMNA 4: INTEGRACION CLOUD Y PERSISTENCIA -->
+        <mxCell id="box-cloud-dest" value="Persistencia, Inferencia y Alertas (Backend AWS)" style="swimlane;startSize=25;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="box-flow">
+          <mxGeometry x="1300" y="50" width="370" height="780" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dest-rules" value="Reglas de Enrutamiento AWS IoT Rules:&#xa;&#xa;Regla 1: Ingesta Cultivo -> DynamoDB&#xa;SELECT *, timestamp() AS ingesta_ts&#xa;FROM 'aromapacifico/fincas/+/telemetria/cultivo'&#xa;Action: DynamoDB PutItem (telemetria_cultivo)&#xa;&#xa;Regla 2: Evaluación de Umbrales -> Lambda Alertas&#xa;SELECT * FROM 'aromapacifico/fincas/+/telemetria/+'&#xa;WHERE temperatura &gt; 30 OR ph &lt; 4.5&#xa;Action: Invocación Lambda (Entrega alerta &lt; 5 min)&#xa;&#xa;Regla 3: Drones S3 -> S3 Bucket Misiones&#xa;Action: Almacenamiento bitácoras y fotos en S3 WORM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#545B64;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-cloud-dest">
+          <mxGeometry x="20" y="45" width="330" height="340" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dest-storage" value="Almacenes de Persistencia Segura y Cifrado:&#xa;&#xa;1. Amazon DynamoDB:&#xa;   - Tablas: telemetria_cultivo, sacos_cafe, viajes.&#xa;   - Cifrado en reposo con llave AWS KMS dedicada.&#xa;   - Retención obligatoria por 5 años (1.825 días).&#xa;&#xa;2. Amazon S3 (Cuenta Seguridad / Prod):&#xa;   - Bitácoras de dron, ortomosaicos y fotos S4.&#xa;   - S3 Object Lock en Compliance Mode (5 años).&#xa;   - Cero acceso público (Bloqueado por SCP)." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#545B64;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-cloud-dest">
+          <mxGeometry x="20" y="415" width="330" height="335" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,190 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1760 1280" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 22px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #5A6B7C; text-anchor: middle; }
+      .header-box { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #232F3E; }
+      .subhead-box { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #555555; }
+      .body-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
+      .mono-text { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; font-size: 12px; fill: #111111; }
+    </style>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <!-- FONDO GENERAL -->
+  <rect width="1760" height="1280" fill="#F8F9FA" />
+
+  <!-- TITULO Y SUBTITULO -->
+  <text x="880" y="45" class="title">AromaPacífico - Flujo Operativo y Criptográfico de Baja y Revocación de Dispositivos</text>
+  <text x="880" y="75" class="subtitle">Procedimiento Paso a Paso de Desactivación de Certificados X.509, Desvinculación de Políticas, Corte mTLS y Verificación de Auditoría WORM</text>
+
+  <!-- PANEL SUPERIOR: GOBERNANZA DE REVOCACION -->
+  <g transform="translate(50, 110)" filter="url(#shadow)">
+    <rect width="1660" height="110" rx="8" fill="#FFFFFF" stroke="#D93F0B" stroke-width="2" />
+    <rect width="1660" height="30" rx="8" fill="#FFF5F5" />
+    <text x="20" y="21" class="header-box" fill="#D93F0B">POLÍTICA DE BAJA Y CONTENCIÓN DE INCIDENTES (Zero Trust Device Decommissioning)</text>
+    <text x="20" y="50" class="body-text" font-weight="bold">Invariante de Seguridad: Ante la sospecha de robo físico, daño irreparable o pérdida de custodia, el dispositivo debe ser revocado en menos de 15 minutos.</text>
+    <text x="20" y="72" class="body-text">1. Quién lo solicita: Técnico de campo FNC, agrónomo de zona o piloto de dron emite el reporte formal con FincaID o DronID.</text>
+    <text x="20" y="92" class="body-text">2. Quién lo ejecuta: Oficial de Ciberseguridad / DevOps FNC mediante sesión con MFA en IAM Identity Center. Efecto inmediato: Broker IoT Core rechaza mTLS.</text>
+  </g>
+
+  <!-- CONTENEDOR PRINCIPAL: LOS 4 CARRILES -->
+  <g transform="translate(50, 245)" filter="url(#shadow)">
+    <rect width="1660" height="990" rx="8" fill="#FFFFFF" stroke="#545B64" stroke-width="2" />
+    <rect width="1660" height="35" rx="8" fill="#EAEDED" />
+    <text x="20" y="24" class="header-box">SECUENCIA DE REVOCACIÓN, CORTE DE TRANSMISIÓN Y VERIFICACIÓN EN CUATRO CARRILES</text>
+
+    <!-- CARRIL 1: CAMPO Y SOLICITANTE -->
+    <g transform="translate(20, 50)">
+      <rect width="380" height="915" rx="6" fill="#FFFFFF" stroke="#0E8A16" stroke-width="1.5" />
+      <rect width="380" height="30" rx="6" fill="#F0FFF4" />
+      <text x="15" y="20" class="header-box" fill="#0E8A16">1. Solicitante en Campo (Técnico / Piloto)</text>
+
+      <g transform="translate(15, 45)">
+        <rect width="350" height="210" rx="6" fill="#F8F9FA" stroke="#0E8A16" stroke-width="2" />
+        <text x="15" y="24" class="header-box" fill="#0E8A16">Paso 1: Detección y Reporte</text>
+        <text x="15" y="55" class="body-text" font-weight="bold">Eventos Disparadores:</text>
+        <text x="25" y="75" class="body-text">a. Robo físico de nodo en lote cafetero.</text>
+        <text x="25" y="93" class="body-text">b. Caída / extravío de dron en cañón remoto.</text>
+        <text x="25" y="111" class="body-text">c. Daño estructural irreparable por rayo.</text>
+        <text x="15" y="140" class="body-text" font-weight="bold">Acción Inmediata:</text>
+        <text x="15" y="160" class="body-text">Emisión de ticket a Mesa de Ayuda FNC con:</text>
+        <text x="25" y="178" class="mono-text">FincaID / DronID, GPS, fecha/hora y causa.</text>
+      </g>
+
+      <g transform="translate(15, 460)">
+        <rect width="350" height="220" rx="6" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" />
+        <text x="15" y="24" class="header-box" fill="#D93F0B">Paso 5: Intento de Transmisión</text>
+        <text x="15" y="55" class="body-text" font-weight="bold">Dispositivo Físico Comprometido:</text>
+        <text x="15" y="75" class="body-text">- Hardware sustraído intenta reconectar.</text>
+        <text x="15" y="95" class="body-text">- Handshake mTLS falla en el paso 5:</text>
+        <text x="25" y="115" class="mono-text">TLS Alert - Certificate Inactive / Revoked</text>
+        <text x="15" y="140" class="body-text">- Conexión TCP terminada inmediatamente.</text>
+        <text x="15" y="160" class="body-text">- El dispositivo no puede enviar ni un byte.</text>
+        <text x="15" y="180" class="body-text" font-weight="bold" fill="#D93F0B">- Clave privada extraída queda 100% inútil.</text>
+      </g>
+
+      <g transform="translate(15, 710)">
+        <rect width="350" height="185" rx="6" fill="#F8F9FA" stroke="#0E8A16" stroke-width="2" />
+        <text x="15" y="24" class="header-box" fill="#0E8A16">Paso 7: Aprovisionamiento de Reemplazo</text>
+        <text x="15" y="55" class="body-text" font-weight="bold">Instalación de Nuevo Hardware:</text>
+        <text x="15" y="75" class="body-text">- Se despacha nuevo nodo con mismo FincaID.</text>
+        <text x="15" y="95" class="body-text">- Nuevo par de claves y certificado X.509.</text>
+        <text x="15" y="115" class="body-text">- Asociación del nuevo certificado al Thing.</text>
+        <text x="15" y="135" class="body-text">- Se preserva el historial agronómico previo.</text>
+        <text x="15" y="155" class="body-text">- Instalación en campo en una sola visita.</text>
+      </g>
+    </g>
+
+    <!-- CARRIL 2: OFICIAL DE SEGURIDAD -->
+    <g transform="translate(425, 50)">
+      <rect width="395" height="915" rx="6" fill="#FFFFFF" stroke="#1D76DB" stroke-width="1.5" />
+      <rect width="395" height="30" rx="6" fill="#EBF3FB" />
+      <text x="15" y="20" class="header-box" fill="#1D76DB">2. Oficial de Seguridad / DevOps (MFA)</text>
+
+      <g transform="translate(15, 45)">
+        <rect width="365" height="180" rx="6" fill="#F8F9FA" stroke="#1D76DB" stroke-width="2" />
+        <text x="15" y="24" class="header-box" fill="#1D76DB">Paso 2: Validación y Triaje</text>
+        <text x="15" y="55" class="body-text">1. Autenticación SSO en IAM Identity Center con MFA.</text>
+        <text x="15" y="75" class="body-text">2. Asume rol AromaPacifico-SecurityOperationsRole.</text>
+        <text x="15" y="95" class="body-text">3. Valida en Thing Registry el CertificateId activo.</text>
+        <text x="15" y="115" class="body-text">4. Comprueba pertenencia de FincaID y AcopioID.</text>
+        <text x="15" y="140" class="body-text" font-weight="bold">Aprobación de Revocación Atómica formal.</text>
+      </g>
+
+      <g transform="translate(15, 245)">
+        <rect width="365" height="265" rx="6" fill="#EBF3FB" stroke="#1D76DB" stroke-width="2" />
+        <text x="15" y="24" class="header-box" fill="#1D76DB">Paso 3: Comandos de Revocación</text>
+        <text x="15" y="50" class="body-text" font-weight="bold">Ejecución Atómica vía AWS CLI:</text>
+        <text x="15" y="75" class="mono-text"># 1. Desactivar el Certificado</text>
+        <text x="15" y="93" class="mono-text">aws iot update-certificate \</text>
+        <text x="25" y="111" class="mono-text">--certificate-id $CERT_ID \</text>
+        <text x="25" y="129" class="mono-text">--new-status INACTIVE</text>
+        <text x="15" y="155" class="mono-text"># 2. Desvincular Política</text>
+        <text x="15" y="173" class="mono-text">aws iot detach-policy \</text>
+        <text x="25" y="191" class="mono-text">--policy-name Node-Policy \</text>
+        <text x="25" y="209" class="mono-text">--target $CERT_ARN</text>
+        <text x="15" y="235" class="mono-text"># 3. Desvincular del Thing</text>
+        <text x="15" y="253" class="mono-text">aws iot detach-thing-principal ...</text>
+      </g>
+
+      <g transform="translate(15, 530)">
+        <rect width="365" height="195" rx="6" fill="#F8F9FA" stroke="#1D76DB" stroke-width="2" />
+        <text x="15" y="24" class="header-box" fill="#1D76DB">Paso 6: Verificación Activa de Cese</text>
+        <text x="15" y="55" class="body-text" font-weight="bold">Comprobación Multicapa por el Oficial:</text>
+        <text x="15" y="80" class="body-text">1. Monitoreo de CloudWatch Connect.AuthError (+1).</text>
+        <text x="15" y="102" class="body-text">2. Consulta DynamoDB: Cero nuevos registros.</text>
+        <text x="15" y="124" class="body-text">3. Handshake de prueba simulado: TLS Fallido.</text>
+        <text x="15" y="146" class="body-text">4. Emisión de Certificado de Revocación digital.</text>
+        <text x="15" y="172" class="body-text" font-weight="bold">Cierre formal de ticket INC-SEC en sistema FNC.</text>
+      </g>
+    </g>
+
+    <!-- CARRIL 3: AWS IOT CORE -->
+    <g transform="translate(845, 50)">
+      <rect width="395" height="915" rx="6" fill="#FFFFFF" stroke="#FF9900" stroke-width="1.5" />
+      <rect width="395" height="30" rx="6" fill="#FFF8E1" />
+      <text x="15" y="20" class="header-box" fill="#FF9900">3. AWS IoT Core (Broker y Control Plane)</text>
+
+      <g transform="translate(15, 245)">
+        <rect width="365" height="190" rx="6" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" />
+        <text x="15" y="24" class="header-box" fill="#FF9900">Paso 4: Aplicación Inmediata</text>
+        <text x="15" y="55" class="body-text">1. Estado muta a INACTIVE en el Device Registry.</text>
+        <text x="15" y="75" class="body-text">2. Terminación forzada de socket TCP/MQTT activo.</text>
+        <text x="15" y="95" class="body-text">3. Invalidación de sesión TLS en memoria del broker.</text>
+        <text x="15" y="115" class="body-text">4. Supresión inmediata de la evaluación de políticas.</text>
+        <text x="15" y="140" class="body-text" font-weight="bold">Tiempo de Propagación: Inmediato (&lt; 2 segundos).</text>
+        <text x="15" y="160" class="body-text">No depende de tiempos de descarga de CRL.</text>
+      </g>
+
+      <g transform="translate(15, 455)">
+        <rect width="365" height="235" rx="6" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" />
+        <text x="15" y="24" class="header-box" fill="#FF9900">Mecanismo de Detección mTLS:</text>
+        <text x="15" y="55" class="body-text">Al recibir nuevo Client Hello del nodo revocado:</text>
+        <text x="15" y="78" class="body-text">1. Broker solicita el certificado cliente X.509.</text>
+        <text x="15" y="98" class="body-text">2. Consulta base interna de certificados en memoria.</text>
+        <text x="15" y="118" class="body-text">3. Detecta estado INACTIVE o inexistente.</text>
+        <text x="15" y="138" class="body-text">4. Responde con TLS Alert Fatal y cierra socket.</text>
+        <text x="15" y="160" class="mono-text">5. Incrementa métrica Connect.AuthError.</text>
+        <text x="15" y="185" class="body-text">6. Genera evento de auditoría en IoT Core Logs.</text>
+        <text x="15" y="210" class="body-text" font-weight="bold">Aislamiento Absoluto: No toca la red interna.</text>
+      </g>
+    </g>
+
+    <!-- CARRIL 4: AUDITORIA INMUTABLE -->
+    <g transform="translate(1265, 50)">
+      <rect width="375" height="915" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" />
+      <rect width="375" height="30" rx="6" fill="#EAEDED" />
+      <text x="15" y="20" class="header-box">4. Auditoría Inmutable (Cuenta Security)</text>
+
+      <g transform="translate(15, 245)">
+        <rect width="345" height="240" rx="6" fill="#F8F9FA" stroke="#545B64" stroke-width="2" />
+        <text x="15" y="24" class="header-box">Registro Forense en CloudTrail:</text>
+        <text x="15" y="55" class="body-text" font-weight="bold">Eventos de Control Capturados:</text>
+        <text x="25" y="75" class="mono-text">- UpdateCertificate (status: INACTIVE)</text>
+        <text x="25" y="95" class="mono-text">- DetachPolicy (Policy desvinculada)</text>
+        <text x="25" y="115" class="mono-text">- DetachThingPrincipal (Thing liberado)</text>
+        <text x="15" y="145" class="body-text" font-weight="bold">Metadatos Inmutables Capturados:</text>
+        <text x="15" y="165" class="body-text">* Identidad del operador (userIdentity con MFA).</text>
+        <text x="15" y="185" class="body-text">* Dirección IP origen y marca de tiempo ISO 8601.</text>
+        <text x="15" y="205" class="body-text">* ARN del certificado y FincaID afectado.</text>
+      </g>
+
+      <g transform="translate(15, 505)">
+        <rect width="345" height="255" rx="6" fill="#F8F9FA" stroke="#545B64" stroke-width="2" />
+        <text x="15" y="24" class="header-box">Retención WORM 5 Años (Ley 1581):</text>
+        <text x="15" y="55" class="body-text">1. Almacenamiento en S3 Cuenta Security:</text>
+        <text x="25" y="75" class="mono-text">Bucket: aromapacifico-audit-trail</text>
+        <text x="25" y="95" class="body-text">S3 Object Lock en Compliance Mode.</text>
+        <text x="25" y="115" class="body-text">Período de retención: 1.825 días (5 años).</text>
+        <text x="15" y="145" class="body-text" font-weight="bold">2. Bloqueo Inmutable por SCP de Raíz:</text>
+        <text x="15" y="165" class="body-text">- Ningún rol ni usuario (ni root de cuenta)</text>
+        <text x="25" y="185" class="body-text">puede borrar o modificar bitácoras.</text>
+        <text x="15" y="210" class="body-text" font-weight="bold">3. Cumplimiento Regulatorio:</text>
+        <text x="15" y="230" class="body-text">- Evidencia pericial para FNC, ICA y aseguradora.</text>
+      </g>
+    </g>
+  </g>
+</svg>
