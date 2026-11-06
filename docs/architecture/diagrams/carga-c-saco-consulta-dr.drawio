@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" compressed="false">
+  <diagram id="saco-consulta-dr" name="Consulta Publica y Estrategia DR">
+    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1300" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TITULO PRINCIPAL -->
+        <mxCell id="title-dr" value="AromaPacífico - Arquitectura de Consulta Pública del Saco y Recuperación ante Desastres (DR)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="250" y="25" width="1300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle-dr" value="Único Punto Abierto a Internet, Protección Perimetral CloudFront/WAF y Cumplimiento Estricto de RPO 15 min y RTO 4 h" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
+          <mxGeometry x="250" y="65" width="1300" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- PANEL IZQUIERDO: EL UNICO PUNTO ABIERTO A INTERNET -->
+        <mxCell id="box-public-entry" value="ARQUITECTURA DEL ÚNICO PUNTO ABIERTO A INTERNET: CONSULTA PÚBLICA DEL COMPRADOR" style="swimlane;startSize=30;horizontal=1;fillColor=#EAEDED;strokeColor=#1D76DB;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="40" y="105" width="830" height="725" as="geometry" />
+        </mxCell>
+
+        <!-- ACTOR Y CLIENTE -->
+        <mxCell id="client-buyer" value="Comprador Internacional&#xa;(Web Browser / App Móvil Externa)&#xa;Origen: Tokio, Berlín, Nueva York, etc.&#xa;Carga: Picos de hasta 30 consultas/min" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;align=center;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="box-public-entry">
+          <mxGeometry x="25" y="45" width="780" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- DNS ROUTE 53 -->
+        <mxCell id="edge-dns" value="1. Amazon Route 53 (DNS Global de Alta Disponibilidad)&#xa;- Enrutamiento por Latencia (Latency-based Routing) hacia la región óptima&#xa;- Application Recovery Controller (ARC): Health Checks continuos sobre us-east-1&#xa;- DNS Failover Automático hacia us-east-2 (Ohio) en menos de 60 segundos si falla N. Virginia" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-public-entry">
+          <mxGeometry x="25" y="125" width="780" height="85" as="geometry" />
+        </mxCell>
+
+        <!-- CLOUDFRONT CDN -->
+        <mxCell id="edge-cdn" value="2. Amazon CloudFront (CDN Perimetral con 600+ Puntos de Presencia Globales)&#xa;- Protocolo Cifrado Obligatorio: HTTPS con TLS 1.3 estricto y certificado ACM público&#xa;- Edge Caching Inteligente: Cache TTL de 60 segundos por código de saco&#xa;  * Absorbe completamente los picos de 30 lecturas por minuto sin tocar el cómputo backend&#xa;  * Reduce la latencia global a menos de 45 milisegundos para compradores en el exterior&#xa;- Compresión Automática Brotli / Gzip para respuestas ultraligeras (payload &lt; 2 KB)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FF9900;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-public-entry">
+          <mxGeometry x="25" y="225" width="780" height="115" as="geometry" />
+        </mxCell>
+
+        <!-- AWS WAFV2 -->
+        <mxCell id="edge-waf" value="3. AWS WAFv2 (Web Application Firewall Perimetral en el Edge de CloudFront)&#xa;- Rate Limiting Estricto por IP: Máximo 60 peticiones por minuto por dirección IP origen;&#xa;  bloquea automáticamente scrapers o ataques de fuerza bruta sobre códigos de sacos&#xa;- Reglas Gestionadas de AWS (AWS Managed Rules):&#xa;  * Core Rule Set (CRS): Mitigación de OWASP Top 10 (SQLi, XSS, Path Traversal)&#xa;  * Known Bad Inputs &amp; Amazon IP Reputation List: Bloqueo de botnets y proxys anónimos&#xa;- Inspección y Validación de Parámetros: Validación por regex del formato del código:&#xa;  Patrón estricto: ^SACO-202[6-9]-(CAU|HUI|TOL)-[A-F0-9]{8}$ (Rechaza payloads maliciosos)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-public-entry">
+          <mxGeometry x="25" y="355" width="780" height="135" as="geometry" />
+        </mxCell>
+
+        <!-- API GATEWAY Y LAMBDA PUBLICA -->
+        <mxCell id="edge-api" value="4. Amazon API Gateway Público y AWS Lambda Resolver (Consulta Sanitizada)&#xa;- API Gateway Regional protegido: Solo acepta invocaciones con cabecera secreta de CloudFront&#xa;- AWS Lambda Resolver Público: Función Python 3.12 con timeout de 3 segundos;&#xa;  carece de permisos sobre la VPC privada y solo tiene lectura IAM sobre la tabla sacos_publicos&#xa;- Aislamiento Perimetral Total: La consulta pública NO tiene conexión de red hacia la red privada&#xa;  ni hacia la tabla maestra sacos_cafe. Es imposible extraer datos personales de caficultores" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-public-entry">
+          <mxGeometry x="25" y="505" width="780" height="105" as="geometry" />
+        </mxCell>
+
+        <!-- VISTA DEL COMPRADOR RETORNADA -->
+        <mxCell id="buyer-payload" value="5. Contenido de la Vista del Comprador (JSON Seguro):&#xa;{ SacoID: 'SACO-2026-CAU-7F3A9C12', Origen: 'Cauca - Meseta de Popayan', AlturaAprox: '1750 msnm', Variedad: 'Castillo',&#xa;  ProcesoSecado: { Metodo: 'Lavado', HumedadFinal: 11.2, TempMedia: 21 }, CalificacionTazaSCA: 84.5, Estado: 'ENTREGADO_PUERTO',&#xa;  PuertoDestino: 'Buenaventura', Fechas: { Cosecha: '2026-05-10', Secado: '2026-05-18', Despacho: '2026-05-22' } }&#xa;CERO CÉDULAS, CERO NOMBRES, CERO COORDENADAS EXACTAS, CERO RUTAS DE TRANSPORTADORES" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FFF4;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=12;fontColor=#1B5E20;fontStyle=1;" vertex="1" parent="box-public-entry">
+          <mxGeometry x="25" y="625" width="780" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- PANEL DERECHO: DISASTER RECOVERY RPO 15 MIN Y RTO 4 H -->
+        <mxCell id="box-dr-strategy" value="ESTRATEGIA DE RECUPERACIÓN ANTE DESASTRES (DR): us-east-1 (N. Virginia) Y us-east-2 (Ohio)" style="swimlane;startSize=30;horizontal=1;fillColor=#EAEDED;strokeColor=#7B1FA2;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="890" y="105" width="870" height="725" as="geometry" />
+        </mxCell>
+
+        <!-- REGION PRIMARIA: US-EAST-1 -->
+        <mxCell id="region-primary" value="REGIÓN PRIMARIA: us-east-1 (N. Virginia)&#xa;Operación Normal de Producción" style="swimlane;startSize=25;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#1D76DB;" vertex="1" parent="box-dr-strategy">
+          <mxGeometry x="20" y="45" width="400" height="425" as="geometry" />
+        </mxCell>
+        <mxCell id="primary-dynamo" value="Amazon DynamoDB Global Tables:&#xa;- sacos_publicos (Read Model Público)&#xa;- sacos_eventos (Event Store Inmutable)&#xa;- sacos_cafe (Maestro Transaccional)&#xa;&#xa;Capacidad: On-Demand automática&#xa;Cifrado: KMS CMK us-east-1&#xa;Respaldo Continuo: PITR (Point-in-Time Recovery)&#xa;habilitado a nivel de segundo (ventana 35 días)&#xa;&#xa;Replicación Global Activa hacia us-east-2:&#xa;Latencia típica de replicación: &lt; 2 segundos&#xa;RPO CUMPLIDO: &lt; 2 segundos (&lt;&lt; 15 min)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EBF3FB;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="region-primary">
+          <mxGeometry x="15" y="35" width="370" height="195" as="geometry" />
+        </mxCell>
+        <mxCell id="primary-compute" value="Cómputo e Ingesta Privada:&#xa;- Ingesta Eventos Lambda + SQS FIFO&#xa;- VPC Producción privada (10.70.0.0/16)&#xa;- Túneles IPsec VPN hacia 3 Acopios&#xa;- S3 Bucket Misiones y Auditoría&#xa;  con S3 Cross-Region Replication (CRR)&#xa;  hacia us-east-2 con RTC (SLA &lt; 15 min)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="region-primary">
+          <mxGeometry x="15" y="245" width="370" height="165" as="geometry" />
+        </mxCell>
+
+        <!-- REGION CONTINGENCIA: US-EAST-2 -->
+        <mxCell id="region-dr" value="REGIÓN DE CONTINGENCIA: us-east-2 (Ohio)&#xa;Warm Standby / Pilot Light DR" style="swimlane;startSize=25;fillColor=#FFFFFF;strokeColor=#7B1FA2;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#7B1FA2;" vertex="1" parent="box-dr-strategy">
+          <mxGeometry x="450" y="45" width="400" height="425" as="geometry" />
+        </mxCell>
+        <mxCell id="dr-dynamo" value="Amazon DynamoDB Global Tables Réplica:&#xa;- sacos_publicos (Copia sincronizada)&#xa;- sacos_eventos (Copia sincronizada)&#xa;- sacos_cafe (Copia sincronizada)&#xa;&#xa;Estado: Permanentemente caliente y lista&#xa;para recibir tráfico de lectura y escritura&#xa;Cifrado: KMS CMK Multi-Región us-east-2&#xa;PITR: Habilitado localmente en Ohio&#xa;&#xa;Pérdida Máxima de Datos ante Falla Total:&#xa;Menos de 2 segundos de transacciones&#xa;RPO VERIFICADO: &lt; 2 min (&lt;&lt; 15 min)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="region-dr">
+          <mxGeometry x="15" y="35" width="370" height="195" as="geometry" />
+        </mxCell>
+        <mxCell id="dr-compute" value="Cómputo en Reposo (IaC Warm Standby):&#xa;- Terraform IaC pre-compilado en Git&#xa;- API Gateway y Lambdas Públicas desplegadas&#xa;- VPC Secundaria lista (10.71.0.0/16)&#xa;- Route 53 DNS Failover conmuta en &lt; 60 s&#xa;Tiempo Total de Recuperación Completa:&#xa;RTO CUMPLIDO: &lt; 45 minutos (&lt;&lt; 4 horas)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="region-dr">
+          <mxGeometry x="15" y="245" width="370" height="165" as="geometry" />
+        </mxCell>
+
+        <!-- SUBPANEL DETALLE CUMPLIMIENTO RPO / RTO -->
+        <mxCell id="box-metrics-proof" value="MATRIZ DE CUMPLIMIENTO RIGUROSO DE OBJETIVOS DE CONTINUIDAD (RPO 15 MIN / RTO 4 H)&#xa;&#xa;1. Mecanismo de Cumplimiento RPO = 15 minutos:&#xa;   - DynamoDB Global Tables: Replicación activa multi-región a nivel de motor de almacenamiento con latencia sub-segundo (RPO real &lt; 2 segundos).&#xa;   - Amazon S3 Cross-Region Replication (CRR) con RTC (Replication Time Control): SLA garantizado de replicación de objetos en menos de 15 minutos.&#xa;   - Point-in-Time Recovery (PITR): Ventana de recuperación granular segundo a segundo ante corrupción lógica de datos o fallas de aplicación.&#xa;&#xa;2. Mecanismo de Cumplimiento RTO = 4 horas:&#xa;   - Consulta Pública: RTO &lt; 60 segundos gracias a que la tabla sacos_publicos ya reside en Ohio y Route 53 conmuta el DNS de inmediato.&#xa;   - Ingesta de Acopios y Apps Móviles: RTO &lt; 45 minutos mediante ejecución automatizada de pipeline Terraform IaC (código validado en CI/CD).&#xa;   - Túneles VPN de Contingencia: Pre-configurados en Transit Gateway de us-east-2 con activación BGP de respaldo." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;align=left;spacingLeft=15;spacingTop=10;fontColor=#232F3E;" vertex="1" parent="box-dr-strategy">
+          <mxGeometry x="20" y="485" width="830" height="225" as="geometry" />
+        </mxCell>
+
+        <!-- PANEL INFERIOR: GESTIÓN DE ERRORES, DETECCIÓN Y RECUPERACIÓN AUTOMÁTICA -->
+        <mxCell id="box-error-mgmt" value="GESTIÓN INTEGRAL DE ERRORES, OBSERVABILIDAD Y AUTO-RECUPERACIÓN (Self-Healing Architecture)" style="swimlane;startSize=30;horizontal=1;fillColor=#F8F9FA;strokeColor=#545B64;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="40" y="850" width="1720" height="410" as="geometry" />
+        </mxCell>
+
+        <!-- ERROR PILAR 1: DETECCION -->
+        <mxCell id="err-col-1" value="1. Detección Automática de Fallas (Observabilidad Proactiva)&#xa;&#xa;- Alarmas CloudWatch de Ingesta:&#xa;  * Tasa de errores 5xx &gt; 1% durante 3 minutos consecutivos&#xa;  * Profundidad de cola DLQ &gt; 0 mensajes activa alerta crítica P1&#xa;  * Latencia de API Gateway p99 &gt; 800 ms dispara escalado&#xa;- Health Checks Compuestos en Route 53 ARC:&#xa;  * Monitoreo sintético HTTP 200 cada 10 s desde 8 regiones globales&#xa;  * Tres fallos consecutivos marcan la región us-east-1 como degradada&#xa;- Trazabilidad Distribuida AWS X-Ray: Correlación de trazas por TraceID&#xa;  a través de API Gateway, Lambdas, DynamoDB y llamadas a KMS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-error-mgmt">
+          <mxGeometry x="25" y="45" width="530" height="340" as="geometry" />
+        </mxCell>
+
+        <!-- ERROR PILAR 2: AISLAMIENTO -->
+        <mxCell id="err-col-2" value="2. Contención y Tolerancia a Fallos (Fault Isolation &amp; Circuit Breakers)&#xa;&#xa;- Circuit Breaker Perimetral: Si DynamoDB experimenta degradación,&#xa;  la Lambda pública responde con datos cacheados en CloudFront o status 429&#xa;  evitando saturar el pool de conexiones con reintentos descontrolados&#xa;- Exponential Backoff con Full Jitter: Todos los clientes móviles y nodos&#xa;  de acopio implementan el algoritmo de espera exponencial aleatoria&#xa;  (t = min(t_max, t_base * 2^intento) * rand(0,1)) para mitigar avalanchas&#xa;- Aislamiento por Blast Radius: La caída del punto de consulta pública&#xa;  jamás impacta la ingesta de pesaje en fincas ni la operación de acopios&#xa;- Asincronismo Desacoplado: SQS amortigua hasta 14 días de mensajes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FF9900;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-error-mgmt">
+          <mxGeometry x="585" y="45" width="540" height="340" as="geometry" />
+        </mxCell>
+
+        <!-- ERROR PILAR 3: RECUPERACION -->
+        <mxCell id="err-col-3" value="3. Auto-Recuperación y Replay de Información (Self-Healing &amp; Replay)&#xa;&#xa;- Replay Automatizado de Eventos desde DLQ: Una vez superada una&#xa;  falla de infraestructura o despliegue, una Lambda Redrive consume&#xa;  los eventos encolados en la DLQ y los reinyecta a sacos_eventos&#xa;- Idempotencia Nativa: El uso de EventoID (UUID v4) como clave garantiza&#xa;  que el replay de un mensaje jamás duplique un evento ni altere estados&#xa;- Reconstrucción Determinista del Estado: Si una proyección se corrompe,&#xa;  se reconstruye leyendo el log inmutable de eventos desde el origen&#xa;- Buffer Local de 24 Horas en Fincas: Los dispositivos retienen hasta&#xa;  24 h de pesajes y drenan ordenadamente por prioridad al reconectar" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-error-mgmt">
+          <mxGeometry x="1155" y="45" width="540" height="340" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
