@@ -106,33 +106,15 @@ El núcleo del requerimiento de protección de datos personales exige especifica
 > **REGLA MANDATORIA DE GOBIERNO DE DATOS: CERO INFERENCIA FITOSANITARIA SOBRE PERSONAS**
 > Queda terminantemente prohibido que una imagen que contenga personas identificables sea sometida a algoritmos de detección fitosanitaria de plagas o de estimación de cosecha. La presencia humana aborta el procesamiento agronómico y conmuta automáticamente el archivo hacia el subsistema de aislamiento ético y custodia probatoria.
 
-### 4.2 Fases del Ciclo de Vida Anti-PII
+### 4.2 Fases del Ciclo de Vida Anti-PII y Árbol de Decisión
 
-El tratamiento se ejecuta a través de cuatro fases consecutivas y deterministas:
+El flujo de decisión y el tratamiento perimetral se formalizan en el siguiente diagrama arquitectónico desarrollado con el Agente de Diagramas (`diagram-agent`):
 
-```
-[Ingesta en S3 raw-images]
-          |
-          v
-[Lambda: PrivacyFilterFunction]
-          |
-          +--> Invoca Rekognition: DetectFaces & DetectLabels (Person)
-          |
-          +-- ¿Figura humana detectada? (Confianza > 50%)
-                 |
-                 +--- SÍ ---> [1. Aborta Inferencia Fitosanitaria]
-                 |            [2. Etiqueta Sensitivity = RESTRICTED_PII]
-                 |            [3. Traslada a s3://...-quarantine-pii/ (Security)]
-                 |            [4. Purgado del Bucket Productivo]
-                 |            [5. Cifrado Restringido con KMS CMK Oficial de Datos]
-                 |            [6. S3 Object Lock en Compliance a 5 Años]
-                 |            [7. Notificación SNS de Alerta al Oficial de Privacidad]
-                 |            [8. Difuminado/Anonimización Opcional para Cultivo]
-                 |
-                 +--- NO ---> [1. Imagen Aprobada como Solo Cultivo]
-                              [2. Avance a Inferencia Fitosanitaria Custom Labels]
-                              [3. Escritura Idempotente en Expediente DynamoDB]
-```
+![Diagrama de Flujo del Filtro de Privacidad y Árbol de Decisión Anti-PII](diagrams/carga-e-inferencia-filtro-pii.svg)
+
+> Archivo fuente Draw.io editable: [`diagrams/carga-e-inferencia-filtro-pii.drawio`](diagrams/carga-e-inferencia-filtro-pii.drawio).
+
+El árbol de decisión anterior estructura la operación técnica a través de las fases consecutivas del pipeline:
 
 #### Fase 1: Detección Automática Perimetral (Filtro Anti-PII Serverless)
 1. Al depositarse una nueva fotografía en `s3://aromapacifico-objetos-prod/raw-images/focos/`, el evento `s3:ObjectCreated:Put` dispara la función Lambda perimetral `PrivacyFilterFunction` (ejecutada en runtime Graviton2 arm64).
@@ -339,3 +321,4 @@ Las decisiones de ingeniería y cumplimiento legal adoptadas en este documento s
 - **Supuesto 008**: Adopción de Amazon Rekognition en `us-east-1` como servicio de visión administrada serverless bajo contrato DPA y autorización de transferencia internacional (Ley 1581 de 2012).
 - **Supuesto 009**: Exclusión absoluta y bloqueo preventivo de inferencia agronómica ante presencia humana en imágenes, con retención inmutable WORM de 5 años en bóveda S3 de seguridad.
 - **Supuesto 010**: Modelo de costos serverless por petición ($2.11 USD / 1.000 fotos), garantizando $0 en reposo y un gasto de inferencia inferior a $1.50 USD para todo el semestre de cosecha.
+
