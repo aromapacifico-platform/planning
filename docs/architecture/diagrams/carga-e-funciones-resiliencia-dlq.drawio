@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mxfile host="Electron" compressed="false">
   <diagram id="resiliencia-dlq" name="Ciclo de Vida de Resiliencia y DLQ">
-    <mxGraphModel dx="1600" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1650" pageHeight="1100" background="#FFFFFF">
+    <mxGraphModel dx="1600" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1650" pageHeight="1080" background="#FFFFFF">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
 
-        <!-- TITULO -->
+        <!-- TITULO Y SUBTITULO -->
         <mxCell id="title" value="AromaPacífico - Ciclo de Vida de Resiliencia, Reintentos Exponenciales y Aislamiento de Fallas (DLQ)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
           <mxGeometry x="275" y="25" width="1100" height="35" as="geometry" />
         </mxCell>
@@ -14,88 +14,137 @@
           <mxGeometry x="275" y="60" width="1100" height="25" as="geometry" />
         </mxCell>
 
-        <!-- CONTENEDOR 1: EJECUCION Y REINTENTOS -->
-        <mxCell id="zone-retries" value="CICLO DE EJECUCIÓN Y REINTENTOS EXPONENCIALES (AWS LAMBDA)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#D5DBDB;strokeWidth=2;fontSize=13;fontStyle=1;fontColor=#232F3E;startSize=30;" vertex="1" parent="1">
+        <!-- CONTENEDOR 1: EJECUCION Y REINTENTOS (FONDO Y CABECERA) -->
+        <mxCell id="zone-retries-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#D5DBDB;strokeWidth=2;arcSize=3;" vertex="1" parent="1">
           <mxGeometry x="40" y="110" width="460" height="880" as="geometry" />
         </mxCell>
-
-        <mxCell id="box-invoc" value="Invocación Asíncrona por Evento&#xa;Disparadores S3 Event / SQS Batch&#xa;&#xa;• Evento de nuevo objeto fotográfico o lote IoT&#xa;• Lambda recibe el puntero al objeto en S3&#xa;• Genera identificador de ejecución único (RequestID)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F7FF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="zone-retries">
-          <mxGeometry x="25" y="50" width="410" height="120" as="geometry" />
+        <mxCell id="zone-retries-header" value="CICLO DE EJECUCIÓN Y REINTENTOS (LAMBDA)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAEDED;strokeColor=#D5DBDB;strokeWidth=1;fontSize=13;fontStyle=1;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="40" y="110" width="460" height="35" as="geometry" />
         </mxCell>
 
-        <mxCell id="box-try-1" value="Intento 1: Ejecución Nominal de la Función&#xa;&#xa;• Procesamiento de imagen o decodificación CBOR&#xa;• Llamada al servicio de inferencia (Rekognition)&#xa;• SI OCURRE UN ERROR (Timeout, Throttling, 5xx):&#xa;  - Se aborta la transacción antes de tocar DynamoDB&#xa;  - El objeto en S3 permanece 100% inalterado" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="zone-retries">
-          <mxGeometry x="25" y="210" width="410" height="150" as="geometry" />
+        <mxCell id="box-invoc" value="Invocación Asíncrona por Evento&#xa;Disparadores S3 Event / SQS Batch&#xa;&#xa;• Evento de nuevo objeto fotográfico o lote IoT&#xa;• Lambda recibe el puntero al objeto en S3&#xa;• Genera identificador de ejecución único (RequestID)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F7FF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="65" y="160" width="410" height="110" as="geometry" />
         </mxCell>
 
-        <mxCell id="box-try-2" value="Intento 2: Reintento Exponencial con Jitter&#xa;&#xa;• Tiempo de espera: Backoff exponencial (t = 2^1 + jitter)&#xa;• Ventana de espera: ~1 a 3 segundos&#xa;• Reintento automático administrado por el runtime&#xa;• Si el fallo persiste, se escala al segundo reintento" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="zone-retries">
-          <mxGeometry x="25" y="400" width="410" height="140" as="geometry" />
+        <mxCell id="box-try-1" value="Intento 1: Ejecución Nominal de la Función&#xa;&#xa;• Procesamiento de imagen o decodificación CBOR&#xa;• Llamada al servicio de inferencia (Rekognition)&#xa;• SI OCURRE UN ERROR (Timeout, Throttling, 5xx):&#xa;  - Se aborta la transacción antes de tocar DynamoDB&#xa;  - El objeto en S3 permanece 100% inalterado" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="65" y="305" width="410" height="145" as="geometry" />
         </mxCell>
 
-        <mxCell id="box-try-3" value="Intento 3: Reintento Final de Agotamiento&#xa;&#xa;• Tiempo de espera: Backoff exponencial (t = 2^2 + jitter)&#xa;• Ventana de espera: ~4 a 8 segundos&#xa;• Si falla por tercera vez: AGOTAMIENTO FORMAL&#xa;• El runtime invoca el destino de fallos asíncrono" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5F5;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="zone-retries">
-          <mxGeometry x="25" y="580" width="410" height="140" as="geometry" />
+        <mxCell id="box-try-2" value="Intento 2: Reintento Exponencial con Jitter&#xa;&#xa;• Tiempo de espera: Backoff exponencial (t = 2^1 + jitter)&#xa;• Ventana de espera: ~1 a 3 segundos&#xa;• Reintento automático administrado por el runtime&#xa;• Si el fallo persiste, se escala al segundo reintento" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="65" y="485" width="410" height="135" as="geometry" />
         </mxCell>
 
-        <mxCell id="box-exhaust" value="Despacho Automático a Dead Letter Queue (DLQ)&#xa;&#xa;• Enrutamiento mediante Lambda Asynchronous Destination&#xa;• Destino: SQS Dead Letter Queue dedicada por función&#xa;• CERO reintentos infinitos que incrementen costos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5F5;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="zone-retries">
-          <mxGeometry x="25" y="760" width="410" height="100" as="geometry" />
+        <mxCell id="box-try-3" value="Intento 3: Reintento Final de Agotamiento&#xa;&#xa;• Tiempo de espera: Backoff exponencial (t = 2^2 + jitter)&#xa;• Ventana de espera: ~4 a 8 segundos&#xa;• Si falla por tercera vez: AGOTAMIENTO FORMAL&#xa;• El runtime invoca el destino de fallos asíncrono" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5F5;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="65" y="655" width="410" height="135" as="geometry" />
         </mxCell>
 
-        <!-- CONTENEDOR 2: AISLAMIENTO DLQ -->
-        <mxCell id="zone-dlq-box" value="COLA DE FALLOS (DEAD LETTER QUEUE) Y CARGA ENRIQUECIDA" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#D5DBDB;strokeWidth=2;fontSize=13;fontStyle=1;fontColor=#232F3E;startSize=30;" vertex="1" parent="1">
+        <mxCell id="box-exhaust" value="Despacho Automático a Dead Letter Queue (DLQ)&#xa;&#xa;• Enrutamiento mediante Lambda Asynchronous Destination&#xa;• Destino: SQS Dead Letter Queue dedicada por función&#xa;• CERO reintentos infinitos que incrementen costos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5F5;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="65" y="825" width="410" height="115" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR 2: AISLAMIENTO DLQ (FONDO Y CABECERA) -->
+        <mxCell id="zone-dlq-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#D5DBDB;strokeWidth=2;arcSize=3;" vertex="1" parent="1">
           <mxGeometry x="540" y="110" width="530" height="880" as="geometry" />
         </mxCell>
-
-        <mxCell id="box-sqs-dlq" value="Amazon SQS: dlq-confirmacion-foco (Cifrada con KMS)&#xa;Configuración: MessageRetentionPeriod = 1209600s (14 días)&#xa;&#xa;• Contenido del mensaje de error en la DLQ:&#xa;  {&#xa;    &quot;version&quot;: &quot;1.0&quot;,&#xa;    &quot;timestamp&quot;: &quot;2026-11-08T15:02:00Z&quot;,&#xa;    &quot;requestContext&quot;: {&#xa;      &quot;requestId&quot;: &quot;c8b3e1a0-9412-4f32-8b01-fnc2026&quot;,&#xa;      &quot;functionArn&quot;: &quot;arn:aws:lambda:us-east-1:...:ProcessFocusConfirmation&quot;,&#xa;      &quot;condition&quot;: &quot;RetriesExhausted&quot;,&#xa;      &quot;approximateInvokeCount&quot;: 3&#xa;    },&#xa;    &quot;requestPayload&quot;: {&#xa;      &quot;Records&quot;: [ { &quot;s3&quot;: { &quot;bucket&quot;: { &quot;name&quot;: &quot;aromapacifico-objetos-prod&quot; },&#xa;                             &quot;object&quot;: { &quot;key&quot;: &quot;raw-images/focos/FINCA-CAUCA-012/foto_9412.jpg&quot; } } } ]&#xa;    },&#xa;    &quot;responsePayload&quot;: {&#xa;      &quot;errorMessage&quot;: &quot;ServiceUnavailable: Rekognition rate exceeded&quot;,&#xa;      &quot;errorType&quot;: &quot;ProvisionedThroughputExceededException&quot;&#xa;    }&#xa;  }" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5F5;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="zone-dlq-box">
-          <mxGeometry x="25" y="50" width="480" height="420" as="geometry" />
+        <mxCell id="zone-dlq-header" value="COLA DE FALLOS (DEAD LETTER QUEUE) Y CARGA ENRIQUECIDA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAEDED;strokeColor=#D5DBDB;strokeWidth=1;fontSize=13;fontStyle=1;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="540" y="110" width="530" height="35" as="geometry" />
         </mxCell>
 
-        <mxCell id="box-redrive" value="Mecanismo de Recuperación: SQS Dead-Letter Queue Redrive&#xa;&#xa;• Inspección del error por el equipo de ingeniería de plataforma&#xa;• Corrección de causa raíz (ej. ajuste de cuota, restauración de VPC Endpoint)&#xa;• Redrive controlado hacia la función Lambda original&#xa;• Reprocesamiento 100% exitoso sin pedir nuevo vuelo de dron a campo&#xa;• Trazabilidad completa en auditoría de CloudWatch" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F7FF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="zone-dlq-box">
-          <mxGeometry x="25" y="510" width="480" height="170" as="geometry" />
+        <mxCell id="box-sqs-dlq" value="Amazon SQS: dlq-confirmacion-foco (Cifrada con KMS)&#xa;Configuración: MessageRetentionPeriod = 1209600s (14 días)&#xa;&#xa;• Contenido del mensaje de error en la DLQ:&#xa;  {&#xa;    &quot;version&quot;: &quot;1.0&quot;,&#xa;    &quot;timestamp&quot;: &quot;2026-11-08T15:02:00Z&quot;,&#xa;    &quot;requestContext&quot;: {&#xa;      &quot;requestId&quot;: &quot;c8b3e1a0-9412-4f32-8b01-fnc2026&quot;,&#xa;      &quot;functionArn&quot;: &quot;arn:aws:lambda:us-east-1:...:ProcessFocusConfirmation&quot;,&#xa;      &quot;condition&quot;: &quot;RetriesExhausted&quot;,&#xa;      &quot;approximateInvokeCount&quot;: 3&#xa;    },&#xa;    &quot;requestPayload&quot;: {&#xa;      &quot;Records&quot;: [ { &quot;s3&quot;: { &quot;bucket&quot;: { &quot;name&quot;: &quot;aromapacifico-objetos-prod&quot; },&#xa;                             &quot;object&quot;: { &quot;key&quot;: &quot;raw-images/focos/FINCA-CAUCA-012/foto_9412.jpg&quot; } } } ]&#xa;    },&#xa;    &quot;responsePayload&quot;: {&#xa;      &quot;errorMessage&quot;: &quot;ServiceUnavailable: Rekognition rate exceeded&quot;,&#xa;      &quot;errorType&quot;: &quot;ProvisionedThroughputExceededException&quot;&#xa;    }&#xa;  }" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5F5;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="565" y="160" width="480" height="410" as="geometry" />
         </mxCell>
 
-        <mxCell id="box-retention" value="Política de Retención y Purga de Seguridad:&#xa;• Mensajes no procesados expiran tras 14 días&#xa;• Almacenamiento seguro bajo KMS CMK de seguridad&#xa;• Previene acumulación silenciosa de fallas fitosanitarias" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="zone-dlq-box">
-          <mxGeometry x="25" y="710" width="480" height="140" as="geometry" />
+        <mxCell id="box-redrive" value="Mecanismo de Recuperación: SQS Dead-Letter Queue Redrive&#xa;&#xa;• Inspección del error por el equipo de ingeniería de plataforma&#xa;• Corrección de causa raíz (ej. ajuste de cuota, restauración de VPC Endpoint)&#xa;• Redrive controlado hacia la función Lambda original&#xa;• Reprocesamiento 100% exitoso sin pedir nuevo vuelo de dron a campo&#xa;• Trazabilidad completa en auditoría de CloudWatch" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F7FF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="565" y="605" width="480" height="175" as="geometry" />
         </mxCell>
 
-        <!-- CONTENEDOR 3: INVARIANTES Y OBSERVABILIDAD -->
-        <mxCell id="zone-sre" value="GARANTÍAS ARQUITECTÓNICAS Y OBSERVABILIDAD SRE" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#D5DBDB;strokeWidth=2;fontSize=13;fontStyle=1;fontColor=#232F3E;startSize=30;" vertex="1" parent="1">
+        <mxCell id="box-retention" value="Política de Retención y Purga de Seguridad:&#xa;• Mensajes no procesados expiran tras 14 días&#xa;• Almacenamiento seguro bajo KMS CMK de seguridad&#xa;• Previene acumulación silenciosa de fallas fitosanitarias" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="565" y="810" width="480" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR 3: INVARIANTES Y OBSERVABILIDAD (FONDO Y CABECERA) -->
+        <mxCell id="zone-sre-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#D5DBDB;strokeWidth=2;arcSize=3;" vertex="1" parent="1">
           <mxGeometry x="1110" y="110" width="500" height="880" as="geometry" />
         </mxCell>
-
-        <mxCell id="box-invariants" value="Garantías Arquitectónicas Innegociables:&#xa;&#xa;1. PRESERVACIÓN DEL OBJETO DE ORIGEN:&#xa;   El archivo en Amazon S3 permanece exactamente en su estado&#xa;   original. Ninguna excepción, corte de red o timeout borra&#xa;   o corrompe la foto o registro capturado.&#xa;&#xa;2. CERO MUTACIÓN DE ESTADO EN FALLA:&#xa;   La tabla ExpedienteFitosanitario en DynamoDB NO muta.&#xa;   El foco permanece en estado nominal o pendiente, impidiendo&#xa;   que un error técnico asuma erróneamente 'Foco descartado'&#xa;   o 'Caso cerrado'.&#xa;&#xa;3. PREVENCIÓN DE FALSAS FUMIGACIONES:&#xa;   Sin un resultado positivo explícito y validado por agrónomo,&#xa;   NUNCA se habilita la creación de la orden de fumigación." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4FBF5;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="zone-sre">
-          <mxGeometry x="25" y="50" width="450" height="270" as="geometry" />
+        <mxCell id="zone-sre-header" value="GARANTÍAS ARQUITECTÓNICAS Y OBSERVABILIDAD SRE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAEDED;strokeColor=#D5DBDB;strokeWidth=1;fontSize=13;fontStyle=1;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="110" width="500" height="35" as="geometry" />
         </mxCell>
 
-        <mxCell id="box-cw-alarms" value="Amazon CloudWatch: Alarmas y Notificación P1&#xa;&#xa;• Métrica supervisada: ApproximateNumberOfMessagesVisible &gt; 0&#xa;• Evaluación: Periodo de 1 minuto, umbral ≥ 1 mensaje&#xa;• Acción inmediata: Notificación vía Amazon SNS&#xa;  - Notifica al canal de soporte técnico de operaciones FNC&#xa;  - Abre ticket de incidente técnico P1 en mesa de servicio&#xa;• Dashboards operativos con desglose por FincaID y AcopioID" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="zone-sre">
-          <mxGeometry x="25" y="350" width="450" height="240" as="geometry" />
+        <mxCell id="box-invariants" value="Garantías Arquitectónicas Innegociables:&#xa;&#xa;1. PRESERVACIÓN DEL OBJETO DE ORIGEN:&#xa;   El archivo en Amazon S3 permanece exactamente en su estado&#xa;   original. Ninguna excepción, corte de red o timeout borra&#xa;   o corrompe la foto o registro capturado.&#xa;&#xa;2. CERO MUTACIÓN DE ESTADO EN FALLA:&#xa;   La tabla ExpedienteFitosanitario en DynamoDB NO muta.&#xa;   El foco permanece en estado nominal o pendiente, impidiendo&#xa;   que un error técnico asuma erróneamente 'Foco descartado'&#xa;   o 'Caso cerrado'.&#xa;&#xa;3. PREVENCIÓN DE FALSAS FUMIGACIONES:&#xa;   Sin un resultado positivo explícito y validado por agrónomo,&#xa;   NUNCA se habilita la creación de la orden de fumigación." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4FBF5;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="1135" y="160" width="450" height="270" as="geometry" />
         </mxCell>
 
-        <mxCell id="box-audit" value="Auditoría y Trazabilidad Inmutable:&#xa;&#xa;• Cada fallo y reintento queda registrado en CloudWatch Logs&#xa;• Agregación en cuenta AromaPacifico-Security con S3 Object Lock&#xa;• Duración de retención de trazas de fallo: 5 años&#xa;• Permite reconstruir cualquier incidente agronómico ante reclamos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F7FF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="zone-sre">
-          <mxGeometry x="25" y="620" width="450" height="230" as="geometry" />
+        <mxCell id="box-cw-alarms" value="Amazon CloudWatch: Alarmas y Notificación P1&#xa;&#xa;• Métrica supervisada: ApproximateNumberOfMessagesVisible &gt; 0&#xa;• Evaluación: Periodo de 1 minuto, umbral ≥ 1 mensaje&#xa;• Acción inmediata: Notificación vía Amazon SNS&#xa;  - Notifica al canal de soporte técnico de operaciones FNC&#xa;  - Abre ticket de incidente técnico P1 en mesa de servicio&#xa;• Dashboards operativos con desglose por FincaID y AcopioID" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="1135" y="465" width="450" height="245" as="geometry" />
         </mxCell>
 
-        <!-- CONECTORES -->
-        <mxCell id="c-i-t1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D76DB;strokeWidth=2;" edge="1" parent="zone-retries" source="box-invoc" target="box-try-1">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="box-audit" value="Auditoría y Trazabilidad Inmutable:&#xa;&#xa;• Cada fallo y reintento queda registrado en CloudWatch Logs&#xa;• Agregación en cuenta AromaPacifico-Security con S3 Object Lock&#xa;• Duración de retención de trazas de fallo: 5 años&#xa;• Permite reconstruir cualquier incidente agronómico ante reclamos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F7FF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="1135" y="740" width="450" height="200" as="geometry" />
         </mxCell>
-        <mxCell id="c-t1-t2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FF9900;strokeWidth=2;" edge="1" parent="zone-retries" source="box-try-1" target="box-try-2">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="c-t2-t3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D93F0B;strokeWidth=2;" edge="1" parent="zone-retries" source="box-try-2" target="box-try-3">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="c-t3-ex" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D93F0B;strokeWidth=2.5;" edge="1" parent="zone-retries" source="box-try-3" target="box-exhaust">
+
+        <!-- ==================== CONECTORES FLUIDOS (TODOS PARENT=1) ==================== -->
+        <!-- Invocación a Intento 1 -->
+        <mxCell id="c-i-t1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D76DB;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="box-invoc" target="box-try-1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
-        <mxCell id="c-ex-dlq" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D93F0B;strokeWidth=2.5;" edge="1" parent="1" source="box-exhaust" target="box-sqs-dlq">
+        <!-- Intento 1 a Intento 2 -->
+        <mxCell id="c-t1-t2" value="Falla 1: Retry con Jitter (~1-3s)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FF9900;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;fontColor=#FF9900;" edge="1" parent="1" source="box-try-1" target="box-try-2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
-        <mxCell id="c-dlq-cw" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FF9900;strokeWidth=2;" edge="1" parent="1" source="box-sqs-dlq" target="box-cw-alarms">
+        <!-- Intento 2 a Intento 3 -->
+        <mxCell id="c-t2-t3" value="Falla 2: Retry Final (~4-8s)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D93F0B;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;fontColor=#D93F0B;" edge="1" parent="1" source="box-try-2" target="box-try-3">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
-        <mxCell id="c-dlq-redrive" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D76DB;strokeWidth=2;dashed=1;" edge="1" parent="zone-dlq-box" source="box-redrive" target="box-sqs-dlq">
+        <!-- Intento 3 a Exhaust -->
+        <mxCell id="c-t3-ex" value="Agotamiento Retries" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D93F0B;strokeWidth=2.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;fontColor=#D93F0B;fontStyle=1;" edge="1" parent="1" source="box-try-3" target="box-exhaust">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Exhaust a SQS DLQ -->
+        <mxCell id="c-ex-dlq" value="OnFailure Destination" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D93F0B;strokeWidth=2.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;fontColor=#D93F0B;fontStyle=1;" edge="1" parent="1" source="box-exhaust" target="box-sqs-dlq">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="510" y="883" />
+              <mxPoint x="510" y="365" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- SQS DLQ a CloudWatch Alarms -->
+        <mxCell id="c-dlq-cw" value="Alarma P1: DLQDepth &gt; 0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FF9900;strokeWidth=2;exitX=1;exitY=0.88;exitDx=0;exitDy=0;entryX=0;entryY=0.23;entryDx=0;entryDy=0;fontSize=12;fontColor=#FF9900;fontStyle=1;" edge="1" parent="1" source="box-sqs-dlq" target="box-cw-alarms">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- SQS DLQ a Invariantes (Garantía de Estado) -->
+        <mxCell id="c-dlq-invariants" value="Objeto S3 Intacto · Cero Mutación DDB" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0E8A16;strokeWidth=2;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.38;entryDx=0;entryDy=0;fontSize=12;fontColor=#0E8A16;fontStyle=1;" edge="1" parent="1" source="box-sqs-dlq" target="box-invariants">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- SQS DLQ a Redrive (Intervención Operativa) -->
+        <mxCell id="c-dlq-to-redrive" value="Intervención Operativa SRE" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D76DB;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;fontColor=#1D76DB;fontStyle=1;" edge="1" parent="1" source="box-sqs-dlq" target="box-redrive">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Redrive a Intento 1 (Línea de retorno discontinua) -->
+        <mxCell id="c-dlq-redrive" value="SQS DLQ Redrive: Reprocesamiento" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D76DB;strokeWidth=2;dashed=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;fontColor=#1D76DB;fontStyle=1;" edge="1" parent="1" source="box-redrive" target="box-try-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="535" y="693" />
+              <mxPoint x="535" y="378" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Redrive a Retención -->
+        <mxCell id="c-redrive-retention" value="Expiración tras 14 días (si no hay redrive)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#545B64;strokeWidth=1.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;fontColor=#545B64;" edge="1" parent="1" source="box-redrive" target="box-retention">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- CloudWatch a Auditoría -->
+        <mxCell id="c-cw-audit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D76DB;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="box-cw-alarms" target="box-audit">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 

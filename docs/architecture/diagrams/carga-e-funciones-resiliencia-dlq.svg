@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1650 980" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1650 1020" width="100%" height="100%">
   <defs>
     <style>
       .main-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
@@ -8,6 +8,7 @@
       .card-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: bold; fill: #555555; }
       .card-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
       .code-body { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 11px; fill: #232F3E; }
+      .flow-label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: bold; fill: #545B64; }
       .flow-line { stroke: #545B64; stroke-width: 2; fill: none; }
       .flow-line-accent { stroke: #1D76DB; stroke-width: 2.5; fill: none; }
       .flow-line-danger { stroke: #D93F0B; stroke-width: 2.5; fill: none; }
@@ -36,188 +37,190 @@
   </defs>
 
   <!-- FONDO -->
-  <rect width="1650" height="980" fill="#FFFFFF" />
+  <rect width="1650" height="1020" fill="#FFFFFF" />
 
   <!-- ENCABEZADO -->
-  <text x="825" y="38" class="main-title">AromaPacífico - Ciclo de Vida de Resiliencia, Reintentos Exponenciales y Aislamiento de Fallas (DLQ)</text>
-  <text x="825" y="62" class="sub-title">Garantía de Cero Mutación Destructiva, Preservación de Evidencias en S3 y Procedimiento de Redrive Operativo</text>
+  <text x="825" y="42" class="main-title">AromaPacífico - Ciclo de Vida de Resiliencia, Reintentos Exponenciales y Aislamiento de Fallas (DLQ)</text>
+  <text x="825" y="70" class="sub-title">Garantía de Cero Mutación Destructiva, Preservación de Evidencias en S3 y Procedimiento de Redrive Operativo</text>
 
   <!-- ==================== CONTENEDOR 1: EJECUCION Y REINTENTOS ==================== -->
-  <g transform="translate(30, 95)">
-    <rect width="470" height="850" rx="8" fill="#F8F9FA" stroke="#D5DBDB" stroke-width="2" />
-    <rect x="0" y="0" width="470" height="35" rx="8" fill="#EAEDED" />
-    <text x="15" y="23" class="swimlane-title">CICLO DE EJECUCIÓN Y REINTENTOS (LAMBDA)</text>
+  <rect x="40" y="110" width="460" height="880" rx="8" fill="#F8F9FA" stroke="#D5DBDB" stroke-width="2" />
+  <rect x="40" y="110" width="460" height="35" rx="8" fill="#EAEDED" />
+  <text x="60" y="133" class="swimlane-title">CICLO DE EJECUCIÓN Y REINTENTOS (LAMBDA)</text>
 
-    <!-- INVOCACION -->
-    <g transform="translate(20, 50)">
-      <rect width="430" height="110" rx="6" fill="#F0F7FF" stroke="#1D76DB" stroke-width="2" filter="url(#box-shadow)" />
-      <text x="15" y="25" class="card-header">Invocación Asíncrona por Evento</text>
-      <text x="15" y="45" class="card-sub">Eventos S3 (ObjectCreated) o Lotes IoT / SQS</text>
-      <text x="15" y="68" class="card-body">• Lambda recibe el puntero al objeto en S3 (Bucket y Key)</text>
-      <text x="15" y="88" class="card-body">• Runtime asigna un RequestID y traza en AWS X-Ray</text>
-    </g>
+  <!-- INVOCACION -->
+  <rect x="65" y="160" width="410" height="110" rx="6" fill="#F0F7FF" stroke="#1D76DB" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="80" y="185" class="card-header">Invocación Asíncrona por Evento</text>
+  <text x="80" y="205" class="card-sub">Disparadores S3 Event / SQS Batch</text>
+  <text x="80" y="228" class="card-body">• Evento de nuevo objeto fotográfico o lote IoT</text>
+  <text x="80" y="248" class="card-body">• Lambda recibe el puntero al objeto en S3</text>
+  <text x="80" y="268" class="card-body">• Genera identificador de ejecución único (RequestID)</text>
 
-    <!-- INTENTO 1 -->
-    <g transform="translate(20, 185)">
-      <rect width="430" height="150" rx="6" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" filter="url(#box-shadow)" />
-      <text x="15" y="25" class="card-header">Intento 1: Ejecución Nominal de la Función</text>
-      <text x="15" y="45" class="card-sub">Procesamiento Serverless en Subred Privada VPC</text>
-      <text x="15" y="70" class="card-body">• Lectura de imagen en S3 e invocación a Rekognition</text>
-      <text x="15" y="90" class="card-body">• SI OCURRE ERROR (Timeout, Throttling 503, Error de red):</text>
-      <text x="25" y="110" class="card-body">- Se aborta la ejecución antes de escribir en DynamoDB</text>
-      <text x="25" y="130" class="card-sub" fill="#D93F0B">- El archivo original en S3 permanece 100% intacto</text>
-    </g>
+  <!-- INTENTO 1 -->
+  <rect x="65" y="305" width="410" height="145" rx="6" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="80" y="330" class="card-header">Intento 1: Ejecución Nominal de la Función</text>
+  <text x="80" y="352" class="card-body">• Procesamiento de imagen o decodificación CBOR</text>
+  <text x="80" y="372" class="card-body">• Llamada al servicio de inferencia (Rekognition)</text>
+  <text x="80" y="394" class="card-body">• SI OCURRE UN ERROR (Timeout, Throttling, 5xx):</text>
+  <text x="95" y="414" class="card-body">- Se aborta la transacción antes de tocar DynamoDB</text>
+  <text x="95" y="434" class="card-sub" fill="#D93F0B">- El objeto en S3 permanece 100% inalterado</text>
 
-    <!-- INTENTO 2 -->
-    <g transform="translate(20, 360)">
-      <rect width="430" height="140" rx="6" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" filter="url(#box-shadow)" />
-      <text x="15" y="25" class="card-header">Intento 2: Reintento Exponencial con Jitter</text>
-      <text x="15" y="45" class="card-sub">Backoff Automático Administrado (Runtime Lambda)</text>
-      <text x="15" y="70" class="card-body">• Ventana de espera: ~1 a 3 segundos con jitter aleatorio</text>
-      <text x="15" y="90" class="card-body">• Previene saturación sincronizada de endpoints AWS</text>
-      <text x="15" y="110" class="card-body">• Si el servicio se recupera: completa y finaliza en éxito</text>
-      <text x="15" y="130" class="card-body">• Si la excepción persiste: escala al último reintento</text>
-    </g>
+  <!-- INTENTO 2 -->
+  <rect x="65" y="485" width="410" height="135" rx="6" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="80" y="510" class="card-header">Intento 2: Reintento Exponencial con Jitter</text>
+  <text x="80" y="533" class="card-body">• Tiempo de espera: Backoff exponencial (t = 2^1 + jitter)</text>
+  <text x="80" y="553" class="card-body">• Ventana de espera: ~1 a 3 segundos</text>
+  <text x="80" y="573" class="card-body">• Reintento automático administrado por el runtime</text>
+  <text x="80" y="593" class="card-body">• Si el fallo persiste, se escala al segundo reintento</text>
 
-    <!-- INTENTO 3 -->
-    <g transform="translate(20, 525)">
-      <rect width="430" height="140" rx="6" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" filter="url(#box-shadow)" />
-      <text x="15" y="25" class="card-header">Intento 3: Reintento Final de Agotamiento</text>
-      <text x="15" y="45" class="card-sub">Segundo Reintento Asíncrono (t = 4 a 8 s)</text>
-      <text x="15" y="70" class="card-body">• Última oportunidad de ejecución automática</text>
-      <text x="15" y="90" class="card-body">• Si falla nuevamente: AGOTAMIENTO FORMAL (RetriesExhausted)</text>
-      <text x="15" y="110" class="card-body">• Se activa el destino de fallos asíncrono (OnFailure Destination)</text>
-      <text x="15" y="130" class="card-sub" fill="#D93F0B">• No hay reintentos infinitos que eleven la factura</text>
-    </g>
+  <!-- INTENTO 3 -->
+  <rect x="65" y="655" width="410" height="135" rx="6" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="80" y="680" class="card-header">Intento 3: Reintento Final de Agotamiento</text>
+  <text x="80" y="703" class="card-body">• Tiempo de espera: Backoff exponencial (t = 2^2 + jitter)</text>
+  <text x="80" y="723" class="card-body">• Ventana de espera: ~4 a 8 segundos</text>
+  <text x="80" y="743" class="card-body">• Si falla por tercera vez: AGOTAMIENTO FORMAL</text>
+  <text x="80" y="763" class="card-sub" fill="#D93F0B">• El runtime invoca el destino de fallos asíncrono</text>
 
-    <!-- DESPACHO DLQ -->
-    <g transform="translate(20, 690)">
-      <rect width="430" height="135" rx="6" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" filter="url(#box-shadow)" />
-      <text x="15" y="25" class="card-header">Despacho Automático a Dead Letter Queue (DLQ)</text>
-      <text x="15" y="45" class="card-sub">Destino SQS Dedicado sin Impactar Flujos Productivos</text>
-      <text x="15" y="70" class="card-body">• Enrutamiento directo mediante AWS Lambda Destinations</text>
-      <text x="15" y="90" class="card-body">• Payload original enriquecido con stack trace y causa de error</text>
-      <text x="15" y="110" class="card-body">• Se aísla el mensaje fallido para remediación controlada</text>
-    </g>
-  </g>
+  <!-- DESPACHO DLQ -->
+  <rect x="65" y="825" width="410" height="115" rx="6" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="80" y="850" class="card-header">Despacho Automático a Dead Letter Queue (DLQ)</text>
+  <text x="80" y="873" class="card-body">• Enrutamiento mediante Lambda Asynchronous Destination</text>
+  <text x="80" y="893" class="card-body">• Destino: SQS Dead Letter Queue dedicada por función</text>
+  <text x="80" y="913" class="card-sub" fill="#D93F0B">• CERO reintentos infinitos que incrementen costos</text>
 
   <!-- ==================== CONTENEDOR 2: DLQ Y RECARGA ==================== -->
-  <g transform="translate(530, 95)">
-    <rect width="550" height="850" rx="8" fill="#F8F9FA" stroke="#D5DBDB" stroke-width="2" />
-    <rect x="0" y="0" width="550" height="35" rx="8" fill="#EAEDED" />
-    <text x="15" y="23" class="swimlane-title">COLA DE FALLOS (DEAD LETTER QUEUE) Y CARGA ENRIQUECIDA</text>
+  <rect x="540" y="110" width="530" height="880" rx="8" fill="#F8F9FA" stroke="#D5DBDB" stroke-width="2" />
+  <rect x="540" y="110" width="530" height="35" rx="8" fill="#EAEDED" />
+  <text x="560" y="133" class="swimlane-title">COLA DE FALLOS (DEAD LETTER QUEUE) Y CARGA ENRIQUECIDA</text>
 
-    <!-- PAYLOAD EN DLQ -->
-    <g transform="translate(20, 50)">
-      <rect width="510" height="420" rx="6" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" filter="url(#box-shadow)" />
-      <text x="15" y="25" class="card-header">Amazon SQS: dlq-confirmacion-foco (Cifrado KMS)</text>
-      <text x="15" y="45" class="card-sub">Retención Máxima: 14 días (1.209.600 s) · Dead-Letter Queue Dedicada</text>
-      <text x="15" y="70" class="code-body">{</text>
-      <text x="25" y="88" class="code-body">"version": "1.0",</text>
-      <text x="25" y="106" class="code-body">"timestamp": "2026-11-08T15:02:00Z",</text>
-      <text x="25" y="124" class="code-body">"requestContext": {</text>
-      <text x="35" y="142" class="code-body">"requestId": "c8b3e1a0-9412-4f32-8b01-fnc2026",</text>
-      <text x="35" y="160" class="code-body">"functionArn": "arn:aws:lambda:us-east-1:...:ProcessFocusConfirmation",</text>
-      <text x="35" y="178" class="code-body">"condition": "RetriesExhausted",</text>
-      <text x="35" y="196" class="code-body">"approximateInvokeCount": 3</text>
-      <text x="25" y="214" class="code-body">},</text>
-      <text x="25" y="232" class="code-body">"requestPayload": {</text>
-      <text x="35" y="250" class="code-body">"Records": [ {</text>
-      <text x="45" y="268" class="code-body">"s3": {</text>
-      <text x="55" y="286" class="code-body">"bucket": { "name": "aromapacifico-objetos-prod" },</text>
-      <text x="55" y="304" class="code-body">"object": { "key": "raw-images/focos/FINCA-CAUCA-012/foto_9412.jpg" }</text>
-      <text x="45" y="322" class="code-body">} } ]</text>
-      <text x="25" y="340" class="code-body">},</text>
-      <text x="25" y="358" class="code-body">"responsePayload": {</text>
-      <text x="35" y="376" class="code-body">"errorMessage": "ServiceUnavailable: Rekognition rate exceeded",</text>
-      <text x="35" y="394" class="code-body">"errorType": "ProvisionedThroughputExceededException"</text>
-      <text x="25" y="412" class="code-body">}</text>
-      <text x="15" y="430" class="code-body">}</text>
-    </g>
+  <!-- PAYLOAD SQS DLQ -->
+  <rect x="565" y="160" width="480" height="410" rx="6" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="580" y="185" class="card-header">Amazon SQS: dlq-confirmacion-foco (Cifrada con KMS)</text>
+  <text x="580" y="205" class="card-sub">Configuración: MessageRetentionPeriod = 1209600s (14 días)</text>
+  <text x="580" y="230" class="code-body">• Contenido del mensaje de error en la DLQ:</text>
+  <text x="580" y="248" class="code-body">  {</text>
+  <text x="590" y="266" class="code-body">    "version": "1.0",</text>
+  <text x="590" y="284" class="code-body">    "timestamp": "2026-11-08T15:02:00Z",</text>
+  <text x="590" y="302" class="code-body">    "requestContext": {</text>
+  <text x="600" y="320" class="code-body">      "requestId": "c8b3e1a0-9412-4f32-8b01-fnc2026",</text>
+  <text x="600" y="338" class="code-body">      "functionArn": "arn:aws:lambda:us-east-1:...:ProcessFocusConfirmation",</text>
+  <text x="600" y="356" class="code-body">      "condition": "RetriesExhausted",</text>
+  <text x="600" y="374" class="code-body">      "approximateInvokeCount": 3</text>
+  <text x="590" y="392" class="code-body">    },</text>
+  <text x="590" y="410" class="code-body">    "requestPayload": {</text>
+  <text x="600" y="428" class="code-body">      "Records": [ { "s3": { "bucket": { "name": "aromapacifico-objetos-prod" },</text>
+  <text x="650" y="446" class="code-body">"object": { "key": "raw-images/focos/FINCA-CAUCA-012/foto_9412.jpg" } } } ]</text>
+  <text x="590" y="464" class="code-body">    },</text>
+  <text x="590" y="482" class="code-body">    "responsePayload": {</text>
+  <text x="600" y="500" class="code-body">      "errorMessage": "ServiceUnavailable: Rekognition rate exceeded",</text>
+  <text x="600" y="518" class="code-body">      "errorType": "ProvisionedThroughputExceededException"</text>
+  <text x="590" y="536" class="code-body">    }</text>
+  <text x="580" y="554" class="code-body">  }</text>
 
-    <!-- REDRIVE -->
-    <g transform="translate(20, 500)">
-      <rect width="510" height="175" rx="6" fill="#F0F7FF" stroke="#1D76DB" stroke-width="2" filter="url(#box-shadow)" />
-      <text x="15" y="25" class="card-header">Protocolo de Remediación: SQS DLQ Redrive</text>
-      <text x="15" y="45" class="card-sub">Recuperación Controlada sin Desplazamientos a Campo</text>
-      <text x="15" y="70" class="card-body">1. El equipo SRE recibe alerta P1 de CloudWatch</text>
-      <text x="15" y="90" class="card-body">2. Se subsana la causa raíz (ej. aumento de cuota en Rekognition)</text>
-      <text x="15" y="110" class="card-body">3. Se ejecuta redrive desde la consola o CLI hacia la función Lambda</text>
-      <text x="15" y="130" class="card-body">4. Lambda reprocesa el mensaje exactamente con la misma imagen S3</text>
-      <text x="15" y="150" class="card-sub" fill="#1D76DB">BENEFICIO OPERATIVO: CERO NECESIDAD DE REPETIR EL VUELO DEL DRON</text>
-    </g>
+  <!-- REDRIVE -->
+  <rect x="565" y="605" width="480" height="175" rx="6" fill="#F0F7FF" stroke="#1D76DB" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="580" y="630" class="card-header">Mecanismo de Recuperación: SQS Dead-Letter Queue Redrive</text>
+  <text x="580" y="652" class="card-body">• Inspección del error por el equipo de ingeniería de plataforma</text>
+  <text x="580" y="672" class="card-body">• Corrección de causa raíz (ej. ajuste de cuota, restauración de VPC Endpoint)</text>
+  <text x="580" y="692" class="card-body">• Redrive controlado hacia la función Lambda original</text>
+  <text x="580" y="712" class="card-body">• Reprocesamiento 100% exitoso sin pedir nuevo vuelo de dron a campo</text>
+  <text x="580" y="732" class="card-sub" fill="#1D76DB">• Trazabilidad completa en auditoría de CloudWatch</text>
 
-    <!-- RETENCION Y PURGA -->
-    <g transform="translate(20, 700)">
-      <rect width="510" height="125" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" />
-      <text x="15" y="25" class="card-header">Garantía de Retención y Auditoría Permanente</text>
-      <text x="15" y="48" class="card-body">• Si tras 14 días no se ejecuta redrive, el mensaje pasa a archivo histórico</text>
-      <text x="15" y="68" class="card-body">• S3 Object Lock retiene las fotos por 5 años independientemente de fallos</text>
-      <text x="15" y="88" class="card-body">• Cero pérdida de trazabilidad en auditorías ante la FNC o el ICA</text>
-    </g>
-  </g>
+  <!-- RETENCION Y PURGA -->
+  <rect x="565" y="810" width="480" height="130" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" />
+  <text x="580" y="835" class="card-header">Política de Retención y Purga de Seguridad:</text>
+  <text x="580" y="858" class="card-body">• Mensajes no procesados expiran tras 14 días (1.209.600 segundos)</text>
+  <text x="580" y="878" class="card-body">• Almacenamiento seguro bajo KMS CMK de seguridad</text>
+  <text x="580" y="898" class="card-body">• Previene acumulación silenciosa de fallas fitosanitarias</text>
+  <text x="580" y="918" class="card-sub" fill="#545B64">• Cero pérdida de trazabilidad en auditorías ante la FNC o el ICA</text>
 
   <!-- ==================== CONTENEDOR 3: INVARIANTES Y SRE ==================== -->
-  <g transform="translate(1110, 95)">
-    <rect width="510" height="850" rx="8" fill="#F8F9FA" stroke="#D5DBDB" stroke-width="2" />
-    <rect x="0" y="0" width="510" height="35" rx="8" fill="#EAEDED" />
-    <text x="15" y="23" class="swimlane-title">GARANTÍAS ARQUITECTÓNICAS Y OBSERVABILIDAD SRE</text>
+  <rect x="1110" y="110" width="500" height="880" rx="8" fill="#F8F9FA" stroke="#D5DBDB" stroke-width="2" />
+  <rect x="1110" y="110" width="500" height="35" rx="8" fill="#EAEDED" />
+  <text x="1130" y="133" class="swimlane-title">GARANTÍAS ARQUITECTÓNICAS Y OBSERVABILIDAD SRE</text>
 
-    <!-- INVARIANTES -->
-    <g transform="translate(20, 50)">
-      <rect width="470" height="280" rx="6" fill="#F4FBF5" stroke="#0E8A16" stroke-width="2" filter="url(#box-shadow)" />
-      <text x="15" y="25" class="card-header">Invariantes Innegociables de Plataforma</text>
-      <text x="15" y="55" class="card-header" fill="#0E8A16">1. PRESERVACIÓN DEL OBJETO DE ORIGEN</text>
-      <text x="15" y="75" class="card-body">La imagen o archivo en S3 permanece 100% intacto. Ninguna</text>
-      <text x="15" y="95" class="card-body">falla de red, timeout o excepción en inferencia altera el archivo.</text>
+  <!-- INVARIANTES -->
+  <rect x="1135" y="160" width="450" height="270" rx="6" fill="#F4FBF5" stroke="#0E8A16" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="1150" y="185" class="card-header">Garantías Arquitectónicas Innegociables:</text>
+  <text x="1150" y="212" class="card-header" fill="#0E8A16">1. PRESERVACIÓN DEL OBJETO DE ORIGEN:</text>
+  <text x="1150" y="232" class="card-body">El archivo en Amazon S3 permanece exactamente en su estado</text>
+  <text x="1150" y="250" class="card-body">original. Ninguna excepción, corte de red o timeout borra</text>
+  <text x="1150" y="268" class="card-body">o corrompe la foto o registro capturado.</text>
 
-      <text x="15" y="125" class="card-header" fill="#0E8A16">2. CERO MUTACIÓN DE ESTADO EN FALLA</text>
-      <text x="15" y="145" class="card-body">La tabla ExpedienteFitosanitario en DynamoDB NO muta.</text>
-      <text x="15" y="165" class="card-body">El foco permanece en estado previo (EN_EVALUACION). Se impide</text>
-      <text x="15" y="185" class="card-body">que una falla técnica descarte una plaga o cierre un caso.</text>
+  <text x="1150" y="296" class="card-header" fill="#0E8A16">2. CERO MUTACIÓN DE ESTADO EN FALLA:</text>
+  <text x="1150" y="316" class="card-body">La tabla ExpedienteFitosanitario en DynamoDB NO muta.</text>
+  <text x="1150" y="334" class="card-body">El foco permanece en estado nominal o pendiente, impidiendo</text>
+  <text x="1150" y="352" class="card-body">que un error técnico asuma erróneamente 'Foco descartado'</text>
+  <text x="1150" y="370" class="card-body">o 'Caso cerrado'.</text>
 
-      <text x="15" y="215" class="card-header" fill="#0E8A16">3. PREVENCIÓN DE FALSAS FUMIGACIONES</text>
-      <text x="15" y="235" class="card-body">Sin un registro exitoso y sin la firma posterior de un agrónomo</text>
-      <text x="15" y="255" class="card-body">con MFA, NUNCA se emite una orden de aspersión química.</text>
-    </g>
+  <text x="1150" y="398" class="card-header" fill="#0E8A16">3. PREVENCIÓN DE FALSAS FUMIGACIONES:</text>
+  <text x="1150" y="416" class="card-body">Sin un resultado positivo explícito y validado por agrónomo,</text>
+  <text x="1150" y="434" class="card-body">NUNCA se habilita la creación de la orden de fumigación.</text>
 
-    <!-- ALARMAS CLOUDWATCH -->
-    <g transform="translate(20, 350)">
-      <rect width="470" height="250" rx="6" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" filter="url(#box-shadow)" />
-      <text x="15" y="25" class="card-header">Amazon CloudWatch: Monitoreo y Alarmas P1</text>
-      <text x="15" y="45" class="card-sub">Detección Inmediata de Mensajes en Colas DLQ</text>
-      <text x="15" y="70" class="card-body">• Métrica: ApproximateNumberOfMessagesVisible &gt; 0 en DLQ</text>
-      <text x="15" y="90" class="card-body">• Periodo de evaluación: 1 minuto (1 punto de datos)</text>
-      <text x="15" y="110" class="card-body">• Notificación crítica por Amazon SNS a ingenieros de guardia</text>
-      <text x="15" y="130" class="card-body">• Métricas por función:</text>
-      <text x="25" y="150" class="code-body">Errors, Invocations, Duration, Throttles, ConcurrentExecutions</text>
-      <text x="15" y="172" class="card-body">• Dashboards con desglose por FincaID, DronID y AcopioID</text>
-      <text x="15" y="195" class="card-sub" fill="#FF9900">TIEMPO DE RESPUESTA OPERACIONAL (MTTR): &lt; 30 MINUTOS</text>
-      <text x="15" y="215" class="card-body">Detección y contención sin degradar la recepción de sacos</text>
-    </g>
+  <!-- ALARMAS CLOUDWATCH -->
+  <rect x="1135" y="465" width="450" height="245" rx="6" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="1150" y="490" class="card-header">Amazon CloudWatch: Alarmas y Notificación P1</text>
+  <text x="1150" y="513" class="card-body">• Métrica supervisada: ApproximateNumberOfMessagesVisible &gt; 0</text>
+  <text x="1150" y="533" class="card-body">• Evaluación: Periodo de 1 minuto, umbral ≥ 1 mensaje</text>
+  <text x="1150" y="553" class="card-body">• Acción inmediata: Notificación vía Amazon SNS</text>
+  <text x="1165" y="573" class="card-body">- Notifica al canal de soporte técnico de operaciones FNC</text>
+  <text x="1165" y="593" class="card-body">- Abre ticket de incidente técnico P1 en mesa de servicio</text>
+  <text x="1150" y="613" class="card-body">• Dashboards operativos con desglose por FincaID y AcopioID</text>
+  <text x="1150" y="635" class="card-sub" fill="#FF9900">TIEMPO DE RESPUESTA OPERACIONAL (MTTR): &lt; 30 MINUTOS</text>
+  <text x="1150" y="655" class="card-body">Detección y contención sin degradar la recepción de sacos</text>
 
-    <!-- TRAZABILIDAD X-RAY -->
-    <g transform="translate(20, 620)">
-      <rect width="470" height="205" rx="6" fill="#F0F7FF" stroke="#1D76DB" stroke-width="2" filter="url(#box-shadow)" />
-      <text x="15" y="25" class="card-header">AWS X-Ray y CloudWatch Logs Insights</text>
-      <text x="15" y="45" class="card-sub">Auditoría Criptográfica e Inmutabilidad (5 Años)</text>
-      <text x="15" y="70" class="card-body">• Logs estructurados en JSON con RequestID, ETag y duración</text>
-      <text x="15" y="90" class="card-body">• Encriptación KMS y almacenamiento en cuenta Security</text>
-      <text x="15" y="110" class="card-body">• S3 Object Lock en modo Compliance impide eliminación</text>
-      <text x="15" y="130" class="card-body">• Cumplimiento estricto de auditoría forense para la FNC</text>
-      <text x="15" y="155" class="card-sub" fill="#1D76DB">RETENCIÓN REGULATORIA EXIGIDA: 5 AÑOS (1.825 DÍAS)</text>
-    </g>
-  </g>
+  <!-- AUDITORIA FORENSE -->
+  <rect x="1135" y="740" width="450" height="200" rx="6" fill="#F0F7FF" stroke="#1D76DB" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="1150" y="765" class="card-header">Auditoría y Trazabilidad Inmutable:</text>
+  <text x="1150" y="788" class="card-body">• Cada fallo y reintento queda registrado en CloudWatch Logs</text>
+  <text x="1150" y="808" class="card-body">• Agregación en cuenta AromaPacifico-Security con S3 Object Lock</text>
+  <text x="1150" y="828" class="card-body">• Duración de retención de trazas de fallo: 5 años</text>
+  <text x="1150" y="848" class="card-body">• Permite reconstruir cualquier incidente agronómico ante reclamos</text>
+  <text x="1150" y="873" class="card-sub" fill="#1D76DB">RETENCIÓN REGULATORIA EXIGIDA: 5 AÑOS (1.825 DÍAS)</text>
 
-  <!-- LÍNEAS DE CONEXIÓN ENTRE PASOS -->
-  <path d="M 235 160 L 235 185" class="flow-line" marker-end="url(#arrow)" />
-  <path d="M 235 335 L 235 360" class="flow-line-warning" marker-end="url(#arrow-warning)" />
-  <path d="M 235 500 L 235 525" class="flow-line-danger" marker-end="url(#arrow-danger)" />
-  <path d="M 235 665 L 235 690" class="flow-line-danger" marker-end="url(#arrow-danger)" />
+  <!-- ==================== CONECTORES Y FLECHAS (CALCULADOS EXACTOS) ==================== -->
+  <!-- Columna 1: Flujo descendente -->
+  <!-- Invocacion a Intento 1 -->
+  <path d="M 270 270 L 270 305" class="flow-line-accent" marker-end="url(#arrow-accent)" />
 
-  <path d="M 450 755 L 550 755 L 550 260 L 570 260" class="flow-line-danger" marker-end="url(#arrow-danger)" />
-  <path d="M 1040 260 L 1130 260" class="flow-line-success" marker-end="url(#arrow-success)" />
-  <path d="M 1040 400 L 1130 400" class="flow-line-warning" marker-end="url(#arrow-warning)" />
-  <path d="M 800 500 L 800 470" class="flow-line-accent flow-dashed" marker-end="url(#arrow-accent)" />
+  <!-- Intento 1 a Intento 2 -->
+  <path d="M 270 450 L 270 485" class="flow-line-warning" marker-end="url(#arrow-warning)" />
+  <text x="280" y="471" class="flow-label" fill="#FF9900">Retry con Jitter (~1-3s)</text>
+
+  <!-- Intento 2 a Intento 3 -->
+  <path d="M 270 620 L 270 655" class="flow-line-danger" marker-end="url(#arrow-danger)" />
+  <text x="280" y="641" class="flow-label" fill="#D93F0B">Retry Final (~4-8s)</text>
+
+  <!-- Intento 3 a Exhaust -->
+  <path d="M 270 790 L 270 825" class="flow-line-danger" marker-end="url(#arrow-danger)" />
+  <text x="280" y="811" class="flow-label" fill="#D93F0B">Agotamiento Retries</text>
+
+  <!-- Corredor 1 a 2: Exhaust hacia DLQ (Canal x = 510) -->
+  <path d="M 475 883 L 510 883 L 510 365 L 565 365" class="flow-line-danger" marker-end="url(#arrow-danger)" />
+  <text x="495" y="610" class="flow-label" fill="#D93F0B" transform="rotate(-90 495 610)">OnFailure Destination (DLQ)</text>
+
+  <!-- Corredor 2 a 1: Redrive hacia Intento 1 (Canal x = 535, Línea discontinua) -->
+  <path d="M 565 693 L 535 693 L 535 378 L 475 378" class="flow-line-accent flow-dashed" marker-end="url(#arrow-accent)" />
+  <text x="548" y="550" class="flow-label" fill="#1D76DB" transform="rotate(-90 548 550)">SQS DLQ Redrive</text>
+
+  <!-- Columna 2: Flujo descendente -->
+  <!-- SQS DLQ a Redrive -->
+  <path d="M 805 570 L 805 605" class="flow-line-accent" marker-end="url(#arrow-accent)" />
+  <text x="815" y="591" class="flow-label" fill="#1D76DB">Intervención Operativa SRE</text>
+
+  <!-- Redrive a Retención -->
+  <path d="M 805 780 L 805 810" class="flow-line" marker-end="url(#arrow)" />
+  <text x="815" y="798" class="flow-label" fill="#545B64">Expiración tras 14 días</text>
+
+  <!-- Corredor 2 a 3: DLQ a Invariantes (Línea horizontal recta y = 262.5) -->
+  <path d="M 1045 262.5 L 1135 262.5" class="flow-line-success" marker-end="url(#arrow-success)" />
+  <text x="1055" y="254" class="flow-label" fill="#0E8A16">Objeto S3 Intacto · Cero Mutación DDB</text>
+
+  <!-- Corredor 2 a 3: DLQ a CloudWatch Alarms (Línea horizontal recta y = 521) -->
+  <path d="M 1045 521 L 1135 521" class="flow-line-warning" marker-end="url(#arrow-warning)" />
+  <text x="1055" y="513" class="flow-label" fill="#FF9900">Alarma P1: DLQDepth &gt; 0</text>
+
+  <!-- Columna 3: CloudWatch a Auditoría -->
+  <path d="M 1360 710 L 1360 740" class="flow-line-accent" marker-end="url(#arrow-accent)" />
 
 </svg>
