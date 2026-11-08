@@ -6,7 +6,7 @@
 
 ## 1. Resumen Ejecutivo y Propósito Arquitectónico
 
-El presente documento define la arquitectura técnica del subsistema de **funciones orientadas por eventos** (*Event-Driven Serverless Compute*) e **inferencia administrada** para la plataforma cafetera **AromaPacífico**, diseñada para la Federación Nacional de Cafeteros (FNC) en convenio con la Universidad Icesi para la vigencia 2026.
+El presente documento define la arquitectura técnica del subsistema de **funciones orientadas por eventos** (*Event-Driven Serverless Compute*) e **inferencia administrada** para la plataforma cafetera **AromaPacífico**, diseñada para la Federación Nacional de Cafeteros (FNC) para la vigencia 2026.
 
 En el marco del estudio del caso y la modernización del piloto en los departamentos de **Cauca, Huila y Tolima** (200 fincas, 3 centros de acopio, 60 transportadores y entrega en Buenaventura), la arquitectura erradica por completo el aprovisionamiento de cómputo inactivo en espera de archivos. La inferencia y el procesamiento agronómico operan bajo un paradigma estrictamente serverless: **la función se invoca únicamente ante la ocurrencia de un evento verificado, procesa de forma transaccional y finaliza de inmediato persistiendo su resultado en el expediente digital**.
 
