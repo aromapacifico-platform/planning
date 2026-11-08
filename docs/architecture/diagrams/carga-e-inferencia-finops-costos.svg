@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1650 1020" width="100%" height="100%">
+  <defs>
+    <style>
+      .main-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
+      .sub-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #5A6B7C; text-anchor: middle; }
+      .swimlane-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
+      .card-header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
+      .card-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: bold; fill: #555555; }
+      .card-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
+      .code-body { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 11px; fill: #232F3E; }
+      .flow-label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: bold; fill: #545B64; }
+      .flow-line { stroke: #545B64; stroke-width: 2; fill: none; }
+      .flow-line-accent { stroke: #1D76DB; stroke-width: 2.5; fill: none; }
+      .flow-line-danger { stroke: #D93F0B; stroke-width: 2.5; fill: none; }
+      .flow-line-success { stroke: #0E8A16; stroke-width: 2.5; fill: none; }
+      .flow-line-warning { stroke: #FF9900; stroke-width: 2.5; fill: none; }
+      .flow-dashed { stroke-dasharray: 6,4; }
+    </style>
+    <filter id="box-shadow" x="-2%" y="-2%" width="104%" height="106%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.08" />
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#545B64" />
+    </marker>
+    <marker id="arrow-danger" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#D93F0B" />
+    </marker>
+    <marker id="arrow-success" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0E8A16" />
+    </marker>
+    <marker id="arrow-accent" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1D76DB" />
+    </marker>
+    <marker id="arrow-warning" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#FF9900" />
+    </marker>
+  </defs>
+
+  <!-- FONDO -->
+  <rect width="1650" height="1020" fill="#FFFFFF" />
+
+  <!-- ENCABEZADO -->
+  <text x="825" y="42" class="main-title">AromaPacífico - Modelo FinOps de Inferencia Administrada y Costos en Cosecha (2026)</text>
+  <text x="825" y="70" class="sub-title">Cálculo Granular por Mil Invocaciones, Cadencia de Drones en 200 Fincas y Comparativa de Ahorro contra Servidores Dedicados</text>
+
+  <!-- ==================== CONTENEDOR 1: CADENCIA OPERATIVA ==================== -->
+  <rect x="40" y="110" width="460" height="880" rx="8" fill="#F8F9FA" stroke="#D5DBDB" stroke-width="2" />
+  <rect x="40" y="110" width="460" height="35" rx="8" fill="#EAEDED" />
+  <text x="55" y="133" class="swimlane-title">CADENCIA OPERATIVA DE VUELOS EN COSECHA (200 FINCAS)</text>
+
+  <!-- DISTRIBUCION FENOLOGICA -->
+  <rect x="65" y="160" width="410" height="150" rx="6" fill="#F0F7FF" stroke="#1D76DB" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="80" y="185" class="card-header">Distribución Fenológica y Demanda de Vuelo:</text>
+  <text x="80" y="210" class="card-body">• Alcance Geográfico: 200 fincas en Cauca, Huila y Tolima</text>
+  <text x="80" y="230" class="card-body">• Semestre de Cosecha: 6 meses (Cosecha Principal y Mitaca)</text>
+  <text x="80" y="250" class="card-body">• Semestre de Mantenimiento: 6 meses fuera de cosecha</text>
+  <text x="80" y="270" class="card-body">• 3 Cuadrillas Departamentales en Centros de Acopio</text>
+  <text x="80" y="290" class="card-sub" fill="#1D76DB">• Tasa de Alertas de Sensores: 20% de fincas/mes en cosecha</text>
+
+  <!-- DESGLOSE DE FOTOS -->
+  <rect x="65" y="330" width="410" height="340" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="80" y="355" class="card-header">Desglose de Fotografías Sujetas a Inferencia:</text>
+  <text x="80" y="380" class="card-header">1. Servicio 2: Confirmar Alerta de Sensor:</text>
+  <text x="80" y="400" class="card-body">• 40 fincas/mes en cosecha x 1 foto foco = 40 fotos/mes</text>
+  <text x="80" y="418" class="card-body">• Total Semestre Cosecha: 40 x 6 = 240 fotos</text>
+  <text x="80" y="446" class="card-header">2. Servicio 4: Verificar Post-Fumigación:</text>
+  <text x="80" y="466" class="card-body">• 75% de focos confirmados = 30 fumigaciones/mes</text>
+  <text x="80" y="484" class="card-body">• 30 fotos de verificación/mes x 6 meses = 180 fotos</text>
+  <text x="80" y="512" class="card-header">3. Servicio 5: Estimar Rendimiento de Cosecha:</text>
+  <text x="80" y="532" class="card-body">• 200 fincas evaluadas en ventana pre-cosecha (~67 fotos/mes)</text>
+  <text x="80" y="550" class="card-body">• Total Semestre Cosecha: 200 fotos por ciclo</text>
+  <text x="80" y="582" class="card-header" fill="#0E8A16">VOLUMEN TOTAL EN SEMESTRE DE COSECHA:</text>
+  <text x="80" y="605" class="card-sub" fill="#0E8A16">240 (S2) + 180 (S4) + 200 (S5) = 620 IMÁGENES / SEMESTRE</text>
+  <text x="80" y="628" class="card-body">Promedio mensual de inferencia: ~103 a 150 fotos/mes</text>
+
+  <!-- RESUMEN MENSUAL -->
+  <rect x="65" y="690" width="410" height="270" rx="6" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="80" y="718" class="card-header">Consolidación Mensual de Inferencia:</text>
+  <text x="80" y="746" class="card-body">• Mes Pico de Cosecha: ~137 a 150 fotos evaluadas</text>
+  <text x="80" y="768" class="card-body">• Promedio por Acopio Departamental: ~45 a 50 fotos/mes</text>
+  <text x="80" y="790" class="card-body">• Tasa Diaria por Cuadrilla: ~2 a 3 fotos por día hábil</text>
+  <text x="80" y="812" class="card-body">• Carga extremadamente ligera para un backend de nube</text>
+  <text x="80" y="840" class="card-sub" fill="#FF9900">ZERO SATURACIÓN COMPUTACIONAL:</text>
+  <text x="80" y="860" class="card-body">No existe riesgo de estrangulamiento o sobrecarga</text>
+  <text x="80" y="880" class="card-body">en las cuotas estándar de AWS Rekognition</text>
+
+  <!-- ==================== CONTENEDOR 2: COSTOS UNITARIOS ==================== -->
+  <rect x="540" y="110" width="530" height="880" rx="8" fill="#F8F9FA" stroke="#D5DBDB" stroke-width="2" />
+  <rect x="540" y="110" width="530" height="35" rx="8" fill="#EAEDED" />
+  <text x="555" y="133" class="swimlane-title">DESGLOSE GRANULAR POR 1.000 INVOCACIONES (AWS 2026)</text>
+
+  <!-- TARIFAS UNITARIAS -->
+  <rect x="565" y="160" width="480" height="430" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="580" y="185" class="card-header">Tarifas Unitarias Oficiales AWS (us-east-1):</text>
+  <text x="580" y="210" class="card-header">1. Amazon Rekognition: Filtro Anti-PII:</text>
+  <text x="580" y="230" class="card-body">• DetectFaces + DetectLabels (MinConfidence 50%):</text>
+  <text x="580" y="248" class="code-body">• $0.0010 USD por imagen analizada = $1.0000 USD / 1.000 req</text>
+  <text x="580" y="274" class="card-header">2. Amazon Rekognition: Inferencia Fitosanitaria:</text>
+  <text x="580" y="294" class="card-body">• Modelo foliar administrado (Roya/Broca/Maduración):</text>
+  <text x="580" y="312" class="code-body">• $0.0010 USD por imagen analizada = $1.0000 USD / 1.000 req</text>
+  <text x="580" y="338" class="card-header">3. Cómputo AWS Lambda (Graviton2 arm64, 512 MB):</text>
+  <text x="580" y="358" class="card-body">• Duración promedio: 400 ms (0.4 s x 0.5 GB = 0.2 GB-s)</text>
+  <text x="580" y="376" class="card-body">• 1.000 invocaciones x 0.2 GB-s = 200 GB-s</text>
+  <text x="580" y="394" class="code-body">• Tarifa Graviton2: $0.0000133334 / GB-s = $0.0027 USD</text>
+  <text x="580" y="412" class="code-body">• Peticiones: 1.000 peticiones x $0.0000002 = $0.0002 USD</text>
+  <text x="580" y="430" class="card-sub" fill="#1D76DB">• Subtotal Lambda: $0.0029 USD / 1.000 invocaciones</text>
+  <text x="580" y="456" class="card-header">4. Almacenamiento Amazon S3 Standard (3.5 MB/foto):</text>
+  <text x="580" y="476" class="card-body">• 1.000 fotos x 3.5 MB = 3.5 GB almacenados 1 mes</text>
+  <text x="580" y="494" class="code-body">• Tarifa S3 Standard: $0.023 / GB-mes = $0.0805 USD</text>
+  <text x="580" y="520" class="card-header">5. Operaciones Criptográficas AWS KMS (SSE-KMS):</text>
+  <text x="580" y="540" class="code-body">• 1.000 peticiones de encriptación = $0.0300 USD</text>
+  <text x="580" y="562" class="card-body">• Gateway VPC Endpoints S3 / DynamoDB: $0.0000 USD (Gratis)</text>
+
+  <!-- COSTO CONSOLIDADO -->
+  <rect x="565" y="610" width="480" height="350" rx="6" fill="#F4FBF5" stroke="#0E8A16" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="580" y="635" class="card-header" fill="#0E8A16">COSTO CONSOLIDADO POR 1.000 INVOCACIONES:</text>
+  <text x="580" y="662" class="code-body">• Filtro Anti-PII:                  $1.0000 USD</text>
+  <text x="580" y="680" class="code-body">• Inferencia Fitosanitaria:         $1.0000 USD</text>
+  <text x="580" y="698" class="code-body">• AWS Lambda (Graviton2 arm64):    $0.0029 USD</text>
+  <text x="580" y="716" class="code-body">• Amazon S3 (Almacenamiento 3.5GB): $0.0805 USD</text>
+  <text x="580" y="734" class="code-body">• AWS KMS (Cifrado Criptográfico):  $0.0300 USD</text>
+  <text x="580" y="752" class="code-body">• Gateway VPC Endpoint S3:          $0.0000 USD (Gratis)</text>
+  <text x="580" y="770" class="code-body">------------------------------------------------</text>
+  <text x="580" y="788" class="card-header" fill="#0E8A16">TOTAL POR 1.000 FOTOS COMPLETAS:    $2.1134 USD</text>
+  <text x="580" y="820" class="card-header">FACTURA REAL DEL SEMESTRE DE COSECHA (620 FOTOS):</text>
+  <text x="580" y="845" class="card-sub" fill="#0E8A16">620 fotos x ($2.1134 / 1.000) = $1.31 USD TOTAL EN 6 MESES</text>
+  <text x="580" y="870" class="card-body">• Costo mensual promedio en cosecha: ~$0.22 USD / MES</text>
+  <text x="580" y="890" class="card-body">• Costo en mes de máxima cosecha (150 fotos): ~$0.32 USD / MES</text>
+  <text x="580" y="910" class="card-sub" fill="#0E8A16">MÁXIMA EFICIENCIA FINOPS: $0 EN REPOSO Y CERO GASTO FIJO</text>
+
+  <!-- ==================== CONTENEDOR 3: COMPARATIVA FINOPS ==================== -->
+  <rect x="1110" y="110" width="500" height="880" rx="8" fill="#F8F9FA" stroke="#D5DBDB" stroke-width="2" />
+  <rect x="1110" y="110" width="500" height="35" rx="8" fill="#EAEDED" />
+  <text x="1125" y="133" class="swimlane-title">COMPARATIVA FINOPS ESTRATÉGICA Y VALOR DEL NEGOCIO</text>
+
+  <!-- OPCION SELECCIONADA -->
+  <rect x="1135" y="160" width="450" height="150" rx="6" fill="#F4FBF5" stroke="#0E8A16" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="1150" y="185" class="card-header" fill="#0E8A16">OPCIÓN SELECCIONADA: VISIÓN ADMINISTRADA SERVERLESS</text>
+  <text x="1150" y="210" class="card-body">• Costo Fijo Mensual: $0.00 USD (Zero Compute en Reposo)</text>
+  <text x="1150" y="230" class="card-body">• Costo Real Mensual en Cosecha: ~$0.22 USD / mes</text>
+  <text x="1150" y="250" class="card-body">• Costo Semestre Cosecha: $1.31 USD</text>
+  <text x="1150" y="270" class="card-body">• Cero mantenimiento de parches, drivers CUDA o clusters</text>
+  <text x="1150" y="290" class="card-sub" fill="#0E8A16">• Escalabilidad elástica instantánea de 200 a 1.000 fincas</text>
+
+  <!-- SAGEMAKER ENDPOINT -->
+  <rect x="1135" y="330" width="450" height="150" rx="6" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="1150" y="355" class="card-header" fill="#D93F0B">ALTERNATIVA DESCARTADA 1: SAGEMAKER ENDPOINT</text>
+  <text x="1150" y="380" class="card-body">• Instancia ml.m5.xlarge 24/7 = $0.20 USD/hora</text>
+  <text x="1150" y="400" class="card-body">• Costo mensual fijo: $144.00 USD/mes ($864.00 USD en cosecha)</text>
+  <text x="1150" y="420" class="card-body">• Costo por foto procesada: $864 / 620 fotos = $1.39 USD / foto</text>
+  <text x="1150" y="440" class="card-sub" fill="#D93F0B">• INEFICIENCIA FINOPS: 99.8% del tiempo el servidor está ocioso</text>
+  <text x="1150" y="460" class="card-body">• Desperdicio masivo e inaceptable para el presupuesto FNC</text>
+
+  <!-- EC2 GPU -->
+  <rect x="1135" y="500" width="450" height="150" rx="6" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="1150" y="525" class="card-header" fill="#D93F0B">ALTERNATIVA DESCARTADA 2: CLUSTER EC2 GPU</text>
+  <text x="1150" y="550" class="card-body">• Instancia g4dn.xlarge con GPU Nvidia T4 = $0.526 USD/hora</text>
+  <text x="1150" y="570" class="card-body">• Costo mensual fijo: $378.72 USD/mes ($2.272.32 USD en cosecha)</text>
+  <text x="1150" y="590" class="card-body">• Sobrecosto operativo inmenso sin justificación agronómica</text>
+  <text x="1150" y="610" class="card-sub" fill="#D93F0B">• Requiere administración de AMIs, parches de seguridad y balanceo</text>
+
+  <!-- EDGE GPU -->
+  <rect x="1135" y="670" width="450" height="150" rx="6" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="1150" y="695" class="card-header">ALTERNATIVA DESCARTADA 3: INFERENCIA GPU EN DRONES</text>
+  <text x="1150" y="720" class="card-body">• Módulos de IA embarcados (Nvidia Jetson Orin en aeronave)</text>
+  <text x="1150" y="740" class="card-body">• Sobrecosto de CapEx: ~$8.000 USD adicionales por dron ($24.000 USD)</text>
+  <text x="1150" y="760" class="card-body">• Impacto Energético: El consumo de cómputo drena baterías LiPo</text>
+  <text x="1150" y="780" class="card-sub" fill="#FF9900">• Reduce autonomía de vuelo en más del 40%, exigiendo más baterías</text>
+
+  <!-- CONCLUSION FINOPS -->
+  <rect x="1135" y="840" width="450" height="120" rx="6" fill="#F0F7FF" stroke="#1D76DB" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="1150" y="865" class="card-header" fill="#1D76DB">DECISIÓN ESTRATÉGICA DE NEGOCIO:</text>
+  <text x="1150" y="888" class="card-body">La visión administrada serverless genera un AHORRO SUPERIOR AL 99.8%</text>
+  <text x="1150" y="908" class="card-body">frente a clusters dedicados, cumpliendo estrictamente la restricción de</text>
+  <text x="1150" y="928" class="card-sub" fill="#1D76DB">inversión moderada del pliego académico y garantizando viabilidad.</text>
+
+  <!-- ==================== CONECTORES ==================== -->
+  <!-- Cadencia a Pricing Items -->
+  <path d="M 475 500 L 505 500 L 505 375 L 565 375" class="flow-line-accent" marker-end="url(#arrow-accent)" />
+  <text x="490" y="445" class="flow-label" fill="#1D76DB" transform="rotate(-90 490 445)">Carga: 620 Fotos</text>
+
+  <!-- Pricing Items a Pricing Total -->
+  <path d="M 805 590 L 805 610" class="flow-line-success" marker-end="url(#arrow-success)" />
+
+  <!-- Pricing Total a FinOps Selected -->
+  <path d="M 1045 785 L 1080 785 L 1080 235 L 1135 235" class="flow-line-success" marker-end="url(#arrow-success)" />
+  <text x="1065" y="510" class="flow-label" fill="#0E8A16" transform="rotate(-90 1065 510)">Ahorro 99.8% FinOps</text>
+
+</svg>

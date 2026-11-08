@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1650 1020" width="100%" height="100%">
+  <defs>
+    <style>
+      .main-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
+      .sub-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #5A6B7C; text-anchor: middle; }
+      .swimlane-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
+      .card-header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
+      .card-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: bold; fill: #555555; }
+      .card-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
+      .flow-label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: bold; fill: #545B64; }
+      .flow-line { stroke: #545B64; stroke-width: 2; fill: none; }
+      .flow-line-accent { stroke: #1D76DB; stroke-width: 2.5; fill: none; }
+      .flow-line-danger { stroke: #D93F0B; stroke-width: 2.5; fill: none; }
+      .flow-line-success { stroke: #0E8A16; stroke-width: 2.5; fill: none; }
+      .flow-line-warning { stroke: #FF9900; stroke-width: 2.5; fill: none; }
+      .flow-dashed { stroke-dasharray: 6,4; }
+    </style>
+    <filter id="box-shadow" x="-2%" y="-2%" width="104%" height="106%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.08" />
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#545B64" />
+    </marker>
+    <marker id="arrow-danger" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#D93F0B" />
+    </marker>
+    <marker id="arrow-success" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0E8A16" />
+    </marker>
+    <marker id="arrow-accent" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1D76DB" />
+    </marker>
+    <marker id="arrow-warning" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#FF9900" />
+    </marker>
+  </defs>
+
+  <!-- FONDO -->
+  <rect width="1650" height="1020" fill="#FFFFFF" />
+
+  <!-- ENCABEZADO -->
+  <text x="825" y="42" class="main-title">AromaPacífico - Arquitectura de Soberanía de Datos y Flujo Transfronterizo (Ley 1581 de 2012)</text>
+  <text x="825" y="70" class="sub-title">Delimitación de Datos en Territorio Nacional vs. Inferencia en Nube us-east-1, Garantías de Transferencia Internacional y Custodia SIC</text>
+
+  <!-- ==================== CONTENEDOR 1: COLOMBIA ON-PREMISES / BORDE ==================== -->
+  <rect x="40" y="110" width="460" height="880" rx="8" fill="#F8F9FA" stroke="#D5DBDB" stroke-width="2" />
+  <rect x="40" y="110" width="460" height="35" rx="8" fill="#EAEDED" />
+  <text x="55" y="133" class="swimlane-title">TERRITORIO NACIONAL (COLOMBIA) · BORDE Y CENTROS DE ACOPIO</text>
+
+  <!-- DATOS QUE SE QUEDAN EN COLOMBIA -->
+  <rect x="65" y="160" width="410" height="250" rx="6" fill="#F4FBF5" stroke="#0E8A16" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="80" y="185" class="card-header" fill="#0E8A16">DATOS PRIVADOS QUE PERMANECEN EN COLOMBIA:</text>
+  <text x="80" y="212" class="card-header">1. Cédula de Ciudadanía del Caficultor:</text>
+  <text x="80" y="232" class="card-body">• Custodiada en bases de datos internas locales y ERP FNC</text>
+  <text x="80" y="250" class="card-body">• NUNCA se serializa en la consulta pública web (Ley 1581)</text>
+  <text x="80" y="268" class="card-body">• En nube solo viaja hash criptográfico HMAC-SHA-256</text>
+  <text x="80" y="296" class="card-header">2. Rutas Privadas Intraprediales:</text>
+  <text x="80" y="316" class="card-body">• Coordenadas de caminos internos retenidas en tableta de finca</text>
+  <text x="80" y="334" class="card-body">• Hacia la nube solo viajan coordenadas del foco o vía principal</text>
+  <text x="80" y="362" class="card-header">3. Imágenes Crudas con Presencia Humana:</text>
+  <text x="80" y="382" class="card-body">• Aisladas inmediatamente o descartadas en el borde</text>
+  <text x="80" y="400" class="card-body">• Cero envío a modelos comerciales extranjeros sin censura</text>
+
+  <!-- ACOPIOS DEPARTAMENTALES -->
+  <rect x="65" y="440" width="410" height="230" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="80" y="465" class="card-header">Centros de Acopio Departamentales (FNC):</text>
+  <text x="80" y="488" class="card-body">• Acopio Cauca: Red Segmentada 10.41.0.0/16</text>
+  <text x="80" y="508" class="card-body">• Acopio Huila: Red Segmentada 10.42.0.0/16</text>
+  <text x="80" y="528" class="card-body">• Acopio Tolima: Red Segmentada 10.43.0.0/16</text>
+  <text x="80" y="556" class="card-header">Infraestructura de Borde y Cuadrillas de Vuelo:</text>
+  <text x="80" y="578" class="card-body">• Descarga de fotos de drones en VLAN Logística (10.X.3.0/24)</text>
+  <text x="80" y="598" class="card-body">• Tableta robustecida con pre-clasificación de privacidad</text>
+  <text x="80" y="618" class="card-body">• Buffer Store-and-Forward hasta 24 horas ante corte WAN</text>
+  <text x="80" y="638" class="card-body">• Concentrador local de telemetría IoT de cultivo y secado</text>
+
+  <!-- MARCO LEGAL COLOMBIANO -->
+  <rect x="65" y="700" width="410" height="250" rx="6" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="80" y="728" class="card-header">Marco Legal Colombiano de Cumplimiento:</text>
+  <text x="80" y="756" class="card-body">• Ley Estatutaria 1581 de 2012 (Protección de Datos Personales)</text>
+  <text x="80" y="778" class="card-body">• Decreto Reglamentario 1377 de 2013 (Autorización del Titular)</text>
+  <text x="80" y="800" class="card-body">• Circular Externa 005 de 2017 de la SIC (Transferencias Nube)</text>
+  <text x="80" y="822" class="card-body">• Registro Nacional de Bases de Datos (RNBD) ante la SIC</text>
+  <text x="80" y="844" class="card-body">• Principio de Finalidad, Libertad, Veracidad y Seguridad</text>
+  <text x="80" y="872" class="card-sub" fill="#FF9900">SANCIONES LEGALES SIC EVITADAS:</text>
+  <text x="80" y="892" class="card-body">Multas de hasta 2.000 SMMLV y cierre de operaciones</text>
+  <text x="80" y="912" class="card-body">por fuga de datos o transferencia ilícita</text>
+
+  <!-- ==================== CONTENEDOR 2: CANAL TRANSFRONTERIZO ==================== -->
+  <rect x="540" y="110" width="530" height="880" rx="8" fill="#F8F9FA" stroke="#D5DBDB" stroke-width="2" />
+  <rect x="540" y="110" width="530" height="35" rx="8" fill="#EAEDED" />
+  <text x="555" y="133" class="swimlane-title">CANAL SEGURO DE TRANSMISIÓN Y SALVAGUARDAS TRANSFRONTERIZAS</text>
+
+  <!-- SEGURIDAD EN TRANSITO -->
+  <rect x="565" y="160" width="480" height="200" rx="6" fill="#F0F7FF" stroke="#1D76DB" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="580" y="185" class="card-header">Túneles Seguros y Cifrado de Transporte:</text>
+  <text x="580" y="210" class="card-body">• Enlace WAN VPN IPsec BGP (Túneles Redundantes por Acopio)</text>
+  <text x="580" y="232" class="card-body">• Transporte de Imágenes: HTTPS con TLS 1.3 y Cifrado AES-256</text>
+  <text x="580" y="254" class="card-body">• URLs Prefirmadas S3 con expiración estricta de 15 minutos</text>
+  <text x="580" y="276" class="card-body">• Certificados Digitales X.509 por cada dispositivo de vuelo y dron</text>
+  <text x="580" y="298" class="card-body">• Cero paso por internet pública sin encriptación punto a punto</text>
+  <text x="580" y="326" class="card-sub" fill="#1D76DB">CANALES PRIVADOS DE RED (AWS DIRECT CONNECT / VPN TRANSIT)</text>
+
+  <!-- OBJETOS AUTORIZADOS -->
+  <rect x="565" y="385" width="480" height="280" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="580" y="410" class="card-header">OBJETOS TÉCNICOS AUTORIZADOS A SALIR DEL PAÍS:</text>
+  <text x="580" y="438" class="card-header">1. Fotos de Dosel y Follaje (Servicios S2, S4 y S5 de Drones):</text>
+  <text x="580" y="458" class="card-body">• Exclusivamente imágenes validadas sin figuras humanas</text>
+  <text x="580" y="476" class="card-body">• Formato JPEG/PNG crudo para diagnóstico fitosanitario</text>
+  <text x="580" y="502" class="card-header">2. Metadatos de Navegación y Vuelo:</text>
+  <text x="580" y="522" class="card-body">• Coordenadas GPS del foco agronómico, altitud, dron ID, UTC</text>
+  <text x="580" y="548" class="card-header">3. Telemetría de Cultivo y Secado:</text>
+  <text x="580" y="568" class="card-body">• Lecturas NPK, humedad de suelo, temperatura de aire y café</text>
+  <text x="580" y="594" class="card-header">4. Eventos de Trazabilidad del Saco de 60 kg:</text>
+  <text x="580" y="614" class="card-body">• Código alfanumérico, peso en báscula, fecha de recibo y salida</text>
+
+  <!-- BASE CONTRACTUAL -->
+  <rect x="565" y="690" width="480" height="260" rx="6" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="580" y="718" class="card-header">Base Legal de Transmisión Internacional (Art. 26 Ley 1581):</text>
+  <text x="580" y="746" class="card-body">• AWS Data Processing Addendum (DPA) con Cláusulas Tipo</text>
+  <text x="580" y="768" class="card-body">• FNC actúa como Responsable del Tratamiento de Datos</text>
+  <text x="580" y="790" class="card-body">• AWS actúa como Encargado del Tratamiento en EE.UU.</text>
+  <text x="580" y="812" class="card-body">• Certificaciones Internacionales: ISO/IEC 27018 (Nube PII), SOC 2</text>
+  <text x="580" y="834" class="card-body">• Cláusula de no utilización de fotos para entrenamiento público</text>
+  <text x="580" y="862" class="card-sub" fill="#FF9900">CIRCULAR SIC 005/2017: ESTÁNDAR ADECUADO RECONOCIDO</text>
+  <text x="580" y="882" class="card-body">Transferencia lícita amparada en contrato y consentimiento</text>
+
+  <!-- ==================== CONTENEDOR 3: AWS US-EAST-1 NUBE ==================== -->
+  <rect x="1110" y="110" width="500" height="880" rx="8" fill="#F8F9FA" stroke="#D5DBDB" stroke-width="2" />
+  <rect x="1110" y="110" width="500" height="35" rx="8" fill="#EAEDED" />
+  <text x="1125" y="133" class="swimlane-title">REGIÓN CLOUD PRINCIPAL: AWS US-EAST-1 (N. VIRGINIA)</text>
+
+  <!-- REKOGNITION -->
+  <rect x="1135" y="160" width="450" height="200" rx="6" fill="#F0F7FF" stroke="#1D76DB" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="1150" y="185" class="card-header">Amazon Rekognition (Visión Administrada):</text>
+  <text x="1150" y="210" class="card-body">• Región us-east-1: Latencia competitiva (~45-55 ms desde Colombia)</text>
+  <text x="1150" y="232" class="card-body">• Precios Pay-as-you-go ($1.00 USD / 1.000 imágenes)</text>
+  <text x="1150" y="254" class="card-body">• Filtro Previo de Personas: DetectFaces + DetectLabels</text>
+  <text x="1150" y="276" class="card-body">• Inferencia Fitosanitaria: Modelos Custom Labels foliares</text>
+  <text x="1150" y="298" class="card-body">• Invariante: CERO retención de datos por el proveedor para reentrenar</text>
+  <text x="1150" y="326" class="card-sub" fill="#1D76DB">ZERO COMPUTE IDLE ($0 USD EN REPOSO)</text>
+
+  <!-- S3 CIFRADO Y CUARENTENA -->
+  <rect x="1135" y="385" width="450" height="240" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="1150" y="410" class="card-header">Amazon S3 (Almacenamiento de Objetos Cifrado):</text>
+  <text x="1150" y="435" class="card-body">• Bucket Principal: s3://aromapacifico-objetos-prod/</text>
+  <text x="1165" y="455" class="card-body">- Cifrado en reposo SSE-KMS con rotación automática anual</text>
+  <text x="1150" y="480" class="card-body">• Bucket Cuarentena: s3://aromapacifico-quarantine-pii/</text>
+  <text x="1165" y="500" class="card-body">- Radicado en cuenta AromaPacifico-Security</text>
+  <text x="1165" y="520" class="card-body">- Aislamiento estricto: Acceso exclusivo para Oficial de Datos</text>
+  <text x="1150" y="545" class="card-body">• Retención Legal WORM: S3 Object Lock a 5 años (1.825 días)</text>
+  <text x="1150" y="572" class="card-sub" fill="#0E8A16">INMUTABILIDAD COMPLIANCE (LEY 1581 / SIC)</text>
+
+  <!-- GOBERNANZA Y AUDITORIA -->
+  <rect x="1135" y="650" width="450" height="300" rx="6" fill="#F4FBF5" stroke="#0E8A16" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="1150" y="675" class="card-header">Gobernanza de Seguridad y Auditoría Forense:</text>
+  <text x="1150" y="700" class="card-body">• AWS Organizations con SCP: Prohibición de despliegue fuera us-east-1</text>
+  <text x="1150" y="722" class="card-body">• Región de Respaldo para Consulta del Saco: us-east-2 (Ohio)</text>
+  <text x="1150" y="744" class="card-body">• AWS CloudTrail y CloudWatch Logs cifrados en cuenta Security</text>
+  <text x="1150" y="766" class="card-body">• Invariante de Negocio: Ninguna inferencia autoriza fumigación</text>
+  <text x="1150" y="788" class="card-body">• Compuerta Humana Mandatoria de agrónomo colegiado FNC</text>
+  <text x="1150" y="816" class="card-header" fill="#0E8A16">REGLA MANDATORIA DE GOBIERNO:</text>
+  <text x="1150" y="836" class="card-body">La IA asiste la detección fitosanitaria; la decisión de aplicar</text>
+  <text x="1150" y="856" class="card-body">agroquímicos es 100% humana con firma MFA.</text>
+
+  <!-- ==================== CONECTORES ORTOGONALES CALCULADOS ==================== -->
+  <!-- Acopio a Canal Seguro (Canal x = 510) -->
+  <path d="M 475 555 L 510 555 L 510 260 L 565 260" class="flow-line-accent" marker-end="url(#arrow-accent)" />
+  <text x="495" y="420" class="flow-label" fill="#1D76DB" transform="rotate(-90 495 420)">Fotos Dron y Lotes IoT</text>
+
+  <!-- Legal a Base Contractual -->
+  <path d="M 475 825 L 565 825" class="flow-line-warning" marker-end="url(#arrow-warning)" />
+  <text x="485" y="815" class="flow-label" fill="#FF9900">Habeas Data · Ley 1581</text>
+
+  <!-- Canal Seguro a Rekognition -->
+  <path d="M 1045 260 L 1135 260" class="flow-line-accent" marker-end="url(#arrow-accent)" />
+  <text x="1055" y="250" class="flow-label" fill="#1D76DB">Invocación Visión TLS 1.3</text>
+
+  <!-- Objetos Autorizados a S3 -->
+  <path d="M 1045 525 L 1135 525" class="flow-line" marker-end="url(#arrow)" />
+  <text x="1055" y="515" class="flow-label" fill="#545B64">Almacenamiento Cifrado KMS</text>
+
+  <!-- Rekognition a S3 Cuarentena / Salida -->
+  <path d="M 1360 360 L 1360 385" class="flow-line-accent" marker-end="url(#arrow-accent)" />
+
+  <!-- S3 a Gobernanza -->
+  <path d="M 1360 625 L 1360 650" class="flow-line-success" marker-end="url(#arrow-success)" />
+
+</svg>

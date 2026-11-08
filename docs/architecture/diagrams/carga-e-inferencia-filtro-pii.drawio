@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" compressed="false">
+  <diagram id="filtro-pii-cuarentena" name="Pipeline Perimetral Anti-PII y Cuarentena">
+    <mxGraphModel dx="1600" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1650" pageHeight="1080" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TITULO Y SUBTITULO -->
+        <mxCell id="title" value="AromaPacífico - Pipeline Perimetral Anti-PII y Aislamiento en Cuarentena de Seguridad" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="275" y="25" width="1100" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Detección Automática de Rostros y Personas (Ley 1581 de 2012), Bloqueo Fitosanitario, Custodia KMS y Retención WORM (5 Años)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
+          <mxGeometry x="275" y="60" width="1100" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- 1. ORIGEN S3 RAW -->
+        <mxCell id="box-s3-raw" value="1. Ingesta Fotográfica de Dron&#xa;s3://aromapacifico-objetos-prod/&#xa;raw-images/focos/{FincaID}/{LoteID}/&#xa;&#xa;• Carga de imagen con URL prefirmada HTTPS&#xa;• Cifrado en reposo SSE-KMS obligatorio&#xa;• Dispara evento s3:ObjectCreated:Put&#xa;• Metadatos EXIF: Coordenadas GPS, UTC, DronID" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F7FF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="120" width="340" height="200" as="geometry" />
+        </mxCell>
+
+        <!-- 2. CONTENEDOR FILTRO LAMBDA -->
+        <mxCell id="zone-filter-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;arcSize=3;" vertex="1" parent="1">
+          <mxGeometry x="415" y="110" width="810" height="920" as="geometry" />
+        </mxCell>
+        <mxCell id="zone-filter-header" value="AWS LAMBDA: PrivacyFilterFunction (Filtro Perimetral Anti-PII Serverless) · us-east-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDEBD0;strokeColor=#FF9900;strokeWidth=1;fontSize=13;fontStyle=1;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="415" y="110" width="810" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- PASO 1: LECTURA STREAMING -->
+        <mxCell id="step-f1" value="Paso 1: Streaming e Inspección de Integridad Binaria&#xa;&#xa;• Lectura de imagen en streaming desde S3 (s3:GetObject) en memoria RAM efímera&#xa;• Verificación criptográfica SHA-256 para evitar corrupción de archivo o inyección de carga&#xa;• Inspección de cabeceras EXIF para confirmar pertenencia al polígono de la finca registrada" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="440" y="170" width="760" height="95" as="geometry" />
+        </mxCell>
+
+        <!-- PASO 2: INVOCACION REKOGNITION PII -->
+        <mxCell id="step-f2" value="Paso 2: Invocación Perimetral a Amazon Rekognition (Detección de Personas)&#xa;&#xa;• Invocación paralela a Rekognition: DetectFaces y DetectLabels (MinConfidence = 50.0%)&#xa;• Detección de entidades biométricas y humanas: Person, Human, Face, Worker, Farmer&#xa;• Latencia de ejecución: ~180 ms | Costo de invocación: $0.0010 USD por imagen analizada" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="440" y="295" width="760" height="95" as="geometry" />
+        </mxCell>
+
+        <!-- ROMBO DECISION PERSONA -->
+        <mxCell id="dec-person" value="¿Figura Humana&#xa;o Rostro Detectado?&#xa;(Confianza &gt; 50%)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#EAEDED;strokeColor=#545B64;strokeWidth=2;fontSize=12;fontColor=#232F3E;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="690" y="420" width="260" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- RAMA SI: BLOQUEO Y CUARENTENA -->
+        <mxCell id="act-quarantine-flow" value="RAMA SÍ: BLOQUEO INMEDIATO Y AISLAMIENTO ÉTICO:&#xa;&#xa;1. Interrupción Inmediata: Aborto determinista del pipeline agronómico&#xa;   • CERO llamadas a modelos fitosanitarios (Ahorro FinOps $0 invertido)&#xa;2. Etiquetado de Seguridad: S3 Tagging Sensitivity = RESTRICTED_PII&#xa;3. Traslado Seguro a Cuenta de Seguridad: Copia cifrada hacia S3 Cuarentena&#xa;4. Purga del Bucket Productivo: Eliminación inmediata del objeto en raw-images&#xa;5. Auditoría Legal: Emisión de evento CloudTrail con hash SHA-256 e ID del dron" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5F5;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="440" y="545" width="760" height="155" as="geometry" />
+        </mxCell>
+
+        <!-- RAMA NO: AVANCE FITOSANITARIO -->
+        <mxCell id="act-nominal-flow" value="RAMA NO: FOTO LIMPIA · AVANCE A INFERENCIA FITOSANITARIA:&#xa;&#xa;• La imagen contiene exclusivamente follaje, dosel de cafeto o suelo productivo&#xa;• Se transfiere al pipeline fitosanitario: Rekognition Custom Labels (Roya / Broca)&#xa;• Persistencia idempotente de resultados en DynamoDB: ExpedienteFitosanitario&#xa;• Invariante de Negocio: Ninguna inferencia autoriza aspersión química" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4FBF5;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="440" y="735" width="760" height="130" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box-blurring" value="Proceso Opcional de Ofuscación Reversible / Anonimización Irreversible:&#xa;Si el agrónomo requiere la toma foliar: Se aplica difuminado gaussiano estricto (box blur) sobre las coordenadas de la persona.&#xa;La imagen derivada foto_anonimizada.jpg reingresa al diagnóstico agronómico sin exponer la identidad del caficultor o jornalero." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="440" y="890" width="760" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- 3. CUARENTENA EN SECURITY -->
+        <mxCell id="box-s3-quarantine" value="3. Almacén Seguro de Cuarentena PII&#xa;s3://aromapacifico-quarantine-pii/&#xa;Cuenta: AromaPacifico-Security&#xa;&#xa;• Cifrado KMS con llave CMK exclusiva&#xa;• Acceso Restringido: Únicamente el Oficial de&#xa;  Protección de Datos (DataPrivacyOfficerRole)&#xa;• Cero acceso para agrónomos o desarrolladores&#xa;&#xa;RETENCIÓN WORM: S3 OBJECT LOCK&#xa;• Modo: Compliance obligatorio&#xa;• Plazo: 5 años inmutables (1.825 días)&#xa;• Satisface requerimientos de la SIC y Ley 1581" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5F5;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="120" width="350" height="260" as="geometry" />
+        </mxCell>
+
+        <!-- 4. EXPEDIENTE EN DYNAMODB -->
+        <mxCell id="box-ddb-expediente" value="4. Amazon DynamoDB: Expediente Digital&#xa;Tabla: ExpedienteFitosanitario (Prod)&#xa;&#xa;• Caso con PII: Estado PII_DETECTED_BLOQUEADO&#xa;  - BoundingBox: Registrado sin datos biométricos&#xa;  - Estado de Orden: BLOQUEADO_POR_PRIVACIDAD&#xa;• Caso Limpio: Estado FOCO_CONFIRMADO / LIMPIO&#xa;  - Confianza Fitosanitaria: ej. 92.4% Roya&#xa;&#xa;COMPUERTA HUMANA INNEGOCIABLE:&#xa;La plataforma asiste el diagnóstico; la autorización de&#xa;fumigación exige firma humana de agrónomo con MFA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4FBF5;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="415" width="350" height="260" as="geometry" />
+        </mxCell>
+
+        <!-- 5. AUDITORIA FORENSE -->
+        <mxCell id="box-audit-security" value="5. Auditoría Forense y Notificación SIC&#xa;Amazon CloudTrail + CloudWatch + SNS&#xa;&#xa;• Log estructurado con RequestID, Hash SHA-256&#xa;• Notificación inmediata al Oficial de Cumplimiento&#xa;• Expediente de tratamiento ante eventual reclamo de&#xa;  Habeas Data o auditoría de la SIC&#xa;• Trazabilidad total de custodia probatoria" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="710" width="350" height="230" as="geometry" />
+        </mxCell>
+
+        <!-- CONECTORES ORTOGONALES (TODOS PARENT=1) -->
+        <!-- S3 Raw a Step F1 -->
+        <mxCell id="c-s3-f1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D76DB;strokeWidth=2.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="box-s3-raw" target="step-f1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Step F1 a Step F2 -->
+        <mxCell id="c-f1-f2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#545B64;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="step-f1" target="step-f2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Step F2 a Dec Person -->
+        <mxCell id="c-f2-dec" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#545B64;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="step-f2" target="dec-person">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Dec Person a Cuarentena (Rama Sí) -->
+        <mxCell id="c-dec-quar" value="SÍ (Persona detectada &gt; 50%)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D93F0B;strokeWidth=2.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;fontColor=#D93F0B;fontStyle=1;" edge="1" parent="1" source="dec-person" target="act-quarantine-flow">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Dec Person a Flujo Nominal (Rama No) -->
+        <mxCell id="c-dec-nom" value="NO (Solo cultivo)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0E8A16;strokeWidth=2.5;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;fontColor=#0E8A16;fontStyle=1;" edge="1" parent="1" source="dec-person" target="act-nominal-flow">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="425" y="465" />
+              <mxPoint x="425" y="800" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Act Quarantine a S3 Cuarentena Externa -->
+        <mxCell id="c-quar-s3ext" value="Aislamiento KMS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D93F0B;strokeWidth=2.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;fontColor=#D93F0B;fontStyle=1;" edge="1" parent="1" source="act-quarantine-flow" target="box-s3-quarantine">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1235" y="622" />
+              <mxPoint x="1235" y="250" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Act Nominal a DynamoDB Expediente -->
+        <mxCell id="c-nom-ddb" value="Diagnóstico Fitosanitario" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0E8A16;strokeWidth=2.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;fontColor=#0E8A16;fontStyle=1;" edge="1" parent="1" source="act-nominal-flow" target="box-ddb-expediente">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1235" y="800" />
+              <mxPoint x="1235" y="545" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- S3 Cuarentena a Auditoría -->
+        <mxCell id="c-s3-audit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FF9900;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="box-s3-quarantine" target="box-audit-security">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1435" y="390" />
+              <mxPoint x="1625" y="390" />
+              <mxPoint x="1625" y="695" />
+              <mxPoint x="1435" y="695" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
