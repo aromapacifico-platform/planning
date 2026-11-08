@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1650 1050" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1650 1060" width="100%" height="100%">
   <defs>
     <style>
       .main-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
@@ -7,6 +7,7 @@
       .card-header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
       .card-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: bold; fill: #555555; }
       .card-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
+      .code-body { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 11px; fill: #232F3E; }
       .flow-label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: bold; fill: #545B64; }
       .flow-line { stroke: #545B64; stroke-width: 2; fill: none; }
       .flow-line-accent { stroke: #1D76DB; stroke-width: 2.5; fill: none; }
@@ -36,136 +37,129 @@
   </defs>
 
   <!-- FONDO -->
-  <rect width="1650" height="1050" fill="#FFFFFF" />
+  <rect width="1650" height="1060" fill="#FFFFFF" />
 
   <!-- ENCABEZADO -->
-  <text x="825" y="42" class="main-title">AromaPacífico - Pipeline Perimetral Anti-PII y Aislamiento en Cuarentena de Seguridad</text>
-  <text x="825" y="70" class="sub-title">Detección Automática de Rostros y Personas (Ley 1581 de 2012), Bloqueo Fitosanitario, Custodia KMS y Retención WORM (5 Años)</text>
+  <text x="825" y="38" class="main-title">AromaPacífico - Diagrama de Flujo y Árbol de Decisión del Filtro de Privacidad Anti-PII</text>
+  <text x="825" y="65" class="sub-title">Tratamiento de Imágenes con Personas de Punta a Punta: Detección, Bloqueo Fitosanitario, Custodia KMS y Retención WORM (Ley 1581)</text>
 
-  <!-- ==================== 1. ORIGEN S3 RAW ==================== -->
-  <rect x="40" y="120" width="340" height="200" rx="8" fill="#F0F7FF" stroke="#1D76DB" stroke-width="2" filter="url(#box-shadow)" />
-  <text x="55" y="145" class="card-header">1. Ingesta Fotográfica de Dron</text>
-  <text x="55" y="165" class="card-sub">s3://aromapacifico-objetos-prod/raw-images/</text>
-  <text x="55" y="190" class="card-body">• Carga de imagen con URL prefirmada HTTPS</text>
-  <text x="55" y="210" class="card-body">• Cifrado en reposo SSE-KMS obligatorio</text>
-  <text x="55" y="230" class="card-body">• Dispara evento s3:ObjectCreated:Put</text>
-  <text x="55" y="250" class="card-body">• Metadatos EXIF: GPS, UTC, DronID</text>
-  <text x="55" y="278" class="card-sub" fill="#1D76DB">PUNTERO DE OBJETO HACIA PRIVACY FILTER</text>
+  <!-- 1. INGESTA EN S3 RAW-IMAGES -->
+  <rect x="575" y="95" width="500" height="75" rx="6" fill="#F0F7FF" stroke="#1D76DB" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="825" y="122" class="card-header" text-anchor="middle">Ingesta en S3: raw-images/focos/{FincaID}/{LoteID}/</text>
+  <text x="825" y="142" class="card-body" text-anchor="middle">• Carga de imagen aérea desde dron con URL prefirmada HTTPS</text>
+  <text x="825" y="160" class="card-body" text-anchor="middle">• Cifrado SSE-KMS obligatorio | Dispara evento s3:ObjectCreated:Put</text>
 
-  <!-- ==================== 2. CONTENEDOR FILTRO LAMBDA ==================== -->
-  <rect x="415" y="110" width="810" height="920" rx="8" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" />
-  <rect x="415" y="110" width="810" height="40" rx="8" fill="#FDEBD0" />
-  <text x="820" y="135" class="swimlane-title" text-anchor="middle">AWS LAMBDA: PrivacyFilterFunction (Filtro Perimetral Anti-PII Serverless) · us-east-1</text>
+  <!-- 2. LAMBDA: PRIVACYFILTERFUNCTION -->
+  <rect x="575" y="200" width="500" height="75" rx="6" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="825" y="225" class="card-header" text-anchor="middle">Lambda: PrivacyFilterFunction (Graviton2 arm64, 512 MB) · us-east-1</text>
+  <text x="825" y="245" class="card-body" text-anchor="middle">• Lee imagen en streaming RAM efímera (cero persistencia en disco)</text>
+  <text x="825" y="263" class="card-body" text-anchor="middle">• Coordina la inspección perimetral previa antes de cualquier inferencia agronómica</text>
 
-  <!-- PASO F1 -->
-  <rect x="440" y="170" width="760" height="95" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" filter="url(#box-shadow)" />
-  <text x="455" y="195" class="card-header">Paso 1: Streaming e Inspección de Integridad Binaria</text>
-  <text x="455" y="218" class="card-body">• Lectura de imagen en streaming desde S3 (s3:GetObject) en memoria RAM efímera (cero persistencia en disco)</text>
-  <text x="455" y="238" class="card-body">• Verificación criptográfica SHA-256 para evitar corrupción de archivo o inyección de carga maliciosa</text>
-  <text x="455" y="258" class="card-body">• Inspección de cabeceras EXIF para confirmar pertenencia al polígono de la finca registrada</text>
+  <!-- 3. INVOCACION REKOGNITION -->
+  <rect x="1120" y="200" width="470" height="75" rx="6" fill="#F0F7FF" stroke="#1D76DB" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="1135" y="225" class="card-header">Amazon Rekognition: DetectFaces &amp; DetectLabels</text>
+  <text x="1135" y="245" class="card-body">• Invocación paralela en us-east-1 (Latencia &lt; 200 ms)</text>
+  <text x="1135" y="263" class="card-body">• Categorías humanas: Person, Human, Face (MinConfidence = 50.0%)</text>
 
-  <!-- PASO F2 -->
-  <rect x="440" y="295" width="760" height="95" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" filter="url(#box-shadow)" />
-  <text x="455" y="320" class="card-header">Paso 2: Invocación Perimetral a Amazon Rekognition (Detección de Personas)</text>
-  <text x="455" y="343" class="card-body">• Invocación paralela a Rekognition: DetectFaces y DetectLabels (MinConfidence = 50.0%)</text>
-  <text x="455" y="363" class="card-body">• Detección de entidades biométricas y humanas: Person, Human, Face, Worker, Farmer</text>
-  <text x="455" y="383" class="card-sub" fill="#1D76DB">• Latencia promedio de ejecución: ~180 ms | Costo por imagen analizada: $0.0010 USD</text>
+  <!-- 4. ROMBO DE DECISION -->
+  <polygon points="825,315 975,362.5 825,410 675,362.5" fill="#EAEDED" stroke="#545B64" stroke-width="2" />
+  <text x="825" y="352" class="card-header" text-anchor="middle">¿Figura humana detectada?</text>
+  <text x="825" y="375" class="card-sub" text-anchor="middle">(Confianza &gt; 50%)</text>
 
-  <!-- ROMBO DECISION -->
-  <polygon points="820,420 950,465 820,510 690,465" fill="#EAEDED" stroke="#545B64" stroke-width="2" />
-  <text x="820" y="455" class="card-header" text-anchor="middle">¿Figura Humana</text>
-  <text x="820" y="475" class="card-header" text-anchor="middle">o Rostro Detectado?</text>
-  <text x="820" y="493" class="card-sub" text-anchor="middle">(Confianza &gt; 50%)</text>
+  <!-- ==================== CONTENEDOR RAMA SI (8 PASOS) ==================== -->
+  <rect x="40" y="445" width="765" height="585" rx="8" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" />
+  <rect x="40" y="445" width="765" height="35" rx="8" fill="#FADBD8" />
+  <text x="422" y="468" class="swimlane-title" text-anchor="middle" fill="#D93F0B">RAMA SÍ: DETECCIÓN POSITIVA DE PERSONA · PROTOCOLO DE AISLAMIENTO ÉTICO</text>
 
-  <!-- RAMA SI: BLOQUEO Y CUARENTENA -->
-  <rect x="440" y="545" width="760" height="155" rx="6" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" filter="url(#box-shadow)" />
-  <text x="455" y="570" class="card-header" fill="#D93F0B">RAMA SÍ: BLOQUEO INMEDIATO Y AISLAMIENTO ÉTICO:</text>
-  <text x="455" y="595" class="card-body">1. Interrupción Inmediata: Aborto determinista del pipeline agronómico (CERO llamadas a modelos foliares)</text>
-  <text x="455" y="615" class="card-body">2. Etiquetado de Seguridad: S3 Tagging Sensitivity = RESTRICTED_PII | LegalRetention = LEY1581_5Y</text>
-  <text x="455" y="635" class="card-body">3. Traslado Seguro a Cuenta de Seguridad: Copia cifrada hacia s3://aromapacifico-quarantine-pii/</text>
-  <text x="455" y="655" class="card-body">4. Purga del Bucket Productivo: Eliminación inmediata del objeto en raw-images/focos/</text>
-  <text x="455" y="675" class="card-sub" fill="#D93F0B">5. Auditoría Legal: Emisión de evento CloudTrail con hash SHA-256 e ID de vuelo hacia CloudWatch Logs</text>
+  <!-- PASO SI 1 -->
+  <rect x="60" y="490" width="725" height="55" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="75" y="512" class="card-header" fill="#D93F0B">1. Aborta Inferencia Fitosanitaria</text>
+  <text x="75" y="532" class="card-body">• Cero llamadas a modelos foliares de roya o broca ($0 USD gastado en inferencia botánica)</text>
 
-  <!-- RAMA NO: NOMINAL FITOSANITARIO -->
-  <rect x="440" y="735" width="760" height="130" rx="6" fill="#F4FBF5" stroke="#0E8A16" stroke-width="2" filter="url(#box-shadow)" />
-  <text x="455" y="760" class="card-header" fill="#0E8A16">RAMA NO: FOTO LIMPIA · AVANCE A INFERENCIA FITOSANITARIA:</text>
-  <text x="455" y="785" class="card-body">• La imagen contiene exclusivamente follaje, dosel de cafeto o suelo productivo</text>
-  <text x="455" y="805" class="card-body">• Se transfiere al pipeline fitosanitario: Rekognition Custom Labels (Roya / Broca / Maduración)</text>
-  <text x="455" y="825" class="card-body">• Persistencia idempotente de resultados en DynamoDB: ExpedienteFitosanitario</text>
-  <text x="455" y="845" class="card-sub" fill="#0E8A16">INVARIANTE ZERO TRUST: NINGUNA FUNCIÓN SERVERLESS AUTORIZA FUMIGACIÓN</text>
+  <!-- PASO SI 2 -->
+  <rect x="60" y="555" width="725" height="55" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="75" y="577" class="card-header" fill="#D93F0B">2. Etiqueta Sensitivity = RESTRICTED_PII</text>
+  <text x="75" y="597" class="card-body">• S3 Object Tagging obligatorio y atributo en DynamoDB: Sensitivity = RESTRICTED_PII</text>
 
-  <!-- ANONIMIZACION OPCIONAL -->
-  <rect x="440" y="890" width="760" height="110" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" filter="url(#box-shadow)" />
-  <text x="455" y="915" class="card-header">Proceso Opcional de Ofuscación Reversible / Anonimización Irreversible:</text>
-  <text x="455" y="938" class="card-body">Si el agrónomo requiere la toma foliar: Se aplica difuminado gaussiano estricto (box blur) sobre las coordenadas</text>
-  <text x="455" y="958" class="card-body">de la persona detectada. La imagen derivada foto_anonimizada.jpg reingresa al diagnóstico agronómico sin</text>
-  <text x="455" y="978" class="card-sub" fill="#1D76DB">exponer la identidad del caficultor o jornalero, garantizando el cumplimiento de la Ley 1581 de 2012.</text>
+  <!-- PASO SI 3 -->
+  <rect x="60" y="620" width="725" height="55" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="75" y="642" class="card-header" fill="#D93F0B">3. Traslada a s3://aromapacifico-quarantine-pii/ (Security)</text>
+  <text x="75" y="662" class="card-body">• Transferencia segura y atómica hacia el bucket aislado radicado en la cuenta AromaPacifico-Security</text>
 
-  <!-- ==================== 3. CUARENTENA SECURITY ==================== -->
-  <rect x="1260" y="120" width="350" height="260" rx="8" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" filter="url(#box-shadow)" />
-  <text x="1275" y="145" class="card-header" fill="#D93F0B">3. Almacén Seguro de Cuarentena PII</text>
-  <text x="1275" y="165" class="card-sub">s3://aromapacifico-quarantine-pii/ (Security)</text>
-  <text x="1275" y="190" class="card-body">• Cifrado KMS con llave CMK exclusiva</text>
-  <text x="1275" y="210" class="card-body">• Acceso Restringido: Únicamente el Oficial de</text>
-  <text x="1285" y="228" class="card-body">Protección de Datos (DataPrivacyOfficerRole)</text>
-  <text x="1275" y="248" class="card-body">• Cero acceso para agrónomos o cuadrillas</text>
-  <text x="1275" y="274" class="card-header" fill="#D93F0B">RETENCIÓN WORM: S3 OBJECT LOCK</text>
-  <text x="1275" y="294" class="card-body">• Modo: Compliance inmutable obligatorio</text>
-  <text x="1275" y="314" class="card-body">• Plazo: 5 años inmutables (1.825 días)</text>
-  <text x="1275" y="340" class="card-sub" fill="#D93F0B">SATISFACE AUDITORÍAS DE LA SIC Y HABEAS DATA</text>
+  <!-- PASO SI 4 -->
+  <rect x="60" y="685" width="725" height="55" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="75" y="707" class="card-header" fill="#D93F0B">4. Purgado del Bucket Productivo</text>
+  <text x="75" y="727" class="card-body">• Eliminación atómica e inmediata del objeto original en s3://aromapacifico-objetos-prod/raw-images/</text>
 
-  <!-- ==================== 4. EXPEDIENTE DYNAMODB ==================== -->
-  <rect x="1260" y="415" width="350" height="260" rx="8" fill="#F4FBF5" stroke="#0E8A16" stroke-width="2" filter="url(#box-shadow)" />
-  <text x="1275" y="440" class="card-header" fill="#0E8A16">4. Amazon DynamoDB: Expediente Digital</text>
-  <text x="1275" y="460" class="card-sub">Tabla: ExpedienteFitosanitario (Prod us-east-1)</text>
-  <text x="1275" y="485" class="card-body">• Caso PII: Estado PII_DETECTED_BLOQUEADO</text>
-  <text x="1285" y="503" class="card-body">- BoundingBox registrado sin datos biométricos</text>
-  <text x="1285" y="521" class="card-body">- Orden fitosanitaria: BLOQUEADA</text>
-  <text x="1275" y="545" class="card-body">• Caso Limpio: FOCO_CONFIRMADO / LIMPIO</text>
-  <text x="1285" y="563" class="card-body">- Diagnóstico foliar: Roya Nivel 3 (92.4%)</text>
-  <text x="1275" y="590" class="card-header" fill="#0E8A16">COMPUERTA HUMANA MANDATORIA:</text>
-  <text x="1275" y="610" class="card-body">Sin firma digital del agrónomo con token MFA,</text>
-  <text x="1275" y="628" class="card-body">ninguna orden de fumigación puede generarse.</text>
+  <!-- PASO SI 5 -->
+  <rect x="60" y="750" width="725" height="55" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="75" y="772" class="card-header" fill="#D93F0B">5. Cifrado Restringido con KMS CMK Oficial de Datos</text>
+  <text x="75" y="792" class="card-body">• Cifrado en reposo con llave KMS CMK exclusiva; acceso denegado a agrónomos e ingenieros</text>
 
-  <!-- ==================== 5. AUDITORIA FORENSE ==================== -->
-  <rect x="1260" y="710" width="350" height="230" rx="8" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" filter="url(#box-shadow)" />
-  <text x="1275" y="735" class="card-header">5. Auditoría Forense y Notificación SIC</text>
-  <text x="1275" y="755" class="card-sub">CloudTrail + CloudWatch Logs + Amazon SNS</text>
-  <text x="1275" y="780" class="card-body">• Log inmutable con RequestID, ETag y Hash SHA-256</text>
-  <text x="1275" y="800" class="card-body">• Notificación crítica por SNS al Oficial de Privacidad</text>
-  <text x="1275" y="820" class="card-body">• Expediente probatorio ante requerimientos judiciales</text>
-  <text x="1275" y="840" class="card-body">• Cumplimiento estricto del principio de responsabilidad</text>
-  <text x="1275" y="858" class="card-body">demostrada (Accountability) exigido por la SIC</text>
-  <text x="1275" y="886" class="card-sub" fill="#FF9900">TRAZABILIDAD FORENSE INMUTABLE (5 AÑOS)</text>
+  <!-- PASO SI 6 -->
+  <rect x="60" y="815" width="725" height="55" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="75" y="837" class="card-header" fill="#D93F0B">6. S3 Object Lock en Compliance a 5 Años</text>
+  <text x="75" y="857" class="card-body">• Retención inmutable WORM por 1.825 días (5 años calendarios); ni Root puede borrar ni acortar</text>
+
+  <!-- PASO SI 7 -->
+  <rect x="60" y="880" width="725" height="55" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="75" y="902" class="card-header" fill="#D93F0B">7. Notificación SNS de Alerta al Oficial de Privacidad</text>
+  <text x="75" y="922" class="card-body">• Alerta crítica por SNS y registro forense inmutable en AWS CloudTrail / CloudWatch Logs</text>
+
+  <!-- PASO SI 8 -->
+  <rect x="60" y="945" width="725" height="65" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="75" y="968" class="card-header" fill="#D93F0B">8. Difuminado/Anonimización Opcional para Cultivo</text>
+  <text x="75" y="988" class="card-body">• Si se certifica necesidad agronómica: Función aplica box blur irreversible sobre la persona</text>
+  <text x="75" y="1004" class="card-sub" fill="#1D76DB">• La copia anonimizada (foto_anonimizada.jpg) reingresa al diagnóstico sin exponer al titular</text>
+
+  <!-- ==================== CONTENEDOR RAMA NO (3 PASOS) ==================== -->
+  <rect x="845" y="445" width="765" height="585" rx="8" fill="#F4FBF5" stroke="#0E8A16" stroke-width="2" />
+  <rect x="845" y="445" width="765" height="35" rx="8" fill="#D5F5E3" />
+  <text x="1228" y="468" class="swimlane-title" text-anchor="middle" fill="#0E8A16">RAMA NO: FOTO LIMPIA · AVANCE NOMINAL AL PIPELINE FITOSANITARIO</text>
+
+  <!-- PASO NO 1 -->
+  <rect x="865" y="495" width="725" height="110" rx="6" fill="#FFFFFF" stroke="#0E8A16" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="880" y="525" class="card-header" fill="#0E8A16">1. Imagen Aprobada como Solo Cultivo</text>
+  <text x="880" y="550" class="card-body">• Validación técnica: La toma contiene exclusivamente dosel de cafeto, hojas o suelo productivo</text>
+  <text x="880" y="570" class="card-body">• Confirma de manera certificada la ausencia de figuras humanas, rostros o transeúntes</text>
+  <text x="880" y="590" class="card-sub" fill="#0E8A16">• Habilita la derivación segura y lícita hacia los modelos fitosanitarios de AromaPacífico</text>
+
+  <!-- PASO NO 2 -->
+  <rect x="865" y="630" width="725" height="130" rx="6" fill="#FFFFFF" stroke="#0E8A16" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="880" y="660" class="card-header" fill="#0E8A16">2. Avance a Inferencia Fitosanitaria Custom Labels</text>
+  <text x="880" y="685" class="card-body">• Invocación administrada a Amazon Rekognition Custom Labels en us-east-1 ($0.0010 USD / llamada)</text>
+  <text x="880" y="705" class="card-body">• Diagnóstico foliar automatizado: Detección de Roya (Hemileia vastatrix) y Broca (Hypothenemus hampei)</text>
+  <text x="880" y="725" class="card-body">• Vector de diagnóstico: Etiqueta fitosanitaria, coordenadas de delimitación y nivel de confianza (%)</text>
+  <text x="880" y="745" class="card-sub" fill="#1D76DB">• Latencia de ejecución &lt; 400 ms | Zero cómputo ocioso en espera ($0 USD en reposo)</text>
+
+  <!-- PASO NO 3 -->
+  <rect x="865" y="785" width="725" height="225" rx="6" fill="#FFFFFF" stroke="#0E8A16" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="880" y="815" class="card-header" fill="#0E8A16">3. Escritura Idempotente en Expediente DynamoDB</text>
+  <text x="880" y="840" class="card-body">• Inserción atómica en tabla ExpedienteFitosanitario con ConditionExpression (garantía anti-duplicados)</text>
+  <text x="880" y="860" class="card-body">• Atributos registrados: TimestampUTC, DiagnosticLabel, ConfidenceScore (ej. 92.4%), SourceObjectID</text>
+  <text x="880" y="880" class="card-body">• Estado del foco: FOCO_CONFIRMADO (o FOCO_DESCARTADO si la confianza fitosanitaria es &lt; 80%)</text>
+  <text x="880" y="900" class="card-body">• Notificación al agrónomo colegiado de la FNC vía Amazon SNS con el reporte técnico adjunto</text>
+  <text x="880" y="935" class="card-header" fill="#0E8A16">INVARIANTE ZERO TRUST: NINGUNA FUNCIÓN SERVERLESS AUTORIZA FUMIGACIÓN</text>
+  <text x="880" y="955" class="card-body">La plataforma asiste el diagnóstico; la autorización de aspersión exige firma humana con token MFA.</text>
+  <text x="880" y="975" class="card-sub" fill="#0E8A16">COMPUERTA HUMANA INNEGOCIABLE ANTES DE CREAR LA ORDEN DE FUMIGACIÓN</text>
 
   <!-- ==================== CONECTORES ==================== -->
-  <!-- S3 Raw a Step F1 -->
-  <path d="M 380 220 L 440 220" class="flow-line-accent" marker-end="url(#arrow-accent)" />
+  <!-- S3 a Lambda Filter -->
+  <path d="M 825 170 L 825 200" class="flow-line-accent" marker-end="url(#arrow-accent)" />
 
-  <!-- Step F1 a Step F2 -->
-  <path d="M 820 265 L 820 295" class="flow-line" marker-end="url(#arrow)" />
+  <!-- Lambda Filter a Rekognition Call -->
+  <path d="M 1075 237.5 L 1120 237.5" class="flow-line-accent" marker-end="url(#arrow-accent)" />
+  <text x="1097" y="230" class="flow-label" fill="#1D76DB" text-anchor="middle">Invoca</text>
 
-  <!-- Step F2 a Dec Person -->
-  <path d="M 820 390 L 820 420" class="flow-line" marker-end="url(#arrow)" />
+  <!-- Lambda Filter a Rombo Decision -->
+  <path d="M 825 275 L 825 315" class="flow-line" marker-end="url(#arrow)" />
 
-  <!-- Dec Person a Cuarentena (Rama Sí) -->
-  <path d="M 820 510 L 820 545" class="flow-line-danger" marker-end="url(#arrow-danger)" />
-  <text x="830" y="530" class="flow-label" fill="#D93F0B">SÍ (Persona detectada &gt; 50%)</text>
+  <!-- Rombo a Rama SI (Izquierda) -->
+  <path d="M 675 362.5 L 422 362.5 L 422 445" class="flow-line-danger" marker-end="url(#arrow-danger)" />
+  <text x="548" y="352" class="flow-label" fill="#D93F0B" text-anchor="middle">SÍ (Figura humana detectada &gt; 50%)</text>
 
-  <!-- Dec Person a Flujo Nominal (Rama No) -->
-  <path d="M 690 465 L 425 465 L 425 800 L 440 800" class="flow-line-success" marker-end="url(#arrow-success)" />
-  <text x="430" y="455" class="flow-label" fill="#0E8A16">NO (Solo cultivo)</text>
-
-  <!-- Act Quarantine a S3 Cuarentena Externa -->
-  <path d="M 1200 622 L 1235 622 L 1235 250 L 1260 250" class="flow-line-danger" marker-end="url(#arrow-danger)" />
-  <text x="1220" y="430" class="flow-label" fill="#D93F0B" transform="rotate(-90 1220 430)">Aislamiento KMS</text>
-
-  <!-- Act Nominal a DynamoDB Expediente -->
-  <path d="M 1200 800 L 1235 800 L 1235 545 L 1260 545" class="flow-line-success" marker-end="url(#arrow-success)" />
-  <text x="1220" y="670" class="flow-label" fill="#0E8A16" transform="rotate(-90 1220 670)">Diagnóstico Fitosanitario</text>
-
-  <!-- S3 Cuarentena a Auditoría -->
-  <path d="M 1435 380 L 1435 710" class="flow-line-warning" marker-end="url(#arrow-warning)" />
-  <text x="1445" y="550" class="flow-label" fill="#FF9900">Alerta de Seguridad SNS</text>
+  <!-- Rombo a Rama NO (Derecha) -->
+  <path d="M 975 362.5 L 1228 362.5 L 1228 445" class="flow-line-success" marker-end="url(#arrow-success)" />
+  <text x="1101" y="352" class="flow-label" fill="#0E8A16" text-anchor="middle">NO (Solo cultivo)</text>
 
 </svg>
