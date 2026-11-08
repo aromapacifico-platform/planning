@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" compressed="false">
+  <diagram id="patron-confirmacion-foco" name="Patrón de Función de Confirmación del Foco (Épica 6)">
+    <mxGraphModel dx="1600" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1650" pageHeight="1100" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TITULO -->
+        <mxCell id="title" value="AromaPacífico - Patrón Arquitectónico de la Función de Confirmación del Foco (Épica 6)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="275" y="25" width="1100" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Especificación de Implementación en Terraform (IaC): Disparador, Permisos Mínimos, Inferencia y Resiliencia sin Mutación Destructiva" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
+          <mxGeometry x="275" y="60" width="1100" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- 1. ORIGEN S3 -->
+        <mxCell id="s3-source" value="Amazon S3 (Bucket de Objetos)&#xa;s3://aromapacifico-objetos-prod/&#xa;Prefijo: raw-images/focos/{FincaID}/{LoteID}/&#xa;&#xa;• Carga de imagen con URL prefirmada (PUT)&#xa;• Cifrado en reposo SSE-KMS obligatorio&#xa;• Emite evento s3:ObjectCreated:Put&#xa;• OBJETO NUNCA SE MODIFICA EN INFERENCIA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5F5;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="140" width="330" height="170" as="geometry" />
+        </mxCell>
+
+        <!-- 2. IAM EXECUTION ROLE -->
+        <mxCell id="iam-role" value="Rol de Ejecución IAM (Mínimo Privilegio)&#xa;arn:aws:iam::*:role/LambdaFocusConfirmationRole&#xa;&#xa;1. s3:GetObject + kms:Decrypt en raw-images/focos/*&#xa;2. rekognition:DetectFaces + DetectCustomLabels&#xa;3. dynamodb:UpdateItem en ExpedienteFitosanitario&#xa;4. sqs:SendMessage en DLQ dedicada&#xa;• PROHIBIDO comodín Resource: * o Action: *" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F7FF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="360" width="330" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- 3. CONTENEDOR LAMBDA PATRON -->
+        <mxCell id="lambda-box" value="AWS Lambda: ProcessFocusConfirmation (Graviton2 arm64, 512 MB, Timeout: 30s)&#xa;Subred Privada VPC (Hyperplane ENI) · Sin IP pública · Acceso vía Gateway Endpoints" style="swimlane;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;fontSize=13;fontStyle=1;fontColor=#232F3E;startSize=35;" vertex="1" parent="1">
+          <mxGeometry x="410" y="120" width="820" height="840" as="geometry" />
+        </mxCell>
+
+        <!-- PASO 1: LECTURA Y VALIDACION -->
+        <mxCell id="step-1" value="Paso 1: Lectura, Extracción EXIF y Verificación de Integridad&#xa;&#xa;• Lee objeto S3 mediante s3:GetObject en streaming (sin buffering completo en disco)&#xa;• Calcula hash criptográfico SHA-256 del contenido binario&#xa;• Extrae metadatos de vuelo: FincaID, LoteID, Altitud, Coordenadas GPS y Hora UTC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="lambda-box">
+          <mxGeometry x="30" y="50" width="760" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- PASO 2: FILTRO ETICO PII -->
+        <mxCell id="step-2" value="Paso 2: Filtro Ético y Protección de Privacidad (Ley 1581 de 2012)&#xa;&#xa;• Invoca Amazon Rekognition: DetectFaces&#xa;• ¿Se detectan rostros o personas identificables en la toma del cultivo?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="lambda-box">
+          <mxGeometry x="30" y="165" width="760" height="85" as="geometry" />
+        </mxCell>
+
+        <!-- DECISION PII -->
+        <mxCell id="dec-pii" value="¿Presencia de&#xa;Personas?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#EAEDED;strokeColor=#545B64;strokeWidth=2;fontSize=12;fontColor=#232F3E;fontStyle=1;" vertex="1" parent="lambda-box">
+          <mxGeometry x="320" y="275" width="180" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="act-quarantine" value="Aislamiento Ético a Cuarentena PII:&#xa;• Copia imagen a s3://aromapacifico-quarantine-pii/&#xa;• Marca objeto original como restringido&#xa;• Emite evento de auditoría en CloudWatch / Security&#xa;• EXCLUYE archivo de inferencia agronómica&#xa;• CERO mutación de la orden en DynamoDB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5F5;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="lambda-box">
+          <mxGeometry x="530" y="380" width="260" height="140" as="geometry" />
+        </mxCell>
+
+        <!-- PASO 3: INFERENCIA FITOSANITARIA -->
+        <mxCell id="step-3" value="Paso 3: Inferencia Fitosanitaria Administrada (Custom Labels / Plagas)&#xa;&#xa;• Invoca Amazon Rekognition: DetectCustomLabels&#xa;• Modelo entrenado para patologías del café: Roya (Hemileia vastatrix) y Broca (Hypothenemus hampei)&#xa;• Obtiene vector de resultados: Etiqueta diagnóstica, caja delimitadora (Bounding Box) y Confianza (%)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="lambda-box">
+          <mxGeometry x="30" y="380" width="460" height="140" as="geometry" />
+        </mxCell>
+
+        <!-- PASO 4: EVALUACION DE UMBRAL -->
+        <mxCell id="dec-umbral" value="¿Confianza ≥ 80%&#xa;en Foco Crítico?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#EAEDED;strokeColor=#545B64;strokeWidth=2;fontSize=12;fontColor=#232F3E;fontStyle=1;" vertex="1" parent="lambda-box">
+          <mxGeometry x="170" y="550" width="180" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- PASO 5: ESCRITURA EN EXPEDIENTE -->
+        <mxCell id="step-5" value="Paso 5: Persistencia Idempotente en Expediente Digital (Amazon DynamoDB)&#xa;&#xa;• Inserción condicional atómica con ConditionExpression (evita sobreescritura accidental)&#xa;• Estructura del registro persistido:&#xa;  - SourceObjectID: S3 Object Key y ETag SHA-256&#xa;  - TimestampUTC: Marca de tiempo ISO-8601 de la inferencia&#xa;  - ConfidenceScore: Porcentaje exacto devuelto por Rekognition&#xa;  - DiagnosticLabel: Patología identificada (ej. ROYA_NIVEL_3)&#xa;  - EvaluatorID: ARN del modelo y versión de la función&#xa;• Estado resultante: FOCO_CONFIRMADO (o DESCARTADO_BAJA_CONFIANZA)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4FBF5;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="lambda-box">
+          <mxGeometry x="30" y="670" width="760" height="150" as="geometry" />
+        </mxCell>
+
+        <!-- 4. CONTENEDOR EXPEDIENTE DYNAMODB -->
+        <mxCell id="ddb-expediente" value="Amazon DynamoDB&#xa;Tabla: ExpedienteFitosanitario&#xa;&#xa;• PK: FincaID | SK: FocoID#Timestamp&#xa;• Expediente enriquecido con diagnóstico&#xa;• INVARIANTE: Caso pasa a PENDIENTE_AUTORIZACION&#xa;• NINGÚN DISPARADOR AUTORIZA FUMIGACIÓN" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4FBF5;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="140" width="340" height="170" as="geometry" />
+        </mxCell>
+
+        <!-- 5. COMPUERTA HUMANA -->
+        <mxCell id="human-gate" value="Compuerta de Autorización Humana&#xa;Panel de Control FNC / Agrónomo Titular&#xa;&#xa;• Notificación vía Amazon SNS con enlace a expediente&#xa;• Revisión técnica de imágenes y porcentaje de confianza&#xa;• Firma digital obligatoria con MFA (Fase 1 Servicio 3)&#xa;• Sin firma humana, NUNCA se emite orden de fumigación" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="360" width="340" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- 6. RESILIENCIA DLQ -->
+        <mxCell id="sqs-dlq" value="Amazon SQS: dlq-confirmacion-foco&#xa;Mecanismo de Falla Aislada (Zero-State-Mutation)&#xa;&#xa;• Disparado tras 2 reintentos fallidos en Lambda&#xa;• Retención: 14 días con cifrado KMS&#xa;• Mensaje incluye: Payload S3, ErrorCode, RequestID&#xa;• Objeto en S3 original QUEDA INTACTO&#xa;• Estado del caso en DynamoDB NO CAMBIA&#xa;• Alarma CloudWatch P1 notifica a ingeniería" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5F5;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="580" width="340" height="200" as="geometry" />
+        </mxCell>
+
+        <!-- CONECTORES -->
+        <mxCell id="c-s3-fn" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D93F0B;strokeWidth=2.5;" edge="1" parent="1" source="s3-source" target="lambda-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c-dec-quar" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D93F0B;strokeWidth=2;" edge="1" parent="lambda-box" source="dec-pii" target="act-quarantine">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c-dec-no" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0E8A16;strokeWidth=2;" edge="1" parent="lambda-box" source="dec-pii" target="step-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c-fn-ddb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0E8A16;strokeWidth=2.5;" edge="1" parent="1" source="step-5" target="ddb-expediente">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c-ddb-gate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FF9900;strokeWidth=2;" edge="1" parent="1" source="ddb-expediente" target="human-gate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c-fn-dlq" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D93F0B;strokeWidth=2;dashed=1;" edge="1" parent="1" source="lambda-box" target="sqs-dlq">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1250" y="680" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
