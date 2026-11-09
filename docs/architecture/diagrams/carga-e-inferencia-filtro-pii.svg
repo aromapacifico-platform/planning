@@ -1,0 +1,165 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1650 1060" width="100%" height="100%">
+  <defs>
+    <style>
+      .main-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
+      .sub-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #5A6B7C; text-anchor: middle; }
+      .swimlane-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
+      .card-header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
+      .card-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: bold; fill: #555555; }
+      .card-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
+      .code-body { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 11px; fill: #232F3E; }
+      .flow-label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: bold; fill: #545B64; }
+      .flow-line { stroke: #545B64; stroke-width: 2; fill: none; }
+      .flow-line-accent { stroke: #1D76DB; stroke-width: 2.5; fill: none; }
+      .flow-line-danger { stroke: #D93F0B; stroke-width: 2.5; fill: none; }
+      .flow-line-success { stroke: #0E8A16; stroke-width: 2.5; fill: none; }
+      .flow-line-warning { stroke: #FF9900; stroke-width: 2.5; fill: none; }
+      .flow-dashed { stroke-dasharray: 6,4; }
+    </style>
+    <filter id="box-shadow" x="-2%" y="-2%" width="104%" height="106%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.08" />
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#545B64" />
+    </marker>
+    <marker id="arrow-danger" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#D93F0B" />
+    </marker>
+    <marker id="arrow-success" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0E8A16" />
+    </marker>
+    <marker id="arrow-accent" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1D76DB" />
+    </marker>
+    <marker id="arrow-warning" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#FF9900" />
+    </marker>
+  </defs>
+
+  <!-- FONDO -->
+  <rect width="1650" height="1060" fill="#FFFFFF" />
+
+  <!-- ENCABEZADO -->
+  <text x="825" y="38" class="main-title">AromaPacífico - Diagrama de Flujo y Árbol de Decisión del Filtro de Privacidad Anti-PII</text>
+  <text x="825" y="65" class="sub-title">Tratamiento de Imágenes con Personas de Punta a Punta: Detección, Bloqueo Fitosanitario, Custodia KMS y Retención WORM (Ley 1581)</text>
+
+  <!-- 1. INGESTA EN S3 RAW-IMAGES -->
+  <rect x="575" y="95" width="500" height="75" rx="6" fill="#F0F7FF" stroke="#1D76DB" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="825" y="122" class="card-header" text-anchor="middle">Ingesta en S3: raw-images/focos/{FincaID}/{LoteID}/</text>
+  <text x="825" y="142" class="card-body" text-anchor="middle">• Carga de imagen aérea desde dron con URL prefirmada HTTPS</text>
+  <text x="825" y="160" class="card-body" text-anchor="middle">• Cifrado SSE-KMS obligatorio | Dispara evento s3:ObjectCreated:Put</text>
+
+  <!-- 2. LAMBDA: PRIVACYFILTERFUNCTION -->
+  <rect x="575" y="200" width="500" height="75" rx="6" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="825" y="225" class="card-header" text-anchor="middle">Lambda: PrivacyFilterFunction (Graviton2 arm64, 512 MB) · us-east-1</text>
+  <text x="825" y="245" class="card-body" text-anchor="middle">• Lee imagen en streaming RAM efímera (cero persistencia en disco)</text>
+  <text x="825" y="263" class="card-body" text-anchor="middle">• Coordina la inspección perimetral previa antes de cualquier inferencia agronómica</text>
+
+  <!-- 3. INVOCACION REKOGNITION -->
+  <rect x="1120" y="200" width="470" height="75" rx="6" fill="#F0F7FF" stroke="#1D76DB" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="1135" y="225" class="card-header">Amazon Rekognition: DetectFaces &amp; DetectLabels</text>
+  <text x="1135" y="245" class="card-body">• Invocación paralela en us-east-1 (Latencia &lt; 200 ms)</text>
+  <text x="1135" y="263" class="card-body">• Categorías humanas: Person, Human, Face (MinConfidence = 50.0%)</text>
+
+  <!-- 4. ROMBO DE DECISION -->
+  <polygon points="825,315 975,362.5 825,410 675,362.5" fill="#EAEDED" stroke="#545B64" stroke-width="2" />
+  <text x="825" y="352" class="card-header" text-anchor="middle">¿Figura humana detectada?</text>
+  <text x="825" y="375" class="card-sub" text-anchor="middle">(Confianza &gt; 50%)</text>
+
+  <!-- ==================== CONTENEDOR RAMA SI (8 PASOS) ==================== -->
+  <rect x="40" y="445" width="765" height="585" rx="8" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" />
+  <rect x="40" y="445" width="765" height="35" rx="8" fill="#FADBD8" />
+  <text x="422" y="468" class="swimlane-title" text-anchor="middle" fill="#D93F0B">RAMA SÍ: DETECCIÓN POSITIVA DE PERSONA · PROTOCOLO DE AISLAMIENTO ÉTICO</text>
+
+  <!-- PASO SI 1 -->
+  <rect x="60" y="490" width="725" height="55" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="75" y="512" class="card-header" fill="#D93F0B">1. Aborta Inferencia Fitosanitaria</text>
+  <text x="75" y="532" class="card-body">• Cero llamadas a modelos foliares de roya o broca ($0 USD gastado en inferencia botánica)</text>
+
+  <!-- PASO SI 2 -->
+  <rect x="60" y="555" width="725" height="55" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="75" y="577" class="card-header" fill="#D93F0B">2. Etiqueta Sensitivity = RESTRICTED_PII</text>
+  <text x="75" y="597" class="card-body">• S3 Object Tagging obligatorio y atributo en DynamoDB: Sensitivity = RESTRICTED_PII</text>
+
+  <!-- PASO SI 3 -->
+  <rect x="60" y="620" width="725" height="55" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="75" y="642" class="card-header" fill="#D93F0B">3. Traslada a s3://aromapacifico-quarantine-pii/ (Security)</text>
+  <text x="75" y="662" class="card-body">• Transferencia segura y atómica hacia el bucket aislado radicado en la cuenta AromaPacifico-Security</text>
+
+  <!-- PASO SI 4 -->
+  <rect x="60" y="685" width="725" height="55" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="75" y="707" class="card-header" fill="#D93F0B">4. Purgado del Bucket Productivo</text>
+  <text x="75" y="727" class="card-body">• Eliminación atómica e inmediata del objeto original en s3://aromapacifico-objetos-prod/raw-images/</text>
+
+  <!-- PASO SI 5 -->
+  <rect x="60" y="750" width="725" height="55" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="75" y="772" class="card-header" fill="#D93F0B">5. Cifrado Restringido con KMS CMK Oficial de Datos</text>
+  <text x="75" y="792" class="card-body">• Cifrado en reposo con llave KMS CMK exclusiva; acceso denegado a agrónomos e ingenieros</text>
+
+  <!-- PASO SI 6 -->
+  <rect x="60" y="815" width="725" height="55" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="75" y="837" class="card-header" fill="#D93F0B">6. S3 Object Lock en Compliance a 5 Años</text>
+  <text x="75" y="857" class="card-body">• Retención inmutable WORM por 1.825 días (5 años calendarios); ni Root puede borrar ni acortar</text>
+
+  <!-- PASO SI 7 -->
+  <rect x="60" y="880" width="725" height="55" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="75" y="902" class="card-header" fill="#D93F0B">7. Notificación SNS de Alerta al Oficial de Privacidad</text>
+  <text x="75" y="922" class="card-body">• Alerta crítica por SNS y registro forense inmutable en AWS CloudTrail / CloudWatch Logs</text>
+
+  <!-- PASO SI 8 -->
+  <rect x="60" y="945" width="725" height="65" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="75" y="968" class="card-header" fill="#D93F0B">8. Difuminado/Anonimización Opcional para Cultivo</text>
+  <text x="75" y="988" class="card-body">• Si se certifica necesidad agronómica: Función aplica box blur irreversible sobre la persona</text>
+  <text x="75" y="1004" class="card-sub" fill="#1D76DB">• La copia anonimizada (foto_anonimizada.jpg) reingresa al diagnóstico sin exponer al titular</text>
+
+  <!-- ==================== CONTENEDOR RAMA NO (3 PASOS) ==================== -->
+  <rect x="845" y="445" width="765" height="585" rx="8" fill="#F4FBF5" stroke="#0E8A16" stroke-width="2" />
+  <rect x="845" y="445" width="765" height="35" rx="8" fill="#D5F5E3" />
+  <text x="1228" y="468" class="swimlane-title" text-anchor="middle" fill="#0E8A16">RAMA NO: FOTO LIMPIA · AVANCE NOMINAL AL PIPELINE FITOSANITARIO</text>
+
+  <!-- PASO NO 1 -->
+  <rect x="865" y="495" width="725" height="110" rx="6" fill="#FFFFFF" stroke="#0E8A16" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="880" y="525" class="card-header" fill="#0E8A16">1. Imagen Aprobada como Solo Cultivo</text>
+  <text x="880" y="550" class="card-body">• Validación técnica: La toma contiene exclusivamente dosel de cafeto, hojas o suelo productivo</text>
+  <text x="880" y="570" class="card-body">• Confirma de manera certificada la ausencia de figuras humanas, rostros o transeúntes</text>
+  <text x="880" y="590" class="card-sub" fill="#0E8A16">• Habilita la derivación segura y lícita hacia los modelos fitosanitarios de AromaPacífico</text>
+
+  <!-- PASO NO 2 -->
+  <rect x="865" y="630" width="725" height="130" rx="6" fill="#FFFFFF" stroke="#0E8A16" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="880" y="660" class="card-header" fill="#0E8A16">2. Avance a Inferencia Multimodal en Amazon Bedrock</text>
+  <text x="880" y="685" class="card-body">• Invocación administrada a Amazon Bedrock (Claude 3 Haiku / Nova Lite) en us-east-1</text>
+  <text x="880" y="705" class="card-body">• Diagnóstico foliar automatizado: Detección de Roya (Hemileia vastatrix) y Broca (Hypothenemus hampei)</text>
+  <text x="880" y="725" class="card-body">• Cero entrenamiento de modelos | Pago estricto por token (Pay-per-Call, ~$0.0020 USD)</text>
+  <text x="880" y="745" class="card-sub" fill="#1D76DB">• Latencia de ejecución &lt; 400 ms | Zero cómputo esperando objetos ($0.00 USD en reposo)</text>
+
+  <!-- PASO NO 3 -->
+  <rect x="865" y="785" width="725" height="225" rx="6" fill="#FFFFFF" stroke="#0E8A16" stroke-width="1.5" filter="url(#box-shadow)" />
+  <text x="880" y="815" class="card-header" fill="#0E8A16">3. Escritura Idempotente en Expediente DynamoDB</text>
+  <text x="880" y="840" class="card-body">• Inserción atómica en tabla ExpedienteFitosanitario con ConditionExpression (garantía anti-duplicados)</text>
+  <text x="880" y="860" class="card-body">• Atributos registrados: TimestampUTC, DiagnosticLabel, ConfidenceScore (ej. 92.4%), SourceObjectID</text>
+  <text x="880" y="880" class="card-body">• Estado del foco: FOCO_CONFIRMADO (o FOCO_DESCARTADO si la confianza fitosanitaria es &lt; 80%)</text>
+  <text x="880" y="900" class="card-body">• Notificación al agrónomo colegiado de la FNC vía Amazon SNS con el reporte técnico adjunto</text>
+  <text x="880" y="935" class="card-header" fill="#0E8A16">INVARIANTE ZERO TRUST: NINGUNA FUNCIÓN SERVERLESS AUTORIZA FUMIGACIÓN</text>
+  <text x="880" y="955" class="card-body">La plataforma asiste el diagnóstico; la autorización de aspersión exige firma humana con token MFA.</text>
+  <text x="880" y="975" class="card-sub" fill="#0E8A16">COMPUERTA HUMANA INNEGOCIABLE ANTES DE CREAR LA ORDEN DE FUMIGACIÓN</text>
+
+  <!-- ==================== CONECTORES ==================== -->
+  <!-- S3 a Lambda Filter -->
+  <path d="M 825 170 L 825 200" class="flow-line-accent" marker-end="url(#arrow-accent)" />
+
+  <!-- Lambda Filter a Rekognition Call -->
+  <path d="M 1075 237.5 L 1120 237.5" class="flow-line-accent" marker-end="url(#arrow-accent)" />
+  <text x="1097" y="230" class="flow-label" fill="#1D76DB" text-anchor="middle">Invoca</text>
+
+  <!-- Lambda Filter a Rombo Decision -->
+  <path d="M 825 275 L 825 315" class="flow-line" marker-end="url(#arrow)" />
+
+  <!-- Rombo a Rama SI (Izquierda) -->
+  <path d="M 675 362.5 L 422 362.5 L 422 445" class="flow-line-danger" marker-end="url(#arrow-danger)" />
+  <text x="548" y="352" class="flow-label" fill="#D93F0B" text-anchor="middle">SÍ (Figura humana detectada &gt; 50%)</text>
+
+  <!-- Rombo a Rama NO (Derecha) -->
+  <path d="M 975 362.5 L 1228 362.5 L 1228 445" class="flow-line-success" marker-end="url(#arrow-success)" />
+  <text x="1101" y="352" class="flow-label" fill="#0E8A16" text-anchor="middle">NO (Solo cultivo)</text>
+
+</svg>

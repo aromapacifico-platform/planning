@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" compressed="false">
+  <diagram id="finops-costos-cosecha" name="Modelo FinOps y Costos en Cosecha">
+    <mxGraphModel dx="1600" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1650" pageHeight="1080" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TITULO Y SUBTITULO -->
+        <mxCell id="title" value="AromaPacífico - Modelo FinOps de Inferencia Administrada y Costos en Cosecha (2026)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="275" y="25" width="1100" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Cálculo Granular por Mil Invocaciones, Cadencia de Drones en 200 Fincas y Comparativa de Ahorro contra Servidores Dedicados" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
+          <mxGeometry x="275" y="60" width="1100" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR 1: CADENCIA OPERATIVA -->
+        <mxCell id="zone-cadence-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#D5DBDB;strokeWidth=2;arcSize=3;" vertex="1" parent="1">
+          <mxGeometry x="40" y="110" width="460" height="880" as="geometry" />
+        </mxCell>
+        <mxCell id="zone-cadence-header" value="CADENCIA OPERATIVA DE VUELOS EN COSECHA (200 FINCAS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAEDED;strokeColor=#D5DBDB;strokeWidth=1;fontSize=13;fontStyle=1;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="40" y="110" width="460" height="35" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box-cadence-fenol" value="Distribución Fenológica y Demanda de Vuelo:&#xa;&#xa;• Alcance Geográfico: 200 fincas en Cauca, Huila y Tolima&#xa;• Semestre de Cosecha: 6 meses (Cosecha Principal y Mitaca)&#xa;• Semestre de Mantenimiento: 6 meses fuera de cosecha&#xa;• 3 Cuadrillas Departamentales en Centros de Acopio&#xa;• Tasa de Alertas de Sensores: 20% de fincas/mes en cosecha" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F7FF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="65" y="160" width="410" height="150" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box-cadence-services" value="Desglose de Fotografías Sujetas a Inferencia:&#xa;&#xa;1. Servicio 2: Confirmar Alerta de Sensor:&#xa;   • 40 fincas/mes en cosecha x 1 foto foco = 40 fotos/mes&#xa;   • Total Semestre Cosecha: 40 x 6 = 240 fotos&#xa;&#xa;2. Servicio 4: Verificar Post-Fumigación:&#xa;   • 75% de focos confirmados = 30 fumigaciones/mes&#xa;   • 30 fotos de verificación/mes x 6 meses = 180 fotos&#xa;&#xa;3. Servicio 5: Estimar Rendimiento de Cosecha:&#xa;   • 200 fincas evaluadas en ventana pre-cosecha (~67 fotos/mes)&#xa;   • Total Semestre Cosecha: 200 fotos por ciclo&#xa;&#xa;VOLUMEN TOTAL EN SEMESTRE DE COSECHA:&#xa;240 (S2) + 180 (S4) + 200 (S5) = 620 IMÁGENES / SEMESTRE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="65" y="330" width="410" height="340" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box-cadence-summary" value="Consolidación Mensual de Inferencia:&#xa;&#xa;• Mes Pico de Cosecha: ~137 a 150 fotos evaluadas&#xa;• Promedio por Acopio Departamental: ~45 a 50 fotos/mes&#xa;• Tasa Diaria por Cuadrilla: ~2 a 3 fotos por día hábil&#xa;• Carga extremadamente ligera para un backend de nube" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="65" y="690" width="410" height="270" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR 2: COSTOS POR 1.000 INVOCACIONES -->
+        <mxCell id="zone-pricing-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#D5DBDB;strokeWidth=2;arcSize=3;" vertex="1" parent="1">
+          <mxGeometry x="540" y="110" width="530" height="880" as="geometry" />
+        </mxCell>
+        <mxCell id="zone-pricing-header" value="DESGLOSE GRANULAR POR 1.000 INVOCACIONES (AWS 2026)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAEDED;strokeColor=#D5DBDB;strokeWidth=1;fontSize=13;fontStyle=1;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="540" y="110" width="530" height="35" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box-pricing-items" value="Tarifas Unitarias Oficiales AWS (us-east-1, Feb 2026):&#xa;&#xa;1. Amazon Rekognition: Filtro Anti-PII:&#xa;   • DetectFaces + DetectLabels (MinConfidence 50%):&#xa;   • $0.0010 USD por imagen analizada = $1.0000 USD / 1.000 req&#xa;&#xa;2. Amazon Bedrock: Inferencia Multimodal:&#xa;   • Claude 3 Haiku / Nova Lite (Diagnóstico foliar):&#xa;   • Pay-per-Call por token: ~$0.0006 - $0.0020 USD / req&#xa;   • Presupuesto conservador: $2.0000 USD / 1.000 req&#xa;&#xa;3. Cómputo AWS Lambda (Graviton2 arm64, 512 MB):&#xa;   • Duración promedio: 400 ms (0.4 s x 0.5 GB = 0.2 GB-s)&#xa;   • 1.000 invocaciones x 0.2 GB-s = 200 GB-s&#xa;   • Tarifa Graviton2: $0.0000133334 / GB-s = $0.0027 USD&#xa;   • Peticiones: 1.000 peticiones x $0.0000002 = $0.0002 USD&#xa;   • Subtotal Lambda: $0.0029 USD / 1.000 invocaciones&#xa;&#xa;4. Almacenamiento Amazon S3 Standard (3.5 MB/foto):&#xa;   • 1.000 fotos x 3.5 MB = 3.5 GB almacenados 1 mes&#xa;   • Tarifa S3 Standard: $0.023 / GB-mes = $0.0805 USD&#xa;&#xa;5. Operaciones Criptográficas AWS KMS (SSE-KMS):&#xa;   • 1.000 peticiones de encriptación = $0.0300 USD" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="565" y="160" width="480" height="430" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box-pricing-total" value="COSTO CONSOLIDADO POR 1.000 INVOCACIONES:&#xa;&#xa;• Filtro Rekognition Anti-PII:     $1.0000 USD&#xa;• Bedrock Inferencia Multimodal:   $2.0000 USD&#xa;• AWS Lambda (Cómputo Graviton2):  $0.0029 USD&#xa;• Amazon S3 (Almacenamiento 3.5GB):$0.0805 USD&#xa;• AWS KMS (Cifrado Criptográfico): $0.0300 USD&#xa;• Gateway VPC Endpoint S3:         $0.0000 USD (Gratis)&#xa;-----------------------------------------------&#xa;TOTAL CONSERVADOR (1.000 FOTOS):   $3.1134 USD&#xa;(Nominal Claude 3 Haiku: $1.75 USD / 1.000)&#xa;&#xa;FACTURA REAL SEMESTRE COSECHA (620 FOTOS):&#xa;620 fotos x ($3.1134 / 1.000) = $1.93 USD EN 6 MESES&#xa;Costo mensual promedio en cosecha: $0.32 USD / MES" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4FBF5;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="565" y="610" width="480" height="350" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR 3: COMPARATIVA FINOPS -->
+        <mxCell id="zone-finops-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#D5DBDB;strokeWidth=2;arcSize=3;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="110" width="500" height="880" as="geometry" />
+        </mxCell>
+        <mxCell id="zone-finops-header" value="COMPARATIVA FINOPS ESTRATÉGICA Y VALOR DEL NEGOCIO" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAEDED;strokeColor=#D5DBDB;strokeWidth=1;fontSize=13;fontStyle=1;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="110" width="500" height="35" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box-finops-selected" value="OPCIÓN SELECCIONADA: VISIÓN ADMINISTRADA SERVERLESS&#xa;&#xa;• Costo Fijo Mensual: $0.00 USD (Zero Compute en Reposo)&#xa;• Costo Real Mensual en Cosecha: ~$0.32 USD / mes&#xa;• Costo Semestre Cosecha: $1.93 USD ($1.09 con Claude)&#xa;• Cero entrenamiento de modelos y cero mantenimiento&#xa;• Escalabilidad elástica instantánea de 200 a 1.000 fincas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4FBF5;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="1135" y="160" width="450" height="150" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box-finops-sagemaker" value="ALTERNATIVA DESCARTADA 1: SAGEMAKER ENDPOINT DEDICADO&#xa;&#xa;• Instancia ml.m5.xlarge 24/7 = $0.20 USD/hora&#xa;• Costo mensual fijo: $144.00 USD/mes ($864.00 USD en cosecha)&#xa;• Costo por foto procesada: $864 / 620 fotos = $1.39 USD / foto&#xa;• INEFICIENCIA FINOPS: 99.8% del tiempo el servidor está ocioso&#xa;• Desperdicio masivo e inaceptable para el presupuesto FNC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5F5;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="1135" y="330" width="450" height="150" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box-finops-gpu" value="ALTERNATIVA DESCARTADA 2: CLUSTER EC2 GPU (G4DN.XLARGE)&#xa;&#xa;• Instancia g4dn.xlarge con GPU Nvidia T4 = $0.526 USD/hora&#xa;• Costo mensual fijo: $378.72 USD/mes ($2.272.32 USD en cosecha)&#xa;• Sobrecosto operativo inmenso sin justificación agronómica&#xa;• Requiere administración de AMIs, parches de seguridad y balanceo" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5F5;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="1135" y="500" width="450" height="150" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box-finops-edge" value="ALTERNATIVA DESCARTADA 3: INFERENCIA GPU EN DRONES&#xa;&#xa;• Módulos de IA embarcados (Nvidia Jetson Orin en aeronave)&#xa;• Sobrecosto de CapEx: ~$8.000 USD adicionales por dron ($24.000 USD)&#xa;• Impacto Energético: El consumo de cómputo drena baterías LiPo&#xa;• Reduce autonomía de vuelo en más del 40%, exigiendo más baterías" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="1135" y="670" width="450" height="150" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box-finops-conclusion" value="DECISIÓN ESTRATÉGICA DE NEGOCIO:&#xa;La visión administrada serverless genera un AHORRO SUPERIOR AL 99.8%&#xa;frente a clusters dedicados, cumpliendo estrictamente la restricción de inversión&#xa;moderada del pliego académico y garantizando máxima viabilidad económica." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F7FF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="1135" y="840" width="450" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- CONECTORES ORTOGONALES (TODOS PARENT=1) -->
+        <!-- Cadencia a Pricing Items -->
+        <mxCell id="c-cad-pricing" value="Carga Operativa: 620 Fotos" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D76DB;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;fontColor=#1D76DB;fontStyle=1;" edge="1" parent="1" source="box-cadence-services" target="box-pricing-items">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="500" y="500" />
+              <mxPoint x="500" y="375" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Pricing Items a Pricing Total -->
+        <mxCell id="c-items-total" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0E8A16;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="box-pricing-items" target="box-pricing-total">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Pricing Total a FinOps Selected -->
+        <mxCell id="c-total-selected" value="Ahorro 99.8%" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0E8A16;strokeWidth=2.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;fontColor=#0E8A16;fontStyle=1;" edge="1" parent="1" source="box-pricing-total" target="box-finops-selected">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1080" y="785" />
+              <mxPoint x="1080" y="235" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

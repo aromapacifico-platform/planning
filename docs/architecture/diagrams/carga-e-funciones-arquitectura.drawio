@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" compressed="false">
+  <diagram id="funciones-serverless-arquitectura" name="Arquitectura General de Funciones por Eventos">
+    <mxGraphModel dx="1600" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1650" pageHeight="1100" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ENCABEZADO -->
+        <mxCell id="title" value="AromaPacífico - Arquitectura General de Funciones Serverless por Eventos" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="275" y="25" width="1100" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Las Cuatro Funciones de Inferencia y Procesamiento Asíncrono: Disparadores, Mínimo Privilegio, Persistencia Inmutable y Resiliencia DLQ" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
+          <mxGeometry x="275" y="60" width="1100" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR 1: FUENTES Y DISPARADORES DE EVENTOS -->
+        <mxCell id="zone-triggers" value="CAPA DE INGESTA Y DISPARADORES DE EVENTOS (EVENT SOURCES)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#D5DBDB;strokeWidth=2;fontSize=13;fontStyle=1;fontColor=#232F3E;startSize=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="110" width="360" height="880" as="geometry" />
+        </mxCell>
+
+        <mxCell id="trig-1" value="Disparador 1: S3 Event Notification&#xa;Bucket: aromapacifico-objetos-prod&#xa;Prefijo: raw-images/focos/&#xa;Evento: s3:ObjectCreated:Put&#xa;&#xa;• Carga de imagen del dron (Servicio 2)&#xa;• Cifrado obligatorio SSE-KMS&#xa;• Metadatos EXIF: GPS, Lote, Fecha" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5F5;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="zone-triggers">
+          <mxGeometry x="20" y="50" width="320" height="170" as="geometry" />
+        </mxCell>
+
+        <mxCell id="trig-2" value="Disparador 2: S3 Event Notification&#xa;Bucket: aromapacifico-objetos-prod&#xa;Prefijo: raw-images/verificaciones/&#xa;Evento: s3:ObjectCreated:Put&#xa;&#xa;• Imagen post-aspersión (Servicio 4)&#xa;• Cifrado SSE-KMS con llave CMK&#xa;• Token de orden de fumigación" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F7FF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="zone-triggers">
+          <mxGeometry x="20" y="260" width="320" height="170" as="geometry" />
+        </mxCell>
+
+        <mxCell id="trig-3" value="Disparador 3: S3 Event Notification&#xa;Bucket: aromapacifico-objetos-prod&#xa;Prefijo: raw-images/estimaciones/&#xa;Evento: s3:ObjectCreated:Put&#xa;&#xa;• Ortomosaico de área (Servicio 5)&#xa;• Metadatos de polígono y altura&#xa;• Muestreo de densidad de frutos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4FBF5;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="zone-triggers">
+          <mxGeometry x="20" y="470" width="320" height="170" as="geometry" />
+        </mxCell>
+
+        <mxCell id="trig-4" value="Disparador 4: Cola Amazon SQS&#xa;Cola: telemetry-live (Definida en HU #12)&#xa;Alimentada por Normalizador de Ingesta IoT&#xa;Evento: Lote de lecturas normalizadas&#xa;&#xa;• Ingesta MQTT Basic Ingest + RockBLOCK SBD&#xa;• Normalización de esquema, tipos y reloj&#xa;• Desacoplamiento buffer de hasta 24 horas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="zone-triggers">
+          <mxGeometry x="20" y="680" width="320" height="170" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR 2: FUNCIONES SERVERLESS AWS LAMBDA -->
+        <mxCell id="zone-lambdas" value="CAPA DE PROCESAMIENTO SERVERLESS (AWS LAMBDA EN VPC PRIVADA)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#D5DBDB;strokeWidth=2;fontSize=13;fontStyle=1;fontColor=#232F3E;startSize=30;" vertex="1" parent="1">
+          <mxGeometry x="440" y="110" width="410" height="880" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fn-1" value="Función 1 (Patrón Épica 6): FN-CONF-FOCO&#xa;AWS Lambda: ProcessFocusConfirmation&#xa;&#xa;• Arquitectura Graviton2 (arm64, 512 MB)&#xa;• Filtro ético anti-PII (Rekognition PII)&#xa;• Diagnóstico foliar: Bedrock Multimodal Vision&#xa;• Cero entrenamiento y cero cómputo en espera&#xa;• Inserción idempotente en expediente (≥ 80%)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5F5;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="zone-lambdas">
+          <mxGeometry x="25" y="50" width="360" height="170" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fn-2" value="Función 2: FN-VERIF-POST&#xa;AWS Lambda: ProcessFumigationVerification&#xa;&#xa;• Arquitectura Graviton2 (arm64, 512 MB)&#xa;• Inferencia multimodal con Amazon Bedrock&#xa;• Mide eficacia y remanencia foliar de plaga&#xa;• Invariante: Si falla, caso SIGUE ABIERTO&#xa;• Habilita verificación humana para cierre" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F7FF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="zone-lambdas">
+          <mxGeometry x="25" y="260" width="360" height="170" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fn-3" value="Función 3: FN-ESTIM-COSECHA&#xa;AWS Lambda: ProcessHarvestEstimation&#xa;&#xa;• Arquitectura Graviton2 (arm64, 1024 MB)&#xa;• Inferencia multimodal con Amazon Bedrock&#xa;• Análisis fenológico y densidad de maduración&#xa;• Proyección de sacos de 60 kg para acopios&#xa;• NUNCA genera órdenes de empaque de sacos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4FBF5;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="zone-lambdas">
+          <mxGeometry x="25" y="470" width="360" height="170" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fn-4" value="Función 4: FN-TELEMETRIA-BATCH&#xa;AWS Lambda: ProcessTelemetryBatch&#xa;&#xa;• Arquitectura Graviton2 (arm64, 256 MB)&#xa;• Batch trigger desde cola telemetry-live (HU #12)&#xa;• Evaluación contra versión activa de umbrales&#xa;• Persistencia de series temporales en DynamoDB&#xa;• Despacho de alerta crítica SNS (&lt; 5 min)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="zone-lambdas">
+          <mxGeometry x="25" y="680" width="360" height="170" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR 3: INFERENCIA Y PERSISTENCIA -->
+        <mxCell id="zone-backend" value="SERVICIOS DE INFERENCIA ADMINISTRADA Y EXPEDIENTES (DATA STORES)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#D5DBDB;strokeWidth=2;fontSize=13;fontStyle=1;fontColor=#232F3E;startSize=30;" vertex="1" parent="1">
+          <mxGeometry x="890" y="110" width="410" height="880" as="geometry" />
+        </mxCell>
+
+        <mxCell id="inf-rekognition" value="Amazon Rekognition (us-east-1)&#xa;Filtro Perimetral Anti-PII (Ley 1581)&#xa;&#xa;• DetectFaces: Detección facial y biometría&#xa;• DetectLabels: Detección de personas y jornaleros&#xa;• Serverless Pay-per-Call ($0,0010 / llamada)&#xa;• Cero costo en reposo ($0 USD sin eventos)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F7FF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="zone-backend">
+          <mxGeometry x="25" y="40" width="360" height="95" as="geometry" />
+        </mxCell>
+
+        <mxCell id="inf-bedrock" value="Amazon Bedrock: Modelos Multimodales&#xa;Inferencia Agronómica Administrada (us-east-1)&#xa;&#xa;• Modelos Fundacionales de Visión (sin entrenamiento)&#xa;• FN-01: Diagnóstico foliar de roya y broca&#xa;• FN-02: Verificación de eficacia post-aspersión&#xa;• FN-03: Estimación volumétrica de cosecha&#xa;• Pago por token/invocación puro ($0 en espera)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5EEF8;strokeColor=#5319E7;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="zone-backend">
+          <mxGeometry x="25" y="145" width="360" height="115" as="geometry" />
+        </mxCell>
+
+        <mxCell id="store-dynamo" value="Amazon DynamoDB (Tablas Transaccionales)&#xa;Modo On-Demand + Encriptación KMS&#xa;&#xa;• ExpedienteFitosanitario (Órdenes y Focos)&#xa;  - Clave: PK=FincaID, SK=FocoID#Timestamp&#xa;  - Atributos: TimestampUTC, Confidence, SourceID&#xa;• ExpedienteCultivoSecado (Telemetría)&#xa;  - Clave: PK=FincaID, SK=SensorID#Timestamp&#xa;• Proyecciones segregadas de consulta" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4FBF5;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="zone-backend">
+          <mxGeometry x="25" y="270" width="360" height="190" as="geometry" />
+        </mxCell>
+
+        <mxCell id="store-s3-quarantine" value="Amazon S3: aromapacifico-quarantine-pii&#xa;Almacenamiento de Cuarentena de Privacidad&#xa;&#xa;• Destino de fotos con personas identificables&#xa;• Exclusión total de inferencia agrícola&#xa;• Cumplimiento estricto Ley 1581 de 2012&#xa;• Cero mutación en expedientes fitosanitarios" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5F5;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="zone-backend">
+          <mxGeometry x="25" y="475" width="360" height="140" as="geometry" />
+        </mxCell>
+
+        <mxCell id="notify-sns" value="Amazon SNS / SES: Notificaciones Críticas&#xa;Tópico: alertas-fitosanitarias-agronomos&#xa;&#xa;• Despacho de alertas a extensionistas FNC&#xa;• Entrega en &lt; 5 min ante lecturas anómalas&#xa;• COMPUERTA MANDATORIA: Ninguna función&#xa;  autoriza fumigación de forma autónoma" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="zone-backend">
+          <mxGeometry x="25" y="630" width="360" height="160" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR 4: RESILIENCIA, DLQ Y OBSERVABILIDAD -->
+        <mxCell id="zone-dlq" value="RESILIENCIA, COLAS DLQ Y OBSERVABILIDAD" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#D5DBDB;strokeWidth=2;fontSize=13;fontStyle=1;fontColor=#232F3E;startSize=30;" vertex="1" parent="1">
+          <mxGeometry x="1340" y="110" width="270" height="880" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dlq-sqs" value="Amazon SQS: Colas DLQ&#xa;Dead Letter Queues Dedicadas&#xa;&#xa;• dlq-foco-confirmation&#xa;• dlq-fumigacion-verification&#xa;• dlq-harvest-estimation&#xa;• dlq-telemetry-batch&#xa;&#xa;• Retención: 14 días&#xa;• Objeto en S3 permanece intacto&#xa;• Cero mutación de estado" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5F5;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="zone-dlq">
+          <mxGeometry x="15" y="50" width="240" height="230" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cw-obs" value="Amazon CloudWatch&#xa;Monitoreo Integral y Alarmas&#xa;&#xa;• Métricas: Invocations, Errors,&#xa;  Duration, Throttles, DLQDepth&#xa;• Alarmas: Fallas de inferencia &gt; 0&#xa;• Logs Insights: Trazas estructuradas&#xa;• Dashboard operativo y FinOps" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F7FF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="zone-dlq">
+          <mxGeometry x="15" y="320" width="240" height="230" as="geometry" />
+        </mxCell>
+
+        <mxCell id="xray-trace" value="AWS X-Ray&#xa;Trazabilidad Distribuida&#xa;&#xa;• Mapa de servicio end-to-end&#xa;• Trazado de latencia Rekognition&#xa;• Análisis de cuellos de botella&#xa;• Registro de excepciones sin PII" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="zone-dlq">
+          <mxGeometry x="15" y="590" width="240" height="260" as="geometry" />
+        </mxCell>
+
+        <!-- CONECTORES Y FLUJOS -->
+        <!-- Triggers a Lambdas -->
+        <mxCell id="flow-t1-fn1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D93F0B;strokeWidth=2.5;" edge="1" parent="1" source="trig-1" target="fn-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-t2-fn2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D76DB;strokeWidth=2.5;" edge="1" parent="1" source="trig-2" target="fn-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-t3-fn3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0E8A16;strokeWidth=2.5;" edge="1" parent="1" source="trig-3" target="fn-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-t4-fn4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FF9900;strokeWidth=2.5;" edge="1" parent="1" source="trig-4" target="fn-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Lambdas a Inferencia / Stores -->
+        <mxCell id="flow-fn1-rek" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D76DB;strokeWidth=2;" edge="1" parent="1" source="fn-1" target="inf-rekognition">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-fn1-bedrock" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#5319E7;strokeWidth=2;" edge="1" parent="1" source="fn-1" target="inf-bedrock">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-fn1-ddb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0E8A16;strokeWidth=2;" edge="1" parent="1" source="fn-1" target="store-dynamo">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-fn2-ddb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0E8A16;strokeWidth=2;" edge="1" parent="1" source="fn-2" target="store-dynamo">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-fn4-ddb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0E8A16;strokeWidth=2;" edge="1" parent="1" source="fn-4" target="store-dynamo">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-fn4-sns" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FF9900;strokeWidth=2;" edge="1" parent="1" source="fn-4" target="notify-sns">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Lambdas a DLQ (en caso de fallo) -->
+        <mxCell id="flow-fn-dlq" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D93F0B;strokeWidth=2;dashed=1;" edge="1" parent="1" source="fn-1" target="dlq-sqs">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="870" y="200" />
+              <mxPoint x="870" y="100" />
+              <mxPoint x="1460" y="100" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
+
