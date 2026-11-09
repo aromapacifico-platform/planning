@@ -10,7 +10,7 @@ Cuánto cuesta al mes la plataforma en la nube en un mes normal y en uno de cose
 
 No incluye el hardware de las fincas ni su conectividad celular o satelital ([#28](costo-hardware-finca.md)), ni el servicio de drones ([#30](costo-campana-drones.md)).
 
-**Precios:** lista oficial de AWS en `us-east-1`, consultada el 9 de noviembre de 2026. Se toman de las páginas de precios de cada servicio y de la [calculadora de AWS](https://calculator.aws/). No se aplican capas gratuitas, salvo donde se indica, para no quedarse corto. **Tasa de cambio:** TRM de COP 3.237,83.
+**Precios:** lista de AWS en `us-east-1`. Los de DynamoDB ([precios](https://aws.amazon.com/dynamodb/pricing/on-demand/)), Network Firewall ([precios](https://aws.amazon.com/network-firewall/pricing/)) e IoT Core ([precios](https://aws.amazon.com/iot-core/pricing/)) se verificaron el 9 de noviembre de 2026. El resto son tarifas de lista de cada servicio que deben confirmarse en la [calculadora de AWS](https://calculator.aws/) antes de presentar. No se aplican capas gratuitas, salvo donde se indica, para no quedarse corto. **Tasa de cambio:** TRM de COP 3.237,83.
 
 ## 1. De qué cifras del caso sale cada volumen
 
