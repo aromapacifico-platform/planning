@@ -93,6 +93,10 @@ Supuestos que no están en el enunciado y que tomó el equipo al diseñar la pla
 | El sensor de humedad del grano SEN0600 requiere cualificación en café antes de aprobarse | Su ficha es de suelo y no acredita precisión en café | #11 | Supuesto |
 | DynamoDB On-Demand como almacén de telemetría | 10.800 registros al día en cosecha no justifican una base de series de tiempo adicional | #12 | Decidido |
 | Presupuesto de 300 segundos de la alerta repartido en siete tramos, con menos de 55 s de holgura | Permite medir por tramo dónde se pierde el tiempo | #12 | Supuesto |
+| La campaña de drones se contrata con un prestador por acopio, no con cuadrillas propias | Con 1.300 vuelos al año, comprar cuesta unas cuatro veces más; los controles de vuelo dependen de la plataforma, no del dueño del dron | #30 | Decidido |
+| Una finca tiene 2 hectáreas en promedio | El enunciado no lo da; se reemplaza por el área real tras la delimitación (S1) | #30 | Supuesto |
+| Visita puntual de dron (S2 o S4) a COP 250.000 | No hay tarifa pública; es la primera cifra que hay que cotizar | #30 | Supuesto |
+| Cada vuelo de área deja 2 GB de fotos y 0,5 GB de ortomosaico; cada visita, 20 fotos de 8 MB | Se ajusta con los primeros vuelos | #30 | Supuesto |
 | Fuera de cosecha, el transporte opera al 25 % y la recepción de sacos al 10 % del pico | El enunciado solo da las cifras de cosecha | #29 | Supuesto |
 | Consulta pública promedio de 3 por minuto en cosecha y 1 fuera de cosecha | El enunciado da solo el pico de 30 por minuto | #29 | Supuesto |
 | 5 alertas por finca al mes en cosecha y 2 fuera, con SMS a unos USD 0,035 | La tasa real de lecturas fuera de rango no se conoce; el precio de SMS a Colombia se confirma en el reporte de uso de SNS | #29 | Supuesto |
