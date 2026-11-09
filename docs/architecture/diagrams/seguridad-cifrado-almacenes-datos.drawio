@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" compressed="false">
+  <diagram id="seguridad-cifrado" name="Arquitectura de Cifrado en Reposo y en Transito">
+    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1300" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TITULO PRINCIPAL -->
+        <mxCell id="title" value="AromaPacífico - Arquitectura de Cifrado en Reposo (KMS) y Cifrado en Tránsito (TLS/mTLS/IPsec)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="300" y="30" width="1200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Protección Criptográfica Integral de Telemetría IoT, Sacos de Café, Misiones de Drones y Auditoría Forense bajo Ley 1581 de 2012" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
+          <mxGeometry x="300" y="70" width="1200" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- PANEL SUPERIOR: GOBERNANZA DE LLAVES KMS -->
+        <mxCell id="sec-kms-gov" value="GOBERNANZA DE CIFRADO EN REPOSO CON AWS KMS (Customer Managed Keys - CMK)&#xa;Segregación Criptográfica de Llaves y Políticas de Mínimo Privilegio&#xa;&#xa;1. Llaves Administradas por el Cliente (KMS CMK):&#xa;   - Se descartan las llaves por defecto de AWS (aws/s3, aws/dynamodb) porque no permiten auditoría de uso ni políticas granulares.&#xa;   - Rotación anual automática activada en todas las CMK (EnableKeyRotation = true) sin disrupción operativa.&#xa;   - Control de acceso por Key Policies: los roles de cómputo solo tienen permisos kms:GenerateDataKey y kms:Decrypt sobre sus datos.&#xa;&#xa;2. Separación de Llaves por Dominio de Carga:&#xa;   - CMK Telemetría: Cifra tablas de suelo, NPK, secado y lecturas IoT.&#xa;   - CMK Trazabilidad Sacos: Cifra la tabla transaccional de sacos y viajes.&#xa;   - CMK Objetos Drones: Cifra buckets S3 de misiones, ortomosaicos y bitácoras .bin.&#xa;   - CMK Multi-Región Auditoría: Cifra bitácoras de CloudTrail en la cuenta Security (réplica en us-east-2 Ohio)." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#1D76DB;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=15;spacingTop=12;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="50" y="115" width="820" height="235" as="geometry" />
+        </mxCell>
+
+        <!-- PANEL SUPERIOR DERECHO: PROTOCOLOS DE CIFRADO EN TRANSITO -->
+        <mxCell id="sec-tls-gov" value="PROTOCOLOS DE CIFRADO EN TRÁNSITO (Zero Cleartext Mandate)&#xa;Garantía Absoluta de Cero Datos en Claro a Través de Toda la Red&#xa;&#xa;1. Telemetría de Borde IoT (Fincas y Drones hacia AWS IoT Core):&#xa;   - MQTT sobre mTLS bidireccional obligatorio en puerto TCP 8883 (o puerto 443 vía ALPN).&#xa;   - Certificados X.509 de cliente individuales con claves privadas ancladas en chip seguro (ATECC608A / eFuse).&#xa;   - Protocolo negociado: TLS 1.3 o TLS 1.2 estricto. Se prohíbe explícitamente TLS 1.0, 1.1 y conexiones sin certificado.&#xa;&#xa;2. Enlaces WAN de Centros de Acopio (Cauca, Huila, Tolima hacia Transit Gateway):&#xa;   - Túneles IPsec VPN redundantes basados en IKEv2 con cifrado AES-256-GCM y grupo Diffie-Hellman 19 (ECDH 256-bit).&#xa;   - Los 100 Mbps simétricos de cada acopio viajan encapsulados; la VLAN de visitantes no tiene ruta al túnel corporativo.&#xa;&#xa;3. Aplicaciones Móviles y Consulta Web Pública:&#xa;   - HTTPS sobre TLS 1.3 obligatorio con certificados emitidos por AWS Certificate Manager (ACM).&#xa;   - Cabeceras estrictas HSTS (Strict-Transport-Security: max-age=63072000; includeSubDomains; preload)." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#0E8A16;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=15;spacingTop=12;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="900" y="115" width="850" height="235" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR PRINCIPAL: MATRIZ DE ALMACENES Y CIFRADO -->
+        <mxCell id="box-storage-matrix" value="MAPA INTEGRAL DE ALMACENES DE DATOS, LLAVES KMS Y MECANISMOS DE PROTECCIÓN" style="swimlane;startSize=30;horizontal=1;fillColor=#EAEDED;strokeColor=#545B64;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="50" y="375" width="1700" height="865" as="geometry" />
+        </mxCell>
+
+        <!-- ALMACEN 1: DYNAMODB TELEMETRIA CULTIVO Y SECADO -->
+        <mxCell id="store-telemetria" value="1. Amazon DynamoDB: Telemetría de Cultivo y Secado&#xa;Cuenta: AromaPacifico-Prod | Región: us-east-1&#xa;&#xa;- Almacén: Tablas NoSQL telemetria_cultivo y telemetria_secado&#xa;- Cifrado en Reposo: AWS KMS CMK (kms-telemetria-prod-key)&#xa;- Algoritmo Criptográfico: AES-256-GCM simétrico&#xa;- Rotación de Clave: Anual automática habilitada&#xa;- Tránsito de Ingreso: Broker AWS IoT Core mTLS (TLS 1.3)&#xa;- Tránsito de Consulta: VPC Gateway Endpoint ($0 USD/GB)&#xa;- Retención Obligatoria: 5 años (1.825 días) mediante TTL&#xa;- Clasificación de Información: Confidencial Operativa (Sin PII)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FF9900;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-storage-matrix">
+          <mxGeometry x="30" y="50" width="380" height="235" as="geometry" />
+        </mxCell>
+
+        <!-- ALMACEN 2: DYNAMODB MASTER DE SACOS Y TRAZABILIDAD -->
+        <mxCell id="store-sacos" value="2. Amazon DynamoDB: Expediente Transaccional del Saco&#xa;Cuenta: AromaPacifico-Prod | Región: us-east-1&#xa;&#xa;- Almacén: Tabla sacos_cafe (60 kg) y viajes_transporte&#xa;- Cifrado en Reposo: AWS KMS CMK (kms-sacos-prod-key)&#xa;- Algoritmo Criptográfico: AES-256-GCM simétrico&#xa;- Protección de Datos Personales (Ley 1581):&#xa;  * Cédula de caficultor enmascarada (Solo últimos 4 dígitos)&#xa;  * FincaID seudonimizado con HMAC-SHA-256 no reversible&#xa;- Tránsito de Ingreso: API Gateway HTTPS TLS 1.3 (App Caficultor)&#xa;- Tránsito de Acopio: IPsec VPN túnel privado hacia LAN Acopio&#xa;- Retención Obligatoria: 5 años inmutables para trazabilidad FNC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FF9900;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-storage-matrix">
+          <mxGeometry x="440" y="50" width="385" height="235" as="geometry" />
+        </mxCell>
+
+        <!-- ALMACEN 3: S3 OBJETOS DE DRONES Y FOTOS FITOSANITARIAS -->
+        <mxCell id="store-drones-s3" value="3. Amazon S3: Objetos de Drones y Verificación Post-Fumigación&#xa;Cuenta: AromaPacifico-Prod | Región: us-east-1&#xa;&#xa;- Almacén: Bucket aromapacifico-drones-prod&#xa;- Cifrado en Reposo: SSE-KMS con CMK (kms-drones-prod-key)&#xa;- Retención Inmutable: S3 Object Lock en Compliance Mode (5 años)&#xa;- Filtro Perimetral Anti-PII: Detección facial previa con Lambda;&#xa;  imágenes con transeúntes son enviadas a cuarentena segura.&#xa;- Tránsito de Subida: Pre-signed URLs HTTPS TLS 1.3 vía acopio&#xa;- Bloqueo de Acceso Público: S3 Block Public Access al 100%&#xa;- Integración IaC: Interface VPC Endpoints desde acopios privados" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-storage-matrix">
+          <mxGeometry x="855" y="50" width="395" height="235" as="geometry" />
+        </mxCell>
+
+        <!-- ALMACEN 4: S3 AUDITORIA FORENSE Y TRAIL MULTICUENTA -->
+        <mxCell id="store-audit-s3" value="4. Amazon S3: Auditoría Forense y Logs de Seguridad (WORM)&#xa;Cuenta: AromaPacifico-Security | Región: us-east-1 (DR us-east-2)&#xa;&#xa;- Almacén: Bucket central aromapacifico-audit-trail&#xa;- Cifrado en Reposo: SSE-KMS Multi-Region Key (kms-audit-key)&#xa;- Retención Legal Obligatoria: 5 años (1.825 días) inmutables&#xa;- Modo de Protección: S3 Object Lock Compliance Mode estricto&#xa;- Gobernanza SCP: Bloqueo de DeleteBucket, PutBucketPolicy y&#xa;  desactivación de CloudTrail desde la raíz de AWS Organizations.&#xa;- Ingesta: CloudTrail Organization Trail, VPC Flow Logs, IoT Logs&#xa;- Acceso Humano: Solo lectura forense con MFA para auditor FNC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-storage-matrix">
+          <mxGeometry x="1280" y="50" width="390" height="235" as="geometry" />
+        </mxCell>
+
+        <!-- FILA INFERIOR: VISTA PUBLICA, RESILIENCIA Y SEGURIDAD TRANSFRONTERIZA -->
+        <!-- SUB-PANEL: DYNAMODB PROYECCION PUBLICA DEL SACO -->
+        <mxCell id="store-public-query" value="5. Amazon DynamoDB: Proyección Pública del Saco (Solo Lectura)&#xa;Cuenta: AromaPacifico-Prod | Subredes: sn-prod-public-query&#xa;&#xa;- Almacén: Tabla proyectada sacos_publicos (Read-Only)&#xa;- Mecanismo de Poblamiento: Asíncrono mediante DynamoDB Streams + Lambda Sanitizadora&#xa;- Cifrado en Reposo: AWS KMS CMK con permisos acotados al servicio de consulta pública.&#xa;- Garantía de Protección de Datos Personales (Ley 1581 de 2012):&#xa;  * Contiene ÚNICAMENTE: Código de Saco, Departamento, Municipio, Variedad, Humedad de Secado,&#xa;    Temperatura de Secado, Fecha de Beneficiado, Estado de Entrega (Aceptado/Rechazado).&#xa;  * CERO Cédulas de Caficultores, CERO Nombres Propios, CERO Coordenadas GPS de Finca.&#xa;  * CERO Geolocalización de Transportadores ni Rutas Intermedias en Carretera.&#xa;- Tránsito: Application Load Balancer Público (ALB) con HTTPS TLS 1.3 y AWS WAFv2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;align=left;spacingLeft=15;fontColor=#232F3E;" vertex="1" parent="box-storage-matrix">
+          <mxGeometry x="30" y="315" width="800" height="235" as="geometry" />
+        </mxCell>
+
+        <!-- SUB-PANEL: TRANSFERENCIA INTERNACIONAL DE DATOS (LEY 1581) -->
+        <mxCell id="store-cross-border" value="6. Régimen de Transferencia Internacional de Datos Personales (Ley 1581 de 2012)&#xa;Soberanía de Datos y Cumplimiento Regulatorio Colombia - Estados Unidos&#xa;&#xa;- Radicación de Cargas: Región us-east-1 (N. Virginia, EE. UU.) y respaldo us-east-2 (Ohio).&#xa;- Habilitación Legal Bajo el Régimen Colombiano:&#xa;  * Autorización Previa, Expresa e Informada firmada por el caficultor durante el onboarding en finca.&#xa;  * Contrato de Transmisión Internacional de Datos Personales (CTIDP) entre FNC (Responsable)&#xa;    y Amazon Web Services Inc. (Encargado), incorporando Cláusulas Contractuales Tipo.&#xa;- Clasificación de Flujos Transfronterizos:&#xa;  a. Flujo Agronómico y Grano: Telemetría NPK, humedad, sacos y bitácoras de vuelo (Datos Industriales).&#xa;  b. Flujo de Datos Personales: Nombres y teléfonos de contacto encriptados con KMS; la clave reside&#xa;     exclusivamente bajo control de la FNC, impidiendo el acceso a terceros en el exterior.&#xa;  c. Flujo de Inferencia de Drones: Imágenes excluyen rostros humanos antes de invocar Rekognition." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#1D76DB;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=15;spacingTop=12;fontSize=12;fontColor=#232F3E;" vertex="1" parent="box-storage-matrix">
+          <mxGeometry x="855" y="315" width="815" height="235" as="geometry" />
+        </mxCell>
+
+        <!-- SUB-PANEL INFERIOR: RESUMEN DE CIFRADO POR CAPA Y PARAMETROS CRIPTOGRAFICOS -->
+        <mxCell id="box-crypto-summary" value="MATRIZ CANÓNICA DE PARÁMETROS CRIPTOGRÁFICOS POR COMPONENTE ARQUITECTÓNICO" style="swimlane;startSize=25;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1;rounded=1;fontSize=12;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="box-storage-matrix">
+          <mxGeometry x="30" y="575" width="1640" height="260" as="geometry" />
+        </mxCell>
+
+        <!-- ENCABEZADOS -->
+        <mxCell id="th-c1" value="Componente / Flujo" style="rounded=0;fillColor=#232F3E;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="15" y="35" width="230" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="th-c2" value="Tipo de Protección" style="rounded=0;fillColor=#232F3E;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="250" y="35" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="th-c3" value="Protocolo / Algoritmo" style="rounded=0;fillColor=#232F3E;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="435" y="35" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="th-c4" value="Administración de Llaves / Certificados" style="rounded=0;fillColor=#232F3E;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="660" y="35" width="320" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="th-c5" value="Mecanismo de Verificación y Respaldo" style="rounded=0;fillColor=#232F3E;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="985" y="35" width="310" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="th-c6" value="Retención / SLA" style="rounded=0;fillColor=#232F3E;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="1300" y="35" width="325" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- FILA 1 -->
+        <mxCell id="f1-c1" value="Nodos Finca -> IoT Core" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="15" y="70" width="230" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f1-c2" value="Tránsito (mTLS)" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=center;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="250" y="70" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f1-c3" value="TLS 1.3 / MQTT Puerto 8883" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="435" y="70" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f1-c4" value="Certificado X.509 individual + ATECC608A" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="660" y="70" width="320" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f1-c5" value="Rechazo en handshake mTLS si inactivo" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="985" y="70" width="310" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f1-c6" value="Buffer Flash local hasta 24 horas" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="1300" y="70" width="325" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- FILA 2 -->
+        <mxCell id="f2-c1" value="Centros Acopio -> Transit GW" style="rounded=0;fillColor=#F8F9FA;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="15" y="115" width="230" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f2-c2" value="Tránsito (IPsec VPN)" style="rounded=0;fillColor=#F8F9FA;fontSize=12;align=center;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="250" y="115" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f2-c3" value="IKEv2 AES-256-GCM DH19" style="rounded=0;fillColor=#F8F9FA;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="435" y="115" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f2-c4" value="Pre-Shared Keys (PSK) rotadas en Secrets Mgr" style="rounded=0;fillColor=#F8F9FA;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="660" y="115" width="320" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f2-c5" value="BGP Keepalive dual-tunnel failover" style="rounded=0;fillColor=#F8F9FA;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="985" y="115" width="310" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f2-c6" value="100 Mbps simétricos compartidos" style="rounded=0;fillColor=#F8F9FA;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="1300" y="115" width="325" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- FILA 3 -->
+        <mxCell id="f3-c1" value="Tablas DynamoDB (Sacos/IoT)" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="15" y="160" width="230" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f3-c2" value="Reposo (KMS CMK)" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=center;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="250" y="160" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f3-c3" value="AES-256-GCM Envelope Encryption" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="435" y="160" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f3-c4" value="KMS CMK dedicada con rotación anual" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="660" y="160" width="320" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f3-c5" value="Point-In-Time Recovery (PITR) continuo" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="985" y="160" width="310" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f3-c6" value="Retención 5 años | RPO 15 min" style="rounded=0;fillColor=#FFFFFF;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="1300" y="160" width="325" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- FILA 4 -->
+        <mxCell id="f4-c1" value="Buckets S3 Drones y Auditoría" style="rounded=0;fillColor=#F8F9FA;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="15" y="205" width="230" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f4-c2" value="Reposo + WORM" style="rounded=0;fillColor=#F8F9FA;fontSize=12;align=center;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="250" y="205" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f4-c3" value="SSE-KMS + S3 Object Lock Compliance" style="rounded=0;fillColor=#F8F9FA;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="435" y="205" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f4-c4" value="KMS Multi-Region Key (us-east-1 / us-east-2)" style="rounded=0;fillColor=#F8F9FA;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="660" y="205" width="320" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f4-c5" value="Bloqueo inmutable por SCP en Raíz Org" style="rounded=0;fillColor=#F8F9FA;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="985" y="205" width="310" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f4-c6" value="Retención 1.825 días (5 años WORM)" style="rounded=0;fillColor=#F8F9FA;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="box-crypto-summary">
+          <mxGeometry x="1300" y="205" width="325" height="40" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

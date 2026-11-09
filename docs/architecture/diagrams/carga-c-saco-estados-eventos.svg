@@ -1,0 +1,261 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1760 1280" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 22px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #5A6B7C; text-anchor: middle; }
+      .swim-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
+      .phase-head { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #1D76DB; }
+      .box-head { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
+      .subhead { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #555555; }
+      .body-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
+      .bold-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #232F3E; }
+      .accent-green { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #1B5E20; }
+      .accent-red { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #B71C1C; }
+    </style>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <!-- FONDO GENERAL -->
+  <rect width="1760" height="1280" fill="#F8F9FA" />
+
+  <!-- TITULO Y SUBTITULO -->
+  <text x="880" y="40" class="title">AromaPacífico - Máquina de Estados del Saco de Café (60 kg) y Event Sourcing Transaccional</text>
+  <text x="880" y="68" class="subtitle">Ciclo de Vida Operativo, Responsables Atribuibles, Invariantes de Calidad y Base Transaccional de Cero Pérdida</text>
+
+  <!-- CONTENEDOR 1: CICLO DE VIDA DE CINCO ESTADOS -->
+  <g transform="translate(35, 95)" filter="url(#shadow)">
+    <rect width="1690" height="575" rx="8" fill="#FFFFFF" stroke="#545B64" stroke-width="2" />
+    <rect width="1690" height="35" rx="8" fill="#EAEDED" />
+    <text x="20" y="23" class="swim-title">CICLO DE VIDA DEL SACO DE CAFÉ: CINCO ESTADOS NOMINALES Y ACTORES RESPONSABLES</text>
+
+    <!-- FASE 1: FINCA CAFETERA -->
+    <g transform="translate(20, 50)">
+      <rect width="310" height="505" rx="6" fill="#F4F8FD" stroke="#1D76DB" stroke-width="1.5" />
+      <rect width="310" height="30" rx="6" fill="#EBF3FB" />
+      <text x="12" y="20" class="phase-head" fill="#1D76DB">FASE 1: FINCA CAFETERA</text>
+      <text x="12" y="46" class="subhead">Actor: Caficultor (App Móvil / Cognito)</text>
+
+      <!-- Estado 1 -->
+      <rect x="12" y="60" width="286" height="275" rx="5" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
+      <text x="22" y="82" class="bold-txt" fill="#1D76DB">ESTADO 1: EN_PREPARACION</text>
+      <text x="22" y="104" class="body-txt">- Ubicación: Finca (Cauca, Huila, Tolima)</text>
+      <text x="22" y="124" class="body-txt">- Ensacado: Saco de fique estándar 60.0 kg</text>
+      <text x="22" y="144" class="body-txt">- Pesaje verificado en balanza de finca</text>
+      <text x="22" y="164" class="body-txt">- Variables de Secado Registradas:</text>
+      <text x="32" y="184" class="body-txt">* Humedad final: 10.0% a 12.0%</text>
+      <text x="32" y="204" class="body-txt">* Método: Lavado / Honey / Natural</text>
+      <text x="32" y="224" class="body-txt">* Temperatura media en secadero (C)</text>
+      <text x="32" y="244" class="body-txt">* Fecha y hora fin de secado (UTC)</text>
+      <text x="22" y="268" class="bold-txt">- Código Canónico HMAC-SHA-256:</text>
+      <text x="22" y="288" class="body-txt">  SACO-2026-[DEPTO]-[HASH8] (Sin PII)</text>
+      <text x="22" y="310" class="body-txt">  Ejemplo: SACO-2026-CAU-7F3A9C12</text>
+
+      <!-- Evento 1 -->
+      <rect x="12" y="350" width="286" height="135" rx="5" fill="#D5E8D4" stroke="#82B366" stroke-width="1.5" />
+      <text x="22" y="375" class="bold-txt" fill="#274E13">EVENTO: EVENTO_ALTA_FINCA</text>
+      <text x="22" y="398" class="body-txt">- Atribuible a: Caficultor (JWT Cognito sub)</text>
+      <text x="22" y="418" class="body-txt">- Criptografía: Hash firmado localmente</text>
+      <text x="22" y="438" class="body-txt">- Buffer: Store-and-forward en celular</text>
+      <text x="22" y="458" class="body-txt">  si la vereda carece de cobertura móvil</text>
+    </g>
+
+    <!-- FASE 2: TRANSPORTE RURAL -->
+    <g transform="translate(350, 50)">
+      <rect width="310" height="505" rx="6" fill="#FDFBF4" stroke="#D99B00" stroke-width="1.5" />
+      <rect width="310" height="30" rx="6" fill="#FDF6E2" />
+      <text x="12" y="20" class="phase-head" fill="#B27B00">FASE 2: TRANSPORTE RURAL</text>
+      <text x="12" y="46" class="subhead">Actor: Transportador Rural (App Móvil)</text>
+
+      <!-- Estado 2 -->
+      <rect x="12" y="60" width="286" height="275" rx="5" fill="#FFFFFF" stroke="#D99B00" stroke-width="2" />
+      <text x="22" y="82" class="bold-txt" fill="#B27B00">ESTADO 2: EN_VIAJE_ACOPIO</text>
+      <text x="22" y="104" class="body-txt">- Ubicación: Vía terciaria veredal</text>
+      <text x="22" y="124" class="body-txt">- Handshake Digital en Finca:</text>
+      <text x="32" y="144" class="body-txt">* Escaneo de código QR en saco</text>
+      <text x="32" y="164" class="body-txt">* Confirmación mutua caficultor/chofer</text>
+      <text x="22" y="188" class="body-txt">- Asignación Viaje: VIAJE-RURAL-XXX</text>
+      <text x="22" y="208" class="body-txt">- Vehículo: Campero rural veredal</text>
+      <text x="22" y="228" class="body-txt">- Resiliencia sin Cobertura:</text>
+      <text x="32" y="248" class="body-txt">* Cola SQLite cifrada en app móvil</text>
+      <text x="32" y="268" class="body-txt">* Reenvío automático al captar señal</text>
+      <text x="22" y="295" class="bold-txt">- Invariante: Bloqueado sin alta previa</text>
+      <text x="22" y="315" class="body-txt">  en finca para evitar café no registrado</text>
+
+      <!-- Evento 2 -->
+      <rect x="12" y="350" width="286" height="135" rx="5" fill="#D5E8D4" stroke="#82B366" stroke-width="1.5" />
+      <text x="22" y="375" class="bold-txt" fill="#274E13">EVENTO: EVENTO_DESPACHO_RURAL</text>
+      <text x="22" y="398" class="body-txt">- Atribuible a: Caficultor + Transportador</text>
+      <text x="22" y="418" class="body-txt">- Payload: Placa, ConductorID, HoraSalida</text>
+      <text x="22" y="438" class="body-txt">- Privacidad: Trayecto no visible fuera</text>
+      <text x="22" y="458" class="body-txt">  del acopio ni expuesto a compradores</text>
+    </g>
+
+    <!-- FASE 3: CENTRO DE ACOPIO -->
+    <g transform="translate(680, 50)">
+      <rect width="360" height="505" rx="6" fill="#FAF5FB" stroke="#7B1FA2" stroke-width="1.5" />
+      <rect width="360" height="30" rx="6" fill="#F3E5F5" />
+      <text x="12" y="20" class="phase-head" fill="#7B1FA2">FASE 3: CENTRO DE ACOPIO</text>
+      <text x="12" y="46" class="subhead">Actor: Operario Acopio (LAN Acopio / MFA TOTP)</text>
+
+      <!-- Estado 3 Base -->
+      <rect x="12" y="60" width="336" height="155" rx="5" fill="#FFFFFF" stroke="#7B1FA2" stroke-width="2" />
+      <text x="22" y="82" class="bold-txt" fill="#7B1FA2">ESTADO 3: EN_ACOPIO (Inspección Técnica)</text>
+      <text x="22" y="104" class="body-txt">- Entrada: Báscula certificada (60.0 kg +/- 0.2 kg)</text>
+      <text x="22" y="124" class="body-txt">- Laboratorio de Calidad del Acopio:</text>
+      <text x="32" y="144" class="body-txt">* Prueba Humedad: 10.5% - 11.5% estándar</text>
+      <text x="32" y="164" class="body-txt">* Catación SCA: Registro de puntaje sensorial</text>
+      <text x="32" y="184" class="body-txt">* Verificación de broca y defectos físicos</text>
+
+      <!-- Subestado Aceptado -->
+      <rect x="12" y="225" width="336" height="125" rx="5" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2" />
+      <text x="22" y="247" class="accent-green">SUB-ESTADO: EN_ACOPIO (ACEPTADO)</text>
+      <text x="22" y="267" class="body-txt">- Evento: EVENTO_RECEPCION_ACEPTADA</text>
+      <text x="22" y="287" class="body-txt">- Condición: Humedad &lt;= 12.0% y SCA &gt;= 80 pts</text>
+      <text x="22" y="307" class="body-txt">- Destino: Ingresa a lote consolidado exportable</text>
+      <text x="22" y="327" class="body-txt">- Atribuible a: Catador Certificado FNC (MFA)</text>
+
+      <!-- Subestado Rechazado -->
+      <rect x="12" y="360" width="336" height="125" rx="5" fill="#FFEBEE" stroke="#C62828" stroke-width="2" />
+      <text x="22" y="382" class="accent-red">SUB-ESTADO: EN_ACOPIO (RECHAZADO)</text>
+      <text x="22" y="402" class="body-txt">- Evento: EVENTO_RECEPCION_RECHAZADA</text>
+      <text x="22" y="422" class="body-txt">- Causa: Humedad &gt; 12.5% o defectos primarios</text>
+      <text x="22" y="442" class="body-txt">- Acción: Devolución a finca o venta pasilla local</text>
+      <text x="22" y="462" class="body-txt">- Estado terminal disyuntivo para exportación</text>
+    </g>
+
+    <!-- FASE 4: TRANSPORTE TRONCAL -->
+    <g transform="translate(1060, 50)">
+      <rect width="300" height="505" rx="6" fill="#FFF9F4" stroke="#E65100" stroke-width="1.5" />
+      <rect width="300" height="30" rx="6" fill="#FFF3E0" />
+      <text x="12" y="20" class="phase-head" fill="#BF360C">FASE 4: TRANSPORTE TRONCAL</text>
+      <text x="12" y="46" class="subhead">Actor: Transportador Troncal (App)</text>
+
+      <!-- Estado 4 -->
+      <rect x="12" y="60" width="276" height="275" rx="5" fill="#FFFFFF" stroke="#E65100" stroke-width="2" />
+      <text x="22" y="82" class="bold-txt" fill="#BF360C">ESTADO 4: EN_VIAJE_PUERTO</text>
+      <text x="22" y="104" class="body-txt">- Ubicación: Corredor vial al Pacífico</text>
+      <text x="22" y="124" class="body-txt">- Carga Consolidada: Hasta 200 sacos</text>
+      <text x="22" y="144" class="body-txt">- Precinto de Seguridad Electrónico</text>
+      <text x="22" y="164" class="body-txt">- Viaje Troncal: VIAJE-TRONCAL-XXX</text>
+      <text x="22" y="184" class="body-txt">- Telemetría Satelital y Celular:</text>
+      <text x="32" y="204" class="body-txt">* Reporte GPS periódico cada 5 min</text>
+      <text x="32" y="224" class="body-txt">* Alertas ante desvío de ruta</text>
+      <text x="22" y="248" class="bold-txt">- Protección de Privacidad:</text>
+      <text x="22" y="268" class="body-txt">  Los datos telemáticos de la ruta</text>
+      <text x="22" y="288" class="body-txt">  se confinan en acopio; el comprador</text>
+      <text x="22" y="308" class="body-txt">  solo ve destino Buenaventura</text>
+
+      <!-- Evento 4 -->
+      <rect x="12" y="350" width="276" height="135" rx="5" fill="#D5E8D4" stroke="#82B366" stroke-width="1.5" />
+      <text x="22" y="375" class="bold-txt" fill="#274E13">EVENTO: DESPACHO_PUERTO</text>
+      <text x="22" y="398" class="body-txt">- Atribuible a: Operario + Chofer</text>
+      <text x="22" y="418" class="body-txt">- Condición: Saco ACEPTADO en acopio</text>
+      <text x="22" y="438" class="body-txt">- Hash de precinto electrónico</text>
+      <text x="22" y="458" class="body-txt">  asociado al expediente digital</text>
+    </g>
+
+    <!-- FASE 5: PUERTO DE BUENAVENTURA -->
+    <g transform="translate(1380, 50)">
+      <rect width="290" height="505" rx="6" fill="#F2FBF9" stroke="#00796B" stroke-width="1.5" />
+      <rect width="290" height="30" rx="6" fill="#E0F2F1" />
+      <text x="12" y="20" class="phase-head" fill="#004D40">FASE 5: BUENAVENTURA</text>
+      <text x="12" y="46" class="subhead">Actor: Agente Portuario FNC (MFA)</text>
+
+      <!-- Estado 5 Base -->
+      <rect x="12" y="60" width="266" height="155" rx="5" fill="#FFFFFF" stroke="#00796B" stroke-width="2" />
+      <text x="22" y="82" class="bold-txt" fill="#004D40">ESTADO 5: ENTREGADO_PUERTO</text>
+      <text x="22" y="104" class="body-txt">- Terminal: SPRB / Aguadulce</text>
+      <text x="22" y="124" class="body-txt">- Sin predio propio de la FNC</text>
+      <text x="22" y="144" class="body-txt">- Recepción en bodega portuaria</text>
+      <text x="22" y="164" class="body-txt">- Verificación de precinto digital</text>
+      <text x="22" y="184" class="body-txt">- Inspección aduanera Dian e ICA</text>
+
+      <!-- Subestado Aceptado -->
+      <rect x="12" y="225" width="266" height="125" rx="5" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2" />
+      <text x="22" y="247" class="accent-green">SUB-ESTADO: PUERTO (ACEPTADO)</text>
+      <text x="22" y="267" class="body-txt">- Evento: EVENTO_ENTREGA_ACEPTADA</text>
+      <text x="22" y="287" class="body-txt">- Aprobado para exportación</text>
+      <text x="22" y="307" class="body-txt">- Estiba en contenedor marítimo</text>
+      <text x="22" y="327" class="body-txt">- Cierre de trazabilidad FNC</text>
+
+      <!-- Subestado Rechazado -->
+      <rect x="12" y="360" width="266" height="125" rx="5" fill="#FFEBEE" stroke="#C62828" stroke-width="2" />
+      <text x="22" y="382" class="accent-red">SUB-ESTADO: PUERTO (RECHAZADO)</text>
+      <text x="22" y="402" class="body-txt">- Evento: EVENTO_ENTREGA_RECHAZADA</text>
+      <text x="22" y="422" class="body-txt">- Causa: Saco rasgado o mojado</text>
+      <text x="22" y="442" class="body-txt">- Reclamación a seguro de carga</text>
+      <text x="22" y="462" class="body-txt">- Registro inmutable de siniestro</text>
+    </g>
+  </g>
+
+  <!-- CONTENEDOR 2: BASE TRANSACCIONAL EVENT SOURCING (CERO PERDIDA) -->
+  <g transform="translate(35, 695)" filter="url(#shadow)">
+    <rect width="1690" height="555" rx="8" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
+    <rect width="1690" height="35" rx="8" fill="#EBF3FB" />
+    <text x="20" y="23" class="swim-title" fill="#1D76DB">BASE TRANSACCIONAL DE EVENT SOURCING Y PROYECCIÓN ASÍNCRONA (Cero Pérdida de Eventos en Despliegues)</text>
+
+    <!-- SUBPANEL 1: INGESTA Y DLQ -->
+    <g transform="translate(20, 50)">
+      <rect width="520" height="235" rx="6" fill="#FFFFFF" stroke="#FF9900" stroke-width="2" />
+      <rect width="520" height="32" rx="6" fill="#FFF8EE" />
+      <text x="15" y="21" class="box-head" fill="#FF9900">1. Ingesta Transaccional y Cola de Amortiguación (SQS DLQ)</text>
+      <text x="15" y="55" class="body-txt">- API Gateway HTTPS TLS 1.3 con validación de schema OpenAPI 3.0</text>
+      <text x="15" y="75" class="body-txt">- Autenticación estricta: Cognito JWT (móvil) o IAM SigV4 (acopios)</text>
+      <text x="15" y="95" class="body-txt">- Amazon SQS FIFO Buffer: Absorbe picos de hasta 1.200 sacos/día</text>
+      <text x="15" y="115" class="body-txt">  y previene saturación ante ráfagas de cosecha simultáneas</text>
+      <text x="15" y="135" class="body-txt">- AWS Lambda Ingesta: Micro-lotes con reintentos exponenciales</text>
+      <text x="15" y="155" class="body-txt">- Amazon SQS Dead Letter Queue (DLQ): Mensajes fallidos retenidos</text>
+      <text x="15" y="175" class="body-txt">  por 14 días con alarma CloudWatch inmediata (DLQ &gt; 0)</text>
+      <text x="15" y="195" class="bold-txt" fill="#B71C1C">- Cero Eventos Perdidos: Durante despliegues de software o fallas</text>
+      <text x="15" y="215" class="body-txt">  de red, los eventos se retienen en cola hasta ser procesados</text>
+    </g>
+
+    <!-- SUBPANEL 2: EVENT STORE DYNAMODB -->
+    <g transform="translate(560, 50)">
+      <rect width="540" height="235" rx="6" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
+      <rect width="520" height="32" rx="6" fill="#EBF3FB" />
+      <text x="15" y="21" class="box-head" fill="#1D76DB">2. Almacén Inmutable de Eventos (Event Store): sacos_eventos</text>
+      <text x="15" y="55" class="body-txt">- Clave de Partición (PK): SacoID (Token SACO-2026-CAU-7F3A9C12)</text>
+      <text x="15" y="75" class="body-txt">- Clave de Ordenamiento (SK): TimestampISO#Version (2026-11-06T...#001)</text>
+      <text x="15" y="95" class="body-txt">- Modelo Append-Only Estricto: Prohibidas las modificaciones</text>
+      <text x="15" y="115" class="body-txt">  de registros; cada transición genera un nuevo ítem inmutable</text>
+      <text x="15" y="135" class="body-txt">- Atributos: EventoID, TipoEvento, ActorID, RolActor, UbicacionID,</text>
+      <text x="15" y="155" class="body-txt">  DatosEvento (cifrado KMS CMK), HashPrevio, FirmaDigital</text>
+      <text x="15" y="175" class="body-txt">- Point-in-Time Recovery (PITR): Activado para RPO sub-segundo</text>
+      <text x="15" y="195" class="bold-txt" fill="#1D76DB">- Retención Legal WORM: Atributo TTL a 1.825 días (5 años)</text>
+      <text x="15" y="215" class="body-txt">  garantizando cumplimiento de auditoría forense bajo Ley 1581</text>
+    </g>
+
+    <!-- SUBPANEL 3: PROYECCIONES DESACOPLADAS -->
+    <g transform="translate(1120, 50)">
+      <rect width="550" height="235" rx="6" fill="#FFFFFF" stroke="#0E8A16" stroke-width="2" />
+      <rect width="520" height="32" rx="6" fill="#F0FFF4" />
+      <text x="15" y="21" class="box-head" fill="#0E8A16">3. Proyecciones Asíncronas (DynamoDB Streams + Lambda)</text>
+      <text x="15" y="55" class="body-txt">- DynamoDB Streams en sacos_eventos: Emite evento NEW_IMAGE</text>
+      <text x="15" y="75" class="body-txt">- Lambda Proyector (VPC Producción): Materializa dos vistas:</text>
+      <text x="25" y="95" class="bold-txt">* sacos_cafe (Maestro Interno): Estado actual consolidado</text>
+      <text x="35" y="115" class="body-txt">  para acopio, pesajes, catación, liquidación y auditoría</text>
+      <text x="25" y="135" class="bold-txt">* sacos_publicos (Vista Sanitizada): Tabla proyectada</text>
+      <text x="35" y="155" class="body-txt">  sin columnas de cédula, nombres ni rutas intermedias</text>
+      <text x="15" y="175" class="body-txt">- Replay Determinista: Si una vista se corrompe o requiere cambio</text>
+      <text x="15" y="195" class="body-txt">  de esquema, se reprocesan todos los eventos históricos desde cero</text>
+      <text x="15" y="215" class="bold-txt" fill="#0E8A16">- Idempotencia Nativa: Cero duplicaciones ante reintentos de red</text>
+    </g>
+
+    <!-- SUBPANEL INFERIOR: RESILIENCIA EN DESPLIEGUES Y POLÍTICAS -->
+    <g transform="translate(20, 305)">
+      <rect width="1650" height="225" rx="6" fill="#F8F9FA" stroke="#545B64" stroke-width="1.5" />
+      <text x="20" y="28" class="box-head">POLÍTICA DE DESPLIEGUES INMUTABLES, TOLERANCIA A FALLOS Y GOBERNANZA</text>
+      <text x="20" y="56" class="bold-txt">1. Despliegues Canary Progresivos (CodeDeploy):</text>
+      <text x="35" y="76" class="body-txt">Toda actualización de Lambdas de ingesta o proyección se efectúa mediante despliegues progresivos Canary10Percent5Minutes.</text>
+      <text x="35" y="96" class="body-txt">Si las alarmas de CloudWatch registran errores 5xx &gt; 1% o fallos en tests sintéticos, el tráfico revierte de inmediato en &lt; 30 segundos.</text>
+      <text x="20" y="122" class="bold-txt">2. Ventana de Congelamiento Operativo en Cosecha (05:00 - 18:00):</text>
+      <text x="35" y="142" class="body-txt">Queda terminantemente prohibido ejecutar despliegues no emergentes a producción durante la jornada diurna de cosecha cafetera.</text>
+      <text x="35" y="162" class="body-txt">Cualquier cambio debe liberarse en la ventana nocturna aprobada (19:00 - 04:00) previa verificación de respaldo PITR.</text>
+      <text x="20" y="188" class="bold-txt">3. Resiliencia Store-and-Forward de 24 Horas:</text>
+      <text x="35" y="208" class="body-txt">Las aplicaciones de caficultores y transportistas operan de forma desconectada reteniendo eventos con firma digital local hasta 24 horas.</text>
+    </g>
+  </g>
+</svg>
