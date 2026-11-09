@@ -97,3 +97,7 @@ Supuestos que no están en el enunciado y que tomó el equipo al diseñar la pla
 | Una finca tiene 2 hectáreas en promedio | El enunciado no lo da; se reemplaza por el área real tras la delimitación (S1) | #30 | Supuesto |
 | Visita puntual de dron (S2 o S4) a COP 250.000 | No hay tarifa pública; es la primera cifra que hay que cotizar | #30 | Supuesto |
 | Cada vuelo de área deja 2 GB de fotos y 0,5 GB de ortomosaico; cada visita, 20 fotos de 8 MB | Se ajusta con los primeros vuelos | #30 | Supuesto |
+| Fuera de cosecha, el transporte opera al 25 % y la recepción de sacos al 10 % del pico | El enunciado solo da las cifras de cosecha | #29 | Supuesto |
+| Consulta pública promedio de 3 por minuto en cosecha y 1 fuera de cosecha | El enunciado da solo el pico de 30 por minuto | #29 | Supuesto |
+| 5 alertas por finca al mes en cosecha y 2 fuera, con SMS a unos USD 0,035 | La tasa real de lecturas fuera de rango no se conoce; el precio de SMS a Colombia se confirma en el reporte de uso de SNS | #29 | Supuesto |
+| La conmutación de la consulta usa health checks de Route 53, no Application Recovery Controller | ARC cuesta unos USD 1.825 al mes y el RTO de 4 horas no lo necesita | #29 | Decidido |
