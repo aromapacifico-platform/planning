@@ -22,41 +22,49 @@ La premisa arquitectónica central del pliego establece que **no se entrena un m
 
 ## 2. Servicio de Inferencia Seleccionado y Región Cloud
 
-### 2.1 Decisión del Motor de Visión: Amazon Rekognition
+### 2.1 Arquitectura Híbrida de Visión Serverless: Amazon Rekognition y Amazon Bedrock
 
-Se selecciona formalmente **Amazon Rekognition** como el servicio de inferencia administrada para la plataforma AromaPacífico. Esta elección responde a tres capacidades nativas del servicio:
-- **Detección Perimetral de Personas y Rostros**: Las APIs administradas `DetectFaces` y `DetectLabels` (con filtro en categoría humana: *Person*, *Human*, *Face*) permiten validar en una sola llamada serverless y en menos de 200 ms si la toma aérea capturó inadvertidamente a un caficultor, jornalero o transeúnte en caminos veredales.
-- **Modelos Fitosanitarios Administrados sin Servidores Ociosos**: El diagnóstico de roya (*Hemileia vastatrix*), broca (*Hypothenemus hampei*) y estimación de maduración se resuelve mediante modelos de clasificación administrados invocados por petición (Pay-per-Call), sin requerir el aprovisionamiento ni el mantenimiento de servidores virtuales, contenedores o clústeres con tarjetas gráficas dedicadas.
-- **Garantías Contractuales de Privacidad**: Amazon Web Services garantiza bajo su anexo de procesamiento de datos (AWS DPA) que las imágenes transmitidas para inferencia no son utilizadas para entrenar modelos públicos de terceros ni son retenidas por el proveedor tras completar la respuesta de la API.
+Para cumplir de forma simultánea con el marco de protección de datos personales (Ley 1581 de 2012) y las dos invariantes innegociables del pliego (*«No se entrena un modelo. Se usa inferencia administrada»* y *«No debe haber cómputo esperando objetos»*), se adopta una arquitectura de visión serverless en dos etapas desacopladas:
+
+1. **Filtro Perimetral Anti-PII con Amazon Rekognition (`DetectFaces` y `DetectLabels`):**
+   - Invoca las APIs administradas de Amazon Rekognition con filtro en categorías humanas (`Person`, `Human`, `Face`, `Worker`, `Farmer`) y umbral de confianza perimetral del 50%.
+   - Si la imagen contiene personas identificables, la toma se excluye de inmediato del flujo agronómico, derivándola al bucket de cuarentena en la cuenta de Seguridad (`AromaPacifico-Security`). Esto asegura cumplimiento estricto del régimen de Habeas Data sin incurrir en gasto de inferencia fitosanitaria ($0 invertido en modelos botánicos ante tomas con personas).
+2. **Diagnóstico Fitosanitario Administrado con Amazon Bedrock Multimodal Vision:**
+   - El análisis foliar de roya (*Hemileia vastatrix*), broca (*Hypothenemus hampei*) y maduración de cosecha se delega a modelos fundacionales multimodales administrados en Amazon Bedrock (ej. Anthropic Claude 3 Haiku o Amazon Nova Lite).
+   - **Cero entrenamiento propio:** El modelo fundacional consume directamente la imagen y un prompt agronómico tipificado con salida JSON estructurada (`diagnostico`, `severidad`, `confianza_pct`). No requiere recopilar, etiquetar ni mantener datasets propios de entrenamiento, cumpliendo a cabalidad con la regla de inferencia administrada.
+   - **Cero cómputo en espera (Pay-per-Call estricto):** Bedrock factura exclusivamente por tokens de entrada y salida procesados (~$0,0006 a $0,0020 USD por inferencia). En periodos intermedios entre misiones de drones y fuera de temporada de cosecha, el costo de cómputo en reposo es **cero absoluto ($0,00 USD/mes)**.
+3. **Garantías Contractuales de Tratamiento de Datos (AWS DPA):**
+   - Amazon Web Services certifica bajo su anexo de procesamiento de datos que ni Rekognition ni Bedrock utilizan las imágenes transmitidas por la Federación para entrenar modelos públicos o comerciales de terceros.
 
 ### 2.2 Región Cloud Seleccionada: AWS us-east-1 (N. Virginia)
 
 La región principal de despliegue para todos los servicios de cómputo, almacenamiento e inferencia es **US East (N. Virginia), `us-east-1`**, complementada con la región de respaldo **US East (Ohio), `us-east-2`** para el mecanismo de recuperación ante desastres (DR) de la consulta pública del saco de café (RTO de 4 horas y RPO de 15 minutos).
 
-La selección de `us-east-1` frente a regiones geográficamente más cercanas (como São Paulo, `sa-east-1`) se fundamenta en tres criterios objetivos:
-1. **Infraestructura de Conectividad Submarina**: El tráfico internacional de internet de Colombia sale mayoritariamente a través de los cables submarinos del Caribe (Arcos-1, Maya-1, South America-1 y SAC) que conectan directamente los nodos nacionales (Cartagena, Barranquilla y Cali) con los puntos de presencia en Florida y Virginia. La latencia típica hacia `us-east-1` oscila entre 45 y 55 ms, ofreciendo una experiencia altamente reactiva para cargas asíncronas de drones y telemetría.
-2. **Economía de Escala y FinOps**: Los precios de cómputo, almacenamiento e inferencia en `sa-east-1` (São Paulo) son entre un 40% y un 60% superiores a los de `us-east-1` debido a cargas arancelarias locales en Brasil. En un proyecto con restricción explícita de inversión moderada, asumir sobrecostos innecesarios en la nube distorsiona la viabilidad económica del piloto.
-3. **Disponibilidad Integral de Servicios**: `us-east-1` ofrece disponibilidad inmediata y paridad completa de características para AWS IoT Core, AWS Lambda Graviton2, Amazon Rekognition Custom Labels, Amazon DynamoDB Global Tables y Amazon S3 Object Lock en modo Compliance.
+La selección de `us-east-1` frente a regiones geográficamente más cercanas (como São Paulo, `sa-east-1`) se fundamenta exclusivamente en criterios objetivos de ingeniería de redes y disponibilidad tecnológica:
+1. **Topología de Cables Submarinos y Baja Latencia**: El tráfico internacional de internet de Colombia transcurre directamente a través de las rutas de fibra óptica submarina del Caribe y el Atlántico (Arcos-1, Maya-1, South America-1 / SAC) que enlazan las estaciones de amarre nacionales (Cartagena, Barranquilla y Cali) con los puntos de presencia e interconexión en Florida y Virginia. La latencia típica hacia `us-east-1` oscila entre 45 y 55 ms, ofreciendo una respuesta altamente reactiva para la telemetría IoT y las cargas de imágenes de drones. En contraste, enrutar hacia São Paulo (`sa-east-1`) implica un trazado por el Cono Sur con múltiples saltos de tránsito internacional, elevando la latencia a 110 - 135 ms (más del doble).
+2. **Disponibilidad Integral y Paridad de Servicios Serverless**: `us-east-1` es la región insignia de AWS con paridad completa e inmediata para todos los servicios requeridos por la plataforma: Amazon Bedrock (disponibilidad nativa y cuotas estándar de modelos multimodales Claude 3 Haiku y Nova Lite), Amazon Rekognition (`DetectFaces` y `DetectLabels`), AWS IoT Core con Basic Ingest, AWS Lambda Graviton2 arm64, Amazon DynamoDB On-Demand y Amazon S3 Object Lock en modo Compliance. En regiones alternativas como `sa-east-1`, la oferta de modelos multimodales en Bedrock y las cuotas de concurrencia serverless son significativamente más limitadas.
+3. **Respaldo Multi-Región Nativo en Estados Unidos**: La troncal privada de alta velocidad de AWS entre `us-east-1` (Virginia) y `us-east-2` (Ohio) permite replicación asíncrona de datos con latencias inter-región inferiores a 15 ms, garantizando la viabilidad del esquema de alta disponibilidad y recuperación ante desastres exigido por el negocio.
 
 ### 2.3 Matriz Comparativa de Motores de Inferencia
 
-| Criterio de Selección | Opción A: Amazon Rekognition (Seleccionada) | Opción B: Amazon SageMaker Endpoints | Opción C: Clúster EC2 con GPUs (g4dn) | Opción D: Inferencia en Borde (Drones) |
-|---|---|---|---|---|
-| **Modelo de Costo** | Pay-as-you-go puro ($0.0010 USD / imagen). | Instancia dedicada continua ($0.20 USD / hora). | Servidor dedicado continuo ($0.526 USD / hora). | CapEx elevado: hardware adicional por dron. |
-| **Costo en Reposo** | **$0.00 USD / mes** ($0 cuando no hay vuelos). | ~$144.00 USD / mes por endpoint ml.m5.xlarge. | ~$378.72 USD / mes por instancia g4dn.xlarge. | Inversión inicial de ~$8.000 USD por cuadrilla. |
-| **Mantenimiento Operativo** | Cero administración de infraestructura ni parches. | Gestión de contenedores, escalado y artefactos. | Administración de SO, controladores CUDA y AMIs. | Calibración térmica y riesgo de pérdida por caída. |
-| **Filtro Anti-PII Integrado** | Nativo (`DetectFaces` y `DetectLabels`). | Requiere codificar y mantener dos modelos en pipeline. | Requiere mantener modelos de segmentación en GPU. | Factible pero drena baterías de la aeronave. |
-| **Alineación con el Reto** | **Óptima**: Inferencia administrada serverless. | Ineficiente para volumen bajo de cosechas. | Descartada por complejidad y sobrecostos. | Viola la restricción de costos de hardware. |
+| Criterio de Selección | Solución Adoptada: Rekognition (PII) + Bedrock Multimodal | Amazon Rekognition Custom Labels (Rechazada) | Amazon SageMaker Endpoints Dedicados | Clúster EC2 con GPUs (g4dn.xlarge) | Inferencia en Borde / Drones (Edge GPUs) |
+|---|---|---|---|---|---|
+| **Modelo de Costo** | **Pay-per-Call puro por petición y token** (~$0,0010 PII + ~$0,0020 Bedrock). | Facturación por hora de Unidad de Inferencia ($4,00 USD/hora por IU) + entrenamiento. | Instancia dedicada continua ($0,20 USD / hora). | Servidor dedicado continuo ($0,526 USD / hora). | CapEx elevado: módulo GPU adicional por aeronave. |
+| **Costo en Reposo** | **$0,00 USD / mes** (Zero cómputo esperando objetos). | **Inviable**: ~$2.880 USD/mes si permanece activo 24/7 (~$96 USD/día). | ~$144,00 USD / mes por endpoint ml.m5.xlarge. | ~$378,72 USD / mes por instancia g4dn.xlarge. | Inversión inicial de ~$8.000 USD por cuadrilla (~$24.000 USD). |
+| **Requisito de Entrenamiento** | **Cero entrenamiento propio**: Modelos fundacionales zero-shot/few-shot. | **Exige entrenamiento propio** con dataset de cientos de fotos etiquetadas. | Exige entrenar, versionar y mantener contenedores MLOps. | Exige compilar modelos TensorRT y mantener AMIs. | Exige compilar y optimizar modelos para edge. |
+| **Mantenimiento Operativo** | Cero administración de servidores, parches o cuotas de GPU. | Gestión de arranque/apagado de IUs y versionamiento de proyectos. | Gestión de balanceadores, escalado y artefactos en S3. | Administración de SO Linux, controladores CUDA y parches. | Calibración térmica, vibración y riesgo de daño por caída. |
+| **Filtro Anti-PII Integrado** | Nativo perimetral (`DetectFaces` + `DetectLabels`). | No filtra PII; requiere llamada separada a APIs base. | Requiere pipeline dual con red neuronal adicional. | Requiere mantener modelo de segmentación en GPU. | Factible pero drena severamente baterías de vuelo. |
+| **Alineación con el Reto** | **100% CUMPLE** ambas reglas (sin entrenamiento y sin espera). | **VIOLA AMBAS REGLAS** (exige entrenamiento y cobra en espera). | Ineficiente para volumen bajo de cosechas (99.8% ocioso). | Descartada por alta complejidad y sobrecostos fijos. | Viola la restricción de costos de hardware e inversión moderada. |
 
 ### 2.4 Matriz Comparativa de Regiones Cloud y Soberanía
 
-| Criterio de Selección | AWS us-east-1 (N. Virginia, USA) | AWS sa-east-1 (São Paulo, Brasil) | Datacenter Local en Colombia / AWS Local Zone |
+| Criterio de Selección | AWS us-east-1 (N. Virginia, USA) - Seleccionada | AWS sa-east-1 (São Paulo, Brasil) | Datacenter Local en Colombia / AWS Local Zone |
 |---|---|---|---|
-| **Estatus Legal SIC (Circular 005/2017)** | País con nivel adecuado reconocido bajo garantías. | País con nivel adecuado bajo acuerdo Mercosur. | Jurisdicción local directa (Ley 1581 de 2012). |
-| **Latencia de Red desde Colombia** | Muy competitiva: 45 - 55 ms vía cables submarinos. | Variable: 110 - 135 ms (enrutamiento por el Cono Sur). | Mínima: 10 - 20 ms. |
-| **Sobrecosto Financiero FinOps** | **0% (Línea base económica más eficiente)**. | +40% a +60% en costos de Lambda, S3 y Rekognition. | +250% en infraestructura y licencias dedicadas. |
-| **Paridad de Servicios Serverless** | 100% de servicios disponibles (KMS, IoT, Rekognition). | Subconjunto de servicios; cuotas reducidas de IA. | Sin servicios administrados de visión artificial. |
-| **Respaldo Multi-Región Nativo** | Excelente paridad con `us-east-2` (Ohio). | Compleja replicación hacia otras regiones del sur. | Sin redundancia regional nativa dentro del país. |
+| **Estatus Legal SIC (Circular 005/2017)** | País con nivel adecuado reconocido bajo garantías contractuales DPA. | País con nivel adecuado bajo acuerdo Mercosur. | Jurisdicción local directa (Ley 1581 de 2012). |
+| **Latencia de Red desde Colombia** | **Óptima: 45 - 55 ms** vía cables submarinos directos del Caribe/Atlántico. | Variable: 110 - 135 ms (enrutamiento por el Cono Sur). | Mínima: 10 - 20 ms. |
+| **Disponibilidad de Servicios Serverless** | **100% de servicios disponibles** (Bedrock Multimodal, Rekognition, KMS, IoT Core). | Subconjunto de servicios; oferta restringida de modelos Bedrock y cuotas reducidas. | Sin servicios administrados de visión artificial ni modelos fundacionales. |
+| **Respaldo Multi-Región Nativo** | Excelente paridad y enlace de alta velocidad con `us-east-2` (Ohio). | Compleja replicación hacia otras regiones del continente. | Sin redundancia regional nativa dentro del país. |
+| **Línea Base Económica de Catálogo** | Región con la estructura de precios base más eficiente a nivel global de AWS. | Precios de catálogo más elevados para cómputo, almacenamiento y APIs. | Elevada inversión en hardware dedicado y licenciamiento local. |
 
 ---
 
@@ -124,7 +132,7 @@ El árbol de decisión anterior estructura la operación técnica a través de l
 3. Si el nivel de confianza arrojado por cualquiera de las dos llamadas supera el 50%, la función concluye de forma determinista que la imagen contiene información personal biométrica o fisonómica protegida por la Ley 1581 de 2012.
 
 #### Fase 2: Bloqueo Operativo e Interrupción del Pipeline
-1. La función interrumpe inmediatamente el flujo de trabajo agronómico: se inhibe cualquier llamada hacia los modelos de Custom Labels de roya o broca.
+1. La función interrumpe inmediatamente el flujo de trabajo agronómico: se inhibe cualquier llamada hacia los modelos multimodales de visión en Amazon Bedrock para el diagnóstico foliar de roya o broca.
 2. Esta decisión ahorra el cómputo y el costo de inferencia fitosanitaria ($0 invertidos en plagas) e impide que datos personales ingresen a modelos de clasificación botánica.
 3. En la tabla DynamoDB `ExpedienteFitosanitario`, el caso se actualiza atómicamente con el estado `PII_DETECTED_BLOQUEADO`. La orden fitosanitaria no muta a autorizada ni se aprueba fumigación alguna.
 
@@ -200,73 +208,120 @@ De los cinco servicios obligatorios de drones, únicamente los servicios fotogr�
 
 ## 6. Modelo de Costos FinOps y Costo por Mil Invocaciones en Cosecha
 
-El modelo financiero se estructura a partir de la lista oficial de precios públicos de Amazon Web Services para la región `us-east-1` (vigentes para 2026).
+El modelo financiero se estructura a partir de la lista oficial de precios públicos de Amazon Web Services para la región `us-east-1` (vigentes y consultados para 2026).
 
-### 6.1 Tarifas Unitarias Oficiales de Componentes (AWS us-east-1)
+### 6.1 Tarifas Unitarias Oficiales de Componentes y Páginas de Precios (AWS us-east-1)
 
-1. **Amazon Rekognition**:
-   - `DetectFaces` y `DetectLabels`: **$0.0010 USD** por imagen analizada (nivel estándar de hasta 1 millón de imágenes al mes: $1.00 USD por cada 1.000 imágenes).
-   - Inferencia Fitosanitaria Administrada (Custom Labels Serverless Pay-per-Call): **$0.0010 USD** por imagen analizada en llamadas administradas por evento.
-2. **AWS Lambda (Arquitectura AWS Graviton2 arm64)**:
+1. **Amazon Rekognition (Filtro Perimetral Anti-PII)**:
+   - **Página oficial de precios:** [Amazon Rekognition Pricing](https://aws.amazon.com/rekognition/pricing/) (Consultada: Febrero de 2026).
+   - Operaciones `DetectFaces` y `DetectLabels`: **$0,0010 USD** por imagen analizada (Nivel 1 de consumo: de 0 a 1 millón de imágenes al mes, equivalente a $1,00 USD por cada 1.000 imágenes).
+   - Se utiliza de manera exclusiva para detectar presencia humana perimetral antes de cualquier análisis fitosanitario. Si detecta personas, la imagen se desvía a cuarentena S3 y se aborta el flujo, evitando costos de inferencia posteriores.
+
+2. **Amazon Bedrock Multimodal Vision (Inferencia Fitosanitaria Administrada)**:
+   - **Página oficial de precios:** [Amazon Bedrock Pricing](https://aws.amazon.com/bedrock/pricing/) (Consultada: Febrero de 2026).
+   - Modelo fundacional multimodal de visión seleccionado: **Anthropic Claude 3 Haiku** (o alternativamente **Amazon Nova Lite** en la misma consola de Bedrock).
+   - **Modelo de Cobro:** Tarificación puramente elástica por token de entrada y salida (Pay-per-Call estricto). No requiere instancias aprovisionadas ni unidades de inferencia dedicadas.
+   - **Desglose de Tokens por Inferencia Foliar (Claude 3 Haiku):**
+     - Tarifa de Tokens de Entrada: **$0,00025 USD** por 1.000 tokens ($0,25 USD por millón).
+     - Tarifa de Tokens de Salida: **$0,00125 USD** por 1.000 tokens ($1,25 USD por millón).
+     - Procesamiento visual de fotografía foliar (resolución estandarizada 1024x1024 px): ~1.600 tokens de imagen.
+     - Prompt taxonómico agronómico del sistema (instrucciones para roya, broca y severidad): ~200 tokens de entrada.
+     - Total tokens de entrada: $1.800\text{ tokens} \times (\$0,00025 / 1.000) = \mathbf{\$0,000450\text{ USD}}$.
+     - Respuesta estructurada en JSON (`diagnostico`, `confianza_pct`, `severidad`, `observaciones`): ~150 tokens de salida.
+     - Total tokens de salida: $150\text{ tokens} \times (\$0,00125 / 1.000) = \mathbf{\$0,000188\text{ USD}}$.
+     - **Costo Real por Inferencia con Claude 3 Haiku:** $\$0,000450 + \$0,000188 = \mathbf{\$0,000638\text{ USD}}$ por imagen analizada (~$0,64 USD por cada 1.000 imágenes).
+     - **Presupuesto Conservador de Contingencia FinOps:** Para absorber posibles variaciones en longitud de salida, prompts detallados o imágenes de mayor resolución, el modelo adopta un valor conservador de **$0,0020 USD por inferencia** ($2,00 USD por cada 1.000 imágenes).
+     - *(Escenario de ultra-bajo costo con Amazon Nova Lite: $0,06 USD/M tokens entrada y $0,24 USD/M tokens salida, arrojando un costo unitario de apenas **$0,00030 USD por imagen**, o $0,30 USD por cada 1.000 imágenes).*
+   - **Costo en Reposo:** **$0,00 USD / mes** (Zero cómputo esperando objetos; si no hay vuelos de drones en la semana, la facturación es $0,00 USD).
+   - **Costo de Entrenamiento:** **$0,00 USD** (Cero recolección de datasets etiquetados y cero horas de GPU de entrenamiento).
+
+3. **Invalidación Formal de Amazon Rekognition Custom Labels:**
+   - **Página oficial de precios:** [Amazon Rekognition Custom Labels Pricing](https://aws.amazon.com/rekognition/pricing/) (Consultada: Febrero de 2026).
+   - **Costo de Inferencia:** Facturación fija de **$4,00 USD por hora** por cada Unidad de Inferencia (Inference Unit - IU) aprovisionada mientras el modelo se encuentre en estado activo (`RUNNING`), independientemente del número de imágenes evaluadas.
+   - **Impacto Financiero:** Si un modelo de Custom Labels permaneciera activo 24/7 durante un mes, generaría una factura fija de $4,00 \times 720\text{ h} = \mathbf{\$2.880,00\text{ USD / mes}}$ por modelo. Incluso encendiéndolo y apagándolo únicamente en las 4 horas operativas diarias de días hábiles, costaría $4,00 \times 4\text{ h} \times 20\text{ días} = \mathbf{\$320,00\text{ USD / mes}}$.
+   - **Costo de Entrenamiento:** Tarifa obligatoria de **$1,00 USD por hora** de entrenamiento del modelo, requiriendo cientos de fotos etiquetadas manualmente.
+   - **Conclusión:** No existe la modalidad "Custom Labels Serverless Pay-per-Call a $0,001 por imagen". Custom Labels queda completamente invalidado y descartado por chocar con las dos directrices del enunciado.
+
+4. **AWS Lambda (Arquitectura AWS Graviton2 arm64)**:
+   - **Página oficial de precios:** [AWS Lambda Pricing](https://aws.amazon.com/lambda/pricing/) (Consultada: Febrero de 2026).
    - Configuración de memoria: 512 MB (0.5 GB).
    - Duración media de ejecución por imagen: 400 milisegundos (0.4 s).
-   - Consumo de cómputo por invocación: $0.4\text{ s} \times 0.5\text{ GB} = 0.2\text{ GB-s}$.
-   - Tarifa Graviton2: **$0.0000133334 USD** por GB-segundo.
-   - Costo de cómputo por 1.000 invocaciones: $200\text{ GB-s} \times \$0.0000133334 = \$0.00267\text{ USD}$.
-   - Peticiones Lambda: **$0.0000002 USD** por invocación ($0.20 USD por millón).
-   - Subtotal Lambda por 1.000 invocaciones: **$0.00287 USD**.
-3. **Amazon S3 Standard (Almacenamiento Temporal y Cuarentena)**:
+   - Consumo de cómputo por invocación: $0,4\text{ s} \times 0,5\text{ GB} = 0,2\text{ GB-s}$.
+   - Tarifa Graviton2 (us-east-1): **$0,0000133334 USD** por GB-segundo.
+   - Costo de cómputo por 1.000 invocaciones: $200\text{ GB-s} \times \$0,0000133334 = \$0,00267\text{ USD}$.
+   - Peticiones Lambda: **$0,0000002 USD** por invocación ($0,20 USD por millón de peticiones).
+   - Subtotal Lambda por 1.000 invocaciones: **$0,00287 USD**.
+
+5. **Amazon S3 Standard (Almacenamiento Temporal y Cuarentena)**:
+   - **Página oficial de precios:** [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/) (Consultada: Febrero de 2026).
    - Tamaño medio por fotografía en alta definición: 3.5 MB.
-   - 1.000 imágenes equivalen a: $1.000 \times 3.5\text{ MB} = 3.500\text{ MB} = 3.5\text{ GB}$.
-   - Tarifa S3 Standard (us-east-1): **$0.023 USD** por GB-mes.
-   - Costo de almacenar 3.5 GB durante un mes: $3.5\text{ GB} \times \$0.023 = \mathbf{\$0.0805\text{ USD}}$.
-4. **AWS Key Management Service (KMS)**:
-   - Solicitudes de cifrado y descifrado SSE-KMS: **$0.0300 USD** por cada 10.000 peticiones ($0.000003 USD por petición).
-   - Costo por 1.000 peticiones de encriptación: **$0.0300 USD**.
-5. **Enrutamiento de Red (Gateway VPC Endpoints)**:
-   - El tráfico interno entre subredes privadas de VPC, Amazon S3 y Amazon DynamoDB transcurre a través de Gateway VPC Endpoints gratuitos: **$0.0000 USD** por GB procesado.
+   - 1.000 imágenes equivalen a: $1.000 \times 3,5\text{ MB} = 3.500\text{ MB} = 3,5\text{ GB}$.
+   - Tarifa S3 Standard (us-east-1): **$0,023 USD** por GB-mes.
+   - Costo de almacenar 3.5 GB durante un mes: $3,5\text{ GB} \times \$0,023 = \mathbf{\$0,0805\text{ USD}}$.
+
+6. **AWS Key Management Service (KMS)**:
+   - **Página oficial de precios:** [AWS KMS Pricing](https://aws.amazon.com/kms/pricing/) (Consultada: Febrero de 2026).
+   - Solicitudes de cifrado y descifrado SSE-KMS: **$0,0300 USD** por cada 10.000 peticiones ($0,000003 USD por petición).
+   - Costo por 1.000 peticiones de encriptación: **$0,0300 USD**.
+
+7. **Enrutamiento de Red (Gateway VPC Endpoints)**:
+   - El tráfico interno entre subredes privadas de VPC, Amazon S3 y Amazon DynamoDB transcurre a través de Gateway VPC Endpoints gratuitos: **$0,0000 USD** por GB procesado.
 
 ### 6.2 Desglose Matemático del Costo por 1.000 Invocaciones Completas
 
-Un ciclo completo de inferencia comprende: lectura en S3, filtro perimetral anti-PII con Rekognition, inferencia fitosanitaria foliar, cómputo serverless en Lambda y cifrado KMS:
+Un ciclo completo de inferencia comprende: lectura en S3, filtro perimetral anti-PII con Rekognition, inferencia fitosanitaria multimodal con Bedrock, cómputo serverless en Lambda y cifrado KMS:
 
-| Componente del Subsistema | Concepto Técnico y Operación | Costo por 1.000 Invocaciones (USD) |
-|---|---|---|
-| **Rekognition Filtro Anti-PII** | Detección perimetral de rostros y personas (`DetectFaces` / `DetectLabels`) | $1.0000 USD |
-| **Rekognition Inferencia Fitosanitaria** | Diagnóstico foliar administrado de roya, broca o maduración | $1.0000 USD |
-| **AWS Lambda (Graviton2 512 MB)** | Cómputo serverless de ingesta, validación y persistencia (200 GB-s) | $0.0029 USD |
-| **Amazon S3 Standard (3.5 GB)** | Retención mensual de 1.000 fotografías de 3.5 MB en la nube | $0.0805 USD |
-| **AWS KMS (Cifrado Criptográfico)** | Operaciones de encriptado en reposo con llaves administradas | $0.0300 USD |
-| **Gateway VPC Endpoints** | Tráfico de red privado entre VPC, S3 y DynamoDB | $0.0000 USD |
-| **TOTAL POR 1.000 INVOCACIONES** | **Pipeline completo de extremo a extremo** | **$2.1134 USD** |
+| Componente del Subsistema | Concepto Técnico y Operación | Costo Nominal Claude 3 Haiku (USD) | Costo Conservador FinOps (USD) |
+|---|---|---|---|
+| **Rekognition Filtro Anti-PII** | Detección perimetral de personas (`DetectFaces` / `DetectLabels`) | $1,0000 USD | $1,0000 USD |
+| **Bedrock Inferencia Multimodal** | Diagnóstico foliar administrado de roya, broca o maduración | $0,6375 USD | $2,0000 USD |
+| **AWS Lambda (Graviton2 512 MB)** | Cómputo serverless de ingesta, orquestación y persistencia | $0,0029 USD | $0,0029 USD |
+| **Amazon S3 Standard (3.5 GB)** | Retención mensual de 1.000 fotografías de 3.5 MB en la nube | $0,0805 USD | $0,0805 USD |
+| **AWS KMS (Cifrado Criptográfico)** | Operaciones de encriptado en reposo SSE-KMS | $0,0300 USD | $0,0300 USD |
+| **Gateway VPC Endpoints** | Tráfico de red privado entre VPC, S3 y DynamoDB | $0,0000 USD | $0,0000 USD |
+| **TOTAL POR 1.000 INVOCACIONES** | **Pipeline completo de extremo a extremo** | **$1,7509 USD** | **$3,1134 USD** |
 
 ### 6.3 Factura Real del Semestre de Cosecha para AromaPacífico (620 Fotos)
 
-Al aplicar la cadencia real calculada para las 200 fincas en los 6 meses de cosecha:
+Al aplicar la cadencia real calculada para las 200 fincas en los 6 meses de cosecha (240 fotos de foco en S2 + 180 fotos de verificación en S4 + 200 fotos de estimación en S5 = 620 fotos):
 
-$$\text{Costo Total Cosecha} = 620\text{ imágenes} \times \left(\frac{\$2{,}1134\text{ USD}}{1.000\text{ imágenes}}\right) = \mathbf{\$1{,}3103\text{ USD}}$$
+1. **Bajo el Escenario Conservador de Presupuesto ($3,1134 USD / 1.000 fotos):**
 
-$$\text{Costo Promedio Mensual en Cosecha} = \frac{\$1{,}3103\text{ USD}}{6\text{ meses}} = \mathbf{\$0{,}2184\text{ USD / mes}}$$
+$$\text{Costo Total Cosecha} = 620\text{ imágenes} \times \left(\frac{\$3{,}1134\text{ USD}}{1.000\text{ imágenes}}\right) = \mathbf{\$1{,}9303\text{ USD en todo el semestre}}$$
+
+$$\text{Costo Promedio Mensual en Cosecha} = \frac{\$1{,}9303\text{ USD}}{6\text{ meses}} = \mathbf{\$0{,}3217\text{ USD / mes}}$$
 
 En el mes de mayor demanda aeronáutica (mes pico con ~150 fotografías evaluadas):
 
-$$\text{Costo Mes Pico} = 150\text{ imágenes} \times \$0{,}0021134\text{ USD} = \mathbf{\$0{,}3170\text{ USD / mes}}$$
+$$\text{Costo Mes Pico} = 150\text{ imágenes} \times \$0{,}0031134\text{ USD} = \mathbf{\$0{,}4670\text{ USD / mes}}$$
+
+2. **Bajo el Escenario Nominal con Claude 3 Haiku ($1,7509 USD / 1.000 fotos):**
+
+$$\text{Costo Total Cosecha} = 620\text{ imágenes} \times \left(\frac{\$1{,}7509\text{ USD}}{1.000\text{ imágenes}}\right) = \mathbf{\$1{,}0856\text{ USD en todo el semestre}}$$
+
+$$\text{Costo Promedio Mensual} = \mathbf{\$0{,}1809\text{ USD / mes}}$$
+
+3. **Costo en Periodos Fuera de Cosecha (Semestre de Mantenimiento):**
+En los meses donde no se despliegan vuelos de inspección, el costo de inferencia es de **$0,00 USD**. No existen servidores esperando peticiones ni cargos mínimos de infraestructura.
 
 ### 6.4 Análisis FinOps y Comparativa de Ahorro del Negocio
 
-La adopción de una arquitectura de visión administrada serverless responde a una decisión deliberada de maximización del valor del negocio y minimización del desperdicio:
+La adopción de una arquitectura de visión administrada serverless responde a una decisión deliberada de maximización del valor del negocio y minimización radical del desperdicio:
 
-```
-[Inferencia Serverless Pay-per-Call]  -->  $1.31 USD / semestre  (Zero cómputo en reposo)
-[SageMaker Endpoint Dedicado 24/7]    -->  $864.00 USD / semestre (99.8% sobrecosto inútil)
-[Clúster EC2 con GPUs Dedicadas]      -->  $2.272.32 USD / semestre (99.9% sobrecosto inútil)
+```text
+[Inferencia Serverless Pay-per-Call]  -->  $1.93 USD / semestre  (Zero cómputo en reposo)
+[SageMaker Endpoint Dedicado 24/7]    -->  $864.00 USD / semestre (99.78% sobrecosto inútil)
+[Custom Labels (si operara 24/7)]     -->  $17.280.00 USD / semestre (99.99% sobrecosto inútil)
+[Clúster EC2 con GPUs Dedicadas]      -->  $2.272.32 USD / semestre (99.91% sobrecosto inútil)
 ```
 
-1. **Ahorro Superior al 99.8% frente a SageMaker Dedicado**:
-   Mantener un endpoint continuo en Amazon SageMaker con una instancia mínima `ml.m5.xlarge` encendida las 24 horas del día cuesta **$144.00 USD mensuales** ($864.00 USD durante los seis meses de cosecha). Con un volumen de apenas 620 fotos en el semestre, el costo unitario por imagen se elevaría absurdamente a **$1.39 USD por foto procesada**, incurriendo en un 99.8% de ineficiencia por servidores desocupados. La solución serverless reduce el gasto a solo **$1.31 USD en todo el semestre**.
-2. **Eliminación Total de CapEx en Cuadrillas**:
+1. **Ahorro Superior al 99.7% frente a SageMaker Dedicado**:
+   Mantener un endpoint continuo en Amazon SageMaker con una instancia mínima `ml.m5.xlarge` encendida las 24 horas del día cuesta **$144,00 USD mensuales** ($864,00 USD durante los seis meses de cosecha). Con un volumen de apenas 620 fotos en el semestre, el costo unitario por imagen se elevaría absurdamente a **$1,39 USD por foto procesada**, incurriendo en un 99.78% de ineficiencia por servidores desocupados. La solución serverless reduce el gasto a solo **$1,93 USD en todo el semestre**.
+2. **Eliminación Total del Riesgo Financiero de Custom Labels**:
+   Custom Labels obligaría a pagar al menos $4,00 USD por cada hora de vuelo de las cuadrillas, más $1,00 USD/hora por entrenar modelos con fotos de fincas. Con Bedrock, la Federación accede de forma inmediata a modelos de última generación sin pagar un solo centavo por preparación ni horas ociosas de cómputo.
+3. **Eliminación Total de CapEx en Cuadrillas**:
    Embarcar GPUs en los drones de las tres cuadrillas departamentales requeriría computadores de abordo especializados (tipo Nvidia Jetson Orin Industrial) con un sobrecosto de al menos **$8.000 USD por aeronave** ($24.000 USD de CapEx adicional para la Federación). Además, el elevado consumo térmico y eléctrico de estos chips en vuelo reduce la autonomía de las baterías LiPo en más del 40%, obligando a comprar bancos de baterías adicionales y degradando la vida útil del equipo.
-3. **Escalabilidad Elástica sin Refactorización**:
+4. **Escalabilidad Elástica sin Refactorización**:
    Si el piloto de la Federación se expande en años posteriores de 200 a 1.000 o 5.000 fincas, la arquitectura serverless escala de forma transparente e instantánea sin necesidad de rediseñar contratos, redimensionar clústeres ni gestionar ventanas de mantenimiento en cosecha.
 
 ---
@@ -290,7 +345,7 @@ Detalla la detección de figuras humanas y rostros con Amazon Rekognition, la bi
 > Archivo fuente Draw.io editable: [`diagrams/carga-e-inferencia-filtro-pii.drawio`](diagrams/carga-e-inferencia-filtro-pii.drawio).
 
 ### 7.3 Diagrama del Modelo FinOps de Inferencia y Costos en Cosecha
-Muestra la correlación entre la cadencia matemática de vuelos de drones en las 200 fincas (620 imágenes semestrales), el desglose de tarifas por cada 1.000 invocaciones ($2.11 USD) y la comparativa de ahorro de más del 99.8% frente a infraestructura fija.
+Muestra la correlación entre la cadencia matemática de vuelos de drones en las 200 fincas (620 imágenes semestrales), el desglose de tarifas por cada 1.000 invocaciones ($3,11 USD conservador / $1,75 USD nominal) y la comparativa de ahorro de más del 99.7% frente a infraestructura fija.
 
 ![Modelo FinOps de Inferencia y Costos en Cosecha](diagrams/carga-e-inferencia-finops-costos.svg)
 
@@ -317,8 +372,8 @@ Para garantizar un gobierno estricto de los recursos en Terraform y en la consol
 
 ## 9. Sincronización de Gobernanza y Registro de Supuestos
 
-Las decisiones de ingeniería y cumplimiento legal adoptadas en este documento se sincronizan en la bitácora central [`assumptions-log.md`](../cross-cutting/assumptions-log.md) bajo las siguientes nuevas entradas de gobierno:
-- **Supuesto 008**: Adopción de Amazon Rekognition en `us-east-1` como servicio de visión administrada serverless bajo contrato DPA y autorización de transferencia internacional (Ley 1581 de 2012).
-- **Supuesto 009**: Exclusión absoluta y bloqueo preventivo de inferencia agronómica ante presencia humana en imágenes, con retención inmutable WORM de 5 años en bóveda S3 de seguridad.
-- **Supuesto 010**: Modelo de costos serverless por petición ($2.11 USD / 1.000 fotos), garantizando $0 en reposo y un gasto de inferencia inferior a $1.50 USD para todo el semestre de cosecha.
+Las decisiones de ingeniería y cumplimiento legal adoptadas en este documento se sincronizan en la bitácora central [`assumptions-log.md`](../cross-cutting/assumptions-log.md) bajo las siguientes entradas de gobierno:
+- **Supuesto 008**: Adopción de arquitectura dual serverless en `us-east-1` (Amazon Rekognition para filtro perimetral anti-PII y Amazon Bedrock Multimodal Vision para diagnóstico fitosanitario) bajo contrato DPA y autorización de transferencia internacional (Ley 1581 de 2012).
+- **Supuesto 009**: Exclusión absoluta y bloqueo preventivo de inferencia agronómica ante presencia humana en imágenes, con retención inmutable WORM de 5 años bajo S3 Object Lock Compliance en la cuenta Security.
+- **Supuesto 010**: Modelo de costos serverless Pay-per-Call ($3,11 USD conservador / $1,75 USD nominal por 1.000 fotos completas), garantizando $0,00 USD en reposo y un gasto de inferencia inferior a $2,00 USD para todo el semestre de cosecha.
 
