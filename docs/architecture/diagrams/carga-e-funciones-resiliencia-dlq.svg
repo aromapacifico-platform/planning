@@ -60,7 +60,7 @@
   <rect x="65" y="305" width="410" height="145" rx="6" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" filter="url(#box-shadow)" />
   <text x="80" y="330" class="card-header">Intento 1: Ejecución Nominal de la Función</text>
   <text x="80" y="352" class="card-body">• Procesamiento de imagen o decodificación CBOR</text>
-  <text x="80" y="372" class="card-body">• Llamada al servicio de inferencia (Rekognition)</text>
+  <text x="80" y="372" class="card-body">• Llamada al servicio de inferencia (Bedrock / Rekognition)</text>
   <text x="80" y="394" class="card-body">• SI OCURRE UN ERROR (Timeout, Throttling, 5xx):</text>
   <text x="95" y="414" class="card-body">- Se aborta la transacción antes de tocar DynamoDB</text>
   <text x="95" y="434" class="card-sub" fill="#D93F0B">- El objeto en S3 permanece 100% inalterado</text>
@@ -112,8 +112,8 @@
   <text x="650" y="446" class="code-body">"object": { "key": "raw-images/focos/FINCA-CAUCA-012/foto_9412.jpg" } } } ]</text>
   <text x="590" y="464" class="code-body">    },</text>
   <text x="590" y="482" class="code-body">    "responsePayload": {</text>
-  <text x="600" y="500" class="code-body">      "errorMessage": "ServiceUnavailable: Rekognition rate exceeded",</text>
-  <text x="600" y="518" class="code-body">      "errorType": "ProvisionedThroughputExceededException"</text>
+  <text x="600" y="500" class="code-body">      "errorMessage": "ThrottlingException: Bedrock rate limit exceeded",</text>
+  <text x="600" y="518" class="code-body">      "errorType": "ThrottlingException"</text>
   <text x="590" y="536" class="code-body">    }</text>
   <text x="580" y="554" class="code-body">  }</text>
 

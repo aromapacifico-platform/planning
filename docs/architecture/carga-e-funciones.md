@@ -37,7 +37,7 @@ Ilustra la topología integral de las cuatro funciones serverless en AWS Lambda,
 
 ### 2.2 Diagrama 2: Patrón Arquitectónico de la Función de Confirmación del Foco (Épica 6)
 
-Detalla el flujo paso a paso de la función a codificar en Terraform: lectura en streaming, filtro ético anti-PII (Ley 1581 de 2012), diagnóstico fitosanitario con Amazon Rekognition Custom Labels, evaluación de umbral de confianza, escritura atómica condicional en DynamoDB y derivación segura a DLQ:
+Detalla el flujo paso a paso de la función a codificar en Terraform: lectura en streaming, filtro ético anti-PII con Amazon Rekognition (Ley 1581 de 2012), diagnóstico fitosanitario multimodal administrado con Amazon Bedrock (sin entrenamiento y sin cómputo en espera), evaluación de umbral de confianza, escritura atómica condicional en DynamoDB y derivación segura a DLQ:
 
 ![Patrón Arquitectónico de Confirmación del Foco](diagrams/carga-e-funciones-foco-patron.svg)
 
@@ -57,16 +57,16 @@ Modela la máquina de estados de ejecución, la política de reintentos exponenc
 
 | ID | Nombre de Función | Disparador Principal | Servicio de Inferencia | Expediente Destino |
 |---|---|---|---|---|
-| **FN-01** | `FN-CONF-FOCO` | S3 Event (`raw-images/focos/`) | Rekognition Custom Labels + PII | `ExpedienteFitosanitario` |
-| **FN-02** | `FN-VERIF-POST` | S3 Event (`raw-images/verificaciones/`) | Rekognition Custom Labels | `ExpedienteFitosanitario` |
-| **FN-03** | `FN-ESTIM-COSECHA` | S3 Event (`raw-images/estimaciones/`) | Rekognition Labels + Biomasa | `ExpedienteCosecha` |
-| **FN-04** | `FN-TELEMETRIA-BATCH` | IoT Topic Rule / SQS Batch | Motor de Reglas FNC (Umbrales) | `ExpedienteCultivoSecado` |
+| **FN-01** | `FN-CONF-FOCO` | S3 Event (`raw-images/focos/`) | Rekognition (PII) + Bedrock Multimodal (Diagnóstico) | `ExpedienteFitosanitario` |
+| **FN-02** | `FN-VERIF-POST` | S3 Event (`raw-images/verificaciones/`) | Bedrock Multimodal (Eficacia y Remisión) | `ExpedienteFitosanitario` |
+| **FN-03** | `FN-ESTIM-COSECHA` | S3 Event (`raw-images/estimaciones/`) | Bedrock Multimodal (Fenología y Maduración) | `ExpedienteCosecha` |
+| **FN-04** | `FN-TELEMETRIA-BATCH` | SQS Batch (`telemetry-live`, HU #12) | Motor de Reglas FNC (Umbrales Dinámicos) | `telemetry` (DynamoDB) |
 
 ### 3.1 Función 1 (Patrón Épica 6): Confirmación del Foco (`FN-CONF-FOCO`)
 
 - **Identificador Lógico:** `FN-CONF-FOCO`
 - **Nombre Físico en AWS:** `aromapacifico-prod-focus-confirmation-fn`
-- **Propósito:** Procesar la evidencia fotográfica recolectada por el dron agrícola durante el Servicio 2 (confirmación de alerta de plaga en lote), verificar que no exponga datos personales identificables, diagnosticar la patología foliar presente (roya o broca) y registrar el resultado en el expediente fitosanitario.
+- **Propósito:** Procesar la evidencia fotográfica recolectada por el dron agrícola durante el Servicio 2 (confirmación de alerta de plaga en lote), verificar perimetralmente que no exponga datos personales identificables (Ley 1581 de 2012), diagnosticar la patología foliar presente (roya o broca) mediante visión multimodal administrada sin entrenamiento y registrar el resultado en el expediente fitosanitario.
 - **Disparador:** Notificación de eventos de Amazon S3 (`s3:ObjectCreated:Put`) sobre el prefijo `raw-images/focos/{FincaID}/{LoteID}/` en el bucket de producción `aromapacifico-objetos-prod`.
 - **Entrada y Formato de Carga Útil:** Evento estándar S3 Event Notification en JSON:
   ```json
@@ -93,10 +93,28 @@ Modela la máquina de estados de ejecución, la política de reintentos exponenc
     ]
   }
   ```
-- **Inferencia Invocada:**
-  1. *Filtro de Privacidad:* `rekognition:DetectFaces` para determinar presencia de rostros humanos. Si se detecta un rostro con confianza > 70%, se deriva la imagen al bucket `aromapacifico-quarantine-pii` y se suspende la inferencia fitosanitaria (cumplimiento Ley 1581 de 2012).
-  2. *Diagnóstico Agrícola:* `rekognition:DetectCustomLabels` contra el proyecto entrenado `fnc-coffee-pathology-v2`. Devuelve la patología identificada, caja delimitadora y vector de confianza $C \in [0, 100\%]$.
-- **Salida Escrita en el Expediente:** Actualización atómica en la tabla DynamoDB `ExpedienteFitosanitario`:
+- **Inferencia Invocada (Dos Etapas Serverless Desacopladas):**
+  1. *Filtro Perimetral de Privacidad Anti-PII (Amazon Rekognition):*
+     - Invoca `rekognition:DetectFaces` y `rekognition:DetectLabels` (evaluando categorías humanas: `Person`, `Human`, `Worker` con umbral de confianza > 50%).
+     - Si se detecta un rostro o persona identificable, la función copia la imagen al bucket de cuarentena `s3://aromapacifico-quarantine-pii/` en la cuenta de Seguridad (`AromaPacifico-Security`), elimina el objeto del bucket de producción y suspende de inmediato la inferencia fitosanitaria ($0 invertido en modelos de plagas, protegiendo los derechos fundamentales del titular bajo la Ley 1581 de 2012).
+     - El expediente registra el estado `PII_DETECTED_BLOQUEADO` y no se emite ninguna orden fitosanitaria.
+  2. *Diagnóstico Agronómico Multimodal Administrado (Amazon Bedrock):*
+     - En cumplimiento de las dos reglas categóricas del enunciado:
+       - *"No se entrena un modelo. Se usa inferencia administrada."* (Se erradica Rekognition Custom Labels que exigía etiquetar y entrenar un modelo).
+       - *"No hay cómputo persistente en espera de objetos."* (Se erradica Custom Labels que cobraba ~$4.00 USD por hora de unidad de inferencia activa, pasando a un modelo Pay-per-Call de $0.00 USD en reposo).
+     - Se invoca la API administrada `bedrock-runtime:InvokeModel` en `us-east-1` utilizando un Modelo Fundacional Multimodal de Visión pre-entrenado (ej. `anthropic.claude-3-haiku-20240307-v1:0` o `amazon.nova-lite-v1:0`).
+     - Se envía la imagen codificada en base64 junto con un prompt de sistema agronómico estructurado que instruye al modelo a evaluar signos de *Hemileia vastatrix* (roya: pústulas amarillas/anaranjadas en el envés, clorosis) o *Hypothenemus hampei* (broca: perforaciones en el ápice de la cereza) y retornar un esquema JSON determinista:
+       ```json
+       {
+         "diagnostic_label": "ROYA_NIVEL_3",
+         "confidence_score": 92.4,
+         "affected_area_pct": 28.5,
+         "severity": "ALTA",
+         "reasoning": "Presencia densa de pústulas esporulantes anaranjadas en el envés foliar con necrosis foliar incipiente en rama terciaria."
+       }
+       ```
+     - Costo por llamada: ~$0.0016 - $0.0025 USD por imagen (facturación por tokens de entrada/salida).
+- **Salida Escrita en el Expediente:** Actualización atómica condicional en la tabla DynamoDB `ExpedienteFitosanitario`:
   ```json
   {
     "FincaID": "FINCA-CAUCA-012",
@@ -107,15 +125,16 @@ Modela la máquina de estados de ejecución, la política de reintentos exponenc
     "SourceSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "ConfidenceScore": 92.4,
     "DiagnosticLabel": "ROYA_NIVEL_3",
-    "EvaluatorID": "arn:aws:rekognition:us-east-1:123456789012:project/fnc-coffee-pathology-v2",
+    "EvaluatorID": "arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-3-haiku-20240307-v1:0",
     "EstadoFoco": "CONFIRMADO",
     "RequiereAtencionHumana": true,
     "OrdenFumigacionID": null
   }
   ```
-- **Permisos IAM Mínimos:**
+- **Permisos IAM Mínimos (Zero Trust):**
   - `s3:GetObject` y `kms:Decrypt` sobre `arn:aws:s3:::aromapacifico-objetos-prod/raw-images/focos/*`.
-  - `rekognition:DetectFaces` y `rekognition:DetectCustomLabels` sobre el modelo de proyecto fitosanitario.
+  - `rekognition:DetectFaces` y `rekognition:DetectLabels` sobre `*` (para filtro PII perimetral).
+  - `bedrock:InvokeModel` sobre `arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-3-haiku-20240307-v1:0`.
   - `dynamodb:UpdateItem` y `dynamodb:PutItem` sobre `arn:aws:dynamodb:us-east-1:*:table/ExpedienteFitosanitario`.
   - `sqs:SendMessage` sobre `arn:aws:sqs:us-east-1:*:dlq-confirmacion-foco`.
 
@@ -125,19 +144,23 @@ Modela la máquina de estados de ejecución, la política de reintentos exponenc
 
 - **Identificador Lógico:** `FN-VERIF-POST`
 - **Nombre Físico en AWS:** `aromapacifico-prod-fumigation-verification-fn`
-- **Propósito:** Evaluar la evidencia fotográfica de verificación capturada por el dron durante el Servicio 4 posterior a una aspersión autorizada. Determina si el foco de plaga fue efectivamente controlado o si persiste actividad biológica.
-- **Disparador:** Notificación de eventos de Amazon S3 (`s3:ObjectCreated:Put`) sobre el prefijo `raw-images/verificaciones/{FincaID}/{OrdenFumigacionID}/`.
+- **Propósito:** Evaluar la evidencia fotográfica de verificación capturada por el dron durante el Servicio 4 posterior a una aspersión autorizada. Determina si el foco de plaga fue efectivamente controlado (remisión foliar, estabilización necrótica de pústulas) o si persiste actividad biológica patógena.
+- **Disparador:** Notificación de eventos de Amazon S3 (`s3:ObjectCreated:Put`) sobre el prefijo `raw-images/verificaciones/{FincaID}/{OrdenFumigacionID}/` en el bucket de producción `aromapacifico-objetos-prod`.
 - **Entrada y Formato:** Evento JSON S3 con puntero al objeto fotográfico y metadatos del vuelo post-aplicación (tiempo transcurrido, cuadrilla UAS, identificador de orden).
-- **Inferencia Invocada:** `rekognition:DetectCustomLabels` para cuantificar la reducción de pústulas de roya o galerías de broca respecto a la imagen de confirmación previa del foco.
+- **Inferencia Invocada (Amazon Bedrock Multimodal):**
+  - Invoca la API administrada `bedrock-runtime:InvokeModel` en `us-east-1` (sin entrenamiento previo ni servidores en espera).
+  - Compara la evidencia fotográfica actual contra el diagnóstico inicial del foco (`DiagnosticLabel` previo), evaluando el porcentaje de tejido foliar recuperado y el cese de esporulación activa de roya o broca.
+  - Retorna un dictamen cuantitativo en JSON con `remision_pct`, `remanencia_activa_pct` y `confidence_score`.
 - **Salida Escrita en el Expediente:** Modificación del expediente de la orden en `ExpedienteFitosanitario`:
   - `EficaciaAspersion`: Porcentaje de remisión foliar.
   - `TimestampVerificacionUTC`: Fecha y hora del análisis.
   - `SourceVerificacionID`: Clave del archivo S3 evaluado.
+  - `EvaluatorID`: `arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-3-haiku-20240307-v1:0`.
   - `HabilitadoParaCierre`: Booleano en `true` si la eficacia supera el umbral agronómico (> 85%).
-  - **Invariante crítica:** Si la imagen no llega, la invocación falla o la eficacia es insuficiente, **el estado de la fumigación sigue ABIERTA**. Bajo ninguna circunstancia esta función cierra la orden de forma ficticia.
+  - **Invariante crítica de negocio:** Si la imagen no llega, la invocación a Bedrock falla o la eficacia es insuficiente, **el estado de la fumigación sigue ABIERTA**. Bajo ninguna circunstancia esta función muta la orden a cerrada ni emite un cierre ficticio.
 - **Permisos IAM Mínimos:**
-  - `s3:GetObject` en `raw-images/verificaciones/*`.
-  - `rekognition:DetectCustomLabels` sobre modelos fitosanitarios.
+  - `s3:GetObject` y `kms:Decrypt` sobre `raw-images/verificaciones/*`.
+  - `bedrock:InvokeModel` sobre el modelo fundacional multimodal de visión.
   - `dynamodb:UpdateItem` en `ExpedienteFitosanitario` condicionado a `attribute_exists(OrdenID)`.
   - `sqs:SendMessage` en `dlq-verificacion-fumigacion`.
 
@@ -147,19 +170,23 @@ Modela la máquina de estados de ejecución, la política de reintentos exponenc
 
 - **Identificador Lógico:** `FN-ESTIM-COSECHA`
 - **Nombre Físico en AWS:** `aromapacifico-prod-harvest-estimation-fn`
-- **Propósito:** Procesar ortofotos multiespectrales obtenidas en el Servicio 5 (vuelo de área previo a cosecha) para proyectar el volumen de café cereza y la cantidad estimada de sacos de 60 kg que ingresarán a cada centro de acopio departamental.
+- **Propósito:** Procesar ortofotos multiespectrales o de alta resolución obtenidas en el Servicio 5 (vuelo de área previo a cosecha) para proyectar el volumen de café cereza maduro y la cantidad estimada de sacos estándar de 60 kg que ingresarán a cada centro de acopio departamental.
 - **Disparador:** Notificación de eventos de Amazon S3 (`s3:ObjectCreated:Put`) sobre el prefijo `raw-images/estimaciones/{DepartamentoID}/{FincaID}/`.
-- **Entrada y Formato:** Puntero a imagen de alta resolución o composición de teselas ortomosaicas acompañada de polígono GeoJSON delimitador.
-- **Inferencia Invocada:** `rekognition:DetectLabels` combinado con un algoritmo algorítmico de densidad espectral (NDVI) y conteo de copa vegetativa para calcular biomasa productiva estimada.
+- **Entrada y Formato:** Puntero a imagen de alta resolución o composición ortomosaica acompañada del polígono GeoJSON delimitador del lote.
+- **Inferencia Invocada (Amazon Bedrock Multimodal):**
+  - Invoca `bedrock-runtime:InvokeModel` en `us-east-1` (modelo multimodal administrado sin entrenamiento).
+  - Evalúa la distribución cromática y fenológica del fruto (conteo y proporción relativa de frutos maduros rojo cereza vs. verdes) y la densidad de carga de copa vegetativa.
+  - Aplica la fórmula agronómica calibrada por Cenicafé para proyectar la biomasa cosechable en sacos de 60 kg.
 - **Salida Escrita en el Expediente:** Registro en la tabla DynamoDB `ExpedienteCosecha`:
-  - `SacosEstimados60kg`: Proyección matemática entera para la finca.
+  - `SacosEstimados60kg`: Proyección matemática entera para la finca y lote.
   - `MargenIncertidumbrePct`: Intervalo de confianza de la estimación (+/- 12%).
-  - `FechaProyeccionUTC`: Marca temporal.
+  - `FechaProyeccionUTC`: Marca temporal UTC.
   - `AcopioDestinoID`: Acopio receptor programado (`ACOPIO-CAUCA`, `ACOPIO-HUILA` o `ACOPIO-TOLIMA`).
-  - **Restricción de Negocio:** Este resultado es un pronóstico para balance logístico de bodegas. **NUNCA genera automáticamente órdenes de empaque de sacos ni altas en la tabla de sacos**.
+  - `EvaluatorID`: `arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-3-haiku-20240307-v1:0`.
+  - **Restricción Categórica de Negocio:** Este resultado es un pronóstico volumétrico para balance logístico de acopios y bodegas. **NUNCA genera automáticamente órdenes de empaque de sacos ni altas en la tabla de sacos de 60 kg**.
 - **Permisos IAM Mínimos:**
-  - `s3:GetObject` en `raw-images/estimaciones/*`.
-  - `rekognition:DetectLabels` sobre la infraestructura administrada.
+  - `s3:GetObject` y `kms:Decrypt` sobre `raw-images/estimaciones/*`.
+  - `bedrock:InvokeModel` sobre el modelo fundacional multimodal de visión.
   - `dynamodb:PutItem` en `ExpedienteCosecha`.
   - `sqs:SendMessage` en `dlq-estimacion-cosecha`.
 
@@ -169,44 +196,44 @@ Modela la máquina de estados de ejecución, la política de reintentos exponenc
 
 - **Identificador Lógico:** `FN-TELEMETRIA-BATCH`
 - **Nombre Físico en AWS:** `aromapacifico-prod-telemetry-batch-fn`
-- **Propósito:** Ingerir paquetes de telemetría de cultivo y secadero transmitidos por nodos de finca (vía celular MQTT o adaptador satelital RockBLOCK SBD), decodificar estructuras compactadas CBOR/JSON, persistir series temporales e identificar lecturas anómalas fuera de umbral.
-- **Disparador:** Cola Amazon SQS amortiguadora alimentada por la regla de AWS IoT Core (`SELECT * FROM 'fincas/+/telemetria'`) o directamente el evento por lotes de DynamoDB Streams.
-- **Entrada y Formato:** Lote de hasta 50 mensajes con lecturas de suelo y grano:
+- **Propósito:** Ingerir lotes de lecturas normalizadas de cultivo y secadero, evaluar las variables contra la versión activa de umbrales agronómicos de la Federación, persistir la serie temporal de forma idempotente en DynamoDB y despachar alertas al teléfono del caficultor en menos de 5 minutos ante desviaciones críticas.
+- **Disparador Oficial (Alineación con HU #12):**
+  - **Cola Amazon SQS `telemetry-live`** (y `telemetry-replay` para lecturas recuperadas tras cortes celulares de hasta 24 horas), definida formalmente en [`carga-a-ingesta-telemetria.md`](carga-a-ingesta-telemetria.md).
+  - Se erradica por completo la propuesta de una regla MQTT aislada (`SELECT * FROM 'fincas/+/telemetria'`), integrándose plenamente con el flujo institucional:
+    $$\text{Nodo IoT} \xrightarrow{\text{MQTT / SBD}} \text{AWS IoT Core Basic Ingest} \xrightarrow{\text{Regla SQL}} \text{Lambda Normalizador} \xrightarrow{\text{SQS}} \textbf{FN-04}$$
+  - Configuración del Event Source Mapping de Lambda:
+    - `BatchSize`: 10 mensajes por invocación.
+    - `MaximumBatchingWindowInSeconds`: 0 segundos (procesamiento reactivo inmediato para preservar el presupuesto de latencia < 5 minutos).
+    - `FunctionResponseTypes`: `["ReportBatchItemFailures"]` (manejo granular de fallos por mensaje individual).
+- **Entrada y Formato de Carga Útil (Sobre Normalizado de HU #12):**
   ```json
   {
-    "FincaID": "FINCA-HUILA-045",
-    "DispositivoID": "NODE-ESP32-H045",
-    "BatchTimestampUTC": "2026-11-08T14:00:00Z",
-    "BufferDrained": true,
-    "Lecturas": [
+    "Records": [
       {
-        "Tipo": "CULTIVO",
-        "TimestampUTC": "2026-11-08T10:00:00Z",
-        "pH": 5.2,
-        "HumedadSueloPct": 65.4,
-        "TemperaturaSueloC": 21.3,
-        "NPK_mg_kg": [120, 35, 180]
-      },
-      {
-        "Tipo": "SECADO",
-        "TimestampUTC": "2026-11-08T13:00:00Z",
-        "LoteSecadoID": "LOTE-SEC-01",
-        "TemperaturaGranoC": 42.5,
-        "HumedadGranoBaseHumedaPct": 13.8
+        "messageId": "sqs-msg-45812903",
+        "receiptHandle": "AQEBwJn...",
+        "body": "{\"schema_version\":1,\"event_id\":\"cultivo-000151\",\"sequence\":151,\"occurred_at\":\"2026-11-08T14:00:00Z\",\"device_id\":\"FINCA-HUILA-045-NODE-01\",\"farm_id\":\"FINCA-HUILA-045\",\"kind\":\"cultivo\",\"calibration_version\":\"cultivo-v1\",\"measurements\":{\"soil_n_mg_kg\":50,\"soil_p_mg_kg\":20,\"soil_k_mg_kg\":80,\"soil_moisture_pct\":55.0,\"soil_temperature_c\":21.5,\"soil_ph\":5.2,\"air_rh_pct\":65.0,\"air_temperature_c\":31.2},\"quality\":{\"status\":\"valid\",\"clock\":\"trusted\"},\"transport\":\"cellular\",\"payload_hash\":\"a4f89b6c43...\"}"
       }
     ]
   }
   ```
-- **Inferencia / Evaluación de Reglas:** No utiliza visión por computador. Ejecuta el **Motor de Reglas Agronómicas Configurables de la Federación**:
-  - Evaluación contra matriz de umbrales: pH fuera de [4,5, 6,0], temperatura de grano en secadero superior a 40 C, humedad de grano menor al 12% (cierre de lote).
-- **Salida Escrita en el Expediente:**
-  - Persistencia idempotente de las lecturas en la tabla de series temporales `ExpedienteCultivoSecado` en DynamoDB.
-  - Si una lectura excede los umbrales críticos, emite evento hacia Amazon SNS para alertar al caficultor en su teléfono móvil en **menos de 5 minutos** (cumpliendo el SLA estricto del pliego).
+- **Evaluación de Reglas y Umbrales Agronómicos:**
+  - No consume visión por computador. Lee con consistencia fuerte (`ConsistentRead = true`) el puntero activo de la tabla `thresholds` en DynamoDB.
+  - Evalúa cada medición contra los límites oficiales configurables:
+    - pH fuera de 4,5 a 6,0 (recomendado entre 4,9 y 5,6).
+    - Temperatura del aire fuera de 14 °C a 30 °C (recomendado entre 17 °C y 23 °C).
+    - Humedad relativa del aire fuera de 40% a 80%.
+    - Temperatura de secadero superior a 40 °C (riesgo de daño térmico al embrión del grano).
+    - Humedad de secadero cercana al 12% (indicador de cierre de lote).
+- **Salida Escrita en el Expediente y Notificación:**
+  1. *Persistencia Idempotente:* Escritura transaccional en la tabla `telemetry` de DynamoDB con clave primaria `PK: DEVICE#{device_id}`, `SK: EVENT#{event_id}`, y registro de control en `ingest_control` para deduplicación estricta ante drenado de buffers de 24 horas.
+  2. *Despacho de Alerta Inmediata:* Si alguna variable excede el umbral, publica un mensaje estructurado en Amazon SNS (`arn:aws:sns:us-east-1:*:alertas-cultivo-caficultores`), entregando la notificación push/SMS al teléfono móvil del productor en **menos de 5 minutos (presupuesto medido: 245 segundos)**.
 - **Permisos IAM Mínimos:**
-  - `sqs:ReceiveMessage`, `sqs:DeleteMessage` y `sqs:GetQueueAttributes` sobre la cola de ingesta.
-  - `dynamodb:BatchWriteItem` y `dynamodb:PutItem` sobre `ExpedienteCultivoSecado`.
-  - `sns:Publish` sobre el tópico de alertas críticas fitosanitarias.
-  - `sqs:SendMessage` sobre `dlq-telemetria-batch`.
+  - `sqs:ReceiveMessage`, `sqs:DeleteMessage` y `sqs:GetQueueAttributes` sobre `telemetry-live` y `telemetry-replay`.
+  - `dynamodb:GetItem` sobre `arn:aws:dynamodb:us-east-1:*:table/thresholds`.
+  - `dynamodb:PutItem`, `dynamodb:UpdateItem` y `dynamodb:TransactWriteItems` sobre `telemetry` e `ingest_control`.
+  - `sns:Publish` sobre `arn:aws:sns:us-east-1:*:alertas-cultivo-caficultores`.
+  - `sqs:SendMessage` sobre `arn:aws:sqs:us-east-1:*:telemetry-dlq`.
 
 ---
 
@@ -321,11 +348,11 @@ resource "aws_lambda_function" "focus_confirmation" {
 
   environment {
     variables = {
-      ENVIRONMENT           = var.environment
-      DYNAMODB_TABLE_NAME   = var.dynamodb_expediente_table_name
-      QUARANTINE_BUCKET     = var.quarantine_s3_bucket_name
-      REKOGNITION_MODEL_ARN = var.rekognition_model_arn
-      CONFIDENCE_THRESHOLD  = "80.0"
+      ENVIRONMENT          = var.environment
+      DYNAMODB_TABLE_NAME  = var.dynamodb_expediente_table_name
+      QUARANTINE_BUCKET    = var.quarantine_s3_bucket_name
+      BEDROCK_MODEL_ID     = "anthropic.claude-3-haiku-20240307-v1:0"
+      CONFIDENCE_THRESHOLD = "80.0"
     }
   }
 
@@ -383,13 +410,21 @@ resource "aws_lambda_permission" "allow_s3_invocation" {
       "Resource": "arn:aws:kms:us-east-1:123456789012:key/cmk-data-objects-prod"
     },
     {
-      "Sid": "AllowRekognitionInference",
+      "Sid": "AllowRekognitionPIIFilter",
       "Effect": "Allow",
       "Action": [
         "rekognition:DetectFaces",
-        "rekognition:DetectCustomLabels"
+        "rekognition:DetectLabels"
       ],
       "Resource": "*"
+    },
+    {
+      "Sid": "AllowBedrockMultimodalInference",
+      "Effect": "Allow",
+      "Action": [
+        "bedrock:InvokeModel"
+      ],
+      "Resource": "arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-3-haiku-20240307-v1:0"
     },
     {
       "Sid": "AllowDynamoDBUpdateExpediente",
@@ -423,6 +458,17 @@ resource "aws_lambda_permission" "allow_s3_invocation" {
 }
 ```
 
+### 5.4 Impacto del Rediseño Serverless en el Patrón de la Épica 6 (Issue #25 y Tarea T6)
+
+El reemplazo de Rekognition Custom Labels por **Amazon Bedrock (Multimodal Vision API)** y la alineación de la ingesta con la cola SQS de la HU #12 transforman positivamente la implementación de la Épica 6:
+
+1. **Eliminación Total de Cómputo Ocioso y Complejidad MLOps:**
+   Rekognition Custom Labels exigía aprovisionar recursos `aws_rekognition_project`, cargar y etiquetar imágenes de entrenamiento, y orquestar llamadas `StartProjectVersion` / `StopProjectVersion` para encender Unidades de Inferencia (Inference Units). Dichas unidades conllevaban un costo fijo obligatorio de **~$4,00 USD por hora** ($96 USD diarios o $2.880 USD mensuales si quedaba encendido 24/7), violando la regla de "cero cómputo en espera". Con Bedrock, la invocación es puramente Pay-per-Call vía SDK (`boto3.client('bedrock-runtime').invoke_model()`), con costo **estrictamente de $0,00 USD en reposo**.
+2. **Cero Entrenamiento Requerido:**
+   Se cumple al 100% la restricción del enunciado: *"No se entrena un modelo. Se usa inferencia administrada"*. Bedrock opera mediante modelos fundacionales pre-entrenados con capacidades multimodales avanzadas, guiados mediante prompts agronómicos estructurados.
+3. **Viabilidad Estricta dentro del Límite de 100 Horas (Tarea T6):**
+   La tarea T6 del plan de 100 horas tenía asignadas 16 horas. Al no tener que codificar pipelines de entrenamiento, datasets de S3 ni orquestadores de encendido/apagado de Custom Labels, el módulo Terraform `serverless_function` se enfoca en recursos nativos simples y reproducibles (bucket S3, Lambda arm64, rol IAM, SQS DLQ y mapeo de eventos), garantizando que `terraform plan` corra limpiamente y sin dependencias bloqueantes de infraestructura.
+
 ---
 
 ## 6. Cuadro Integral de Parámetros, Tags, IDs y Nueva Nomenclatura de Verificaciones
@@ -446,9 +492,9 @@ Para asegurar la coherencia arquitectónica entre las historias de usuario de go
 Se define un esquema de códigos estandarizados para gobernar las verificaciones que ejecutan las funciones serverless de extremo a extremo:
 
 - **`CHK-INT-01` (Integridad y Origen del Objeto):** Valida que el archivo en S3 o el paquete IoT no esté truncado, contenga un hash SHA-256 válido y provenga de un dispositivo autenticado (mTLS o URL prefirmada).
-- **`CHK-ETH-02` (Filtro Ético de Privacidad Anti-PII):** Evaluación de presencia de personas y rostros mediante visión administrada. Exclusión inmediata de imágenes a cuarentena bajo Ley 1581 de 2012.
-- **`CHK-AGR-03` (Diagnóstico Agronómico y Umbrales):** Ejecución de inferencia de patología o reglas de variables de suelo/secado. Asignación del vector de confianza $C \in [0, 100\%]$.
-- **`CHK-EXP-04` (Persistencia Idempotente en Expediente):** Escritura atómica condicional con tupla `{TimestampUTC, ConfidenceScore, SourceObjectID, EvaluatorID}` impidiendo duplicidades por reintentos.
+- **`CHK-ETH-02` (Filtro Ético de Privacidad Anti-PII):** Evaluación perimetral de presencia de personas y rostros mediante Amazon Rekognition (`DetectFaces` y `DetectLabels`). Exclusión inmediata de imágenes a cuarentena bajo Ley 1581 de 2012.
+- **`CHK-AGR-03` (Diagnóstico Agronómico Multimodal y Umbrales):** Ejecución de inferencia de patología mediante Amazon Bedrock o evaluación de reglas de variables de suelo/secado sobre la tabla `thresholds`. Asignación del vector de confianza $C \in [0, 100\%]$.
+- **`CHK-EXP-04` (Persistencia Idempotente en Expediente):** Escritura atómica condicional con tupla `{TimestampUTC, ConfidenceScore, SourceObjectID, EvaluatorID}` impidiendo duplicidades por reintentos o drenado de buffer.
 - **`CHK-ST-05` (Invarianza de Estados y Protección Humana):** Garantiza que si la confianza es baja o la función falla, el estado nominal del caso no muta; bloquea cualquier emisión de orden sin firma humana MFA.
 - **`CHK-DLQ-06` (Aislamiento en Cola de Fallos y Telemetría SRE):** Enrutamiento del mensaje fallido a SQS DLQ tras agotar reintentos, preservando el archivo original intacto y emitiendo alarma CloudWatch P1.
 
@@ -456,10 +502,10 @@ Se define un esquema de códigos estandarizados para gobernar las verificaciones
 
 | Función ID | Tags Obligatorios Asignados | Entrada y Origen | Inferencia / Servicio | Expediente y Salida | Cadena de Verificación Complementaria (CHK) |
 |---|---|---|---|---|---|
-| **FN-CONF-FOCO** | `FincaID`, `DronID`, `Ambiente`, `Propietario`, `Proyecto` | S3 PutObject `raw-images/focos/` (SSE-KMS) | Rekognition DetectFaces + Custom Labels | `ExpedienteFitosanitario`: TimestampUTC, Confianza%, SourceID, EstadoFoco | `CHK-INT-01` -> `CHK-ETH-02` -> `CHK-AGR-03` -> `CHK-EXP-04` -> `CHK-ST-05` |
-| **FN-VERIF-POST** | `FincaID`, `DronID`, `OrdenID`, `Propietario`, `Proyecto` | S3 PutObject `raw-images/verificaciones/` (Token misión) | Rekognition Custom Labels (Severidad plaga) | `ExpedienteFitosanitario`: EficaciaAspersion, HabilitaCierre: true | `CHK-INT-01` -> `CHK-AGR-03` -> `CHK-EXP-04` -> `CHK-ST-05` (Orden sigue abierta si falla) |
-| **FN-ESTIM-COSECHA** | `DronID`, `AcopioID`, `Ambiente`, `Propietario`, `Proyecto` | S3 PutObject `raw-images/estimaciones/` (GeoJSON Lote) | Rekognition DetectLabels + Índice NDVI | `ExpedienteCosecha`: SacosEstimados60kg, MargenIncertidumbre | `CHK-INT-01` -> `CHK-AGR-03` -> `CHK-EXP-04` -> `CHK-ST-05` (Cero órdenes de empaque) |
-| **FN-TELEMETRIA-BATCH** | `FincaID`, `DispositivoID`, `Ambiente`, `Propietario`, `Proyecto` | IoT Core / SQS MQTT / RockBLOCK (CBOR / Deltas) | Motor de Reglas Umbrales FNC (pH, Hum, Temp) | `ExpedienteCultivoSecado`: Serie temporal NPK, Despacho Alerta SNS | `CHK-INT-01` -> `CHK-AGR-03` -> `CHK-EXP-04` -> `CHK-DLQ-06` (Reintento automático) |
+| **FN-CONF-FOCO** | `FincaID`, `DronID`, `Ambiente`, `Propietario`, `Proyecto` | S3 PutObject `raw-images/focos/` (SSE-KMS) | Rekognition (PII) + Bedrock (Multimodal) | `ExpedienteFitosanitario`: TimestampUTC, Confianza%, SourceID, EstadoFoco | `CHK-INT-01` -> `CHK-ETH-02` -> `CHK-AGR-03` -> `CHK-EXP-04` -> `CHK-ST-05` |
+| **FN-VERIF-POST** | `FincaID`, `DronID`, `OrdenID`, `Propietario`, `Proyecto` | S3 PutObject `raw-images/verificaciones/` (Token misión) | Amazon Bedrock Multimodal (Remisión foliar) | `ExpedienteFitosanitario`: EficaciaAspersion, HabilitaCierre: true | `CHK-INT-01` -> `CHK-AGR-03` -> `CHK-EXP-04` -> `CHK-ST-05` (Orden sigue abierta si falla) |
+| **FN-ESTIM-COSECHA** | `DronID`, `AcopioID`, `Ambiente`, `Propietario`, `Proyecto` | S3 PutObject `raw-images/estimaciones/` (GeoJSON Lote) | Amazon Bedrock Multimodal (Fenología/Biomasa) | `ExpedienteCosecha`: SacosEstimados60kg, MargenIncertidumbre | `CHK-INT-01` -> `CHK-AGR-03` -> `CHK-EXP-04` -> `CHK-ST-05` (Cero órdenes de empaque) |
+| **FN-TELEMETRIA-BATCH** | `FincaID`, `DispositivoID`, `Ambiente`, `Propietario`, `Proyecto` | SQS `telemetry-live` / `telemetry-replay` (HU #12) | Motor de Reglas Umbrales FNC (`thresholds`) | `telemetry` (DynamoDB): Serie temporal NPK, Alerta SNS | `CHK-INT-01` -> `CHK-AGR-03` -> `CHK-EXP-04` -> `CHK-DLQ-06` (Reintento automático) |
 
 ---
 
@@ -477,15 +523,27 @@ A continuación se presentan las matrices analíticas que sustentan las eleccion
 | **Mantenimiento Operativo** | **Cero parches de SO ni gestión de clúster** | Gestión de plantillas de tarea y redes | Parcheo mensual de Linux y vulnerabilidades |
 | **Justificación de Negocio** | El piloto procesa imágenes de drones esporádicas y lotes IoT espaciados (cada 4 horas). Pagar por servidores o tareas en espera consumiría presupuesto innecesariamente. Lambda garantiza pagar **exclusivamente por milisegundo de ejecución real**. |
 
-### 7.2 Comparativa de Visión Artificial: Rekognition Administrado vs. SageMaker Custom vs. Edge
+### 7.2 Comparativa de Visión e Inferencia Administrada: Por qué Bedrock Multimodal vs. Rekognition Custom Labels
 
-| Criterio de Selección | Opción Seleccionada: Amazon Rekognition | Alternativa 1: Modelo Propio en SageMaker | Alternativa 2: Inferencia en el Dron (Edge) |
-|---|---|---|---|
-| **Costo Fijo de Infraestructura** | **$0,00 USD fijos (Pago por llamada API)** | ~$80 - $220 USD/mes por Endpoint real-time | Sobrecosto de $600+ USD por procesador GPU |
-| **Costo por 1.000 Invocaciones** | **~$1,00 USD (DetectFaces + Custom Labels)**| ~$0,30 USD (pero con base fija alta) | $0 en nube (pero CapEx inviable en hardware) |
-| **Complejidad de Mantenimiento** | **SLA administrado por AWS (99,99%)** | Reentrenamiento, MLOps, drift de datos | Actualización de firmware riesgosa en campo |
-| **Soberanía y Filtro Ético PII** | **DetectFaces nativo antes de persistir** | Requiere programar red neuronal propia | Difícil auditar privacidad en dispositivo |
-| **Justificación de Negocio** | Con una cadencia anual de ~1.300 vuelos en el piloto, montar un clúster de SageMaker costaría más de $1.200 USD anuales en ociosidad. Rekognition resuelve todo el volumen anual de inferencias por **menos de $15 USD al año**, ofreciendo fiabilidad industrial. |
+El pliego del caso de estudio establece dos restricciones explícitas e innegociables:
+1. *"No se entrena un modelo. Se usa inferencia administrada."*
+2. *"No hay cómputo persistente en espera de objetos."*
+
+A continuación se evalúan las cuatro alternativas tecnológicas del ecosistema AWS:
+
+| Criterio de Análisis | Opción Seleccionada: Amazon Bedrock Multimodal | Alternativa 1: Rekognition Custom Labels (RECHAZADA) | Alternativa 2: Rekognition DetectLabels Estándar | Alternativa 3: Amazon SageMaker Serverless |
+|---|---|---|---|---|
+| **Entrenamiento Previo** | **CERO entrenamiento**. Modelo fundacional multimodal pre-entrenado. | **EXIGE entrenamiento** con imágenes etiquetadas del cultivo. | **Cero entrenamiento** (pero sin clases de roya ni broca). | Exige empaquetar y versionar un artefacto de modelo propio. |
+| **Costo Fijo en Reposo** | **$0,00 USD / mes** ($0 cuando no hay vuelos). | **~$4,00 USD / hora** (~$96/día o ~$2.880/mes si queda activo). | **$0,00 USD / mes** (pago por imagen pura). | **$0,00 USD / mes** (pero frío de 3-10 segundos en arranque). |
+| **Modelo de Facturación** | **Pay-per-Call por token** (~$0,0016 - $0,0025 USD / imagen). | Cobro por hora de Unidad de Inferencia activa (Inference Unit). | Pay-per-Call ($0,0010 USD / imagen analizada). | Cobro por GB-segundo de inferencia invocada. |
+| **Precisión Diagnóstica** | **Alta**: Comprende contexto foliar, envés, pústulas y severidad. | Alta (pero requiere dataset inicial de cientos de fotos). | **Insuficiente**: Detecta "planta", "hoja", pero no patologías. | Alta (si se entrena un modelo ResNet/YOLO botánico). |
+| **Filtro Anti-PII Integrado** | Se delega a Rekognition `DetectFaces`/`DetectLabels` ($0,0010). | No filtra PII de forma nativa en la misma llamada. | Excelente para detectar `Person`, `Human`, `Worker`. | Requiere pipeline dual con modelo de rostros. |
+| **Cumplimiento del Pliego** | **100% CUMPLE** ambas reglas (sin entrenamiento y sin espera). | **VIOLA AMBAS REGLAS** (exige entrenamiento y cobra en espera). | Cumple reglas pero **no diagnostica roya/broca**. | Viola la regla de inferencia administrada sin modelo. |
+
+**Conclusión y Sustentación Técnica:**
+Amazon Rekognition Custom Labels queda formalmente **rechazado** por violar la premisa de no-entrenamiento y por incurrir en cómputo esperando objetos de alto costo ($4,00 USD/hora por unidad de inferencia). La combinación arquitectónica óptima adoptada consiste en:
+- **Amazon Rekognition (`DetectFaces` + `DetectLabels`):** Utilizado exclusivamente como filtro perimetral ético y de privacidad anti-PII ($0,0010 USD por llamada).
+- **Amazon Bedrock (Modelos Multimodales):** Utilizado como motor agronómico administrado para diagnóstico foliar de roya y broca, verificación post-fumigación y estimación de cosecha volumétrica, pagando estrictamente por invocación real (~$0,002 USD por llamada) y garantizando **$0,00 USD de costo fijo**.
 
 ### 7.3 Comparativa de Resiliencia: SQS DLQ vs. Reintentos Infinitos vs. Descarte Silencioso
 
@@ -509,10 +567,14 @@ El dimensionamiento económico se fundamenta en las cifras consolidadas del plie
 | Invocaciones Lambda FN-01 (Focos) | 15 vuelos/mes: $0,001 USD | 45 vuelos/mes: $0,003 USD |
 | Invocaciones Lambda FN-02 (Verificación) | 10 vuelos/mes: $0,001 USD | 35 vuelos/mes: $0,002 USD |
 | Invocaciones Lambda FN-03 (Estimación) | 0 vuelos/mes: $0,000 USD | 65 vuelos/mes: $0,008 USD |
-| Invocaciones Lambda FN-04 (Telemetría IoT) | 36.000 msgs: $0,008 USD | 108.000 msgs: $0,022 USD |
-| Inferencia Amazon Rekognition (Llamadas) | 25 imágenes: $0,025 USD | 145 imágenes: $0,145 USD |
-| Persistencia Amazon DynamoDB (WCU/RCU) | 36.000 ops: $0,045 USD | 108.000 ops: $0,135 USD |
+| Invocaciones Lambda FN-04 (Telemetría SQS HU #12) | 36.000 msgs: $0,008 USD | 108.000 msgs: $0,022 USD |
+| Filtro PII Amazon Rekognition (Llamadas API) | 25 imágenes: $0,025 USD | 145 imágenes: $0,145 USD |
+| Inferencia Multimodal Amazon Bedrock (Tokens) | 25 imágenes: $0,050 USD | 145 imágenes: $0,290 USD |
+| Persistencia Amazon DynamoDB (`telemetry`/`thresholds`) | 36.000 ops: $0,045 USD | 108.000 ops: $0,135 USD |
 | Colas Amazon SQS + DLQs (Requests) | 36.000 reqs: $0,014 USD | 108.000 reqs: $0,043 USD |
+| Monitoreo CloudWatch (Métricas/Logs) | 2 GB ingest: $1,140 USD | 5 GB ingest: $2,850 USD |
+| **TOTAL MENSUAL CONSOLIDADO** | **$1,284 USD / mes** | **$3,498 USD / mes** |
+| **COSTO ANUAL ESTIMADO SUBSISTEMA** | **~$28,69 USD / año** | **~$28,69 USD / año** |
 | Monitoreo CloudWatch (Métricas/Logs) | 2 GB ingest: $1,140 USD | 5 GB ingest: $2,850 USD |
 | **TOTAL MENSUAL CONSOLIDADO** | **$1,234 USD / mes** | **$3,208 USD / mes** |
 | **COSTO ANUAL ESTIMADO SUBSISTEMA** | **~$26,65 USD / año** | **~$26,65 USD / año** |
