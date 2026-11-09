@@ -80,12 +80,12 @@ Precios de lista de `us-east-1`. Se verifican contra la página de precios al co
 | --- | --- | --- | ---: |
 | S3 Standard, últimos 90 días | USD 0,023 por GB-mes | ~10,5 GB | USD 0,24 al mes |
 | Glacier Deep Archive, quinto año | USD 0,00099 por GB-mes | ~200 GB | USD 0,20 al mes |
-| Transiciones a Deep Archive | USD 0,05 por 1.000 objetos | Firehose agrupa cada 5 min: ~1.200 objetos al día entre los streams | USD 22 al año |
+| Transiciones a Deep Archive | USD 0,05 por 1.000 objetos | ~2.600 objetos al día: tres streams de Firehose que entregan cada 5 minutos y el trail de las seis cuentas | USD 47 al año |
 | Firehose | USD 0,029 por GB | ~6 GB al año | USD 0,18 al año |
 | Eventos de datos de CloudTrail | USD 0,10 por 100.000 eventos | ~400.000 al año | USD 0,40 al año |
 | Primer trail de gestión de la organización | Sin costo | — | USD 0 |
 
-**Total: unos USD 28 al año, o USD 140 en los cinco años.** La línea que más pesa son las transiciones, porque Firehose genera muchos objetos pequeños. Si hiciera falta bajarlas, se sube el búfer de Firehose a 15 minutos y el número de objetos cae a la tercera parte. Todo cabe holgado en los USD 50 al mes que la #1 le asigna a la cuenta de seguridad.
+**Total: unos USD 53 al año, o unos USD 265 en los cinco años.** Lo que más pesa son las transiciones, porque Firehose y CloudTrail generan muchos objetos pequeños. Si hiciera falta bajar ese costo, se sube el búfer de Firehose a 15 minutos, con lo que sus objetos caen a la tercera parte. Además, S3 no mueve por defecto los objetos de menos de 128 KB, y esos se quedan en Standard a un costo despreciable. Todo cabe holgado en los USD 50 al mes que la #1 le asigna a la cuenta de seguridad.
 
 ## 5. Verificación de los criterios de la #2
 
