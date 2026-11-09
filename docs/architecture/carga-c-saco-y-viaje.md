@@ -6,7 +6,7 @@
 
 ## 1. Resumen Ejecutivo y Marco Operativo
 
-El presente documento define la arquitectura técnica del ciclo de vida del saco de café de 60 kg, la base transaccional de eventos de viaje (*Event Sourcing*), los mecanismos de resiliencia para el cumplimiento de los objetivos de recuperación ante desastres (**RPO de 15 minutos y RTO de 4 horas**) y el diseño del **único punto abierto a internet** de la plataforma: el servicio de consulta pública para el comprador internacional.
+El presente documento define la arquitectura técnica del ciclo de vida del saco de café de 60 kg, la base transaccional de eventos de viaje (*Event Sourcing*), los mecanismos de resiliencia para el cumplimiento de los objetivos de recuperación ante desastres (**RPO de 15 minutos y RTO de 4 horas**) y el diseño del **único servicio de lectura abierto a internet sin credenciales**: la consulta pública para el comprador internacional.
 
 En el marco del caso de estudio para la reactivación del piloto de trazabilidad cafetera para la Federación Nacional de Cafeteros (FNC) en la vigencia 2026, la plataforma articula la operación de **200 fincas cafeteras** distribuidas en los departamentos de **Cauca, Huila y Tolima**, tres centros de acopio departamentales, una flota de 60 transportadores y la entrega final en las instalaciones portuarias de Buenaventura.
 
@@ -56,13 +56,13 @@ El ciclo de vida del café verde de exportación se modela como una máquina de 
 |---|---|---|---|---|---|
 | **E01** | `EN_PREPARACION` | `EVENTO_ALTA_FINCA` | Caficultor Titular | Amazon Cognito (App Caficultor) | Pesaje en finca (60.0 kg +/- 0.5 kg). Variables de secado registradas (humedad 10.0% a 12.0%, método y temperatura). Generación de token canónico HMAC-SHA-256. |
 | **E02** | `EN_VIAJE_ACOPIO` | `EVENTO_DESPACHO_RURAL` | Transportador Rural | Amazon Cognito (App Transportador) | Handshake digital en finca mediante escaneo de código QR del saco. Asignación de viaje rural. Buffer local store-and-forward en caso de vía terciaria sin cobertura móvil. |
-| **E03** | `EN_ACOPIO` | `EVENTO_LLEGADA_ACOPIO` | Operario de Acopio | IAM Identity Center / LAN Acopio (MFA TOTP) | Pesaje en báscula certificada de acopio. Inspección de laboratorio: prueba de humedad (10.5% - 11.5%) y catación sensorial según protocolo SCA. |
-| **E03-A** | `EN_ACOPIO (ACEPTADO)` | `EVENTO_RECEPCION_ACEPTADA` | Catador Certificado FNC | IAM Identity Center (MFA TOTP) | Puntaje SCA &gt;= 80 puntos y humedad &lt;= 12.0%. El saco ingresa oficialmente al inventario de exportación del acopio. |
-| **E03-B** | `EN_ACOPIO (RECHAZADO)` | `EVENTO_RECEPCION_RECHAZADA` | Operario de Acopio | IAM Identity Center (MFA TOTP) | Humedad &gt; 12.5% o defectos físicos mayores (broca severa o fermento). Estado terminal de exportación; se deriva a consumo doméstico (pasilla) o devolución. |
+| **E03** | `EN_ACOPIO` | `EVENTO_LLEGADA_ACOPIO` | Operario de Acopio | Amazon Cognito (App Acopio, MFA TOTP) | Pesaje en báscula certificada de acopio. Inspección de laboratorio: prueba de humedad (10.5% - 11.5%) y catación sensorial según protocolo SCA. |
+| **E03-A** | `EN_ACOPIO (ACEPTADO)` | `EVENTO_RECEPCION_ACEPTADA` | Catador Certificado FNC | Amazon Cognito (App Acopio, MFA TOTP) | Puntaje SCA &gt;= 80 puntos y humedad &lt;= 12.0%. El saco ingresa oficialmente al inventario de exportación del acopio. |
+| **E03-B** | `EN_ACOPIO (RECHAZADO)` | `EVENTO_RECEPCION_RECHAZADA` | Operario de Acopio | Amazon Cognito (App Acopio, MFA TOTP) | Humedad &gt; 12.5% o defectos físicos mayores (broca severa o fermento). Estado terminal de exportación; se deriva a consumo doméstico (pasilla) o devolución. |
 | **E04** | `EN_VIAJE_PUERTO` | `EVENTO_DESPACHO_PUERTO` | Transportador Troncal | Amazon Cognito (App Transportador) | Consolidación de lote de hasta 200 sacos previamente aceptados. Precinto electrónico verificado. Monitoreo telemático GPS cada 5 min sobre corredor hacia el Pacífico. |
-| **E05** | `ENTREGADO_PUERTO` | `EVENTO_LLEGADA_PUERTO` | Operario Portuario FNC | AWS IAM / Portal Web Portuario (MFA) | Llegada a terminal marítimo en Buenaventura (SPRB / Aguadulce). Operación en bodega concesionada sin predio propio de la FNC. Verificación de integridad de precinto. |
-| **E05-A** | `ENTREGADO (ACEPTADO)` | `EVENTO_ENTREGA_ACEPTADA` | Agente Aduanal FNC | Portal Portuario (MFA FIDO2) | Inspección aduanera Dian e inspección fitosanitaria ICA aprobadas. El saco pasa a contenedor marítimo para embarque internacional. Fin de trazabilidad en tierra. |
-| **E05-B** | `ENTREGADO (RECHAZADO)` | `EVENTO_ENTREGA_RECHAZADA` | Agente Aduanal FNC | Portal Portuario (MFA FIDO2) | Avería física durante el transporte (humedad por lluvia, saco rasgado o contaminación). Apertura formal de siniestro ante aseguradora de carga. |
+| **E05** | `ENTREGADO_PUERTO` | `EVENTO_LLEGADA_PUERTO` | Transportador Troncal | Amazon Cognito (App Transportador) | Llegada a terminal marítimo en Buenaventura (SPRB / Aguadulce). Operación en bodega concesionada sin predio propio de la FNC. Verificación de integridad de precinto. |
+| **E05-A** | `ENTREGADO (ACEPTADO)` | `EVENTO_ENTREGA_ACEPTADA` | Transportador Troncal (registra el resultado que informa el operador portuario) | Amazon Cognito (App Transportador) | Inspección aduanera Dian e inspección fitosanitaria ICA aprobadas. El saco pasa a contenedor marítimo para embarque internacional. Fin de trazabilidad en tierra. |
+| **E05-B** | `ENTREGADO (RECHAZADO)` | `EVENTO_ENTREGA_RECHAZADA` | Transportador Troncal (registra el resultado que informa el operador portuario) | Amazon Cognito (App Transportador) | Avería física durante el transporte (humedad por lluvia, saco rasgado o contaminación). Apertura formal de siniestro ante aseguradora de carga. |
 
 ---
 
@@ -137,7 +137,7 @@ La tabla `sacos_eventos` en Amazon DynamoDB constituye el libro contable inmutab
 | `EventoID` | String | Identificador universal único (UUID v4) generado en el cliente o en el API Gateway para deduplicación e idempotencia. |
 | `TipoEvento` | String | Código tipificado: `EVENTO_ALTA_FINCA`, `EVENTO_DESPACHO_RURAL`, `EVENTO_RECEPCION_ACEPTADA`, etc. |
 | `ActorID` | String | Identificador único del responsable (sub de Cognito JWT o ARN de IAM Identity Center). |
-| `RolActor` | String | Rol formal validado: `CAFICULTOR`, `TRANSPORTADOR`, `OPERARIO_ACOPIO`, `OPERARIO_PUERTO`. |
+| `RolActor` | String | Rol formal validado: `CAFICULTOR`, `TRANSPORTADOR`, `OPERARIO_ACOPIO`. En Buenaventura no hay personal ni infraestructura de la Federación: la entrega la registra el transportador. |
 | `DatosEvento` | Map | Payload JSON que transporta las mediciones específicas (humedad, temperatura, pesaje, puntaje SCA, placa, precinto). |
 | `HashPrevio` | String | Hash criptográfico SHA-256 del evento anterior del mismo saco, creando una cadena de bloques lógica (*tamper-evident*). |
 | `FirmaDigital` | String | Firma criptográfica ECDSA o HMAC generada por el dispositivo emisor para garantizar no repudio. |
@@ -219,7 +219,7 @@ El restablecimiento operativo ante una pérdida total de la región `us-east-1` 
 
 ## 6. Arquitectura del Único Punto Abierto a Internet: Consulta del Comprador
 
-Conforme al pliego de condiciones de seguridad: *"La consulta pública es el único punto abierto a internet de la plataforma"*. Ningún otro microservicio, base de datos o componente de administración posee direccionamiento público ni acepta conexiones entrantes desde internet.
+La consulta pública es el único servicio de lectura abierto a internet sin credenciales. El ingreso de telemetría también recibe tráfico de internet, pero exige certificado X.509 o identidad de Cognito (ver `red-firewall.md`). Ninguna base de datos ni componente de administración tiene direccionamiento público.
 
 ```
 ┌────────────────────────────────────────────────────────────────────────────────────────┐

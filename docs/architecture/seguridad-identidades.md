@@ -6,7 +6,7 @@
 
 ## 1. Resumen Ejecutivo y Propósito Arquitectónico
 
-El presente documento define la arquitectura integral de seguridad, el modelo de identidades y la gobernanza de control de acceso para la plataforma cafetera **AromaPacífico**, iniciativa liderada por la Federación Nacional de Cafeteros (FNC) en convenio académico con la Universidad Icesi para la vigencia 2026.
+El presente documento define la arquitectura integral de seguridad, el modelo de identidades y la gobernanza de control de acceso para la plataforma cafetera **AromaPacífico**. Es un caso académico inspirado en la Federación Nacional de Cafeteros; no es un proyecto oficial de la Federación.
 
 En el diseño original formulado en el año 2020 no existía un modelo formal de gestión de identidades; los dispositivos y usuarios se concebían de forma homogénea sin segregación de privilegios, sin esquemas de autenticación multifactor (MFA), sin mecanismos criptográficos de revocación y sin salvaguardas para proteger los datos personales de los productores bajo la legislación colombiana (**Ley Estatutaria 1581 de 2012**).
 
