@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" compressed="false">
+  <diagram id="soberania-datos-inferencia" name="Soberanía de Datos y Flujo Transfronterizo">
+    <mxGraphModel dx="1600" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1650" pageHeight="1080" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TITULO Y SUBTITULO -->
+        <mxCell id="title" value="AromaPacífico - Arquitectura de Soberanía de Datos y Flujo Transfronterizo (Ley 1581 de 2012)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="275" y="25" width="1100" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Delimitación de Datos en Territorio Nacional vs. Inferencia en Nube us-east-1, Garantías de Transferencia Internacional y Custodia SIC" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
+          <mxGeometry x="275" y="60" width="1100" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR 1: COLOMBIA ON-PREMISES / BORDE -->
+        <mxCell id="zone-co-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#D5DBDB;strokeWidth=2;arcSize=3;" vertex="1" parent="1">
+          <mxGeometry x="40" y="110" width="460" height="880" as="geometry" />
+        </mxCell>
+        <mxCell id="zone-co-header" value="TERRITORIO NACIONAL (COLOMBIA) · BORDE Y CENTROS DE ACOPIO" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAEDED;strokeColor=#D5DBDB;strokeWidth=1;fontSize=13;fontStyle=1;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="40" y="110" width="460" height="35" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box-co-stay" value="DATOS PRIVADOS QUE PERMANECEN EN COLOMBIA:&#xa;&#xa;1. Cédula de Ciudadanía del Caficultor:&#xa;   • Custodiada en bases de datos internas locales y ERP FNC&#xa;   • NUNCA se serializa en la consulta pública web (Ley 1581)&#xa;   • En nube solo viaja hash criptográfico HMAC-SHA-256&#xa;&#xa;2. Rutas Privadas Intraprediales:&#xa;   • Coordenadas de caminos internos retenidas en tableta de finca&#xa;   • Hacia la nube solo viajan coordenadas del foco o vía principal&#xa;&#xa;3. Imágenes Crudas con Presencia Humana:&#xa;   • Aisladas inmediatamente o descartadas en el borde&#xa;   • Cero envío a modelos comerciales extranjeros" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4FBF5;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="65" y="160" width="410" height="250" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box-co-acopios" value="Centros de Acopio Departamentales (FNC):&#xa;&#xa;• Acopio Cauca: Red Segmentada 10.41.0.0/16&#xa;• Acopio Huila: Red Segmentada 10.42.0.0/16&#xa;• Acopio Tolima: Red Segmentada 10.43.0.0/16&#xa;&#xa;Infraestructura de Borde y Cuadrillas de Vuelo:&#xa;• Descarga de fotos de drones en VLAN Logística (10.X.3.0/24)&#xa;• Tableta robustecida con pre-clasificación de privacidad&#xa;• Buffer Store-and-Forward hasta 24 horas ante corte WAN&#xa;• Concentrador local de telemetría IoT de cultivo y secado" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="65" y="440" width="410" height="230" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box-co-legal" value="Marco Legal Colombiano de Cumplimiento:&#xa;&#xa;• Ley Estatutaria 1581 de 2012 (Protección de Datos)&#xa;• Decreto Reglamentario 1377 de 2013 (Autorización Titular)&#xa;• Circular Externa 005 de 2017 de la SIC (Transferencias)&#xa;• Registro Nacional de Bases de Datos (RNBD) ante la SIC&#xa;• Principio de Finalidad, Libertad, Veracidad y Seguridad" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="65" y="700" width="410" height="250" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR 2: CANAL TRANSFRONTERIZO -->
+        <mxCell id="zone-channel-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#D5DBDB;strokeWidth=2;arcSize=3;" vertex="1" parent="1">
+          <mxGeometry x="540" y="110" width="530" height="880" as="geometry" />
+        </mxCell>
+        <mxCell id="zone-channel-header" value="CANAL SEGURO DE TRANSMISIÓN Y SALVAGUARDAS TRANSFRONTERIZAS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAEDED;strokeColor=#D5DBDB;strokeWidth=1;fontSize=13;fontStyle=1;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="540" y="110" width="530" height="35" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box-channel-sec" value="Túneles Seguros y Cifrado de Transporte:&#xa;&#xa;• Enlace WAN VPN IPsec BGP (Túneles Redundantes por Acopio)&#xa;• Transporte de Imágenes: HTTPS con TLS 1.3 y Cifrado AES-256&#xa;• URLs Prefirmadas S3 con expiración estricta de 15 minutos&#xa;• Certificados Digitales X.509 por cada dispositivo de vuelo y dron&#xa;• Cero paso por internet pública sin encriptación punto a punto" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F7FF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="565" y="160" width="480" height="200" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box-channel-items" value="OBJETOS TÉCNICOS AUTORIZADOS A SALIR DEL PAÍS:&#xa;&#xa;1. Fotos de Dosel y Follaje (Servicios S2, S4 y S5 de Drones):&#xa;   • Exclusivamente imágenes validadas sin figuras humanas&#xa;   • Formato JPEG/PNG crudo para diagnóstico fitosanitario&#xa;&#xa;2. Metadatos de Navegación y Vuelo:&#xa;   • Coordenadas GPS del foco agronómico, altitud, dron ID, UTC&#xa;&#xa;3. Telemetría de Cultivo y Secado:&#xa;   • Lecturas NPK, humedad de suelo, temperatura de aire y café&#xa;&#xa;4. Eventos de Trazabilidad del Saco de 60 kg:&#xa;   • Código alfanumérico, peso en báscula, fecha de recibo y salida" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="565" y="385" width="480" height="280" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box-channel-contract" value="Base Legal de Transmisión Internacional (Art. 26 Ley 1581):&#xa;&#xa;• AWS Data Processing Addendum (DPA) con Cláusulas Tipo&#xa;• FNC actúa como Responsable del Tratamiento de Datos&#xa;• AWS actúa como Encargado del Tratamiento en EE.UU.&#xa;• Certificaciones Internacionales: ISO/IEC 27018 (Nube PII), SOC 2 Tipo II&#xa;• Cláusula de no utilización de fotos para entrenamiento público de IA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="565" y="690" width="480" height="260" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR 3: AWS US-EAST-1 NUBE -->
+        <mxCell id="zone-cloud-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#D5DBDB;strokeWidth=2;arcSize=3;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="110" width="500" height="880" as="geometry" />
+        </mxCell>
+        <mxCell id="zone-cloud-header" value="REGIÓN CLOUD PRINCIPAL: AWS US-EAST-1 (N. VIRGINIA)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAEDED;strokeColor=#D5DBDB;strokeWidth=1;fontSize=13;fontStyle=1;fontColor=#232F3E;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="110" width="500" height="35" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box-cloud-rekog" value="Inferencia Administrada Serverless (us-east-1):&#xa;&#xa;• Rekognition: Filtro Anti-PII perimetral (DetectFaces / DetectLabels)&#xa;• Bedrock Multimodal: Diagnóstico foliar administrado (sin entrenamiento)&#xa;• Región us-east-1: Latencia directa (~45-55 ms vía cables submarinos)&#xa;• Precios Pay-as-you-go: ~$0.003 USD por ciclo completo ($0 en reposo)&#xa;• Invariante: CERO retención de datos por el proveedor para reentrenar" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F7FF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="1135" y="160" width="450" height="200" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box-cloud-s3" value="Amazon S3 (Almacenamiento de Objetos Cifrado):&#xa;&#xa;• Bucket Principal: s3://aromapacifico-objetos-prod/&#xa;  - Cifrado en reposo SSE-KMS con rotación automática anual&#xa;• Bucket Cuarentena: s3://aromapacifico-quarantine-pii/&#xa;  - Radicado en cuenta AromaPacifico-Security&#xa;  - Aislamiento estricto: Acceso exclusivo para Oficial de Datos&#xa;• Retención Legal WORM: S3 Object Lock a 5 años (1.825 días)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="1135" y="385" width="450" height="240" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box-cloud-gov" value="Gobernanza de Seguridad y Auditoría Forense:&#xa;&#xa;• AWS Organizations con SCP: Prohibición de despliegue fuera de us-east-1&#xa;• Región de Respaldo para Consulta del Saco: us-east-2 (Ohio)&#xa;• AWS CloudTrail y CloudWatch Logs cifrados en cuenta Security&#xa;• Invariante de Negocio: Ninguna inferencia autoriza fumigación&#xa;• Compuerta Humana Mandatoria de agrónomo colegiado FNC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4FBF5;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="1135" y="650" width="450" height="300" as="geometry" />
+        </mxCell>
+
+        <!-- CONECTORES ORTOGONALES (TODOS PARENT=1) -->
+        <!-- Acopio a Canal Seguro -->
+        <mxCell id="c-acopio-channel" value="Fotos Dron y Lotes IoT" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D76DB;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;fontColor=#1D76DB;fontStyle=1;" edge="1" parent="1" source="box-co-acopios" target="box-channel-sec">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="510" y="555" />
+              <mxPoint x="510" y="260" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Legal a Base Contractual -->
+        <mxCell id="c-legal-contract" value="Habeas Data · Ley 1581" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FF9900;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;fontColor=#FF9900;fontStyle=1;" edge="1" parent="1" source="box-co-legal" target="box-channel-contract">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Canal Seguro a Rekognition -->
+        <mxCell id="c-sec-rekog" value="Invocación Visión TLS 1.3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D76DB;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;fontColor=#1D76DB;fontStyle=1;" edge="1" parent="1" source="box-channel-sec" target="box-cloud-rekog">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Objetos Autorizados a S3 -->
+        <mxCell id="c-items-s3" value="Almacenamiento Cifrado KMS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#545B64;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;fontColor=#545B64;fontStyle=1;" edge="1" parent="1" source="box-channel-items" target="box-cloud-s3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Rekognition a S3 Cuarentena / Salida -->
+        <mxCell id="c-rekog-s3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D76DB;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="box-cloud-rekog" target="box-cloud-s3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- S3 a Gobernanza -->
+        <mxCell id="c-s3-gov" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0E8A16;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="box-cloud-s3" target="box-cloud-gov">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
