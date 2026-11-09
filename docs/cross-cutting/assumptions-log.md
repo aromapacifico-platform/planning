@@ -62,3 +62,8 @@ Supuestos que no están en el enunciado y que tomó el equipo al diseñar la pla
 | La telemetría se audita con una segunda acción de la regla de IoT hacia Firehose, no con los logs de IoT Core en nivel INFO | Registra lo que la plataforma aceptó con la identidad del certificado, sin pagar ingesta de CloudWatch Logs | #2 | Decidido |
 | El cambio de umbral se audita con dos fuentes que deben coincidir por `request_id`: el registro de la aplicación y los eventos de datos de CloudTrail | CloudTrail ve el rol de la función, no a la persona; la aplicación guarda el `sub` de Cognito | #2 | Decidido |
 | Los registros de auditoría pasan a Glacier Deep Archive a los 90 días | Los reclamos recientes se consultan en Standard; los antiguos toleran una recuperación de 12 a 48 horas | #2 | Supuesto |
+| Escenario base de 60 fincas sin cobertura LTE-M/NB-IoT (30 %) | El enunciado indica que el caficultor tiene datos solo en cabecera o vía principal; el número real sale de la preinspección de la #6 | #28 | Supuesto |
+| Logística e importación del 10 % sobre precio de lista, más IVA de importación del 19 % | Los precios son de tiendas fuera de Colombia; se reemplaza con la oferta de un integrador | #28 | Supuesto |
+| Instalación de COP 350.000 por finca | Una jornada de técnico con transporte rural, dentro de la visita única de la #11 | #28 | Supuesto |
+| SIM IoT de 1NCE como referencia de la cuota celular (USD 14 por 10 años y 500 MB) | Precio público verificable; la cobertura en Colombia está por confirmar y la alternativa es un plan M2M de Movistar | #28 | Supuesto |
+| Un conjunto compartido de cultivo y secado por finca | Diseño de la #11; si una finca exige conjuntos separados, se recotiza el controlador adicional | #28 | Supuesto |
