@@ -71,15 +71,15 @@
     <text x="15" y="55" class="card-sub">FocusConfirmationExecutionRole</text>
     <text x="15" y="78" class="card-body">• Permiso 1: Lectura de imagen en S3</text>
     <text x="25" y="96" class="code-body">s3:GetObject, kms:Decrypt (objeto foco)</text>
-    <text x="15" y="118" class="card-body">• Permiso 2: Visión e Inferencia</text>
-    <text x="25" y="136" class="code-body">rekognition:DetectFaces, DetectCustomLabels</text>
+    <text x="15" y="118" class="card-body">• Permiso 2: Filtro PII e Inferencia Multimodal</text>
+    <text x="25" y="136" class="code-body">rekognition:DetectFaces, bedrock:InvokeModel</text>
     <text x="15" y="158" class="card-body">• Permiso 3: Escritura de expediente</text>
     <text x="25" y="176" class="code-body">dynamodb:UpdateItem (ExpedienteFitosanitario)</text>
     <text x="15" y="198" class="card-body">• Permiso 4: Aislamiento de fallas</text>
     <text x="25" y="216" class="code-body">sqs:SendMessage (dlq-confirmacion-foco)</text>
     <text x="15" y="240" class="card-sub" fill="#1D76DB">POLÍTICA ZERO TRUST:</text>
     <text x="15" y="260" class="card-body">• Sin comodines Resource: * o Action: *</text>
-    <text x="15" y="280" class="card-body">• Recursos acotados por ARN exacto en Terraform</text>
+    <text x="15" y="280" class="card-body">• Cero entrenamiento y cero cómputo en espera</text>
   </g>
 
   <!-- ==================== CONTENEDOR CENTRAL: AWS LAMBDA ==================== -->
@@ -104,8 +104,8 @@
   <g transform="translate(440, 295)">
     <rect width="760" height="85" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" filter="url(#box-shadow)" />
     <text x="15" y="25" class="card-header">Paso 2: Filtro Ético y Protección de Privacidad (Ley 1581 de 2012)</text>
-    <text x="15" y="48" class="card-body">• Invoca Amazon Rekognition: DetectFaces sobre la toma aérea del lote cafetero</text>
-    <text x="15" y="68" class="card-body">• ¿Se detectan rostros o personas identificables en la toma del cultivo?</text>
+    <text x="15" y="48" class="card-body">• Invoca Amazon Rekognition: DetectFaces y DetectLabels (categoría humana)</text>
+    <text x="15" y="68" class="card-body">• ¿Se detectan rostros, personas o jornaleros en la toma aérea del cultivo?</text>
   </g>
 
   <!-- DECISIÓN PII -->
@@ -129,12 +129,12 @@
   <!-- PASO 3: INFERENCIA FITOSANITARIA -->
   <g transform="translate(440, 515)">
     <rect width="480" height="135" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" filter="url(#box-shadow)" />
-    <text x="15" y="22" class="card-header">Paso 3: Inferencia Fitosanitaria Administrada (Custom Labels)</text>
-    <text x="15" y="42" class="card-sub">Amazon Rekognition: Custom Labels en us-east-1</text>
-    <text x="15" y="65" class="card-body">• Diagnóstico especializado: Roya (Hemileia) o Broca (Hypothenemus)</text>
-    <text x="15" y="85" class="card-body">• Devuelve vector de confianza C ∈ [0, 100%] y caja delimitadora</text>
-    <text x="15" y="105" class="card-body">• Latencia promedio: &lt; 400 ms | Costo por inferencia: $0,001 USD</text>
-    <text x="15" y="125" class="card-body">• Cero cómputo ocioso en espera ($0 en reposo)</text>
+    <text x="15" y="22" class="card-header">Paso 3: Inferencia Fitosanitaria Multimodal (Amazon Bedrock)</text>
+    <text x="15" y="42" class="card-sub">bedrock-runtime:InvokeModel en us-east-1 (Sin Entrenamiento)</text>
+    <text x="15" y="65" class="card-body">• Modelo fundacional multimodal de visión (ej. Claude 3 Haiku / Nova)</text>
+    <text x="15" y="85" class="card-body">• Diagnóstico foliar especializado: Roya (Hemileia) o Broca (Hypothenemus)</text>
+    <text x="15" y="105" class="card-body">• Devuelve vector de confianza C ∈ [0, 100%] y severidad foliar</text>
+    <text x="15" y="125" class="card-body">• Cero cómputo ocioso en espera | Pago por token/invocación puro</text>
   </g>
 
   <!-- DECISIÓN UMBRAL -->

@@ -20,7 +20,7 @@
         </mxCell>
 
         <!-- 2. IAM EXECUTION ROLE -->
-        <mxCell id="iam-role" value="2. Rol IAM Mínimo Privilegio (IaC)&#xa;FocusConfirmationExecutionRole&#xa;&#xa;• Permiso 1: Lectura de imagen en S3&#xa;  s3:GetObject, kms:Decrypt (objeto foco)&#xa;• Permiso 2: Visión e Inferencia&#xa;  rekognition:DetectFaces, DetectCustomLabels&#xa;• Permiso 3: Escritura de expediente&#xa;  dynamodb:UpdateItem (ExpedienteFitosanitario)&#xa;• Permiso 4: Aislamiento de fallas&#xa;  sqs:SendMessage (dlq-confirmacion-foco)&#xa;&#xa;POLÍTICA ZERO TRUST:&#xa;• Sin comodines Resource: * o Action: *&#xa;• Recursos acotados por ARN exacto en Terraform" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F7FF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+        <mxCell id="iam-role" value="2. Rol IAM Mínimo Privilegio (IaC)&#xa;FocusConfirmationExecutionRole&#xa;&#xa;• Permiso 1: Lectura de imagen en S3&#xa;  s3:GetObject, kms:Decrypt (objeto foco)&#xa;• Permiso 2: Filtro PII e Inferencia Multimodal&#xa;  rekognition:DetectFaces, DetectLabels (PII)&#xa;  bedrock:InvokeModel (Multimodal Vision)&#xa;• Permiso 3: Escritura de expediente&#xa;  dynamodb:UpdateItem (ExpedienteFitosanitario)&#xa;• Permiso 4: Aislamiento de fallas&#xa;  sqs:SendMessage (dlq-confirmacion-foco)&#xa;&#xa;POLÍTICA ZERO TRUST:&#xa;• Sin comodines Resource: * o Action: *&#xa;• Cero entrenamiento y cero cómputo en espera" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F7FF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
           <mxGeometry x="40" y="390" width="340" height="300" as="geometry" />
         </mxCell>
 
@@ -38,7 +38,7 @@
         </mxCell>
 
         <!-- PASO 2: FILTRO ETICO PII -->
-        <mxCell id="step-2" value="Paso 2: Filtro Ético y Protección de Privacidad (Ley 1581 de 2012)&#xa;&#xa;• Invoca Amazon Rekognition: DetectFaces sobre la toma aérea del lote cafetero&#xa;• ¿Se detectan rostros o personas identificables en la toma del cultivo?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="1">
+        <mxCell id="step-2" value="Paso 2: Filtro Ético y Protección de Privacidad (Ley 1581 de 2012)&#xa;&#xa;• Invoca Amazon Rekognition: DetectFaces y DetectLabels (categoría humana)&#xa;• ¿Se detectan rostros, personas o jornaleros en la toma aérea del cultivo?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="1">
           <mxGeometry x="440" y="295" width="760" height="85" as="geometry" />
         </mxCell>
 
@@ -53,7 +53,7 @@
         </mxCell>
 
         <!-- PASO 3: INFERENCIA FITOSANITARIA -->
-        <mxCell id="step-3" value="Paso 3: Inferencia Fitosanitaria Administrada (Custom Labels)&#xa;&#xa;• Invoca Amazon Rekognition: DetectCustomLabels en us-east-1&#xa;• Modelo entrenado: Roya (Hemileia vastatrix) y Broca (Hypothenemus hampei)&#xa;• Obtiene vector de resultados: Etiqueta diagnóstica, Bounding Box y Confianza (%)&#xa;• Cero cómputo ocioso en espera ($0 en reposo) | Latencia promedio &lt; 400 ms" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="1">
+        <mxCell id="step-3" value="Paso 3: Inferencia Fitosanitaria Multimodal Administrada (Amazon Bedrock)&#xa;&#xa;• Invoca bedrock-runtime:InvokeModel en us-east-1 (sin entrenamiento previo)&#xa;• Modelo fundacional multimodal de visión (ej. Claude 3 Haiku / Nova)&#xa;• Prompt agronómico especializado: Diagnóstico de Roya (Hemileia) y Broca (Hypothenemus)&#xa;• Obtiene JSON estricto: Patología, severidad foliar y Confianza (%) | Latencia &lt; 800 ms" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=10;" vertex="1" parent="1">
           <mxGeometry x="440" y="515" width="480" height="135" as="geometry" />
         </mxCell>
 
