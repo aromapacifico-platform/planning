@@ -263,7 +263,9 @@ Son cuatro funciones orientadas a eventos: confirmación del foco, verificación
 
 **Fotos con personas:** antes de la inferencia, Rekognition `DetectFaces` y `DetectLabels` filtran las imágenes con personas. Esas imágenes no se envían a inferencia: van a cuarentena con Object Lock a 5 años.
 
-> **Pendiente:** el servicio que diagnostica la hoja se está corrigiendo en los PR [#56](https://github.com/aromapacifico-platform/planning/pull/56) y [#57](https://github.com/aromapacifico-platform/planning/pull/57). Rekognition Custom Labels exige entrenar un modelo y cobra por hora encendida, y el enunciado prohíbe ambas cosas. Esta sección se cierra cuando se fusione esa corrección.
+**Diagnóstico de la hoja:** lo hace un modelo fundacional multimodal en **Amazon Bedrock** (Amazon Nova Lite o Claude), con un prompt agronómico y salida JSON con diagnóstico, severidad y confianza. No se entrena ningún modelo y se cobra por tokens: unos USD 0,30 a 0,64 por cada 1.000 imágenes, con una reserva de USD 2. Sin vuelos, el costo es cero. Rekognition Custom Labels se descartó porque exige entrenar un modelo y cobra unos USD 4 por cada hora que está encendido.
+
+**Qué sale del país:** las fotos del cultivo sin personas, los metadatos del vuelo y la telemetría, que se procesan en `us-east-1` bajo el artículo 26 de la Ley 1581. La cédula y las rutas privadas no salen.
 
 ## 7. Observabilidad
 
