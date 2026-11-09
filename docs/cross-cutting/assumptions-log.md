@@ -93,3 +93,7 @@ Supuestos que no están en el enunciado y que tomó el equipo al diseñar la pla
 | El sensor de humedad del grano SEN0600 requiere cualificación en café antes de aprobarse | Su ficha es de suelo y no acredita precisión en café | #11 | Supuesto |
 | DynamoDB On-Demand como almacén de telemetría | 10.800 registros al día en cosecha no justifican una base de series de tiempo adicional | #12 | Decidido |
 | Presupuesto de 300 segundos de la alerta repartido en siete tramos, con menos de 55 s de holgura | Permite medir por tramo dónde se pierde el tiempo | #12 | Supuesto |
+| Fuera de cosecha, el transporte opera al 25 % y la recepción de sacos al 10 % del pico | El enunciado solo da las cifras de cosecha | #29 | Supuesto |
+| Consulta pública promedio de 3 por minuto en cosecha y 1 fuera de cosecha | El enunciado da solo el pico de 30 por minuto | #29 | Supuesto |
+| 5 alertas por finca al mes en cosecha y 2 fuera, con SMS a unos USD 0,035 | La tasa real de lecturas fuera de rango no se conoce; el precio de SMS a Colombia se confirma en el reporte de uso de SNS | #29 | Supuesto |
+| La conmutación de la consulta usa health checks de Route 53, no Application Recovery Controller | ARC cuesta unos USD 1.825 al mes y el RTO de 4 horas no lo necesita | #29 | Decidido |
