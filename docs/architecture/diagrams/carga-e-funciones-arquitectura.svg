@@ -1,0 +1,274 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1650 960" width="100%" height="100%">
+  <defs>
+    <style>
+      .main-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
+      .sub-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #5A6B7C; text-anchor: middle; }
+      .swimlane-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
+      .card-header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
+      .card-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: bold; fill: #555555; }
+      .card-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 10px; font-weight: bold; fill: #FFFFFF; }
+      .flow-line { stroke: #545B64; stroke-width: 2; fill: none; }
+      .flow-line-accent { stroke: #1D76DB; stroke-width: 2.5; fill: none; }
+      .flow-line-danger { stroke: #D93F0B; stroke-width: 2.5; fill: none; }
+      .flow-line-success { stroke: #0E8A16; stroke-width: 2.5; fill: none; }
+      .flow-line-warning { stroke: #FF9900; stroke-width: 2.5; fill: none; }
+      .flow-dashed { stroke-dasharray: 6,4; }
+    </style>
+    <filter id="box-shadow" x="-2%" y="-2%" width="104%" height="106%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.08" />
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#545B64" />
+    </marker>
+    <marker id="arrow-danger" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#D93F0B" />
+    </marker>
+    <marker id="arrow-success" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0E8A16" />
+    </marker>
+    <marker id="arrow-accent" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1D76DB" />
+    </marker>
+    <marker id="arrow-warning" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#FF9900" />
+    </marker>
+  </defs>
+
+  <!-- FONDO -->
+  <rect width="1650" height="960" fill="#FFFFFF" />
+
+  <!-- ENCABEZADO -->
+  <text x="825" y="38" class="main-title">AromaPacífico - Arquitectura General de Funciones Serverless por Eventos</text>
+  <text x="825" y="62" class="sub-title">Las Cuatro Funciones de Inferencia y Procesamiento Asíncrono: Disparadores, Mínimo Privilegio, Persistencia Inmutable y Resiliencia DLQ</text>
+
+  <!-- ==================== CONTENEDOR 1: FUENTES Y DISPARADORES ==================== -->
+  <rect x="30" y="90" width="360" height="840" rx="8" fill="#F8F9FA" stroke="#D5DBDB" stroke-width="2" />
+  <rect x="30" y="90" width="360" height="35" rx="8" fill="#EAEDED" />
+  <text x="45" y="113" class="swimlane-title">DISPARADORES DE EVENTOS (SOURCES)</text>
+
+  <!-- Disparador 1 -->
+  <g transform="translate(50, 140)">
+    <rect width="320" height="160" rx="6" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" filter="url(#box-shadow)" />
+    <text x="15" y="25" class="card-header">Disparador 1: S3 Event Notification</text>
+    <text x="15" y="42" class="card-sub">Prefijo: raw-images/focos/ · PutObject</text>
+    <text x="15" y="65" class="card-body">• Carga de imagen del dron (Servicio 2: Foco)</text>
+    <text x="15" y="85" class="card-body">• Cifrado obligatorio con KMS (SSE-KMS)</text>
+    <text x="15" y="105" class="card-body">• Metadatos EXIF: coordenadas GPS, lote, fecha</text>
+    <text x="15" y="125" class="card-body">• Almacenamiento seguro en S3 de Producción</text>
+  </g>
+
+  <!-- Disparador 2 -->
+  <g transform="translate(50, 335)">
+    <rect width="320" height="160" rx="6" fill="#F0F7FF" stroke="#1D76DB" stroke-width="2" filter="url(#box-shadow)" />
+    <text x="15" y="25" class="card-header">Disparador 2: S3 Event Notification</text>
+    <text x="15" y="42" class="card-sub">Prefijo: raw-images/verificaciones/ · PutObject</text>
+    <text x="15" y="65" class="card-body">• Foto post-aspersión (Servicio 4: Verificación)</text>
+    <text x="15" y="85" class="card-body">• Cifrado KMS y hash SHA-256 de integridad</text>
+    <text x="15" y="105" class="card-body">• Token de orden de fumigación preposicionada</text>
+    <text x="15" y="125" class="card-body">• Cierre condicional de orden de fumigación</text>
+  </g>
+
+  <!-- Disparador 3 -->
+  <g transform="translate(50, 530)">
+    <rect width="320" height="160" rx="6" fill="#F4FBF5" stroke="#0E8A16" stroke-width="2" filter="url(#box-shadow)" />
+    <text x="15" y="25" class="card-header">Disparador 3: S3 Event Notification</text>
+    <text x="15" y="42" class="card-sub">Prefijo: raw-images/estimaciones/ · PutObject</text>
+    <text x="15" y="65" class="card-body">• Ortomosaico multiespectral (Servicio 5: Área)</text>
+    <text x="15" y="85" class="card-body">• Polígono georreferenciado de finca y lote</text>
+    <text x="15" y="105" class="card-body">• Muestreo fenológico y conteo de biomasa</text>
+    <text x="15" y="125" class="card-body">• Carga semestral (1 vez por campaña de cosecha)</text>
+  </g>
+
+  <!-- Disparador 4 -->
+  <g transform="translate(50, 725)">
+    <rect width="320" height="160" rx="6" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" filter="url(#box-shadow)" />
+    <text x="15" y="25" class="card-header">Disparador 4: Cola Amazon SQS</text>
+    <text x="15" y="42" class="card-sub">Cola: telemetry-live (HU #12) · SQS Batch</text>
+    <text x="15" y="65" class="card-body">• Ingesta MQTT Basic Ingest + RockBLOCK SBD</text>
+    <text x="15" y="85" class="card-body">• Normalización previa de esquema y reloj</text>
+    <text x="15" y="105" class="card-body">• Desacoplamiento buffer de hasta 24 horas</text>
+    <text x="15" y="125" class="card-body">• Lecturas cada 4h (cultivo) y cada 1h (secado)</text>
+  </g>
+
+  <!-- ==================== CONTENEDOR 2: AWS LAMBDA EN VPC ==================== -->
+  <rect x="420" y="90" width="410" height="840" rx="8" fill="#F8F9FA" stroke="#D5DBDB" stroke-width="2" />
+  <rect x="420" y="90" width="410" height="35" rx="8" fill="#EAEDED" />
+  <text x="435" y="113" class="swimlane-title">COMPUTO SERVERLESS (AWS LAMBDA EN VPC PRIVADA)</text>
+
+  <!-- Lambda 1 (Patrón Épica 6) -->
+  <g transform="translate(440, 140)">
+    <rect width="370" height="160" rx="6" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" filter="url(#box-shadow)" />
+    <rect x="250" y="8" width="110" height="18" rx="4" fill="#D93F0B" />
+    <text x="305" y="21" class="badge-text" text-anchor="middle">PATRÓN ÉPICA 6</text>
+    <text x="15" y="25" class="card-header">FN-CONF-FOCO</text>
+    <text x="15" y="42" class="card-sub">ProcessFocusConfirmation · Graviton2 (512 MB)</text>
+    <text x="15" y="65" class="card-body">• Extrae EXIF y valida integridad SHA-256</text>
+    <text x="15" y="85" class="card-body">• Invoca filtro ético anti-PII (Rekognition PII)</text>
+    <text x="15" y="105" class="card-body">• Diagnóstico foliar con Bedrock Multimodal Vision</text>
+    <text x="15" y="125" class="card-body">• Escribe resultado en expediente (confianza ≥ 80%)</text>
+    <text x="15" y="145" class="card-body">• Si falla: S3 intacto, cero mutación de orden</text>
+  </g>
+
+  <!-- Lambda 2 -->
+  <g transform="translate(440, 335)">
+    <rect width="370" height="160" rx="6" fill="#F0F7FF" stroke="#1D76DB" stroke-width="2" filter="url(#box-shadow)" />
+    <text x="15" y="25" class="card-header">FN-VERIF-POST</text>
+    <text x="15" y="42" class="card-sub">ProcessFumigationVerification · Graviton2 (512 MB)</text>
+    <text x="15" y="65" class="card-body">• Analiza imagen post-fumigación con Bedrock</text>
+    <text x="15" y="85" class="card-body">• Inferencia multimodal Pay-per-Call de remisión</text>
+    <text x="15" y="105" class="card-body">• Si la invocación falla: la orden SIGUE ABIERTA</text>
+    <text x="15" y="125" class="card-body">• Si verifica éxito: habilita cierre formal del caso</text>
+    <text x="15" y="145" class="card-body">• Persiste evidencia en expediente y audita en S3</text>
+  </g>
+
+  <!-- Lambda 3 -->
+  <g transform="translate(440, 530)">
+    <rect width="370" height="160" rx="6" fill="#F4FBF5" stroke="#0E8A16" stroke-width="2" filter="url(#box-shadow)" />
+    <text x="15" y="25" class="card-header">FN-ESTIM-COSECHA</text>
+    <text x="15" y="42" class="card-sub">ProcessHarvestEstimation · Graviton2 (1024 MB)</text>
+    <text x="15" y="65" class="card-body">• Inferencia multimodal sobre ortofoto con Bedrock</text>
+    <text x="15" y="85" class="card-body">• Estima número de sacos de 60 kg proyectados</text>
+    <text x="15" y="105" class="card-body">• Notifica pronóstico a los centros de acopio</text>
+    <text x="15" y="125" class="card-body">• NUNCA genera órdenes de empaque de sacos</text>
+    <text x="15" y="145" class="card-body">• Si falla: retiene imagen y no altera históricos</text>
+  </g>
+
+  <!-- Lambda 4 -->
+  <g transform="translate(440, 725)">
+    <rect width="370" height="160" rx="6" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" filter="url(#box-shadow)" />
+    <text x="15" y="25" class="card-header">FN-TELEMETRIA-BATCH</text>
+    <text x="15" y="42" class="card-sub">ProcessTelemetryBatch · Graviton2 (256 MB)</text>
+    <text x="15" y="65" class="card-body">• Batch trigger desde cola telemetry-live (HU #12)</text>
+    <text x="15" y="85" class="card-body">• Compara contra versión activa de umbrales FNC</text>
+    <text x="15" y="105" class="card-body">• Persiste serie temporal en DynamoDB</text>
+    <text x="15" y="125" class="card-body">• Emite alerta crítica al caficultor (&lt; 5 min)</text>
+    <text x="15" y="145" class="card-body">• Idempotencia por hash: evita duplicados al drenar</text>
+  </g>
+
+  <!-- ==================== CONTENEDOR 3: INFERENCIA Y PERSISTENCIA ==================== -->
+  <rect x="860" y="90" width="410" height="840" rx="8" fill="#F8F9FA" stroke="#D5DBDB" stroke-width="2" />
+  <rect x="860" y="90" width="410" height="35" rx="8" fill="#EAEDED" />
+  <text x="875" y="113" class="swimlane-title">INFERENCIA ADMINISTRADA Y EXPEDIENTES</text>
+
+  <!-- Rekognition Inferencia -->
+  <g transform="translate(880, 135)">
+    <rect width="370" height="80" rx="6" fill="#F0F7FF" stroke="#1D76DB" stroke-width="2" filter="url(#box-shadow)" />
+    <text x="15" y="22" class="card-header">Amazon Rekognition: Filtro Anti-PII</text>
+    <text x="15" y="38" class="card-sub">DetectFaces + DetectLabels (Personas) · Pay-per-Call</text>
+    <text x="15" y="58" class="card-body">• Detección facial y jornaleros antes de persistir</text>
+    <text x="15" y="74" class="card-body">• Cero cómputo ocioso en espera ($0 en reposo)</text>
+  </g>
+
+  <!-- Bedrock Inferencia -->
+  <g transform="translate(880, 225)">
+    <rect width="370" height="100" rx="6" fill="#F5EEF8" stroke="#5319E7" stroke-width="2" filter="url(#box-shadow)" />
+    <text x="15" y="22" class="card-header">Amazon Bedrock: Modelos Multimodales</text>
+    <text x="15" y="38" class="card-sub">Inferencia de Visión sin Entrenamiento (us-east-1)</text>
+    <text x="15" y="58" class="card-body">• Diagnóstico foliar de roya y broca (FN-01)</text>
+    <text x="15" y="74" class="card-body">• Verificación post-fumigación y cosecha (FN-02, FN-03)</text>
+    <text x="15" y="90" class="card-body">• Pago por token/invocación puro ($0 en espera)</text>
+  </g>
+
+  <!-- DynamoDB Expediente -->
+  <g transform="translate(880, 335)">
+    <rect width="370" height="190" rx="6" fill="#F4FBF5" stroke="#0E8A16" stroke-width="2" filter="url(#box-shadow)" />
+    <text x="15" y="25" class="card-header">Amazon DynamoDB (Tablas Transaccionales)</text>
+    <text x="15" y="42" class="card-sub">Almacén Inmutable de Expedientes · Cifrado KMS</text>
+    <text x="15" y="65" class="card-body">• Tabla: ExpedienteFitosanitario</text>
+    <text x="25" y="85" class="card-body">Campos: TimestampUTC, ConfidenceScore, SourceObjectID</text>
+    <text x="15" y="105" class="card-body">• Tabla: ExpedienteCultivoSecado</text>
+    <text x="25" y="125" class="card-body">Campos: FincaID, SensorID, NPK, Humedad, Temp, Alerta</text>
+    <text x="15" y="145" class="card-body">• Escritura atómica con ConditionExpression</text>
+    <text x="15" y="165" class="card-body">• Replicación global para contingencia DR (us-east-2)</text>
+  </g>
+
+  <!-- S3 Cuarentena PII -->
+  <g transform="translate(880, 555)">
+    <rect width="370" height="150" rx="6" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" filter="url(#box-shadow)" />
+    <text x="15" y="25" class="card-header">S3 Cuarentena de Privacidad</text>
+    <text x="15" y="42" class="card-sub">Bucket: aromapacifico-quarantine-pii · Ley 1581</text>
+    <text x="15" y="65" class="card-body">• Destino aislado si DetectFaces reporta humanos</text>
+    <text x="15" y="85" class="card-body">• Exclusión automática de inferencia agronómica</text>
+    <text x="15" y="105" class="card-body">• Acceso restringido exclusivo a Oficial de Seguridad</text>
+    <text x="15" y="125" class="card-body">• Notificación CloudWatch y retención protegida</text>
+  </g>
+
+  <!-- Notificaciones Agrónomo -->
+  <g transform="translate(880, 735)">
+    <rect width="370" height="150" rx="6" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" filter="url(#box-shadow)" />
+    <text x="15" y="25" class="card-header">Amazon SNS: Alertas y Compuerta Humana</text>
+    <text x="15" y="42" class="card-sub">Panel de Gestión FNC · Autorización Estricta MFA</text>
+    <text x="15" y="65" class="card-body">• Despacho de alerta con vector de confianza</text>
+    <text x="15" y="85" class="card-body">• INVARIANTE INNEGOCIABLE: Ningún disparador</text>
+    <text x="25" y="105" class="card-body">autoriza fumigación de forma autónoma</text>
+    <text x="15" y="125" class="card-body">• Firma digital requerida del agrónomo FNC</text>
+  </g>
+
+  <!-- ==================== CONTENEDOR 4: RESILIENCIA Y DLQ ==================== -->
+  <rect x="1300" y="90" width="320" height="840" rx="8" fill="#F8F9FA" stroke="#D5DBDB" stroke-width="2" />
+  <rect x="1300" y="90" width="320" height="35" rx="8" fill="#EAEDED" />
+  <text x="1315" y="113" class="swimlane-title">RESILIENCIA, DLQ Y SRE</text>
+
+  <!-- SQS Dead Letter Queues -->
+  <g transform="translate(1320, 140)">
+    <rect width="280" height="230" rx="6" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" filter="url(#box-shadow)" />
+    <text x="15" y="25" class="card-header">Amazon SQS: Colas DLQ</text>
+    <text x="15" y="42" class="card-sub">Aislamiento de Excepciones sin Pérdida</text>
+    <text x="15" y="65" class="card-body">• dlq-confirmacion-foco</text>
+    <text x="15" y="85" class="card-body">• dlq-verificacion-fumigacion</text>
+    <text x="15" y="105" class="card-body">• dlq-estimacion-cosecha</text>
+    <text x="15" y="125" class="card-body">• dlq-telemetria-batch</text>
+    <text x="15" y="150" class="card-body">• Retención: 14 días con KMS</text>
+    <text x="15" y="170" class="card-body">• Objeto origen PERMANECE INTACTO</text>
+    <text x="15" y="190" class="card-body">• El estado del caso NO cambia</text>
+    <text x="15" y="210" class="card-body">• Cero estados falsos en fallos</text>
+  </g>
+
+  <!-- CloudWatch Monitoreo -->
+  <g transform="translate(1320, 400)">
+    <rect width="280" height="230" rx="6" fill="#F0F7FF" stroke="#1D76DB" stroke-width="2" filter="url(#box-shadow)" />
+    <text x="15" y="25" class="card-header">Amazon CloudWatch</text>
+    <text x="15" y="42" class="card-sub">Observabilidad de Funciones y DLQs</text>
+    <text x="15" y="65" class="card-body">• Métricas por función:</text>
+    <text x="25" y="85" class="card-body">Invocations, Errors, Duration, Throttles</text>
+    <text x="15" y="105" class="card-body">• Métrica DLQ: ApproximateNumberOfMessages</text>
+    <text x="15" y="125" class="card-body">• Alarma P1: DLQDepth &gt; 0 (Notifica SRE)</text>
+    <text x="15" y="145" class="card-body">• Logs estructurados en formato JSON</text>
+    <text x="15" y="165" class="card-body">• Cero exposición de PII en los logs</text>
+    <text x="15" y="185" class="card-body">• Tablero operativo y FinOps en tiempo real</text>
+  </g>
+
+  <!-- AWS X-Ray -->
+  <g transform="translate(1320, 660)">
+    <rect width="280" height="225" rx="6" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" filter="url(#box-shadow)" />
+    <text x="15" y="25" class="card-header">AWS X-Ray / Distributed Tracing</text>
+    <text x="15" y="42" class="card-sub">Rastreo de Invocaciones End-to-End</text>
+    <text x="15" y="65" class="card-body">• Rastreo activo de llamadas Lambda</text>
+    <text x="15" y="85" class="card-body">• Desglose de latencia de Rekognition</text>
+    <text x="15" y="105" class="card-body">• Trazado de conexiones DynamoDB</text>
+    <text x="15" y="125" class="card-body">• Identificación de cold starts (&lt; 400 ms)</text>
+    <text x="15" y="145" class="card-body">• Mapa de dependencias del microservicio</text>
+  </g>
+
+  <!-- ==================== LÍNEAS DE CONEXIÓN ==================== -->
+  <!-- Triggers a Lambdas -->
+  <path d="M 370 220 L 440 220" class="flow-line-danger" marker-end="url(#arrow-danger)" />
+  <path d="M 370 415 L 440 415" class="flow-line-accent" marker-end="url(#arrow-accent)" />
+  <path d="M 370 610 L 440 610" class="flow-line-success" marker-end="url(#arrow-success)" />
+  <path d="M 370 805 L 440 805" class="flow-line-warning" marker-end="url(#arrow-warning)" />
+
+  <!-- Lambdas a Inferencia / Stores -->
+  <path d="M 810 200 L 880 200" class="flow-line-accent" marker-end="url(#arrow-accent)" />
+  <path d="M 810 240 L 850 240 L 850 370 L 880 370" class="flow-line-success" marker-end="url(#arrow-success)" />
+  <path d="M 810 415 L 880 415" class="flow-line-success" marker-end="url(#arrow-success)" />
+  <path d="M 810 610 L 850 610 L 850 460 L 880 460" class="flow-line-success" marker-end="url(#arrow-success)" />
+  <path d="M 810 805 L 880 805" class="flow-line-warning" marker-end="url(#arrow-warning)" />
+  <path d="M 810 780 L 840 780 L 840 480 L 880 480" class="flow-line-success" marker-end="url(#arrow-success)" />
+
+  <!-- Rutas de Fallo a DLQ -->
+  <path d="M 810 160 L 840 160 L 840 80 L 1310 80 L 1310 180 L 1320 180" class="flow-line-danger flow-dashed" marker-end="url(#arrow-danger)" />
+  <path d="M 1460 370 L 1460 400" class="flow-line-danger" marker-end="url(#arrow-danger)" />
+
+</svg>
+
