@@ -1,0 +1,121 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Conectividad sin señal" id="hu6">
+    <mxGraphModel dx="3008" dy="1587" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1650" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f3f6f9;strokeColor=#f3f6f9;fontColor=#19324b;fontSize=26;fontStyle=1;align=left;verticalAlign=middle;spacing=18;" value="AromaPacífico · HU #6 · Conectividad sin señal" vertex="1">
+          <mxGeometry height="125" width="1705" x="45" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="r0c0" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcefe5;strokeColor=#3c8060;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="01 · Finca y beneficiadero&#xa;&#xa;Cultivo: cada 4 horas&#xa;Secado activo: cada hora&#xa;Ruta asignada por cobertura" vertex="1">
+          <mxGeometry height="162" width="345" x="45" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="e0_0" edge="1" parent="1" source="r0c0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r0c1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r0c1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="Flash del nodo&#xa;&#xa;Escribir antes de enviar&#xa;Retención máxima: 24 h&#xa;Retirar tras ACK persistido" vertex="1">
+          <mxGeometry height="162" width="355" x="450" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="e0_1" edge="1" parent="1" source="r0c1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r0c2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r0c2" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="Celular o satélite&#xa;&#xa;LTE-M/NB-IoT: MQTT/TLS 8883&#xa;Sin cobertura: Iridium SBD&#xa;Proveedor → HTTPS 443" vertex="1">
+          <mxGeometry height="162" width="425" x="865" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="e0_2" edge="1" parent="1" source="r0c2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r0c3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r0c3" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="IoT Core / ingesta&#xa;&#xa;Celular: entrada existente&#xa;Satélite: adaptador + cola&#xa;Normalizar y persistir" vertex="1">
+          <mxGeometry height="162" width="400" x="1350" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="r1c0" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5eafb;strokeColor=#5d74b3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="02 · Dron y cuadrilla&#xa;&#xa;Misión precargada&#xa;Autorización humana previa&#xa;Fotos, mapas y bitácora" vertex="1">
+          <mxGeometry height="162" width="345" x="45" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="e1_0" edge="1" parent="1" source="r1c0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r1c1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r1c1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="Dron + estación de campo&#xa;&#xa;Memoria no volátil y copia&#xa;Sin internet: conservar misión&#xa;No cerrar sin evidencias" vertex="1">
+          <mxGeometry height="162" width="355" x="450" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="e1_1" edge="1" parent="1" source="r1c1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r1c2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r1c2" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="Estación → nube&#xa;&#xa;USB / enlace local del equipo&#xa;Luego 4G o wifi del acopio&#xa;HTTPS 443 · URL prefirmada" vertex="1">
+          <mxGeometry height="162" width="425" x="865" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="e1_2" edge="1" parent="1" source="r1c2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r1c3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r1c3" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="S3 + expediente&#xa;&#xa;Carga al volver de la misión&#xa;Validar objeto y registro&#xa;No transmitir fotos por SBD" vertex="1">
+          <mxGeometry height="162" width="400" x="1350" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="r2c0" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d8;strokeColor=#bd8832;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="03 · Transportador&#xa;&#xa;Posición cada 5 minutos&#xa;Eventos de custodia aparte&#xa;Hora original y responsable" vertex="1">
+          <mxGeometry height="162" width="345" x="45" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_0" edge="1" parent="1" source="r2c0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r2c1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r2c1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="SQLite cifrada&#xa;&#xa;Cola persistente del teléfono&#xa;Conservar tras reinicio&#xa;No inventar una posición" vertex="1">
+          <mxGeometry height="162" width="355" x="450" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_1" edge="1" parent="1" source="r2c1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r2c2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r2c2" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="4G/LTE o wifi autorizado&#xa;&#xa;HTTPS 443 hacia API Gateway&#xa;Recuperar sesión y enviar lotes&#xa;Reintentar sin cambiar event_id" vertex="1">
+          <mxGeometry height="162" width="425" x="865" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_2" edge="1" parent="1" source="r2c2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r2c3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r2c3" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="API + registros&#xa;&#xa;Deduplicar por event_id&#xa;Confirmar cada resultado&#xa;Separar captura y recepción" vertex="1">
+          <mxGeometry height="162" width="400" x="1350" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="r3c0" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e0eff5;strokeColor=#48859c;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="04 · Centro de acopio&#xa;&#xa;Recepción y despacho&#xa;VLAN y SSID por zona&#xa;Patrón: Cauca, Huila, Tolima" vertex="1">
+          <mxGeometry height="162" width="345" x="45" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="e3_0" edge="1" parent="1" source="r3c0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r3c1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r3c1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="Cola local + impresión&#xa;&#xa;Transacciones pendientes&#xa;Spooler de códigos local&#xa;Energía: concretar en #8" vertex="1">
+          <mxGeometry height="162" width="355" x="450" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="e3_1" edge="1" parent="1" source="r3c1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r3c2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r3c2" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="WAN compartida 100 Mbps&#xa;&#xa;VPN IPsec → Transit Gateway&#xa;HTTPS 443 para objetos&#xa;LAN operativa si solo cae WAN" vertex="1">
+          <mxGeometry height="162" width="425" x="865" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="e3_2" edge="1" parent="1" source="r3c2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r3c3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r3c3" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="Servicios privados / S3&#xa;&#xa;Mantener topología de #7&#xa;Sincronizar tras recuperar WAN&#xa;Resolver conflictos de estado" vertex="1">
+          <mxGeometry height="162" width="400" x="1350" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="r4c0" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f0e5f5;strokeColor=#9462a9;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="05 · Buenaventura&#xa;&#xa;Entrega del saco&#xa;Aceptada o rechazada&#xa;Sin seguimiento del barco" vertex="1">
+          <mxGeometry height="162" width="345" x="45" y="1100" as="geometry" />
+        </mxCell>
+        <mxCell id="e4_0" edge="1" parent="1" source="r4c0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r4c1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4c1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="Cola cifrada del teléfono&#xa;&#xa;Evento con saco y responsable&#xa;Hora original de la entrega&#xa;Pendiente hasta confirmación" vertex="1">
+          <mxGeometry height="162" width="355" x="450" y="1100" as="geometry" />
+        </mxCell>
+        <mxCell id="e4_1" edge="1" parent="1" source="r4c1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r4c2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4c2" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="Teléfono con 4G/LTE&#xa;&#xa;HTTPS 443 hacia la API&#xa;Sin datos: guardar y reenviar&#xa;No presuponer wifi portuario" vertex="1">
+          <mxGeometry height="162" width="425" x="865" y="1100" as="geometry" />
+        </mxCell>
+        <mxCell id="e4_2" edge="1" parent="1" source="r4c2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r4c3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4c3" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="Historia del saco&#xa;&#xa;Persistir entrega idempotente&#xa;No instalar infraestructura&#xa;de la Federación en el puerto" vertex="1">
+          <mxGeometry height="162" width="400" x="1350" y="1100" as="geometry" />
+        </mxCell>
+        <mxCell id="rules" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e8edf2;strokeColor=#19324b;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="REGLAS TRANSVERSALES&#xa;1. El ACK de transporte no prueba persistencia: confirmar la escritura antes de retirar un pendiente.&#xa;2. Finca: entregar antes de 24 h. Si vence sin ACK, registrar incidente y conciliar una posible pérdida.&#xa;3. Satélite: novedad de #6; equipo, energía, tarifa y enlace necesitan validación. Se limita a fincas aisladas.&#xa;4. Alerta al caficultor: conservar SNS; #12 concreta canal y tiempos. Llegar al módem no es llegar al usuario.&#xa;5. Objetivo &lt; 5 min con ruta completa disponible; recuperación dentro de 24 h. No es un SLA ya probado." vertex="1">
+          <mxGeometry height="250" width="1705" x="45" y="1340" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
