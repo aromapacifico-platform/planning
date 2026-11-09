@@ -78,3 +78,18 @@ Supuestos que no están en el enunciado y que tomó el equipo al diseñar la pla
 | Instalación de COP 350.000 por finca | Una jornada de técnico con transporte rural, dentro de la visita única de la #11 | #28 | Supuesto |
 | SIM IoT de 1NCE como referencia de la cuota celular (USD 14 por 10 años y 500 MB) | Precio público verificable; la cobertura en Colombia está por confirmar y la alternativa es un plan M2M de Movistar | #28 | Supuesto |
 | Un conjunto compartido de cultivo y secado por finca | Diseño de la #11; si una finca exige conjuntos separados, se recotiza el controlador adicional | #28 | Supuesto |
+| Las fincas sin cobertura LTE-M/NB-IoT usan Iridium SBD con RockBLOCK 9603 como referencia técnica | No exige radiobase nueva ni visita semanal; la viabilidad económica queda condicionada a la #31 | #6 | Supuesto |
+| Reintentos del nodo a 1, 5 y 15 minutos y luego cada 15 minutos; aviso de antigüedad a las 12 h y escalamiento a las 20 h | Drenar antes del límite de 24 horas sin agotar energía ni tarifa | #6 | Supuesto |
+| Dimensionamiento satelital de 200 bytes de salida y 50 de retorno por lectura | Presupuesto de diseño por verificar con el formato definitivo del firmware | #6 | Supuesto |
+| VLAN 101 a 105, 110 y 120 con cinco SSID de usuarios en el patrón de acopio | Implementa las zonas del caso sin alterar sus CIDR | #8 | Decidido |
+| Tres AP iniciales, switch de 24 puertos, host local consolidado y UPS de 30 minutos por acopio | Punto de partida de capacidad; se valida con estudio de cobertura antes de comprar | #8 | Supuesto |
+| Techo WAN de 90 Mbps por sentido con perfiles reducidos para transporte y visitantes en el pico | 66 clientes a 2 Mbps piden 132 Mbps, más que los 100 Mbps del enlace | #8 | Decidido |
+| ASN de los customer gateway 65041, 65042 y 65043; CPE en `.20.1` y firewall en `.20.2` | Especifica el borde sin confundir la LAN con la identidad pública de la VPN | #8 | Decidido |
+| El cupo de identificadores del acopio son códigos HMAC emitidos por adelantado por la plataforma | Un solo esquema de código para sacos registrados con y sin señal | #19 | Decidido |
+| Los eventos móviles no telemétricos entran con origen `0.0.0.0/0`, Cognito, viaje autorizado y límite de tasa | Una allowlist de IP de operadores móviles no es viable | #19 | Decidido |
+| La consulta pública entra por CloudFront y WAF hacia un ALB en la subred pública, con una Lambda que solo lee `sacos_publicos` | Concilia la #5, la #9 y la #15, y el ALB solo acepta tráfico desde la lista de prefijos de CloudFront | #19 | Decidido |
+| Reglas temporales de firewall con vigencia máxima de 4 horas, ticket y aprobación del senior | Los accesos de diagnóstico no quedan abiertos | #9 | Decidido |
+| Conjunto compartido de cultivo y secado con panel de 15 W y batería LiFePO4 de 12 V y 6 Ah | El balance da 8 días de reserva y cubre tres días nublados a 0,5 HSP | #11 | Supuesto |
+| El sensor de humedad del grano SEN0600 requiere cualificación en café antes de aprobarse | Su ficha es de suelo y no acredita precisión en café | #11 | Supuesto |
+| DynamoDB On-Demand como almacén de telemetría | 10.800 registros al día en cosecha no justifican una base de series de tiempo adicional | #12 | Decidido |
+| Presupuesto de 300 segundos de la alerta repartido en siete tramos, con menos de 55 s de holgura | Permite medir por tramo dónde se pierde el tiempo | #12 | Supuesto |
