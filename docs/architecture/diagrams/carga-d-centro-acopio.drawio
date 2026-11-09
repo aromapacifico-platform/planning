@@ -1,0 +1,148 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Centro de acopio" id="hu8-acopio">
+    <mxGraphModel dx="3351" dy="1769" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1770" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=27;fontStyle=1;fontColor=#243746;" value="AromaPacífico · Centro de acopio patrón&#xa;HU #8 · X=41 Cauca / 42 Huila / 43 Tolima " vertex="1">
+          <mxGeometry height="130" width="1690" x="50" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="isp" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#7a8790;fontColor=#243746;fontSize=20;align=left;verticalAlign=middle;spacing=18;" value="Proveedor / CPE&#xa;&#xa;WAN: 100 Mbps simétricos compartidos&#xa;CPE: 10.X.20.1 · VLAN 120&#xa;IP pública / NAT-T: validar con ISP" vertex="1">
+          <mxGeometry height="172" width="510" x="50" y="225" as="geometry" />
+        </mxCell>
+        <mxCell id="fw" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#315f86;fontColor=#243746;fontSize=21;align=left;verticalAlign=middle;spacing=18;" value="Firewall del acopio&#xa;&#xa;WAN: 10.X.20.2 · gateways LAN .1&#xa;Enruta y filtra todas las VLAN&#xa;QoS global · NAT solo a internet" vertex="1">
+          <mxGeometry height="172" width="530" x="630" y="225" as="geometry" />
+        </mxCell>
+        <mxCell id="cloud" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#b47b2b;fontColor=#243746;fontSize=21;align=left;verticalAlign=middle;spacing=18;" value="AWS · cuenta de red / producción&#xa;&#xa;VPN IPsec → Transit Gateway&#xa;Una conexión con dos túneles&#xa;Aplicación privada + S3 autorizado" vertex="1">
+          <mxGeometry height="172" width="520" x="1230" y="225" as="geometry" />
+        </mxCell>
+        <mxCell id="isp_fw" edge="1" parent="1" source="isp" style="edgeStyle=none;html=0;endArrow=open;strokeColor=#506579;strokeWidth=2;dashed=0;" target="fw">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fw_cloud" edge="1" parent="1" source="fw" style="edgeStyle=none;html=0;endArrow=open;strokeColor=#506579;strokeWidth=2;dashed=0;" target="cloud">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vpn_note" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=20;fontStyle=0;fontColor=#243746;" value="Visitantes: sin acceso a LAN ni VPN." vertex="1">
+          <mxGeometry height="45" width="510" x="50" y="417" as="geometry" />
+        </mxCell>
+        <mxCell id="services" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#487d6a;fontColor=#243746;fontSize=20;align=left;verticalAlign=middle;spacing=18;" value="VLAN 110 · 10.X.10.0/24&#xa;&#xa;.2–.5   Gestión de switch y AP&#xa;.10       Servidor de impresión IPPS&#xa;.11       Controlador local&#xa;.12       Autenticación WLAN local&#xa;.13       Copia cifrada de continuidad&#xa;.20       Impresora cableada&#xa;ACL de host dentro de esta VLAN" vertex="1">
+          <mxGeometry height="310" width="510" x="50" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="switch" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#315f86;fontColor=#243746;fontSize=21;align=left;verticalAlign=middle;spacing=18;" value="Switch L2 administrable + PoE&#xa;&#xa;24 puertos 1 GbE · troncal 802.1Q&#xa;Sin enrutamiento entre VLAN&#xa;6 escritorios conectados por cable" vertex="1">
+          <mxGeometry height="165" width="530" x="630" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="continuity" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#7a658c;fontColor=#243746;fontSize=20;align=left;verticalAlign=middle;spacing=18;" value="Continuidad en el acopio&#xa;&#xa;Cola cifrada por puesto de Logística&#xa;Spooler y plantillas locales&#xa;Sin WAN: registros provisionales&#xa;Al volver: autenticar y sincronizar&#xa;Retirar solo eventos confirmados&#xa;UPS propuesta: objetivo 30 min&#xa;Sin energía o sesión: contingencia" vertex="1">
+          <mxGeometry height="310" width="520" x="1230" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="fw_switch" edge="1" parent="1" source="fw" style="edgeStyle=none;html=0;endArrow=open;strokeColor=#506579;strokeWidth=2;dashed=0;" target="switch">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="switch_services" edge="1" parent="1" source="switch" style="edgeStyle=none;html=0;endArrow=open;strokeColor=#506579;strokeWidth=2;dashed=0;" target="services">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aps" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#315f86;fontColor=#243746;fontSize=20;align=left;verticalAlign=middle;spacing=18;" value="Tres AP iniciales · cinco SSID&#xa;&#xa;VLAN por SSID · cobertura por medir&#xa;Servidores y borde: sin SSID" vertex="1">
+          <mxGeometry height="118" width="530" x="630" y="735" as="geometry" />
+        </mxCell>
+        <mxCell id="switch_aps" edge="1" parent="1" source="switch" style="edgeStyle=none;html=0;endArrow=open;strokeColor=#506579;strokeWidth=2;dashed=0;" target="aps">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wlan_note" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=20;fontStyle=0;fontColor=#243746;" value="Escritorios: cable al switch.&#xa;Teléfonos: wifi de su zona." vertex="1">
+          <mxGeometry height="55" width="720" x="50" y="865" as="geometry" />
+        </mxCell>
+        <mxCell id="aps_bus" edge="1" parent="1" source="aps" style="edgeStyle=none;html=0;endArrow=none;strokeColor=#506579;strokeWidth=2;dashed=0;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="895" y="935" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bus" edge="1" parent="1" style="edgeStyle=none;html=0;endArrow=none;strokeColor=#506579;strokeWidth=2;dashed=0;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="190" y="935" as="sourcePoint" />
+            <mxPoint x="1614" y="935" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ger" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#3d7b6c;fontColor=#243746;fontSize=17;align=left;verticalAlign=middle;spacing=18;" value="Gerencia&#xa;&#xa;VLAN 101 · 10.X.1.0/24&#xa;7 clientes de usuario&#xa;AP-X-Gerencia&#xa;2 / 0,5 Mbps&#xa;Perfil de pico de cosecha" vertex="1">
+          <mxGeometry height="217" width="300" x="40" y="975" as="geometry" />
+        </mxCell>
+        <mxCell id="to_ger" edge="1" parent="1" style="edgeStyle=none;html=0;endArrow=open;strokeColor=#506579;strokeWidth=2;dashed=0;" target="ger">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="190" y="935" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sup" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#3d7b6c;fontColor=#243746;fontSize=17;align=left;verticalAlign=middle;spacing=18;" value="Soporte&#xa;&#xa;VLAN 102 · 10.X.2.0/24&#xa;7 clientes de usuario&#xa;AP-X-Soporte&#xa;2 / 0,5 Mbps&#xa;Perfil de pico de cosecha" vertex="1">
+          <mxGeometry height="217" width="300" x="396" y="975" as="geometry" />
+        </mxCell>
+        <mxCell id="to_sup" edge="1" parent="1" style="edgeStyle=none;html=0;endArrow=open;strokeColor=#506579;strokeWidth=2;dashed=0;" target="sup">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="546" y="935" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="log" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#3d7b6c;fontColor=#243746;fontSize=17;align=left;verticalAlign=middle;spacing=18;" value="Logística&#xa;&#xa;VLAN 103 · 10.X.3.0/24&#xa;22 clientes de usuario&#xa;AP-X-Logistica&#xa;2 / 0,5 Mbps&#xa;Perfil de pico de cosecha" vertex="1">
+          <mxGeometry height="217" width="300" x="752" y="975" as="geometry" />
+        </mxCell>
+        <mxCell id="to_log" edge="1" parent="1" style="edgeStyle=none;html=0;endArrow=open;strokeColor=#506579;strokeWidth=2;dashed=0;" target="log">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="902" y="935" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tra" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#b07d34;fontColor=#243746;fontSize=17;align=left;verticalAlign=middle;spacing=18;" value="Transporte&#xa;&#xa;VLAN 104 · 10.X.4.0/24&#xa;20 clientes de usuario&#xa;AP-X-Transporte&#xa;0,5 / 0,25 Mbps&#xa;Perfil de pico de cosecha" vertex="1">
+          <mxGeometry height="217" width="300" x="1108" y="975" as="geometry" />
+        </mxCell>
+        <mxCell id="to_tra" edge="1" parent="1" style="edgeStyle=none;html=0;endArrow=open;strokeColor=#506579;strokeWidth=2;dashed=0;" target="tra">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="1258" y="935" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vis" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#b04444;fontColor=#243746;fontSize=17;align=left;verticalAlign=middle;spacing=18;" value="Visitantes&#xa;&#xa;VLAN 105 · 10.X.5.0/24&#xa;10 clientes de usuario&#xa;AP-X-Visitantes&#xa;0,2 / 0,1 Mbps&#xa;Solo internet" vertex="1">
+          <mxGeometry height="217" width="300" x="1464" y="975" as="geometry" />
+        </mxCell>
+        <mxCell id="to_vis" edge="1" parent="1" style="edgeStyle=none;html=0;endArrow=open;strokeColor=#506579;strokeWidth=2;dashed=0;" target="vis">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="1614" y="935" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="deny_bus" edge="1" parent="1" source="vis" style="edgeStyle=none;html=0;endArrow=none;strokeColor=#b04444;strokeWidth=2;dashed=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1614" y="1230" />
+              <mxPoint x="190" y="1230" />
+            </Array>
+            <mxPoint x="190" y="1192" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="deny_log" edge="1" parent="1" style="edgeStyle=none;html=0;endArrow=none;strokeColor=#b04444;strokeWidth=2;dashed=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="902" y="1230" as="sourcePoint" />
+            <mxPoint x="902" y="1192" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="deny_note" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=24;fontStyle=1;fontColor=#a53131;" value="VISITANTES → GERENCIA / LOGÍSTICA: DENEGADO EN EL FIREWALL&#xa;También se bloquean gestión, servidores, otros acopios y VPN." vertex="1">
+          <mxGeometry height="65" width="1450" x="290" y="1240" as="geometry" />
+        </mxCell>
+        <mxCell id="capacity" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=25;fontStyle=0;fontColor=#243746;" value="CAPACIDAD&#xa;66 × 2 = 132 Mbps bajada &gt; 100 Mbps&#xa;66 × 0,5 = 33 Mbps subida&#xa;Se limita Transporte y Visitantes.&#xa;Los techos no son mínimos garantizados." vertex="1">
+          <mxGeometry height="320" width="820" x="50" y="1330" as="geometry" />
+        </mxCell>
+        <mxCell id="qos" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=24;fontStyle=0;fontColor=#243746;" value="PRESUPUESTO DE PICO (bajada / subida, Mbps)&#xa;Oficina y Logística: 72 / 18&#xa;Transporte: 10 / 5&#xa;Visitantes: 2 / 1&#xa;Masivo: 4 / 60&#xa;Control: 2 / 6&#xa;SUMA DE TECHOS: 90 / 90" vertex="1">
+          <mxGeometry height="320" width="830" x="920" y="1330" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
