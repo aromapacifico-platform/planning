@@ -99,7 +99,7 @@ Es el modelo de la #13: una cuadrilla por acopio, con un piloto y un auxiliar, u
 
 La decisión aguanta los supuestos:
 - Si el mapeo se cobra como proyecto pequeño, a COP 300.000 por hectárea, contratar sube a USD 116.498 al año y sigue costando menos de la mitad que comprar.
-- Para que comprar empate, cada visita de S2 y S4 tendría que costar más de COP 1,4 millones.
+- Para que comprar empate, cada visita de S2 y S4 tendría que costar más de COP 1,5 millones.
 
 **Qué no se pierde al contratar.** Los controles de la #13 y la #14 no dependen de quién es dueño del dron, sino de la plataforma:
 - La identidad del operador con MFA.
