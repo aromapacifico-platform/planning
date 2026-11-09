@@ -31,11 +31,13 @@ flowchart TD
         Q1 --> Q2[terraform validate]
         Q2 --> Q3[tflint recursivo con reglas AWS]
         Q3 --> Q4[trivy config - analisis estatico y misconfig]
-        Q4 --> SP[Planes Especulativos OIDC]
+        Q4 --> INFRA[Infracost FinOps - Estimacion de Costos]
+        INFRA --> SP[Planes Especulativos OIDC]
         SP --> SP_DEV[Plan Dev]
         SP --> SP_TEST[Plan Test]
         SP --> SP_PROD[Plan Prod]
         SP_DEV & SP_TEST & SP_PROD --> PR_COMMENT[Publicacion de Resumen en Comentarios del PR]
+        INFRA --> COST_COMMENT[Publicacion de Desglose de Costo en PR]
     end
 
     subgraph CD_Phase["2. Fase de Despliegue Continuo (iac-cd-platform.yml)"]
@@ -222,10 +224,20 @@ flowchart LR
 - **Repositorio**: `aromapacifico-platform/iac` (o `.github` compartido).
 - **Alcance**: Despliegue de componentes base de AWS (VPC, subredes, endpoints de VPC para S3/DynamoDB/KMS/Logs, politicas de firewall, colas SQS con DLQ, tablas DynamoDB y roles IAM de minimo privilegio).
 - **Workflows Implementados**:
-  - `iac-ci-pr.yml`: Evaluacion estatica de formato, linter, seguridad y generacion de planes especulativos en PRs.
+  - `iac-ci-pr.yml`: Evaluacion estatica de formato, linter, seguridad, estimacion de costos con Infracost y generacion de planes especulativos en PRs.
   - `iac-reusable-tf-pipeline.yml`: Modulo reutilizable de ejecucion `init`, `plan` y `apply` parametrizado por ambiente.
   - `iac-cd-platform.yml`: Orquestador de despliegue continuo con promocion secuencial `dev` -> `test` -> `prod`, compuerta de cosecha y aprobacion manual.
   - `iac-drift-detection.yml`: Deteccion de desviacion nocturna sin ejecucion destructiva.
+
+#### 6.1.1. Integracion FinOps con Infracost y Estandarizacion de Pruebas
+- **Infracost en Pull Requests (Epica 7 - FinOps)**:
+  - Archivo de configuracion canonico `infracost.yml` mapeando los tres ambientes `iac/environments/dev`, `iac/environments/test` y `iac/environments/prod`.
+  - Generacion automatica de la linea base en la rama de destino (`main`) y calculo del diferencial de costo mensual (`infracost diff`).
+  - Publicacion interactiva del desglose de costos en el Pull Request mediante `infracost comment github`, permitiendo al equipo de operaciones anticipar el impacto financiero de cada cambio de infraestructura.
+  - Operacion resiliente: si el secreto `INFRACOST_API_KEY` no esta presente en el repositorio, el paso emite un registro informativo sin abortar la ejecucion del pipeline ni los planes de Terraform.
+- **Estandarizacion de Pruebas Unitarias (Pytest)**:
+  - Configuraciones declarativas en `pytest.ini` y `pyproject.toml` para garantizar paridad absoluta entre la ejecucion en estaciones de trabajo locales y los entornos de ejecucion de GitHub Actions.
+  - Enrutamiento explicito a la suite de scripts (`testpaths = scripts`), convenciones estrictas de descubrimiento (`test_*.py`) y trazas resumidas sin verbosidad excesiva.
 
 ### 6.2. Pipeline de Ingesta IoT (Fincas y Borde)
 - **Alcance**: Gestion y despliegue del software de borde para los microcontroladores y sensores en las 200 fincas y 3 centros de acopio.
@@ -260,3 +272,4 @@ En caso de requerirse un despliegue correctivo durante la ventana de congelamien
    El script `check_harvest_window.py` detectara el bypass, registrara la justificacion en los logs de ejecucion y emitira codigo de salida `0`.
 6. **Aprobacion Humana en Produccion**:
    El lider DevOps revisa el plan final y autoriza el despliegue en el GitHub Environment `prod`.
+
