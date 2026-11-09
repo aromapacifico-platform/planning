@@ -62,7 +62,7 @@
           <mxGeometry x="1110" y="110" width="500" height="35" as="geometry" />
         </mxCell>
 
-        <mxCell id="box-cloud-rekog" value="Amazon Rekognition (Visión Administrada):&#xa;&#xa;• Región us-east-1: Latencia competitiva (~45-55 ms desde Colombia)&#xa;• Precios Pay-as-you-go ($1.00 USD / 1.000 imágenes)&#xa;• Filtro Previo de Personas: DetectFaces + DetectLabels&#xa;• Inferencia Fitosanitaria: Modelos Custom Labels foliares&#xa;• Invariante: CERO retención de datos por el proveedor para reentrenar" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F7FF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+        <mxCell id="box-cloud-rekog" value="Inferencia Administrada Serverless (us-east-1):&#xa;&#xa;• Rekognition: Filtro Anti-PII perimetral (DetectFaces / DetectLabels)&#xa;• Bedrock Multimodal: Diagnóstico foliar administrado (sin entrenamiento)&#xa;• Región us-east-1: Latencia directa (~45-55 ms vía cables submarinos)&#xa;• Precios Pay-as-you-go: ~$0.003 USD por ciclo completo ($0 en reposo)&#xa;• Invariante: CERO retención de datos por el proveedor para reentrenar" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F7FF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
           <mxGeometry x="1135" y="160" width="450" height="200" as="geometry" />
         </mxCell>
 

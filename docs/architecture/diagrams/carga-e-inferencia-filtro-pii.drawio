@@ -96,7 +96,7 @@
         </mxCell>
 
         <!-- PASO NO 2 -->
-        <mxCell id="step-no-2" value="2. Avance a Inferencia Fitosanitaria Custom Labels&#xa;&#xa;• Invocación administrada a Amazon Rekognition Custom Labels en us-east-1 (Costo: $0.0010 USD / llamada)&#xa;• Diagnóstico foliar automatizado: Detección de Roya (Hemileia vastatrix) y Broca (Hypothenemus hampei)&#xa;• Vector de diagnóstico: Etiqueta fitosanitaria, coordenadas de delimitación y nivel de confianza (%)&#xa;• Latencia de ejecución &lt; 400 ms | Zero cómputo ocioso en espera ($0 USD en reposo)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=1.5;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
+        <mxCell id="step-no-2" value="2. Avance a Inferencia Multimodal en Amazon Bedrock&#xa;&#xa;• Invocación administrada a Amazon Bedrock (Claude 3 Haiku / Nova Lite) en us-east-1&#xa;• Diagnóstico foliar automatizado: Detección de Roya (Hemileia vastatrix) y Broca (Hypothenemus hampei)&#xa;• Cero entrenamiento propio de modelos | Pago estricto por token (Pay-per-Call, ~$0.0020 USD)&#xa;• Latencia de ejecución &lt; 400 ms | Zero cómputo esperando objetos ($0.00 USD en reposo)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=1.5;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;" vertex="1" parent="1">
           <mxGeometry x="865" y="630" width="725" height="130" as="geometry" />
         </mxCell>
 

@@ -126,11 +126,11 @@
 
   <!-- PASO NO 2 -->
   <rect x="865" y="630" width="725" height="130" rx="6" fill="#FFFFFF" stroke="#0E8A16" stroke-width="1.5" filter="url(#box-shadow)" />
-  <text x="880" y="660" class="card-header" fill="#0E8A16">2. Avance a Inferencia Fitosanitaria Custom Labels</text>
-  <text x="880" y="685" class="card-body">• Invocación administrada a Amazon Rekognition Custom Labels en us-east-1 ($0.0010 USD / llamada)</text>
+  <text x="880" y="660" class="card-header" fill="#0E8A16">2. Avance a Inferencia Multimodal en Amazon Bedrock</text>
+  <text x="880" y="685" class="card-body">• Invocación administrada a Amazon Bedrock (Claude 3 Haiku / Nova Lite) en us-east-1</text>
   <text x="880" y="705" class="card-body">• Diagnóstico foliar automatizado: Detección de Roya (Hemileia vastatrix) y Broca (Hypothenemus hampei)</text>
-  <text x="880" y="725" class="card-body">• Vector de diagnóstico: Etiqueta fitosanitaria, coordenadas de delimitación y nivel de confianza (%)</text>
-  <text x="880" y="745" class="card-sub" fill="#1D76DB">• Latencia de ejecución &lt; 400 ms | Zero cómputo ocioso en espera ($0 USD en reposo)</text>
+  <text x="880" y="725" class="card-body">• Cero entrenamiento de modelos | Pago estricto por token (Pay-per-Call, ~$0.0020 USD)</text>
+  <text x="880" y="745" class="card-sub" fill="#1D76DB">• Latencia de ejecución &lt; 400 ms | Zero cómputo esperando objetos ($0.00 USD en reposo)</text>
 
   <!-- PASO NO 3 -->
   <rect x="865" y="785" width="725" height="225" rx="6" fill="#FFFFFF" stroke="#0E8A16" stroke-width="1.5" filter="url(#box-shadow)" />

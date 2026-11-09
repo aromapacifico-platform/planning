@@ -129,13 +129,13 @@
   <rect x="1110" y="110" width="500" height="35" rx="8" fill="#EAEDED" />
   <text x="1125" y="133" class="swimlane-title">REGIÓN CLOUD PRINCIPAL: AWS US-EAST-1 (N. VIRGINIA)</text>
 
-  <!-- REKOGNITION -->
+  <!-- INFERENCIA SERVERLESS -->
   <rect x="1135" y="160" width="450" height="200" rx="6" fill="#F0F7FF" stroke="#1D76DB" stroke-width="2" filter="url(#box-shadow)" />
-  <text x="1150" y="185" class="card-header">Amazon Rekognition (Visión Administrada):</text>
-  <text x="1150" y="210" class="card-body">• Región us-east-1: Latencia competitiva (~45-55 ms desde Colombia)</text>
-  <text x="1150" y="232" class="card-body">• Precios Pay-as-you-go ($1.00 USD / 1.000 imágenes)</text>
-  <text x="1150" y="254" class="card-body">• Filtro Previo de Personas: DetectFaces + DetectLabels</text>
-  <text x="1150" y="276" class="card-body">• Inferencia Fitosanitaria: Modelos Custom Labels foliares</text>
+  <text x="1150" y="185" class="card-header">Inferencia Administrada Serverless (us-east-1):</text>
+  <text x="1150" y="210" class="card-body">• Rekognition: Filtro Anti-PII perimetral (DetectFaces / DetectLabels)</text>
+  <text x="1150" y="232" class="card-body">• Bedrock Multimodal: Diagnóstico foliar administrado (sin entrenamiento)</text>
+  <text x="1150" y="254" class="card-body">• Región us-east-1: Latencia directa (~45-55 ms vía cables submarinos)</text>
+  <text x="1150" y="276" class="card-body">• Precios Pay-as-you-go: ~$0.003 USD por ciclo completo ($0 en reposo)</text>
   <text x="1150" y="298" class="card-body">• Invariante: CERO retención de datos por el proveedor para reentrenar</text>
   <text x="1150" y="326" class="card-sub" fill="#1D76DB">ZERO COMPUTE IDLE ($0 USD EN REPOSO)</text>
 

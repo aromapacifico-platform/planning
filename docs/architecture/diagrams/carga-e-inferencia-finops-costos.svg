@@ -91,13 +91,13 @@
 
   <!-- TARIFAS UNITARIAS -->
   <rect x="565" y="160" width="480" height="430" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" filter="url(#box-shadow)" />
-  <text x="580" y="185" class="card-header">Tarifas Unitarias Oficiales AWS (us-east-1):</text>
+  <text x="580" y="185" class="card-header">Tarifas Unitarias Oficiales AWS (us-east-1, Feb 2026):</text>
   <text x="580" y="210" class="card-header">1. Amazon Rekognition: Filtro Anti-PII:</text>
   <text x="580" y="230" class="card-body">• DetectFaces + DetectLabels (MinConfidence 50%):</text>
   <text x="580" y="248" class="code-body">• $0.0010 USD por imagen analizada = $1.0000 USD / 1.000 req</text>
-  <text x="580" y="274" class="card-header">2. Amazon Rekognition: Inferencia Fitosanitaria:</text>
-  <text x="580" y="294" class="card-body">• Modelo foliar administrado (Roya/Broca/Maduración):</text>
-  <text x="580" y="312" class="code-body">• $0.0010 USD por imagen analizada = $1.0000 USD / 1.000 req</text>
+  <text x="580" y="274" class="card-header">2. Amazon Bedrock: Inferencia Multimodal Administrada:</text>
+  <text x="580" y="294" class="card-body">• Claude 3 Haiku / Nova Lite (Diagnóstico foliar):</text>
+  <text x="580" y="312" class="code-body">• Pay-per-Call por token: ~$0.0006 - $0.0020 USD / req ($2.00 / 1.000)</text>
   <text x="580" y="338" class="card-header">3. Cómputo AWS Lambda (Graviton2 arm64, 512 MB):</text>
   <text x="580" y="358" class="card-body">• Duración promedio: 400 ms (0.4 s x 0.5 GB = 0.2 GB-s)</text>
   <text x="580" y="376" class="card-body">• 1.000 invocaciones x 0.2 GB-s = 200 GB-s</text>
@@ -114,18 +114,19 @@
   <!-- COSTO CONSOLIDADO -->
   <rect x="565" y="610" width="480" height="350" rx="6" fill="#F4FBF5" stroke="#0E8A16" stroke-width="2" filter="url(#box-shadow)" />
   <text x="580" y="635" class="card-header" fill="#0E8A16">COSTO CONSOLIDADO POR 1.000 INVOCACIONES:</text>
-  <text x="580" y="662" class="code-body">• Filtro Anti-PII:                  $1.0000 USD</text>
-  <text x="580" y="680" class="code-body">• Inferencia Fitosanitaria:         $1.0000 USD</text>
+  <text x="580" y="662" class="code-body">• Filtro Rekognition Anti-PII:       $1.0000 USD</text>
+  <text x="580" y="680" class="code-body">• Bedrock Inferencia Multimodal:     $2.0000 USD</text>
   <text x="580" y="698" class="code-body">• AWS Lambda (Graviton2 arm64):    $0.0029 USD</text>
   <text x="580" y="716" class="code-body">• Amazon S3 (Almacenamiento 3.5GB): $0.0805 USD</text>
   <text x="580" y="734" class="code-body">• AWS KMS (Cifrado Criptográfico):  $0.0300 USD</text>
   <text x="580" y="752" class="code-body">• Gateway VPC Endpoint S3:          $0.0000 USD (Gratis)</text>
   <text x="580" y="770" class="code-body">------------------------------------------------</text>
-  <text x="580" y="788" class="card-header" fill="#0E8A16">TOTAL POR 1.000 FOTOS COMPLETAS:    $2.1134 USD</text>
-  <text x="580" y="820" class="card-header">FACTURA REAL DEL SEMESTRE DE COSECHA (620 FOTOS):</text>
-  <text x="580" y="845" class="card-sub" fill="#0E8A16">620 fotos x ($2.1134 / 1.000) = $1.31 USD TOTAL EN 6 MESES</text>
-  <text x="580" y="870" class="card-body">• Costo mensual promedio en cosecha: ~$0.22 USD / MES</text>
-  <text x="580" y="890" class="card-body">• Costo en mes de máxima cosecha (150 fotos): ~$0.32 USD / MES</text>
+  <text x="580" y="788" class="card-header" fill="#0E8A16">TOTAL CONSERVADOR (1.000 FOTOS):    $3.1134 USD</text>
+  <text x="580" y="806" class="card-sub" fill="#1D76DB">(Nominal Claude 3 Haiku: $1.7509 USD / 1.000)</text>
+  <text x="580" y="828" class="card-header">FACTURA REAL DEL SEMESTRE DE COSECHA (620 FOTOS):</text>
+  <text x="580" y="848" class="card-sub" fill="#0E8A16">620 fotos x ($3.1134 / 1.000) = $1.93 USD TOTAL EN 6 MESES</text>
+  <text x="580" y="870" class="card-body">• Costo mensual promedio en cosecha: ~$0.32 USD / MES</text>
+  <text x="580" y="890" class="card-body">• Costo en mes de máxima cosecha (150 fotos): ~$0.47 USD / MES</text>
   <text x="580" y="910" class="card-sub" fill="#0E8A16">MÁXIMA EFICIENCIA FINOPS: $0 EN REPOSO Y CERO GASTO FIJO</text>
 
   <!-- ==================== CONTENEDOR 3: COMPARATIVA FINOPS ==================== -->
@@ -137,8 +138,8 @@
   <rect x="1135" y="160" width="450" height="150" rx="6" fill="#F4FBF5" stroke="#0E8A16" stroke-width="2" filter="url(#box-shadow)" />
   <text x="1150" y="185" class="card-header" fill="#0E8A16">OPCIÓN SELECCIONADA: VISIÓN ADMINISTRADA SERVERLESS</text>
   <text x="1150" y="210" class="card-body">• Costo Fijo Mensual: $0.00 USD (Zero Compute en Reposo)</text>
-  <text x="1150" y="230" class="card-body">• Costo Real Mensual en Cosecha: ~$0.22 USD / mes</text>
-  <text x="1150" y="250" class="card-body">• Costo Semestre Cosecha: $1.31 USD</text>
+  <text x="1150" y="230" class="card-body">• Costo Real Mensual en Cosecha: ~$0.32 USD / mes</text>
+  <text x="1150" y="250" class="card-body">• Costo Semestre Cosecha: $1.93 USD ($1.09 con Claude)</text>
   <text x="1150" y="270" class="card-body">• Cero mantenimiento de parches, drivers CUDA o clusters</text>
   <text x="1150" y="290" class="card-sub" fill="#0E8A16">• Escalabilidad elástica instantánea de 200 a 1.000 fincas</text>
 
