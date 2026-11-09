@@ -41,14 +41,16 @@ flowchart TD
     end
 
     subgraph CD_Phase["2. Fase de Despliegue Continuo (iac-cd-platform.yml)"]
-        MERGE[Merge a rama main] --> DEV_DEPLOY[Despliegue Automatico a Dev]
-        DEV_DEPLOY --> TEST_DEPLOY[Despliegue Automatico a Test]
+        MERGE[Merge a rama main] --> DEV_DEPLOY["Despliegue a Dev (Plan -> Artefacto tfplan-dev -> Apply)"]
+        DEV_DEPLOY --> TEST_DEPLOY["Despliegue a Test (Plan -> Artefacto tfplan-test -> Apply)"]
         TEST_DEPLOY --> HARVEST_GATE{"Compuerta Horaria de Cosecha (05:00-18:00 UTC-5)"}
         
         HARVEST_GATE -- "En ventana y sin incidente" --> BLOCKED[Ejecucion Detenida - Bloqueo Cosecha]
-        HARVEST_GATE -- "Fuera de ventana O Bypass Incidente" --> APPROVAL{"Aprobacion Manual (GitHub Environment prod)"}
+        HARVEST_GATE -- "Fuera de ventana O Bypass PR/Dispatch" --> PLAN_PROD["Job plan-prod: Generacion y Subida de tfplan-prod"]
         
-        APPROVAL -- "Aprobado por Lider DevOps" --> PROD_DEPLOY[Despliegue Controlado a Produccion]
+        PLAN_PROD --> APPROVAL{"Aprobacion Manual Humana (GitHub Environment prod)"}
+        
+        APPROVAL -- "Aprobado tras auditar tfplan" --> APPLY_PROD["Job apply-prod: Descarga de tfplan-prod y terraform apply"]
         APPROVAL -- "Rechazado" --> ABORT[Despliegue Cancelado]
     end
 
@@ -119,6 +121,12 @@ permissions:
   contents: read
 ```
 
+### Manejo Estricto de OIDC y Prevencion de Falsos Positivos
+Para garantizar que ningun cambio de infraestructura se apruebe con falsos positivos:
+- Si el Pull Request o ejecucion proviene de una rama interna del repositorio oficial (`is_fork == false`), la asuncion del rol OIDC es **estricta y mandatoria**.
+- Si `steps.aws-auth` no culmina con exito, el workflow `iac-ci-pr.yml` ejecuta una verificacion que termina de inmediato en error (`exit 1`), bloqueando el PR y exigiendo la revision de politicas IAM o trust relationships.
+- Para forks externos no autenticados, se emite una advertencia tecnica limitando la revision a validacion estatica sintactica sin conceder acceso a los estados remotos en la nube.
+
 ---
 
 ## 4. Matriz de Control de Acceso y Aprobaciones en Produccion
@@ -127,9 +135,15 @@ El despliegue hacia el ambiente `prod` utiliza la caracteristica nativa de **Git
 
 | Entorno GitHub | Aprobadores Requeridos | Ventana de Espera | Ramas Permitidas | Proteccion Adicional |
 |---|---|---|---|---|
-| `dev` | Ninguno (Automatico tras PR merge) | 0 min | `refs/heads/main` | Ninguna |
-| `test` | Ninguno (Automatico tras exito en dev) | 0 min | `refs/heads/main` | Ninguna |
-| `prod` | Lider DevOps / Arquitecto Cloud (1 requerido) | 0 min | `refs/heads/main` | Compuerta de Cosecha previa |
+| `dev` | Ninguno (Automatico tras PR merge) | 0 min | `refs/heads/main` | Artefacto inmutable `tfplan-dev` |
+| `test` | Ninguno (Automatico tras exito en dev) | 0 min | `refs/heads/main` | Artefacto inmutable `tfplan-test` |
+| `prod` | Lider DevOps / Arquitecto Cloud (1 requerido) | 0 min | `refs/heads/main` | Compuerta Cosecha + `plan-prod` previo |
+
+### Desacoplamiento de Plan y Apply con Artefactos Inmutables
+Para eliminar cualquier riesgo de discrepancia entre lo analizado y lo desplegado:
+1. **Fase de Planificacion (`plan-prod`)**: Se inicializa el backend, se genera el archivo binario inmutable `terraform plan -out=tfplan` y su volcado legible `tfplan.txt`, almacenandolos temporalmente mediante `actions/upload-artifact@v4` con retencion de 2 dias. Esta fase no requiere aprobacion manual y permite a los revisores auditar el impacto real.
+2. **Pausa de Aprobacion Humana**: El entorno `prod` detiene la ejecucion en el job `apply-prod` solicitando revision y firma manual al personal autorizado.
+3. **Fase de Aplicacion (`apply-prod`)**: Tras la aprobacion, el runner descarga el artefacto inmutable mediante `actions/download-artifact@v4` y ejecuta estrictamente `terraform apply tfplan`. No se recalculan planes ni se admiten cambios fuera de banda.
 
 ### Politica de Concurrencia
 Para evitar condiciones de carrera o bloqueos simultaneos sobre el estado de Terraform, los workflows de despliegue definen grupos de concurrencia:
@@ -148,7 +162,7 @@ Durante las temporadas de cosecha en Cauca, Huila y Tolima, la plataforma opera 
 
 Cualquier interrupcion o latencia inducida por despliegues en horario de operacion activa (05:00 a 18:00 hora de Colombia) pone en riesgo el secado de cafe de alta calidad, la deteccion de anomalías y la emision oportuna de alertas a caficultores.
 
-### Reglas de Evaluacion del Script `check_harvest_window.py`
+### Reglas de Evaluacion y Bypass Dinamico
 
 1. **Zona Horaria Canonica**: Evaluacion obligatoria en `America/Bogota` (UTC-5 sin horario de verano).
 2. **Intervalo Restringido**: Desde las 05:00:00 hasta las 18:00:00 inclusive.
@@ -156,11 +170,10 @@ Cualquier interrupcion o latencia inducida por despliegues en horario de operaci
    - Ciclo Mitaca: Meses 4, 5, 6 (Abril, Mayo, Junio).
    - Ciclo Principal: Meses 9, 10, 11 (Septiembre, Octubre, Noviembre).
    - Configurable alternativamente por semanas ISO calendarizadas.
-4. **Mecanismo de Bypass de Emergencia**:
-   - Admision de flags CLI: `--emergency`, `--incident`, `--hotfix`, `--override`.
-   - Variables de entorno: `EMERGENCY_OVERRIDE=true`, `INCIDENT_FLAG=true`, `HOTFIX=true`.
-   - Etiquetas en GitHub PR / Issue: etiquetas que contengan `incident`, `emergency` o `hotfix`.
-   - Marcador en mensaje de commit: Deteccion automatica de palabras clave en `head_commit.message`.
+4. **Mecanismo de Bypass de Emergencia Multicapa**:
+   - **Consulta Automatizada de la API de GitHub**: Mediante `actions/github-script@v7`, el pipeline consulta la lista de Pull Requests asociados al commit de merge en `main` (`repos.listPullRequestsAssociatedWithCommit`) e inspecciona etiquetas de tipo `incident`, `emergency`, `hotfix` o `harvest-bypass`.
+   - **Flags CLI y Workflow Dispatch**: Admision explicita de inputs de emergencia en ejecuciones manuales.
+   - **Mensaje de Commit**: Deteccion de marcadores de contingencia (`[emergency]`, `[incident]`, `[hotfix]`).
 
 ### Evidencias de Pruebas Unitarias Automatizadas
 
