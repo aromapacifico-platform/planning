@@ -1,0 +1,226 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1650 1020" width="100%" height="100%">
+  <defs>
+    <style>
+      .main-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
+      .sub-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #5A6B7C; text-anchor: middle; }
+      .swimlane-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
+      .card-header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
+      .card-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: bold; fill: #555555; }
+      .card-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
+      .code-body { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 11px; fill: #232F3E; }
+      .flow-label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: bold; fill: #545B64; }
+      .flow-line { stroke: #545B64; stroke-width: 2; fill: none; }
+      .flow-line-accent { stroke: #1D76DB; stroke-width: 2.5; fill: none; }
+      .flow-line-danger { stroke: #D93F0B; stroke-width: 2.5; fill: none; }
+      .flow-line-success { stroke: #0E8A16; stroke-width: 2.5; fill: none; }
+      .flow-line-warning { stroke: #FF9900; stroke-width: 2.5; fill: none; }
+      .flow-dashed { stroke-dasharray: 6,4; }
+    </style>
+    <filter id="box-shadow" x="-2%" y="-2%" width="104%" height="106%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.08" />
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#545B64" />
+    </marker>
+    <marker id="arrow-danger" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#D93F0B" />
+    </marker>
+    <marker id="arrow-success" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0E8A16" />
+    </marker>
+    <marker id="arrow-accent" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1D76DB" />
+    </marker>
+    <marker id="arrow-warning" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#FF9900" />
+    </marker>
+  </defs>
+
+  <!-- FONDO -->
+  <rect width="1650" height="1020" fill="#FFFFFF" />
+
+  <!-- ENCABEZADO -->
+  <text x="825" y="42" class="main-title">AromaPacífico - Ciclo de Vida de Resiliencia, Reintentos Exponenciales y Aislamiento de Fallas (DLQ)</text>
+  <text x="825" y="70" class="sub-title">Garantía de Cero Mutación Destructiva, Preservación de Evidencias en S3 y Procedimiento de Redrive Operativo</text>
+
+  <!-- ==================== CONTENEDOR 1: EJECUCION Y REINTENTOS ==================== -->
+  <rect x="40" y="110" width="460" height="880" rx="8" fill="#F8F9FA" stroke="#D5DBDB" stroke-width="2" />
+  <rect x="40" y="110" width="460" height="35" rx="8" fill="#EAEDED" />
+  <text x="60" y="133" class="swimlane-title">CICLO DE EJECUCIÓN Y REINTENTOS (LAMBDA)</text>
+
+  <!-- INVOCACION -->
+  <rect x="65" y="160" width="410" height="110" rx="6" fill="#F0F7FF" stroke="#1D76DB" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="80" y="185" class="card-header">Invocación Asíncrona por Evento</text>
+  <text x="80" y="205" class="card-sub">Disparadores S3 Event / SQS Batch</text>
+  <text x="80" y="228" class="card-body">• Evento de nuevo objeto fotográfico o lote IoT</text>
+  <text x="80" y="248" class="card-body">• Lambda recibe el puntero al objeto en S3</text>
+  <text x="80" y="268" class="card-body">• Genera identificador de ejecución único (RequestID)</text>
+
+  <!-- INTENTO 1 -->
+  <rect x="65" y="305" width="410" height="145" rx="6" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="80" y="330" class="card-header">Intento 1: Ejecución Nominal de la Función</text>
+  <text x="80" y="352" class="card-body">• Procesamiento de imagen o decodificación CBOR</text>
+  <text x="80" y="372" class="card-body">• Llamada al servicio de inferencia (Bedrock / Rekognition)</text>
+  <text x="80" y="394" class="card-body">• SI OCURRE UN ERROR (Timeout, Throttling, 5xx):</text>
+  <text x="95" y="414" class="card-body">- Se aborta la transacción antes de tocar DynamoDB</text>
+  <text x="95" y="434" class="card-sub" fill="#D93F0B">- El objeto en S3 permanece 100% inalterado</text>
+
+  <!-- INTENTO 2 -->
+  <rect x="65" y="485" width="410" height="135" rx="6" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="80" y="510" class="card-header">Intento 2: Reintento Exponencial con Jitter</text>
+  <text x="80" y="533" class="card-body">• Tiempo de espera: Backoff exponencial (t = 2^1 + jitter)</text>
+  <text x="80" y="553" class="card-body">• Ventana de espera: ~1 a 3 segundos</text>
+  <text x="80" y="573" class="card-body">• Reintento automático administrado por el runtime</text>
+  <text x="80" y="593" class="card-body">• Si el fallo persiste, se escala al segundo reintento</text>
+
+  <!-- INTENTO 3 -->
+  <rect x="65" y="655" width="410" height="135" rx="6" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="80" y="680" class="card-header">Intento 3: Reintento Final de Agotamiento</text>
+  <text x="80" y="703" class="card-body">• Tiempo de espera: Backoff exponencial (t = 2^2 + jitter)</text>
+  <text x="80" y="723" class="card-body">• Ventana de espera: ~4 a 8 segundos</text>
+  <text x="80" y="743" class="card-body">• Si falla por tercera vez: AGOTAMIENTO FORMAL</text>
+  <text x="80" y="763" class="card-sub" fill="#D93F0B">• El runtime invoca el destino de fallos asíncrono</text>
+
+  <!-- DESPACHO DLQ -->
+  <rect x="65" y="825" width="410" height="115" rx="6" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="80" y="850" class="card-header">Despacho Automático a Dead Letter Queue (DLQ)</text>
+  <text x="80" y="873" class="card-body">• Enrutamiento mediante Lambda Asynchronous Destination</text>
+  <text x="80" y="893" class="card-body">• Destino: SQS Dead Letter Queue dedicada por función</text>
+  <text x="80" y="913" class="card-sub" fill="#D93F0B">• CERO reintentos infinitos que incrementen costos</text>
+
+  <!-- ==================== CONTENEDOR 2: DLQ Y RECARGA ==================== -->
+  <rect x="540" y="110" width="530" height="880" rx="8" fill="#F8F9FA" stroke="#D5DBDB" stroke-width="2" />
+  <rect x="540" y="110" width="530" height="35" rx="8" fill="#EAEDED" />
+  <text x="560" y="133" class="swimlane-title">COLA DE FALLOS (DEAD LETTER QUEUE) Y CARGA ENRIQUECIDA</text>
+
+  <!-- PAYLOAD SQS DLQ -->
+  <rect x="565" y="160" width="480" height="410" rx="6" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="580" y="185" class="card-header">Amazon SQS: dlq-confirmacion-foco (Cifrada con KMS)</text>
+  <text x="580" y="205" class="card-sub">Configuración: MessageRetentionPeriod = 1209600s (14 días)</text>
+  <text x="580" y="230" class="code-body">• Contenido del mensaje de error en la DLQ:</text>
+  <text x="580" y="248" class="code-body">  {</text>
+  <text x="590" y="266" class="code-body">    "version": "1.0",</text>
+  <text x="590" y="284" class="code-body">    "timestamp": "2026-11-08T15:02:00Z",</text>
+  <text x="590" y="302" class="code-body">    "requestContext": {</text>
+  <text x="600" y="320" class="code-body">      "requestId": "c8b3e1a0-9412-4f32-8b01-fnc2026",</text>
+  <text x="600" y="338" class="code-body">      "functionArn": "arn:aws:lambda:us-east-1:...:ProcessFocusConfirmation",</text>
+  <text x="600" y="356" class="code-body">      "condition": "RetriesExhausted",</text>
+  <text x="600" y="374" class="code-body">      "approximateInvokeCount": 3</text>
+  <text x="590" y="392" class="code-body">    },</text>
+  <text x="590" y="410" class="code-body">    "requestPayload": {</text>
+  <text x="600" y="428" class="code-body">      "Records": [ { "s3": { "bucket": { "name": "aromapacifico-objetos-prod" },</text>
+  <text x="650" y="446" class="code-body">"object": { "key": "raw-images/focos/FINCA-CAUCA-012/foto_9412.jpg" } } } ]</text>
+  <text x="590" y="464" class="code-body">    },</text>
+  <text x="590" y="482" class="code-body">    "responsePayload": {</text>
+  <text x="600" y="500" class="code-body">      "errorMessage": "ThrottlingException: Bedrock rate limit exceeded",</text>
+  <text x="600" y="518" class="code-body">      "errorType": "ThrottlingException"</text>
+  <text x="590" y="536" class="code-body">    }</text>
+  <text x="580" y="554" class="code-body">  }</text>
+
+  <!-- REDRIVE -->
+  <rect x="565" y="605" width="480" height="175" rx="6" fill="#F0F7FF" stroke="#1D76DB" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="580" y="630" class="card-header">Mecanismo de Recuperación: SQS Dead-Letter Queue Redrive</text>
+  <text x="580" y="652" class="card-body">• Inspección del error por el equipo de ingeniería de plataforma</text>
+  <text x="580" y="672" class="card-body">• Corrección de causa raíz (ej. ajuste de cuota, restauración de VPC Endpoint)</text>
+  <text x="580" y="692" class="card-body">• Redrive controlado hacia la función Lambda original</text>
+  <text x="580" y="712" class="card-body">• Reprocesamiento 100% exitoso sin pedir nuevo vuelo de dron a campo</text>
+  <text x="580" y="732" class="card-sub" fill="#1D76DB">• Trazabilidad completa en auditoría de CloudWatch</text>
+
+  <!-- RETENCION Y PURGA -->
+  <rect x="565" y="810" width="480" height="130" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" />
+  <text x="580" y="835" class="card-header">Política de Retención y Purga de Seguridad:</text>
+  <text x="580" y="858" class="card-body">• Mensajes no procesados expiran tras 14 días (1.209.600 segundos)</text>
+  <text x="580" y="878" class="card-body">• Almacenamiento seguro bajo KMS CMK de seguridad</text>
+  <text x="580" y="898" class="card-body">• Previene acumulación silenciosa de fallas fitosanitarias</text>
+  <text x="580" y="918" class="card-sub" fill="#545B64">• Cero pérdida de trazabilidad en auditorías ante la FNC o el ICA</text>
+
+  <!-- ==================== CONTENEDOR 3: INVARIANTES Y SRE ==================== -->
+  <rect x="1110" y="110" width="500" height="880" rx="8" fill="#F8F9FA" stroke="#D5DBDB" stroke-width="2" />
+  <rect x="1110" y="110" width="500" height="35" rx="8" fill="#EAEDED" />
+  <text x="1130" y="133" class="swimlane-title">GARANTÍAS ARQUITECTÓNICAS Y OBSERVABILIDAD SRE</text>
+
+  <!-- INVARIANTES -->
+  <rect x="1135" y="160" width="450" height="270" rx="6" fill="#F4FBF5" stroke="#0E8A16" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="1150" y="185" class="card-header">Garantías Arquitectónicas Innegociables:</text>
+  <text x="1150" y="212" class="card-header" fill="#0E8A16">1. PRESERVACIÓN DEL OBJETO DE ORIGEN:</text>
+  <text x="1150" y="232" class="card-body">El archivo en Amazon S3 permanece exactamente en su estado</text>
+  <text x="1150" y="250" class="card-body">original. Ninguna excepción, corte de red o timeout borra</text>
+  <text x="1150" y="268" class="card-body">o corrompe la foto o registro capturado.</text>
+
+  <text x="1150" y="296" class="card-header" fill="#0E8A16">2. CERO MUTACIÓN DE ESTADO EN FALLA:</text>
+  <text x="1150" y="316" class="card-body">La tabla ExpedienteFitosanitario en DynamoDB NO muta.</text>
+  <text x="1150" y="334" class="card-body">El foco permanece en estado nominal o pendiente, impidiendo</text>
+  <text x="1150" y="352" class="card-body">que un error técnico asuma erróneamente 'Foco descartado'</text>
+  <text x="1150" y="370" class="card-body">o 'Caso cerrado'.</text>
+
+  <text x="1150" y="398" class="card-header" fill="#0E8A16">3. PREVENCIÓN DE FALSAS FUMIGACIONES:</text>
+  <text x="1150" y="416" class="card-body">Sin un resultado positivo explícito y validado por agrónomo,</text>
+  <text x="1150" y="434" class="card-body">NUNCA se habilita la creación de la orden de fumigación.</text>
+
+  <!-- ALARMAS CLOUDWATCH -->
+  <rect x="1135" y="465" width="450" height="245" rx="6" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="1150" y="490" class="card-header">Amazon CloudWatch: Alarmas y Notificación P1</text>
+  <text x="1150" y="513" class="card-body">• Métrica supervisada: ApproximateNumberOfMessagesVisible &gt; 0</text>
+  <text x="1150" y="533" class="card-body">• Evaluación: Periodo de 1 minuto, umbral ≥ 1 mensaje</text>
+  <text x="1150" y="553" class="card-body">• Acción inmediata: Notificación vía Amazon SNS</text>
+  <text x="1165" y="573" class="card-body">- Notifica al canal de soporte técnico de operaciones FNC</text>
+  <text x="1165" y="593" class="card-body">- Abre ticket de incidente técnico P1 en mesa de servicio</text>
+  <text x="1150" y="613" class="card-body">• Dashboards operativos con desglose por FincaID y AcopioID</text>
+  <text x="1150" y="635" class="card-sub" fill="#FF9900">TIEMPO DE RESPUESTA OPERACIONAL (MTTR): &lt; 30 MINUTOS</text>
+  <text x="1150" y="655" class="card-body">Detección y contención sin degradar la recepción de sacos</text>
+
+  <!-- AUDITORIA FORENSE -->
+  <rect x="1135" y="740" width="450" height="200" rx="6" fill="#F0F7FF" stroke="#1D76DB" stroke-width="2" filter="url(#box-shadow)" />
+  <text x="1150" y="765" class="card-header">Auditoría y Trazabilidad Inmutable:</text>
+  <text x="1150" y="788" class="card-body">• Cada fallo y reintento queda registrado en CloudWatch Logs</text>
+  <text x="1150" y="808" class="card-body">• Agregación en cuenta AromaPacifico-Security con S3 Object Lock</text>
+  <text x="1150" y="828" class="card-body">• Duración de retención de trazas de fallo: 5 años</text>
+  <text x="1150" y="848" class="card-body">• Permite reconstruir cualquier incidente agronómico ante reclamos</text>
+  <text x="1150" y="873" class="card-sub" fill="#1D76DB">RETENCIÓN REGULATORIA EXIGIDA: 5 AÑOS (1.825 DÍAS)</text>
+
+  <!-- ==================== CONECTORES Y FLECHAS (CALCULADOS EXACTOS) ==================== -->
+  <!-- Columna 1: Flujo descendente -->
+  <!-- Invocacion a Intento 1 -->
+  <path d="M 270 270 L 270 305" class="flow-line-accent" marker-end="url(#arrow-accent)" />
+
+  <!-- Intento 1 a Intento 2 -->
+  <path d="M 270 450 L 270 485" class="flow-line-warning" marker-end="url(#arrow-warning)" />
+  <text x="280" y="471" class="flow-label" fill="#FF9900">Retry con Jitter (~1-3s)</text>
+
+  <!-- Intento 2 a Intento 3 -->
+  <path d="M 270 620 L 270 655" class="flow-line-danger" marker-end="url(#arrow-danger)" />
+  <text x="280" y="641" class="flow-label" fill="#D93F0B">Retry Final (~4-8s)</text>
+
+  <!-- Intento 3 a Exhaust -->
+  <path d="M 270 790 L 270 825" class="flow-line-danger" marker-end="url(#arrow-danger)" />
+  <text x="280" y="811" class="flow-label" fill="#D93F0B">Agotamiento Retries</text>
+
+  <!-- Corredor 1 a 2: Exhaust hacia DLQ (Canal x = 510) -->
+  <path d="M 475 883 L 510 883 L 510 365 L 565 365" class="flow-line-danger" marker-end="url(#arrow-danger)" />
+  <text x="495" y="610" class="flow-label" fill="#D93F0B" transform="rotate(-90 495 610)">OnFailure Destination (DLQ)</text>
+
+  <!-- Corredor 2 a 1: Redrive hacia Intento 1 (Canal x = 535, Línea discontinua) -->
+  <path d="M 565 693 L 535 693 L 535 378 L 475 378" class="flow-line-accent flow-dashed" marker-end="url(#arrow-accent)" />
+  <text x="548" y="550" class="flow-label" fill="#1D76DB" transform="rotate(-90 548 550)">SQS DLQ Redrive</text>
+
+  <!-- Columna 2: Flujo descendente -->
+  <!-- SQS DLQ a Redrive -->
+  <path d="M 805 570 L 805 605" class="flow-line-accent" marker-end="url(#arrow-accent)" />
+  <text x="815" y="591" class="flow-label" fill="#1D76DB">Intervención Operativa SRE</text>
+
+  <!-- Redrive a Retención -->
+  <path d="M 805 780 L 805 810" class="flow-line" marker-end="url(#arrow)" />
+  <text x="815" y="798" class="flow-label" fill="#545B64">Expiración tras 14 días</text>
+
+  <!-- Corredor 2 a 3: DLQ a Invariantes (Línea horizontal recta y = 262.5) -->
+  <path d="M 1045 262.5 L 1135 262.5" class="flow-line-success" marker-end="url(#arrow-success)" />
+  <text x="1055" y="254" class="flow-label" fill="#0E8A16">Objeto S3 Intacto · Cero Mutación DDB</text>
+
+  <!-- Corredor 2 a 3: DLQ a CloudWatch Alarms (Línea horizontal recta y = 521) -->
+  <path d="M 1045 521 L 1135 521" class="flow-line-warning" marker-end="url(#arrow-warning)" />
+  <text x="1055" y="513" class="flow-label" fill="#FF9900">Alarma P1: DLQDepth &gt; 0</text>
+
+  <!-- Columna 3: CloudWatch a Auditoría -->
+  <path d="M 1360 710 L 1360 740" class="flow-line-accent" marker-end="url(#arrow-accent)" />
+
+</svg>
