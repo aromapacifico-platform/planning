@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" compressed="false">
+  <diagram id="seguridad-firewall-iac" name="Arquitectura de Seguridad IaC y Matriz de Firewall">
+    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="1100" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TITULO Y ENCABEZADO -->
+        <mxCell id="title" value="AromaPacífico - Módulo de Seguridad IaC y Verificación de Firewall (Épica 6 · E6-04)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="250" y="25" width="1000" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Mapeo Técnico de Llaves KMS, Roles IAM con Privilegio Mínimo y Catálogo Permanente de Firewall (C01–C20, N01–N16)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
+          <mxGeometry x="250" y="60" width="1000" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR 1: LLAVES KMS CUSTOMER MANAGED (CMK) -->
+        <mxCell id="box-kms" value="1. Cifrado en Reposo: Customer Managed Keys (AWS KMS con Rotación Anual Automática)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F2F3F3;strokeColor=#545B64;strokeWidth=2;fontColor=#232F3E;fontSize=14;fontStyle=1;startSize=35;" vertex="1" parent="1">
+          <mxGeometry x="50" y="110" width="440" height="420" as="geometry" />
+        </mxCell>
+
+        <mxCell id="kms-data" value="KMS Datos Agronómicos y Sacos&#xa;Alias: alias/aromapacifico-dev-kms-data&#xa;&#xa;• Cifrado de tabla DynamoDB de Telemetría&#xa;• Cifrado de tabla Master de Sacos (60 kg)&#xa;• Algoritmo AES-256-GCM Envelope&#xa;• Lifecycle: prevent_destroy = true&#xa;• Acceso restringido por CallerAccount" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0073BB;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="box-kms">
+          <mxGeometry x="20" y="50" width="400" height="105" as="geometry" />
+        </mxCell>
+
+        <mxCell id="kms-objects" value="KMS Objetos y Vuelos de Drones&#xa;Alias: alias/aromapacifico-dev-kms-objects&#xa;&#xa;• Cifrado SSE-KMS de Bucket de Fotos de Foco&#xa;• Protección de Bitácoras de Vuelo (.bin)&#xa;• Integración con Inferencia Rekognition&#xa;• Lifecycle: prevent_destroy = true&#xa;• Zero-Cleartext en almacenamiento" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0073BB;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="box-kms">
+          <mxGeometry x="20" y="170" width="400" height="105" as="geometry" />
+        </mxCell>
+
+        <mxCell id="kms-logs" value="KMS Auditoría y Trazas Centralizadas&#xa;Alias: alias/aromapacifico-dev-kms-logs&#xa;&#xa;• Cifrado de CloudWatch Logs y VPC Flow Logs&#xa;• Cifrado de Estado Remoto S3 y DynamoDB Lock&#xa;• Retención Probatoria de 5 Años&#xa;• Lifecycle: prevent_destroy = true&#xa;• Acceso exclusivo para el servicio de logs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0073BB;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="box-kms">
+          <mxGeometry x="20" y="290" width="400" height="105" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR 2: ROLES IAM DE PLATAFORMA -->
+        <mxCell id="box-iam" value="2. Identidades de Plataforma: Roles IAM con Privilegio Mínimo (Zero-Wildcards en Datos)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F2F3F3;strokeColor=#545B64;strokeWidth=2;fontColor=#232F3E;fontSize=14;fontStyle=1;startSize=35;" vertex="1" parent="1">
+          <mxGeometry x="520" y="110" width="450" height="420" as="geometry" />
+        </mxCell>
+
+        <mxCell id="iam-ingest" value="Rol de Ingesta Telemetría (IoT Core)&#xa;Nombre: aromapacifico-dev-role-ingest&#xa;&#xa;• Entidad de Confianza: iot.amazonaws.com&#xa;• Permiso: dynamodb:PutItem en tabla telemetría&#xa;• Permiso: sqs:SendMessage en cola telemetría&#xa;• Permiso: kms:Encrypt en llave KMS Datos&#xa;• Sin comodines (*) en recursos o acciones" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="box-iam">
+          <mxGeometry x="20" y="50" width="410" height="105" as="geometry" />
+        </mxCell>
+
+        <mxCell id="iam-function" value="Rol de Función de Foco (AWS Lambda)&#xa;Nombre: aromapacifico-dev-role-focus-func&#xa;&#xa;• Entidad de Confianza: lambda.amazonaws.com&#xa;• Permiso 1: s3:GetObject en bucket de foco&#xa;• Permiso 2: rekognition:DetectLabels en inferencia&#xa;• Permiso 3: dynamodb:PutItem en expediente&#xa;• Permiso Auxiliar: sqs:SendMessage a DLQ de fallos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="box-iam">
+          <mxGeometry x="20" y="170" width="410" height="105" as="geometry" />
+        </mxCell>
+
+        <mxCell id="iam-delivery" value="Rol de Entrega en Puerto y Eventos&#xa;Nombre: aromapacifico-dev-role-delivery&#xa;&#xa;• Entidad de Confianza: lambda.amazonaws.com&#xa;• Permiso: dynamodb:PutItem en ledger de sacos&#xa;• Permiso: kms:Encrypt en llave KMS Datos&#xa;• Transacción digital Buenaventura (cero infra FNC)&#xa;• Trazabilidad inmutable con RPO de 15 minutos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="box-iam">
+          <mxGeometry x="20" y="290" width="410" height="105" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR 3: SECURITY GROUPS DE FIREWALL PERMANENTE -->
+        <mxCell id="box-sg" value="3. Reglas Permanentes de Firewall: Security Groups por Capa y Servicio (C01–C20)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F2F3F3;strokeColor=#545B64;strokeWidth=2;fontColor=#232F3E;fontSize=14;fontStyle=1;startSize=35;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="110" width="460" height="420" as="geometry" />
+        </mxCell>
+
+        <mxCell id="sg-public" value="Capa Consulta Pública (C01, C02, C03, C20)&#xa;• SG-ALB-CONSULTA: Ingress 0.0.0.0/0:443 (C01)&#xa;• SG-ALB-CONSULTA: Egress hacia SG-CONSULTA:443 (C02)&#xa;• SG-CONSULTA: Ingress desde SG-ALB-CONSULTA:443 (C03)&#xa;• SG-CONSULTA: Egress hacia Prefix List DynamoDB:443 (C20)&#xa;• Restricción: Sin exposición de cédula ni traza interna" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D8102;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="box-sg">
+          <mxGeometry x="20" y="50" width="420" height="105" as="geometry" />
+        </mxCell>
+
+        <mxCell id="sg-endpoints" value="Capa Interconexión Privada (C04, C05, C10, C11)&#xa;• SG-VPCE-API: Ingress desde LOG-AUT-CIDR:443 (C04)&#xa;• SG-VPCE-S3: Ingress desde DRON y BACKUP CIDR:443 (C05)&#xa;• SG-FUNCION: Egress hacia SG-VPCE-REKOG:443 (C10)&#xa;• SG-VPCE-REKOG: Ingress desde SG-FUNCION:443 (C11)&#xa;• Tráfico enrutado por túneles VPN IPsec sin solape" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D8102;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="box-sg">
+          <mxGeometry x="20" y="170" width="420" height="105" as="geometry" />
+        </mxCell>
+
+        <mxCell id="sg-shared" value="Capa Servicios Transversales (C12–C19)&#xa;• SG-VPCE-LOGS: Ingress CloudWatch Logs:443 (C12, C13)&#xa;• SG-VPCE-KMS: Ingress AWS KMS PrivateLink:443 (C14, C15)&#xa;• SG-VPCE-SSM: Ingress Administración SSM:443 (C16, C17)&#xa;• SG-RESOLVER: In/Out Route 53 Resolver:53 (C18, C19)&#xa;• Invariantes C21 y C22: Cero salida 0.0.0.0/0 por defecto" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D8102;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="box-sg">
+          <mxGeometry x="20" y="290" width="420" height="105" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR 4: LISTAS DE CONTROL DE ACCESO DE RED (NACLs) -->
+        <mxCell id="box-nacl" value="4. Perímetro de Subredes: Network Access Control Lists (NACLs Permanentes N01–N16)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F2F3F3;strokeColor=#545B64;strokeWidth=2;fontColor=#232F3E;fontSize=14;fontStyle=1;startSize=35;" vertex="1" parent="1">
+          <mxGeometry x="50" y="560" width="1410" height="480" as="geometry" />
+        </mxCell>
+
+        <mxCell id="nacl-priv" value="NACL Subredes Privadas del Ambiente (N01 a N11, N16)&#xa;&#xa;Ingreso (Ingress):&#xa;• Regla 10 (N01): DENEGAR tráfico proveniente de VLAN Visitantes (10.41.5.0/24) [Prioridad Alta]&#xa;• Regla 100 (N02): PERMITIR HTTPS TCP 443 desde CIDRs Privados Autorizados (PRIV-AUT)&#xa;• Regla 110 (N04): PERMITIR DNS TCP 53 desde PRIV-AUT&#xa;• Regla 120 (N05): PERMITIR DNS UDP 53 desde PRIV-AUT&#xa;• Regla 130 (N08): PERMITIR Puertos Efímeros TCP 1024-65535 para retorno de conexiones&#xa;• Regla 140 (N10): PERMITIR Puertos Efímeros UDP 1024-65535 para respuestas DNS&#xa;• Regla * (N16): DENEGACIÓN implícita por defecto para cualquier otro tráfico&#xa;&#xa;Egreso (Egress):&#xa;• Regla 100 (N03): PERMITIR HTTPS TCP 443 hacia PRIV-AUT y endpoints privados de datos&#xa;• Regla 110 (N06): PERMITIR DNS TCP 53 hacia PRIV-AUT&#xa;• Regla 120 (N07): PERMITIR DNS UDP 53 hacia PRIV-AUT&#xa;• Regla 130 (N09): PERMITIR Puertos Efímeros TCP 1024-65535 hacia clientes autorizados&#xa;• Regla 140 (N11): PERMITIR Puertos Efímeros UDP 1024-65535 hacia clientes autorizados" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#314A5E;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;verticalAlign=middle;" vertex="1" parent="box-nacl">
+          <mxGeometry x="20" y="50" width="670" height="400" as="geometry" />
+        </mxCell>
+
+        <mxCell id="nacl-pub" value="NACL Subredes de Consulta Pública (N12 a N16)&#xa;&#xa;Ingreso (Ingress):&#xa;• Regla 100 (N12): PERMITIR HTTPS TCP 443 desde cualquier origen (0.0.0.0/0) hacia el Application Load Balancer&#xa;• Regla 110 (N15): PERMITIR Puertos Efímeros TCP 1024-65535 desde la subred de aplicación (APP-CIDR) para retorno de peticiones&#xa;• Regla * (N16): DENEGACIÓN implícita para todo origen no previsto&#xa;&#xa;Egreso (Egress):&#xa;• Regla 100 (N13): PERMITIR Puertos Efímeros TCP 1024-65535 hacia Internet (0.0.0.0/0) para retorno de respuestas HTTP a compradores&#xa;• Regla 110 (N14): PERMITIR HTTPS TCP 443 hacia la subred de aplicación interna (APP-CIDR) para reenvío del balanceador&#xa;• Regla * (N16): DENEGACIÓN implícita para cualquier salida no listada&#xa;&#xa;Garantías de Diseño:&#xa;• Aislamiento estricto: la subred pública no posee enrutamiento directo hacia la subred de datos ni ingesta&#xa;• RTO de 4 horas y RPO de 15 minutos asegurados mediante réplicas multi-AZ en us-east-1a y us-east-1b" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#314A5E;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;verticalAlign=middle;" vertex="1" parent="box-nacl">
+          <mxGeometry x="720" y="50" width="670" height="400" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
+
