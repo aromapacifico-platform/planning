@@ -101,3 +101,6 @@ Supuestos que no están en el enunciado y que tomó el equipo al diseñar la pla
 | Consulta pública promedio de 3 por minuto en cosecha y 1 fuera de cosecha | El enunciado da solo el pico de 30 por minuto | #29 | Supuesto |
 | 5 alertas por finca al mes en cosecha y 2 fuera, con SMS a unos USD 0,035 | La tasa real de lecturas fuera de rango no se conoce; el precio de SMS a Colombia se confirma en el reporte de uso de SNS | #29 | Supuesto |
 | La conmutación de la consulta usa health checks de Route 53, no Application Recovery Controller | ARC cuesta unos USD 1.825 al mes y el RTO de 4 horas no lo necesita | #29 | Decidido |
+| Las fincas sin cobertura se conectan por LoRa a un gateway LTE compartido entre unas 5 fincas; el 80 % lo alcanza y el resto sigue con satélite | Baja la cuota de conectividad sin cobertura de USD 147 a centavos; el alcance real depende de la línea de vista y sale de la preinspección | #31 | Decidido |
+| Se quita Network Firewall del piloto y se deja solo el Resolver de entrada | La red fija era el 83 % del costo de la plataforma; el filtrado lo hacen los security groups, las NACL y los firewalls de los acopios | #31 | Decidido |
+| El presupuesto mensual de la #1 se actualiza a unos USD 811 en mes normal y USD 841 en cosecha | Son los valores de la plataforma después de bajar la red fija | #31 | Decidido |
