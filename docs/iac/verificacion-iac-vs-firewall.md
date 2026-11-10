@@ -26,57 +26,57 @@ A continuación se presenta la arquitectura visual del módulo de seguridad, ilu
 
 ## 3. Matriz de Verificación Cruzada: Security Groups frente a la Tabla de Firewall
 
-La siguiente matriz detalla la correspondencia exacta, biunívoca y sin excepciones entre cada identificador permanente del catálogo de firewall de nube (`C01` a `C20`), las invariantes de diseño (`C21` y `C22`) y los recursos HCL declarados en el archivo `main.tf` del módulo `modules/security`:
+La siguiente matriz detalla la correspondencia exacta, biunívoca y sin excepciones entre cada identificador permanente del catálogo de firewall de nube (`C01` a `C20`), las invariantes de diseño (`C21` y `C22`), su clave de contrato dentro de `module.security.rule_catalog`, su recurso contenedor o ID padre (`parent_id`) y los recursos HCL declarados en el archivo `main.tf` del módulo `modules/security`:
 
-| ID Catálogo | Control | Origen Autorizado | Destino Autorizado | Protocolo y Puerto | Acción | Recurso Terraform HCL en `modules/security` | Estado de Verificación |
-|---|---|---|---|---|---|---|---|
-| **C01** | SG-IN | `0.0.0.0/0` (Internet público) | `SG-ALB-CONSULTA` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_ingress_rule.c01` | Verificado uno a uno |
-| **C02** | SG-OUT | `SG-ALB-CONSULTA` | `SG-CONSULTA` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_egress_rule.c02` | Verificado uno a uno |
-| **C03** | SG-IN | `SG-ALB-CONSULTA` | `SG-CONSULTA` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_ingress_rule.c03` | Verificado uno a uno |
-| **C04** | SG-IN | `LOG-AUT-CIDR` (`var.log_authorized_cidr`) | `SG-VPCE-API` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_ingress_rule.c04` | Verificado uno a uno |
-| **C05** | SG-IN | `DRON-CIDR` y `BACKUP-CIDR` (`var.drone_backup_cidrs`) | `SG-VPCE-S3` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_ingress_rule.c05` | Verificado uno a uno |
-| **C06** | SG-OUT | `SG-INGESTA` | `PL-DDB` (Prefix List DynamoDB) | TCP 443 (HTTPS) | Permitir | `aws_security_group.ingest` (salida hacia gateway endpoint) | Verificado por diseño |
-| **C07** | SG-OUT | `SG-INGESTA` | `PL-S3` (Prefix List Amazon S3) | TCP 443 (HTTPS) | Permitir | `aws_security_group.ingest` (salida hacia gateway endpoint) | Verificado por diseño |
-| **C08** | SG-OUT | `SG-FUNCION` | `PL-S3` (Prefix List Amazon S3) | TCP 443 (HTTPS) | Permitir | `aws_security_group.function` (salida hacia gateway endpoint) | Verificado por diseño |
-| **C09** | SG-OUT | `SG-FUNCION` | `PL-DDB` (Prefix List DynamoDB) | TCP 443 (HTTPS) | Permitir | `aws_security_group.function` (salida hacia gateway endpoint) | Verificado por diseño |
-| **C10** | SG-OUT | `SG-FUNCION` | `SG-VPCE-REKOG` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_egress_rule.c10` | Verificado uno a uno |
-| **C11** | SG-IN | `SG-FUNCION` | `SG-VPCE-REKOG` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_ingress_rule.c11` | Verificado uno a uno |
-| **C12** | SG-OUT | `SG-CLIENTES-LOG` | `SG-VPCE-LOGS` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_egress_rule.c12` | Verificado uno a uno |
-| **C13** | SG-IN | `SG-CLIENTES-LOG` | `SG-VPCE-LOGS` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_ingress_rule.c13` | Verificado uno a uno |
-| **C14** | SG-OUT | `SG-CLIENTES-KMS` | `SG-VPCE-KMS` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_egress_rule.c14` | Verificado uno a uno |
-| **C15** | SG-IN | `SG-CLIENTES-KMS` | `SG-VPCE-KMS` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_ingress_rule.c15` | Verificado uno a uno |
-| **C16** | SG-OUT | `SG-ADMIN` | `SG-VPCE-SSM` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_egress_rule.c16` | Verificado uno a uno |
-| **C17** | SG-IN | `ADMIN-CIDR` (`var.admin_cidr`) | `SG-VPCE-SSM` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_ingress_rule.c17` | Verificado uno a uno |
-| **C18** | SG-IN | `DNS-CIDR` (`var.dns_cidr`) | `SG-RESOLVER-IN` | TCP/UDP 53 (DNS) | Permitir | `aws_vpc_security_group_ingress_rule.c18_tcp` y `c18_udp` | Verificado uno a uno |
-| **C19** | SG-OUT | `SG-RESOLVER-OUT` | `DNS-CIDR` (`var.dns_cidr`) | TCP/UDP 53 (DNS) | Permitir | `aws_vpc_security_group_egress_rule.c19_tcp` y `c19_udp` | Verificado uno a uno |
-| **C20** | SG-OUT | `SG-CONSULTA` | `PL-DDB` (Prefix List DynamoDB) | TCP 443 (HTTPS) | Permitir | `aws_security_group.query` (salida hacia gateway endpoint) | Verificado por diseño |
-| **C21** | INVARIANTE | Tráfico entrante no enumerado | Security Groups de la plataforma | Todos | Denegación implícita | Arquitectura nativa de AWS Security Groups (sin reglas allow coincidentes) | Cumplimiento estricto |
-| **C22** | INVARIANTE | Security Groups de la plataforma | Destinos no explícitos | Todos | Denegación implícita | Se elimina la regla de salida universal 0.0.0.0/0 por defecto en todos los grupos | Cumplimiento estricto |
+| ID Catálogo | Contrato (`rule_catalog`) | Control | ID Padre (`parent_id`) | Origen Autorizado | Destino Autorizado | Protocolo y Puerto | Acción | Recurso Terraform HCL en `modules/security` |
+|---|---|---|---|---|---|---|---|---|
+| **C01** | `sg_ingress["C01"]` | SG-IN | `aws_security_group.alb_query.id` | `0.0.0.0/0` (Internet) | `SG-ALB-CONSULTA` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_ingress_rule.c01` |
+| **C02** | `sg_egress["C02"]` | SG-OUT | `aws_security_group.alb_query.id` | `SG-ALB-CONSULTA` | `SG-CONSULTA` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_egress_rule.c02` |
+| **C03** | `sg_ingress["C03"]` | SG-IN | `aws_security_group.query.id` | `SG-ALB-CONSULTA` | `SG-CONSULTA` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_ingress_rule.c03` |
+| **C04** | `sg_ingress["C04"]` | SG-IN | `aws_security_group.vpce_api.id` | `LOG-AUT-CIDR` (`var.log_authorized_cidr`) | `SG-VPCE-API` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_ingress_rule.c04` |
+| **C05** | `sg_ingress["C05"]` | SG-IN | `aws_security_group.vpce_s3.id` | `DRON-CIDR` y `BACKUP-CIDR` (`var.drone_backup_cidrs`) | `SG-VPCE-S3` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_ingress_rule.c05` |
+| **C06** | `sg_egress["C06"]` | SG-OUT | `aws_security_group.ingest.id` | `SG-INGESTA` | `PL-DDB` (Prefix List DynamoDB) | TCP 443 (HTTPS) | Permitir | Salida nativa a gateway endpoint DynamoDB |
+| **C07** | `sg_egress["C07"]` | SG-OUT | `aws_security_group.ingest.id` | `SG-INGESTA` | `PL-S3` (Prefix List Amazon S3) | TCP 443 (HTTPS) | Permitir | Salida nativa a gateway endpoint Amazon S3 |
+| **C08** | `sg_egress["C08"]` | SG-OUT | `aws_security_group.function.id` | `SG-FUNCION` | `PL-S3` (Prefix List Amazon S3) | TCP 443 (HTTPS) | Permitir | Salida nativa a gateway endpoint Amazon S3 |
+| **C09** | `sg_egress["C09"]` | SG-OUT | `aws_security_group.function.id` | `SG-FUNCION` | `PL-DDB` (Prefix List DynamoDB) | TCP 443 (HTTPS) | Permitir | Salida nativa a gateway endpoint DynamoDB |
+| **C10** | `sg_egress["C10"]` | SG-OUT | `aws_security_group.function.id` | `SG-FUNCION` | `SG-VPCE-REKOG` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_egress_rule.c10` |
+| **C11** | `sg_ingress["C11"]` | SG-IN | `aws_security_group.vpce_rekog.id` | `SG-FUNCION` | `SG-VPCE-REKOG` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_ingress_rule.c11` |
+| **C12** | `sg_egress["C12"]` | SG-OUT | `aws_security_group.clients_log.id` | `SG-CLIENTES-LOG` | `SG-VPCE-LOGS` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_egress_rule.c12` |
+| **C13** | `sg_ingress["C13"]` | SG-IN | `aws_security_group.vpce_logs.id` | `SG-CLIENTES-LOG` | `SG-VPCE-LOGS` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_ingress_rule.c13` |
+| **C14** | `sg_egress["C14"]` | SG-OUT | `aws_security_group.clients_kms.id` | `SG-CLIENTES-KMS` | `SG-VPCE-KMS` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_egress_rule.c14` |
+| **C15** | `sg_ingress["C15"]` | SG-IN | `aws_security_group.vpce_kms.id` | `SG-CLIENTES-KMS` | `SG-VPCE-KMS` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_ingress_rule.c15` |
+| **C16** | `sg_egress["C16"]` | SG-OUT | `aws_security_group.admin.id` | `SG-ADMIN` | `SG-VPCE-SSM` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_egress_rule.c16` |
+| **C17** | `sg_ingress["C17"]` | SG-IN | `aws_security_group.vpce_ssm.id` | `ADMIN-CIDR` (`var.admin_cidr`) | `SG-VPCE-SSM` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_ingress_rule.c17` |
+| **C18** | `sg_ingress["C18"]` | SG-IN | `aws_security_group.resolver_in.id` | `DNS-CIDR` (`var.dns_cidr`) | `SG-RESOLVER-IN` | TCP/UDP 53 (DNS) | Permitir | `aws_vpc_security_group_ingress_rule.c18_tcp` y `c18_udp` |
+| **C19** | `sg_egress["C19"]` | SG-OUT | `aws_security_group.resolver_out.id` | `SG-RESOLVER-OUT` | `DNS-CIDR` (`var.dns_cidr`) | TCP/UDP 53 (DNS) | Permitir | `aws_vpc_security_group_egress_rule.c19_tcp` y `c19_udp` |
+| **C20** | `sg_egress["C20"]` | SG-OUT | `aws_security_group.query.id` | `SG-CONSULTA` | `PL-DDB` (Prefix List DynamoDB) | TCP 443 (HTTPS) | Permitir | Salida nativa a gateway endpoint DynamoDB |
+| **C21** | `assertions["C21"]` | INVARIANTE | `all-security-groups` | Tráfico entrante no enumerado | Security Groups de la plataforma | Todos los puertos | Denegar | Denegación implícita nativa sin reglas allow coincidentes |
+| **C22** | `assertions["C22"]` | INVARIANTE | `all-security-groups` | Security Groups de la plataforma | Destinos no explícitos (cero 0.0.0.0/0) | Todos los puertos | Denegar | Supresión total de la regla egress predeterminada abierta |
 
 ---
 
 ## 4. Matriz de Verificación Cruzada: Network Access Control Lists (NACLs)
 
-Las subredes del entorno implementan un filtrado a nivel de capa de red (Capa 4 del modelo OSI) mediante dos Network ACLs dedicadas: una para las subredes privadas y otra para las subredes de consulta pública. La siguiente tabla demuestra el cumplimiento de los controles `N01` a `N16`:
+Las subredes del entorno implementan un filtrado a nivel de capa de red (Capa 4 del modelo OSI) mediante dos Network ACLs dedicadas: una para las subredes privadas y otra para las subredes de consulta pública. Cada entrada documenta su contrato en `rule_catalog` y su recurso padre:
 
-| ID Regla | Dirección | Número de Regla | CIDR de Origen o Destino | Protocolo y Puerto | Acción | Recurso HCL en `modules/security` | Justificación Operativa |
-|---|---|---|---|---|---|---|---|
-| **N01** | Ingress | 10 | `var.visitor_cidr` (`10.41.5.0/24`) | Todos los puertos | Denegar | `aws_network_acl.private` regla 10 | Aislamiento mandatorio: la red de visitantes nunca alcanza subredes privadas. |
-| **N02** | Ingress | 100 | `var.authorized_private_cidrs` | TCP 443 (HTTPS) | Permitir | `aws_network_acl.private` regla 100 | Acceso cifrado hacia microservicios y endpoints privados autorizados. |
-| **N03** | Egress | 100 | `var.authorized_private_cidrs` | TCP 443 (HTTPS) | Permitir | `aws_network_acl.private` regla 100 | Tráfico de salida cifrado hacia almacenes y servicios internos. |
-| **N04** | Ingress | 110 | `var.authorized_private_cidrs` | TCP 53 (DNS) | Permitir | `aws_network_acl.private` regla 110 | Consultas de resolución de nombres TCP hacia resolvers locales. |
-| **N05** | Ingress | 120 | `var.authorized_private_cidrs` | UDP 53 (DNS) | Permitir | `aws_network_acl.private` regla 120 | Consultas estándar de resolución de nombres DNS sobre UDP. |
-| **N06** | Egress | 110 | `var.authorized_private_cidrs` | TCP 53 (DNS) | Permitir | `aws_network_acl.private` regla 110 | Respuestas de resolución de nombres DNS sobre canal TCP. |
-| **N07** | Egress | 120 | `var.authorized_private_cidrs` | UDP 53 (DNS) | Permitir | `aws_network_acl.private` regla 120 | Respuestas de resolución de nombres DNS sobre canal UDP. |
-| **N08** | Ingress | 130 | `var.authorized_private_cidrs` | TCP 1024–65535 (Efímeros) | Permitir | `aws_network_acl.private` regla 130 | Retorno de conexiones TCP salientes establecidas por los servicios. |
-| **N09** | Egress | 130 | `var.authorized_private_cidrs` | TCP 1024–65535 (Efímeros) | Permitir | `aws_network_acl.private` regla 130 | Entrega de respuestas a puertos efímeros de clientes internos. |
-| **N10** | Ingress | 140 | `var.authorized_private_cidrs` | UDP 1024–65535 (Efímeros) | Permitir | `aws_network_acl.private` regla 140 | Retorno de paquetes UDP requeridos por consultas DNS y telemetría. |
-| **N11** | Egress | 140 | `var.authorized_private_cidrs` | UDP 1024–65535 (Efímeros) | Permitir | `aws_network_acl.private` regla 140 | Entrega de respuestas UDP hacia clientes internos autorizados. |
-| **N12** | Ingress | 100 | `0.0.0.0/0` (Internet) | TCP 443 (HTTPS) | Permitir | `aws_network_acl.public` regla 100 | Tráfico de consulta pública del saco hacia el balanceador de carga. |
-| **N13** | Egress | 100 | `0.0.0.0/0` (Internet) | TCP 1024–65535 (Efímeros) | Permitir | `aws_network_acl.public` regla 100 | Retorno de respuestas HTTP seguras a navegadores de compradores. |
-| **N14** | Egress | 110 | `var.app_cidr` (`10.50.10.0/24`) | TCP 443 (HTTPS) | Permitir | `aws_network_acl.public` regla 110 | Reenvío del balanceador de carga hacia el servicio backend en la subred app. |
-| **N15** | Ingress | 110 | `var.app_cidr` (`10.50.10.0/24`) | TCP 1024–65535 (Efímeros) | Permitir | `aws_network_acl.public` regla 110 | Retorno de datos procesados por la aplicación hacia el balanceador. |
-| **N16** | Ambos | Asterisco (*) | Cualquier dirección IP no contemplada | Todos los puertos | Denegar | Regla final predeterminada de AWS NACL | Denegación implícita universal que descarta paquetes sin coincidencia. |
+| ID Regla | Contrato (`rule_catalog`) | Dirección | ID Padre (`parent_id`) | Prioridad | CIDR de Origen o Destino | Protocolo y Puerto | Acción | Recurso HCL en `modules/security` |
+|---|---|---|---|---|---|---|---|---|
+| **N01** | `nacl_ingress["N01"]` | Ingress | `aws_network_acl.private.id` | 10 | `var.visitor_cidr` (`10.41.5.0/24`) | Todos los puertos | Denegar | `aws_network_acl.private` regla 10 |
+| **N02** | `nacl_ingress["N02"]` | Ingress | `aws_network_acl.private.id` | 100 | `var.authorized_private_cidrs` | TCP 443 (HTTPS) | Permitir | `aws_network_acl.private` regla 100 |
+| **N03** | `nacl_egress["N03"]` | Egress | `aws_network_acl.private.id` | 100 | `var.authorized_private_cidrs` | TCP 443 (HTTPS) | Permitir | `aws_network_acl.private` regla 100 |
+| **N04** | `nacl_ingress["N04"]` | Ingress | `aws_network_acl.private.id` | 110 | `var.authorized_private_cidrs` | TCP 53 (DNS) | Permitir | `aws_network_acl.private` regla 110 |
+| **N05** | `nacl_ingress["N05"]` | Ingress | `aws_network_acl.private.id` | 120 | `var.authorized_private_cidrs` | UDP 53 (DNS) | Permitir | `aws_network_acl.private` regla 120 |
+| **N06** | `nacl_egress["N06"]` | Egress | `aws_network_acl.private.id` | 110 | `var.authorized_private_cidrs` | TCP 53 (DNS) | Permitir | `aws_network_acl.private` regla 110 |
+| **N07** | `nacl_egress["N07"]` | Egress | `aws_network_acl.private.id` | 120 | `var.authorized_private_cidrs` | UDP 53 (DNS) | Permitir | `aws_network_acl.private` regla 120 |
+| **N08** | `nacl_ingress["N08"]` | Ingress | `aws_network_acl.private.id` | 130 | `var.authorized_private_cidrs` | TCP 1024–65535 (Efímeros) | Permitir | `aws_network_acl.private` regla 130 |
+| **N09** | `nacl_egress["N09"]` | Egress | `aws_network_acl.private.id` | 130 | `var.authorized_private_cidrs` | TCP 1024–65535 (Efímeros) | Permitir | `aws_network_acl.private` regla 130 |
+| **N10** | `nacl_ingress["N10"]` | Ingress | `aws_network_acl.private.id` | 140 | `var.authorized_private_cidrs` | UDP 1024–65535 (Efímeros) | Permitir | `aws_network_acl.private` regla 140 |
+| **N11** | `nacl_egress["N11"]` | Egress | `aws_network_acl.private.id` | 140 | `var.authorized_private_cidrs` | UDP 1024–65535 (Efímeros) | Permitir | `aws_network_acl.private` regla 140 |
+| **N12** | `nacl_ingress["N12"]` | Ingress | `aws_network_acl.public.id` | 100 | `0.0.0.0/0` (Internet) | TCP 443 (HTTPS) | Permitir | `aws_network_acl.public` regla 100 |
+| **N13** | `nacl_egress["N13"]` | Egress | `aws_network_acl.public.id` | 100 | `0.0.0.0/0` (Internet) | TCP 1024–65535 (Efímeros) | Permitir | `aws_network_acl.public` regla 100 |
+| **N14** | `nacl_egress["N14"]` | Egress | `aws_network_acl.public.id` | 110 | `var.app_cidr` (`10.50.10.0/24`) | TCP 443 (HTTPS) | Permitir | `aws_network_acl.public` regla 110 |
+| **N15** | `nacl_ingress["N15"]` | Ingress | `aws_network_acl.public.id` | 110 | `var.app_cidr` (`10.50.10.0/24`) | TCP 1024–65535 (Efímeros) | Permitir | `aws_network_acl.public` regla 110 |
+| **N16** | `assertions["N16"]` | Ambos | `custom-network-acls` | Asterisco (*) | Cualquier dirección IP no contemplada | Todos los puertos | Denegar | Regla final predeterminada de AWS NACL |
 
 ---
 
@@ -107,9 +107,17 @@ resource "aws_kms_key" "this" {
 
 ---
 
-## 6. Auditoría de Identidades de Plataforma (Roles IAM sin Comodines)
+## 6. Auditoría de Identidades de Plataforma y Cero Comodines
 
-Para dar estricto cumplimiento al criterio de aceptación de la Historia de Usuario (*"Ningún rol de plataforma usa comodines asterisco en acciones sobre datos"*), las políticas de los roles de servicio han sido construidas delimitando cada acción de la API de AWS y acotando los recursos exactos por su Nombre de Recurso de Amazon (ARN). La siguiente tabla consolida los privilegios otorgados:
+Para dar estricto cumplimiento al criterio de aceptación de la Historia de Usuario (*"Ningún rol de plataforma usa comodines asterisco en acciones sobre datos"*) y resolver las observaciones pendientes de la Historia de Usuario #4 y el PR #50, las políticas de los roles de servicio e identidades han sido consolidadas bajo los siguientes principios deterministas:
+
+1. **Parámetro de Cuenta en ARNs:** Ningún recurso utiliza comodines en la posición de cuenta (`arn:aws:...:*:...`). En su lugar, el identificador de cuenta de doce dígitos es inyectado de forma determinista mediante variables de entorno (`local.account_id`).
+2. **Enumeración Taxativa de Acciones:** Se prohíbe el uso de acciones abiertas como `cloudwatch:Get*`, `config:Get*` y `ec2:Describe*`. Se enumeran taxativamente las llamadas requeridas (`cloudwatch:GetMetricData`, `config:GetComplianceDetailsByConfigRule`, `ec2:DescribeInstances`, entre otras).
+3. **Transportador vía HTTPS API Gateway:** Se subsana la referencia previa a MQTT en el perfil transportador. Conforme a las Historias de Usuario #6 y #12, el transportador reporta su posición exclusivamente mediante HTTPS hacia Amazon API Gateway autenticado con Amazon Cognito (POST `/v1/viajes/{id}/posicion`).
+4. **Impresión de Acopio en Spooler Local:** Se elimina la cola en la nube `cola_impresion_acopio_*`. La orden de impresión física de códigos de sacos se remite directamente al servicio de spooler local en la VLAN de Logística (`10.X.3.0/24`) del acopio según la arquitectura de red de la HU #8.
+5. **Exclusión de Despliegue Manual (`terraform:apply`):** Se certifica que `terraform:apply` no es una acción de IAM ni forma parte de las facultades de operadores humanos en la consola. El aprovisionamiento de infraestructura reside de forma exclusiva en el pipeline CI/CD mediante el rol OIDC `AromaPacifico-DevOps-PipelineRole` (HU #26).
+
+La siguiente tabla consolida los privilegios otorgados en el código de infraestructura del módulo:
 
 | Rol IAM de Plataforma | Entidad de Confianza | Acciones Específicas Permitidas | Recursos Exactos Autorizados (ARN) | Salvaguarda de Mínimo Privilegio |
 |---|---|---|---|---|
