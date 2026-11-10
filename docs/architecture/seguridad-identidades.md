@@ -54,12 +54,12 @@ El pliego del caso de estudio define seis perfiles humanos con responsabilidades
 
 | Perfil / Rol | Proveedor de Identidad | Mecanismo MFA | Permisos de Lectura (Read Actions) | Permisos de Escritura (Write Actions) | ARN del Recurso Acotado (Cero Comodines `*`) | Restricción Específica de Negocio |
 |---|---|---|---|---|---|---|
-| **1. Caficultor** | Amazon Cognito User Pool | Opcional (Recomendado) | `dynamodb:GetItem`<br>`dynamodb:Query` | `dynamodb:PutItem`<br>`execute-api:Invoke` | `arn:aws:dynamodb:us-east-1:*:table/telemetria_cultivo`<br>`arn:aws:dynamodb:us-east-1:*:table/sacos_cafe` | Restringido por condición IAM a su propio `FincaID`. No visualiza datos de fincas colindantes ni accede a consola AWS. |
-| **2. Transportador** | Amazon Cognito User Pool | Opcional (Recomendado) | `dynamodb:GetItem`<br>`execute-api:Invoke` | `iot:Publish`<br>`dynamodb:UpdateItem` | `arn:aws:iot:us-east-1:*:topic/aromapacifico/transportador/${cognito:sub}/gps`<br>`arn:aws:dynamodb:us-east-1:*:table/viajes_transporte` | Solo accede al manifiesto de los sacos asignados a su viaje. Prohibida la consulta de compradores o fincas ajenas. |
-| **3. Operario de Acopio** | Amazon Cognito User Pool | **MANDATORIO** (TOTP / WebAuthn) | `dynamodb:Query`<br>`dynamodb:GetItem` | `dynamodb:UpdateItem`<br>`sqs:SendMessage` | `arn:aws:dynamodb:us-east-1:*:table/sacos_cafe`<br>`arn:aws:sqs:us-east-1:*:cola_impresion_acopio_${AcopioID}` | Restringido a la VLAN de Logística (`10.X.3.0/24`) del centro de acopio. Exige token JWT con reclamo `amr: ["mfa"]`. |
-| **4. Comprador** | Amazon Cognito / Portal Público | No Aplica (Solo Lectura) | `execute-api:Invoke`<br>`dynamodb:GetItem` | **NINGUNA** (Denegación Explícita) | `arn:aws:execute-api:us-east-1:*:api-id/*/GET/v1/sacos/*`<br>`arn:aws:dynamodb:us-east-1:*:table/sacos_publicos` | Vista anonimizada estricta: código, departamento/municipio, variedad, secado y fechas. Cero serialización de cédula ni rutas. |
-| **5. Operador Drones** | Amazon Cognito User Pool | **MANDATORIO** (TOTP / FIDO2) | `dynamodb:GetItem`<br>`s3:GetObject` | `s3:PutObject`<br>`dynamodb:UpdateItem` | `arn:aws:s3:::aromapacifico-drones-prod/misiones/*`<br>`arn:aws:dynamodb:us-east-1:*:table/ordenes_fumigacion` | Descarga de planes de vuelo y subida de bitácoras `.bin`. No puede autorizar fumigación (potestad exclusiva de agrónomo FNC). |
-| **6. DevOps Plataforma** | AWS IAM Identity Center | **MANDATORIO** (FIDO2 / YubiKey) | `cloudwatch:Get*`<br>`logs:FilterLogEvents`<br>`config:Get*`<br>`ec2:Describe*` | `iot:UpdateCertificate`<br>`iot:DetachPolicy`<br>`terraform:apply` | `arn:aws:iam::*:role/AromaPacifico-DevOpsRole`<br>`arn:aws:iot:us-east-1:*:cert/*` | Acceso federado multi-cuenta con sesiones STS de máximo 4 horas. Prohibido el acceso directo a datos productivos PII. |
+| **1. Caficultor** | Amazon Cognito User Pool | Opcional (Recomendado) | `dynamodb:GetItem`<br>`dynamodb:Query` | `dynamodb:PutItem`<br>`execute-api:Invoke` | `arn:aws:dynamodb:us-east-1:${aws_account_id}:table/telemetria_cultivo`<br>`arn:aws:dynamodb:us-east-1:${aws_account_id}:table/sacos_cafe` | Restringido por condición IAM a su propio `FincaID`. No visualiza datos de fincas colindantes ni accede a consola AWS. |
+| **2. Transportador** | Amazon Cognito User Pool | Opcional (Recomendado) | `execute-api:Invoke`<br>`dynamodb:GetItem` | `execute-api:Invoke`<br>`dynamodb:UpdateItem` | `arn:aws:execute-api:us-east-1:${aws_account_id}:api-viajes/*/POST/v1/viajes/*/posicion`<br>`arn:aws:dynamodb:us-east-1:${aws_account_id}:table/viajes_transporte` | Envío de telemetría de posición mediante HTTPS a API Gateway con Cognito (POST `/v1/viajes/{id}/posicion`) según HU #6 y #12. Cero uso de MQTT/IoT Core directo. Solo accede a manifiestos de sacos de su propio viaje. |
+| **3. Operario de Acopio** | Amazon Cognito User Pool | **MANDATORIO** (TOTP / WebAuthn) | `dynamodb:Query`<br>`dynamodb:GetItem` | `dynamodb:UpdateItem` | `arn:aws:dynamodb:us-east-1:${aws_account_id}:table/sacos_cafe`<br>`arn:aws:dynamodb:us-east-1:${aws_account_id}:table/recepcion_acopio` | Restringido a la VLAN de Logística (`10.X.3.0/24`) del centro de acopio. Exige token JWT con reclamo `amr: ["mfa"]`. La impresión de códigos se gestiona en el spooler local del acopio físico según HU #8 (sin colas SQS en nube). |
+| **4. Comprador** | Amazon Cognito / Portal Público | No Aplica (Solo Lectura) | `execute-api:Invoke`<br>`dynamodb:GetItem` | **NINGUNA** (Denegación Explícita) | `arn:aws:execute-api:us-east-1:${aws_account_id}:api-sacos/*/GET/v1/sacos/*`<br>`arn:aws:dynamodb:us-east-1:${aws_account_id}:table/sacos_publicos` | Vista anonimizada estricta: código, departamento/municipio, variedad, secado y fechas. Cero serialización de cédula ni rutas. |
+| **5. Operador Drones** | Amazon Cognito User Pool | **MANDATORIO** (TOTP / FIDO2) | `dynamodb:GetItem`<br>`s3:GetObject` | `s3:PutObject`<br>`dynamodb:UpdateItem` | `arn:aws:s3:::aromapacifico-drones-prod/misiones/${dron_id}/*`<br>`arn:aws:dynamodb:us-east-1:${aws_account_id}:table/ordenes_fumigacion` | Descarga de planes de vuelo y subida de bitácoras `.bin`. No puede autorizar fumigación (potestad exclusiva de agrónomo FNC). |
+| **6. DevOps Plataforma** | AWS IAM Identity Center | **MANDATORIO** (FIDO2 / YubiKey) | `cloudwatch:GetMetricData`<br>`cloudwatch:GetMetricStatistics`<br>`cloudwatch:ListMetrics`<br>`logs:FilterLogEvents`<br>`config:GetComplianceDetailsByConfigRule`<br>`config:GetResourceConfigHistory`<br>`ec2:DescribeInstances`<br>`ec2:DescribeSecurityGroups`<br>`ec2:DescribeSubnets`<br>`ec2:DescribeVpcs`<br>`ec2:DescribeNetworkAcls` | `iot:UpdateCertificate`<br>`iot:DetachPolicy` | `arn:aws:iam::${aws_account_id}:role/AromaPacifico-DevOpsRole`<br>`arn:aws:iot:us-east-1:${aws_account_id}:cert/${iot:CertificateId}` | Acceso federado multi-cuenta con sesiones STS de máximo 4 horas. Prohibido acceso a PII. El despliegue IaC es exclusivo del rol OIDC de pipeline (`AromaPacifico-DevOps-PipelineRole` en HU #26); `terraform:apply` no es acción IAM. |
 
 ---
 
@@ -108,7 +108,7 @@ Esta política vinculada al grupo de Cognito `CaficultoresGroup` restringe las c
 ```
 
 #### Política 2: Operario de Acopio con Verificación Obligatoria de MFA
-Esta política exige de forma estricta que la sesión contenga el contexto de autenticación multifactor verificado antes de permitir la actualización del estado de un saco o el envío de órdenes de impresión:
+Esta política exige de forma estricta que la sesión contenga el contexto de autenticación multifactor verificado antes de permitir la recepción y actualización del estado de un saco en el libro mayor. La orden de impresión física se despacha directamente al servicio de spooler de impresión local en la VLAN de Logística (`10.X.3.0/24`) del acopio según el diseño de red de la HU #8, sin requerir colas SQS intermedias en la nube:
 
 ```json
 {
@@ -138,25 +138,39 @@ Esta política exige de forma estricta que la sesión contenga el contexto de au
           ]
         }
       }
-    },
-    {
-      "Sid": "AllowEnqueueSackLabelPrint",
-      "Effect": "Allow",
-      "Action": [
-        "sqs:SendMessage"
-      ],
-      "Resource": "arn:aws:sqs:us-east-1:111122223333:cola_impresion_acopio_*",
-      "Condition": {
-        "Bool": {
-          "aws:MultiFactorAuthPresent": "true"
-        }
-      }
     }
   ]
 }
 ```
 
-#### Política 3: Comprador Internacional (Vista Anonimizada sin Escritura)
+#### Política 3: Transportador con Ingesta de Posición HTTPS vía API Gateway
+Conforme a las Historias de Usuario #6 y #12, el transportador reporta su posición mediante invocación segura HTTPS hacia Amazon API Gateway autenticado con Amazon Cognito, sin publicar de forma directa sobre brokers MQTT:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowTransportadorReportPositionHTTPS",
+      "Effect": "Allow",
+      "Action": [
+        "execute-api:Invoke"
+      ],
+      "Resource": "arn:aws:execute-api:us-east-1:111122223333:api-viajes/*/POST/v1/viajes/*/posicion"
+    },
+    {
+      "Sid": "AllowReadOwnAssignedTripManifest",
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:GetItem"
+      ],
+      "Resource": "arn:aws:dynamodb:us-east-1:111122223333:table/viajes_transporte"
+    }
+  ]
+}
+```
+
+#### Política 4: Comprador Internacional (Vista Anonimizada sin Escritura)
 El comprador accede mediante un rol de solo lectura cuya política deniega explícitamente cualquier acción mutacional y filtra el acceso a proyecciones seguras:
 
 ```json
@@ -183,6 +197,49 @@ El comprador accede mediante un rol de solo lectura cuya política deniega expl�
       ],
       "Resource": "*"
     }
+  ]
+}
+```
+
+#### Política 5: Operador DevOps de Plataforma (Acciones Explícitas sin Comodines)
+El personal de operaciones de plataforma accede a través de AWS IAM Identity Center con MFA físico FIDO2. Todas las acciones de telemetría y configuración están taxativamente enumeradas sin comodines `*`. El aprovisionamiento de infraestructura se ejecuta exclusivamente a través del pipeline CI/CD con autenticación federada OIDC (HU #26); la consola no admite despliegues directos:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowEnumeratedObservabilityReadActions",
+      "Effect": "Allow",
+      "Action": [
+        "cloudwatch:GetMetricData",
+        "cloudwatch:GetMetricStatistics",
+        "cloudwatch:ListMetrics",
+        "logs:FilterLogEvents",
+        "config:GetComplianceDetailsByConfigRule",
+        "config:GetResourceConfigHistory",
+        "ec2:DescribeInstances",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeNetworkAcls"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "AllowDeviceRevocationUnderIncident",
+      "Effect": "Allow",
+      "Action": [
+        "iot:UpdateCertificate",
+        "iot:DetachPolicy"
+      ],
+      "Resource": [
+        "arn:aws:iot:us-east-1:111122223333:cert/a1b2c3d4e5f67890abcdef1234567890abcdef1234567890abcdef1234567890"
+      ]
+    }
+  ]
+}
+```
   ]
 }
 ```
