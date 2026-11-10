@@ -141,9 +141,9 @@ El despliegue hacia el ambiente `prod` utiliza la caracteristica nativa de **Git
 
 ### Desacoplamiento de Plan y Apply con Artefactos Inmutables
 Para eliminar cualquier riesgo de discrepancia entre lo analizado y lo desplegado:
-1. **Fase de Planificacion (`plan-prod`)**: Se inicializa el backend, se genera el archivo binario inmutable `terraform plan -out=tfplan` y su volcado legible `tfplan.txt`, almacenandolos temporalmente mediante `actions/upload-artifact@v4` con retencion de 2 dias. Esta fase no requiere aprobacion manual y permite a los revisores auditar el impacto real.
-2. **Pausa de Aprobacion Humana**: El entorno `prod` detiene la ejecucion en el job `apply-prod` solicitando revision y firma manual al personal autorizado.
-3. **Fase de Aplicacion (`apply-prod`)**: Tras la aprobacion, el runner descarga el artefacto inmutable mediante `actions/download-artifact@v4` y ejecuta estrictamente `terraform apply tfplan`. No se recalculan planes ni se admiten cambios fuera de banda.
+1. **Fase de Planificacion (`plan`)**: Se inicializa el backend, se genera el archivo binario inmutable `terraform plan -out=tfplan` y su volcado legible `tfplan.txt`, almacenandolos temporalmente mediante `actions/upload-artifact@v4` con retencion de 2 dias. Esta fase no requiere aprobacion manual y permite a los revisores auditar el impacto real.
+2. **Pausa de Aprobacion Humana**: El entorno `prod` detiene la ejecucion en el job `apply` solicitando revision y firma manual al personal autorizado (Lider DevOps / Arquitecto Cloud).
+3. **Fase de Aplicacion (`apply`)**: Tras la aprobacion, el runner descarga el artefacto inmutable mediante `actions/download-artifact@v4` y ejecuta la verificacion de integridad. Para cumplir con el alcance academico FNC 2026 y la directriz de Cero Costos / Cero Apply no autorizado (Regla 9 PC-IAC), la mutacion en AWS esta controlada por la variable `ENABLE_TERRAFORM_APPLY`. En modo demostracion y auditoria, el pipeline valida la aprobacion manual, expone el comando de despliegue `terraform apply -no-color -auto-approve tfplan` y audita el plan sin generar sobrecostos accidentales.
 
 ### Politica de Concurrencia
 Para evitar condiciones de carrera o bloqueos simultaneos sobre el estado de Terraform, los workflows de despliegue definen grupos de concurrencia:
