@@ -233,14 +233,16 @@ flowchart LR
     end
 ```
 
-### 6.1. Pipeline de Plataforma (Codificado en `.github/workflows/`)
-- **Repositorio**: `aromapacifico-platform/iac` (o `.github` compartido).
-- **Alcance**: Despliegue de componentes base de AWS (VPC, subredes, endpoints de VPC para S3/DynamoDB/KMS/Logs, politicas de firewall, colas SQS con DLQ, tablas DynamoDB y roles IAM de minimo privilegio).
-- **Workflows Implementados**:
-  - `iac-ci-pr.yml`: Evaluacion estatica de formato, linter, seguridad, estimacion de costos con Infracost y generacion de planes especulativos en PRs.
-  - `iac-reusable-tf-pipeline.yml`: Modulo reutilizable de ejecucion `init`, `plan` y `apply` parametrizado por ambiente.
-  - `iac-cd-platform.yml`: Orquestador de despliegue continuo con promocion secuencial `dev` -> `test` -> `prod`, compuerta de cosecha y aprobacion manual.
-  - `iac-drift-detection.yml`: Deteccion de desviacion nocturna sin ejecucion destructiva.
+### 6.1. Pipeline de Plataforma (Arquitectura Centralizada y Caller Workflows)
+- **Repositorio Central de Gobernanza**: `aromapacifico-platform/.github`.
+  - Aloja los workflows reutilizables canónicos en `.github/workflows/`:
+    - `iac-ci-reusable.yml`: Workflow reutilizable de integración continua con detección dinámica de targets, validación estática (fmt, validate, TFLint, Trivy), FinOps con Infracost y planes especulativos autenticados con AWS OIDC.
+    - `iac-cd-reusable.yml`: Workflow reutilizable de entrega continua con promoción secuencial `dev` -> `test` -> Compuerta de Cosecha -> `prod` (aprobación manual).
+    - `iac-reusable-tf-pipeline.yml`: Módulo reutilizable de ejecución de Terraform parametrizado por ambiente.
+    - `iac-drift-detection.yml`: Auditoría nocturna de desviación no destructiva.
+- **Repositorio de Infraestructura**: `aromapacifico-platform/iac`.
+  - Opera como **llamador ligero (Caller Workflow)**: sus workflows locales (`iac-ci-pr.yml` e `iac-cd-platform.yml`) contienen únicamente la definición de triggers (`pull_request`, `push`, `workflow_dispatch`), políticas de concurrencia y permisos (`id-token: write`, etc.), e invocan los workflows reutilizables de `.github` mediante `uses: aromapacifico-platform/.github/.github/workflows/<workflow>.yml@main` y `secrets: inherit`.
+  - Esta arquitectura desacopla el ciclo de vida de la infraestructura respecto a las reglas de cumplimiento y gobernanza, permitiendo que cualquier repositorio consumidor (como futuros módulos o repositorios globales) adopte las mismas políticas corporativas sin duplicar código de pipeline.
 
 #### 6.1.1. Integracion FinOps con Infracost y Estandarizacion de Pruebas
 - **Infracost en Pull Requests (Epica 7 - FinOps)**:
