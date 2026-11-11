@@ -1,0 +1,178 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "name": "Tokens de Tipografia AromaPacifico",
+  "version": "1.0.0",
+  "description": "Especificacion dual de escalas tipograficas para AromaPacifico (FNC 2026): Escala Vehicular/Campo para lectura a 50-80 cm con vibracion y sol directo, y Escala Web para consulta de alta densidad de datos del comprador internacional.",
+  "fontFamily": {
+    "sans": {
+      "$value": "system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+      "$type": "fontFamily",
+      "$description": "Pila de fuentes sans-serif nativa de alto rendimiento con alta altura de x (x-height), aperturas abiertas y distincion clara de glifos ambiguos (1, I, l, 0, O)."
+    },
+    "mono": {
+      "$value": "'Fira Code', 'Roboto Mono', 'Cascadia Code', monospace",
+      "$type": "fontFamily",
+      "$description": "Fuente monoespaciada para codigos de sacos (HMAC-SHA-256), matriculas de viaje, hashes criptograficos y telemetria."
+    }
+  },
+  "fontWeight": {
+    "regular": {
+      "$value": "400",
+      "$type": "fontWeight",
+      "$description": "Cuerpo de texto continuo y parrafos explicativos en portal web."
+    },
+    "medium": {
+      "$value": "500",
+      "$type": "fontWeight",
+      "$description": "Etiquetas de formulario web y metadatos secundarios."
+    },
+    "semibold": {
+      "$value": "600",
+      "$type": "fontWeight",
+      "$description": "Texto vehicular base, encabezados de tarjetas moviles y badges de estado."
+    },
+    "bold": {
+      "$value": "700",
+      "$type": "fontWeight",
+      "$description": "Botones de accion en cabina, titulos principales y valores criticos."
+    },
+    "heavy": {
+      "$value": "800",
+      "$type": "fontWeight",
+      "$description": "Metricas de impacto vehicular (numero de sacos, peso en kg, codigo de lote)."
+    }
+  },
+  "letterSpacing": {
+    "tighter": {
+      "$value": "-0.02em",
+      "$type": "dimension",
+      "$description": "Encabezados gigantes web para reducir espacio blanco excesivo."
+    },
+    "tight": {
+      "$value": "-0.01em",
+      "$type": "dimension",
+      "$description": "Titulos vehiculares para mantener compacidad visual."
+    },
+    "normal": {
+      "$value": "0em",
+      "$type": "dimension",
+      "$description": "Cuerpo de texto estandar para lectura continua."
+    },
+    "wide": {
+      "$value": "0.02em",
+      "$type": "dimension",
+      "$description": "Etiquetas vehiculares en mayusculas para facilitar decodificacion a distancia."
+    },
+    "wider": {
+      "$value": "0.05em",
+      "$type": "dimension",
+      "$description": "Codigos alfanumericos y badges de estado del saco."
+    }
+  },
+  "phone": {
+    "contexto": "Vehicular / Campo (Cabina de camion, montura a 50-80 cm, vibracion de trocha 4-16 Hz, iluminacion 5.000 a 100.000 lux)",
+    "scaleRatio": "1.25 (Major Third)",
+    "fontSize": {
+      "caption": {
+        "$value": "14px",
+        "$type": "dimension",
+        "$description": "Tamano minimo absoluto en pantalla vehicular. Prohibido texto inferior a 14px en cabina. Usado para marcas de tiempo secundarias y notas tecnicas con peso 600."
+      },
+      "body": {
+        "$value": "18px",
+        "$type": "dimension",
+        "$description": "Cuerpo de texto vehicular base. Legible a 65 cm con angulo visual subtendido de 21 arcominutos."
+      },
+      "button": {
+        "$value": "18px",
+        "$type": "dimension",
+        "$description": "Tipografia de botones de accion vehicular. Altura tactil asociada minima de 56px."
+      },
+      "subtitle": {
+        "$value": "20px",
+        "$type": "dimension",
+        "$description": "Subtitulos de tarjeta y etiquetas de entrada de datos en cabina."
+      },
+      "title": {
+        "$value": "24px",
+        "$type": "dimension",
+        "$description": "Titulos de tarjeta, destino de viaje y estado de despacho."
+      },
+      "metric": {
+        "$value": "32px",
+        "$type": "dimension",
+        "$description": "Contador primario de sacos y peso en kilogramos en cabina."
+      },
+      "display": {
+        "$value": "40px",
+        "$type": "dimension",
+        "$description": "Confirmacion de entrega exitosa o aviso de alerta de detencion en ruta."
+      }
+    },
+    "lineHeight": {
+      "caption": { "$value": "20px", "$type": "dimension" },
+      "body": { "$value": "26px", "$type": "dimension" },
+      "button": { "$value": "24px", "$type": "dimension" },
+      "subtitle": { "$value": "28px", "$type": "dimension" },
+      "title": { "$value": "32px", "$type": "dimension" },
+      "metric": { "$value": "38px", "$type": "dimension" },
+      "display": { "$value": "48px", "$type": "dimension" }
+    }
+  },
+  "web": {
+    "contexto": "Escritorio / Consulta Comprador Internacional (Pantalla 1080p/4K a 45-60 cm, iluminacion 300-500 lux, alta densidad informativa)",
+    "scaleRatio": "1.20 (Minor Third)",
+    "fontSize": {
+      "legal": {
+        "$value": "12px",
+        "$type": "dimension",
+        "$description": "Notas al pie, leyendas de graficos SCA y descargos de Ley 1581 de 2012."
+      },
+      "table": {
+        "$value": "14px",
+        "$type": "dimension",
+        "$description": "Celdas de tabla de datos de trazabilidad, metadatos y atributos organolepticos."
+      },
+      "body": {
+        "$value": "16px",
+        "$type": "dimension",
+        "$description": "Cuerpo de texto estandar para lectura continua de informes tecnicos y descripciones."
+      },
+      "h4": {
+        "$value": "18px",
+        "$type": "dimension",
+        "$description": "Subtitulos de modulos y encabezados de bloque de datos."
+      },
+      "h3": {
+        "$value": "20px",
+        "$type": "dimension",
+        "$description": "Titulos de tarjetas de catacion y graficas de secado."
+      },
+      "h2": {
+        "$value": "24px",
+        "$type": "dimension",
+        "$description": "Encabezados de seccion del portal de trazabilidad del saco."
+      },
+      "h1": {
+        "$value": "32px",
+        "$type": "dimension",
+        "$description": "Titulo principal del certificado de lote y verificacion de origen."
+      },
+      "hero": {
+        "$value": "48px",
+        "$type": "dimension",
+        "$description": "Titulo principal de bienvenida en pagina de inicio del portal de consulta."
+      }
+    },
+    "lineHeight": {
+      "legal": { "$value": "16px", "$type": "dimension" },
+      "table": { "$value": "20px", "$type": "dimension" },
+      "body": { "$value": "24px", "$type": "dimension" },
+      "h4": { "$value": "24px", "$type": "dimension" },
+      "h3": { "$value": "28px", "$type": "dimension" },
+      "h2": { "$value": "32px", "$type": "dimension" },
+      "h1": { "$value": "40px", "$type": "dimension" },
+      "hero": { "$value": "56px", "$type": "dimension" }
+    }
+  }
+}
