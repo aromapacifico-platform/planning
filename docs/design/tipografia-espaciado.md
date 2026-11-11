@@ -294,3 +294,4 @@ Todos los artefactos cumplen con la nomenclatura del proyecto y se encuentran in
 3. **Diagramas Técnicos de Arquitectura:**
    - [`docs/architecture/diagrams/diseno-tipografia-espaciado-grilla.drawio`](../architecture/diagrams/diseno-tipografia-espaciado-grilla.drawio): Diagrama fuente editable XML UTF-8 descomprimido.
    - [`docs/architecture/diagrams/diseno-tipografia-espaciado-grilla.svg`](../architecture/diagrams/diseno-tipografia-espaciado-grilla.svg): Diagrama vectorial autónomo de publicación.
+
