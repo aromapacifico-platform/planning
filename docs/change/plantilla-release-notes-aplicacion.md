@@ -237,3 +237,4 @@ Antes de firmar y emitir el release note de aplicacion, el Lider de Operaciones 
 - [ ] Se adjunta la matriz comparativa FinOps con al menos 2 alternativas y demostracion del costo evitado.
 - [ ] Se verifica el cumplimiento estricto de la Ley 1581 de 2012 (cero exposicion de PII).
 - [ ] El documento cumple con la politica de Cero Emojis y redaccion tecnica profesional en espanol.
+
