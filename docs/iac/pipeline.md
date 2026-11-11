@@ -66,11 +66,19 @@ flowchart TD
 
 | Ambiente | Cuenta AWS | Rango VPC | Bucket de Estado S3 | Llave KMS de Estado | Mecanismo de Bloqueo |
 |---|---|---|---|---|---|
-| **dev** | AromaPacifico-Dev | `10.50.0.0/16` | `aromapacifico-tfstate-dev` | `alias/aromapacifico-tfstate` | S3 Native Lockfile |
-| **test** | AromaPacifico-Test | `10.60.0.0/16` | `aromapacifico-tfstate-test` | `alias/aromapacifico-tfstate` | S3 Native Lockfile |
-| **prod** | AromaPacifico-Prod | `10.70.0.0/16` | `aromapacifico-tfstate-prod` | `alias/aromapacifico-tfstate` | S3 Native Lockfile |
+| **dev** | AromaPacifico-Dev (`273577169715`) | `10.50.0.0/16` | `aromapacifico-tfstate-dev` | `alias/aromapacifico-tfstate` | S3 Native Lockfile |
+| **test** | AromaPacifico-Test (`273577169715`) | `10.60.0.0/16` | `aromapacifico-tfstate-test` | `alias/aromapacifico-tfstate` | S3 Native Lockfile |
+| **prod** | AromaPacifico-Prod (`273577169715`) | `10.70.0.0/16` | `aromapacifico-tfstate-prod` | `alias/aromapacifico-tfstate` | S3 Native Lockfile |
 
-El aislamiento estricto por cuenta garantiza que ninguna credencial u operacion en desarrollo o pruebas tenga alcance sobre los recursos de produccion.
+> [!IMPORTANT]
+> **Supuesto de Arquitectura para el Piloto Academico (Epica 6 - FNC 2026):**
+> 1. **Cuenta AWS Unica para el Piloto (`273577169715`)**:
+>    - Para el alcance de la Epica 6 (piloto academico con timebox de 100 horas y 2 semanas), los tres roles OIDC de ejecucion (`aromapacifico-ci-dev`, `aromapacifico-ci-test` y `aromapacifico-ci-prod`) coexisten dentro de una **unica cuenta AWS (`273577169715`)**.
+>    - **Titularidad y Responsabilidad Financiera**: La cuenta pertenece al entorno de laboratorio de pruebas de AromaPacifico (FNC 2026). Los costos de operacion del piloto son asumidos por la infraestructura y presupuesto academico asignado al proyecto.
+>    - **Salvaguarda de Costo Cero (PC-IAC Regla 9)**: La variable de repositorio `ENABLE_TERRAFORM_APPLY` se mantiene apagada (`false`) por defecto. Ningun agente o pipeline muta infraestructura en vivo; el alcance se limita a `terraform fmt`, `terraform validate` e inspeccion auditada de `terraform plan`, evitando costos por aprovisionamiento indebido.
+>    - **Mapeo a Landing Zone Final**: La arquitectura corporativa destino prescribe segregacion estricta multi-cuenta (Seguridad, Red, Produccion, Pruebas y Desarrollo) orquestada mediante AWS Organizations, transicionando los roles a sus respectivas cuentas una vez concluido el piloto academico.
+
+El aislamiento logico por ambiente en el piloto (y físico en la Landing Zone corporativa) garantiza que ninguna credencial u operacion en desarrollo o pruebas tenga alcance sobre los recursos de produccion.
 
 ---
 
@@ -98,7 +106,7 @@ Cada rol IAM asumido por los workflows (`aromapacifico-ci-dev`, `aromapacifico-c
       "Sid": "GitHubOIDCAuthentication",
       "Effect": "Allow",
       "Principal": {
-        "Federated": "arn:aws:iam::<ACCOUNT_ID>:oidc-provider/token.actions.githubusercontent.com"
+        "Federated": "arn:aws:iam::273577169715:oidc-provider/token.actions.githubusercontent.com"
       },
       "Action": "sts:AssumeRoleWithWebIdentity",
       "Condition": {
@@ -241,8 +249,12 @@ flowchart LR
     - `iac-reusable-tf-pipeline.yml`: Módulo reutilizable de ejecución de Terraform parametrizado por ambiente.
     - `iac-drift-detection.yml`: Auditoría nocturna de desviación no destructiva.
 - **Repositorio de Infraestructura**: `aromapacifico-platform/iac`.
-  - Opera como **llamador ligero (Caller Workflow)**: sus workflows locales (`iac-ci-pr.yml` e `iac-cd-platform.yml`) contienen únicamente la definición de triggers (`pull_request`, `push`, `workflow_dispatch`), políticas de concurrencia y permisos (`id-token: write`, etc.), e invocan los workflows reutilizables de `.github` mediante `uses: aromapacifico-platform/.github/.github/workflows/<workflow>.yml@main` y `secrets: inherit`.
-  - Esta arquitectura desacopla el ciclo de vida de la infraestructura respecto a las reglas de cumplimiento y gobernanza, permitiendo que cualquier repositorio consumidor (como futuros módulos o repositorios globales) adopte las mismas políticas corporativas sin duplicar código de pipeline.
+  - Opera como **llamador ligero (Caller Workflow)**: sus workflows locales (`iac-ci-pr.yml` e `iac-cd-platform.yml`) contienen únicamente la definición de triggers (`pull_request`, `push`, `workflow_dispatch`), políticas de concurrencia y permisos (`id-token: write`, etc.), e invocan los workflows reutilizables de `.github` fijados a tags inmutables SemVer o commit SHAs (ej. `uses: aromapacifico-platform/.github/.github/workflows/<workflow>.yml@v1.0.0`) y `secrets: inherit`.
+  - Se prohíbe el uso de `@main` en invocadores de producción para blindar la cadena de suministro de CI/CD frente a cambios no auditados en el repositorio de gobernanza.
+  - Esta arquitectura desacopla el ciclo de vida de la infraestructura respecto a las reglas de cumplimiento y gobernanza, permitiendo que cualquier repositorio consumidor adopte las mismas políticas corporativas sin duplicar código de pipeline.
+- **Politica de Cambios y Gobernanza en `.github`**:
+  - Todo cambio a los workflows reutilizables, acciones compuestas (`setup-iac-tools`) o scripts de compuerta debe someterse a Pull Request con revisión obligatoria por pares y validación automática de suite `pytest`.
+  - Queda prohibido el push directo a la rama `main` de `.github` o la auto-fusión de PRs sin aprobación, salvaguardando la integridad de los pipelines que consumen la organización.
 
 #### 6.1.1. Integracion FinOps con Infracost y Estandarizacion de Pruebas
 - **Infracost en Pull Requests (Epica 7 - FinOps)**:
