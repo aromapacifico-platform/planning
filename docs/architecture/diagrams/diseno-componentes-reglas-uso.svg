@@ -1,0 +1,320 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1400" width="100%" height="100%">
+  <defs>
+    <style>
+      .main-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #0F172A; text-anchor: middle; }
+      .main-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; fill: #475569; text-anchor: middle; }
+      .sec-hdr { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #0F172A; }
+      .box-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #135E34; text-anchor: middle; }
+      .box-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #475569; text-anchor: middle; }
+      .btn-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #FFFFFF; text-anchor: middle; }
+      .btn-txt-dark { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #0F172A; text-anchor: middle; }
+      .btn-txt-dis { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #94A3B8; text-anchor: middle; }
+      .fld-lbl { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #0F172A; }
+      .fld-val { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #0F172A; }
+      .fld-err { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #7F1D1D; }
+      .alt-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 800; }
+      .alt-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; }
+      .card-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #0F172A; }
+      .card-mono { font-family: "Fira Code", monospace; font-size: 13px; font-weight: bold; fill: #0F172A; }
+      .badge-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 0.5px; }
+      .body-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #0F172A; }
+      .bold-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #0F172A; }
+    </style>
+    <filter id="shadow" x="-1%" y="-1%" width="102%" height="102%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.05" />
+    </filter>
+  </defs>
+
+  <!-- FONDO -->
+  <rect width="1800" height="1400" fill="#FAF8F5" />
+
+  <!-- HEADER -->
+  <text x="900" y="45" class="main-title">AromaPacífico - Especificación de Componentes Base y Reglas de Uso en Campo (FNC 2026)</text>
+  <text x="900" y="75" class="main-sub">Sistema de Diseño UI/UX: 5 Componentes Base, Ergonomía en Campo (Luz Solar >80.000 lux, 56px Touch Target) y Vista Anonimizada del Saco (Ley 1581 de 2012)</text>
+
+  <!-- SECCION 1: 5 COMPONENTES BASE -->
+  <g transform="translate(40, 105)" filter="url(#shadow)">
+    <rect width="1720" height="480" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+    <rect width="1720" height="35" rx="8" fill="#F1F5F9" />
+    <text x="15" y="23" class="sec-hdr">1. CATÁLOGO DE LOS CINCO COMPONENTES BASE Y MATRIZ DE ESTADOS INTERACTIVOS</text>
+
+    <!-- 1.1 BOTÓN -->
+    <g transform="translate(20, 50)">
+      <rect width="315" height="410" rx="6" fill="#FAF8F5" stroke="#E2E8F0" />
+      <text x="157" y="25" class="box-title">1.1 BOTÓN (.ap-btn)</text>
+      <text x="157" y="45" class="box-desc">Regla: Altura 56px campo. Contraste > 7:1 AAA.</text>
+
+      <rect x="25" y="65" width="265" height="48" rx="8" fill="#135E34" />
+      <text x="157" y="94" class="btn-txt">REGISTRAR PESAJE (Primario)</text>
+
+      <rect x="30" y="125" width="255" height="44" rx="8" fill="#0D4A27" stroke="#0A381E" stroke-width="2" />
+      <text x="157" y="152" class="btn-txt">PRESIONADO (Escala 0.98)</text>
+
+      <rect x="25" y="180" width="265" height="44" rx="8" fill="#135E34" stroke="#0F4C81" stroke-width="3" />
+      <text x="157" y="207" class="btn-txt">FOCO (Anillo 3px Azul)</text>
+
+      <rect x="25" y="235" width="265" height="44" rx="8" fill="#FFFFFF" stroke="#0F172A" stroke-width="2" />
+      <text x="157" y="262" class="btn-txt-dark">VER HISTORIAL (Secundario)</text>
+
+      <rect x="25" y="290" width="265" height="44" rx="8" fill="#9E1B1B" />
+      <text x="157" y="317" class="btn-txt">CANCELAR DESPACHO (Peligro)</text>
+
+      <rect x="25" y="345" width="265" height="40" rx="8" fill="#E2E8F0" stroke="#CBD5E1" />
+      <text x="157" y="370" class="btn-txt-dis">EN ESPERA (Deshabilitado)</text>
+    </g>
+
+    <!-- 1.2 CAMPO -->
+    <g transform="translate(355, 50)">
+      <rect width="315" height="410" rx="6" fill="#FAF8F5" stroke="#E2E8F0" />
+      <text x="157" y="25" class="box-title">1.2 CAMPO (.ap-input)</text>
+      <text x="157" y="45" class="box-desc">Regla: Label visible permanente. Teclado numérico.</text>
+
+      <!-- Campo Valido -->
+      <g transform="translate(20, 65)">
+        <rect width="275" height="60" rx="6" fill="#FFFFFF" stroke="#16A34A" stroke-width="2" />
+        <text x="12" y="22" class="fld-lbl">PESO EN BÁSCULA</text>
+        <text x="12" y="46" class="fld-val">[  60.0  ] KG  (Válido)</text>
+      </g>
+      <!-- Campo Foco -->
+      <g transform="translate(20, 140)">
+        <rect width="275" height="60" rx="6" fill="#FFFFFF" stroke="#135E34" stroke-width="2.5" />
+        <text x="12" y="22" class="fld-lbl">NÚMERO DE LOTE</text>
+        <text x="12" y="46" class="fld-val">[ LOTE-03-CATURRA | ]</text>
+      </g>
+      <!-- Campo Error -->
+      <g transform="translate(20, 215)">
+        <rect width="275" height="75" rx="6" fill="#FFF5F5" stroke="#9E1B1B" stroke-width="2" />
+        <text x="12" y="22" class="fld-err">HUMEDAD REGISTRADA (%)</text>
+        <text x="12" y="46" class="fld-val" fill="#7F1D1D">[  13.4  ] % (Error > 12.5%)</text>
+        <text x="12" y="65" class="fld-err">Excede límite máximo FNC</text>
+      </g>
+      <!-- Campo Solo Lectura -->
+      <g transform="translate(20, 305)">
+        <rect width="275" height="75" rx="6" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5" />
+        <text x="12" y="22" class="fld-lbl">CÓDIGO HASH8 GENERADO</text>
+        <text x="12" y="46" class="card-mono">SACO-2026-CAU-7F3A9C12</text>
+        <text x="12" y="65" class="box-desc" style="text-anchor:start;">(Solo lectura criptográfica)</text>
+      </g>
+    </g>
+
+    <!-- 1.3 ALERTA -->
+    <g transform="translate(690, 50)">
+      <rect width="330" height="410" rx="6" fill="#FAF8F5" stroke="#E2E8F0" />
+      <text x="165" y="25" class="box-title">1.3 ALERTA (.ap-alert)</text>
+      <text x="165" y="45" class="box-desc">Doble codificación: Color + Silueta + Botón.</text>
+
+      <!-- Critica -->
+      <g transform="translate(15, 65)">
+        <rect width="300" height="75" rx="6" fill="#FEE2E2" stroke="#9E1B1B" stroke-width="2.5" />
+        <text x="12" y="20" class="alt-title" fill="#7F1D1D">[!] CRÍTICA: ROYA DETECTADA</text>
+        <text x="12" y="40" class="alt-desc" fill="#450A0A">Lote 3 Caturra - Severidad Alta</text>
+        <text x="12" y="60" class="bold-txt" fill="#9E1B1B">Boton: VER RECOMENDACIÓN</text>
+      </g>
+      <!-- Advertencia -->
+      <g transform="translate(15, 150)">
+        <rect width="300" height="70" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="2" />
+        <text x="12" y="20" class="alt-title" fill="#78350F">[!] ADVERTENCIA: HUMEDAD ALTA</text>
+        <text x="12" y="40" class="alt-desc" fill="#78350F">Secado a 13.1% - Riesgo de daño</text>
+        <text x="12" y="58" class="bold-txt" fill="#D97706">Boton: PROLONGAR SECADO</text>
+      </g>
+      <!-- Exito -->
+      <g transform="translate(15, 230)">
+        <rect width="300" height="70" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="2" />
+        <text x="12" y="20" class="alt-title" fill="#14532D">[V] ÉXITO: PESAJE GUARDADO</text>
+        <text x="12" y="40" class="alt-desc" fill="#14532D">Saco 60.0 kg registrado en finca</text>
+        <text x="12" y="58" class="card-txt">Persistido en flash local</text>
+      </g>
+      <!-- Info -->
+      <g transform="translate(15, 310)">
+        <rect width="300" height="70" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="2" />
+        <text x="12" y="20" class="alt-title" fill="#1E40AF">[i] INFO: MODO SIN SEÑAL</text>
+        <text x="12" y="40" class="alt-desc" fill="#1E40AF">Buffer local activo (24h)</text>
+        <text x="12" y="58" class="card-txt">Sincronizará al reconectar</text>
+      </g>
+    </g>
+
+    <!-- 1.4 TARJETA SACO -->
+    <g transform="translate(1040, 50)">
+      <rect width="330" height="410" rx="6" fill="#FAF8F5" stroke="#E2E8F0" />
+      <text x="165" y="25" class="box-title">1.4 TARJETA SACO (.ap-card-saco)</text>
+      <text x="165" y="45" class="box-desc">Vista comprador anonimizada vs vista caficultor.</text>
+
+      <!-- Vista Comprador -->
+      <g transform="translate(15, 65)">
+        <rect width="300" height="140" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+        <text x="12" y="20" class="bold-txt" fill="#135E34">VISTA COMPRADOR (PÚBLICA):</text>
+        <text x="12" y="38" class="card-mono">SACO-2026-CAU-7F3A9C12</text>
+        <text x="12" y="56" class="card-txt">Origen: Cauca / Popayán</text>
+        <text x="12" y="74" class="card-txt">Variedad: Castillo | Peso: 60.0 KG</text>
+        <text x="12" y="92" class="card-txt">Humedad: 11.8% | SCA: 86.5 pts</text>
+        <text x="12" y="110" class="bold-txt" fill="#14532D">Estado: [ACEPTADO]</text>
+        <text x="12" y="128" class="box-desc" fill="#9E1B1B" style="text-anchor:start;">Cero cédulas ni GPS privado</text>
+      </g>
+
+      <!-- Vista Caficultor -->
+      <g transform="translate(15, 215)">
+        <rect width="300" height="115" rx="8" fill="#FFFFFF" stroke="#135E34" stroke-width="2" />
+        <text x="12" y="20" class="bold-txt" fill="#135E34">VISTA CAFICULTOR (PROPIA):</text>
+        <text x="12" y="38" class="card-txt">Finca Las Brisas - Lote 2</text>
+        <text x="12" y="56" class="card-txt">Peso: 60.2 KG | Humedad: 11.9%</text>
+        <text x="12" y="74" class="bold-txt" fill="#78350F">Estado: EN PREPARACIÓN</text>
+        <text x="12" y="95" class="bold-txt" fill="#135E34">Acción: IMPRIMIR TIQUETE</text>
+      </g>
+
+      <!-- Vista Transportador -->
+      <g transform="translate(15, 340)">
+        <rect width="300" height="45" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5" />
+        <text x="150" y="27" class="bold-txt" fill="#1E40AF" text-anchor="middle">45 Sacos | 2.700 KG | EN VIAJE</text>
+      </g>
+    </g>
+
+    <!-- 1.5 DISTINTIVO -->
+    <g transform="translate(1390, 50)">
+      <rect width="310" height="410" rx="6" fill="#FAF8F5" stroke="#E2E8F0" />
+      <text x="155" y="25" class="box-title">1.5 DISTINTIVO (.ap-badge)</text>
+      <text x="155" y="45" class="box-desc">4 Estados. Triple codificación. Contraste > 7:1.</text>
+
+      <g transform="translate(15, 65)">
+        <rect width="280" height="70" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5" />
+        <text x="12" y="24" class="badge-txt" fill="#78350F">[ENGRANAJE] EN PREPARACIÓN</text>
+        <text x="12" y="42" class="card-txt" fill="#78350F">Beneficiadero Finca (Secado)</text>
+        <text x="12" y="60" class="bold-txt" fill="#78350F">Contraste 8.15:1 AAA</text>
+      </g>
+      <g transform="translate(15, 145)">
+        <rect width="280" height="70" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5" />
+        <text x="12" y="24" class="badge-txt" fill="#1E40AF">[CAMIÓN] EN VIAJE</text>
+        <text x="12" y="42" class="card-txt" fill="#1E40AF">Transporte Rural o Troncal</text>
+        <text x="12" y="60" class="bold-txt" fill="#1E40AF">Contraste 7.15:1 AAA</text>
+      </g>
+      <g transform="translate(15, 225)">
+        <rect width="280" height="70" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5" />
+        <text x="12" y="24" class="badge-txt" fill="#14532D">[ESCUDO] ACEPTADO</text>
+        <text x="12" y="42" class="card-txt" fill="#14532D">Centro Acopio / Puerto Exportación</text>
+        <text x="12" y="60" class="bold-txt" fill="#14532D">Contraste 8.30:1 AAA</text>
+      </g>
+      <g transform="translate(15, 305)">
+        <rect width="280" height="70" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5" />
+        <text x="12" y="24" class="badge-txt" fill="#7F1D1D">[OCTÁGONO] RECHAZADO</text>
+        <text x="12" y="42" class="card-txt" fill="#7F1D1D">Fallo Fitosanitario / Humedad</text>
+        <text x="12" y="60" class="bold-txt" fill="#7F1D1D">Contraste 8.20:1 AAA</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- SECCION 2: REGLAS ERGONOMICAS Y CONDICIONES DE CAMPO -->
+  <g transform="translate(40, 605)" filter="url(#shadow)">
+    <rect width="840" height="420" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+    <rect width="840" height="35" rx="8" fill="#F1F5F9" />
+    <text x="15" y="23" class="sec-hdr">2. REGLAS ERGONÓMICAS DE USO EN CAMPO (BIOCLIMÁTICA Y MOTRICIDAD)</text>
+
+    <!-- Regla 1 -->
+    <g transform="translate(20, 50)">
+      <rect width="800" height="95" rx="6" fill="#FAF8F5" stroke="#CBD5E1" />
+      <text x="15" y="24" class="bold-txt" fill="#135E34">REGLA 1: RESISTENCIA A LUZ SOLAR DIRECTA (> 80.000 LUX)</text>
+      <text x="15" y="45" class="body-txt">- Se prohíben grises claros y tonos pasteles sin borde perimetral sólido.</text>
+      <text x="15" y="65" class="body-txt">- Todo contenedor cuenta con borde de al menos 1.5 px (contraste perimetral).</text>
+      <text x="15" y="85" class="body-txt">- Contraste tipográfico laboratorio > 7:1 AAA (efectivo > 3.5:1 bajo sol pleno).</text>
+    </g>
+
+    <!-- Regla 2 -->
+    <g transform="translate(20, 160)">
+      <rect width="800" height="95" rx="6" fill="#FAF8F5" stroke="#CBD5E1" />
+      <text x="15" y="24" class="bold-txt" fill="#135E34">REGLA 2: ÁREA TÁCTIL SOBREDIMENSIONADA (DEDOS CON GUANTES O ROCÍO)</text>
+      <text x="15" y="45" class="body-txt">- Altura vehicular y báscula: 56 px (--ap-vehicular-touch-target).</text>
+      <text x="15" y="65" class="body-txt">- Separación libre entre botones contiguos: mínimo 12 px (--ap-space-sm).</text>
+      <text x="15" y="85" class="body-txt">- Prohibido botones contiguos sin margen; previene toques falsos por vibración de camión.</text>
+    </g>
+
+    <!-- Regla 3 -->
+    <g transform="translate(20, 270)">
+      <rect width="800" height="95" rx="6" fill="#FAF8F5" stroke="#CBD5E1" />
+      <text x="15" y="24" class="bold-txt" fill="#135E34">REGLA 3: ICONOGRAFÍA AUTOSUFICIENTE Y PREATENTIVA (CERO MANUALES)</text>
+      <text x="15" y="45" class="body-txt">- Metáforas físicas directas del agro: báscula, camión, saco, escudo y octágono.</text>
+      <text x="15" y="65" class="body-txt">- Prohibido botones con solo icono sin texto acompañante en app del caficultor.</text>
+      <text x="15" y="85" class="body-txt">- Doble codificación mandatoria: color saturado + silueta + texto explícito en mayúsculas.</text>
+    </g>
+
+    <!-- Banner Adopcion -->
+    <rect x="20" y="375" width="800" height="35" rx="6" fill="#DCFCE7" stroke="#16A34A" />
+    <text x="420" y="397" class="bold-txt" fill="#14532D" text-anchor="middle">ADOPCIÓN DEL CAFICULTOR: MÁXIMO DOS ACCIONES PRIMARIAS VISIBLES POR PANTALLA</text>
+  </g>
+
+  <!-- SECCION 3: TARJETA DEL COMPRADOR (LEY 1581) -->
+  <g transform="translate(900, 605)" filter="url(#shadow)">
+    <rect width="860" height="420" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+    <rect width="860" height="35" rx="8" fill="#F1F5F9" />
+    <text x="15" y="23" class="sec-hdr">3. TARJETA DE SACO DEL COMPRADOR: VISTA ANONIMIZADA (LEY 1581 DE 2012)</text>
+
+    <!-- Permitidos -->
+    <g transform="translate(20, 50)">
+      <rect width="820" height="115" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5" />
+      <text x="15" y="24" class="bold-txt" fill="#14532D">ATRIBUTOS PERMITIDOS Y VISIBLES (TABLA PÚBLICA sacos_publicos)</text>
+      <text x="15" y="45" class="body-txt" fill="#14532D">- Código canónico tokenizado: SACO-2026-CAU-7F3A9C12 (HMAC-SHA-256)</text>
+      <text x="15" y="65" class="body-txt" fill="#14532D">- Departamento y Municipio: Cauca / Popayán (Indicación Geográfica Regional)</text>
+      <text x="15" y="85" class="body-txt" fill="#14532D">- Variedad: Castillo | Humedad: 11.8% | Temp: 21 grados C | Peso: 60.0 KG</text>
+      <text x="15" y="105" class="body-txt" fill="#14532D">- Puntaje SCA: 86.5 pts | Estado: [ACEPTADO] | Entrega: Terminal Buenaventura</text>
+    </g>
+
+    <!-- Bloqueados -->
+    <g transform="translate(20, 175)">
+      <rect width="820" height="95" rx="6" fill="#FEE2E2" stroke="#9E1B1B" stroke-width="1.5" />
+      <text x="15" y="24" class="bold-txt" fill="#7F1D1D">DATOS TERMINANTEMENTE BLOQUEADOS Y EXCLUIDOS (CERO FUGA DE DATOS)</text>
+      <text x="15" y="45" class="body-txt" fill="#7F1D1D">[X] Cédula del caficultor: Cero acceso público. Protegida bajo Ley 1581.</text>
+      <text x="15" y="65" class="body-txt" fill="#7F1D1D">[X] Nombre propio del productor: Protege privacidad patrimonial y personal.</text>
+      <text x="15" y="85" class="body-txt" fill="#7F1D1D">[X] ID interno de finca y coordenadas GPS prediales: Previene extorsión rural.</text>
+    </g>
+
+    <!-- Segregacion -->
+    <g transform="translate(20, 280)">
+      <rect width="820" height="50" rx="6" fill="#FAF8F5" stroke="#CBD5E1" />
+      <text x="15" y="24" class="bold-txt">SEGREGACIÓN EN CAPA FÍSICA: Dos tablas DynamoDB disjuntas.</text>
+      <text x="15" y="42" class="body-txt">API pública lee sacos_publicos (sanitizada asíncronamente con DynamoDB Streams y Lambda E6-05).</text>
+    </g>
+
+    <rect x="20" y="340" width="820" height="35" rx="6" fill="#F1F5F9" stroke="#0F172A" />
+    <text x="430" y="362" class="bold-txt" fill="#0F172A" text-anchor="middle">CUMPLIMIENTO: HABEAS DATA, LEY 1581 DE 2012 Y DECRETO 1377 DE 2013 AUDITADOS</text>
+  </g>
+
+  <!-- SECCION 4: FINOPS -->
+  <g transform="translate(40, 1045)" filter="url(#shadow)">
+    <rect width="1720" height="320" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+    <rect width="1720" height="35" rx="8" fill="#F1F5F9" />
+    <text x="15" y="23" class="sec-hdr">4. SUSTENTACIÓN FINOPS, CONSUMO EN VALLE Y ANÁLISIS MULTICRITERIO DE COMPONENTES</text>
+
+    <!-- Alt 1 -->
+    <g transform="translate(20, 50)">
+      <rect width="530" height="100" rx="6" fill="#FFF5F5" stroke="#CBD5E1" />
+      <text x="15" y="22" class="bold-txt" fill="#7F1D1D">ALTERNATIVA 1: Framework Pesado (MUI / Ant Design)</text>
+      <text x="15" y="42" class="body-txt">- Costo valle: $0/mes | Peso: > 600 KB | Carga rural 128 kbps: > 35 s</text>
+      <text x="15" y="62" class="body-txt">- Consumo crítico de batería y datos móviles en campo.</text>
+      <text x="15" y="82" class="bold-txt" fill="#7F1D1D">- Decisión: DESCARTADA CATEGÓRICAMENTE por inviabilidad.</text>
+    </g>
+
+    <!-- Alt 2 -->
+    <g transform="translate(570, 50)">
+      <rect width="530" height="100" rx="6" fill="#FFF5F5" stroke="#CBD5E1" />
+      <text x="15" y="22" class="bold-txt" fill="#7F1D1D">ALTERNATIVA 2: Implementación Ad-Hoc en Silos</text>
+      <text x="15" y="42" class="body-txt">- Costo valle: $0/mes | Peso: ~350 KB | Carga rural: ~18 s</text>
+      <text x="15" y="62" class="body-txt">- Inconsistencia visual, duplicación en 3 repos (+180 h retrabajo).</text>
+      <text x="15" y="82" class="bold-txt" fill="#7F1D1D">- Decisión: DESCARTADA.</text>
+    </g>
+
+    <!-- Solucion Adoptada -->
+    <g transform="translate(1120, 50)">
+      <rect width="580" height="100" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5" />
+      <text x="15" y="22" class="bold-txt" fill="#14532D">SOLUCIÓN ADOPTADA: Sistema Propio Basado en Tokens DTCG</text>
+      <text x="15" y="42" class="body-txt" fill="#14532D">- Costo valle: $0,00 USD / mes (Principio de cero cómputo en espera).</text>
+      <text x="15" y="62" class="body-txt" fill="#14532D">- Peso: < 28 KB CSS puro + SVG | Carga rural: < 1.8 s instantánea.</text>
+      <text x="15" y="82" class="bold-txt" fill="#14532D">- Decisión: SELECCIONADA COMO ESTÁNDAR CANÓNICO.</text>
+    </g>
+
+    <!-- Banner FinOps -->
+    <g transform="translate(20, 165)">
+      <rect width="1680" height="55" rx="6" fill="#FAF8F5" stroke="#135E34" stroke-width="2" />
+      <text x="840" y="25" class="bold-txt" fill="#0F172A" text-anchor="middle">CÁLCULO DE COSTO EVITADO: 180 h ingeniería ahorradas ($12.600 USD) + Datos celulares ($1.440 USD/año) = $14.040 USD AHORRADOS</text>
+      <text x="840" y="45" class="body-txt" fill="#475569" text-anchor="middle">Invariante FinOps: Cero cómputo en espera. Distribución CloudFront + S3 (&lt; $1.50 USD/mes consolidado). Respeto a presupuestos ($480/$750 USD/mes).</text>
+    </g>
+
+    <text x="860" y="245" class="box-desc">Trazabilidad: Cajas E6-05 y E6-07 | Cumplimiento DoD 100% | Validado con Suite Linter de Arquitectura AromaPacífico (FNC 2026)</text>
+  </g>
+</svg>
