@@ -130,15 +130,15 @@
       <text x="15" y="24" class="header-box">VPC Hub de Inspección (10.80.0.0/16)</text>
       <text x="15" y="50" class="subhead-box">Zona us-east-1a:</text>
       <text x="25" y="70" class="mono-text">• 10.80.1.0/24 : TGW Attachment AZ-a (251 IPs)</text>
-      <text x="25" y="88" class="mono-text">• 10.80.10.0/24: Network Firewall AZ-a (251 IPs)</text>
+      <text x="25" y="88" class="mono-text">• 10.80.10.0/24: Reserva / Firewall AZ-a (retirado #31)</text>
       <text x="25" y="106" class="mono-text">• 10.80.20.0/24: PrivateLink Endpoints AZ-a (251 IPs)</text>
       <text x="15" y="135" class="subhead-box">Zona us-east-1b:</text>
       <text x="25" y="155" class="mono-text">• 10.80.101.0/24 : TGW Attachment AZ-b (251 IPs)</text>
-      <text x="25" y="173" class="mono-text">• 10.80.110.0/24: Network Firewall AZ-b (251 IPs)</text>
+      <text x="25" y="173" class="mono-text">• 10.80.110.0/24: Reserva / Firewall AZ-b (retirado #31)</text>
       <text x="25" y="191" class="mono-text">• 10.80.120.0/24: PrivateLink Endpoints AZ-b (251 IPs)</text>
       <text x="15" y="225" class="body-text" fill="#555555">Servicios Centralizados:</text>
-      <text x="15" y="245" class="body-text">• Route 53 Resolver Endpoints (DNS privado híbrido split-horizon)</text>
-      <text x="15" y="260" class="body-text">• Inspección de tráfico saliente hacia internet vía firewall central</text>
+      <text x="15" y="245" class="body-text">• Route 53 Inbound Resolver (DNS híbrido; salida retirada por #31)</text>
+      <text x="15" y="260" class="body-text">• Ahorro FinOps #31: Network Firewall retirado para el piloto</text>
     </g>
 
     <!-- Resumen Data Paths -->

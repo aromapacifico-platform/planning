@@ -102,10 +102,10 @@
     <text x="15" y="55" class="subhead-box">Asignación y Notificación Mensual por Cuenta</text>
 
     <text x="15" y="80" class="body-text">- Seguridad y Auditoría: $50 USD / mes</text>
-    <text x="15" y="102" class="body-text">- Red Compartida: $120 USD / mes</text>
-    <text x="15" y="124" class="body-text">- Producción: $180 USD normal | $450 cosecha</text>
-    <text x="15" y="146" class="body-text">- Pruebas: $80 USD / mes</text>
-    <text x="15" y="168" class="body-text">- Desarrollo: $50 USD / mes</text>
+    <text x="15" y="102" class="body-text">- Red Compartida: $562 norm | $563 cosecha</text>
+    <text x="15" y="124" class="body-text">- Producción: $118 normal | $146 cosecha</text>
+    <text x="15" y="146" class="body-text">- Pruebas: $56 USD | Desarrollo: $25 USD</text>
+    <text x="15" y="168" class="body-text">- Total: $811 normal | $841 cosecha (#31)</text>
 
     <line x1="15" y1="185" x2="345" y2="185" stroke="#E1E4E8" stroke-width="1" />
     <text x="15" y="208" class="header-box" fill="#D93F0B" font-size="12px">POLÍTICA INNEGOCIABLE DE NEGOCIO:</text>
@@ -173,8 +173,8 @@
       <text x="15" y="92" class="body-text">- VPN IPsec hacia 3 Centros de Acopio:</text>
       <text x="25" y="110" class="mono-text">* Cauca 10.41.0.0/16 | Huila 10.42.0.0/16</text>
       <text x="25" y="126" class="mono-text">* Tolima 10.43.0.0/16 (7 VLANs/acopio)</text>
-      <text x="15" y="148" class="body-text">- AWS Network Firewall Inspección</text>
-      <text x="15" y="170" class="body-text">- VPC Endpoints (S3, DynamoDB) FinOps</text>
+      <text x="15" y="148" class="body-text">- Route 53 Inbound Resolver (DNS)</text>
+      <text x="15" y="170" class="body-text">- Endpoints S3/DDB (NetFW retirado #31)</text>
       <text x="15" y="205" class="subhead-box">Subredes cloud sin solapamiento local</text>
     </g>
   </g>
@@ -190,7 +190,7 @@
       <rect width="460" height="345" rx="6" fill="#FFFFFF" stroke="#0E8A16" stroke-width="2" />
       <rect width="460" height="32" rx="6" fill="#F4FBF5" />
       <text x="15" y="22" class="acc-title" fill="#0E8A16">Desarrollo (Workload-Dev)</text>
-      <text x="15" y="52" class="subhead-box">Ambiente: desarrollo | Presupuesto: $50 USD/mes</text>
+      <text x="15" y="52" class="subhead-box">Ambiente: desarrollo | Presupuesto: $25 USD/mes</text>
 
       <text x="15" y="80" class="body-text">- Sandbox aislado para módulos de Terraform (IaC).</text>
       <text x="15" y="105" class="body-text">- Pruebas de integración rápida con emuladores IoT.</text>
@@ -210,7 +210,7 @@
       <rect width="460" height="345" rx="6" fill="#FFFFFF" stroke="#FBCA04" stroke-width="2" />
       <rect width="460" height="32" rx="6" fill="#FFFCF0" />
       <text x="15" y="22" class="acc-title" fill="#B08800">Pruebas / Staging (Workload-Test)</text>
-      <text x="15" y="52" class="subhead-box">Ambiente: pruebas | Presupuesto: $80 USD/mes</text>
+      <text x="15" y="52" class="subhead-box">Ambiente: pruebas | Presupuesto: $56 USD/mes</text>
 
       <text x="15" y="80" class="body-text">- Réplica fiel de arquitectura de producción a escala reducida.</text>
       <text x="15" y="105" class="body-text">- Pipeline automatizado CI/CD en GitHub Actions.</text>

@@ -40,7 +40,7 @@ Los alias se resuelven antes del plan o de aplicar configuración. No se inventa
 | `DNS-PUBLICO-IP`, `NTP-PUBLICO-IP` | Listas de IP concretas de forwarders y servidores de hora seleccionados por operación; pendientes de configuración, sin permiso genérico. |
 | `API-PUBLICA`, `COGNITO-FQDN` | FQDN de la API y autenticación del piloto, obtenidos de sus recursos. Alias FQDN solo en el perímetro que lo soporte; un SG no admite nombres DNS. |
 | `ADMIN-CLOUD-FQDN` | Lista aprobada de destinos HTTPS necesarios para IAM Identity Center, MFA, consola y API de administración de AWS; operación la mantiene por servicio/región, sin comodín de navegación general. Solo se consume en el firewall local. |
-| `RESOLVER-IN-IP`, `RESOLVER-OUT-IP` | /32 reales de las ENI de entrada y salida de Route 53 Resolver en hub, obtenidas de sus recursos; las respuestas conservan rutas hacia DNS-CIDR. |
+| `RESOLVER-IN-IP` | /32 reales de las ENI de entrada de Route 53 Resolver en hub, obtenidas de sus recursos; las respuestas conservan rutas hacia DNS-CIDR. (Nota: `RESOLVER-OUT-IP` queda retirado del piloto por decisión FinOps #31 al suprimirse el Resolver de salida). |
 | `MOVIL-IP` | CIDR públicos de salida de los operadores/accesos autorizados para eventos no telemétricos, verificados y mantenidos. No hay lista aportada todavía: ese permiso queda bloqueado hasta definirla o aprobar un cambio de requisito. |
 | `SUB(t,a)` | Prefijo /24 de la categoría `t` y zona `a` del plan integrado. En prod: telemetría 1/101, dron 2/102, app 10/110, datos 20/120, objetos 30/130, admin 40/140, pública 50/150, todos bajo `10.70`. |
 | `APP-CIDR`, `FUNCION-CIDR`, `ADMIN-CIDR` | Respectivamente `SUB(app,a/b)`, `SUB(dron,a/b)`, `SUB(admin,a/b)` del ambiente concreto, no mezclas de dev/test/prod. |
@@ -87,7 +87,7 @@ La columna «Contrato #23» es una clave dentro de `module.security.rule_catalog
 | L24 | LOCAL | TUNNEL-AWS-IP | TUNNEL-CGW-IP | TCP 179 | Permitir | P | VPN | `local_policy["L24"]` |
 | L25 | LOCAL | TUNNEL-CGW-IP | TUNNEL-AWS-IP | TCP 179 | Permitir | P | VPN | `local_policy["L25"]` |
 | L26 | LOCAL | WAN-X y PUB-VPN-AWS-IP | Peer exacto de la conexión VPN | ICMP tipo 3 / código 4 | Permitir | P | VPN | `local_policy["L26"]` |
-| L27 | LOCAL | RESOLVER-OUT-IP | DNS-X | TCP/UDP 53 | Permitir | P | Privado | `local_policy["L27"]` |
+| L27 | LOCAL | RESOLVER-OUT-IP | DNS-X | TCP/UDP 53 | Retirada | — | Privado | Retirada por decisión FinOps #31 (supresión de Resolver de salida, ahorro $182,50 USD/mes). |
 | L28 | HOST | Equipos no autorizados de SRV-X | PRINT-X, LABEL-X, CTRL-X y RADIUS-X | Todos | Denegar | P | Local | `host_policy["L28"]` |
 | L29 | LOCAL | ADMIN-X | ADMIN-CLOUD-FQDN | TCP 443 / TLS | Permitir | P | Admin | `local_policy["L29"]` |
 | L30 | INVARIANTE | Tráfico nuevo no cubierto por L01–L29 | Perímetro local y hosts | Todos | Denegar por defecto | P | Local | `assertions["L30"]` |
@@ -109,7 +109,7 @@ La columna «Contrato #23» es una clave dentro de `module.security.rule_catalog
 | C16 | SG-OUT | SG-ADMIN | VPCE-SSM-IP | TCP 443 / TLS | Permitir | P | Admin | `sg_egress["C16"]` |
 | C17 | SG-IN | ADMIN-CIDR | SG-VPCE-SSM | TCP 443 / TLS | Permitir | P | Admin | `sg_ingress["C17"]` |
 | C18 | SG-IN | DNS-CIDR | SG-RESOLVER-IN | TCP/UDP 53 | Permitir | P | Privado | `sg_ingress["C18"]` |
-| C19 | SG-OUT | SG-RESOLVER-OUT | DNS-CIDR | TCP/UDP 53 | Permitir | P | Privado | `sg_egress["C19"]` |
+| C19 | SG-OUT | SG-RESOLVER-OUT | DNS-CIDR | TCP/UDP 53 | Retirada | — | Privado | Retirada por decisión FinOps #31 (supresión de SG-RESOLVER-OUT y Resolver de salida, ahorro $182,50 USD/mes). |
 | C20 | SG-OUT | SG-CONSULTA | PL-DDB | TCP 443 / TLS | Permitir | P | Consulta | `sg_egress["C20"]` |
 | C21 | INVARIANTE | Cualquier origen no permitido explícitamente | SG de workloads y endpoints | Todos | Denegar implícito | P | Patron | `assertions["C21"]` |
 | C22 | INVARIANTE | SG de workloads y endpoints | Destinos no enumerados | Todos | Denegar implícito | P | Patron | `assertions["C22"]` |
@@ -167,7 +167,7 @@ La columna «Contrato #23» es una clave dentro de `module.security.rule_catalog
 - **L24:** BGP dentro de túneles; no se abre TCP 179 en internet.
 - **L25:** BGP de origen acopio; filtros de rutas y ASN de #8.
 - **L26:** PMTU entre peers conocidos; comprobar MSS/MTU sin permitir ICMP general.
-- **L27:** Solo resolución inversa de zonas locales declaradas; sin consulta recursiva pública.
+- **L27:** **Regla retirada para el piloto (Decisión FinOps #31)**: Se retiró el Route 53 Resolver Outbound para evitar un sobrecosto recurrente de $182,50 USD al mes ($2.190 USD al año). El diseño del piloto no requiere resolución DNS inversa o recursiva de nombres locales de los acopios desde la nube (las conexiones hacia acopios se dirigen a IPs fijas asignadas en el plan de direccionamiento sin requerir consultas directas al DNS local).
 - **L28:** Protección dentro de VLAN 110, después de excepciones L05/L08/L09/L10; no se atribuye al router.
 - **L29:** Inicio de sesión y consola/API administrativa desde el puesto administrado; Identity Center con MFA y roles aprobados, sin abrir entrada a la VPC.
 - **L30:** Retornos establecidos permitidos por estado; no es una regla allow general.
@@ -189,7 +189,7 @@ La columna «Contrato #23» es una clave dentro de `module.security.rule_catalog
 - **C16:** Solo nodos administrados mediante agente SSM; sin entrada SSH permanente.
 - **C17:** Endpoints ssm/ssmmessages; ec2messages solo si la versión del agente lo requiere.
 - **C18:** Entrada al resolver híbrido desde los DNS locales concretos de VLAN 110.
-- **C19:** Reenvío únicamente a DNS locales registrados y sus zonas; no retorno genérico.
+- **C19:** **Regla retirada para el piloto (Decisión FinOps #31)**: Al suprimirse el endpoint de salida de Route 53 Resolver, se retira tanto el Security Group asociado (`SG-RESOLVER-OUT`) como sus reglas de egreso (`sg_egress["C19"]`), evitando $182,50 USD mensuales. El tráfico saliente de DNS hacia los acopios queda cerrado.
 - **C20:** Lectura de la vista del comprador; IAM restringe tabla/acciones/campos.
 - **C21:** SG sin reglas ingress adicionales; no se intenta crear un deny en un SG.
 - **C22:** Eliminar la salida allow-all creada por defecto; conservar retornos stateful.
@@ -259,7 +259,7 @@ Se conservan carga de objetos por S3 privado desde el acopio, dos túneles IPsec
 
 En NAT-T se usa UDP 4500 para los datos encapsulados e IKE 500; este perfil no añade ESP nativo como regla permanente. Si se acuerda IPsec sin NAT-T, se debe añadir y revisar explícitamente protocolo IP 50 entre peers concretos: no habilitar ambas variantes sin necesidad. No hay SG asociado a Transit Gateway o al extremo administrado de VPN; sus rutas, peers y opciones son de #22. TCP 179 se limita al interior de los túneles y no transporta usuarios. El firewall del CPE que haga NAT debe conservar el mismo alcance de peers.
 
-El DNS privado usa resolver de entrada/salida y sus SG en hub según #7. Invitados reciben solo resolución pública. Reenvío de una zona no implica acceso a todas las redes de esa zona. Las referencias entre SG en distintas VPC/cuentas no se presuponen válidas: donde exista tránsito híbrido se usan los CIDR/IP autorizados y rutas de ida/vuelta. Las NACL no aceptan referencias SG ni alias FQDN.
+El DNS privado híbrido utiliza exclusivamente el Route 53 Inbound Resolver (entrada) y sus SG en la VPC Hub según #7 y la decisión FinOps #31. El Resolver de salida (outbound) y su SG asociado (`SG-RESOLVER-OUT`) fueron retirados para el piloto por decisión FinOps #31, ahorrando $182,50 USD al mes ($2.190 USD al año), dado que el diseño del piloto no requiere reenviar consultas DNS desde la nube hacia los servidores de nombres locales de los acopios. Invitados reciben solo resolución pública. Reenvío de una zona no implica acceso a todas las redes de esa zona. Las referencias entre SG en distintas VPC/cuentas no se presuponen válidas: donde exista tránsito híbrido se usan los CIDR/IP autorizados y rutas de ida/vuelta. Las NACL no aceptan referencias SG ni alias FQDN.
 
 ### Administración y tráfico dentro de la VPC
 
@@ -269,7 +269,7 @@ KMS, Logs y Rekognition se alcanzan por endpoints privados para funciones asocia
 
 Las NACL privadas permiten pares de prefijos a nivel de subred y los SG limitan qué recurso realmente recibe. Las entradas efímeras de NACL son permisos sin estado y no prueban que el paquete sea una respuesta: el control stateful del SG debe seguir activo. Los rangos deben ajustarse si los sistemas elegidos usan otros puertos de cliente; no se asume que la tabla haya pasado una prueba real.
 
-Se mantiene el AWS Network Firewall previsto en la arquitectura de gobierno como punto de inspección de los caminos que se enruten por él. **No se le atribuye protección de todos los servicios administrados o de endpoints que lo eviten.** Su incorporación al patrón, rutas simétricas y reglas efectivas deben armonizarse con #22/#23; esta tabla no inventa un rule group de contenido ni sustituye SG/endpoint policies por la mera presencia de ese recurso. No se habilita un pass-all adicional para eludir esa revisión.
+Respecto a AWS Network Firewall, se aclara formalmente que fue retirado del alcance del piloto según la Decisión FinOps 3 de la Issue #31 (ahorro de $577,68 USD al mes / $6.932,16 USD al año). El tráfico del piloto fluye predominantemente hacia servicios administrados de AWS (IoT Core, API Gateway, S3) con defensas perimetrales nativas y TLS 1.3, mientras que el tráfico inter-VPC queda estrictamente aislado por los Security Groups y Network ACLs de este catálogo, complementados por los firewalls perimetrales de cada centro de acopio. Si una fase posterior a gran escala o una auditoría específica demandara inspección profunda de paquetes (DPI) o filtrado de dominios salientes por SNI, se incorporará mediante código IaC sin requerir modificaciones en el esquema de subredes.
 
 Las consultas al resolver proporcionado por AWS y ciertos servicios de plataforma tienen excepciones de filtrado propias de AWS; no se promete controlarlas mediante un SG común. Se verifican esas limitaciones antes de presentar un bloqueo completo de DNS. El tráfico lateral dentro de VLAN 110 se filtra en host/switch, tal como exige #8, no en un firewall que el paquete no atraviesa.
 

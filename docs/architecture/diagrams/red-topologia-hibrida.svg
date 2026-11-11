@@ -150,10 +150,10 @@
     <!-- VPC Hub Inspection & PrivateLink -->
     <g transform="translate(25, 830)">
       <rect width="650" height="180" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" />
-      <text x="15" y="25" class="card-title">VPC HUB DE INSPECCIÓN Y SERVICIOS COMPARTIDOS (10.80.0.0/16)</text>
-      <text x="15" y="55" class="body-text">• AWS Network Firewall para inspección Stateful de paquetes entrantes/salientes.</text>
-      <text x="15" y="75" class="body-text">• PrivateLink Interface Endpoints Compartidos para servicios AWS (KMS, CloudWatch, SSM).</text>
-      <text x="15" y="95" class="body-text">• Amazon Route 53 Inbound/Outbound Resolvers para resolución DNS split-horizon.</text>
+      <text x="15" y="25" class="card-title">VPC HUB Y SERVICIOS COMPARTIDOS (10.80.0.0/16)</text>
+      <text x="15" y="55" class="body-text">• PrivateLink Interface Endpoints Compartidos para servicios AWS (KMS, CloudWatch, SSM).</text>
+      <text x="15" y="75" class="body-text">• Route 53 Inbound Resolver para resolución split-horizon de acopios hacia nube.</text>
+      <text x="15" y="95" class="body-text">• Ahorro FinOps #31: Network Firewall y Resolver de salida retirados para el piloto ($760 USD/mes).</text>
       <text x="15" y="125" class="mono-text" fill="#0E8A16">Ahorro FinOps: 1 solo par de Interface Endpoints compartido por todas las cuentas</text>
       <text x="15" y="145" class="body-text" fill="#555555">Ahorra más de $180 USD al mes frente a desplegar endpoints redundantes por VPC</text>
     </g>
