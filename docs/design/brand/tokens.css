@@ -1,7 +1,9 @@
 /**
  * AromaPacífico Design Tokens - FNC 2026
  * Tokens cromáticos y de accesibilidad para aplicaciones web y móviles en campo.
- * Cumplimiento estricto: WCAG 2.1 AAA / APCA Silver Draft.
+ * Reference conversion: 1rem = 16px; actual size follows the user root size.
+ * HU36 sources: tipografia.json and espaciado-grilla.json (project format, not DTCG).
+ * Field legibility and application accessibility remain to be validated.
  */
 
 :root {
@@ -58,14 +60,14 @@
 
   /* Tipografía - Familias y Pesos */
   --ap-font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --ap-font-mono: 'Fira Code', 'Roboto Mono', monospace;
+  --ap-font-mono: 'Fira Code', 'Roboto Mono', 'Cascadia Code', monospace;
   --ap-font-weight-regular: 400;
   --ap-font-weight-medium: 500;
   --ap-font-weight-semibold: 600;
   --ap-font-weight-bold: 700;
   --ap-font-weight-heavy: 800;
 
-  /* Escala Tipográfica Vehicular / Campo (Teléfono a 50-80 cm, vibración y sol directo) */
+  /* Phone scale: vehicle stopped; viewing distance 50-80cm is an untested assumption. */
   --ap-font-phone-caption: 0.875rem; /* 14px - Mínimo absoluto en cabina */
   --ap-line-phone-caption: 1.25rem;  /* 20px */
   --ap-font-phone-body: 1.125rem;    /* 18px - Base vehicular */
@@ -99,7 +101,46 @@
   --ap-font-web-hero: 3.0rem;        /* 48px */
   --ap-line-web-hero: 3.5rem;        /* 56px */
 
+  /* Reusable tracking and role weights, mirrored from tipografia.json. */
+  --ap-letter-spacing-tighter: -0.02em;
+  --ap-letter-spacing-tight: -0.01em;
+  --ap-letter-spacing-normal: 0em;
+  --ap-letter-spacing-wide: 0.02em;
+  --ap-letter-spacing-wider: 0.05em;
+  --ap-letter-spacing-slight: 0.01em;
+  --ap-weight-phone-caption: 600;
+  --ap-weight-phone-body: 600;
+  --ap-weight-phone-button: 700;
+  --ap-weight-phone-subtitle: 600;
+  --ap-weight-phone-title: 700;
+  --ap-weight-phone-metric: 800;
+  --ap-weight-phone-display: 800;
+  --ap-tracking-phone-caption: 0.02em;
+  --ap-tracking-phone-body: 0em;
+  --ap-tracking-phone-button: 0.02em;
+  --ap-tracking-phone-subtitle: 0.01em;
+  --ap-tracking-phone-title: 0.01em;
+  --ap-tracking-phone-metric: 0em;
+  --ap-tracking-phone-display: -0.01em;
+  --ap-weight-web-legal: 400;
+  --ap-weight-web-table: 400;
+  --ap-weight-web-body: 400;
+  --ap-weight-web-h4: 600;
+  --ap-weight-web-h3: 600;
+  --ap-weight-web-h2: 700;
+  --ap-weight-web-h1: 800;
+  --ap-weight-web-hero: 800;
+  --ap-tracking-web-legal: 0.01em;
+  --ap-tracking-web-table: 0em;
+  --ap-tracking-web-body: 0em;
+  --ap-tracking-web-h4: 0em;
+  --ap-tracking-web-h3: 0em;
+  --ap-tracking-web-h2: 0em;
+  --ap-tracking-web-h1: -0.01em;
+  --ap-tracking-web-hero: -0.02em;
+
   /* Espaciado Modular Base 8pt / 4pt */
+  --ap-space-base: 0.5rem; /* 8px at the reference root size */
   --ap-space-xxs: 0.25rem;  /* 4px */
   --ap-space-xs: 0.5rem;    /* 8px */
   --ap-space-sm: 0.75rem;   /* 12px */
@@ -122,12 +163,21 @@
   --ap-grid-phone-columns: 4;
   --ap-grid-phone-gutter: 16px;
   --ap-grid-phone-margin: 16px;
+  --ap-grid-phone-vehicular-margin: 20px;
   --ap-grid-tablet-columns: 8;
   --ap-grid-tablet-gutter: 20px;
   --ap-grid-tablet-margin: 24px;
   --ap-grid-web-columns: 12;
   --ap-grid-web-gutter: 24px;
   --ap-grid-web-max-width: 1280px;
+  --ap-grid-web-margin: auto;
+
+  /* Breakpoint reference values; native @media conditions cannot use var(). */
+  --ap-breakpoint-sm: 640px;
+  --ap-breakpoint-md: 768px;
+  --ap-breakpoint-lg: 1024px;
+  --ap-breakpoint-xl: 1280px;
+  --ap-breakpoint-2xl: 1536px;
 
   /* Radios de Borde */
   --ap-radius-none: 0px;
@@ -139,7 +189,7 @@
   --ap-radius-full: 9999px;/* Pastillas circulares y FAB */
 }
 
-/* Modo Exterior de Alto Brillo (Luz Solar Extrema en Campo) */
+/* User preference for more contrast; this does not detect sunlight or ambient lux. */
 @media (prefers-contrast: more) {
   :root {
     --ap-color-brand-primary: #0D4A27;

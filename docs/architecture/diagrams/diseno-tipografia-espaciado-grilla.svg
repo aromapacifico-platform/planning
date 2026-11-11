@@ -19,7 +19,7 @@
 
   <!-- ENCABEZADO -->
   <text x="880" y="38" class="title">AromaPacífico - Sistema de Diseño: Tipografía, Grilla, Espaciado y Radios de Borde</text>
-  <text x="880" y="64" class="subtitle">Especificación Dual: Ergonomía Vehicular en Cabina (50-80 cm / Vibración / Sol) vs. Consulta Web del Comprador (FNC 2026)</text>
+  <text x="880" y="64" class="subtitle">Esquema ilustrativo · Base: 1rem = 16px · Supuestos de entorno sin medir · Registro con vehículo detenido</text>
 
   <!-- SECCION 1: ESCALAS TIPOGRAFICAS DUALES -->
   <g transform="translate(35, 90)" filter="url(#shadow)">
@@ -31,7 +31,7 @@
     <g transform="translate(20, 50)">
       <rect width="810" height="350" rx="6" fill="#F0FDF4" stroke="#135E34" stroke-width="1.5" />
       <rect width="810" height="32" rx="6" fill="#DCFCE7" />
-      <text x="15" y="21" class="card-header" fill="#135E34">CONTEXTO 1: TELÉFONO EN VEHÍCULO (TRANSPORTADOR) · Distancia: 50-80 cm | Vibración trocha: 4-16 Hz | Sol directo</text>
+      <text x="15" y="21" class="card-header" fill="#135E34">TELÉFONO · REGISTRO DETENIDO · Supuestos: 50-80 cm | Vibración: 4-16 Hz | Cabina: 5.000-15.000 lux</text>
 
       <!-- Fila Display -->
       <g transform="translate(15, 45)">
@@ -60,19 +60,19 @@
       <!-- Fila Cuerpo Base -->
       <g transform="translate(15, 213)">
         <rect width="780" height="36" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" />
-        <text x="12" y="23" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#0F172A">Cuerpo Vehicular Base: 18px (1.125rem) · Line-height: 26px · Regular/SemiBold <tspan font-size="12" font-weight="400" fill="#475569">(Lectura clara a 65 cm)</tspan></text>
+        <text x="12" y="23" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#0F172A">Cuerpo Vehicular Base: 18px (1.125rem) · Line-height: 26px · SemiBold (600) <tspan font-size="12" font-weight="400" fill="#475569">(Validación en campo pendiente)</tspan></text>
       </g>
 
       <!-- Fila Boton -->
       <g transform="translate(15, 255)">
         <rect width="780" height="38" rx="4" fill="#DCFCE7" stroke="#135E34" stroke-width="1.5" />
-        <text x="12" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" fill="#135E34">Botón de Acción en Cabina: 18px (1.125rem) · Bold (700) · Altura táctil: 56px obligatoria <tspan font-size="12" font-weight="400" fill="#0D4A27">(Anti-vibración)</tspan></text>
+        <text x="12" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" fill="#135E34">Botón: 18px (1.125rem) · Line-height: 24px · Bold (700) · Altura mínima: 56px <tspan font-size="12" font-weight="400" fill="#0D4A27">(Detenido)</tspan></text>
       </g>
 
-      <!-- Fila Minimo Legal -->
+      <!-- Fila Minimo Interno -->
       <g transform="translate(15, 299)">
         <rect width="780" height="36" rx="4" fill="#FEF2F2" stroke="#B91C1C" stroke-width="1.5" />
-        <text x="12" y="23" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" fill="#7F1D1D">MÍNIMO LEGAL EN CABINA: 14px (0.875rem) · SemiBold (600) · Prohibido texto menor a 14px en pantalla vehicular</text>
+        <text x="12" y="23" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" fill="#7F1D1D">MÍNIMO INTERNO: 14px (0.875rem) · Line-height: 20px · SemiBold (600) · Decisión de diseño</text>
       </g>
     </g>
 
@@ -80,47 +80,53 @@
     <g transform="translate(860, 50)">
       <rect width="810" height="350" rx="6" fill="#EFF6FF" stroke="#0F4C81" stroke-width="1.5" />
       <rect width="810" height="32" rx="6" fill="#DBEAFE" />
-      <text x="15" y="21" class="card-header" fill="#0F4C81">CONTEXTO 2: CONSULTA WEB COMPRADOR · Distancia: 45-60 cm | Iluminación: 300-500 lux | Alta densidad informativa</text>
+      <text x="15" y="21" class="card-header" fill="#0F4C81">CONSULTA WEB · Supuestos: 45-60 cm | Iluminación: 300-500 lux | Datos públicos según seguridad §5.1</text>
 
       <!-- Fila Hero Web -->
-      <g transform="translate(15, 45)">
-        <rect width="780" height="36" rx="4" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1" />
+      <g transform="translate(15, 40)">
+        <rect width="780" height="34" rx="4" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1" />
         <text x="12" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="800" fill="#0F4C81">Hero Portada: 48px (3.000rem) · Line-height: 56px · Heavy (800) <tspan font-size="12" font-weight="400" fill="#475569">(Bienvenida trazabilidad FNC)</tspan></text>
       </g>
 
       <!-- Fila H1 Web -->
-      <g transform="translate(15, 87)">
-        <rect width="780" height="36" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" />
+      <g transform="translate(15, 79)">
+        <rect width="780" height="34" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" />
         <text x="12" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="800" fill="#0F172A">H1 Título Principal: 32px (2.000rem) · Line-height: 40px · Heavy (800) <tspan font-size="12" font-weight="400" fill="#475569">(Certificado de Trazabilidad)</tspan></text>
       </g>
 
       <!-- Fila H2 Web -->
-      <g transform="translate(15, 129)">
-        <rect width="780" height="36" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" />
-        <text x="12" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#0F172A">H2 Encabezado de Sección: 24px (1.500rem) · Line-height: 32px · Bold (700) <tspan font-size="12" font-weight="400" fill="#475569">(Perfil SCA de Taza)</tspan></text>
+      <g transform="translate(15, 118)">
+        <rect width="780" height="34" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" />
+        <text x="12" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#0F172A">H2 Encabezado de Sección: 24px (1.500rem) · Line-height: 32px · Bold (700) <tspan font-size="12" font-weight="400" fill="#475569">(Secado, origen y puerto)</tspan></text>
       </g>
 
       <!-- Fila H3 Web -->
-      <g transform="translate(15, 171)">
-        <rect width="780" height="36" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" />
-        <text x="12" y="23" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#0F172A">H3 Título de Módulo: 20px (1.250rem) · Line-height: 28px · SemiBold (600) <tspan font-size="12" font-weight="400" fill="#475569">(Variedad y Altitud)</tspan></text>
+      <g transform="translate(15, 157)">
+        <rect width="780" height="34" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" />
+        <text x="12" y="23" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#0F172A">H3 Título de Módulo: 20px (1.250rem) · Line-height: 28px · SemiBold (600) <tspan font-size="12" font-weight="400" fill="#475569">(Variedad y municipio)</tspan></text>
+      </g>
+
+      <!-- Fila H4 Web -->
+      <g transform="translate(15, 196)">
+        <rect width="780" height="34" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" />
+        <text x="12" y="23" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#0F172A">H4 Subtítulo: 18px (1.125rem) · Line-height: 24px · SemiBold (600) <tspan font-size="12" font-weight="400" fill="#475569">(Subsección)</tspan></text>
       </g>
 
       <!-- Fila Cuerpo Web Base -->
-      <g transform="translate(15, 213)">
-        <rect width="780" height="36" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" />
+      <g transform="translate(15, 235)">
+        <rect width="780" height="34" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" />
         <text x="12" y="23" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="400" fill="#0F172A">Cuerpo Web Estándar: 16px (1.000rem) · Line-height: 24px · Regular (400) <tspan font-size="12" font-weight="400" fill="#475569">(Párrafos de descripción técnica)</tspan></text>
       </g>
 
       <!-- Fila Tabla Web -->
-      <g transform="translate(15, 255)">
-        <rect width="780" height="38" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" />
-        <text x="12" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500" fill="#0F172A">Tabla de Datos / Metadatos: 14px (0.875rem) · Line-height: 20px · Regular/Medium <tspan font-size="12" font-weight="400" fill="#475569">(Celdas metrológicas)</tspan></text>
+      <g transform="translate(15, 274)">
+        <rect width="780" height="34" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" />
+        <text x="12" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="400" fill="#0F172A">Tabla de Datos / Metadatos: 14px (0.875rem) · Line-height: 20px · Regular (400) <tspan font-size="12" font-weight="400" fill="#475569">(Celdas metrológicas)</tspan></text>
       </g>
 
       <!-- Fila Legal Web -->
-      <g transform="translate(15, 299)">
-        <rect width="780" height="36" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1" />
+      <g transform="translate(15, 313)">
+        <rect width="780" height="34" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1" />
         <text x="12" y="23" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="400" fill="#475569">Notas Legales y Descargos: 12px (0.750rem) · Line-height: 16px · Regular (400) · Ley 1581 de 2012</text>
       </g>
     </g>
@@ -138,18 +144,19 @@
       <rect width="530" height="30" rx="6" fill="#E2E8F0" />
       <text x="15" y="20" class="card-header" fill="#0F172A">ESCALA DE ESPACIADO ATÓMICO (BASE 8PT / 4PT)</text>
 
-      <text x="15" y="55" class="body-txt"><tspan class="bold-txt">--ap-space-xxs: 4px</tspan> (0.25rem) · Micro-separación icono/texto</text>
-      <text x="15" y="80" class="body-txt"><tspan class="bold-txt">--ap-space-xs: 8px</tspan> (0.50rem) · Padding interno badges de estado</text>
-      <text x="15" y="105" class="body-txt" fill="#135E34"><tspan class="bold-txt" fill="#135E34">--ap-space-sm: 12px</tspan> (0.75rem) · Separación obligatoria entre botones en cabina</text>
-      <text x="15" y="130" class="body-txt"><tspan class="bold-txt">--ap-space-md: 16px</tspan> (1.00rem) · Padding estándar móvil / canaleta teléfono</text>
-      <text x="15" y="155" class="body-txt" fill="#135E34"><tspan class="bold-txt" fill="#135E34">--ap-space-lg: 24px</tspan> (1.50rem) · Padding tarjetas vehiculares / canaleta web</text>
-      <text x="15" y="180" class="body-txt"><tspan class="bold-txt">--ap-space-xl: 32px</tspan> (2.00rem) · Separación entre bloques mayores de UI</text>
-      <text x="15" y="205" class="body-txt"><tspan class="bold-txt">--ap-space-2xl: 40px</tspan> (2.50rem) · Márgenes laterales tableta de acopio</text>
-      <text x="15" y="230" class="body-txt"><tspan class="bold-txt">--ap-space-3xl: 48px</tspan> (3.00rem) · Altura de botones estándar de campo</text>
-      <text x="15" y="255" class="body-txt"><tspan class="bold-txt">--ap-space-4xl: 64px</tspan> (4.00rem) · Espaciado estructural portal web</text>
+      <text x="15" y="50" class="body-txt"><tspan class="bold-txt">--ap-space-xxs: 4px</tspan> (0.25rem) · Micro-separación icono/texto</text>
+      <text x="15" y="72" class="body-txt"><tspan class="bold-txt">--ap-space-xs: 8px</tspan> (0.50rem) · Padding interno badges de estado</text>
+      <text x="15" y="94" class="body-txt" fill="#135E34"><tspan class="bold-txt" fill="#135E34">--ap-space-sm: 12px</tspan> (0.75rem) · Separación obligatoria entre botones en cabina</text>
+      <text x="15" y="116" class="body-txt"><tspan class="bold-txt">--ap-space-md: 16px</tspan> (1.00rem) · Padding estándar móvil / canaleta teléfono</text>
+      <text x="15" y="138" class="body-txt" fill="#135E34"><tspan class="bold-txt" fill="#135E34">--ap-space-lg: 24px</tspan> (1.50rem) · Padding tarjetas vehiculares / canaleta web</text>
+      <text x="15" y="160" class="body-txt"><tspan class="bold-txt">--ap-space-xl: 32px</tspan> (2.00rem) · Separación entre bloques mayores de UI</text>
+      <text x="15" y="182" class="body-txt"><tspan class="bold-txt">--ap-space-2xl: 40px</tspan> (2.50rem) · Separación de paneles amplios</text>
+      <text x="15" y="204" class="body-txt"><tspan class="bold-txt">--ap-space-3xl: 48px</tspan> (3.00rem) · Altura de botones estándar de campo</text>
+      <text x="15" y="226" class="body-txt"><tspan class="bold-txt">--ap-space-4xl: 64px</tspan> (4.00rem) · Espaciado estructural portal web</text>
+      <text x="15" y="248" class="body-txt"><tspan class="bold-txt">--ap-space-5xl: 80px</tspan> (5.00rem) · Pie de página</text>
 
       <rect x="15" y="275" width="500" height="35" rx="4" fill="#DCFCE7" stroke="#135E34" stroke-width="1.5" />
-      <text x="25" y="297" class="bold-txt" fill="#135E34">--ap-vehicular-touch-target: 56px · Altura táctil anti-vibración en cabina</text>
+      <text x="25" y="297" class="bold-txt" fill="#135E34">--ap-vehicular-touch-target: 56px · Altura mínima interna en cabina</text>
     </g>
 
     <!-- BLOQUE 2: GRILLAS RESPONSIVAS -->
@@ -227,12 +234,12 @@
     <g transform="translate(20, 50)">
       <rect width="810" height="400" rx="12" fill="#FFFFFF" stroke="#135E34" stroke-width="2" />
       <rect width="810" height="32" rx="12" fill="#DCFCE7" />
-      <text x="15" y="21" class="card-header" fill="#135E34">TARJETA VEHICULAR: REGISTRO DE ENTREGA EN CABINA (TRANSPORTADOR)</text>
+      <text x="15" y="21" class="card-header" fill="#135E34">EJEMPLO TIPOGRÁFICO: REGISTRO CON VEHÍCULO DETENIDO</text>
 
       <!-- Insignia y Ruta -->
       <g transform="translate(20, 45)">
         <rect width="360" height="40" rx="8" fill="#DBEAFE" stroke="#2563EB" stroke-width="2" />
-        <text x="180" y="25" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="800" fill="#1E40AF" text-anchor="middle">ESTADO: [ CAMIÓN ] EN VIAJE (7.15:1 AAA)</text>
+        <text x="180" y="25" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="800" fill="#1E40AF" text-anchor="middle">ESTADO: [ CAMIÓN ] EN VIAJE</text>
 
         <rect x="380" y="0" width="390" height="40" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1" />
         <text x="575" y="25" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" fill="#334155" text-anchor="middle">RUTA: CAUCA &gt; ACOPIO POPAYÁN (VIAJE-084)</text>
@@ -248,33 +255,33 @@
       <!-- Código de Lote -->
       <g transform="translate(20, 198)">
         <rect width="770" height="65" rx="8" fill="#FFFFFF" stroke="#0F172A" stroke-width="1.5" />
-        <text x="385" y="28" font-family="monospace" font-size="18" font-weight="700" fill="#0F172A" text-anchor="middle">LOTE ACTIVO: SACO-2026-CAU-9F2B81</text>
-        <text x="385" y="50" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#475569" text-anchor="middle">Token HMAC-SHA-256 anonimizado · Soberanía Ley 1581: Cero cédula ni coordenadas en pantalla</text>
+        <text x="385" y="28" font-family="monospace" font-size="18" font-weight="700" fill="#0F172A" text-anchor="middle">LOTE ACTIVO: SACO-2026-CAU-7F3A9C12</text>
+        <text x="385" y="50" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#475569" text-anchor="middle">Pila mono local · Ejemplo sin cédula ni coordenadas · Legibilidad en campo pendiente de prueba</text>
       </g>
 
       <!-- Botón de Acción Sobredimensionado -->
       <g transform="translate(20, 275)">
         <rect width="770" height="56" rx="8" fill="#135E34" stroke="#0D4A27" stroke-width="2" />
-        <text x="385" y="35" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="800" fill="#FFFFFF" text-anchor="middle">CONFIRMAR ENTREGA EN CENTRO DE ACOPIO (ALTURA: 56PX)</text>
+        <text x="385" y="35" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="800" fill="#FFFFFF" text-anchor="middle">CONFIRMAR ENTREGA CON EL VEHÍCULO DETENIDO (ALTURA: 56PX)</text>
       </g>
 
-      <text x="405" y="360" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#475569" text-anchor="middle">Mínimo de cabina: 14px SemiBold | Margen perimetral: 24px | Separación táctil de guarda: 12px</text>
-      <text x="405" y="380" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#135E34" font-weight="bold" text-anchor="middle">Resiliencia sin señal: Almacenado local en SQLite y sincronizado automáticamente al llegar al acopio</text>
+      <text x="405" y="360" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#475569" text-anchor="middle">Mínimo interno: 14px / 600 | Margen exterior: 20px | Padding tarjeta: 24px | Gap: 12px</text>
+      <text x="405" y="380" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#135E34" font-weight="bold" text-anchor="middle">Registro detenido; sincronización sin conexión fuera del alcance de esta HU</text>
     </g>
 
     <!-- COMPONENTE WEB: CONSULTA PÚBLICA DEL COMPRADOR -->
     <g transform="translate(860, 50)">
       <rect width="810" height="400" rx="12" fill="#FFFFFF" stroke="#0F4C81" stroke-width="2" />
       <rect width="810" height="32" rx="12" fill="#DBEAFE" />
-      <text x="15" y="21" class="card-header" fill="#0F4C81">TARJETA WEB: CERTIFICADO DE TRAZABILIDAD DEL SACO (COMPRADOR INTERNACIONAL)</text>
+      <text x="15" y="21" class="card-header" fill="#0F4C81">EJEMPLO TIPOGRÁFICO: CONSULTA PÚBLICA DEL SACO (SEGURIDAD §5.1)</text>
 
       <!-- Badge Aceptado y Token -->
       <g transform="translate(20, 45)">
         <rect width="380" height="40" rx="8" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5" />
-        <text x="190" y="25" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="800" fill="#14532D" text-anchor="middle">ESTADO OFICIAL: [ ESCUDO ] ACEPTADO</text>
+        <text x="190" y="25" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="800" fill="#14532D" text-anchor="middle">ESTADO: [ ESCUDO ] ACEPTADO</text>
 
         <rect x="400" y="0" width="370" height="40" rx="8" fill="#EFF6FF" stroke="#0F4C81" stroke-width="1" />
-        <text x="585" y="25" font-family="monospace" font-size="12" font-weight="700" fill="#0F4C81" text-anchor="middle">TOKEN: SACO-2026-CAU-9F2B81</text>
+        <text x="585" y="25" font-family="monospace" font-size="12" font-weight="700" fill="#0F4C81" text-anchor="middle">CÓDIGO: SACO-2026-CAU-7F3A9C12</text>
       </g>
 
       <!-- Grilla de 3 Columnas Web -->
@@ -283,43 +290,37 @@
 
         <!-- Columna 1 -->
         <g transform="translate(20, 15)">
-          <text x="0" y="20" class="bold-txt" fill="#0F4C81">1. PERFIL DE TAZA SCA</text>
-          <text x="0" y="45" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="800" fill="#0F172A">86.25 Pts</text>
-          <text x="0" y="68" class="body-txt">Calificación: Café Especial</text>
-          <text x="0" y="90" class="body-txt">Notas: Cítrico dulce, panela</text>
-          <text x="0" y="112" class="body-txt">Acidez: Málica brillante</text>
-          <text x="0" y="134" class="body-txt">Cuerpo: Cremoso sedoso</text>
+          <text x="0" y="20" class="bold-txt" fill="#0F4C81">1. COSECHA Y ENTREGA</text>
+          <text x="0" y="45" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="800" fill="#0F172A">Fechas del saco</text>
+          <text x="0" y="68" class="body-txt">Cosecha: 2026-10-01</text>
+          <text x="0" y="90" class="body-txt">Puerto: 2026-10-10</text>
         </g>
 
         <!-- Columna 2 -->
         <g transform="translate(275, 15)">
-          <text x="0" y="20" class="bold-txt" fill="#0F4C81">2. ORIGEN GEOGRÁFICO</text>
+          <text x="0" y="20" class="bold-txt" fill="#0F4C81">2. ORIGEN MUNICIPAL</text>
           <text x="0" y="45" class="body-txt"><tspan class="bold-txt">Departamento:</tspan> Cauca</text>
-          <text x="0" y="68" class="body-txt"><tspan class="bold-txt">Región:</tspan> Macizo Colombiano</text>
+          <text x="0" y="68" class="body-txt"><tspan class="bold-txt">Municipio:</tspan> Popayán</text>
           <text x="0" y="90" class="body-txt"><tspan class="bold-txt">Variedad:</tspan> Castillo y Colombia</text>
-          <text x="0" y="112" class="body-txt"><tspan class="bold-txt">Altitud:</tspan> 1.780 msnm</text>
-          <text x="0" y="134" class="body-txt"><tspan class="bold-txt">Suelo:</tspan> Ceniza volcánica</text>
         </g>
 
         <!-- Columna 3 -->
         <g transform="translate(530, 15)">
           <text x="0" y="20" class="bold-txt" fill="#0F4C81">3. METROLOGÍA Y SECADO</text>
-          <text x="0" y="45" class="body-txt"><tspan class="bold-txt">Humedad Final:</tspan> 11.2 % (Conforme)</text>
-          <text x="0" y="68" class="body-txt"><tspan class="bold-txt">Actividad de Agua:</tspan> 0.58 aw</text>
-          <text x="0" y="90" class="body-txt"><tspan class="bold-txt">Beneficio:</tspan> Lavado tradicional</text>
-          <text x="0" y="112" class="body-txt"><tspan class="bold-txt">Fermentación:</tspan> 24 horas</text>
-          <text x="0" y="134" class="body-txt"><tspan class="bold-txt">Certificación:</tspan> FNC Export</text>
+          <text x="0" y="45" class="body-txt"><tspan class="bold-txt">Humedad:</tspan> 11.2 %</text>
+          <text x="0" y="68" class="body-txt"><tspan class="bold-txt">Temperatura:</tspan> 21 °C</text>
+          <text x="0" y="90" class="body-txt"><tspan class="bold-txt">Peso:</tspan> 60 kg</text>
         </g>
       </g>
 
       <!-- Botón de Descarga Web -->
       <g transform="translate(20, 290)">
         <rect width="770" height="42" rx="8" fill="#0F4C81" stroke="#0B375D" stroke-width="1.5" />
-        <text x="385" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">DESCARGAR CERTIFICADO DIGITAL OFICIAL FNC (PDF CON FIRMA CRIPTOGRÁFICA)</text>
+        <text x="385" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">CONSULTA PÚBLICA · SOLO CAMPOS AUTORIZADOS (SEGURIDAD §5.1)</text>
       </g>
 
-      <text x="405" y="358" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#475569" text-anchor="middle">Gobernanza y Ley 1581 de 2012: Información pública anonimizada para auditoría de comprador internacional.</text>
-      <text x="405" y="378" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#475569" text-anchor="middle">Datos protegidos: Se omite cédula del productor, nombre predial y coordenadas submétricas del hogar.</text>
+      <text x="405" y="358" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#475569" text-anchor="middle">Ejemplo ilustrativo de jerarquía tipográfica; datos ficticios dentro de la lista pública autorizada.</text>
+      <text x="405" y="378" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#475569" text-anchor="middle">Excluye identidad, finca, coordenadas y georrutas; no es una certificación de privacidad.</text>
     </g>
   </g>
 </svg>

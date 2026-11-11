@@ -1,8 +1,7 @@
 {
-  "$schema": "https://design-tokens.github.io/community-group/format/",
   "name": "Tokens de Espaciado, Grilla y Radios AromaPacifico",
   "version": "1.0.0",
-  "description": "Tokens de espaciado basados en el sistema modular 8pt/4pt, grillas responsivas y radios de borde para AromaPacifico (FNC 2026). Garantiza ergonomia tactil vehicular y composicion modular limpia en web.",
+  "description": "Espaciado modular 8px/4px, grillas y radios reutilizables. Formato propio inspirado en DTCG; no conforme a DTCG 2025.10. Decisiones internas pendientes de validacion en campo.",
   "spacing": {
     "base": {
       "$value": "8px",
@@ -43,7 +42,7 @@
       "2xl": {
         "$value": "40px",
         "$type": "dimension",
-        "$description": "Margenes perimetrales en tabletas y paneles de acopio."
+        "$description": "Separacion de paneles amplios. El margen de grilla de tableta es 24px, no 40px."
       },
       "3xl": {
         "$value": "48px",
@@ -65,12 +64,12 @@
       "touch_target_min": {
         "$value": "56px",
         "$type": "dimension",
-        "$description": "Altura minima obligatoria para botones de accion principal en cabina del transportador. Absorbe el temblor por vibracion mecanica (4-16 Hz)."
+        "$description": "Altura minima de accion principal de 56px, decision interna para registro con vehiculo detenido. Efecto sobre errores pendiente de prueba."
       },
       "touch_gap_min": {
         "$value": "12px",
         "$type": "dimension",
-        "$description": "Zona de aislamiento perimetral entre botones de accion para evitar pulsaciones falsas accidentales."
+        "$description": "Separacion minima interna de 12px entre acciones; no garantiza ausencia de errores."
       },
       "card_padding": {
         "$value": "24px",
@@ -82,22 +81,23 @@
         "$type": "dimension",
         "$description": "Margen de seguridad exterior para evitar que bordes de fundas rugerizadas de camiones oculten contenido."
       }
-    }
+    },
+    "touch_target_min": {"$value": "48px", "$type": "dimension", "$description": "Altura minima general fuera de cabina; en cabina prevalece el token de 56px."}
   },
   "grid": {
     "phone": {
-      "columns": { "$value": 4, "$type": "number", "$description": "4 columnas para telefonos moviles en orientacion vertical (360px a 480px)." },
+      "columns": { "$value": 4, "$type": "number", "$description": "4 columnas fluidas. Referencia 360-480px; grilla base hasta 767px, incluido sm." },
       "gutter": { "$value": "16px", "$type": "dimension", "$description": "Canaleta entre columnas en telefono." },
       "margin": { "$value": "16px", "$type": "dimension", "$description": "Margen lateral estandar en telefono móvil." },
       "vehicular_margin": { "$value": "20px", "$type": "dimension", "$description": "Margen lateral en modo vehicular para fundas industriales de soporte." }
     },
     "tablet": {
-      "columns": { "$value": 8, "$type": "number", "$description": "8 columnas para tabletas de operarios de bascula en acopios (Cauca, Huila, Tolima)." },
+      "columns": { "$value": 8, "$type": "number", "$description": "8 columnas desde md (768px) hasta 1023px." },
       "gutter": { "$value": "20px", "$type": "dimension", "$description": "Canaleta entre columnas en tableta." },
       "margin": { "$value": "24px", "$type": "dimension", "$description": "Margen perimetral en tableta." }
     },
     "web": {
-      "columns": { "$value": 12, "$type": "number", "$description": "12 columnas para portal de consulta web del comprador internacional." },
+      "columns": { "$value": 12, "$type": "number", "$description": "12 columnas desde lg (1024px), contenedor maximo de 1280px." },
       "gutter": { "$value": "24px", "$type": "dimension", "$description": "Canaleta modular entre columnas de escritorio." },
       "maxWidth": { "$value": "1280px", "$type": "dimension", "$description": "Ancho maximo del contenedor principal de contenido con centrado horizontal." },
       "margin": { "$value": "auto", "$type": "string", "$description": "Margen lateral fluido y centrado." }
