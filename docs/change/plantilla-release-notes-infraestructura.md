@@ -256,3 +256,4 @@ Antes de presentar el release note de infraestructura ante el comite de cambios,
 - [ ] Se incluye la compuerta humana colegiada con los 4 roles y autenticacion MFA.
 - [ ] Se presenta la matriz comparativa FinOps con al menos 2 alternativas y el calculo matematico del costo evitado.
 - [ ] Se cumple estrictamente el principio de Cero Emojis y redaccion tecnica profesional en espanol.
+
