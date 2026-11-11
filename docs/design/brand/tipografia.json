@@ -1,13 +1,12 @@
 {
-  "$schema": "https://design-tokens.github.io/community-group/format/",
   "name": "Tokens de Tipografia AromaPacifico",
   "version": "1.0.0",
-  "description": "Especificacion dual de escalas tipograficas para AromaPacifico (FNC 2026): Escala Vehicular/Campo para lectura a 50-80 cm con vibracion y sol directo, y Escala Web para consulta de alta densidad de datos del comprador internacional.",
+  "description": "Escalas discretas para telefono y web. Formato propio inspirado en DTCG; no conforme a DTCG 2025.10. Valores y supuestos documentados en tipografia-espaciado.md.",
   "fontFamily": {
     "sans": {
       "$value": "system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
       "$type": "fontFamily",
-      "$description": "Pila de fuentes sans-serif nativa de alto rendimiento con alta altura de x (x-height), aperturas abiertas y distincion clara de glifos ambiguos (1, I, l, 0, O)."
+      "$description": "Pila sans-serif local. La fuente efectiva y la distincion de glifos requieren verificacion en cada sistema."
     },
     "mono": {
       "$value": "'Fira Code', 'Roboto Mono', 'Cascadia Code', monospace",
@@ -51,7 +50,7 @@
     "tight": {
       "$value": "-0.01em",
       "$type": "dimension",
-      "$description": "Titulos vehiculares para mantener compacidad visual."
+      "$description": "Tracking de display del telefono y h1 web."
     },
     "normal": {
       "$value": "0em",
@@ -67,11 +66,12 @@
       "$value": "0.05em",
       "$type": "dimension",
       "$description": "Codigos alfanumericos y badges de estado del saco."
-    }
+    },
+    "slight": {"$value": "0.01em", "$type": "dimension", "$description": "Tracking de titulo/subtitulo del telefono y avisos legales web. Unidad CSS propia; em no es dimension DTCG 2025.10."}
   },
   "phone": {
-    "contexto": "Vehicular / Campo (Cabina de camion, montura a 50-80 cm, vibracion de trocha 4-16 Hz, iluminacion 5.000 a 100.000 lux)",
-    "scaleRatio": "1.25 (Major Third)",
+    "contexto": "Vehicular / Campo: registro con vehiculo detenido. Supuestos no medidos: soporte a 50-80 cm, vibracion 4-16 Hz e iluminacion 5.000-15.000 lux en cabina.",
+    "scaleRatio": "1.25 (Major Third), inspiracion con ajustes manuales; no progresion exacta",
     "fontSize": {
       "caption": {
         "$value": "14px",
@@ -81,7 +81,7 @@
       "body": {
         "$value": "18px",
         "$type": "dimension",
-        "$description": "Cuerpo de texto vehicular base. Legible a 65 cm con angulo visual subtendido de 21 arcominutos."
+        "$description": "Cuerpo vehicular base de 18px y peso 600. Decision interna; legibilidad a distancia pendiente de validacion en campo con el vehiculo detenido."
       },
       "button": {
         "$value": "18px",
@@ -117,16 +117,34 @@
       "title": { "$value": "32px", "$type": "dimension" },
       "metric": { "$value": "38px", "$type": "dimension" },
       "display": { "$value": "48px", "$type": "dimension" }
+    },
+    "fontWeight": {
+      "caption": {"$value": "600", "$type": "fontWeight"},
+      "body": {"$value": "600", "$type": "fontWeight"},
+      "button": {"$value": "700", "$type": "fontWeight"},
+      "subtitle": {"$value": "600", "$type": "fontWeight"},
+      "title": {"$value": "700", "$type": "fontWeight"},
+      "metric": {"$value": "800", "$type": "fontWeight"},
+      "display": {"$value": "800", "$type": "fontWeight"}
+    },
+    "letterSpacing": {
+      "caption": {"$value": "0.02em", "$type": "dimension"},
+      "body": {"$value": "0em", "$type": "dimension"},
+      "button": {"$value": "0.02em", "$type": "dimension"},
+      "subtitle": {"$value": "0.01em", "$type": "dimension"},
+      "title": {"$value": "0.01em", "$type": "dimension"},
+      "metric": {"$value": "0em", "$type": "dimension"},
+      "display": {"$value": "-0.01em", "$type": "dimension"}
     }
   },
   "web": {
-    "contexto": "Escritorio / Consulta Comprador Internacional (Pantalla 1080p/4K a 45-60 cm, iluminacion 300-500 lux, alta densidad informativa)",
-    "scaleRatio": "1.20 (Minor Third)",
+    "contexto": "Consulta web. Supuestos no medidos: pantalla a 45-60 cm e iluminacion interior 300-500 lux. Campos publicos limitados por seguridad-datos-saco.md, seccion 5.1.",
+    "scaleRatio": "1.20 (Minor Third), inspiracion con ajustes manuales; no progresion exacta",
     "fontSize": {
       "legal": {
         "$value": "12px",
         "$type": "dimension",
-        "$description": "Notas al pie, leyendas de graficos SCA y descargos de Ley 1581 de 2012."
+        "$description": "Notas al pie y avisos de privacidad. El nombre legal no representa un minimo exigido por ley."
       },
       "table": {
         "$value": "14px",
@@ -146,7 +164,7 @@
       "h3": {
         "$value": "20px",
         "$type": "dimension",
-        "$description": "Titulos de tarjetas de catacion y graficas de secado."
+        "$description": "Titulos de tarjetas de variedad y origen municipal."
       },
       "h2": {
         "$value": "24px",
@@ -173,6 +191,26 @@
       "h2": { "$value": "32px", "$type": "dimension" },
       "h1": { "$value": "40px", "$type": "dimension" },
       "hero": { "$value": "56px", "$type": "dimension" }
+    },
+    "fontWeight": {
+      "legal": {"$value": "400", "$type": "fontWeight"},
+      "table": {"$value": "400", "$type": "fontWeight"},
+      "body": {"$value": "400", "$type": "fontWeight"},
+      "h4": {"$value": "600", "$type": "fontWeight"},
+      "h3": {"$value": "600", "$type": "fontWeight"},
+      "h2": {"$value": "700", "$type": "fontWeight"},
+      "h1": {"$value": "800", "$type": "fontWeight"},
+      "hero": {"$value": "800", "$type": "fontWeight"}
+    },
+    "letterSpacing": {
+      "legal": {"$value": "0.01em", "$type": "dimension"},
+      "table": {"$value": "0em", "$type": "dimension"},
+      "body": {"$value": "0em", "$type": "dimension"},
+      "h4": {"$value": "0em", "$type": "dimension"},
+      "h3": {"$value": "0em", "$type": "dimension"},
+      "h2": {"$value": "0em", "$type": "dimension"},
+      "h1": {"$value": "-0.01em", "$type": "dimension"},
+      "hero": {"$value": "-0.02em", "$type": "dimension"}
     }
   }
 }
