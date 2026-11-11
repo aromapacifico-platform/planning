@@ -56,18 +56,87 @@
   --ap-alert-crop-icon: #DC2626;
   --ap-alert-crop-stroke: 2.5px;
 
-  /* Tipografía y Escala */
+  /* Tipografía - Familias y Pesos */
   --ap-font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --ap-font-mono: 'Fira Code', monospace;
-  --ap-text-badge: 0.875rem; /* 14px */
-  --ap-text-body: 1rem;       /* 16px */
-  --ap-text-title: 1.25rem;   /* 20px */
-  --ap-text-hero: 1.5rem;     /* 24px */
+  --ap-font-mono: 'Fira Code', 'Roboto Mono', monospace;
+  --ap-font-weight-regular: 400;
+  --ap-font-weight-medium: 500;
+  --ap-font-weight-semibold: 600;
+  --ap-font-weight-bold: 700;
+  --ap-font-weight-heavy: 800;
 
-  /* Ergonomía Táctil en Campo */
-  --ap-touch-target-min: 48px;
-  --ap-radius-badge: 6px;
-  --ap-radius-card: 12px;
+  /* Escala Tipográfica Vehicular / Campo (Teléfono a 50-80 cm, vibración y sol directo) */
+  --ap-font-phone-caption: 0.875rem; /* 14px - Mínimo absoluto en cabina */
+  --ap-line-phone-caption: 1.25rem;  /* 20px */
+  --ap-font-phone-body: 1.125rem;    /* 18px - Base vehicular */
+  --ap-line-phone-body: 1.625rem;    /* 26px */
+  --ap-font-phone-button: 1.125rem;  /* 18px */
+  --ap-line-phone-button: 1.5rem;    /* 24px */
+  --ap-font-phone-subtitle: 1.25rem; /* 20px */
+  --ap-line-phone-subtitle: 1.75rem; /* 28px */
+  --ap-font-phone-title: 1.5rem;     /* 24px */
+  --ap-line-phone-title: 2.0rem;     /* 32px */
+  --ap-font-phone-metric: 2.0rem;    /* 32px - Contadores de sacos/kg */
+  --ap-line-phone-metric: 2.375rem;  /* 38px */
+  --ap-font-phone-display: 2.5rem;   /* 40px - Alertas y confirmaciones */
+  --ap-line-phone-display: 3.0rem;   /* 48px */
+
+  /* Escala Tipográfica Web (Consulta Comprador Internacional - Alta densidad) */
+  --ap-font-web-legal: 0.75rem;      /* 12px - Notas y descargos Ley 1581 */
+  --ap-line-web-legal: 1.0rem;       /* 16px */
+  --ap-font-web-table: 0.875rem;     /* 14px - Celdas y atributos SCA */
+  --ap-line-web-table: 1.25rem;      /* 20px */
+  --ap-font-web-body: 1.0rem;        /* 16px - Base de lectura web */
+  --ap-line-web-body: 1.5rem;        /* 24px */
+  --ap-font-web-h4: 1.125rem;        /* 18px */
+  --ap-line-web-h4: 1.5rem;          /* 24px */
+  --ap-font-web-h3: 1.25rem;         /* 20px */
+  --ap-line-web-h3: 1.75rem;         /* 28px */
+  --ap-font-web-h2: 1.5rem;          /* 24px */
+  --ap-line-web-h2: 2.0rem;          /* 32px */
+  --ap-font-web-h1: 2.0rem;          /* 32px */
+  --ap-line-web-h1: 2.5rem;          /* 40px */
+  --ap-font-web-hero: 3.0rem;        /* 48px */
+  --ap-line-web-hero: 3.5rem;        /* 56px */
+
+  /* Espaciado Modular Base 8pt / 4pt */
+  --ap-space-xxs: 0.25rem;  /* 4px */
+  --ap-space-xs: 0.5rem;    /* 8px */
+  --ap-space-sm: 0.75rem;   /* 12px */
+  --ap-space-md: 1.0rem;    /* 16px */
+  --ap-space-lg: 1.5rem;    /* 24px */
+  --ap-space-xl: 2.0rem;    /* 32px */
+  --ap-space-2xl: 2.5rem;   /* 40px */
+  --ap-space-3xl: 3.0rem;   /* 48px */
+  --ap-space-4xl: 4.0rem;   /* 64px */
+  --ap-space-5xl: 5.0rem;   /* 80px */
+
+  /* Ergonomía Táctil y Vehicular en Cabina */
+  --ap-touch-target-min: 48px;          /* Mínimo estándar de campo */
+  --ap-vehicular-touch-target: 56px;    /* Mínimo obligatorio botones en cabina */
+  --ap-vehicular-touch-gap: 12px;       /* Zona de guarda entre controles */
+  --ap-vehicular-card-padding: 24px;    /* Padding amplio para absorción visual */
+  --ap-vehicular-screen-margin: 20px;   /* Margen seguro para fundas rugerizadas */
+
+  /* Grilla Responsiva */
+  --ap-grid-phone-columns: 4;
+  --ap-grid-phone-gutter: 16px;
+  --ap-grid-phone-margin: 16px;
+  --ap-grid-tablet-columns: 8;
+  --ap-grid-tablet-gutter: 20px;
+  --ap-grid-tablet-margin: 24px;
+  --ap-grid-web-columns: 12;
+  --ap-grid-web-gutter: 24px;
+  --ap-grid-web-max-width: 1280px;
+
+  /* Radios de Borde */
+  --ap-radius-none: 0px;
+  --ap-radius-sm: 4px;
+  --ap-radius-md: 8px;     /* Estándar botones y badges */
+  --ap-radius-lg: 12px;    /* Tarjetas móviles y paneles */
+  --ap-radius-xl: 16px;    /* Diálogos modales y bottom sheets */
+  --ap-radius-2xl: 24px;   /* Tarjetas web de comprador */
+  --ap-radius-full: 9999px;/* Pastillas circulares y FAB */
 }
 
 /* Modo Exterior de Alto Brillo (Luz Solar Extrema en Campo) */

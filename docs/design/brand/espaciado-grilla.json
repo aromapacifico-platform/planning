@@ -1,0 +1,151 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "name": "Tokens de Espaciado, Grilla y Radios AromaPacifico",
+  "version": "1.0.0",
+  "description": "Tokens de espaciado basados en el sistema modular 8pt/4pt, grillas responsivas y radios de borde para AromaPacifico (FNC 2026). Garantiza ergonomia tactil vehicular y composicion modular limpia en web.",
+  "spacing": {
+    "base": {
+      "$value": "8px",
+      "$type": "dimension",
+      "$description": "Unidad atomica base del sistema de diseno modular."
+    },
+    "scale": {
+      "xxs": {
+        "$value": "4px",
+        "$type": "dimension",
+        "$description": "Micro-espaciado: separacion entre icono y texto en badges, bordes decorativos."
+      },
+      "xs": {
+        "$value": "8px",
+        "$type": "dimension",
+        "$description": "Espaciado compacto: padding interno de badges y pastillas de estado."
+      },
+      "sm": {
+        "$value": "12px",
+        "$type": "dimension",
+        "$description": "Espaciado ajustado: separacion minima obligatoria entre elementos interactivos en cabina."
+      },
+      "md": {
+        "$value": "16px",
+        "$type": "dimension",
+        "$description": "Espaciado estandar: padding interno de tarjetas moviles y canaletas de columnas en telefono."
+      },
+      "lg": {
+        "$value": "24px",
+        "$type": "dimension",
+        "$description": "Espaciado vehicular amplio: padding de tarjetas de registro de entrega y canaletas web de 12 columnas."
+      },
+      "xl": {
+        "$value": "32px",
+        "$type": "dimension",
+        "$description": "Separacion de bloques tematicos en aplicaciones moviles."
+      },
+      "2xl": {
+        "$value": "40px",
+        "$type": "dimension",
+        "$description": "Margenes perimetrales en tabletas y paneles de acopio."
+      },
+      "3xl": {
+        "$value": "48px",
+        "$type": "dimension",
+        "$description": "Separacion entre secciones mayores en portal web y altura minima de botones de campo estandar."
+      },
+      "4xl": {
+        "$value": "64px",
+        "$type": "dimension",
+        "$description": "Espaciado estructural entre contenedores del portal internacional de consulta."
+      },
+      "5xl": {
+        "$value": "80px",
+        "$type": "dimension",
+        "$description": "Separacion de pie de pagina y pie institucional FNC."
+      }
+    },
+    "vehicular": {
+      "touch_target_min": {
+        "$value": "56px",
+        "$type": "dimension",
+        "$description": "Altura minima obligatoria para botones de accion principal en cabina del transportador. Absorbe el temblor por vibracion mecanica (4-16 Hz)."
+      },
+      "touch_gap_min": {
+        "$value": "12px",
+        "$type": "dimension",
+        "$description": "Zona de aislamiento perimetral entre botones de accion para evitar pulsaciones falsas accidentales."
+      },
+      "card_padding": {
+        "$value": "24px",
+        "$type": "dimension",
+        "$description": "Relleno interior para tarjetas de despacho y recepcion de sacos en ruta rural."
+      },
+      "screen_margin": {
+        "$value": "20px",
+        "$type": "dimension",
+        "$description": "Margen de seguridad exterior para evitar que bordes de fundas rugerizadas de camiones oculten contenido."
+      }
+    }
+  },
+  "grid": {
+    "phone": {
+      "columns": { "$value": 4, "$type": "number", "$description": "4 columnas para telefonos moviles en orientacion vertical (360px a 480px)." },
+      "gutter": { "$value": "16px", "$type": "dimension", "$description": "Canaleta entre columnas en telefono." },
+      "margin": { "$value": "16px", "$type": "dimension", "$description": "Margen lateral estandar en telefono móvil." },
+      "vehicular_margin": { "$value": "20px", "$type": "dimension", "$description": "Margen lateral en modo vehicular para fundas industriales de soporte." }
+    },
+    "tablet": {
+      "columns": { "$value": 8, "$type": "number", "$description": "8 columnas para tabletas de operarios de bascula en acopios (Cauca, Huila, Tolima)." },
+      "gutter": { "$value": "20px", "$type": "dimension", "$description": "Canaleta entre columnas en tableta." },
+      "margin": { "$value": "24px", "$type": "dimension", "$description": "Margen perimetral en tableta." }
+    },
+    "web": {
+      "columns": { "$value": 12, "$type": "number", "$description": "12 columnas para portal de consulta web del comprador internacional." },
+      "gutter": { "$value": "24px", "$type": "dimension", "$description": "Canaleta modular entre columnas de escritorio." },
+      "maxWidth": { "$value": "1280px", "$type": "dimension", "$description": "Ancho maximo del contenedor principal de contenido con centrado horizontal." },
+      "margin": { "$value": "auto", "$type": "string", "$description": "Margen lateral fluido y centrado." }
+    },
+    "breakpoints": {
+      "sm": { "$value": "640px", "$type": "dimension", "$description": "Telefonos grandes y modo horizontal." },
+      "md": { "$value": "768px", "$type": "dimension", "$description": "Tabletas y terminales de acopio." },
+      "lg": { "$value": "1024px", "$type": "dimension", "$description": "Portatiles y pantallas medianas de escritorio." },
+      "xl": { "$value": "1280px", "$type": "dimension", "$description": "Escritorio estandar de alta resolucion (1080p)." },
+      "2xl": { "$value": "1536px", "$type": "dimension", "$description": "Monitores ultra-anchos de comercializadoras portuarias." }
+    }
+  },
+  "radius": {
+    "none": {
+      "$value": "0px",
+      "$type": "dimension",
+      "$description": "Bordes ortogonales para divisores y tablas de datos."
+    },
+    "sm": {
+      "$value": "4px",
+      "$type": "dimension",
+      "$description": "Micro-radios para tooltips y selectores compactos web."
+    },
+    "md": {
+      "$value": "8px",
+      "$type": "dimension",
+      "$description": "Radio estandar institucional: badges de estado del saco, campos de texto y botones."
+    },
+    "lg": {
+      "$value": "12px",
+      "$type": "dimension",
+      "$description": "Radio de tarjetas moviles de entrega, paneles de alerta y fichas de viaje."
+    },
+    "xl": {
+      "$value": "16px",
+      "$type": "dimension",
+      "$description": "Radio de dialogos modales, hojas inferiores (bottom sheets) y contenedores elevados."
+    },
+    "2xl": {
+      "$value": "24px",
+      "$type": "dimension",
+      "$description": "Tarjetas destacadas en el portal web del comprador."
+    },
+    "full": {
+      "$value": "9999px",
+      "$type": "dimension",
+      "$description": "Pastillas circulares de filtro, botones flotantes de accion (FAB) e indicadores de estado."
+    }
+  }
+}
+
