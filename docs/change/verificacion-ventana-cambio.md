@@ -367,3 +367,4 @@ sequenceDiagram
 | **Cumplimiento de la Ley 1581 de 2012** | **CUMPLIDO AL 100%** | Anonimización total mediante tokens HMAC-SHA-256; exclusión de cédulas cafeteras y rutas prediales privadas en registros de cambio. |
 | **Política Estricta de Cero Emojis** | **CUMPLIDO AL 100%** | Verificado mediante `validate_doc.py` con 0 infracciones en todo el documento. |
 | **Diagrama de Arquitectura Oficial** | **CUMPLIDO AL 100%** | Generado en Draw.io (`flujo-congelamiento-cosecha.drawio`) y SVG (`flujo-congelamiento-cosecha.svg`) validado mediante `diagram_agent_helper.py lint`. |
+
