@@ -39,7 +39,7 @@ Las cajas marcadas **E6-01 a E6-08** son las que codifica la Épica 6. Son los m
 | --- | --- |
 | `AromaPacifico-Root` | Organización, SCP, IAM Identity Center y presupuestos. No aloja cargas |
 | `AromaPacifico-Security` | Auditoría inmutable, GuardDuty, Config y llaves KMS |
-| `AromaPacifico-Network` | Transit Gateway, VPN de los acopios y Network Firewall |
+| `AromaPacifico-Network` | Transit Gateway, VPN de los acopios, VPC Endpoints y Route 53 Inbound Resolver (Network Firewall retirado del piloto por decisión #31) |
 | `AromaPacifico-Dev` | Desarrollo, `10.50.0.0/16` |
 | `AromaPacifico-Test` | Pruebas, `10.60.0.0/16` |
 | `AromaPacifico-Prod` | Producción, `10.70.0.0/16`; contingencia `10.71.0.0/16` en `us-east-2` |

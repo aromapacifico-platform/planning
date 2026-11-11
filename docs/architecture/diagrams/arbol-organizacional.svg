@@ -87,10 +87,10 @@
     <text x="14" y="103" class="card-item">• Túneles VPN IPsec Centros Acopio:</text>
     <text x="24" y="123" class="card-item">- Cauca: 10.41.0.0/16</text>
     <text x="24" y="143" class="card-item">- Huila: 10.42.0.0/16 | Tolima: 10.43.0.0/16</text>
-    <text x="14" y="166" class="card-item">• AWS Network Firewall Inspección</text>
-    <text x="14" y="189" class="card-item">• VPC Endpoints Privados S3 y DynamoDB</text>
+    <text x="14" y="166" class="card-item">• Route 53 Inbound Resolver (DNS)</text>
+    <text x="14" y="189" class="card-item">• Endpoints S3/DDB (NetFW retirado #31)</text>
     <line x1="14" y1="218" x2="266" y2="218" stroke="#E1E4E8" stroke-width="1" />
-    <text x="14" y="245" class="card-budget">Presupuesto: $120 USD / mes</text>
+    <text x="14" y="245" class="card-budget">Presupuesto: $562 norm / $563 pico</text>
   </g>
 
   <!-- OU WORKLOADS: CARGAS DE TRABAJO -->
@@ -113,7 +113,7 @@
     <text x="12" y="172" class="card-item">• Apagado fuera laboral</text>
     <text x="12" y="195" class="card-item">• Aislamiento blast radius</text>
     <line x1="12" y1="218" x2="188" y2="218" stroke="#E1E4E8" stroke-width="1" />
-    <text x="12" y="245" class="card-budget">Presupuesto: $50 USD</text>
+    <text x="12" y="245" class="card-budget">Presupuesto: $25 USD</text>
   </g>
 
   <!-- CUENTA PRUEBAS -->
@@ -129,7 +129,7 @@
     <text x="12" y="172" class="card-item">• Umbrales FNC</text>
     <text x="12" y="195" class="card-item">• Validación offline drones</text>
     <line x1="12" y1="218" x2="193" y2="218" stroke="#E1E4E8" stroke-width="1" />
-    <text x="12" y="245" class="card-budget">Presupuesto: $80 USD</text>
+    <text x="12" y="245" class="card-budget">Presupuesto: $56 USD</text>
   </g>
 
   <!-- CUENTA PRODUCCION -->
@@ -145,7 +145,7 @@
     <text x="12" y="172" class="card-item">• Consulta Buenaventura</text>
     <text x="12" y="195" class="card-item">• Congelamiento 5h-18h</text>
     <line x1="12" y1="218" x2="193" y2="218" stroke="#E1E4E8" stroke-width="1" />
-    <text x="12" y="245" class="card-budget">$180 norm / $450 pico</text>
+    <text x="12" y="245" class="card-budget">$118 norm / $146 pico</text>
   </g>
 
   <!-- PANEL DE INVARIANTES Y DIRECTIVAS -->

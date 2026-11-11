@@ -64,7 +64,7 @@
         </mxCell>
 
         <!-- VPC Hub Inspection & PrivateLink -->
-        <mxCell id="card-hub-vpc-arch" value="VPC HUB DE INSPECCIÓN Y SERVICIOS COMPARTIDOS (10.80.0.0/16)&#xa;&#xa;- AWS Network Firewall para inspección Stateful de paquetes entrantes/salientes.&#xa;- PrivateLink Interface Endpoints Compartidos para servicios AWS (KMS, CloudWatch, SSM).&#xa;- Amazon Route 53 Inbound/Outbound Resolvers para resolución de nombres split-horizon.&#xa;- Ahorro FinOps: 1 solo par de Interface Endpoints compartido por todas las cuentas." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="lane-tgw-hub">
+        <mxCell id="card-hub-vpc-arch" value="VPC HUB Y SERVICIOS COMPARTIDOS (10.80.0.0/16)&#xa;&#xa;- PrivateLink Interface Endpoints Compartidos para servicios AWS (KMS, CloudWatch, SSM).&#xa;- Route 53 Inbound Resolver para resolución split-horizon de acopios hacia nube.&#xa;- Ahorro FinOps #31: Network Firewall y Resolver de salida retirados para el piloto ($760 USD/mes).&#xa;- 1 solo par de Interface Endpoints compartido por todas las cuentas." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="lane-tgw-hub">
           <mxGeometry x="25" y="805" width="650" height="160" as="geometry" />
         </mxCell>
 

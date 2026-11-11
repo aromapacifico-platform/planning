@@ -26,7 +26,7 @@ A continuación se presenta la arquitectura visual del módulo de seguridad, ilu
 
 ## 3. Matriz de Verificación Cruzada: Security Groups frente a la Tabla de Firewall
 
-La siguiente matriz detalla la correspondencia exacta, biunívoca y sin excepciones entre cada identificador permanente del catálogo de firewall de nube (`C01` a `C20`), las invariantes de diseño (`C21` y `C22`), su clave de contrato dentro de `module.security.rule_catalog`, su recurso contenedor o ID padre (`parent_id`) y los recursos HCL declarados en el archivo `main.tf` del módulo `modules/security`:
+La siguiente matriz detalla la correspondencia exacta, biunívoca y sin excepciones entre cada identificador permanente activo del catálogo de firewall de nube (`C01` a `C18`, `C20`), las invariantes de diseño (`C21` y `C22`), el estado formal de la regla retirada `C19`, su clave de contrato dentro de `module.security.rule_catalog`, su recurso contenedor o ID padre (`parent_id`) y los recursos HCL declarados en el archivo `main.tf` del módulo `modules/security`:
 
 | ID Catálogo | Contrato (`rule_catalog`) | Control | ID Padre (`parent_id`) | Origen Autorizado | Destino Autorizado | Protocolo y Puerto | Acción | Recurso Terraform HCL en `modules/security` |
 |---|---|---|---|---|---|---|---|---|
@@ -48,7 +48,7 @@ La siguiente matriz detalla la correspondencia exacta, biunívoca y sin excepcio
 | **C16** | `sg_egress["C16"]` | SG-OUT | `aws_security_group.admin.id` | `SG-ADMIN` | `SG-VPCE-SSM` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_egress_rule.c16` |
 | **C17** | `sg_ingress["C17"]` | SG-IN | `aws_security_group.vpce_ssm.id` | `ADMIN-CIDR` (`var.admin_cidr`) | `SG-VPCE-SSM` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_ingress_rule.c17` |
 | **C18** | `sg_ingress["C18"]` | SG-IN | `aws_security_group.resolver_in.id` | `DNS-CIDR` (`var.dns_cidr`) | `SG-RESOLVER-IN` | TCP/UDP 53 (DNS) | Permitir | `aws_vpc_security_group_ingress_rule.c18_tcp` y `c18_udp` |
-| **C19** | `sg_egress["C19"]` | SG-OUT | `aws_security_group.resolver_out.id` | `SG-RESOLVER-OUT` | `DNS-CIDR` (`var.dns_cidr`) | TCP/UDP 53 (DNS) | Permitir | `aws_vpc_security_group_egress_rule.c19_tcp` y `c19_udp` |
+| **C19** | *(Retirada)* | SG-OUT | *(Retirado)* | `SG-RESOLVER-OUT` | `DNS-CIDR` | TCP/UDP 53 (DNS) | Retirada | Retirada de recursos HCL y catálogo por Decisión FinOps #31 (ahorro $182,50 USD/mes) |
 | **C20** | `sg_egress["C20"]` | SG-OUT | `aws_security_group.query.id` | `SG-CONSULTA` | `PL-DDB` (Prefix List DynamoDB) | TCP 443 (HTTPS) | Permitir | Salida nativa a gateway endpoint DynamoDB |
 | **C21** | `assertions["C21"]` | INVARIANTE | `all-security-groups` | Tráfico entrante no enumerado | Security Groups de la plataforma | Todos los puertos | Denegar | Denegación implícita nativa sin reglas allow coincidentes |
 | **C22** | `assertions["C22"]` | INVARIANTE | `all-security-groups` | Security Groups de la plataforma | Destinos no explícitos (cero 0.0.0.0/0) | Todos los puertos | Denegar | Supresión total de la regla egress predeterminada abierta |
@@ -153,11 +153,28 @@ El módulo `modules/security` ha sido auditado mediante el script automatizado d
 
 ---
 
-## 8. Conclusión de Aceptación y Veredicto Técnico
+## 8. Justificación FinOps y Comparativa de Alternativas en Seguridad de Red
+
+En cumplimiento con los mandatos de documentación de arquitectura, la configuración del catálogo de reglas y grupos de seguridad incorpora un análisis comparativo multicriterio frente a opciones descartadas:
+
+### 8.1 Comparativa FinOps: Retiro de Regla C19 y Resolver de Salida vs. Alternativas Evaluadas
+
+| Criterio de Decisión | Opción Adoptada: Retiro de C19 y Resolver de Salida (Decisión #31) | Alternativa 1 Descartada: Mantener C19 y Route 53 Outbound Resolver | Alternativa 2 Descartada: DNS Forwarder Dedicado en Instancia EC2 |
+|---|---|---|---|
+| Costo Fijo Mensual | **$0,00 USD** | $182,50 USD / mes (2 ENIs a $0,125/hora) | ~$45,00 USD / mes (instancia t4g.small + EBS) |
+| Costo Evitado Cuantificado | **$182,50 USD / mes ($2.190 USD / año)** | $0,00 USD (Línea base no optimizada) | $137,50 USD / mes |
+| Justificación Técnica | La nube no requiere resolución inversa de nombres de hosts de acopios; la comunicación se efectúa mediante direccionamiento IP estático. | Sobrecosto ocioso sin justificación de tráfico real en el piloto de 200 fincas. | Introduce sobrecarga de parches, mantenimiento y puntos de falla adicionales en la VPC Hub. |
+| Cobertura y Seguridad | Tráfico DNS saliente cerrado en el perímetro; solo se conserva C18 (Inbound Resolver) para acopios. | Abre vectores de egreso DNS innecesarios hacia redes on-premises. | Requiere bastion host y monitoreo continuo de seguridad del sistema operativo. |
+
+- **Sustentación FinOps:** La eliminación de la regla `C19` y del grupo de seguridad `aws_security_group.resolver_out` se fundamenta en la eliminación del Route 53 Resolver de salida dentro de la Decisión FinOps 3 de la Issue #31. Esto asegura que el código Terraform en `modules/security` refleje estrictamente los recursos que generan valor operativo sin inducir costos fijos ociosos, manteniendo una correspondencia biunívoca y transparente con el diseño de arquitectura.
+
+---
+
+## 9. Conclusión de Aceptación y Veredicto Técnico
 
 Tras la inspección automatizada y manual del módulo de seguridad y su correspondencia frente al pliego del reto:
 
-1. **Exactitud del Mapeo:** Se comprueba que cada una de las reglas permanentes del catálogo de firewall de la nube (`C01` a `C20` y `N01` a `N16`) posee un recurso HCL explícito en el código fuente, sin la existencia de puertos o destinos adicionales no contemplados.
+1. **Exactitud del Mapeo:** Se comprueba que cada una de las reglas permanentes activas del catálogo de firewall de la nube (`C01` a `C18`, `C20` y `N01` a `N16`) posee un recurso HCL explícito en el código fuente, y que la regla retirada `C19` fue suprimida deterministamente tanto del código de recursos como del `rule_catalog`, garantizando correspondencia biunívoca.
 2. **Protección Criptográfica:** Las tres Customer Managed Keys declaradas cuentan con rotación anual automática habilitada y protección contra destrucción accidental.
 3. **Mínimo Privilegio Demostrado:** Ningún rol de plataforma hace uso de acciones abiertas sobre almacenes de datos, salvaguardando la confidencialidad de la información agronómica y la privacidad de los caficultores de Cauca, Huila y Tolima.
-4. **Veredicto:** El entregable cumple satisfactoriamente la totalidad de los criterios de aceptación de la Historia de Usuario #23 y se encuentra listo para su integración en los ambientes de desarrollo, pruebas y producción.
+4. **Veredicto:** El entregable cumple satisfactoriamente la totalidad de los criterios de aceptación de la Historia de Usuario #23 y la revisión #70, encontrándose listo para su integración en los ambientes de desarrollo, pruebas y producción.

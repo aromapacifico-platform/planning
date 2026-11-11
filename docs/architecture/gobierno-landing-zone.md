@@ -42,7 +42,7 @@ Para evitar que los dominios críticos compartan el mismo entorno operativo y pr
 | --- | --- | --- | --- |
 | Raíz (Root) | Management Account | `AromaPacifico-Root` | Facturación consolidada, gobernanza de AWS Organizations, despliegue de SCPs raíz, directorio IAM Identity Center y AWS Budgets Master. Prohibido desplegar recursos de cómputo o aplicaciones operativas. |
 | OU Core | Seguridad y Auditoría | `AromaPacifico-Security` | Centralización de registros de auditoría inmutables (CloudTrail, VPC Flow Logs, logs de IoT Core), agregación de AWS Config, detección de amenazas con Amazon GuardDuty y gestión de llaves maestras KMS. |
-| OU Core | Red Compartida | `AromaPacifico-Network` | Concentración del AWS Transit Gateway, terminación de túneles IPsec VPN hacia los centros de acopio (10.41.0.0/16, 10.42.0.0/16, 10.43.0.0/16), AWS Network Firewall e inspección centralizada, y VPC Endpoints privados para servicios AWS. |
+| OU Core | Red Compartida | `AromaPacifico-Network` | Concentración del AWS Transit Gateway, terminación de túneles IPsec VPN hacia los centros de acopio (10.41.0.0/16, 10.42.0.0/16, 10.43.0.0/16), Route 53 Inbound Resolver y VPC Endpoints privados para servicios AWS. (Nota de ahorro FinOps #31: AWS Network Firewall e inspección centralizada fueron retirados del piloto, ahorrando $577,68 USD/mes). |
 | OU Workloads | Desarrollo | `AromaPacifico-Dev` | Prototipado rápido de módulos de infraestructura en Terraform, pruebas unitarias de funciones serverless y simulación de telemetría con nodos emulados. |
 | OU Workloads | Pruebas / Staging | `AromaPacifico-Test` | Entorno de homologación previa a despliegue productivo. Pruebas de carga de la consulta pública del saco (30 transacciones por minuto), drenado de buffer de 24 horas y validación de umbrales federativos. |
 | OU Workloads | Producción | `AromaPacifico-Prod` | Entorno productivo principal en la región `us-east-1` (con capacidad de contingencia en `us-east-2` para consulta pública). Ingesta de 200 fincas con AWS IoT Core, persistencia en DynamoDB, fotos en S3, inferencia con Rekognition y APIs de consulta. |
@@ -364,7 +364,7 @@ La administración y operación de la plataforma en la nube sigue el principio d
 | --- | --- | --- | --- | --- |
 | **DevOps Lead / Operador Plataforma** | IAM Identity Center | MFA Obligatorio (FIDO2 / WebAuthn) | `AromaPacifico-Dev`, `AromaPacifico-Test`, `AromaPacifico-Prod` | Administración de IaC (Terraform) y canalizaciones en Dev/Test. En Prod, despliegue restringido mediante pipelines CI/CD y acceso solo de lectura/diagnóstico para incidentes. |
 | **Ingeniero de Seguridad / Auditor** | IAM Identity Center | MFA Obligatorio (FIDO2 / WebAuthn) | `AromaPacifico-Security` (Primaria), Lectura en resto | Solo lectura e inspección forense de logs en S3, CloudTrail y agregadores de AWS Config. Sin permisos de mutación de recursos. |
-| **Ingeniero de Redes y Conectividad** | IAM Identity Center | MFA Obligatorio (FIDO2 / WebAuthn) | `AromaPacifico-Network` | Administración de Transit Gateway, túneles VPN IPsec con centros de acopio y reglas de AWS Network Firewall. |
+| **Ingeniero de Redes y Conectividad** | IAM Identity Center | MFA Obligatorio (FIDO2 / WebAuthn) | `AromaPacifico-Network` | Administración de Transit Gateway, túneles VPN IPsec con centros de acopio, VPC Endpoints y Route 53 Inbound Resolver (AWS Network Firewall retirado del piloto por decisión FinOps #31). |
 
 ### 6.2 Delimitación de Usuarios Finales (Sin Acceso a Consola AWS)
 
@@ -384,16 +384,16 @@ Para controlar el gasto operativo del piloto bajo criterios de moderación finan
 
 | Cuenta AWS | Presupuesto Mensual Estimado | Principales Componentes de Gasto Cubiertos |
 | --- | --- | --- |
-| `AromaPacifico-Security` | **$50 USD** | Ingesta y almacenamiento en S3 Standard/Glacier de CloudTrail Organization Trail, VPC Flow Logs y reglas de AWS Config. |
-| `AromaPacifico-Network` | **$120 USD** | Horas activas de AWS Transit Gateway, túneles VPN IPsec hacia Cauca, Huila y Tolima, y VPC Endpoints privados. |
-| `AromaPacifico-Prod` | **$180 USD** (Mes normal)<br>**$450 USD** (Mes de cosecha pico) | AWS IoT Core (telemetría de 200 fincas y drones), DynamoDB On-Demand, invocaciones Lambda, Amazon Rekognition para confirmación de plagas y egreso de datos para consulta web. |
-| `AromaPacifico-Test` | **$80 USD** | Réplica acotada de infraestructura para homologación continua, pruebas de carga y validaciones de firmware. |
-| `AromaPacifico-Dev` | **$50 USD** | Cómputo efímero de desarrollo con horario laboral controlado y bancos de prueba de Terraform. |
-| **Total Estimado Organización** | **$480 USD** (Mes normal)<br>**$750 USD** (Mes de cosecha) | Presupuesto consolidado del piloto dentro del margen financiero federativo. |
+| `AromaPacifico-Security` | **$50 USD** | Ingesta y almacenamiento en S3 Standard/Glacier de CloudTrail Organization Trail, VPC Flow Logs, agregador de AWS Config, Amazon GuardDuty y llaves maestras KMS ($50,42 USD calculados en #29). |
+| `AromaPacifico-Network` | **$562 USD** (Mes normal)<br>**$563 USD** (Mes de cosecha) | AWS Transit Gateway attachments ($182,80 normal / $183,50 cosecha), 3 túneles IPsec VPN hacia acopios ($109,50 USD), VPC Interface Endpoints en 2 AZs ($87,65 USD) y Route 53 Inbound Resolver ($182,50 USD). Nota de ahorro: Network Firewall fue retirado (ahorro $577,68 USD/mes) y Resolver de salida fue retirado (ahorro $182,50 USD/mes) según decisión FinOps #31. |
+| `AromaPacifico-Prod` | **$118 USD** (Mes normal)<br>**$146 USD** (Mes de cosecha pico) | Ingesta IoT Core ($0,80-$0,98 USD), SQS ($0,05-$0,14 USD), Lambdas ($0,16-$0,66 USD), API Gateway ($0,25-$0,87 USD), DynamoDB On-Demand ($2,19-$2,94 USD), S3 objetos de dron con réplica ($22,70-$26,55 USD), Rekognition/Bedrock ($0,05-$0,47 USD), ALB + WAF + Route 53 ($54,06-$54,11 USD), alertas SNS ($14-$35 USD), CloudWatch y Synthetics ($23,27-$24,77 USD). |
+| `AromaPacifico-Test` | **$56 USD** | Homologación previa a despliegue productivo y pruebas de carga. Endpoints de interfaz optimizados en una sola zona de disponibilidad (AZ) por decisión FinOps #31 (ahorro $14,60 USD/mes), 1 attachment TGW y consumo bajo demanda ($56,10 USD calculados). |
+| `AromaPacifico-Dev` | **$25 USD** | Cómputo efímero de desarrollo con horario laboral controlado, sin attachment permanente de Transit Gateway y bancos de prueba IaC ($25,00 USD calculados en #29). |
+| **Total Estimado Organización** | **$811 USD** (Mes normal)<br>**$841 USD** (Mes de cosecha) | Presupuesto total consolidado y optimizado del piloto de 200 fincas, plenamente armonizado con los documentos de costo #29 y #31 tras aplicar las decisiones de ahorro. |
 
 > [!NOTE]
-> **Carácter Provisional de las Cifras Presupuestales:**
-> Los montos consolidados de $480 USD en mes normal y $750 USD en mes de cosecha, así como la asignación de $120 USD para la cuenta `AromaPacifico-Network`, constituyen cifras base provisionales de referencia arquitectónica. Estos valores serán formalmente armonizados y consolidados con las cotizaciones detalladas de mercado en el marco de la Issue #29 (`f3-mes`), incorporando el dimensionamiento de conectividad híbrida de la Issue #7 / PR #46.
+> **Armonización Definitiva con las Decisiones FinOps de Ahorro (#29 y #31):**
+> Las cifras base provisionales iniciales ($480 USD en mes normal y $750 USD en cosecha) quedaron desactualizadas al modelar la red fija real en la Issue #29 ($1.322 USD/mes, representando el 83% del gasto total). Tras la adopción formal de las tres palancas de la **Decisión FinOps 3 de la Issue #31** (retiro de AWS Network Firewall, retiro de Route 53 Resolver Outbound y reducción a una sola zona para endpoints en pruebas), la plataforma evitó un sobrecosto recurrente de **$774,78 USD al mes ($9.297 USD al año)**, pasando de un gasto bruto sin optimizar de $1.586,26 USD / $1.618,19 USD a las cifras consolidadas y vigentes de **$811 USD en mes normal** y **$841 USD en mes de cosecha**.
 
 ### 7.2 Umbrales de Alerta Progresivos
 
@@ -443,6 +443,19 @@ A continuación se sustenta formalmente por qué la arquitectura adoptada es sup
 
 - **Sustentación**: Los paquetes de telemetría y las imágenes pesadas capturadas por drones transitan directamente desde Lambda hacia DynamoDB y S3 mediante **Gateway VPC Endpoints gratuitos**, evitando el procesamiento tarifado por gigabyte de los NAT Gateways tradicionales y ahorrando más de $180 USD mensuales en la cuenta de producción.
 
+### 8.3 Seguridad Perimetral del Piloto: Security Groups + NACLs vs. AWS Network Firewall vs. NVA Dedicado (EC2)
+
+| Criterio de Evaluación | Opción Seleccionada: SG + NACL + Firewalls Locales | Alternativa 1: AWS Network Firewall Centralizado | Alternativa 2: Clúster de NVA / Firewall Virtual en EC2 |
+| --- | --- | --- | --- |
+| Costo Fijo Mensual | **$0,00 USD** (Servicios nativos sin costo fijo) | $577,68 USD / mes ($0,395/endpoint-hora en 2 AZs + GB) | ~$320,00 USD / mes (2 instancias EC2 m5.large + EBS) |
+| Costo Evitado Cuantificado | **$577,68 USD / mes ($6.932,16 USD / año)** | $0,00 USD (Línea base sin optimización) | $257,68 USD / mes |
+| Cobertura del Tráfico del Piloto | Total. Tráfico principal va a servicios administrados (IoT Core, API Gateway, S3). Tráfico de VPC filtrado por SG y NACL. | Redundante para el piloto. Inspección profunda de paquetes innecesaria en flujos serverless directos. | Alta sobrecarga operativa de parches y licencias para flujos cerrados. |
+| Timebox de Implementación | Inmediato y compatible con las 100 horas de Épica 6. | Consume tiempo de desarrollo de reglas Suricata complejas. | Incompatible con el límite de 100 horas y 2 semanas. |
+
+- **Sustentación FinOps y de Seguridad**:
+  Se adoptó formalmente la **Decisión FinOps 3 de la Issue #31**, descartando el despliegue de AWS Network Firewall durante la vigencia del piloto académico de 200 fincas. La justificación técnica radica en que más del 95% del volumen de datos del piloto (lecturas agronómicas de suelo, telemetría de secado, posiciones GPS y eventos de sacos) fluye directamente hacia endpoints públicos seguros y gestionados por AWS (**AWS IoT Core por MQTT sobre TLS 1.3**, **Amazon API Gateway** y **Amazon S3**), los cuales no cruzan las interfaces de red de una VPC tradicional ni requieren enrutamiento de inspección centralizada.
+  Para el tráfico que transita a través de la VPC (comunicación con centros de acopio vía IPsec VPN y microservicios internos), el aislamiento perimetral está plenamente garantizado mediante el catálogo exhaustivo de **Security Groups estatales** y **Network ACLs sin estado** de la Issue #9, en conjunto con los firewalls perimetrales en cada sede física (Cauca `10.41.0.0/16`, Huila `10.42.0.0/16`, Tolima `10.43.0.0/16`). Si la operación a escala nacional o un dictamen de auditoría federativa posterior demandara inspección profunda de contenido (DPI) o prevención de intrusiones (IPS), Network Firewall puede incorporarse modularmente mediante un cambio puntual de infraestructura como código (IaC) sin rediseñar la topología de subredes.
+
 ---
 
 ## 9. Registro de Decisiones y Supuestos de Gobierno
@@ -453,3 +466,4 @@ En cumplimiento del flujo metodológico del proyecto, las decisiones técnicas a
 2. **Regiones Restringidas**: Confinamiento operativo a `us-east-1` (principal) y `us-east-2` (contingencia) validado mediante la SCP `deny-unapproved-regions`.
 3. **Resiliencia Operativa**: Imposición de la regla "Avisar, Nunca Apagar" en la configuración de alertas de AWS Budgets para salvaguardar la ingesta del grano de café.
 4. **Gobierno de Etiquetas**: Aprobación de las cinco dimensiones técnicas (`FincaID`, `DronID`, `AcopioID`, `ViajeID`, `Ambiente`) complementadas con `Propietario` y `Proyecto`.
+5. **Alineación Presupuestal y Ahorro en Red Fija (Decisión FinOps #31)**: Presupuestos armonizados en $811 USD (mes normal) y $841 USD (mes de cosecha) tras retirar AWS Network Firewall (ahorro $577,68 USD/mes), retirar el Resolver de salida de Route 53 (ahorro $182,50 USD/mes) y consolidar endpoints de pruebas en single-AZ (ahorro $14,60 USD/mes).

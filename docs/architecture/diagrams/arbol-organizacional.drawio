@@ -30,7 +30,7 @@
         </mxCell>
 
         <!-- CUENTA RED COMPARTIDA -->
-        <mxCell id="acc-network" value="Cuenta: Red Compartida&#xa;ID: AromaPacifico-Network&#xa;&#xa;• AWS Transit Gateway Hub Inter-Cuentas&#xa;• Túneles VPN IPsec Centros de Acopio:&#xa;  - Cauca: 10.41.0.0/16&#xa;  - Huila: 10.42.0.0/16&#xa;  - Tolima: 10.43.0.0/16&#xa;• AWS Network Firewall Inspección Central&#xa;• VPC Endpoints Privados S3 y DynamoDB&#xa;• Presupuesto Asignado: $120 USD / mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;spacingTop=8;fontColor=#232F3E;verticalAlign=top;" vertex="1" parent="1">
+        <mxCell id="acc-network" value="Cuenta: Red Compartida&#xa;ID: AromaPacifico-Network&#xa;&#xa;• AWS Transit Gateway Hub Inter-Cuentas&#xa;• Túneles VPN IPsec Centros de Acopio:&#xa;  - Cauca: 10.41.0.0/16&#xa;  - Huila: 10.42.0.0/16&#xa;  - Tolima: 10.43.0.0/16&#xa;• Route 53 Inbound Resolver (DNS)&#xa;• VPC Endpoints Privados S3 y DynamoDB&#xa;• Presupuesto: $562 normal / $563 cosecha&#xa;(NetFW y Outbound Resolver retirados por #31)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;spacingTop=8;fontColor=#232F3E;verticalAlign=top;" vertex="1" parent="1">
           <mxGeometry x="370" y="440" width="280" height="270" as="geometry" />
         </mxCell>
 
@@ -40,17 +40,17 @@
         </mxCell>
 
         <!-- CUENTA DESARROLLO -->
-        <mxCell id="acc-dev" value="Cuenta: Desarrollo&#xa;ID: AromaPacifico-Dev&#xa;&#xa;• Sandboxes IaC en Terraform&#xa;• Emuladores y firmware IoT&#xa;• Prototipos serverless Lambda&#xa;• Sin enlace a acopios físicos&#xa;• Apagado fuera de horario laboral&#xa;• Aislamiento blast radius de estado&#xa;• Presupuesto: $50 USD / mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;spacingTop=8;fontColor=#232F3E;verticalAlign=top;" vertex="1" parent="1">
+        <mxCell id="acc-dev" value="Cuenta: Desarrollo&#xa;ID: AromaPacifico-Dev&#xa;&#xa;• Sandboxes IaC en Terraform&#xa;• Emuladores y firmware IoT&#xa;• Prototipos serverless Lambda&#xa;• Sin enlace a acopios físicos&#xa;• Apagado fuera de horario laboral&#xa;• Aislamiento blast radius de estado&#xa;• Presupuesto: $25 USD / mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;spacingTop=8;fontColor=#232F3E;verticalAlign=top;" vertex="1" parent="1">
           <mxGeometry x="720" y="440" width="200" height="270" as="geometry" />
         </mxCell>
 
         <!-- CUENTA PRUEBAS -->
-        <mxCell id="acc-test" value="Cuenta: Pruebas / Staging&#xa;ID: AromaPacifico-Test&#xa;&#xa;• Réplica de producción previa&#xa;• Pipelines CI/CD reproducibles&#xa;• Drenado de buffer 24 horas&#xa;• Pruebas de estrés (30 req/min)&#xa;• Homologación umbrales FNC&#xa;• Validación misiones offline drones&#xa;• Presupuesto: $80 USD / mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FBCA04;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;spacingTop=8;fontColor=#232F3E;verticalAlign=top;" vertex="1" parent="1">
+        <mxCell id="acc-test" value="Cuenta: Pruebas / Staging&#xa;ID: AromaPacifico-Test&#xa;&#xa;• Réplica de producción previa&#xa;• Pipelines CI/CD reproducibles&#xa;• Drenado de buffer 24 horas&#xa;• Pruebas de estrés (30 req/min)&#xa;• Homologación umbrales FNC&#xa;• Validación misiones offline drones&#xa;• Presupuesto: $56 USD / mes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FBCA04;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;spacingTop=8;fontColor=#232F3E;verticalAlign=top;" vertex="1" parent="1">
           <mxGeometry x="945" y="440" width="205" height="270" as="geometry" />
         </mxCell>
 
         <!-- CUENTA PRODUCCION -->
-        <mxCell id="acc-prod" value="Cuenta: Producción&#xa;ID: AromaPacifico-Prod&#xa;&#xa;• IoT Core (200 Fincas MQTT/TLS)&#xa;• DynamoDB On-Demand + S3&#xa;• Inferencia con Rekognition&#xa;• App Caficultor, Drones y Transporte&#xa;• Consulta Pública Buenaventura&#xa;• Ventana congelamiento 05:00-18:00&#xa;• $180 USD normal / $450 cosecha" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;spacingTop=8;fontColor=#232F3E;verticalAlign=top;" vertex="1" parent="1">
+        <mxCell id="acc-prod" value="Cuenta: Producción&#xa;ID: AromaPacifico-Prod&#xa;&#xa;• IoT Core (200 Fincas MQTT/TLS)&#xa;• DynamoDB On-Demand + S3&#xa;• Inferencia con Rekognition&#xa;• App Caficultor, Drones y Transporte&#xa;• Consulta Pública Buenaventura&#xa;• Ventana congelamiento 05:00-18:00&#xa;• $118 USD normal / $146 cosecha" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;spacingTop=8;fontColor=#232F3E;verticalAlign=top;" vertex="1" parent="1">
           <mxGeometry x="1175" y="440" width="205" height="270" as="geometry" />
         </mxCell>
 
