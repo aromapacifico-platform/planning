@@ -4,32 +4,28 @@
       <stop offset="0%" stop-color="#166534"/>
       <stop offset="100%" stop-color="#135E34"/>
     </linearGradient>
-    <linearGradient id="grad-azul-iso" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1E40AF"/>
-      <stop offset="100%" stop-color="#0F4C81"/>
-    </linearGradient>
     <linearGradient id="grad-cereza-iso" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#B91C1C"/>
       <stop offset="100%" stop-color="#9E1B1B"/>
     </linearGradient>
+    <linearGradient id="grad-azul-iso" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E40AF"/>
+      <stop offset="100%" stop-color="#0F4C81"/>
+    </linearGradient>
   </defs>
 
   <!-- Circulo contenedor perimetral -->
-  <circle cx="50" cy="50" r="48" fill="#F0FDF4" stroke="#DCFCE7" stroke-width="2.5"/>
+  <circle cx="50" cy="50" r="46" fill="#F0FDF4" stroke="#DCFCE7" stroke-width="2.5"/>
   
-  <!-- Lobo Izquierdo: Montanas Andinas y Cafetales -->
-  <path d="M 48,15 C 29,15 17,31 17,50 C 17,69 29,85 48,85 C 46,74 42,61 42,50 C 42,38 46,26 48,15 Z" 
+  <!-- Lobo Izquierdo: Montanas Andinas y Cafetales (Verde Cordillera) -->
+  <path d="M 47.5,14 C 29,14 17,29 17,50 C 17,71 29,86 47.5,86 C 42,72 43,60 46.5,50 C 50,40 51,28 47.5,14 Z" 
         fill="url(#grad-verde-iso)"/>
   
-  <!-- Lobo Derecho Superior: Cereza Madura -->
-  <path d="M 52,15 C 60,25 64,36 64,48 C 64,50 64,52 64,54 C 75,51 83,41 83,31 C 83,21 70,15 52,15 Z" 
+  <!-- Lobo Derecho Superior: Cereza Madura de Cafe (Rojo Cereza) -->
+  <path d="M 52.5,14 C 56,28 55,40 51.5,47 C 64,45 76,40 81,30 C 78,19 68,14 52.5,14 Z" 
         fill="url(#grad-cereza-iso)"/>
 
-  <!-- Lobo Derecho Inferior: Ruta Pacifico Buenaventura -->
-  <path d="M 64,57 C 63,67 59,77 52,85 C 70,85 83,73 83,57 C 83,52 77,54 64,57 Z" 
+  <!-- Lobo Derecho Inferior: Ruta Pacifico Buenaventura (Azul Pacifico) -->
+  <path d="M 51.5,53 C 48,60 47,72 52.5,86 C 68,86 83,73 83,52 C 75,51 63,52 51.5,53 Z" 
         fill="url(#grad-azul-iso)"/>
-
-  <!-- Surco Central S-Curve: Rio / Viento Andino / Surco del Grano -->
-  <path d="M 49,16 Q 53,35 43,50 Q 34,65 50,84" 
-        fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
 </svg>

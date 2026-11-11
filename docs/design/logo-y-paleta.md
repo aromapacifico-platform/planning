@@ -4,25 +4,18 @@
 
 ---
 
-**Historia de Usuario:** Como caficultor, quiero reconocer de un vistazo el estado de mi saco y una alerta de mi cultivo, incluso bajo el sol, para no tener que leer textos largos en el campo.  
-**Issue:** #35 (`f5-logo`)  
-**Responsable:** Senior DevOps Engineer, Cloud Architect & Senior UI/UX Specialist  
-**Estado:** Aprobado para Implementación  
-**Fase:** Fase 5 - Sistema de diseño  
-**Cajas de Arquitectura Vinculadas:** `E6-03` (Ingesta y Alertas Fitosanitarias de Cultivo), `E6-05` (Ciclo de Vida del Saco y Consulta Pública) y Capa Transversal de Frontend / Aplicaciones Móviles  
-
----
-
 ## 1. Resumen Ejecutivo y Marco Operativo
 
 El presente documento formaliza el subsistema de identidad visual, tokens cromáticos, ergonomía visual en exteriores y patrones de doble codificación para la plataforma cafetera **AromaPacífico**, en el marco del piloto de modernización tecnológica 2026 para la Federación Nacional de Cafeteros (FNC).
 
 El diseño de 2020 carecía de un sistema de diseño propio y pretendía heredar manuales gráficos impresos institucionales pensados exclusivamente para papelería de escritorio o pantallas de oficina en condiciones de iluminación controlada (300 a 500 lux). Dicho enfoque resultaba completamente inoperante en las condiciones reales de campo del suroccidente colombiano:
+
 1. **Luz solar directa extrema:** En las zonas rurales de Cauca, Huila y Tolima, la irradiancia solar al mediodía supera con frecuencia los **80.000 a 100.000 lux**. Bajo estas condiciones, el reflejo parásito en los cristales de teléfonos inteligentes de gama media o de entrada (pantallas IPS LCD o AMOLED de 300 a 450 nits con protectores de plástico rayados o manchados) reduce el contraste aparente en un **50 % a 70 %**, lavando los tonos sutiles o pasteles.
 2. **Carga cognitiva y fatiga física del caficultor:** El caficultor y el recolector operan en jornadas físicas intensas en pendientes andinas, con manos ocupadas, guantes o humedad por lluvia o rocío. La interfaz debe permitir una **decodificación preatentiva instantánea (tiempo de fijación visual inferior a 200 ms)** sin obligar a detener la labor para leer bloques densos de texto.
 3. **Diversidad visual y daltonismo rural:** Aproximadamente el 8 % de la población masculina padece deficiencias en la percepción del color (protanopia, deuteranopia o tritanopia). Además, el deslumbramiento solar produce un fenómeno fisiológico transitorio equivalente a la acromatopsia, donde la saturación de los conos oculares anula la discriminación cromática. Por ello, confiar exclusivamente en el color para diferenciar "Aceptado" de "Rechazado" o "En Viaje" viola los estándares de accesibilidad universal y genera graves errores de acopio.
 
 Para resolver este desafío de manera integral, AromaPacífico establece un sistema propio basado en:
+
 - **Identidad de marca moderna:** Logotipo principal, isotipo y variantes vectoriales nativas en color institucional, una tinta (100 % negro para impresión térmica en acopios) y negativo (modo oscuro).
 - **Paleta cromática bioclimática y contrastada:** Basada en tonos orgánicos de la cordillera andina, el fruto del café y el océano Pacífico, donde cada token cumple o supera el estándar **WCAG 2.1 Nivel AAA (contraste superior a 7:1)** sobre sus superficies de aplicación.
 - **Doble codificación mandatoria (WCAG 2.1 Criterio 1.4.1):** Los cuatro estados del saco de 60 kg y la alerta crítica de cultivo combinan de manera redundante: (1) color semántico de alto contraste, (2) silueta geométrica e icono vectorial exclusivo, y (3) texto explícito visible en español con tipografía robusta.
@@ -49,17 +42,18 @@ El piloto 2026 de AromaPacífico no hereda el manual estático de 2020. Requiere
 ### 3.1 Morfología y Concepto Semiótico del Isotipo
 
 El isotipo sintetiza tres fuerzas geográficas y productivas en una estructura geométrica unitaria inscrita en un círculo perimetral continuo:
+
 1. **Lóbulo izquierdo (Verde Cordillera - `#135E34`):** Representa la Cordillera Occidental y el macizo andino de Cauca, Huila y Tolima, la sombra vegetal de los cafetales y la sostenibilidad agronómica. Su silueta asciende como una montaña protectora.
 2. **Lóbulo derecho superior (Rojo Cereza Madura - `#9E1B1B`):** Simboliza el fruto del café en su punto exacto de maduración de cosecha, recolectado grano a grano a mano por los caficultores de la Federación.
 3. **Lóbulo derecho inferior (Azul Pacífico - `#0F4C81`):** Evoca la corriente marina y la salida de ultramar a través del puerto de Buenaventura, representando el transporte confiable y el comercio global.
-4. **Surco central en S (Blanco Calado / Vector de Flujo):** Une los tres elementos representando simultáneamente la hendidura natural del grano de café arábica, el cauce de los ríos andinos que nutren el cultivo y el camino del transporte terrestre rural.
+4. **Hendidura Central en S (Espacio Negativo Orgánico):** En lugar de un trazo superpuesto o línea flotante artificial que causaba distorsión perceptiva, la división de los lóbulos se modela mediante un **canal esculpido de espacio negativo de 5 px de ancho constante**. Este surco natural reproduce la hendidura botánica del grano de café arábica y el cauce de los ríos andinos, permitiendo que el fondo respire limpiamente a través del isotipo en todas las escalas y medios de reproducción sin artefactos de trazo.
 
 ### 3.2 Variantes Oficiales de Reproducción
 
 Se han diseñado, codificado y entregado tres variantes vectoriales oficiales bajo formato SVG nativo optimizado (peso inferior a 3 KB por archivo), ubicadas en el directorio canónico `docs/design/brand/`:
 
 | Variante | Archivo Vectorial | Superficie de Aplicación | Racional Técnico y Operativo | Relación de Contraste Tipográfico |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | **Color Principal** | [`logo-principal.svg`](brand/logo-principal.svg)<br>[`isotipo-color.svg`](brand/isotipo-color.svg) | Fondo Blanco Puro (`#FFFFFF`) o Blanco Pergamino (`#FAF8F5`). | Uso en la pantalla principal de la aplicación del caficultor, aplicación del transportador y portal web de consulta del saco. Transmite modernidad, naturaleza y rigor institucional. | **17.85:1** (Carbón sobre Blanco)<br>**7.84:1** (Verde sobre Blanco)<br>Clasificación **WCAG AAA** |
 | **Una Tinta (Monocromo)** | [`logo-una-tinta.svg`](brand/logo-una-tinta.svg)<br>[`isotipo-una-tinta.svg`](brand/isotipo-una-tinta.svg) | Fondo blanco o sustrato de papel kraft / fique. 100 % Negro (`#000000`). | Obligatorio para impresoras térmicas de recepción en centros de acopio (Cauca, Huila, Tolima), sellos de saco de fique de 60 kg, rótulos de despacho físico y facturas de transporte. Elimina medios tonos o gradientes que sangran en cabezales térmicos de 203 DPI. | **21.00:1**<br>Máximo teórico de contraste |
 | **En Negativo** | [`logo-negativo.svg`](brand/logo-negativo.svg)<br>[`isotipo-negativo.svg`](brand/isotipo-negativo.svg) | Fondo Carbón Pizarra (`#0F172A`) o Verde Oscuro (`#0D4A27`). | Destinado a pantallas de bienvenida (*splash screen*), modo nocturno de aplicaciones móviles para conductores de camión que viajan de noche para evitar deslumbramiento ocular en cabina, y barras de navegación invertidas. | **17.85:1** (Blanco sobre Carbón)<br>Clasificación **WCAG AAA** |
@@ -81,7 +75,7 @@ El ojo humano en exteriores experimenta una adaptación pupilar a la luz brillan
 La relación de contraste efectiva en exteriores ($C_{\text{efectivo}}$) se calcula mediante la fórmula física:
 $$C_{\text{efectivo}} = \frac{L_{\text{primer\_plano}} + (L_{\text{ambiental}} \times R_s)}{L_{\text{fondo}} + (L_{\text{ambiental}} \times R_s)}$$
 
-Si una interfaz utiliza colores convencionales con una relación de laboratorio de 4.5:1 (el mínimo exigido por WCAG AA), bajo luz solar directa la relación efectiva se degrada a niveles inferiores a **1.8:1**, volviendo el texto completamente ilegible. 
+Si una interfaz utiliza colores convencionales con una relación de laboratorio de 4.5:1 (el mínimo exigido por WCAG AA), bajo luz solar directa la relación efectiva se degrada a niveles inferiores a **1.8:1**, volviendo el texto completamente ilegible.
 
 Por esta razón, la arquitectura UI/UX de AromaPacífico establece como **política obligatoria un contraste base de laboratorio superior a 7.0:1 (Nivel WCAG 2.1 AAA)** en todos los textos informativos, asegurando que aun con el 60 % de pérdida por reflejo solar, el contraste percibido supere el umbral ergonómico de 3.5:1.
 
@@ -90,19 +84,19 @@ Por esta razón, la arquitectura UI/UX de AromaPacífico establece como **polít
 A continuación se detalla la medición cuantitativa de cada color frente a sus fondos de despliegue, calculada mediante el algoritmo de luminancia relativa estándar de WCAG 2.1 y contrastada con el algoritmo perceptual APCA (*Accessible Perceptual Contrast Algorithm*):
 
 | Rol Semántico | Token de Diseño | Valor HEX | RGB | Luminancia Relativa ($L$) | Contraste sobre Blanco (`#FFF`) | Contraste sobre Pergamino (`#FAF8F5`) | Cumplimiento WCAG 2.1 | Racional de Uso en Campo |
-|---|---|---|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | **Primario Base** | `--ap-color-brand-primary` | `#135E34` | `(19, 94, 52)` | 0.084 | **7.84:1** | **7.39:1** | **Pasa AAA** | Encabezados de pantalla, botones principales y badges de éxito en ambiente normal. |
 | **Primario Oscuro** | `--ap-color-brand-primary-dark` | `#0D4A27` | `(13, 74, 39)` | 0.051 | **10.37:1** | **9.78:1** | **Pasa AAA** | Texto de alta prioridad sobre fondos claros cuando el sensor de luz detecta sol pleno. |
 | **Primario Superficie** | `--ap-color-brand-primary-light` | `#DCFCE7` | `(220, 252, 231)` | 0.912 | 1.09:1 | 1.03:1 | Contenedor | Fondo suave de tarjeta de saco aprobado; no emite deslumbramiento visual. |
 | **Secundario Cereza** | `--ap-color-brand-cherry` | `#9E1B1B` | `(158, 27, 27)` | 0.113 | **6.44:1** | **6.07:1** | **Pasa AA / AAA Grande** | Indicadores de maduración, botones de parada de emergencia y acentos. |
 | **Secundario Cereza Oscuro** | `--ap-color-brand-cherry-dark` | `#7F1D1D` | `(127, 29, 29)` | 0.054 | **10.02:1** | **9.44:1** | **Pasa AAA** | Texto mandatorio de rechazo de saco y títulos de alerta fitosanitaria en lote. |
 | **Secundario Pacífico** | `--ap-color-brand-pacific` | `#0F4C81` | `(15, 76, 129)` | 0.085 | **7.78:1** | **7.33:1** | **Pasa AAA** | Indicador de trazabilidad marítima, reportes de despacho y métricas WAN de acopio. |
-| **Secundario Ruta** | `--ap-color-brand-pacific-vibrant`| `#1D4ED8` | `(29, 78, 216)` | 0.124 | **6.03:1** | **5.68:1** | **Pasa AA / AAA Grande** | Icono activo de camión en tránsito y selector de ruta satelital. |
+| **Secundario Ruta** | `--ap-color-brand-pacific-vibrant` | `#1D4ED8` | `(29, 78, 216)` | 0.124 | **6.03:1** | **5.68:1** | **Pasa AA / AAA Grande** | Icono activo de camión en tránsito y selector de ruta satelital. |
 | **Secundario Tierra** | `--ap-color-brand-earth` | `#4A2E1B` | `(74, 46, 27)` | 0.056 | **9.87:1** | **9.30:1** | **Pasa AAA** | Identificación de beneficiadero, patio de secado y métricas de suelo (NPK). |
 | **Neutro Carbón** | `--ap-color-neutral-carbon` | `#0F172A` | `(15, 23, 42)` | 0.009 | **17.85:1** | **16.84:1** | **Pasa AAA Máximo** | Tipografía base de lectura (pesajes, identificadores de saco, coordenadas de finca). |
 | **Neutro Pizarra** | `--ap-color-neutral-slate` | `#334155` | `(51, 65, 85)` | 0.061 | **9.43:1** | **8.89:1** | **Pasa AAA** | Metadatos secundarios, fechas UTC, nombres de conductores y subtítulos. |
-| **Neutro Borde** | `--ap-color-neutral-border` | `#CBD5E1` | `(203, 213, 225)`| 0.603 | 1.61:1 | 1.52:1 | Componente no texto | Delimitador de tarjetas bajo luz indirecta; complementado con sombra suave. |
-| **Neutro Pergamino** | `--ap-color-neutral-parchment` | `#FAF8F5` | `(250, 248, 245)`| 0.945 | 1.05:1 | N/A | Canvas Base | Fondo general de las aplicaciones móviles; evita la fatiga ocular por blanco cegador. |
+| **Neutro Borde** | `--ap-color-neutral-border` | `#CBD5E1` | `(203, 213, 225)` | 0.603 | 1.61:1 | 1.52:1 | Componente no texto | Delimitador de tarjetas bajo luz indirecta; complementado con sombra suave. |
+| **Neutro Pergamino** | `--ap-color-neutral-parchment` | `#FAF8F5` | `(250, 248, 245)` | 0.945 | 1.05:1 | N/A | Canvas Base | Fondo general de las aplicaciones móviles; evita la fatiga ocular por blanco cegador. |
 
 ---
 
@@ -111,6 +105,7 @@ A continuación se detalla la medición cuantitativa de cada color frente a sus 
 El caso de estudio especifica cuatro etapas cardinales en el ciclo de vida del saco: **en preparación**, **en viaje**, **aceptado** y **rechazado**.
 
 En estricto cumplimiento con el **Criterio de Conformidad 1.4.1 de WCAG 2.1 (Uso del Color)**, ninguna pantalla o reporte de AromaPacífico comunicará el estado de un lote o saco valiéndose únicamente del matiz cromático. Cada estado implementa una **triple redundancia sensorial y cognitiva**:
+
 1. **Color de fondo y borde de alta saturación:** Identificación perimetral rápida a distancia.
 2. **Icono vectorial con silueta geométrica exclusiva:** Cada estado cuenta con un glifo de contorno único que no comparte similitud formal con los demás, garantizando discriminación visual incluso para usuarios con daltonismo total (acromatopsia) o bajo reflejo solar que elimine la percepción de color.
 3. **Texto explícito en español en alta jerarquía:** Rótulo en mayúsculas sostenidas, peso tipográfico *Semi-Bold* u *Heavy*, con contraste medido superior a 7:1 contra el fondo de la insignia.
@@ -118,7 +113,7 @@ En estricto cumplimiento con el **Criterio de Conformidad 1.4.1 de WCAG 2.1 (Uso
 ### 5.1 Matriz de Especificación de Estados del Saco
 
 | Estado ID | Rótulo Visible | Etapa en la Cadena | Color Texto / Borde | Color Fondo | Silueta e Icono Vectorial | Contraste WCAG | Codificación Accesible (Daltonismo y Sol) |
-|---|---|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- | --- | --- |
 | **`EN_PREPARACION`** | **EN PREPARACIÓN** | Beneficiadero en finca cafetera (secado, pesaje y marcado). | Texto: `#78350F`<br>Borde: `#D97706` | `#FEF3C7`<br>(Ámbar suave) | **Saco cúbico con núcleo concéntrico:** Silueta de contenedor cuadrado/rectangular con engranaje interior de proceso. | **8.15:1**<br>(Pasa AAA) | La forma ortogonal de caja y el engranaje central comunican ensamblaje/preparación mecánica sin requerir detección del color ámbar. |
 | **`EN_VIAJE`** | **EN VIAJE** | Transporte terrestre rural o troncal hacia acopio / Buenaventura. | Texto: `#1E40AF`<br>Borde: `#2563EB` | `#DBEAFE`<br>(Azul cielo) | **Camión de carga con silueta horizontal:** Contorno de cabina, plataforma y dos ruedas circulares en sentido de marcha derecha. | **7.15:1**<br>(Pasa AAA) | La silueta alargada del vehículo de transporte transmite movilidad y dirección activa de manera preatentiva en menos de 100 ms. |
 | **`ACEPTADO`** | **ACEPTADO** | Centro de acopio o terminal portuaria tras prueba SCA y humedad &lt; 12 %. | Texto: `#14532D`<br>Borde: `#16A34A` | `#DCFCE7`<br>(Menta clara) | **Escudo heráldico con marca de verificación (Checkmark):** Contorno de protección con tilde positivo de trazo grueso (3 px). | **8.30:1**<br>(Pasa AAA) | El escudo es el símbolo universal de certificación, aprobación fitosanitaria y cumplimiento de estándares de exportación FNC. |
@@ -142,6 +137,7 @@ El componente reutilizable de estado del saco sigue una anatomía estructural es
 ```
 
 Reglas CSS asociadas:
+
 - Altura mínima del contenedor: **36 px** (en escritorio) y **44 px** (en aplicación móvil).
 - Radio de borde (*border-radius*): **6 px** para preservar la sensación de ficha industrial.
 - Borde perimetral: **Grosor mínimo de 1.5 px** con color semántico saturado para delimitar el contenedor contra fondos blancos deslumbrantes.
@@ -198,6 +194,7 @@ Esta delimitación asegura que ninguna insignia de estado o componente de diseñ
 ### 8.1 La Dimensión FinOps en el Sistema de Diseño
 
 El principio rector de FinOps en AromaPacífico establece que **toda decisión técnica debe fundamentarse en eficiencia de costos, reducción de desperdicio y cálculo de costo evitado**. En el diseño de interfaces y componentes visuales, el impacto financiero se manifiesta en tres factores críticos:
+
 1. **Costos de mantenimiento y refactorización:** La dispersión de estilos codificados a mano en múltiples plataformas incrementa drásticamente el costo de desarrollo y soporte.
 2. **Transferencia de datos celular (Data Egress) y almacenamiento en la nube:** Enviar activos gráficos pesados (imágenes PNG/JPEG de alta densidad) sobre redes celulares rurales 3G/4G hacia 200 fincas y 60 transportadores consume cuotas mensuales de datos móviles y encarece la facturación de Amazon CloudFront y Amazon S3.
 3. **Costos operacionales por mermas y errores humanos:** Diseños con bajo contraste o estados confusos bajo luz solar provocan rechazos equivocados en báscula, reprocesos en laboratorio y mezclas accidentales de café de especialidad con café comercial estándar.
@@ -207,7 +204,7 @@ El principio rector de FinOps en AromaPacífico establece que **toda decisión t
 A continuación se compara la solución adoptada frente a dos alternativas tradicionales del mercado:
 
 | Criterio de Evaluación | Alternativa 1: Manual Estático Tradicional + Silos Nativos (Descartada) | Alternativa 2: Sistema de Diseño Propietario en SaaS Externo (Descartada) | Alternativa Adoptada: Tokens W3C JSON Centralizados + SVG Autónomo |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Arquitectura de Entrega** | Manual de marca en PDF (120 páginas). Estilos CSS, XML de Android y Swift codificados manualmente en cada repositorio. | Plataforma SaaS de gestión de diseño (Figma Enterprise Tokens / Zeplin / Storybook Cloud). | Repositorio central de tokens en JSON estándar (W3C DTCG), versionado en Git y transpilado con Style Dictionary. |
 | **Costo en Reposo (Valle)** | **$0,00 USD / mes** (pero transfiere una deuda técnica masiva ante cualquier cambio). | **$120,00 USD / mes** ($1.440 USD / año en licencias para el equipo de desarrollo). | **$0,00 USD / mes** bajo la regla estricta de *cero costos fijos ociosos*. |
 | **Costo en Mes Pico (Cosecha)** | **$0,00 USD / mes** directo, pero alto gasto de soporte por inconsistencias visuales. | **$120,00 USD / mes** recurrente sin escalabilidad económica. | **$0,00 USD / mes**. Los tokens y SVGs residen en el bundle de la aplicación y en cache perimetral CloudFront. |
@@ -222,6 +219,7 @@ $$\text{Costo Evitado}_{\text{Tokens}} = \text{Costo Alternativa 1} - \text{Cost
 $$\text{Costo Evitado}_{\text{Tokens}} = \$4.800\text{ USD} - \$450\text{ USD} = \$4.350\text{ USD}$$
 
 Adicionalmente, se cuantifica el costo evitado por mitigación de errores operacionales en centros de acopio gracias a la doble codificación y alto contraste solar:
+
 - Un centro de acopio recibe hasta 400 sacos diarios durante cosecha (1.200 sacos diarios entre Cauca, Huila y Tolima).
 - En el diseño preliminar de 2020, la confusión visual entre lotes "Aceptados" y "En Preparación" o "Rechazados" generaba una tasa de error de clasificación de aproximadamente el 0.5 % (6 sacos diarios mezclados o devueltos incorrectamente).
 - El valor promedio de exportación de un saco de café especial de 60 kg certificado por la FNC es de **$320 USD**.
@@ -254,15 +252,3 @@ Todos los archivos generados cumplen con la nomenclatura oficial del proyecto y 
 4. **Diagramas Técnicos de Arquitectura:**
    - [`docs/architecture/diagrams/diseno-logo-paleta-estados.drawio`](../architecture/diagrams/diseno-logo-paleta-estados.drawio): Diagrama fuente editable XML UTF-8.
    - [`docs/architecture/diagrams/diseno-logo-paleta-estados.svg`](../architecture/diagrams/diseno-logo-paleta-estados.svg): Diagrama vectorial autónomo de publicación.
-
----
-
-## 10. Matriz de Cumplimiento de Criterios de Aceptación
-
-| Criterio de Aceptación de la Historia de Usuario | Estado | Evidencia Técnica y Mapeo en el Documento |
-|---|---|---|
-| **1. Logo e isotipo en color, una tinta y negativo.** | **CUMPLIDO** | Se diseñaron, codificaron y validaron las tres variantes completas tanto para el logotipo combinado como para el isotipo individual ([`docs/design/brand/`](brand/)). Cumplen con tamaños mínimos de 32 px en digital y 15 mm en impresión térmica para acopio. Detallado en Sección 3. |
-| **2. Cada color de estado y de alerta cumple contraste WCAG AA sobre su fondo.** | **CUMPLIDO CON EXCELENCIA (SUPERA A WCAG AAA)** | Todos los textos de estado y alerta superan el ratio mínimo de 4.5:1 exigido por WCAG AA, alcanzando entre **7.15:1 y 10.02:1 (Nivel WCAG AAA)** sobre sus respectivos contenedores y sobre blanco. Además, garantizan resistencia a la luz solar extrema (>80.000 lux) manteniendo una relación efectiva superior a 4.0:1. Detallado en Sección 4 y 5. |
-| **3. Los estados no dependen solo del color (llevan icono o texto).** | **CUMPLIDO** | Cada uno de los cuatro estados del saco (`EN_PREPARACION`, `EN_VIAJE`, `ACEPTADO`, `RECHAZADO`) y la alerta de cultivo implementan triple codificación: (1) color semántico de alto contraste, (2) silueta geométrica e icono exclusivo (engranaje, camión, escudo, octágono con X, triángulo de exclamación), y (3) texto visible obligatorio en español con semántica ARIA. Detallado en Sección 5 y 6. |
-| **4. Entregables en ubicación requerida y en español.** | **CUMPLIDO** | Especificación redactada rigurosamente en español técnico bajo `docs/design/logo-y-paleta.md` y tokens alojados en `docs/design/brand/`. Cero emojis en todos los archivos. Detallado en Sección 9. |
-| **5. Sustentación FinOps y Marco Legal (Ley 1581).** | **CUMPLIDO** | Análisis comparativo con 2 alternativas descartadas, cálculo de costo evitado ($9.150 USD/año), cero costos fijos en reposo ($0 USD/mes) y estricta delimitación de la vista pública del saco sin datos privados de caficultores. Detallado en Sección 7 y 8. |

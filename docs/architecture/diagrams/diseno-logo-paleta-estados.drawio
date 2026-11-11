@@ -23,7 +23,7 @@
         <mxCell id="brand-col-card" value="VARIANTE 1: COLOR PRINCIPAL (CANVAS CLARO)&#xa;Uso: Aplicaciones móviles, portal web de consulta y papelería institucional" style="swimlane;startSize=25;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#135E34;" vertex="1" parent="box-brand">
           <mxGeometry x="25" y="45" width="530" height="275" as="geometry" />
         </mxCell>
-        <mxCell id="brand-col-visual" value="[ ISOTIPO COLOR: Grano Andino + Ola Pacifico + Cereza Madura ]&#xa;&#xa;AromaPacífico&#xa;FEDERACIÓN NACIONAL DE CAFETEROS · FNC 2026&#xa;&#xa;Paleta activa: Verde Cordillera (#135E34), Azul Pacifico (#0F4C81), Cereza (#9E1B1B)&#xa;Fondo optimizado: Blanco Pergamino (#FAF8F5) o Blanco Puro (#FFFFFF)&#xa;Relación de Contraste Tipográfico: 17.85:1 sobre blanco (Pasa AAA)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#135E34;strokeWidth=2;fontSize=12;align=center;fontColor=#0F172A;fontStyle=0;" vertex="1" parent="brand-col-card">
+        <mxCell id="brand-col-visual" value="[ ISOTIPO COLOR: Grano Andino + Ola Pacifico + Cereza Madura ]&#xa;&#xa;AromaPacífico&#xa;FEDERACIÓN NACIONAL DE CAFETEROS · FNC 2026&#xa;&#xa;Paleta activa: Verde Cordillera (#135E34), Azul Pacifico (#0F4C81), Cereza (#9E1B1B)&#xa;Fondo optimizado: Blanco Pergamino (#FAF8F5) o Blanco Puro (#FFFFFF)&#xa;Hendidura del Grano: Espacio negativo orgánico de 5 px sin líneas superpuestas&#xa;Relación de Contraste Tipográfico: 17.85:1 sobre blanco (Pasa AAA)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#135E34;strokeWidth=2;fontSize=12;align=center;fontColor=#0F172A;fontStyle=0;" vertex="1" parent="brand-col-card">
           <mxGeometry x="15" y="35" width="500" height="225" as="geometry" />
         </mxCell>
 
@@ -31,7 +31,7 @@
         <mxCell id="brand-mono-card" value="VARIANTE 2: UNA TINTA (MONOCROMÁTICA - 100% NEGRO)&#xa;Uso: Impresoras térmicas de acopio, sellos de sacos de fique, guías de despacho y fax" style="swimlane;startSize=25;fillColor=#FFFFFF;strokeColor=#0F172A;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#0F172A;" vertex="1" parent="box-brand">
           <mxGeometry x="595" y="45" width="530" height="275" as="geometry" />
         </mxCell>
-        <mxCell id="brand-mono-visual" value="[ ISOTIPO UNA TINTA: Alto Contraste Negro Puro ]&#xa;&#xa;AromaPacífico&#xa;FEDERACIÓN NACIONAL DE CAFETEROS · FNC 2026&#xa;&#xa;Tinta: Negro Solido 100% (#000000) sobre Blanco Puro (#FFFFFF)&#xa;Trazos calados: 4.5 pt de separacion minima para evitar sangrado de tinta termica&#xa;Relación de Contraste Tipográfico: 21.0:1 (Máximo Teórico WCAG)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontSize=12;align=center;fontColor=#000000;fontStyle=0;" vertex="1" parent="brand-mono-card">
+        <mxCell id="brand-mono-visual" value="[ ISOTIPO UNA TINTA: Alto Contraste Negro Puro ]&#xa;&#xa;AromaPacífico&#xa;FEDERACIÓN NACIONAL DE CAFETEROS · FNC 2026&#xa;&#xa;Tinta: Negro Solido 100% (#000000) sobre Blanco Puro (#FFFFFF)&#xa;Hendidura Térmica: Canal calado limpio de 5 px que no se empasta en 203 DPI&#xa;Relación de Contraste Tipográfico: 21.0:1 (Máximo Teórico WCAG)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontSize=12;align=center;fontColor=#000000;fontStyle=0;" vertex="1" parent="brand-mono-card">
           <mxGeometry x="15" y="35" width="500" height="225" as="geometry" />
         </mxCell>
 
@@ -39,7 +39,7 @@
         <mxCell id="brand-dark-card" value="VARIANTE 3: EN NEGATIVO (CANVAS OSCURO / MODO NOCHE)&#xa;Uso: Splash screens, turno nocturno de transporte y paneles en cabina de camion" style="swimlane;startSize=25;fillColor=#0F172A;strokeColor=#334155;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="box-brand">
           <mxGeometry x="1165" y="45" width="530" height="275" as="geometry" />
         </mxCell>
-        <mxCell id="brand-dark-visual" value="[ ISOTIPO NEGATIVO: Blanco Puro Calado ]&#xa;&#xa;AromaPacífico&#xa;FEDERACIÓN NACIONAL DE CAFETEROS · FNC 2026&#xa;&#xa;Fondo: Carbon Pizarra Profundo (#0F172A)&#xa;Elementos graficos y tipografia: Blanco Puro (#FFFFFF) con subtitulo en Slate (#94A3B8)&#xa;Relación de Contraste Tipográfico: 17.85:1 sobre fondo oscuro (Pasa AAA)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1E293B;strokeColor=#FFFFFF;strokeWidth=2;fontSize=12;align=center;fontColor=#FFFFFF;fontStyle=0;" vertex="1" parent="brand-dark-card">
+        <mxCell id="brand-dark-visual" value="[ ISOTIPO NEGATIVO: Blanco Puro Calado ]&#xa;&#xa;AromaPacífico&#xa;FEDERACIÓN NACIONAL DE CAFETEROS · FNC 2026&#xa;&#xa;Fondo: Carbon Pizarra Profundo (#0F172A)&#xa;Hendidura Nocturna: El fondo oscuro actúa como canal orgánico calado&#xa;Relación de Contraste Tipográfico: 17.85:1 sobre fondo oscuro (Pasa AAA)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1E293B;strokeColor=#FFFFFF;strokeWidth=2;fontSize=12;align=center;fontColor=#FFFFFF;fontStyle=0;" vertex="1" parent="brand-dark-card">
           <mxGeometry x="15" y="35" width="500" height="225" as="geometry" />
         </mxCell>
 
@@ -148,3 +148,4 @@
     </mxGraphModel>
   </diagram>
 </mxfile>
+

@@ -7,21 +7,18 @@
     <!-- Contenedor perimetral blanco -->
     <circle cx="45" cy="45" r="43" fill="#1E293B" stroke="#FFFFFF" stroke-width="2.5"/>
     
-    <!-- Lobo Izquierdo: Blanco -->
-    <path d="M 43,14 C 26,14 15,28 15,45 C 15,62 26,76 43,76 C 41,66 38,55 38,45 C 38,34 41,24 43,14 Z" 
-          fill="#FFFFFF"/>
-    
-    <!-- Lobo Derecho Superior: Blanco -->
-    <path d="M 47,14 C 54,23 58,33 58,43 C 58,45 58,47 58,49 C 68,46 75,37 75,28 C 75,19 63,14 47,14 Z" 
-          fill="#FFFFFF"/>
-
-    <!-- Lobo Derecho Inferior: Blanco -->
-    <path d="M 58,52 C 57,61 53,70 47,76 C 63,76 75,66 75,52 C 75,47 70,49 58,52 Z" 
-          fill="#FFFFFF"/>
-
-    <!-- Surco Central S-Curve: Calado en el color de fondo para mantener geometria -->
-    <path d="M 44,15 Q 48,32 39,45 Q 31,58 45,75" 
-          fill="none" stroke="#0F172A" stroke-width="4" stroke-linecap="round"/>
+    <!-- Geometria refinada del grano de cafe (fissura natural en espacio negativo) -->
+    <g transform="translate(45, 45) scale(0.88) translate(-50, -50)">
+      <!-- Lobo Izquierdo: Blanco Puro -->
+      <path d="M 47.5,14 C 29,14 17,29 17,50 C 17,71 29,86 47.5,86 C 42,72 43,60 46.5,50 C 50,40 51,28 47.5,14 Z" 
+            fill="#FFFFFF"/>
+      <!-- Lobo Derecho Superior: Blanco Puro -->
+      <path d="M 52.5,14 C 56,28 55,40 51.5,47 C 64,45 76,40 81,30 C 78,19 68,14 52.5,14 Z" 
+            fill="#FFFFFF"/>
+      <!-- Lobo Derecho Inferior: Blanco Puro -->
+      <path d="M 51.5,53 C 48,60 47,72 52.5,86 C 68,86 83,73 83,52 C 75,51 63,52 51.5,53 Z" 
+            fill="#FFFFFF"/>
+    </g>
   </g>
 
   <!-- LOGOTIPO / TIPOGRAFIA NEGATIVO (x=130) -->
