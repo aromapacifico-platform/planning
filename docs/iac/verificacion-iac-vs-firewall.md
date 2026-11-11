@@ -29,7 +29,7 @@ A continuación se presenta la arquitectura visual del módulo de seguridad, ilu
 La siguiente matriz detalla la correspondencia exacta, biunívoca y sin excepciones entre cada identificador permanente activo del catálogo de firewall de nube (`C01` a `C18`, `C20`), las invariantes de diseño (`C21` y `C22`), el estado formal de la regla retirada `C19`, su clave de contrato dentro de `module.security.rule_catalog`, su recurso contenedor o ID padre (`parent_id`) y los recursos HCL declarados en el archivo `main.tf` del módulo `modules/security`:
 
 | ID Catálogo | Contrato (`rule_catalog`) | Control | ID Padre (`parent_id`) | Origen Autorizado | Destino Autorizado | Protocolo y Puerto | Acción | Recurso Terraform HCL en `modules/security` |
-|---|---|---|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | **C01** | `sg_ingress["C01"]` | SG-IN | `aws_security_group.alb_query.id` | `0.0.0.0/0` (Internet) | `SG-ALB-CONSULTA` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_ingress_rule.c01` |
 | **C02** | `sg_egress["C02"]` | SG-OUT | `aws_security_group.alb_query.id` | `SG-ALB-CONSULTA` | `SG-CONSULTA` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_egress_rule.c02` |
 | **C03** | `sg_ingress["C03"]` | SG-IN | `aws_security_group.query.id` | `SG-ALB-CONSULTA` | `SG-CONSULTA` | TCP 443 (HTTPS) | Permitir | `aws_vpc_security_group_ingress_rule.c03` |
@@ -60,7 +60,7 @@ La siguiente matriz detalla la correspondencia exacta, biunívoca y sin excepcio
 Las subredes del entorno implementan un filtrado a nivel de capa de red (Capa 4 del modelo OSI) mediante dos Network ACLs dedicadas: una para las subredes privadas y otra para las subredes de consulta pública. Cada entrada documenta su contrato en `rule_catalog` y su recurso padre:
 
 | ID Regla | Contrato (`rule_catalog`) | Dirección | ID Padre (`parent_id`) | Prioridad | CIDR de Origen o Destino | Protocolo y Puerto | Acción | Recurso HCL en `modules/security` |
-|---|---|---|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | **N01** | `nacl_ingress["N01"]` | Ingress | `aws_network_acl.private.id` | 10 | `var.visitor_cidr` (`10.41.5.0/24`) | Todos los puertos | Denegar | `aws_network_acl.private` regla 10 |
 | **N02** | `nacl_ingress["N02"]` | Ingress | `aws_network_acl.private.id` | 100 | `var.authorized_private_cidrs` | TCP 443 (HTTPS) | Permitir | `aws_network_acl.private` regla 100 |
 | **N03** | `nacl_egress["N03"]` | Egress | `aws_network_acl.private.id` | 100 | `var.authorized_private_cidrs` | TCP 443 (HTTPS) | Permitir | `aws_network_acl.private` regla 100 |
@@ -100,7 +100,7 @@ resource "aws_kms_key" "this" {
 ### Tabla de Especificaciones de Llaves KMS
 
 | Clave del Recurso | Nombre Físico / Alias de la Llave | Tipo de Cifrado | Rotación Configurada | Protección de Ciclo de Vida | Cargas Específicas Protegidas |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | `data` | `alias/aromapacifico-dev-kms-data` | Simétrico AES-256-GCM | Anual automática (`enable_key_rotation = true`) | `prevent_destroy = true` | Tablas DynamoDB de telemetría de cultivo (NPK, pH, humedad), secado horario y libro mayor de sacos. |
 | `objects` | `alias/aromapacifico-dev-kms-objects` | Simétrico SSE-KMS | Anual automática (`enable_key_rotation = true`) | `prevent_destroy = true` | Bucket S3 de confirmación de foco, bitácoras de vuelo de drones (.bin) e imágenes procesadas por Rekognition. |
 | `logs` | `alias/aromapacifico-dev-kms-logs` | Simétrico AES-256 | Anual automática (`enable_key_rotation = true`) | `prevent_destroy = true` | Grupos de registro CloudWatch Logs, trazas de auditoría de CloudTrail, VPC Flow Logs y archivos de estado de Terraform. |
@@ -120,7 +120,7 @@ Para dar estricto cumplimiento al criterio de aceptación de la Historia de Usua
 La siguiente tabla consolida los privilegios otorgados en el código de infraestructura del módulo:
 
 | Rol IAM de Plataforma | Entidad de Confianza | Acciones Específicas Permitidas | Recursos Exactos Autorizados (ARN) | Salvaguarda de Mínimo Privilegio |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | **Ingesta de Telemetría** (`...-role-ingest`) | `iot.amazonaws.com` | `dynamodb:PutItem`, `dynamodb:UpdateItem`, `sqs:SendMessage`, `kms:Encrypt` | Tabla de telemetría, cola SQS de ingesta y llave KMS de datos | Sin permisos de lectura ni escaneo sobre la tabla; solo inserción de métricas agronómicas. |
 | **Función de Foco** (`...-role-focus-func`) | `lambda.amazonaws.com` | `s3:GetObject`, `rekognition:DetectLabels`, `dynamodb:PutItem`, `sqs:SendMessage`, `kms:Decrypt`, `logs:PutLogEvents` | Bucket de foco, colección Rekognition, tabla expedientes, cola DLQ y llave KMS objetos | Privilegio acotado al procesamiento visual; carece de permisos para autorizar órdenes de fumigación. |
 | **Entrega en Puerto** (`...-role-delivery`) | `lambda.amazonaws.com` / `apigateway.amazonaws.com` | `dynamodb:PutItem`, `dynamodb:UpdateItem`, `dynamodb:GetItem`, `kms:Encrypt`, `logs:PutLogEvents` | Tabla master de sacos y llave KMS de datos | Acceso circunscrito al registro de eventos de entrega sin desplegar infraestructura en Buenaventura. |
@@ -133,7 +133,7 @@ La siguiente tabla consolida los privilegios otorgados en el código de infraest
 El módulo `modules/security` ha sido auditado mediante el script automatizado de gobernanza del proyecto, validando el cumplimiento de las siguientes directrices:
 
 | Regla | Nombre de la Directriz | Mecanismo de Cumplimiento en el Código |
-|---|---|---|
+| --- | --- | --- |
 | **PC-IAC-001** | Estructura Obligatoria de Módulo | Módulo estructurado con los 10 archivos en raíz y los 7 archivos requeridos en el subdirectorio `sample/`. |
 | **PC-IAC-002** | Variables Obligatorias | Todas las variables declaran atributos `type`, `description` y bloques `validation` basados en expresiones regulares o funciones CIDR. |
 | **PC-IAC-003** | Nomenclatura Estándar | Identificadores en HCL bajo convención `snake_case` y nombres físicos construidos bajo el patrón `${client}-${project}-${environment}-${type}-${key}` con longitud menor a 28 caracteres. |
@@ -160,7 +160,7 @@ En cumplimiento con los mandatos de documentación de arquitectura, la configura
 ### 8.1 Comparativa FinOps: Retiro de Regla C19 y Resolver de Salida vs. Alternativas Evaluadas
 
 | Criterio de Decisión | Opción Adoptada: Retiro de C19 y Resolver de Salida (Decisión #31) | Alternativa 1 Descartada: Mantener C19 y Route 53 Outbound Resolver | Alternativa 2 Descartada: DNS Forwarder Dedicado en Instancia EC2 |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Costo Fijo Mensual | **$0,00 USD** | $182,50 USD / mes (2 ENIs a $0,125/hora) | ~$45,00 USD / mes (instancia t4g.small + EBS) |
 | Costo Evitado Cuantificado | **$182,50 USD / mes ($2.190 USD / año)** | $0,00 USD (Línea base no optimizada) | $137,50 USD / mes |
 | Justificación Técnica | La nube no requiere resolución inversa de nombres de hosts de acopios; la comunicación se efectúa mediante direccionamiento IP estático. | Sobrecosto ocioso sin justificación de tráfico real en el piloto de 200 fincas. | Introduce sobrecarga de parches, mantenimiento y puntos de falla adicionales en la VPC Hub. |
