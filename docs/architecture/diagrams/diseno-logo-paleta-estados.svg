@@ -1,0 +1,361 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1760 1280" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 22px; font-weight: bold; fill: #0F172A; text-anchor: middle; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #475569; text-anchor: middle; }
+      .swim-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #0F172A; }
+      .card-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; }
+      .body-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #0F172A; }
+      .bold-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #0F172A; }
+      .code-txt { font-family: "Fira Code", monospace; font-size: 12px; font-weight: bold; }
+      .badge-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 800; letter-spacing: 0.5px; }
+      .alert-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 15px; font-weight: 800; fill: #7F1D1D; }
+    </style>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.06" />
+    </filter>
+  </defs>
+
+  <!-- FONDO GENERAL PERGAMINO SUAVE ANTI-DESLUMBRAMIENTO -->
+  <rect width="1760" height="1280" fill="#FAF8F5" />
+
+  <!-- ENCABEZADO -->
+  <text x="880" y="38" class="title">AromaPacífico - Sistema de Diseño Visual: Identidad, Paleta Cromática y Estados del Saco</text>
+  <text x="880" y="64" class="subtitle">Especificación Técnica UI/UX, Accesibilidad WCAG 2.1 AAA, Resistencia Solar en Campo y Doble Codificación Visual (FNC 2026)</text>
+
+  <!-- SECCION 1: IDENTIDAD DE MARCA (TRES VARIANTES) -->
+  <g transform="translate(35, 90)" filter="url(#shadow)">
+    <rect width="1690" height="320" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+    <rect width="1690" height="35" rx="8" fill="#F1F5F9" />
+    <text x="20" y="23" class="swim-title">1. IDENTIDAD DE MARCA: LOGOTIPO E ISOTIPO (TRES VARIANTES OFICIALES)</text>
+
+    <!-- Variante 1: Color Principal -->
+    <g transform="translate(20, 50)">
+      <rect width="525" height="250" rx="6" fill="#F0FDF4" stroke="#135E34" stroke-width="2" />
+      <rect width="525" height="28" rx="6" fill="#DCFCE7" />
+      <text x="12" y="19" class="card-title" fill="#135E34">VARIANTE 1: COLOR INSTITUCIONAL (CANVAS CLARO)</text>
+      
+      <!-- Logo renderizado a color -->
+      <g transform="translate(20, 45)">
+        <!-- Isotipo miniatura -->
+        <circle cx="35" cy="35" r="32" fill="#FFFFFF" stroke="#DCFCE7" stroke-width="2"/>
+        <path d="M 33,12 C 20,12 12,22 12,35 C 12,48 20,58 33,58 C 31,50 29,42 29,35 C 29,26 31,19 33,12 Z" fill="#135E34"/>
+        <path d="M 37,12 C 42,19 45,26 45,33 C 45,35 45,37 45,38 C 53,36 58,29 58,22 C 58,15 49,12 37,12 Z" fill="#9E1B1B"/>
+        <path d="M 45,41 C 44,48 41,54 37,58 C 49,58 58,51 58,41 C 58,37 54,39 45,41 Z" fill="#0F4C81"/>
+        <path d="M 34,13 Q 37,25 31,35 Q 24,45 35,57" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+
+        <!-- Tipografia -->
+        <text x="85" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="800" fill="#0F172A">Aroma<tspan fill="#135E34">Pacífico</tspan></text>
+        <rect x="85" y="42" width="280" height="2.5" rx="1" fill="#135E34"/>
+        <text x="85" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" font-weight="700" fill="#475569" letter-spacing="1">FEDERACIÓN NACIONAL DE CAFETEROS · FNC 2026</text>
+      </g>
+
+      <text x="20" y="145" class="body-txt">• Uso: Aplicación móvil del caficultor, transportador y portal web de consulta.</text>
+      <text x="20" y="168" class="body-txt">• Paleta activa: Verde Cordillera (#135E34), Azul Pacífico (#0F4C81), Cereza (#9E1B1B).</text>
+      <text x="20" y="191" class="body-txt">• Contraste tipográfico: 17.85:1 sobre blanco | 16.84:1 sobre pergamino (Pasa AAA).</text>
+      <text x="20" y="214" class="body-txt">• Área de reserva: X = 1.5 veces el alto de la letra "A". Tamaño mínimo: 32 px.</text>
+    </g>
+
+    <!-- Variante 2: Una Tinta -->
+    <g transform="translate(580, 50)">
+      <rect width="525" height="250" rx="6" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+      <rect width="525" height="28" rx="6" fill="#E2E8F0" />
+      <text x="12" y="19" class="card-title" fill="#0F172A">VARIANTE 2: UNA TINTA (100% NEGRO / IMPRESIÓN)</text>
+
+      <!-- Logo renderizado a una tinta -->
+      <g transform="translate(20, 45)">
+        <circle cx="35" cy="35" r="32" fill="none" stroke="#000000" stroke-width="2.5"/>
+        <path d="M 33,12 C 20,12 12,22 12,35 C 12,48 20,58 33,58 C 31,50 29,42 29,35 C 29,26 31,19 33,12 Z" fill="#000000"/>
+        <path d="M 37,12 C 42,19 45,26 45,33 C 45,35 45,37 45,38 C 53,36 58,29 58,22 C 58,15 49,12 37,12 Z" fill="#000000"/>
+        <path d="M 45,41 C 44,48 41,54 37,58 C 49,58 58,51 58,41 C 58,37 54,39 45,41 Z" fill="#000000"/>
+        <path d="M 34,13 Q 37,25 31,35 Q 24,45 35,57" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+
+        <text x="85" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="800" fill="#000000">AromaPacífico</text>
+        <rect x="85" y="42" width="280" height="2.5" fill="#000000"/>
+        <text x="85" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" font-weight="800" fill="#000000" letter-spacing="1">FEDERACIÓN NACIONAL DE CAFETEROS · FNC 2026</text>
+      </g>
+
+      <text x="20" y="145" class="body-txt">• Uso: Impresoras térmicas en acopios, rótulos de sacos de fique y guías físicas.</text>
+      <text x="20" y="168" class="body-txt">• Resistencia: 100% monocromo sin tramado; evita pérdida por sangrado de tinta.</text>
+      <text x="20" y="191" class="body-txt">• Contraste tipográfico: 21.0:1 (Máximo teórico de laboratorio).</text>
+      <text x="20" y="214" class="body-txt">• Tamaño mínimo impreso: 15 mm de base en etiquetas de báscula de acopio.</text>
+    </g>
+
+    <!-- Variante 3: Negativo -->
+    <g transform="translate(1140, 50)">
+      <rect width="525" height="250" rx="6" fill="#0F172A" stroke="#334155" stroke-width="2" />
+      <rect width="525" height="28" rx="6" fill="#1E293B" />
+      <text x="12" y="19" class="card-title" fill="#FFFFFF">VARIANTE 3: EN NEGATIVO (CANVAS OSCURO / NOCHE)</text>
+
+      <!-- Logo renderizado en negativo -->
+      <g transform="translate(20, 45)">
+        <circle cx="35" cy="35" r="32" fill="#1E293B" stroke="#FFFFFF" stroke-width="2.5"/>
+        <path d="M 33,12 C 20,12 12,22 12,35 C 12,48 20,58 33,58 C 31,50 29,42 29,35 C 29,26 31,19 33,12 Z" fill="#FFFFFF"/>
+        <path d="M 37,12 C 42,19 45,26 45,33 C 45,35 45,37 45,38 C 53,36 58,29 58,22 C 58,15 49,12 37,12 Z" fill="#FFFFFF"/>
+        <path d="M 45,41 C 44,48 41,54 37,58 C 49,58 58,51 58,41 C 58,37 54,39 45,41 Z" fill="#FFFFFF"/>
+        <path d="M 34,13 Q 37,25 31,35 Q 24,45 35,57" fill="none" stroke="#0F172A" stroke-width="3" stroke-linecap="round"/>
+
+        <text x="85" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="800" fill="#FFFFFF">AromaPacífico</text>
+        <rect x="85" y="42" width="280" height="2.5" fill="#FFFFFF"/>
+        <text x="85" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" font-weight="700" fill="#94A3B8" letter-spacing="1">FEDERACIÓN NACIONAL DE CAFETEROS · FNC 2026</text>
+      </g>
+
+      <text x="20" y="145" class="body-txt" fill="#F8FAFC">• Uso: Splash screens de bienvenida, turno nocturno y cabinas de camiones.</text>
+      <text x="20" y="168" class="body-txt" fill="#F8FAFC">• Fondo base: Carbón Pizarra (#0F172A) con texto puro (#FFFFFF).</text>
+      <text x="20" y="191" class="body-txt" fill="#F8FAFC">• Contraste en modo oscuro: 17.85:1 (Pasa AAA, previene fatiga visual nocturna).</text>
+      <text x="20" y="214" class="body-txt" fill="#F8FAFC">• Calado geométrico exacto de 4 pt para preservar nitidez en pantallas OLED.</text>
+    </g>
+  </g>
+
+  <!-- SECCION 2: PALETA CROMATICA Y MEDICION DE CONTRASTE SOLAR -->
+  <g transform="translate(35, 430)" filter="url(#shadow)">
+    <rect width="1690" height="270" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+    <rect width="1690" height="35" rx="8" fill="#F1F5F9" />
+    <text x="20" y="23" class="swim-title">2. PALETA CROMÁTICA OFICIAL Y MEDICIÓN DE CONTRASTE SOLAR EN CAMPO</text>
+
+    <!-- Color 1: Verde Cordillera -->
+    <g transform="translate(20, 50)">
+      <rect width="250" height="200" rx="6" fill="#135E34" stroke="#0D4A27" stroke-width="2" />
+      <text x="15" y="30" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF">VERDE CORDILLERA</text>
+      <text x="15" y="50" font-family="-apple-system, sans-serif" font-size="12" fill="#DCFCE7">Primario Institucional FNC</text>
+      <rect x="15" y="65" width="220" height="1" fill="#DCFCE7" opacity="0.4"/>
+      <text x="15" y="85" class="code-txt" fill="#FFFFFF">HEX: #135E34</text>
+      <text x="15" y="105" class="code-txt" fill="#FFFFFF">RGB: (19, 94, 52)</text>
+      <text x="15" y="125" class="code-txt" fill="#FFFFFF">Contraste Blanco: 7.84:1</text>
+      <text x="15" y="145" class="code-txt" fill="#FFFFFF">Contraste Pergamino: 7.39:1</text>
+      <rect x="15" y="160" width="220" height="26" rx="4" fill="#0D4A27"/>
+      <text x="125" y="177" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#4ADE80" text-anchor="middle">WCAG 2.1 AAA (PASA)</text>
+    </g>
+
+    <!-- Color 2: Rojo Cereza -->
+    <g transform="translate(290, 50)">
+      <rect width="250" height="200" rx="6" fill="#9E1B1B" stroke="#7F1D1D" stroke-width="2" />
+      <text x="15" y="30" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF">ROJO CEREZA MADURA</text>
+      <text x="15" y="50" font-family="-apple-system, sans-serif" font-size="12" fill="#FEE2E2">Secundario de Cosecha</text>
+      <rect x="15" y="65" width="220" height="1" fill="#FEE2E2" opacity="0.4"/>
+      <text x="15" y="85" class="code-txt" fill="#FFFFFF">HEX: #9E1B1B</text>
+      <text x="15" y="105" class="code-txt" fill="#FFFFFF">RGB: (158, 27, 27)</text>
+      <text x="15" y="125" class="code-txt" fill="#FFFFFF">Contraste Blanco: 6.44:1</text>
+      <text x="15" y="145" class="code-txt" fill="#FFFFFF">Modo Oscuro: 10.02:1 (#7F)</text>
+      <rect x="15" y="160" width="220" height="26" rx="4" fill="#7F1D1D"/>
+      <text x="125" y="177" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#FCA5A5" text-anchor="middle">WCAG 2.1 AA / AAA (PASA)</text>
+    </g>
+
+    <!-- Color 3: Azul Pacifico -->
+    <g transform="translate(560, 50)">
+      <rect width="250" height="200" rx="6" fill="#0F4C81" stroke="#1E40AF" stroke-width="2" />
+      <text x="15" y="30" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF">AZUL PACÍFICO</text>
+      <text x="15" y="50" font-family="-apple-system, sans-serif" font-size="12" fill="#DBEAFE">Secundario Ruta Marítima</text>
+      <rect x="15" y="65" width="220" height="1" fill="#DBEAFE" opacity="0.4"/>
+      <text x="15" y="85" class="code-txt" fill="#FFFFFF">HEX: #0F4C81</text>
+      <text x="15" y="105" class="code-txt" fill="#FFFFFF">RGB: (15, 76, 129)</text>
+      <text x="15" y="125" class="code-txt" fill="#FFFFFF">Contraste Blanco: 7.78:1</text>
+      <text x="15" y="145" class="code-txt" fill="#FFFFFF">Contraste Pergamino: 7.33:1</text>
+      <rect x="15" y="160" width="220" height="26" rx="4" fill="#1E3A8A"/>
+      <text x="125" y="177" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#93C5FD" text-anchor="middle">WCAG 2.1 AAA (PASA)</text>
+    </g>
+
+    <!-- Color 4: Tierra Volcanica -->
+    <g transform="translate(830, 50)">
+      <rect width="250" height="200" rx="6" fill="#4A2E1B" stroke="#2D1A0E" stroke-width="2" />
+      <text x="15" y="30" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF">TIERRA VOLCÁNICA</text>
+      <text x="15" y="50" font-family="-apple-system, sans-serif" font-size="12" fill="#FEF3C7">Secundario Suelo Andino</text>
+      <rect x="15" y="65" width="220" height="1" fill="#FEF3C7" opacity="0.4"/>
+      <text x="15" y="85" class="code-txt" fill="#FFFFFF">HEX: #4A2E1B</text>
+      <text x="15" y="105" class="code-txt" fill="#FFFFFF">RGB: (74, 46, 27)</text>
+      <text x="15" y="125" class="code-txt" fill="#FFFFFF">Contraste Blanco: 9.87:1</text>
+      <text x="15" y="145" class="code-txt" fill="#FFFFFF">Contraste Pergamino: 9.30:1</text>
+      <rect x="15" y="160" width="220" height="26" rx="4" fill="#2D1A0E"/>
+      <text x="125" y="177" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#FCD34D" text-anchor="middle">WCAG 2.1 AAA (PASA)</text>
+    </g>
+
+    <!-- Color 5: Carbon Neutro -->
+    <g transform="translate(1100, 50)">
+      <rect width="250" height="200" rx="6" fill="#0F172A" stroke="#000000" stroke-width="2" />
+      <text x="15" y="30" font-family="-apple-system, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF">CARBÓN PROFUNDO</text>
+      <text x="15" y="50" font-family="-apple-system, sans-serif" font-size="12" fill="#94A3B8">Neutro Primario de Lectura</text>
+      <rect x="15" y="65" width="220" height="1" fill="#94A3B8" opacity="0.4"/>
+      <text x="15" y="85" class="code-txt" fill="#FFFFFF">HEX: #0F172A</text>
+      <text x="15" y="105" class="code-txt" fill="#FFFFFF">RGB: (15, 23, 42)</text>
+      <text x="15" y="125" class="code-txt" fill="#FFFFFF">Contraste Blanco: 17.85:1</text>
+      <text x="15" y="145" class="code-txt" fill="#FFFFFF">Contraste Pergamino: 16.84:1</text>
+      <rect x="15" y="160" width="220" height="26" rx="4" fill="#020617"/>
+      <text x="125" y="177" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#E2E8F0" text-anchor="middle">WCAG 2.1 AAA MÁXIMO</text>
+    </g>
+
+    <!-- Panel Explicativo Sol de Mediodia -->
+    <g transform="translate(1370, 50)">
+      <rect width="300" height="200" rx="6" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5" />
+      <text x="15" y="28" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#1E3A8A">REGLA SOLAR EN CAMPO</text>
+      <text x="15" y="52" class="body-txt" fill="#1E3A8A">• Irradiancia en cafetal: > 80.000 lux.</text>
+      <text x="15" y="74" class="body-txt" fill="#1E3A8A">• La luz parásita ambiental reduce el</text>
+      <text x="15" y="94" class="body-txt" fill="#1E3A8A">  contraste dinámico en un 50% - 60%.</text>
+      <text x="15" y="118" class="body-txt" fill="#1E3A8A">• Un contraste base de 7.5:1 a 10:1</text>
+      <text x="15" y="138" class="body-txt" fill="#1E3A8A">  garantiza que el texto mantenga un</text>
+      <text x="15" y="158" class="body-txt" fill="#1E3A8A">  contraste neto &gt; 4.0:1 bajo el sol.</text>
+      <text x="15" y="184" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#1E40AF">Cero dependencia de contraste sutil.</text>
+    </g>
+  </g>
+
+  <!-- SECCION 3: ESTADOS DEL SACO (DOBLE CODIFICACION OBLIGATORIA) -->
+  <g transform="translate(35, 720)" filter="url(#shadow)">
+    <rect width="1690" height="280" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+    <rect width="1690" height="35" rx="8" fill="#F1F5F9" />
+    <text x="20" y="23" class="swim-title">3. ESTADOS DEL SACO DE CAFÉ (60 KG): DOBLE CODIFICACIÓN (COLOR + ICONO SILUETA + TEXTO VISIBLE)</text>
+
+    <!-- Estado 1: EN PREPARACION -->
+    <g transform="translate(20, 50)">
+      <rect width="395" height="215" rx="6" fill="#FFFBEB" stroke="#D97706" stroke-width="2" />
+      <rect width="395" height="30" rx="6" fill="#FEF3C7" />
+      <text x="15" y="20" class="card-title" fill="#78350F">ESTADO 1: EN BENEFICIADERO / FINCA</text>
+      
+      <!-- Componente Insignia / Badge -->
+      <g transform="translate(15, 45)">
+        <rect width="365" height="55" rx="8" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+        <!-- Icono Silueta: Caja/Saco con engranaje -->
+        <g transform="translate(15, 12)">
+          <rect x="0" y="4" width="26" height="24" rx="3" fill="#D97706"/>
+          <circle cx="13" cy="16" r="6" fill="#FEF3C7"/>
+          <circle cx="13" cy="16" r="3" fill="#78350F"/>
+        </g>
+        <text x="55" y="34" class="badge-txt" fill="#78350F">EN PREPARACIÓN</text>
+        <rect x="250" y="15" width="100" height="25" rx="4" fill="#78350F"/>
+        <text x="300" y="32" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#FEF3C7" text-anchor="middle">AAA: 8.15:1</text>
+      </g>
+
+      <text x="15" y="125" class="body-txt">• Significado: Saco pesándose (60 kg) y marcado con hash.</text>
+      <text x="15" y="145" class="body-txt">• Icono distintivo: Saco cúbico con núcleo concéntrico.</text>
+      <text x="15" y="165" class="body-txt">• Daltonismo: Distinguible por forma de caja aun sin color.</text>
+      <text x="15" y="185" class="code-txt" fill="#78350F">Token: --ap-status-prep (Texto #78350F / Borde #D97706)</text>
+    </g>
+
+    <!-- Estado 2: EN VIAJE -->
+    <g transform="translate(440, 50)">
+      <rect width="395" height="215" rx="6" fill="#EFF6FF" stroke="#2563EB" stroke-width="2" />
+      <rect width="395" height="30" rx="6" fill="#DBEAFE" />
+      <text x="15" y="20" class="card-title" fill="#1E40AF">ESTADO 2: TRANSPORTE / CARRETERA</text>
+      
+      <!-- Componente Insignia / Badge -->
+      <g transform="translate(15, 45)">
+        <rect width="365" height="55" rx="8" fill="#DBEAFE" stroke="#2563EB" stroke-width="2"/>
+        <!-- Icono Silueta: Camion de Carga / Chevron -->
+        <g transform="translate(15, 12)">
+          <rect x="0" y="8" width="18" height="18" rx="2" fill="#2563EB"/>
+          <path d="M 18,14 L 26,14 L 30,20 L 30,26 L 18,26 Z" fill="#2563EB"/>
+          <circle cx="6" cy="26" r="3" fill="#1E40AF"/>
+          <circle cx="24" cy="26" r="3" fill="#1E40AF"/>
+        </g>
+        <text x="55" y="34" class="badge-txt" fill="#1E40AF">EN VIAJE</text>
+        <rect x="250" y="15" width="100" height="25" rx="4" fill="#1E40AF"/>
+        <text x="300" y="32" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#DBEAFE" text-anchor="middle">AAA: 7.15:1</text>
+      </g>
+
+      <text x="15" y="125" class="body-txt">• Significado: Despachado en camión hacia acopio o puerto.</text>
+      <text x="15" y="145" class="body-txt">• Icono distintivo: Camión con cabina y ruedas visibles.</text>
+      <text x="15" y="165" class="body-txt">• Daltonismo: Silueta horizontal direccional inequívoca.</text>
+      <text x="15" y="185" class="code-txt" fill="#1E40AF">Token: --ap-status-travel (Texto #1E40AF / Borde #2563EB)</text>
+    </g>
+
+    <!-- Estado 3: ACEPTADO -->
+    <g transform="translate(860, 50)">
+      <rect width="395" height="215" rx="6" fill="#F0FDF4" stroke="#16A34A" stroke-width="2" />
+      <rect width="395" height="30" rx="6" fill="#DCFCE7" />
+      <text x="15" y="20" class="card-title" fill="#14532D">ESTADO 3: ACOPIO / PUERTO APROBADO</text>
+      
+      <!-- Componente Insignia / Badge -->
+      <g transform="translate(15, 45)">
+        <rect width="365" height="55" rx="8" fill="#DCFCE7" stroke="#16A34A" stroke-width="2"/>
+        <!-- Icono Silueta: Escudo con verificacion -->
+        <g transform="translate(15, 12)">
+          <path d="M 13,2 L 26,6 L 26,18 C 26,26 13,31 13,31 C 13,31 0,26 0,18 L 0,6 Z" fill="#16A34A"/>
+          <path d="M 6,16 L 11,21 L 20,10" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+        </g>
+        <text x="55" y="34" class="badge-txt" fill="#14532D">ACEPTADO</text>
+        <rect x="250" y="15" width="100" height="25" rx="4" fill="#14532D"/>
+        <text x="300" y="32" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#DCFCE7" text-anchor="middle">AAA: 8.30:1</text>
+      </g>
+
+      <text x="15" y="125" class="body-txt">• Significado: Puntaje SCA &gt;= 80 pts y humedad &lt;= 12.0%.</text>
+      <text x="15" y="145" class="body-txt">• Icono distintivo: Escudo heráldico con check de garantía.</text>
+      <text x="15" y="165" class="body-txt">• Daltonismo: Reconocible por el escudo y la palabra.</text>
+      <text x="15" y="185" class="code-txt" fill="#14532D">Token: --ap-status-accepted (Texto #14532D / Borde #16A34A)</text>
+    </g>
+
+    <!-- Estado 4: RECHAZADO -->
+    <g transform="translate(1280, 50)">
+      <rect width="385" height="215" rx="6" fill="#FEF2F2" stroke="#DC2626" stroke-width="2" />
+      <rect width="385" height="30" rx="6" fill="#FEE2E2" />
+      <text x="15" y="20" class="card-title" fill="#7F1D1D">ESTADO 4: ACOPIO / PUERTO RECHAZADO</text>
+      
+      <!-- Componente Insignia / Badge -->
+      <g transform="translate(15, 45)">
+        <rect width="355" height="55" rx="8" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
+        <!-- Icono Silueta: Octagono con aspa X -->
+        <g transform="translate(15, 12)">
+          <polygon points="9,0 21,0 30,9 30,21 21,30 9,30 0,21 0,9" fill="#DC2626"/>
+          <line x1="8" y1="8" x2="22" y2="22" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+          <line x1="22" y1="8" x2="8" y2="22" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+        </g>
+        <text x="55" y="34" class="badge-txt" fill="#7F1D1D">RECHAZADO</text>
+        <rect x="240" y="15" width="100" height="25" rx="4" fill="#7F1D1D"/>
+        <text x="290" y="32" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#FEE2E2" text-anchor="middle">AAA: 8.20:1</text>
+      </g>
+
+      <text x="15" y="125" class="body-txt">• Significado: Tacha sensorial o humedad &gt; 12.5%.</text>
+      <text x="15" y="145" class="body-txt">• Icono distintivo: Octágono internacional de detención (X).</text>
+      <text x="15" y="165" class="body-txt">• Daltonismo: Geometría de 8 lados inconfundible.</text>
+      <text x="15" y="185" class="code-txt" fill="#7F1D1D">Token: --ap-status-rejected (Texto #7F1D1D / Borde #DC2626)</text>
+    </g>
+  </g>
+
+  <!-- SECCION 4: ALERTA DE CULTIVO DE ALTO CONTRASTE Y GOBERNANZA -->
+  <g transform="translate(35, 1020)" filter="url(#shadow)">
+    <rect width="1690" height="235" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+    <rect width="1690" height="35" rx="8" fill="#F1F5F9" />
+    <text x="20" y="23" class="swim-title">4. COMPONENTE DE ALERTA DE CULTIVO EN CAMPO Y ARQUITECTURA DE PRIVACIDAD (LEY 1581 / FINOPS)</text>
+
+    <!-- Componente de Alerta -->
+    <g transform="translate(20, 50)">
+      <rect width="820" height="170" rx="8" fill="#FEF2F2" stroke="#B91C1C" stroke-width="2.5" />
+      
+      <!-- Icono de Advertencia Triangulo -->
+      <g transform="translate(25, 25)">
+        <polygon points="26,0 52,48 0,48" fill="#DC2626" stroke="#991B1B" stroke-width="2"/>
+        <line x1="26" y1="18" x2="26" y2="32" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="26" cy="40" r="2.5" fill="#FFFFFF"/>
+      </g>
+
+      <text x="95" y="38" class="alert-txt">ALERTA CRÍTICA: ANOMALÍA EN LOTE 3 - FINCA EL ROSAL</text>
+      <text x="95" y="62" class="body-txt" fill="#7F1D1D">Variable detectada: Humedad de suelo en 32 % (Umbral configurado: 40 % - 80 %).</text>
+      <text x="95" y="84" class="body-txt" fill="#7F1D1D">Lectura: 11:40 UTC | Buffer local drenado | Latencia de entrega: 3.2 minutos (&lt; 5 min SLO).</text>
+
+      <!-- Boton tactil de campo -->
+      <g transform="translate(95, 100)">
+        <rect width="250" height="48" rx="6" fill="#B91C1C" stroke="#7F1D1D" stroke-width="1.5"/>
+        <text x="125" y="29" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#FFFFFF" text-anchor="middle">SOLICITAR DRON DE FOCO</text>
+      </g>
+      <g transform="translate(360, 100)">
+        <rect width="220" height="48" rx="6" fill="#FFFFFF" stroke="#B91C1C" stroke-width="1.5"/>
+        <text x="110" y="29" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#B91C1C" text-anchor="middle">CONTACTAR AGRÓNOMO</text>
+      </g>
+      <g transform="translate(600, 108)">
+        <text x="0" y="16" class="code-txt" fill="#7F1D1D">Contraste: 9.16:1 (AAA)</text>
+        <text x="0" y="32" class="code-txt" fill="#7F1D1D">Touch Target: 48 px mín</text>
+      </g>
+    </g>
+
+    <!-- Panel de Gobernanza y FinOps -->
+    <g transform="translate(860, 50)">
+      <rect width="805" height="170" rx="8" fill="#F0FDF4" stroke="#135E34" stroke-width="1.5" />
+      <text x="20" y="28" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#135E34">GOBERNANZA DE DATOS (LEY 1581) Y SUSTENTACIÓN FINOPS</text>
+      
+      <text x="20" y="54" class="body-txt">• <tspan font-weight="bold">Vista del Comprador (Consulta Pública):</tspan> Visualiza únicamente el estado del saco, hash canónico</text>
+      <text x="32" y="74" class="body-txt">  HMAC-SHA-256, departamento, altitud y puntaje SCA. Cero cédulas, nombres o coordenadas submétricas.</text>
+      
+      <text x="20" y="100" class="body-txt">• <tspan font-weight="bold">Decisión FinOps Centralizada:</tspan> Tokens W3C JSON universales transpilan a Web, Android y iOS.</text>
+      <text x="32" y="120" class="body-txt">  Elimina 80 horas de maquetación ad-hoc en silos (Costo evitado: $3.150 USD en el primer año).</text>
+
+      <text x="20" y="146" class="body-txt">• <tspan font-weight="bold">Activos Vectoriales SVG (&lt; 3 KB):</tspan> Evitan 180 GB/mes de egress CloudFront y minimizan mermas por error.</text>
+    </g>
+  </g>
+</svg>

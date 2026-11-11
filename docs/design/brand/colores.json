@@ -1,0 +1,119 @@
+{
+  "metadatos": {
+    "sistema": "Paleta Cromatica Oficial AromaPacífico",
+    "version": "1.0.0",
+    "fecha": "2026-11-11",
+    "norma_accesibilidad": "WCAG 2.1 Nivel AAA / APCA W3C Silver Draft",
+    "entorno_operativo": "Luz solar directa ecuatorial (>80.000 lux), Cauca, Huila y Tolima"
+  },
+  "colores_principales": [
+    {
+      "nombre": "Verde Cordillera (Primario)",
+      "token": "--color-primario-base",
+      "hex": "#135E34",
+      "rgb": "rgb(19, 94, 52)",
+      "hsl": "hsl(146, 66%, 22%)",
+      "rol": "Color institucional primario. Identidad de marca, encabezados y botones de accion principal.",
+      "contraste_fondo_blanco": "7.84:1 (Pasa AAA)",
+      "contraste_fondo_pergamino": "7.39:1 (Pasa AAA)",
+      "apca_lc_blanco": "-88.4 (Nivel 4 - Todo tipo de texto)",
+      "uso_en_campo": "Garantiza lectura sin fatiga ocular bajo cielo despejado."
+    },
+    {
+      "nombre": "Verde Acopio Profundo (Primario Oscuro)",
+      "token": "--color-primario-oscuro",
+      "hex": "#0D4A27",
+      "rgb": "rgb(13, 74, 39)",
+      "hsl": "hsl(146, 70%, 17%)",
+      "rol": "Texto de alta jerarquia, bordes de elementos activos y estados en alto brillo.",
+      "contraste_fondo_blanco": "10.37:1 (Pasa AAA)",
+      "contraste_fondo_pergamino": "9.78:1 (Pasa AAA)",
+      "apca_lc_blanco": "-98.1 (Nivel 4 - Excelente legibilidad)",
+      "uso_en_campo": "Ideal para telefonos de gama baja con pantallas de bajo brillo (300 nits)."
+    },
+    {
+      "nombre": "Rojo Cereza Madura (Secundario)",
+      "token": "--color-secundario-cereza",
+      "hex": "#9E1B1B",
+      "rgb": "rgb(158, 27, 27)",
+      "hsl": "hsl(0, 71%, 36%)",
+      "rol": "Color secundario de identidad, alertas de atencion y madurez del grano.",
+      "contraste_fondo_blanco": "6.44:1 (Pasa AA normal, Pasa AAA texto grande)",
+      "contraste_fondo_pergamino": "6.07:1 (Pasa AA normal, Pasa AAA texto grande)",
+      "apca_lc_blanco": "-79.2 (Nivel 3 - Titulos y texto destacado)",
+      "uso_en_campo": "Diferenciador semantico calido frente a la dominancia del verde rural."
+    },
+    {
+      "nombre": "Azul Pacifico (Secundario)",
+      "token": "--color-secundario-pacifico",
+      "hex": "#0F4C81",
+      "rgb": "rgb(15, 76, 129)",
+      "hsl": "hsl(208, 79%, 28%)",
+      "rol": "Color de ruta de exportacion marítima y monitoreo de transporte en carretera.",
+      "contraste_fondo_blanco": "7.78:1 (Pasa AAA)",
+      "contraste_fondo_pergamino": "7.33:1 (Pasa AAA)",
+      "apca_lc_blanco": "-88.1 (Nivel 4 - Todo tipo de texto)",
+      "uso_en_campo": "Asociacion directa con la salida de carga hacia el puerto de Buenaventura."
+    },
+    {
+      "nombre": "Tierra Volcanica (Secundario)",
+      "token": "--color-secundario-tierra",
+      "hex": "#4A2E1B",
+      "rgb": "rgb(74, 46, 27)",
+      "hsl": "hsl(24, 47%, 20%)",
+      "rol": "Suelos andinos, metadatos de beneficiadero y delimitacion de lotes.",
+      "contraste_fondo_blanco": "9.87:1 (Pasa AAA)",
+      "contraste_fondo_pergamino": "9.30:1 (Pasa AAA)",
+      "apca_lc_blanco": "-95.7 (Nivel 4 - Todo tipo de texto)",
+      "uso_en_campo": "Representacion de suelo y secado en patio."
+    }
+  ],
+  "colores_neutros": [
+    {
+      "nombre": "Carbon Profundo (Slate 900)",
+      "token": "--color-neutro-carbon",
+      "hex": "#0F172A",
+      "rgb": "rgb(15, 23, 42)",
+      "rol": "Texto principal del sistema. Lectura obligatoria de identificadores y pesajes.",
+      "contraste_fondo_blanco": "17.85:1 (Pasa AAA maximo)",
+      "contraste_fondo_pergamino": "16.84:1 (Pasa AAA maximo)"
+    },
+    {
+      "nombre": "Gris Pizarra (Slate 700)",
+      "token": "--color-neutro-pizarra",
+      "hex": "#334155",
+      "rgb": "rgb(51, 65, 85)",
+      "rol": "Texto secundario, etiquetas de campo y unidades de medida.",
+      "contraste_fondo_blanco": "9.43:1 (Pasa AAA)"
+    },
+    {
+      "nombre": "Gris Borde (Slate 300)",
+      "token": "--color-neutro-borde",
+      "hex": "#CBD5E1",
+      "rgb": "rgb(203, 213, 225)",
+      "rol": "Lineas divisorias, bordes de tablas y separadores estructurales.",
+      "contraste_fondo_blanco": "1.34:1 (Elemento no textual de contorno)"
+    },
+    {
+      "nombre": "Gris Niebla Andina (Slate 100)",
+      "token": "--color-neutro-niebla",
+      "hex": "#F1F5F9",
+      "rgb": "rgb(241, 245, 249)",
+      "rol": "Fondos de campos inactivos, filas alternas de tablas e indicadores deshabilitados."
+    },
+    {
+      "nombre": "Blanco Pergamino (Canvas)",
+      "token": "--color-neutro-pergamino",
+      "hex": "#FAF8F5",
+      "rgb": "rgb(250, 248, 245)",
+      "rol": "Fondo general de pantallas de aplicacion. Mitiga el encandilamiento solar frente a blanco puro."
+    },
+    {
+      "nombre": "Blanco Puro",
+      "token": "--color-neutro-blanco",
+      "hex": "#FFFFFF",
+      "rgb": "rgb(255, 255, 255)",
+      "rol": "Tarjetas elevadas, modales y botones de contraste invertido."
+    }
+  ]
+}

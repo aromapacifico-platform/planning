@@ -1,0 +1,134 @@
+{
+  "metadatos": {
+    "modulo": "Estados del Saco y Alerta de Cultivo",
+    "principio_rector": "Doble codificacion obligatoria (WCAG 2.1 Criterio 1.4.1 Uso del Color)",
+    "meta_ergonomica": "Reconocimiento visual inmediato (<200 ms) en pantalla bajo sol intenso",
+    "invariante_soberania": "La consulta publica muestra estado y hash anonimo; nunca expone cedulas ni coordenadas privadas"
+  },
+  "estados_saco": [
+    {
+      "estado_id": "EN_PREPARACION",
+      "etiqueta_espanol": "EN PREPARACIÓN",
+      "etapa_cadena": "Beneficiadero / Finca Cafetera",
+      "significado": "Saco de 60 kg en proceso de secado, pesaje y marcado con código único HMAC-SHA-256.",
+      "tokens": {
+        "color_texto": "#78350F",
+        "color_fondo": "#FEF3C7",
+        "color_borde": "#D97706",
+        "color_icono": "#B45309"
+      },
+      "metricas_contraste": {
+        "texto_sobre_fondo_badge": "8.15:1 (WCAG AAA)",
+        "texto_sobre_blanco_general": "9.07:1 (WCAG AAA)",
+        "borde_indicador_grafico": "3.24:1 (Cumple WCAG 2.1 AA componentes interfaz)"
+      },
+      "doble_codificacion": {
+        "forma_icono": "Caja / Saco con engranaje de preparacion",
+        "silueta_geometrica": "Rombo perimetral o rectangulo con esquinas redondeadas (8px)",
+        "texto_visible_obligatorio": true,
+        "aria_label": "Estado del saco: En preparación en beneficiadero"
+      },
+      "resistencia_solar": "El tono ambar profundo (#78350F) mantiene contraste superior a 5.0:1 aun bajo lavado luminico ambiental de 80.000 lux."
+    },
+    {
+      "estado_id": "EN_VIAJE",
+      "etiqueta_espanol": "EN VIAJE",
+      "etapa_cadena": "Transporte Terrestre Rural / Carretera Primaria",
+      "significado": "Saco despachado con transportador en ruta hacia centro de acopio o hacia Buenaventura.",
+      "tokens": {
+        "color_texto": "#1E40AF",
+        "color_fondo": "#DBEAFE",
+        "color_borde": "#2563EB",
+        "color_icono": "#1D4ED8"
+      },
+      "metricas_contraste": {
+        "texto_sobre_fondo_badge": "7.15:1 (WCAG AAA)",
+        "texto_sobre_blanco_general": "8.72:1 (WCAG AAA)",
+        "borde_indicador_grafico": "3.88:1 (Cumple WCAG 2.1 AA componentes interfaz)"
+      },
+      "doble_codificacion": {
+        "forma_icono": "Camion de carga o flecha direccional derecha con estelas de movimiento",
+        "silueta_geometrica": "Cilindro horizontal o chevron orientado",
+        "texto_visible_obligatorio": true,
+        "aria_label": "Estado del saco: En viaje con transportador"
+      },
+      "resistencia_solar": "El azul cobalto profundo (#1E40AF) no se confunde con el follaje verde de la carretera ni se satura bajo luz solar cenital."
+    },
+    {
+      "estado_id": "ACEPTADO",
+      "etiqueta_espanol": "ACEPTADO",
+      "etapa_cadena": "Centro de Acopio / Puerto de Buenaventura",
+      "significado": "Saco recibido satisfactoriamente tras control de humedad (<12%) y prueba de calidad sensorial SCA.",
+      "tokens": {
+        "color_texto": "#14532D",
+        "color_fondo": "#DCFCE7",
+        "color_borde": "#16A34A",
+        "color_icono": "#15803D"
+      },
+      "metricas_contraste": {
+        "texto_sobre_fondo_badge": "8.30:1 (WCAG AAA)",
+        "texto_sobre_blanco_general": "9.11:1 (WCAG AAA)",
+        "borde_indicador_grafico": "3.31:1 (Cumple WCAG 2.1 AA componentes interfaz)"
+      },
+      "doble_codificacion": {
+        "forma_icono": "Escudo de garantia con marca de verificacion (Checkmark)",
+        "silueta_geometrica": "Escudo o circulo regular continuo",
+        "texto_visible_obligatorio": true,
+        "aria_label": "Estado del saco: Aceptado con estandar de calidad FNC"
+      },
+      "resistencia_solar": "Verde esmeralda forestal (#14532D) de alta densidad de pigmento que evita ser lavado por reflejos en pantallas LCD."
+    },
+    {
+      "estado_id": "RECHAZADO",
+      "etiqueta_espanol": "RECHAZADO",
+      "etapa_cadena": "Centro de Acopio / Inspeccion Portuaria",
+      "significado": "Saco con tacha, exceso de humedad (>12.5%) o dano fisico. No admitido en lote de exportacion.",
+      "tokens": {
+        "color_texto": "#7F1D1D",
+        "color_fondo": "#FEE2E2",
+        "color_borde": "#DC2626",
+        "color_icono": "#B91C1C"
+      },
+      "metricas_contraste": {
+        "texto_sobre_fondo_badge": "8.20:1 (WCAG AAA)",
+        "texto_sobre_blanco_general": "10.02:1 (WCAG AAA)",
+        "borde_indicador_grafico": "4.26:1 (Cumple WCAG 2.1 AA componentes interfaz)"
+      },
+      "doble_codificacion": {
+        "forma_icono": "Octagono de advertencia con aspa (X) interna",
+        "silueta_geometrica": "Octagono regular (forma internacional de detencion)",
+        "texto_visible_obligatorio": true,
+        "aria_label": "Estado del saco: Rechazado por calidad o defecto"
+      },
+      "resistencia_solar": "El rojo carmesi profundo (#7F1D1D) destaca de manera preatentiva sobre cualquier fondo ambiental en menos de 100 ms."
+    }
+  ],
+  "alerta_cultivo": {
+    "alerta_id": "ALERTA_CULTIVO_FOCO",
+    "etiqueta_espanol": "ALERTA DE CULTIVO",
+    "subtitulo": "Lectura fuera de rango / Foco fitosanitario detectado",
+    "disparador": "Telemetria fuera de umbral (pH < 4.5 o > 6.0, humedad suelo anomala o deteccion de broca/roya por dron)",
+    "tokens": {
+      "color_texto": "#7F1D1D",
+      "color_fondo": "#FEF2F2",
+      "color_borde": "#B91C1C",
+      "color_icono": "#DC2626",
+      "grosor_borde": "2.5px solid",
+      "sombra_resalte": "0 4px 6px -1px rgba(185, 28, 28, 0.2)"
+    },
+    "metricas_contraste": {
+      "texto_sobre_fondo": "9.16:1 (WCAG AAA maximo)",
+      "borde_sobre_pantalla": "4.82:1 (WCAG AA componentes graficos)",
+      "icono_sobre_fondo": "4.15:1"
+    },
+    "doble_codificacion": {
+      "forma_icono": "Triangulo de advertencia equilatero con signo de exclamacion en negrita",
+      "patron_visual": "Borde grueso continuo de 2.5px en rojo cereza vibrante",
+      "texto_visible_obligatorio": true,
+      "accion_inmediata": "Boton de llamada al agronomico o solicitud de dron de confirmacion",
+      "aria_live": "assertive",
+      "aria_label": "Alerta crítica de cultivo: Foco fitosanitario detectado en lote"
+    },
+    "resistencia_solar": "Disenada especificamente para avisar al caficultor que camina por el cafetal bajo luz solar plena, complementada con patron de vibracion haptica en dispositivo movil."
+  }
+}
