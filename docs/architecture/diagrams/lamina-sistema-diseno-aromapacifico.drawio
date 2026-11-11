@@ -1,0 +1,248 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="Electron" compressed="false" version="24.7.5">
+  <diagram id="AP-LAMINA-01" name="Lamina-Sistema-Diseno-AromaPacifico">
+    <mxGraphModel dx="2000" dy="1500" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2400" pageHeight="1600" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="201" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FAF8F5;strokeColor=none;" parent="1" vertex="1">
+          <mxGeometry x="0" y="0" width="2400" height="1600" as="geometry" />
+        </mxCell>
+        <mxCell id="202" value="AromaPacifico - Lamina Maestra de Arquitectura Visual del Sistema de Diseno (FNC 2026)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=26;fontStyle=1;fontColor=#0F172A;" parent="1" vertex="1">
+          <mxGeometry x="50" y="20" width="2300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="203" value="Federacion Nacional de Cafeteros · Identidad Institucional, Tokens W3C DTCG, Escalas Tipograficas Duales, Grilla 8pt/4pt y Aplicacion Real a las Tres Plataformas" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;fontColor=#475569;" parent="1" vertex="1">
+          <mxGeometry x="50" y="60" width="2300" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="204" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1.5;shadow=1;" parent="1" vertex="1">
+          <mxGeometry x="40" y="95" width="2320" height="365" as="geometry" />
+        </mxCell>
+        <mxCell id="205" value="1. FUNDAMENTOS DEL SISTEMA DE DISENO: IDENTIDAD, PALETA WCAG AAA, TIPOGRAFIA DUAL Y DISTINTIVOS DEL SACO" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#CBD5E1;align=left;fontSize=14;fontStyle=1;fontColor=#0F172A;spacingLeft=15;" parent="1" vertex="1">
+          <mxGeometry x="40" y="95" width="2320" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="206" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF8F5;strokeColor=#E2E8F0;" parent="1" vertex="1">
+          <mxGeometry x="60" y="145" width="520" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="207" value="1.1 IDENTIDAD DE MARCA (ISOTIPO Y VARIANTES)" style="text;html=1;fontSize=13;fontStyle=1;fontColor=#135E34;align=center;" parent="1" vertex="1">
+          <mxGeometry x="60" y="155" width="520" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="208" value="Isotipo: Silueta de grano de cafe arábica con hendidura organica en S de 5 px (espacio negativo puro sin trazos flotantes).&#10;- Verde Cordillera (#135E34) + Rojo Cereza (#9E1B1B) + Azul Pacifico (#0F4C81)." style="text;html=1;fontSize=12;fontColor=#334155;align=left;spacingLeft=12;verticalAlign=top;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="75" y="185" width="490" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="209" value="AROMA PACIFICO&#10;(Variante Color Principal - Fondo Blanco/Pergamino)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;fontColor=#0F172A;fontSize=13;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="75" y="245" width="490" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="210" value="AROMA PACIFICO&#10;(Variante Una Tinta 100% Negro - Termica Acopio)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;fontSize=13;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="75" y="310" width="490" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="211" value="AROMA PACIFICO&#10;(Variante Negativo Modo Oscuro - Cabina Nocturna)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F172A;strokeColor=#CBD5E1;strokeWidth=1;fontColor=#FFFFFF;fontSize=13;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="75" y="375" width="490" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="212" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF8F5;strokeColor=#E2E8F0;" parent="1" vertex="1">
+          <mxGeometry x="600" y="145" width="560" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="213" value="1.2 PALETA CROMATICA BIOCLIMATICA (WCAG 2.1 AAA)" style="text;html=1;fontSize=13;fontStyle=1;fontColor=#135E34;align=center;" parent="1" vertex="1">
+          <mxGeometry x="600" y="155" width="560" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="214" value="Todos los tokens cumplen contraste de laboratorio &gt; 7:1 AAA contra sus fondos, garantizando &gt; 3.5:1 bajo deslumbramiento solar (&gt; 80.000 lux en campo):" style="text;html=1;fontSize=12;fontColor=#334155;align=left;spacingLeft=12;verticalAlign=top;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="615" y="185" width="530" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="215" value="VERDE CORDILLERA&#10;#135E34 (Contraste 7.84:1 AAA)&#10;Primario Base y Accion" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#135E34;fontColor=#FFFFFF;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="615" y="235" width="255" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="216" value="ROJO CEREZA MADURA&#10;#9E1B1B (Contraste 10.02:1 AAA)&#10;Alertas y Peligro Fitosanitario" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9E1B1B;fontColor=#FFFFFF;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="885" y="235" width="255" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="217" value="AZUL PACIFICO&#10;#0F4C81 (Contraste 7.78:1 AAA)&#10;Trazabilidad y Ruta Transporte" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F4C81;fontColor=#FFFFFF;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="615" y="310" width="255" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="218" value="CARBON PIZARRA&#10;#0F172A (Contraste 17.85:1 AAA)&#10;Tipografia Base de Lectura" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F172A;fontColor=#FFFFFF;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="885" y="310" width="255" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="219" value="LIENZO BASE PERGAMINO: #FAF8F5 (Antideslumbramiento) | Borde Perimetral Obligatorio: #CBD5E1 (1.5 px)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF8F5;strokeColor=#CBD5E1;fontColor=#334155;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="615" y="385" width="525" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="220" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF8F5;strokeColor=#E2E8F0;" parent="1" vertex="1">
+          <mxGeometry x="1180" y="145" width="560" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="221" value="1.3 ESCALAS TIPOGRAFICAS DUALES Y GRILLA 8PT/4PT" style="text;html=1;fontSize=13;fontStyle=1;fontColor=#135E34;align=center;" parent="1" vertex="1">
+          <mxGeometry x="1180" y="155" width="560" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="222" value="Dos contextos fisicos con requerimientos independientes:&#10;1. VEHICULAR (Transportador a 65 cm con vibracion): Metrica 32px Heavy, Titulo 24px Bold, Cuerpo 18px SemiBold, Boton 18px Bold. Minimo absoluto: 14 px.&#10;2. WEB ESCRITORIO (Comprador en oficina 300 lux): H1 32px, Titulo 20px, Cuerpo 16px Regular, Tablas analiticas densas 14px.&#10;3. GRILLA Y ESPACIADO: Base modular 8px / 4px (--ap-space-xxs: 4px a 5xl: 80px).&#10;4. ERGONOMIA: Touch target vehicular de 56 px con guarda de 12 px (--ap-space-sm)." style="text;html=1;fontSize=12;fontColor=#334155;align=left;spacingLeft=12;verticalAlign=top;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1195" y="185" width="530" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="223" value="CABINA CAMION: 32 PX METRICA | BOTON 56 PX | MINIMO 14 PX (CERO MICROTEXTOS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontColor=#1E40AF;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1195" y="325" width="530" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="224" value="PORTAL WEB: MONOESPACIADO Fira Code PARA SACO HMAC-SHA-256 Y PRECINTO" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontColor=#14532D;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1195" y="380" width="530" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="225" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF8F5;strokeColor=#E2E8F0;" parent="1" vertex="1">
+          <mxGeometry x="1760" y="145" width="580" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="226" value="1.4 DISTINTIVOS DE ESTADO (TRIPLE CODIFICACION)" style="text;html=1;fontSize=13;fontStyle=1;fontColor=#135E34;align=center;" parent="1" vertex="1">
+          <mxGeometry x="1760" y="155" width="580" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="227" value="Cumplimiento estricto WCAG 2.1 Criterio 1.4.1 (Uso del color): Cada estado integra (1) Color saturado AAA, (2) Silueta exclusiva y (3) Texto explicito visible:" style="text;html=1;fontSize=12;fontColor=#334155;align=left;spacingLeft=12;verticalAlign=top;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1775" y="185" width="550" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="228" value="[ENGRANAJE] EN PREPARACION&#10;Beneficiadero Finca (Secado)&#10;Fondo #FEF3C7 | Texto #78350F (8.15:1)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;strokeWidth=1.5;fontColor=#78350F;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1775" y="235" width="265" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="229" value="[CAMION] EN VIAJE&#10;Transporte Rural Troncal&#10;Fondo #DBEAFE | Texto #1E40AF (7.15:1)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=1.5;fontColor=#1E40AF;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="2055" y="235" width="265" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="230" value="[ESCUDO] ACEPTADO&#10;Centro Acopio / Puerto Exportacion&#10;Fondo #DCFCE7 | Texto #14532D (8.30:1)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=1.5;fontColor=#14532D;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1775" y="330" width="265" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="231" value="[OCTAGONO] RECHAZADO&#10;Fallo Fitosanitario / Humedad&#10;Fondo #FEE2E2 | Texto #7F1D1D (8.20:1)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;strokeWidth=1.5;fontColor=#7F1D1D;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="2055" y="330" width="265" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="232" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1.5;shadow=1;" parent="1" vertex="1">
+          <mxGeometry x="40" y="480" width="2320" height="870" as="geometry" />
+        </mxCell>
+        <mxCell id="233" value="2. APLICACION REAL DEL SISTEMA DE DISENO EN LAS TRES PLATAFORMAS DE NEGOCIO (COHERENCIA Y ACCESIBILIDAD)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#CBD5E1;align=left;fontSize=14;fontStyle=1;fontColor=#0F172A;spacingLeft=15;" parent="1" vertex="1">
+          <mxGeometry x="40" y="480" width="2320" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="234" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF8F5;strokeColor=#CBD5E1;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="60" y="530" width="720" height="800" as="geometry" />
+        </mxCell>
+        <mxCell id="235" value="APP 1: MOVIL DEL CAFICULTOR&#10;Contexto: Campo Abierto, Sol &gt; 80.000 lux, Dedos con Guantes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#135E34;fontColor=#FFFFFF;fontSize=14;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="60" y="530" width="720" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="236" value="AROMA PACIFICO | FINCA LAS BRISAS (CAUCA)&#10;Conectado a IoT Core | Modo Alto Contraste Solar Activo" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0D4A27;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="80" y="595" width="680" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="237" value="[!] ALERTA FITOSANITARIA CRITICA: FOCO DE ROYA CONFIRMADO&#10;Deteccion multimodal de vision artificial en Lote 3 (Variedad Caturra).&#10;Severidad: Alta (87% confianza). Requiere fumigacion focalizada con dron." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#9E1B1B;strokeWidth=2.5;fontColor=#7F1D1D;fontSize=13;fontStyle=1;align=left;spacingLeft=15;verticalAlign=top;spacingTop=10;" parent="1" vertex="1">
+          <mxGeometry x="80" y="650" width="680" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="238" value="VER RECOMENDACION TECNICA (Boton 56px)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9E1B1B;fontColor=#FFFFFF;fontSize=14;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="100" y="760" width="640" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="239" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="80" y="835" width="680" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="240" value="REGISTRO RAPIDO DE BASCULA (BENEFICIADERO)" style="text;html=1;fontSize=13;fontStyle=1;fontColor=#135E34;align=center;" parent="1" vertex="1">
+          <mxGeometry x="80" y="845" width="680" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="241" value="PESO EN BASCULA&#10;[ 60.0 ] KG" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#16A34A;strokeWidth=2;fontColor=#0F172A;fontSize=16;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="105" y="880" width="305" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="242" value="HUMEDAD DE SECADO&#10;[ 11.8 ] %" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#16A34A;strokeWidth=2;fontColor=#0F172A;fontSize=16;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="430" y="880" width="310" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="243" value="REGISTRAR PESAJE DE SACO (Boton Primario 56px)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#135E34;fontColor=#FFFFFF;fontSize=15;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="105" y="975" width="635" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="244" value="Guardado inmediato en memoria flash local (buffer 24h ante caida celular)" style="text;html=1;fontSize=12;fontColor=#475569;align=center;" parent="1" vertex="1">
+          <mxGeometry x="80" y="1045" width="680" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="245" value="RESUMEN DEL DIA: 4 Sacos en preparacion | 1 Saco verificado FNC&#10;Regla de Usabilidad: Cero menus anidados. Maximo 2 botones de accion por pantalla." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontColor=#14532D;fontSize=12;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="80" y="1090" width="680" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="246" value="Ergonomia de Campo: Botones tactiles sobredimensionados de 56 px accesibles con guantes agricolas de nitrilo/lona o rocío matinal. Contraste solar efectivo &gt; 3.5:1 bajo 80.000 lux." style="text;html=1;fontSize=12;fontColor=#334155;align=left;spacingLeft=10;verticalAlign=top;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="80" y="1160" width="680" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="247" value="ADOPCION DEL CAFICULTOR: CONFIANZA TOTAL FRENTE AL CUADERNO TRADICIONAL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#0F172A;fontColor=#0F172A;fontSize=12;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="80" y="1280" width="680" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="248" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF8F5;strokeColor=#CBD5E1;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="810" y="530" width="740" height="800" as="geometry" />
+        </mxCell>
+        <mxCell id="249" value="APP 2: MOVIL DEL TRANSPORTADOR&#10;Contexto: Cabina de Camion a 65 cm, Vibracion Trocha 4-16 Hz" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F4C81;fontColor=#FFFFFF;fontSize=14;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="810" y="530" width="740" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="250" value="CAMION RURAL C-402 | MANIFIESTO #TR-2026-084&#10;Conductor: Juan Perez | GPS Tracking Activo (Cada 5 min)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0A3860;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="830" y="595" width="700" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="251" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="830" y="650" width="700" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="252" value="CARGA ASIGNADA EN RUTA (METRICA VEHICULAR ISO 15008):" style="text;html=1;fontSize=12;fontColor=#475569;align=center;" parent="1" vertex="1">
+          <mxGeometry x="830" y="660" width="700" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="253" value="45 SACOS DE 60 KG&#10;(2.700 KG BRUTOS)" style="text;html=1;fontSize=28;fontStyle=1;fontColor=#0F172A;align=center;" parent="1" vertex="1">
+          <mxGeometry x="830" y="685" width="700" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="254" value="[CAMION] ESTADO: EN VIAJE A BUENAVENTURA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=2;fontColor=#1E40AF;fontSize=14;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="900" y="750" width="560" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="255" value="HOJA DE RUTA LOGISTICA:&#10;Origen: Centro de Acopio Popayan (Vereda La Rejoya) - Salida: 06:30 UTC-5&#10;Destino: Terminal Portuaria Buenaventura (Muelle FNC) - LLegada Est: 14:30&#10;Precinto de Seguridad Electronico: #PREC-CAU-88219 (Intacto)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=15;verticalAlign=top;spacingTop=10;" parent="1" vertex="1">
+          <mxGeometry x="830" y="815" width="700" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="256" value="REGISTRAR ENTREGA EN PUERTO (Boton 56px)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#135E34;fontColor=#FFFFFF;fontSize=16;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="850" y="935" width="660" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="257" value="REPORTAR INCIDENTE EN RUTA (Secundario)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9E1B1B;strokeWidth=2;fontColor=#9E1B1B;fontSize=14;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="850" y="1003" width="660" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="258" value="ESTADO DE RED: MODO OFFLINE (Buffer SQLite: 3 puntos GPS encolados)&#10;Drenado automatico sin duplicacion de datos al recuperar cobertura 4G." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontColor=#78350F;fontSize=12;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="830" y="1070" width="700" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="259" value="Ergonomia Vehicular: Altura tipografica calculada para angulo visual de 26 arcmin a 65 cm de distancia del tablero. Separacion fisica de 12 px entre botones que previene toques falsos por baches o aceleracion en carretera." style="text;html=1;fontSize=12;fontColor=#334155;align=left;spacingLeft=10;verticalAlign=top;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="830" y="1145" width="700" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="260" value="SEGURIDAD VIAL: TIEMPO DE FIJACION VISUAL &lt; 1.5 SEGUNDOS (ISO 15008 / SAE J2364)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#0F172A;fontColor=#0F172A;fontSize=12;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="830" y="1280" width="700" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="261" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF8F5;strokeColor=#CBD5E1;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="1580" y="530" width="760" height="800" as="geometry" />
+        </mxCell>
+        <mxCell id="262" value="APP 3: PORTAL WEB DEL COMPRADOR INTERNACIONAL&#10;Contexto: Escritorio Oficina 300 lux, Alta Densidad, Ley 1581" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F172A;fontColor=#FFFFFF;fontSize=14;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="1580" y="530" width="760" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="263" value="AROMA PACIFICO | PORTAL PUBLICO DE TRAZABILIDAD (FEDERACION NACIONAL DE CAFETEROS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1E293B;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="1600" y="595" width="720" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="264" value="BUSCAR CODIGO DE SACO:&#10;[ SACO-2026-CAU-7F3A9C12                    ] [ CONSULTAR ]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=13;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="1600" y="640" width="720" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="265" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="1600" y="710" width="720" height="350" as="geometry" />
+        </mxCell>
+        <mxCell id="266" value="CERTIFICADO OFICIAL DE ORIGEN Y TRAZABILIDAD DEL SACO" style="text;html=1;fontSize=12;fontStyle=1;fontColor=#135E34;align=left;spacingLeft=15;" parent="1" vertex="1">
+          <mxGeometry x="1600" y="720" width="500" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="267" value="[ESCUDO] ACEPTADO" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontColor=#14532D;fontSize=12;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="2140" y="720" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="268" value="CODIGO: SACO-2026-CAU-7F3A9C12 (Token Criptografico)" style="text;html=1;fontSize=15;fontStyle=1;fontColor=#0F172A;align=left;spacingLeft=15;" parent="1" vertex="1">
+          <mxGeometry x="1600" y="750" width="700" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="269" value="Departamento Origen: Cauca                     Variedad Botanica: Castillo&#10;Municipio de Beneficio: Popayan                Calificacion SCA:  86.5 pts (Specialty)&#10;Humedad de Secado:      11.8 %                 Temp. Promedio:    21 grados C&#10;Masa Estandar FNC:      60.0 KG                Puerto de Salida:  Buenaventura&#10;Fecha Cosecha/Empaque:  2026-11-05 08:30 UTC   Fecha Entrega:     2026-11-10 14:15 UTC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF8F5;strokeColor=#CBD5E1;fontColor=#0F172A;fontSize=12;fontStyle=1;align=left;spacingLeft=15;verticalAlign=top;spacingTop=10;" parent="1" vertex="1">
+          <mxGeometry x="1615" y="785" width="690" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="270" value="PROTECCION DE DATOS PERSONALES (LEY 1581 DE 2012 / DECRETO 1377 DE 2013):&#10;[X] Cedula y nombre del caficultor: Cero acceso publico (bloqueado).&#10;[X] Coordenadas GPS submétricas de finca: Bloqueadas para seguridad del agricultor.&#10;[X] Conductor y georutas intermedias: Bloqueadas para proteccion de carga." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#9E1B1B;fontColor=#7F1D1D;fontSize=12;fontStyle=1;align=left;spacingLeft=15;verticalAlign=top;spacingTop=8;" parent="1" vertex="1">
+          <mxGeometry x="1615" y="910" width="690" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="271" value="Descargar Certificado SCA en PDF (Firma Digital FNC)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F4C81;fontColor=#FFFFFF;fontSize=13;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="1615" y="1005" width="690" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="272" value="Segregacion Fisica de Vistas: El portal web apunta exclusivamente a la tabla DynamoDB disjunta sacos_publicos. La base de datos publica no contiene fisicamente cedulas ni coordenadas privadas, imposibilitando fugas por error de aplicacion." style="text;html=1;fontSize=12;fontColor=#334155;align=left;spacingLeft=10;verticalAlign=top;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1600" y="1080" width="720" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="273" value="Auditoria Inmutable: Las consultas del comprador se registran en logs con retencion de 5 anos en modo Compliance en la cuenta AromaPacifico-Security." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontColor=#14532D;fontSize=12;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="1600" y="1150" width="720" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="274" value="GOBERNANZA JURIDICA: PRIVACIDAD POR DISENO Y SOBERANIA DE DATOS (LEY 1581)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#0F172A;fontColor=#0F172A;fontSize=12;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="1600" y="1280" width="720" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="275" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1.5;shadow=1;" parent="1" vertex="1">
+          <mxGeometry x="40" y="1370" width="2320" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="276" value="3. GOBERNANZA ARQUITECTONICA, FINOPS Y EVALUACION DE COSTO EVITADO (FNC 2026)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#CBD5E1;align=left;fontSize=14;fontStyle=1;fontColor=#0F172A;spacingLeft=15;" parent="1" vertex="1">
+          <mxGeometry x="40" y="1370" width="2320" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="277" value="SUSTENTACION FINOPS (CERO COMPUTO EN REPOSO):&#10;- Costo en valle: $0,00 USD / mes (Libreria estatica de tokens DTCG alojada en S3 + CloudFront; costo distribuido &lt; $1.50 USD/mes consolidado).&#10;- Presupuestos respetados: Invariante de Budgets ($480 USD mes normal / $750 USD mes cosecha) sin apagar ingesta ni consulta publica." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF8F5;strokeColor=#CBD5E1;fontColor=#0F172A;fontSize=12;fontStyle=1;align=left;spacingLeft=15;verticalAlign=top;spacingTop=8;" parent="1" vertex="1">
+          <mxGeometry x="60" y="1410" width="1120" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="278" value="COSTO EVITADO CUANTIFICADO:&#10;- $17.500 USD evitados en desarrollo prematuro de aplicaciones nativas antes de validar la consistencia arquitectonica visual.&#10;- $14.040 USD/ano ahorrados en mantenimiento unificado y optimizacion de paquetes celulares/satelitales (28 KB vs 600 KB)." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontColor=#14532D;fontSize=12;fontStyle=1;align=left;spacingLeft=15;verticalAlign=top;spacingTop=8;" parent="1" vertex="1">
+          <mxGeometry x="1200" y="1410" width="1140" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="279" value="TRAZABILIDAD INTEGRAL: Cajas de Arquitectura E6-05 (Saco, viaje y consulta) y E6-07 (Sistema de diseno y costos) | Region AWS us-east-1 (DR us-east-2) | Federacion Nacional de Cafeteros" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF8F5;strokeColor=#135E34;strokeWidth=1.5;fontColor=#135E34;fontSize=13;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="60" y="1495" width="2280" height="45" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

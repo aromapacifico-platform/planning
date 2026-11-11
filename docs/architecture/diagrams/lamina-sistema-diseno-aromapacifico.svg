@@ -1,0 +1,414 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 1600" width="100%" height="100%">
+  <defs>
+    <style>
+      .main-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 26px; font-weight: bold; fill: #0F172A; text-anchor: middle; }
+      .main-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 15px; fill: #475569; text-anchor: middle; }
+      .sec-hdr { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #0F172A; }
+      .box-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #135E34; text-anchor: middle; }
+      .app-hdr { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #FFFFFF; text-anchor: middle; }
+      .app-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #E2E8F0; text-anchor: middle; }
+      .btn-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #FFFFFF; text-anchor: middle; }
+      .btn-txt-dark { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #0F172A; text-anchor: middle; }
+      .btn-txt-danger { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #9E1B1B; text-anchor: middle; }
+      .body-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #334155; }
+      .bold-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #0F172A; }
+      .alt-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 800; fill: #7F1D1D; }
+      .alt-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #450A0A; }
+      .card-mono { font-family: "Fira Code", monospace; font-size: 14px; font-weight: bold; fill: #0F172A; }
+      .badge-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 0.5px; }
+      .metric-massive { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 28px; font-weight: 900; fill: #0F172A; text-anchor: middle; }
+    </style>
+    <filter id="shadow" x="-1%" y="-1%" width="102%" height="102%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.06" />
+    </filter>
+  </defs>
+
+  <!-- FONDO GENERAL PERGAMINO -->
+  <rect width="2400" height="1600" fill="#FAF8F5" />
+
+  <!-- ENCABEZADO INSTITUCIONAL -->
+  <text x="1200" y="42" class="main-title">AromaPacífico - Lámina Maestra de Arquitectura Visual del Sistema de Diseño (FNC 2026)</text>
+  <text x="1200" y="70" class="main-sub">Federación Nacional de Cafeteros · Identidad Institucional, Tokens W3C DTCG, Escalas Tipográficas Duales, Grilla 8pt/4pt y Aplicación Real a las Tres Plataformas</text>
+
+  <!-- ======================================================== -->
+  <!-- FRANJA 1: FUNDAMENTOS DEL SISTEMA DE DISEÑO (y=95 a 455)  -->
+  <!-- ======================================================== -->
+  <g transform="translate(40, 95)" filter="url(#shadow)">
+    <rect width="2320" height="365" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+    <rect width="2320" height="35" rx="8" fill="#F1F5F9" />
+    <text x="15" y="23" class="sec-hdr">1. FUNDAMENTOS DEL SISTEMA DE DISEÑO: IDENTIDAD, PALETA WCAG AAA, TIPOGRAFÍA DUAL Y DISTINTIVOS DEL SACO</text>
+
+    <!-- 1.1 IDENTIDAD Y MARCA -->
+    <g transform="translate(20, 50)">
+      <rect width="520" height="300" rx="6" fill="#FAF8F5" stroke="#E2E8F0" />
+      <text x="260" y="25" class="box-title">1.1 IDENTIDAD DE MARCA (ISOTIPO Y VARIANTES)</text>
+      <text x="15" y="50" class="body-txt">Isotipo: Grano de café con hendidura orgánica en S de 5 px (espacio negativo).</text>
+      <text x="15" y="68" class="body-txt">Paleta: Verde Cordillera (#135E34), Rojo Cereza (#9E1B1B) y Azul Pacífico (#0F4C81).</text>
+
+      <!-- Variante Color -->
+      <g transform="translate(15, 85)">
+        <rect width="490" height="55" rx="6" fill="#FFFFFF" stroke="#135E34" stroke-width="2" />
+        <circle cx="35" cy="27" r="16" fill="#135E34" />
+        <text x="65" y="27" class="bold-txt" fill="#0F172A">AROMA PACÍFICO - Principal (Color)</text>
+        <text x="65" y="44" class="body-txt">Uso: Pantallas móviles diurnas y portal web de trazabilidad</text>
+      </g>
+      <!-- Variante 1 Tinta -->
+      <g transform="translate(15, 150)">
+        <rect width="490" height="55" rx="6" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+        <circle cx="35" cy="27" r="16" fill="#000000" />
+        <text x="65" y="27" class="bold-txt" fill="#000000">AROMA PACÍFICO - Una Tinta (100% Negro)</text>
+        <text x="65" y="44" class="body-txt">Uso: Impresoras térmicas en acopios y sacos de fique de 60 kg</text>
+      </g>
+      <!-- Variante Negativo -->
+      <g transform="translate(15, 215)">
+        <rect width="490" height="55" rx="6" fill="#0F172A" stroke="#CBD5E1" />
+        <circle cx="35" cy="27" r="16" fill="#FFFFFF" />
+        <text x="65" y="27" class="bold-txt" fill="#FFFFFF">AROMA PACÍFICO - En Negativo (Modo Oscuro)</text>
+        <text x="65" y="44" class="body-txt" fill="#CBD5E1">Uso: Cabina vehicular nocturna (previene deslumbramiento)</text>
+      </g>
+    </g>
+
+    <!-- 1.2 PALETA CROMATICA -->
+    <g transform="translate(560, 50)">
+      <rect width="560" height="300" rx="6" fill="#FAF8F5" stroke="#E2E8F0" />
+      <text x="280" y="25" class="box-title">1.2 PALETA CROMÁTICA BIOCLIMÁTICA (WCAG 2.1 AAA)</text>
+      <text x="15" y="48" class="body-txt">Contraste de laboratorio > 7:1 AAA contra sus fondos. Resiste deslumbramiento solar:</text>
+
+      <g transform="translate(15, 65)">
+        <rect width="255" height="65" rx="6" fill="#135E34" />
+        <text x="12" y="24" class="bold-txt" fill="#FFFFFF">VERDE CORDILLERA</text>
+        <text x="12" y="42" class="body-txt" fill="#DCFCE7">#135E34 | 7.84:1 AAA</text>
+        <text x="12" y="58" class="body-txt" fill="#FFFFFF">Primario base y acción</text>
+      </g>
+      <g transform="translate(285, 65)">
+        <rect width="255" height="65" rx="6" fill="#9E1B1B" />
+        <text x="12" y="24" class="bold-txt" fill="#FFFFFF">ROJO CEREZA MADURA</text>
+        <text x="12" y="42" class="body-txt" fill="#FEE2E2">#9E1B1B | 10.02:1 AAA</text>
+        <text x="12" y="58" class="body-txt" fill="#FFFFFF">Alertas y fitosanitarias</text>
+      </g>
+      <g transform="translate(15, 140)">
+        <rect width="255" height="65" rx="6" fill="#0F4C81" />
+        <text x="12" y="24" class="bold-txt" fill="#FFFFFF">AZUL PACÍFICO</text>
+        <text x="12" y="42" class="body-txt" fill="#DBEAFE">#0F4C81 | 7.78:1 AAA</text>
+        <text x="12" y="58" class="body-txt" fill="#FFFFFF">Trazabilidad y ruta</text>
+      </g>
+      <g transform="translate(285, 140)">
+        <rect width="255" height="65" rx="6" fill="#0F172A" />
+        <text x="12" y="24" class="bold-txt" fill="#FFFFFF">CARBÓN PIZARRA</text>
+        <text x="12" y="42" class="body-txt" fill="#CBD5E1">#0F172A | 17.85:1 AAA</text>
+        <text x="12" y="58" class="body-txt" fill="#FFFFFF">Tipografía de lectura</text>
+      </g>
+      <g transform="translate(15, 215)">
+        <rect width="525" height="65" rx="6" fill="#FAF8F5" stroke="#CBD5E1" stroke-width="1.5" />
+        <text x="15" y="25" class="bold-txt">FONDO PERGAMINO: #FAF8F5 (Antideslumbramiento visual en campo)</text>
+        <text x="15" y="45" class="body-txt">Borde perimetral obligatorio: #CBD5E1 (1.5 px) para delimitar contenedores bajo sol directo.</text>
+      </g>
+    </g>
+
+    <!-- 1.3 TIPOGRAFIA DUAL Y GRILLA 8PT -->
+    <g transform="translate(1140, 50)">
+      <rect width="580" height="300" rx="6" fill="#FAF8F5" stroke="#E2E8F0" />
+      <text x="290" y="25" class="box-title">1.3 ESCALAS TIPOGRÁFICAS DUALES Y GRILLA 8PT/4PT</text>
+      <text x="15" y="45" class="body-txt">VEHICULAR (Camión 65 cm con vibración 4-16 Hz): Métrica 32px Heavy, Título 24px Bold, Cuerpo 18px SemiBold.</text>
+      <text x="15" y="65" class="body-txt">REGLA CABINA: Mínimo 14 px absoluto. Prohibido micro-textos (10-12 px) en la app del transportador.</text>
+      <text x="15" y="85" class="body-txt">WEB ESCRITORIO (Oficina 300 lux): H1 32px Heavy, Cuerpo 16px Regular, Tablas 14px, Monoespacio Fira Code.</text>
+      <text x="15" y="105" class="body-txt">GRILLA MODULAR: Sistema geométrico base 8px con submódulo de micro-alineación de 4px.</text>
+
+      <g transform="translate(15, 125)">
+        <rect width="550" height="70" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5" />
+        <text x="15" y="25" class="bold-txt" fill="#1E40AF">CABINA VEHICULAR: TARGET TÁCTIL SOBREDIMENSIONADO DE 56 PX</text>
+        <text x="15" y="45" class="body-txt" fill="#1E40AF">Separación de guarda física obligatoria de 12 px (--ap-space-sm) entre botones contiguos.</text>
+      </g>
+      <g transform="translate(15, 205)">
+        <rect width="550" height="75" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5" />
+        <text x="15" y="25" class="bold-txt" fill="#14532D">PORTAL WEB: DENSIDAD ANALÍTICA SCA Y TOKENIZACIÓN DEL SACO</text>
+        <text x="15" y="45" class="body-txt" fill="#14532D">Formato criptográfico: SACO-2026-[DEPTO]-[HASH8] generado mediante HMAC-SHA-256 en KMS.</text>
+      </g>
+    </g>
+
+    <!-- 1.4 DISTINTIVOS DE ESTADO -->
+    <g transform="translate(1740, 50)">
+      <rect width="560" height="300" rx="6" fill="#FAF8F5" stroke="#E2E8F0" />
+      <text x="280" y="25" class="box-title">1.4 DISTINTIVOS DE ESTADO DEL SACO (TRIPLE CODIFICACIÓN)</text>
+      <text x="15" y="45" class="body-txt">Cumplimiento WCAG 2.1 Criterio 1.4.1: Color Saturado + Silueta Exclusiva + Texto Explícito:</text>
+
+      <g transform="translate(15, 60)">
+        <rect width="255" height="95" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5" />
+        <text x="12" y="24" class="badge-txt" fill="#78350F">[ENGRANAJE] EN PREPARACIÓN</text>
+        <text x="12" y="45" class="body-txt" fill="#78350F">Beneficiadero en Finca (Secado)</text>
+        <text x="12" y="65" class="body-txt" fill="#78350F">Fondo #FEF3C7 | Texto #78350F</text>
+        <text x="12" y="85" class="bold-txt" fill="#78350F">Contraste 8.15:1 AAA</text>
+      </g>
+      <g transform="translate(285, 60)">
+        <rect width="255" height="95" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5" />
+        <text x="12" y="24" class="badge-txt" fill="#1E40AF">[CAMIÓN] EN VIAJE</text>
+        <text x="12" y="45" class="body-txt" fill="#1E40AF">Transporte Rural o Troncal</text>
+        <text x="12" y="65" class="body-txt" fill="#1E40AF">Fondo #DBEAFE | Texto #1E40AF</text>
+        <text x="12" y="85" class="bold-txt" fill="#1E40AF">Contraste 7.15:1 AAA</text>
+      </g>
+      <g transform="translate(15, 170)">
+        <rect width="255" height="95" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5" />
+        <text x="12" y="24" class="badge-txt" fill="#14532D">[ESCUDO] ACEPTADO</text>
+        <text x="12" y="45" class="body-txt" fill="#14532D">Centro Acopio / Puerto Buenaventura</text>
+        <text x="12" y="65" class="body-txt" fill="#14532D">Fondo #DCFCE7 | Texto #14532D</text>
+        <text x="12" y="85" class="bold-txt" fill="#14532D">Contraste 8.30:1 AAA</text>
+      </g>
+      <g transform="translate(285, 170)">
+        <rect width="255" height="95" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5" />
+        <text x="12" y="24" class="badge-txt" fill="#7F1D1D">[OCTÁGONO] RECHAZADO</text>
+        <text x="12" y="45" class="body-txt" fill="#7F1D1D">Fallo Fitosanitario o Humedad</text>
+        <text x="12" y="65" class="body-txt" fill="#7F1D1D">Fondo #FEE2E2 | Texto #7F1D1D</text>
+        <text x="12" y="85" class="bold-txt" fill="#7F1D1D">Contraste 8.20:1 AAA</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- FRANJA 2: LAS TRES APLICACIONES APLICADAS (y=480 a 1350)  -->
+  <!-- ======================================================== -->
+  <g transform="translate(40, 480)" filter="url(#shadow)">
+    <rect width="2320" height="870" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+    <rect width="2320" height="35" rx="8" fill="#F1F5F9" />
+    <text x="15" y="23" class="sec-hdr">2. APLICACIÓN REAL DEL SISTEMA DE DISEÑO EN LAS TRES PLATAFORMAS DE NEGOCIO (COHERENCIA Y ACCESIBILIDAD)</text>
+
+    <!-- ---------------------------------------------------- -->
+    <!-- PANTALLA 1: CAFICULTOR (CAMPO Y SOL)                 -->
+    <!-- ---------------------------------------------------- -->
+    <g transform="translate(20, 50)">
+      <rect width="720" height="800" rx="10" fill="#FAF8F5" stroke="#CBD5E1" stroke-width="2" />
+      <rect width="720" height="50" rx="10" fill="#135E34" />
+      <text x="360" y="25" class="app-hdr">APP 1: MÓVIL DEL CAFICULTOR</text>
+      <text x="360" y="42" class="app-sub">Contexto: Campo Abierto, Sol > 80.000 lux, Dedos con Guantes / Rocío</text>
+
+      <!-- Barra estado móvil -->
+      <g transform="translate(20, 65)">
+        <rect width="680" height="40" rx="6" fill="#0D4A27" />
+        <text x="340" y="25" class="btn-txt" style="font-size:12px;">AROMA PACÍFICO | FINCA LAS BRISAS (CAUCA) - Modo Alto Contraste Activo</text>
+      </g>
+
+      <!-- Alerta Fitosanitaria -->
+      <g transform="translate(20, 120)">
+        <rect width="680" height="110" rx="8" fill="#FEE2E2" stroke="#9E1B1B" stroke-width="2.5" />
+        <text x="20" y="30" class="alt-title">[!] ALERTA FITOSANITARIA CRÍTICA: FOCO DE ROYA CONFIRMADO</text>
+        <text x="20" y="55" class="alt-desc">Detección multimodal de visión artificial (E6-06) en Lote 3 (Variedad Caturra).</text>
+        <text x="20" y="75" class="alt-desc">Severidad: Alta (87% confianza). Se recomienda autorización para fumigación con dron.</text>
+        <text x="20" y="98" class="bold-txt" fill="#9E1B1B">Acción Inmediata Requerida por el Caficultor</text>
+      </g>
+
+      <!-- Botón resolutivo 56px -->
+      <g transform="translate(40, 245)">
+        <rect width="640" height="56" rx="8" fill="#9E1B1B" />
+        <text x="320" y="34" class="btn-txt">VER RECOMENDACIÓN TÉCNICA (Botón Vehicular 56px)</text>
+      </g>
+
+      <!-- Módulo de Báscula y Secado -->
+      <g transform="translate(20, 320)">
+        <rect width="680" height="235" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+        <text x="340" y="30" class="box-title">REGISTRO RÁPIDO DE BÁSCULA (BENEFICIADERO)</text>
+
+        <!-- Inputs grandes -->
+        <g transform="translate(25, 45)">
+          <rect width="300" height="75" rx="6" fill="#FFFFFF" stroke="#16A34A" stroke-width="2" />
+          <text x="150" y="28" class="bold-txt" text-anchor="middle">PESO EN BÁSCULA</text>
+          <text x="150" y="58" class="metric-massive" fill="#135E34">60.0 KG</text>
+        </g>
+        <g transform="translate(355, 45)">
+          <rect width="300" height="75" rx="6" fill="#FFFFFF" stroke="#16A34A" stroke-width="2" />
+          <text x="150" y="28" class="bold-txt" text-anchor="middle">HUMEDAD DE SECADO</text>
+          <text x="150" y="58" class="metric-massive" fill="#135E34">11.8 %</text>
+        </g>
+
+        <!-- Boton registrar 56px -->
+        <g transform="translate(25, 135)">
+          <rect width="630" height="56" rx="8" fill="#135E34" />
+          <text x="315" y="34" class="btn-txt">REGISTRAR PESAJE DE SACO (Botón Primario 56px)</text>
+        </g>
+        <text x="340" y="215" class="body-txt" text-anchor="middle">Guardado inmediato en memoria flash local (buffer 24h ante caída de red celular)</text>
+      </g>
+
+      <!-- Resumen del dia -->
+      <g transform="translate(20, 570)">
+        <rect width="680" height="60" rx="8" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5" />
+        <text x="340" y="25" class="bold-txt" fill="#14532D" text-anchor="middle">RESUMEN DEL DÍA: 4 Sacos en preparación | 1 Saco verificado FNC</text>
+        <text x="340" y="45" class="body-txt" fill="#14532D" text-anchor="middle">Regla de Usabilidad: Cero menús anidados. Máximo 2 botones de acción por pantalla.</text>
+      </g>
+
+      <!-- Ergonomia y Leyenda -->
+      <g transform="translate(20, 645)">
+        <text x="10" y="20" class="bold-txt" fill="#135E34">ERGONOMÍA BIOCLIMÁTICA EN CAMPO:</text>
+        <text x="10" y="40" class="body-txt">- Botones sobredimensionados de 56 px accesibles con guantes de lona/nitrilo o rocío.</text>
+        <text x="10" y="60" class="body-txt">- Contraste solar efectivo > 3.5:1 bajo 80.000 lux (laboratorio > 7:1 AAA).</text>
+        <text x="10" y="80" class="body-txt">- Adopción gradual: interfaz predecible que sustituye el cuaderno de contabilidad tradicional.</text>
+      </g>
+      <rect x="20" y="745" width="680" height="35" rx="6" fill="#F1F5F9" stroke="#0F172A" />
+      <text x="360" y="768" class="bold-txt" fill="#0F172A" text-anchor="middle">ADOPCIÓN DEL CAFICULTOR: CONFIANZA TOTAL FRENTE AL CUADERNO FÍSICO</text>
+    </g>
+
+    <!-- ---------------------------------------------------- -->
+    <!-- PANTALLA 2: TRANSPORTADOR (VEHICULAR)                -->
+    <!-- ---------------------------------------------------- -->
+    <g transform="translate(770, 50)">
+      <rect width="740" height="800" rx="10" fill="#FAF8F5" stroke="#CBD5E1" stroke-width="2" />
+      <rect width="740" height="50" rx="10" fill="#0F4C81" />
+      <text x="370" y="25" class="app-hdr">APP 2: MÓVIL DEL TRANSPORTADOR</text>
+      <text x="370" y="42" class="app-sub">Contexto: Cabina de Camión a 65 cm, Vibración Trocha 4-16 Hz (ISO 15008)</text>
+
+      <!-- Barra cabina -->
+      <g transform="translate(20, 65)">
+        <rect width="700" height="40" rx="6" fill="#0A3860" />
+        <text x="350" y="25" class="btn-txt" style="font-size:12px;">CAMIÓN C-402 | MANIFIESTO #TR-2026-084 - GPS Activo (Cada 5 min)</text>
+      </g>
+
+      <!-- Métrica masiva y Estado -->
+      <g transform="translate(20, 120)">
+        <rect width="700" height="150" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+        <text x="350" y="25" class="body-txt" text-anchor="middle">CARGA ASIGNADA EN RUTA (MÉTRICA VEHICULAR ISO 15008):</text>
+        <text x="350" y="65" class="metric-massive" fill="#0F172A">45 SACOS DE 60 KG</text>
+        <text x="350" y="95" class="bold-txt" fill="#0F4C81" text-anchor="middle">(2.700 KG BRUTOS)</text>
+        <!-- Badge Camion -->
+        <rect x="70" y="108" width="560" height="32" rx="6" fill="#DBEAFE" stroke="#2563EB" />
+        <text x="350" y="129" class="badge-txt" fill="#1E40AF" text-anchor="middle">[CAMIÓN] ESTADO: EN VIAJE A BUENAVENTURA</text>
+      </g>
+
+      <!-- Hoja de ruta -->
+      <g transform="translate(20, 285)">
+        <rect width="700" height="105" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+        <text x="20" y="25" class="bold-txt" fill="#135E34">HOJA DE RUTA LOGÍSTICA:</text>
+        <text x="20" y="45" class="body-txt">Origen: Centro de Acopio Popayán (Vereda La Rejoya) - Salida: 06:30 UTC-5</text>
+        <text x="20" y="65" class="body-txt">Destino: Terminal Portuaria Buenaventura (Muelle FNC) - Llegada Est: 14:30</text>
+        <text x="20" y="85" class="bold-txt">Precinto de Seguridad Electrónico: #PREC-CAU-88219 (Intacto)</text>
+      </g>
+
+      <!-- Boton registrar 56px -->
+      <g transform="translate(30, 405)">
+        <rect width="680" height="56" rx="8" fill="#135E34" />
+        <text x="340" y="34" class="btn-txt">REGISTRAR ENTREGA EN PUERTO (Botón Vehicular 56px)</text>
+      </g>
+
+      <!-- Boton secundario con separación 12px -->
+      <g transform="translate(30, 473)">
+        <rect width="680" height="48" rx="8" fill="#FFFFFF" stroke="#9E1B1B" stroke-width="2" />
+        <text x="340" y="29" class="btn-txt-danger">REPORTAR INCIDENTE EN RUTA (Separación 12px)</text>
+      </g>
+
+      <!-- Resiliencia offline -->
+      <g transform="translate(20, 535)">
+        <rect width="700" height="55" rx="8" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5" />
+        <text x="350" y="24" class="bold-txt" fill="#78350F" text-anchor="middle">ESTADO DE RED: MODO OFFLINE (Buffer SQLite: 3 puntos GPS encolados)</text>
+        <text x="350" y="42" class="body-txt" fill="#78350F" text-anchor="middle">Drenado automático sin duplicar datos al recuperar cobertura 4G en troncal.</text>
+      </g>
+
+      <!-- Ergonomia cabina -->
+      <g transform="translate(20, 605)">
+        <text x="10" y="20" class="bold-txt" fill="#0F4C81">ERGONOMÍA VEHICULAR EN CABINA (65 CM DE DISTANCIA):</text>
+        <text x="10" y="40" class="body-txt">- Ángulo visual subtendido de 26 arcmin para métricas primarias (32 px Heavy).</text>
+        <text x="10" y="60" class="body-txt">- Botones de 56 px de altura con guarda de 12 px: previene errores por baches o sacudidas.</text>
+        <text x="10" y="80" class="body-txt">- Tiempo de fijación visual seguro < 1.5 s para no comprometer la seguridad vial en trocha.</text>
+      </g>
+      <rect x="20" y="745" width="700" height="35" rx="6" fill="#F1F5F9" stroke="#0F172A" />
+      <text x="370" y="768" class="bold-txt" fill="#0F172A" text-anchor="middle">SEGURIDAD VIAL: CERO DISTRACCIÓN MOTRIZ (DIRECTRICES ISO 15008 / SAE J2364)</text>
+    </g>
+
+    <!-- ---------------------------------------------------- -->
+    <!-- PANTALLA 3: COMPRADOR (WEB ESCRITORIO)               -->
+    <!-- ---------------------------------------------------- -->
+    <g transform="translate(1540, 50)">
+      <rect width="760" height="800" rx="10" fill="#FAF8F5" stroke="#CBD5E1" stroke-width="2" />
+      <rect width="760" height="50" rx="10" fill="#0F172A" />
+      <text x="380" y="25" class="app-hdr">APP 3: PORTAL WEB DEL COMPRADOR INTERNACIONAL</text>
+      <text x="380" y="42" class="app-sub">Contexto: Escritorio Oficina 300 lux, Alta Densidad Analítica, Ley 1581</text>
+
+      <!-- Barra navegacion web -->
+      <g transform="translate(20, 65)">
+        <rect width="720" height="35" rx="6" fill="#1E293B" />
+        <text x="360" y="22" class="btn-txt" style="font-size:12px;">AROMA PACÍFICO | PORTAL PÚBLICO DE TRAZABILIDAD (FEDERACIÓN NACIONAL DE CAFETEROS)</text>
+      </g>
+
+      <!-- Barra de busqueda -->
+      <g transform="translate(20, 110)">
+        <rect width="720" height="50" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+        <text x="15" y="30" class="bold-txt">BUSCAR SACO:</text>
+        <text x="130" y="30" class="card-mono">SACO-2026-CAU-7F3A9C12</text>
+        <rect x="580" y="8" width="125" height="34" rx="4" fill="#135E34" />
+        <text x="642" y="29" class="btn-txt" style="font-size:12px;">CONSULTAR</text>
+      </g>
+
+      <!-- Tarjeta anonimizada -->
+      <g transform="translate(20, 170)">
+        <rect width="720" height="350" rx="8" fill="#FFFFFF" stroke="#135E34" stroke-width="2" />
+        <text x="20" y="25" class="box-title" style="text-anchor:start;">CERTIFICADO OFICIAL DE ORIGEN Y TRAZABILIDAD DEL SACO</text>
+        <!-- Badge Aceptado -->
+        <rect x="530" y="10" width="170" height="28" rx="4" fill="#DCFCE7" stroke="#16A34A" />
+        <text x="615" y="28" class="badge-txt" fill="#14532D" text-anchor="middle">[ESCUDO] ACEPTADO</text>
+
+        <text x="20" y="55" class="card-mono" style="font-size:16px;">CÓDIGO: SACO-2026-CAU-7F3A9C12 (Token HMAC-SHA-256)</text>
+
+        <!-- Cuadricula de atributos permitidos -->
+        <g transform="translate(20, 70)">
+          <rect width="680" height="115" rx="6" fill="#FAF8F5" stroke="#CBD5E1" />
+          <text x="15" y="25" class="body-txt">Departamento Origen: <tspan class="bold-txt">Cauca</tspan>                  Variedad Botánica: <tspan class="bold-txt">Castillo</tspan></text>
+          <text x="15" y="45" class="body-txt">Municipio Beneficio:  <tspan class="bold-txt">Popayán</tspan>                Puntaje SCA:       <tspan class="bold-txt" fill="#135E34">86.5 pts (Specialty Grade)</tspan></text>
+          <text x="15" y="65" class="body-txt">Humedad de Secado:    <tspan class="bold-txt">11.8 %</tspan>                 Temp. Promedio:    <tspan class="bold-txt">21 grados C</tspan></text>
+          <text x="15" y="85" class="body-txt">Masa Estándar FNC:    <tspan class="bold-txt">60.0 KG</tspan>                Puerto de Salida:  <tspan class="bold-txt">Buenaventura</tspan></text>
+          <text x="15" y="105" class="body-txt">Fecha Cosecha/Benef:  <tspan class="bold-txt">2026-11-05 08:30 UTC</tspan>   Fecha Entrega:     <tspan class="bold-txt">2026-11-10 14:15 UTC</tspan></text>
+        </g>
+
+        <!-- Bloqueo datos personales Ley 1581 -->
+        <g transform="translate(20, 195)">
+          <rect width="680" height="90" rx="6" fill="#FEE2E2" stroke="#9E1B1B" stroke-width="1.5" />
+          <text x="15" y="22" class="bold-txt" fill="#7F1D1D">PROTECCIÓN DE DATOS PERSONALES (LEY 1581 DE 2012 / DECRETO 1377):</text>
+          <text x="15" y="42" class="body-txt" fill="#7F1D1D">[X] Cédula y nombre del caficultor: Cero acceso público (datos personales bloqueados).</text>
+          <text x="15" y="62" class="body-txt" fill="#7F1D1D">[X] Coordenadas GPS submétricas de finca: Bloqueadas para salvaguardar seguridad rural.</text>
+          <text x="15" y="80" class="body-txt" fill="#7F1D1D">[X] Identidad del transportador y georutas intermedias: Bloqueadas para proteger carga.</text>
+        </g>
+
+        <!-- Boton PDF -->
+        <g transform="translate(20, 295)">
+          <rect width="680" height="42" rx="6" fill="#0F4C81" />
+          <text x="340" y="26" class="btn-txt">Descargar Certificado SCA en PDF (Firma Digital FNC)</text>
+        </g>
+      </g>
+
+      <!-- Gobernanza y Segregacion -->
+      <g transform="translate(20, 535)">
+        <text x="10" y="20" class="bold-txt" fill="#0F172A">SEGREGACIÓN FÍSICA DE VISTAS (DYNAMODB):</text>
+        <text x="10" y="40" class="body-txt">- El portal web consulta exclusivamente la tabla pública sacos_publicos.</text>
+        <text x="10" y="60" class="body-txt">- Alimentada asíncronamente vía DynamoDB Streams y Lambda sanitizadora E6-05.</text>
+        <text x="10" y="80" class="body-txt">- Auditoría inmutable de lecturas con retención de 5 años en modo Compliance.</text>
+      </g>
+      <rect x="20" y="745" width="720" height="35" rx="6" fill="#F1F5F9" stroke="#0F172A" />
+      <text x="380" y="768" class="bold-txt" fill="#0F172A" text-anchor="middle">GOBERNANZA JURÍDICA: PRIVACIDAD POR DISEÑO Y SOBERANÍA DE DATOS (LEY 1581)</text>
+    </g>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- FRANJA 3: FINOPS Y GOBERNANZA (y=1370 a 1570)            -->
+  <!-- ======================================================== -->
+  <g transform="translate(40, 1370)" filter="url(#shadow)">
+    <rect width="2320" height="190" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+    <rect width="2320" height="30" rx="8" fill="#F1F5F9" />
+    <text x="15" y="20" class="sec-hdr">3. GOBERNANZA ARQUITECTÓNICA, FINOPS Y EVALUACIÓN DE COSTO EVITADO (FNC 2026)</text>
+
+    <!-- Caja FinOps Izquierda -->
+    <g transform="translate(20, 40)">
+      <rect width="1120" height="80" rx="6" fill="#FAF8F5" stroke="#CBD5E1" />
+      <text x="15" y="24" class="bold-txt" fill="#135E34">SUSTENTACIÓN FINOPS (CERO CÓMPUTO EN REPOSO):</text>
+      <text x="15" y="44" class="body-txt">- Costo en valle: $0,00 USD / mes (Librería estática de tokens DTCG en S3 + CloudFront; costo distribuido &lt; $1.50 USD/mes).</text>
+      <text x="15" y="64" class="body-txt">- Presupuestos respetados: Invariante de Budgets ($480 USD mes normal / $750 USD mes cosecha) sin apagar ingesta ni consulta.</text>
+    </g>
+
+    <!-- Caja FinOps Derecha -->
+    <g transform="translate(1160, 40)">
+      <rect width="1140" height="80" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5" />
+      <text x="15" y="24" class="bold-txt" fill="#14532D">COSTO EVITADO CUANTIFICADO:</text>
+      <text x="15" y="44" class="body-txt" fill="#14532D">- $17.500 USD evitados en desarrollo prematuro de aplicaciones nativas antes de validar consistencia arquitectónica.</text>
+      <text x="15" y="64" class="body-txt" fill="#14532D">- $14.040 USD/año ahorrados en mantenimiento unificado y optimización de paquetes móviles/satelitales (28 KB vs 600 KB).</text>
+    </g>
+
+    <!-- Banner Trazabilidad -->
+    <g transform="translate(20, 130)">
+      <rect width="2280" height="45" rx="6" fill="#FAF8F5" stroke="#135E34" stroke-width="1.5" />
+      <text x="1140" y="28" class="bold-txt" fill="#135E34" text-anchor="middle">TRAZABILIDAD INTEGRAL: Cajas E6-05 (Saco, viaje y consulta) y E6-07 (Sistema de diseño y costos) | Región AWS us-east-1 (DR us-east-2) | Federación Nacional de Cafeteros</text>
+    </g>
+  </g>
+</svg>
