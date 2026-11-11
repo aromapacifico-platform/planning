@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" width="100%" height="100%">
+  <!-- Fondo Oscuro Carbón para version negativo -->
+  <rect width="520" height="120" rx="12" fill="#0F172A"/>
+
+  <!-- ISOTIPO NEGATIVO (x=20, y=15, w=90, h=90) -->
+  <g id="isotipo-negativo" transform="translate(20, 15)">
+    <!-- Contenedor perimetral blanco -->
+    <circle cx="45" cy="45" r="43" fill="#1E293B" stroke="#FFFFFF" stroke-width="2.5"/>
+    
+    <!-- Geometria refinada del grano de cafe (fissura natural en espacio negativo) -->
+    <g transform="translate(45, 45) scale(0.88) translate(-50, -50)">
+      <!-- Lobo Izquierdo: Blanco Puro -->
+      <path d="M 47.5,14 C 29,14 17,29 17,50 C 17,71 29,86 47.5,86 C 42,72 43,60 46.5,50 C 50,40 51,28 47.5,14 Z" 
+            fill="#FFFFFF"/>
+      <!-- Lobo Derecho Superior: Blanco Puro -->
+      <path d="M 52.5,14 C 56,28 55,40 51.5,47 C 64,45 76,40 81,30 C 78,19 68,14 52.5,14 Z" 
+            fill="#FFFFFF"/>
+      <!-- Lobo Derecho Inferior: Blanco Puro -->
+      <path d="M 51.5,53 C 48,60 47,72 52.5,86 C 68,86 83,73 83,52 C 75,51 63,52 51.5,53 Z" 
+            fill="#FFFFFF"/>
+    </g>
+  </g>
+
+  <!-- LOGOTIPO / TIPOGRAFIA NEGATIVO (x=130) -->
+  <g id="logotipo-negativo" transform="translate(130, 24)">
+    <text x="0" y="44" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" 
+          font-size="42" font-weight="800" fill="#FFFFFF" letter-spacing="-0.5">AromaPacífico</text>
+    
+    <rect x="0" y="56" width="360" height="3" fill="#FFFFFF"/>
+
+    <text x="0" y="78" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" 
+          font-size="13" font-weight="600" fill="#94A3B8" letter-spacing="1.5">FEDERACIÓN NACIONAL DE CAFETEROS · FNC 2026</text>
+  </g>
+</svg>

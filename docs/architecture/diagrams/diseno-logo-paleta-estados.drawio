@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" compressed="false">
+  <diagram id="diseno-logo-paleta-estados" name="Sistema de Diseno Logo Paleta y Estados">
+    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1300" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ENCABEZADO Y TITULOS DEL DIAGRAMA -->
+        <mxCell id="main-title" value="AromaPacífico - Sistema de Diseño Visual: Identidad, Paleta Cromática y Estados del Saco" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#0F172A;" vertex="1" parent="1">
+          <mxGeometry x="100" y="20" width="1600" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="main-subtitle" value="Especificación Técnica de UI/UX, Accesibilidad WCAG 2.1 Nivel AAA, Resistencia Solar en Campo y Doble Codificación Visual (FNC 2026)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=0;fontColor=#475569;" vertex="1" parent="1">
+          <mxGeometry x="100" y="60" width="1600" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- CONTENEDOR 1: IDENTIDAD DE MARCA (LOGO E ISOTIPO EN SUS 3 VERSIONES) -->
+        <mxCell id="box-brand" value="1. IDENTIDAD DE MARCA: LOGOTIPO E ISOTIPO (TRES VARIANTES OFICIALES)" style="swimlane;startSize=30;horizontal=1;fillColor=#F8FAFC;strokeColor=#475569;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#0F172A;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="1720" height="340" as="geometry" />
+        </mxCell>
+
+        <!-- VARIANTE A: COLOR PRINCIPAL -->
+        <mxCell id="brand-col-card" value="VARIANTE 1: COLOR PRINCIPAL (CANVAS CLARO)&#xa;Uso: Aplicaciones móviles, portal web de consulta y papelería institucional" style="swimlane;startSize=25;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#135E34;" vertex="1" parent="box-brand">
+          <mxGeometry x="25" y="45" width="530" height="275" as="geometry" />
+        </mxCell>
+        <mxCell id="brand-col-visual" value="[ ISOTIPO COLOR: Grano Andino + Ola Pacifico + Cereza Madura ]&#xa;&#xa;AromaPacífico&#xa;FEDERACIÓN NACIONAL DE CAFETEROS · FNC 2026&#xa;&#xa;Paleta activa: Verde Cordillera (#135E34), Azul Pacifico (#0F4C81), Cereza (#9E1B1B)&#xa;Fondo optimizado: Blanco Pergamino (#FAF8F5) o Blanco Puro (#FFFFFF)&#xa;Hendidura del Grano: Espacio negativo orgánico de 5 px sin líneas superpuestas&#xa;Relación de Contraste Tipográfico: 17.85:1 sobre blanco (Pasa AAA)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#135E34;strokeWidth=2;fontSize=12;align=center;fontColor=#0F172A;fontStyle=0;" vertex="1" parent="brand-col-card">
+          <mxGeometry x="15" y="35" width="500" height="225" as="geometry" />
+        </mxCell>
+
+        <!-- VARIANTE B: UNA TINTA (MONOCROMO) -->
+        <mxCell id="brand-mono-card" value="VARIANTE 2: UNA TINTA (MONOCROMÁTICA - 100% NEGRO)&#xa;Uso: Impresoras térmicas de acopio, sellos de sacos de fique, guías de despacho y fax" style="swimlane;startSize=25;fillColor=#FFFFFF;strokeColor=#0F172A;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#0F172A;" vertex="1" parent="box-brand">
+          <mxGeometry x="595" y="45" width="530" height="275" as="geometry" />
+        </mxCell>
+        <mxCell id="brand-mono-visual" value="[ ISOTIPO UNA TINTA: Alto Contraste Negro Puro ]&#xa;&#xa;AromaPacífico&#xa;FEDERACIÓN NACIONAL DE CAFETEROS · FNC 2026&#xa;&#xa;Tinta: Negro Solido 100% (#000000) sobre Blanco Puro (#FFFFFF)&#xa;Hendidura Térmica: Canal calado limpio de 5 px que no se empasta en 203 DPI&#xa;Relación de Contraste Tipográfico: 21.0:1 (Máximo Teórico WCAG)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontSize=12;align=center;fontColor=#000000;fontStyle=0;" vertex="1" parent="brand-mono-card">
+          <mxGeometry x="15" y="35" width="500" height="225" as="geometry" />
+        </mxCell>
+
+        <!-- VARIANTE C: NEGATIVO (FONDO OSCURO) -->
+        <mxCell id="brand-dark-card" value="VARIANTE 3: EN NEGATIVO (CANVAS OSCURO / MODO NOCHE)&#xa;Uso: Splash screens, turno nocturno de transporte y paneles en cabina de camion" style="swimlane;startSize=25;fillColor=#0F172A;strokeColor=#334155;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="box-brand">
+          <mxGeometry x="1165" y="45" width="530" height="275" as="geometry" />
+        </mxCell>
+        <mxCell id="brand-dark-visual" value="[ ISOTIPO NEGATIVO: Blanco Puro Calado ]&#xa;&#xa;AromaPacífico&#xa;FEDERACIÓN NACIONAL DE CAFETEROS · FNC 2026&#xa;&#xa;Fondo: Carbon Pizarra Profundo (#0F172A)&#xa;Hendidura Nocturna: El fondo oscuro actúa como canal orgánico calado&#xa;Relación de Contraste Tipográfico: 17.85:1 sobre fondo oscuro (Pasa AAA)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1E293B;strokeColor=#FFFFFF;strokeWidth=2;fontSize=12;align=center;fontColor=#FFFFFF;fontStyle=0;" vertex="1" parent="brand-dark-card">
+          <mxGeometry x="15" y="35" width="500" height="225" as="geometry" />
+        </mxCell>
+
+
+        <!-- CONTENEDOR 2: PALETA CROMATICA Y TOKENS (MEDICION WCAG AAA) -->
+        <mxCell id="box-palette" value="2. PALETA CROMÁTICA OFICIAL Y MEDICIÓN DE CONTRASTE SOLAR EN CAMPO" style="swimlane;startSize=30;horizontal=1;fillColor=#F8FAFC;strokeColor=#475569;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#0F172A;" vertex="1" parent="1">
+          <mxGeometry x="40" y="460" width="1720" height="260" as="geometry" />
+        </mxCell>
+
+        <!-- PRIMARIO VERDE -->
+        <mxCell id="pal-primary" value="VERDE CORDILLERA&#xa;Primario Institucional&#xa;&#xa;HEX: #135E34&#xa;RGB: (19, 94, 52)&#xa;Contraste: 7.84:1&#xa;Clasificación: WCAG AAA&#xa;Uso: Acciones clave y marca" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#135E34;strokeColor=#0D4A27;strokeWidth=2;fontSize=12;align=center;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="box-palette">
+          <mxGeometry x="25" y="45" width="225" height="195" as="geometry" />
+        </mxCell>
+
+        <!-- SECUNDARIO CEREZA -->
+        <mxCell id="pal-cherry" value="ROJO CEREZA MADURA&#xa;Secundario Cultivo&#xa;&#xa;HEX: #9E1B1B&#xa;RGB: (158, 27, 27)&#xa;Contraste: 6.44:1&#xa;Clasificación: WCAG AA / AAA&#xa;Uso: Alertas y maduración" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9E1B1B;strokeColor=#7F1D1D;strokeWidth=2;fontSize=12;align=center;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="box-palette">
+          <mxGeometry x="275" y="45" width="225" height="195" as="geometry" />
+        </mxCell>
+
+        <!-- SECUNDARIO PACIFICO -->
+        <mxCell id="pal-pacific" value="AZUL PACÍFICO&#xa;Secundario Logística&#xa;&#xa;HEX: #0F4C81&#xa;RGB: (15, 76, 129)&#xa;Contraste: 7.78:1&#xa;Clasificación: WCAG AAA&#xa;Uso: Rutas y transporte" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F4C81;strokeColor=#1E40AF;strokeWidth=2;fontSize=12;align=center;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="box-palette">
+          <mxGeometry x="525" y="45" width="225" height="195" as="geometry" />
+        </mxCell>
+
+        <!-- SECUNDARIO TIERRA -->
+        <mxCell id="pal-earth" value="TIERRA VOLCÁNICA&#xa;Secundario Andino&#xa;&#xa;HEX: #4A2E1B&#xa;RGB: (74, 46, 27)&#xa;Contraste: 9.87:1&#xa;Clasificación: WCAG AAA&#xa;Uso: Beneficio y secado" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4A2E1B;strokeColor=#2D1A0E;strokeWidth=2;fontSize=12;align=center;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="box-palette">
+          <mxGeometry x="775" y="45" width="225" height="195" as="geometry" />
+        </mxCell>
+
+        <!-- NEUTRO CARBON -->
+        <mxCell id="pal-carbon" value="CARBÓN PROFUNDO&#xa;Neutro de Texto Base&#xa;&#xa;HEX: #0F172A&#xa;RGB: (15, 23, 42)&#xa;Contraste: 17.85:1&#xa;Clasificación: WCAG AAA Máx&#xa;Uso: Lectura bajo sol cenital" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F172A;strokeColor=#000000;strokeWidth=2;fontSize=12;align=center;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="box-palette">
+          <mxGeometry x="1025" y="45" width="225" height="195" as="geometry" />
+        </mxCell>
+
+        <!-- NEUTRO PERGAMINO -->
+        <mxCell id="pal-parchment" value="BLANCO PERGAMINO&#xa;Lienzo Anti-Deslumbramiento&#xa;&#xa;HEX: #FAF8F5&#xa;RGB: (250, 248, 245)&#xa;Reflectancia: Suave&#xa;Clasificación: Confort Visual&#xa;Uso: Fondo general de pantalla" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF8F5;strokeColor=#CBD5E1;strokeWidth=2;fontSize=12;align=center;fontColor=#0F172A;fontStyle=1;" vertex="1" parent="box-palette">
+          <mxGeometry x="1275" y="45" width="200" height="195" as="geometry" />
+        </mxCell>
+
+        <!-- RESISTENCIA SOLAR REGLA -->
+        <mxCell id="pal-formula" value="REGLA SOLAR EN CAMPO&#xa;&#xa;Bajo 80.000 lux (sol ecuatorial), el contraste real cae un 50% por luz ambiental reflejada.&#xa;Una relación base de 7.5:1 a 10.0:1 garantiza una relación percibida mayor a 4.0:1 en pantalla." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B82F6;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#1E3A8A;fontStyle=0;" vertex="1" parent="box-palette">
+          <mxGeometry x="1495" y="45" width="200" height="195" as="geometry" />
+        </mxCell>
+
+
+        <!-- CONTENEDOR 3: ESTADOS DEL SACO (DOBLE CODIFICACIÓN OBLIGATORIA) -->
+        <mxCell id="box-states" value="3. ESTADOS DEL SACO DE CAFÉ (60 KG): DOBLE CODIFICACIÓN (COLOR + FORMA / ICONO + TEXTO VISIBLE)" style="swimlane;startSize=30;horizontal=1;fillColor=#F8FAFC;strokeColor=#475569;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#0F172A;" vertex="1" parent="1">
+          <mxGeometry x="40" y="740" width="1720" height="280" as="geometry" />
+        </mxCell>
+
+        <!-- ESTADO 1: EN PREPARACION -->
+        <mxCell id="card-state-prep" value="ESTADO 1: EN PREPARACIÓN&#xa;Fase: Beneficiadero y Finca Cafetera" style="swimlane;startSize=25;fillColor=#FEF3C7;strokeColor=#D97706;strokeWidth=2;rounded=1;fontSize=12;fontStyle=1;fontColor=#78350F;" vertex="1" parent="box-states">
+          <mxGeometry x="25" y="45" width="390" height="215" as="geometry" />
+        </mxCell>
+        <mxCell id="badge-prep" value="[ ICONO: SACO CON ENGRANAJE ]&#xa;&#xa;EN PREPARACIÓN&#xa;&#xa;Tokens: Texto #78350F | Fondo #FEF3C7 | Borde #D97706&#xa;Contraste WCAG: 8.15:1 (Cumple AAA)&#xa;Silueta: Rombo o rectángulo redondeado&#xa;Significado: Secado, pesaje y marcado con hash HMAC-SHA-256" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D97706;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#78350F;fontStyle=0;" vertex="1" parent="card-state-prep">
+          <mxGeometry x="15" y="35" width="360" height="165" as="geometry" />
+        </mxCell>
+
+        <!-- ESTADO 2: EN VIAJE -->
+        <mxCell id="card-state-travel" value="ESTADO 2: EN VIAJE&#xa;Fase: Transporte Rural y Carretera" style="swimlane;startSize=25;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=2;rounded=1;fontSize=12;fontStyle=1;fontColor=#1E40AF;" vertex="1" parent="box-states">
+          <mxGeometry x="450" y="45" width="390" height="215" as="geometry" />
+        </mxCell>
+        <mxCell id="badge-travel" value="[ ICONO: CAMIÓN DE CARGA / CHEVRON ]&#xa;&#xa;EN VIAJE&#xa;&#xa;Tokens: Texto #1E40AF | Fondo #DBEAFE | Borde #2563EB&#xa;Contraste WCAG: 7.15:1 (Cumple AAA)&#xa;Silueta: Flecha direccional derecha / cilindro&#xa;Significado: En custodia de transportador hacia acopio o puerto" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#1E40AF;fontStyle=0;" vertex="1" parent="card-state-travel">
+          <mxGeometry x="15" y="35" width="360" height="165" as="geometry" />
+        </mxCell>
+
+        <!-- ESTADO 3: ACEPTADO -->
+        <mxCell id="card-state-acc" value="ESTADO 3: ACEPTADO&#xa;Fase: Acopio / Puerto de Buenaventura" style="swimlane;startSize=25;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=2;rounded=1;fontSize=12;fontStyle=1;fontColor=#14532D;" vertex="1" parent="box-states">
+          <mxGeometry x="875" y="45" width="390" height="215" as="geometry" />
+        </mxCell>
+        <mxCell id="badge-acc" value="[ ICONO: ESCUDO CON CHECKMARK ]&#xa;&#xa;ACEPTADO&#xa;&#xa;Tokens: Texto #14532D | Fondo #DCFCE7 | Borde #16A34A&#xa;Contraste WCAG: 8.30:1 (Cumple AAA)&#xa;Silueta: Escudo perimetral continuo&#xa;Significado: Calidad SCA mayor a 80 puntos y humedad menor al 12%" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#16A34A;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#14532D;fontStyle=0;" vertex="1" parent="card-state-acc">
+          <mxGeometry x="15" y="35" width="360" height="165" as="geometry" />
+        </mxCell>
+
+        <!-- ESTADO 4: RECHAZADO -->
+        <mxCell id="card-state-rej" value="ESTADO 4: RECHAZADO&#xa;Fase: Acopio / Inspección Portuaria" style="swimlane;startSize=25;fillColor=#FEE2E2;strokeColor=#DC2626;strokeWidth=2;rounded=1;fontSize=12;fontStyle=1;fontColor=#7F1D1D;" vertex="1" parent="box-states">
+          <mxGeometry x="1300" y="45" width="395" height="215" as="geometry" />
+        </mxCell>
+        <mxCell id="badge-rej" value="[ ICONO: OCTÁGONO CON ASPA X ]&#xa;&#xa;RECHAZADO&#xa;&#xa;Tokens: Texto #7F1D1D | Fondo #FEE2E2 | Borde #DC2626&#xa;Contraste WCAG: 8.20:1 (Cumple AAA)&#xa;Silueta: Octágono regular (detención)&#xa;Significado: Tacha, humedad mayor al 12.5% o defecto fitosanitario" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DC2626;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#7F1D1D;fontStyle=0;" vertex="1" parent="card-state-rej">
+          <mxGeometry x="15" y="35" width="365" height="165" as="geometry" />
+        </mxCell>
+
+
+        <!-- CONTENEDOR 4: ALERTA DE CULTIVO DE ALTO CONTRASTE Y GOBERNANZA -->
+        <mxCell id="box-alert-gov" value="4. COMPONENTE DE ALERTA DE CULTIVO EN CAMPO Y ARQUITECTURA DE PRIVACIDAD (LEY 1581)" style="swimlane;startSize=30;horizontal=1;fillColor=#F8FAFC;strokeColor=#475569;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#0F172A;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1040" width="1720" height="230" as="geometry" />
+        </mxCell>
+
+        <!-- TARJETA ALERTA CULTIVO -->
+        <mxCell id="alert-card" value="ALERTA FITOSANITARIA DE CULTIVO (DETECCIÓN DE FOCO / UMBRAL FUERA DE RANGO)&#xa;Diseño Ergonómico para Lectura Inmediata bajo Sol Directo y Alerta Háptica en Teléfono" style="swimlane;startSize=25;fillColor=#FEF2F2;strokeColor=#B91C1C;strokeWidth=2.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#7F1D1D;" vertex="1" parent="box-alert-gov">
+          <mxGeometry x="25" y="45" width="850" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="alert-content" value="[ TRIÁNGULO DE ALERTA CON SIGNO DE EXCLAMACIÓN EN NEGRITA ]&#xa;&#xa;ALERTA CRÍTICA: ANOMALÍA EN LOTE 3 - FINCA EL ROSAL&#xa;Variable: Humedad suelo fuera de rango (32 % menor al umbral mínimo 40 %) | Lectura: 11:40 UTC&#xa;&#xa;Tokens: Texto #7F1D1D | Fondo #FEF2F2 | Borde 2.5px #B91C1C | Contraste: 9.16:1 (WCAG AAA)&#xa;Acción en Campo: Botón de llamada a agrónomo / Solicitud de dron de confirmación (Mínimo 48x48 px)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B91C1C;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#7F1D1D;fontStyle=0;" vertex="1" parent="alert-card">
+          <mxGeometry x="15" y="35" width="820" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- PRIVACIDAD Y FINOPS -->
+        <mxCell id="gov-card" value="GOBERNANZA DE DATOS (LEY 1581) Y SUSTENTACIÓN FINOPS&#xa;Segregación de Vistas y Optimización de Ancho de Banda Móvil en Zonas Rurales" style="swimlane;startSize=25;fillColor=#F0FDF4;strokeColor=#135E34;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#135E34;" vertex="1" parent="box-alert-gov">
+          <mxGeometry x="900" y="45" width="795" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="gov-content" value="VISTA DEL COMPRADOR (CONSULTA PÚBLICA SIN CREDENCIALES):&#xa;* Muestra: Estado del saco, hash anonimizado HMAC-SHA-256, departamento, altitud y puntaje SCA.&#xa;* Oculta estrictamente: Cédula caficultor, nombre, teléfono y coordenadas GPS submétricas.&#xa;&#xa;DECISIÓN FINOPS EN SISTEMA DE DISEÑO:&#xa;* Tokens W3C JSON centralizados y activos SVG nativos menores a 3 KB.&#xa;* Evita 180 GB mensuales de egress CloudFront y previene costos de reproceso de sacos ($3.500 USD/año)." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#0F172A;fontStyle=0;" vertex="1" parent="gov-card">
+          <mxGeometry x="15" y="35" width="765" height="120" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
+

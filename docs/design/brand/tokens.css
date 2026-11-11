@@ -1,0 +1,85 @@
+/**
+ * AromaPacífico Design Tokens - FNC 2026
+ * Tokens cromáticos y de accesibilidad para aplicaciones web y móviles en campo.
+ * Cumplimiento estricto: WCAG 2.1 AAA / APCA Silver Draft.
+ */
+
+:root {
+  /* Marca Primaria */
+  --ap-color-brand-primary: #135E34;
+  --ap-color-brand-primary-dark: #0D4A27;
+  --ap-color-brand-primary-light: #DCFCE7;
+  --ap-color-brand-primary-surface: #F0FDF4;
+
+  /* Marca Secundaria */
+  --ap-color-brand-cherry: #9E1B1B;
+  --ap-color-brand-cherry-dark: #7F1D1D;
+  --ap-color-brand-cherry-surface: #FEF2F2;
+  --ap-color-brand-pacific: #0F4C81;
+  --ap-color-brand-pacific-vibrant: #1D4ED8;
+  --ap-color-brand-earth: #4A2E1B;
+
+  /* Neutros y Superficies */
+  --ap-color-neutral-carbon: #0F172A;
+  --ap-color-neutral-slate: #334155;
+  --ap-color-neutral-muted: #64748B;
+  --ap-color-neutral-border: #CBD5E1;
+  --ap-color-neutral-cloud: #F1F5F9;
+  --ap-color-neutral-parchment: #FAF8F5;
+  --ap-color-neutral-white: #FFFFFF;
+
+  /* Estados del Saco de Café (60 kg) */
+  --ap-status-prep-text: #78350F;
+  --ap-status-prep-bg: #FEF3C7;
+  --ap-status-prep-border: #D97706;
+  --ap-status-prep-icon: #B45309;
+
+  --ap-status-travel-text: #1E40AF;
+  --ap-status-travel-bg: #DBEAFE;
+  --ap-status-travel-border: #2563EB;
+  --ap-status-travel-icon: #1D4ED8;
+
+  --ap-status-accepted-text: #14532D;
+  --ap-status-accepted-bg: #DCFCE7;
+  --ap-status-accepted-border: #16A34A;
+  --ap-status-accepted-icon: #15803D;
+
+  --ap-status-rejected-text: #7F1D1D;
+  --ap-status-rejected-bg: #FEE2E2;
+  --ap-status-rejected-border: #DC2626;
+  --ap-status-rejected-icon: #B91C1C;
+
+  /* Alerta de Cultivo (Foco Fitosanitario / Lectura Fuera de Rango) */
+  --ap-alert-crop-text: #7F1D1D;
+  --ap-alert-crop-bg: #FEF2F2;
+  --ap-alert-crop-border: #B91C1C;
+  --ap-alert-crop-icon: #DC2626;
+  --ap-alert-crop-stroke: 2.5px;
+
+  /* Tipografía y Escala */
+  --ap-font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --ap-font-mono: 'Fira Code', monospace;
+  --ap-text-badge: 0.875rem; /* 14px */
+  --ap-text-body: 1rem;       /* 16px */
+  --ap-text-title: 1.25rem;   /* 20px */
+  --ap-text-hero: 1.5rem;     /* 24px */
+
+  /* Ergonomía Táctil en Campo */
+  --ap-touch-target-min: 48px;
+  --ap-radius-badge: 6px;
+  --ap-radius-card: 12px;
+}
+
+/* Modo Exterior de Alto Brillo (Luz Solar Extrema en Campo) */
+@media (prefers-contrast: more) {
+  :root {
+    --ap-color-brand-primary: #0D4A27;
+    --ap-status-prep-border: #92400E;
+    --ap-status-travel-border: #1D4ED8;
+    --ap-status-accepted-border: #15803D;
+    --ap-status-rejected-border: #991B1B;
+    --ap-alert-crop-border: #991B1B;
+    --ap-alert-crop-stroke: 3px;
+  }
+}
+

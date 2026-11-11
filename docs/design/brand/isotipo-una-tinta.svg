@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <!-- Circulo contenedor perimetral monocromatico -->
+  <circle cx="50" cy="50" r="46" fill="none" stroke="#000000" stroke-width="2.5"/>
+  
+  <!-- Lobo Izquierdo: Follaje / Montana -->
+  <path d="M 47.5,14 C 29,14 17,29 17,50 C 17,71 29,86 47.5,86 C 42,72 43,60 46.5,50 C 50,40 51,28 47.5,14 Z" 
+        fill="#000000"/>
+  
+  <!-- Lobo Derecho Superior: Fruto de Cafe -->
+  <path d="M 52.5,14 C 56,28 55,40 51.5,47 C 64,45 76,40 81,30 C 78,19 68,14 52.5,14 Z" 
+        fill="#000000"/>
+
+  <!-- Lobo Derecho Inferior: Ruta Pacifico -->
+  <path d="M 51.5,53 C 48,60 47,72 52.5,86 C 68,86 83,73 83,52 C 75,51 63,52 51.5,53 Z" 
+        fill="#000000"/>
+</svg>
