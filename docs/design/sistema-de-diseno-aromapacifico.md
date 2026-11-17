@@ -165,3 +165,4 @@ A continuación se audita el cumplimiento riguroso de cada uno de los criterios 
 | **Entregable en formatos editables y vectoriales.** | **CUMPLIDO** | Se entregan `.drawio` (fuente XML UTF-8), `.svg` (vectorial web), `.png` (alta resolución 2400x1600 px) y `.pdf` (documento portable). | Sección 2. |
 | **Sustentación FinOps y Justificación Técnica.** | **CUMPLIDO** | Modelo multicriterio, **$17.500 USD de costo evitado**, $0 en reposo y respeto a la ventana de cosecha y presupuestos cloud. | Sección 3. |
 | **Gobernanza de Datos y Ley 1581 de 2012.** | **CUMPLIDO** | Anonimización total del expediente del saco en la vista del comprador; cero exposición de cédulas, nombres o coordenadas submétricas. | Sección 5.3. |
+
