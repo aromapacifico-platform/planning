@@ -197,7 +197,7 @@ El código instancia **una finca**, no las 200.
 Detalle en [#11](carga-a-nodo-finca.md) y [#12](carga-a-ingesta-telemetria.md).
 
 **El nodo:**
-- Un ESP32-S3 con módem LTE-M/NB-IoT y sondas de suelo, NPK, pH, aire y grano.
+- Un ESP32-S3 con sondas de suelo, NPK, pH, aire y grano: módem LTE-M/NB-IoT en `140` fincas, módulo LoRaWAN US915 en `48` fincas (vía `10` gateways solares LTE-M hacia `AWS IoT Core for LoRaWAN`) y RockBLOCK 9603/Iridium SBD en las `12` fincas restantes sin línea de vista.
 - Panel solar de 15 W y batería LiFePO4 de 12 V y 6 Ah, que aguanta tres días nublados seguidos.
 - Se instala en una sola visita, de unas 4 h 30 min.
 

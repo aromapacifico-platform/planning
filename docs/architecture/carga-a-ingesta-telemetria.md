@@ -139,6 +139,10 @@ El ACK MT ocupa hasta **50 bytes**: encabezado 13 + nonce 12 + etiqueta 16 + 9 d
 
 El adaptador normaliza y encola en las mismas colas; HTTP 202 al proveedor solo confirma recepción de esa etapa. El ACK al nodo se genera tras la transacción de persistencia y se pone en el servicio de mensajes MT. La desactivación del certificado IoT debe acompañarse del estado inactivo en el registro del adaptador; no se presupone que cortar MQTT bloquee por sí solo SBD.
 
+### 3.4 Finca sin cobertura con línea de vista: entrada LoRaWAN compartida (48 fincas)
+
+Para las **48 fincas sin cobertura celular con línea de vista** (80 % de las 60 sin señal, Decisión `#31` / `#71`), las lecturas ingresan por **10 gateways solares compartidos con salida LTE-M** (`RAK7289CV2`) registrados en **AWS IoT Core for LoRaWAN** (`DevEUI` individual con cifrado OTAA AES-128 por finca). La regla de destino de Wireless/IoT Core for LoRaWAN decodifica la carga compacta y la enruta hacia el mismo normalizador y colas (`telemetry-live` / `telemetry-replay`) de `#12`, manteniendo las 140 fincas celulares (MQTT/TLS), 48 fincas LoRaWAN y 12 fincas Iridium SBD bajo la misma lógica agronómica y de persistencia antes de enviar el ACK por downlink Clase A.
+
 ## 4. Persistencia, ACK e idempotencia
 
 ### 4.1 Almacén seleccionado

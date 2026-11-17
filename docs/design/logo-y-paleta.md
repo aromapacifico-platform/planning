@@ -28,9 +28,9 @@ Para resolver este desafío de manera integral, AromaPacífico establece un sist
 
 La arquitectura visual, las tres variantes de marca, la paleta cromática con contrastes medidos, los componentes de estado del saco y la tarjeta de alerta fitosanitaria se integran en el siguiente diagrama técnico de referencia:
 
-![Sistema de Diseño: Logo, Paleta y Estados del Saco](diagrams/diseno-logo-paleta-estados.svg)
+![Sistema de Diseño: Logo, Paleta y Estados del Saco](../architecture/diagrams/diseno-logo-paleta-estados.svg)
 
-> Archivo fuente editable en formato Draw.io XML descomprimido disponible en: [`diagrams/diseno-logo-paleta-estados.drawio`](diagrams/diseno-logo-paleta-estados.drawio).  
+> Archivo fuente editable en formato Draw.io XML descomprimido disponible en: [`../architecture/diagrams/diseno-logo-paleta-estados.drawio`](../architecture/diagrams/diseno-logo-paleta-estados.drawio).  
 > Validado exitosamente mediante el linter oficial del proyecto bajo codificación UTF-8, tamaño de fuente mínimo de 12 pt, cero emojis y elementos vectoriales autónomos sin dependencias externas.
 
 ---
