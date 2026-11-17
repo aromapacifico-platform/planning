@@ -137,3 +137,10 @@ La Federación decide la activación. Estos son los casos en los que tendría se
 
 Al activarse, el costo de la VPN, del cómputo de la consulta y de la copia de datos se estima en el
 documento de costos (#29) antes de construir nada.
+
+## 9. Comparativa FinOps de alternativas multi-nube
+
+| Criterio | Alternativa seleccionada: Azure preparada en diseño y red (`10.90.0.0/16`) sin recursos activos | Alternativa descartada A: Despliegue activo-activo permanente en AWS y Azure | Alternativa descartada B: Contingencia únicamente en una sola nube y una sola región |
+| --- | --- | --- | --- |
+| **Costo mensual en el piloto** | **$0,00 USD / mes** | Duplicación de VPN, cómputo y transferencia entre nubes (> USD 400 / mes extra) | $0,00 USD extra, pero incumple el requisito de segunda nube preparada |
+| **Veredicto FinOps** | **Seleccionada** (cumple el reto con costo cero en piloto) | Rechazada (prohibido duplicar la plataforma) | Rechazada (incumple mandato del enunciado) |

@@ -87,6 +87,14 @@ Precios de lista de `us-east-1`. Se verifican contra la página de precios al co
 
 **Total: unos USD 53 al año, o unos USD 265 en los cinco años.** Lo que más pesa son las transiciones, porque Firehose y CloudTrail generan muchos objetos pequeños. Si hiciera falta bajar ese costo, se sube el búfer de Firehose a 15 minutos, con lo que sus objetos caen a la tercera parte. Además, S3 no mueve por defecto los objetos de menos de 128 KB, y esos se quedan en Standard a un costo despreciable. Todo cabe holgado en los USD 50 al mes que la #1 le asigna a la cuenta de seguridad.
 
+### Comparativa FinOps de alternativas de auditoría
+
+| Criterio | Alternativa seleccionada: S3 Object Lock Compliance + Firehose + Glacier Deep Archive | Alternativa descartada A: CloudWatch Logs con retención 5 años | Alternativa descartada B: SIEM externo dedicado (24/7) |
+| --- | --- | --- | --- |
+| **Costo anual estimado** | **USD 53 / año** | ~USD 310 / año (ingesta USD 0,50/GB + almacenamiento sin inmutabilidad) | > USD 3.600 / año (licenciamiento e instancias dedicadas) |
+| **Inmutabilidad WORM (5 años)** | Sí (Object Lock Compliance) | No nativa | Requiere almacenamiento WORM adicional |
+| **Veredicto FinOps** | **Seleccionada** (menor costo y cumplimiento legal) | Rechazada (mayor costo sin bloqueo WORM) | Rechazada (inviable para presupuesto moderado) |
+
 ## 5. Verificación de los criterios de la #2
 
 | Criterio | Dónde se cumple |

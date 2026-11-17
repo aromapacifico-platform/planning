@@ -114,6 +114,14 @@ El detalle por finca o por dron se abre en Cost Explorer con el mismo filtro de 
 
 La consulta a Cost Explorer cuesta USD 0,01 por llamada. Con 3 llamadas al día son unos USD 0,90 al mes, más unas 20 métricas propias a USD 0,30 cada una.
 
+### Comparativa FinOps de alternativas de observabilidad
+
+| Criterio | Alternativa seleccionada: CloudWatch EMF + Synthetics + X-Ray Pay-per-Use | Alternativa descartada A: Amazon Managed Prometheus + Grafana | Alternativa descartada B: Stack ELK / SIEM autoadministrado en EC2 |
+| --- | --- | --- | --- |
+| **Costo fijo en reposo** | **$0,00 USD / mes** en cómputo | ~USD 54+ / mes (workspaces y nodos de consulta) | ~USD 180+ / mes (instancias EC2 + EBS 24/7) |
+| **Integración nativa AWS** | Nativa con Lambda, IoT Core, DynamoDB y VPN | Requiere colectores y exportación adicional | Alta carga operativa de parches y escalado |
+| **Veredicto FinOps** | **Seleccionada** (pago por uso sin infraestructura ociosa) | Rechazada (sobrecosto fijo innecesario) | Rechazada (viola principio de cero cómputo ocioso) |
+
 ## 6. Verificación de los criterios de la #18
 
 | Criterio | Dónde se cumple |

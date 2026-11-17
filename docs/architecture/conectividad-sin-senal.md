@@ -10,7 +10,7 @@ Este caso académico conecta 200 fincas, 60 transportadores y tres acopios de Ca
 
 Se conservan AWS en `us-east-1`, IoT Core para telemetría celular, API Gateway para aplicaciones, DynamoDB para registros y S3 para objetos; son decisiones de [gobierno](gobierno-landing-zone.md), [direccionamiento](red-direccionamiento-nube.md) y [operación de drones](carga-b-orden-fumigacion.md). No se modifican sus CIDR, la topología con Transit Gateway ni la autorización humana de fumigación.
 
-La decisión nueva de #6 es un canal **Iridium SBD para telemetría de las fincas sin cobertura celular**, con RockBLOCK 9603 como referencia técnica y comercial, no como compra confirmada. Se agrega un adaptador de recepción satelital al diseño. Bluetooth no se incorpora como requisito ni como canal de alerta en esta historia.
+La decisión base de #6 incorporó un canal **Iridium SBD para telemetría de las fincas sin cobertura celular**, complementado por la decisión FinOps #31 (#71): **enlace LoRaWAN compartido** para el 80 % de las fincas sin cobertura (48 fincas conectadas vía LoRa a 10 gateways solares con salida LTE-M registrados en **AWS IoT Core for LoRaWAN**) y **Iridium SBD** (RockBLOCK 9603 como referencia técnica) únicamente para las 12 fincas residuales sin línea de vista. Esto reduce la cuota mensual de conectividad sin cobertura de USD 8.820 a USD 1.774 al mes (USD 0,20/mes por finca en LoRaWAN compartido). Bluetooth no se incorpora como requisito ni como canal de alerta en esta historia.
 
 ## 2. Matriz de conectividad por punto
 

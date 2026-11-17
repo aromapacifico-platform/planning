@@ -352,3 +352,11 @@ Documentación primaria consultada el 7 de noviembre de 2026; las configuracione
 - **[A9] DynamoDB:** [auditoría con CloudTrail](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/logging-using-cloudtrail.html).
 - **[A10] DynamoDB:** [capacidad On-Demand y escalamiento](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html).
 - **[A11] S3:** [Object Lock y versiones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html).
+
+## 12. Comparativa FinOps de alternativas de ingesta y almacenamiento
+
+| Criterio | Alternativa seleccionada: IoT Core Basic Ingest + SQS + Lambda + DynamoDB On-Demand | Alternativa descartada A: Amazon Timestream o RDS PostgreSQL dedicado 24/7 | Alternativa descartada B: Broker MQTT autoadministrado en EC2 |
+| --- | --- | --- | --- |
+| **Costo fijo en reposo** | **$0,00 USD / mes** (pago por lectura/escritura) | ~USD 50–120 / mes por instancia mínima encendida 24/7 | ~USD 70+ / mes por instancia + mantenimiento de certificados X.509 |
+| **Escalabilidad (200 a 1.000 fincas)** | Elástica automática sin rediseño | Requiere redimensionamiento de capacidad o clúster | Requiere balanceadores y gestión manual de clúster |
+| **Veredicto FinOps** | **Seleccionada** (óptima para 10.800 lecturas/día en cosecha) | Rechazada (sobrecosto ocioso fuera de pico) | Rechazada (mayor costo operativo y de seguridad) |
