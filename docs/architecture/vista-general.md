@@ -52,7 +52,7 @@ Desde la raíz se aplican cuatro SCP:
 
 **Etiquetas.** `FincaID`, `DronID`, `AcopioID`, `ViajeID`, `Ambiente`, `Propietario` y `Proyecto`. Alimentan el tablero de costo por fincas, drones, acopio, viajes y ambientes.
 
-**Presupuestos.** USD 480 al mes en mes normal y USD 750 en cosecha. Avisan sin apagar la ingesta ni la consulta.
+**Presupuestos.** USD 811 al mes en mes normal y USD 841 en cosecha (actualizados por decisión FinOps #31). Avisan sin apagar la ingesta ni la consulta.
 
 **Auditoría** ([#2](gobierno-auditoria.md)). Los cuatro eventos del enunciado van al bucket `aromapacifico-audit-logs-security`, con Object Lock en modo Compliance a 5 años:
 
@@ -106,7 +106,7 @@ Detalle en [#6](conectividad-sin-senal.md).
 
 | Punto | Con señal | Sin señal |
 | --- | --- | --- |
-| **Finca** | LTE-M o NB-IoT, MQTT sobre TLS a IoT Core, puerto 8883 | Buffer en flash de hasta 24 horas, reintentos a 1, 5 y 15 minutos y drenado al reconectar. Solo se borra lo que la plataforma confirmó como persistido. Si la finca no tiene cobertura, usa Iridium SBD por satélite |
+| **Finca** | LTE-M o NB-IoT, MQTT sobre TLS a IoT Core, puerto 8883 | Buffer en flash de hasta 24 horas, reintentos a 1, 5 y 15 minutos y drenado al reconectar. Solo se borra lo que la plataforma confirmó como persistido. De las 60 fincas sin cobertura celular, 48 (80 %) usan LoRaWAN hacia 10 gateways solares compartidos con salida LTE-M (AWS IoT Core for LoRaWAN) y las 12 restantes usan satélite Iridium SBD |
 | **Dron** | La misión se descarga por HTTPS antes de salir. Los objetos suben desde la estación de la cuadrilla, por el wifi del acopio o por 4G | Ejecuta la misión ya autorizada y precargada. Sin bitácora persistida no hay cierre |
 | **Transportador** | App con 4G y HTTPS a API Gateway con Cognito | Guarda una posición cada 5 minutos en SQLite cifrado y sube lotes al reconectar, sin duplicar |
 | **Acopio** | LAN segmentada y VPN IPsec con dos túneles al Transit Gateway | La LAN, la impresión y la cola local siguen funcionando; se sincroniza al volver la WAN |
@@ -197,7 +197,7 @@ El código instancia **una finca**, no las 200.
 Detalle en [#11](carga-a-nodo-finca.md) y [#12](carga-a-ingesta-telemetria.md).
 
 **El nodo:**
-- Un ESP32-S3 con módem LTE-M/NB-IoT y sondas de suelo, NPK, pH, aire y grano.
+- Un ESP32-S3 con sondas de suelo, NPK, pH, aire y grano: módem LTE-M/NB-IoT en `140` fincas, módulo LoRaWAN US915 en `48` fincas (vía `10` gateways solares LTE-M hacia `AWS IoT Core for LoRaWAN`) y RockBLOCK 9603/Iridium SBD en las `12` fincas restantes sin línea de vista.
 - Panel solar de 15 W y batería LiFePO4 de 12 V y 6 Ah, que aguanta tres días nublados seguidos.
 - Se instala en una sola visita, de unas 4 h 30 min.
 

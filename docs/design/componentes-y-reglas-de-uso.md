@@ -32,7 +32,7 @@ En las 200 fincas cafeteras del piloto distribuidas en las zonas montañosas de 
 
 La anatomía, estados interactivos, variantes de visualización y restricciones de acceso para los cinco componentes se estructuran en el siguiente diagrama técnico de arquitectura visual:
 
-![Diagrama Oficial de Componentes Base y Reglas de Uso](diagrams/diseno-componentes-reglas-uso.svg)
+![Diagrama Oficial de Componentes Base y Reglas de Uso](../architecture/diagrams/diseno-componentes-reglas-uso.svg)
 
 > Archivo fuente editable en formato Draw.io XML descomprimido disponible en: [`diagrams/diseno-componentes-reglas-uso.drawio`](../architecture/diagrams/diseno-componentes-reglas-uso.drawio).  
 > Validado mediante la suite de linting del proyecto bajo codificación UTF-8, tamaño de fuente mínimo de 12 pt, cero emojis y cumplimiento estricto de accesibilidad e iconografía profesional.

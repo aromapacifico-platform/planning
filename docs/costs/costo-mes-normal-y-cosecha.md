@@ -120,6 +120,19 @@ Por eso la diferencia entre un mes normal y uno de cosecha es de solo USD 32. La
 
 **Un costo que se evitó:** la #15 proponía Route 53 Application Recovery Controller para la conmutación de la consulta. Su clúster cuesta USD 2,50 por hora, unos USD 1.825 al mes. La consolidación de la #19 lo reemplazó por health checks de Route 53, que cuestan USD 1.
 
+### Comparativa FinOps pos-Decisión #31 (#70) y presupuesto actualizado
+
+Al ejecutar las palancas de ahorro definidas en [decisiones-ahorro.md](decisiones-ahorro.md) (`#31` / `#70`), el gasto mensual de nube se reduce mediante la comparación explícita entre alternativas descartadas y la topología optimizada adoptada (manteniendo `0,00 USD` en cómputo ocioso para ingesta/inferencia serverless y Gateway Endpoints de S3/DynamoDB a `0 USD/GB`):
+
+| Alternativa comparativa evaluada | Mes normal (USD) | Mes de cosecha (USD) | Costo anual (6 normal + 6 cosecha) | Decisión FinOps |
+| --- | ---: | ---: | ---: | --- |
+| **Alternativa descartada A (Diseño base #29 con red completa + Route 53 ARC)** | 3.410,26 | 3.442,19 | 41.115 | **Descartada** (reemplazo por health checks de `USD 1/mes`, `-1.824/mes`) |
+| **Alternativa descartada B (Línea base #29 previa a #31: con Network Firewall + Outbound Resolver + Test 2 AZ)** | 1.586,26 | 1.618,19 | 19.227 | **Descartada por #31 / #70** (red fija consume `83 %` del gasto) |
+| **Alternativa adoptada (#31 / #70: sin Network Firewall `C19`, sin Outbound Resolver y Test 1 AZ)** | **811,48** | **841,14** | **9.916** | **Adoptada** (ahorro de `USD 774,78` en mes normal y `USD 777,05` en cosecha; `USD 9.297/año` sobre base `#31`) |
+
+- **Desglose de reducción aplicada sobre la sección 2:** retiro de AWS Network Firewall (`-USD 577,68` en mes normal / `-USD 579,95` en cosecha), retiro de Route 53 Outbound Resolver (`-USD 182,50/mes`) y endpoints de Pruebas en una sola zona de disponibilidad (`-USD 14,60/mes`).
+- **Presupuestos oficiales en AWS Budgets (`#1` / `#31`):** redondeados a **USD 811 (mes normal)** y **USD 841 (mes de cosecha)** en `AromaPacifico-Root`, manteniendo la invariante de notificar por SNS/correo sin apagar la ingesta ni la consulta pública del saco.
+
 ## 6. Verificación de los criterios de la #29
 
 | Criterio | Dónde se cumple |

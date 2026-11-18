@@ -127,7 +127,12 @@ Nadie ha medido todavía cuántas de las 200 fincas tienen LTE-M o NB-IoT. El en
 | **60 (30 %)** | **USD 222.473,55** | **USD 8.862** |
 | 100 (50 %) | USD 246.433,69 | USD 14.730 |
 
-**Lo que dice este resultado:** la inversión crece poco con las fincas sin cobertura, pero la cuota mensual crece casi en proporción, porque cada terminal satelital cuesta USD 147 al mes frente a USD 0,30 de uno celular. Con 60 fincas, el satélite es más del 99 % de la cuota del piloto. Es el primer gasto que debe atacar la [#31](https://github.com/aromapacifico-platform/planning/issues/31). Por ejemplo, la #6 dejó abierta la opción de un enlace de largo alcance hasta un punto con señal, compartido entre fincas vecinas.
+**Lo que dice este resultado:** la inversión crece poco con las fincas sin cobertura, pero la cuota mensual crece casi en proporción, porque cada terminal satelital cuesta USD 147 al mes frente a USD 0,30 de uno celular. Con 60 fincas, el satélite es más del 99 % de la cuota del piloto. Es el primer gasto que ataca la [#31](decisiones-ahorro.md) (`#71`) incorporando el enlace compartido **LoRaWAN** (`48` fincas a través de `10` gateways solares LTE-M a `~USD 0,20/mes` por finca y `12` fincas residuales con Iridium SBD):
+
+| Escenario comparativo de las 200 fincas (`140` celulares + `60` sin cobertura) | Inversión inicial total (USD) | Conectividad mensual total (USD/mes) | Referencia |
+| --- | ---: | ---: | --- |
+| **Alternativa descartada (sin enlace compartido):** `140` LTE-M + `60` SBD | 222.474 | 8.862 | Tablas superiores (`#28`) |
+| **Alternativa adoptada (`#31` / `#71`):** `140` LTE-M + `48` LoRaWAN en `10` gateways + `12` SBD | **208.370** (`-14.104`) | **1.816** (`-7.046/mes`) | [Decisiones de ahorro](decisiones-ahorro.md) (`#31`) |
 
 ## 6. Cuánto paga una finca
 

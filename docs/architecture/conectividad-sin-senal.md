@@ -10,25 +10,34 @@ Este caso académico conecta 200 fincas, 60 transportadores y tres acopios de Ca
 
 Se conservan AWS en `us-east-1`, IoT Core para telemetría celular, API Gateway para aplicaciones, DynamoDB para registros y S3 para objetos; son decisiones de [gobierno](gobierno-landing-zone.md), [direccionamiento](red-direccionamiento-nube.md) y [operación de drones](carga-b-orden-fumigacion.md). No se modifican sus CIDR, la topología con Transit Gateway ni la autorización humana de fumigación.
 
-La decisión nueva de #6 es un canal **Iridium SBD para telemetría de las fincas sin cobertura celular**, con RockBLOCK 9603 como referencia técnica y comercial, no como compra confirmada. Se agrega un adaptador de recepción satelital al diseño. Bluetooth no se incorpora como requisito ni como canal de alerta en esta historia.
+La decisión base de #6 incorporó un canal **Iridium SBD para telemetría de las fincas sin cobertura celular**, complementado por la decisión FinOps #31 (#71): **enlace LoRaWAN compartido** para el 80 % de las fincas sin cobertura (48 fincas conectadas vía LoRa a 10 gateways solares con salida LTE-M registrados en **AWS IoT Core for LoRaWAN**) y **Iridium SBD** (RockBLOCK 9603 como referencia técnica) únicamente para las 12 fincas residuales sin línea de vista. Esto reduce la cuota mensual de conectividad sin cobertura de USD 8.820 a USD 1.774 al mes (USD 0,20/mes por finca en LoRaWAN compartido). Bluetooth no se incorpora como requisito ni como canal de alerta en esta historia.
 
 ## 2. Matriz de conectividad por punto
 
 | Punto y datos | Red de salida y protocolo | Buffer local persistente | Comportamiento sin señal y recuperación |
 |---|---|---|---|
-| **Finca y beneficiadero.** Cultivo cada 4 h; secado cada hora mientras esté activo. | Con cobertura comprobada: LTE-M/NB-IoT, MQTT sobre TLS hacia IoT Core, TCP 8883. Sin cobertura celular permanente: SBD mediante satélite; el proveedor entrega por HTTPS/TCP 443 al adaptador de AWS. | Cola en flash del nodo, escrita antes de transmitir; antigüedad máxima de 24 h. Cultivo y secado comparten un equipo de comunicaciones solo si la instalación permite conectarlos sin añadir enlaces no diseñados. | Si la ruta asignada falla, conserva cada lectura, reintenta y drena sin esperar al siguiente muestreo. Solo retira registros confirmados por la plataforma. El canal satelital funciona sin traslados periódicos ni radiobase terrestre nueva. La excepción por agotamiento de 24 h se define en la sección 5. |
+| **Finca y beneficiadero.** Cultivo cada 4 h; secado cada hora mientras esté activo. | Con cobertura comprobada (`140` fincas): LTE-M/NB-IoT, MQTT sobre TLS hacia IoT Core, TCP 8883. Sin cobertura con línea de vista (`48` fincas): **LoRaWAN US915** hacia **10 gateways solares compartidos con salida LTE-M** registrados en **AWS IoT Core for LoRaWAN**. Excepción sin línea de vista (`12` fincas): SBD mediante satélite Iridium; el proveedor entrega por HTTPS/TCP 443 al adaptador de AWS. | Cola en flash del nodo, escrita antes de transmitir; antigüedad máxima de 24 h sin cambios entre perfiles. Cultivo y secado comparten un equipo de comunicaciones solo si la instalación permite conectarlos sin añadir enlaces no diseñados. | Si la ruta asignada falla (incluyendo caída temporal del gateway solar LoRaWAN o de su backhaul LTE-M), el nodo conserva cada lectura en su buffer de 24 h, reintenta (`1/5/15 min`) y drena sin esperar al siguiente muestreo. Solo retira registros confirmados por ACK de persistencia. La excepción por agotamiento de 24 h se define en la sección 5. |
 | **Dron.** Misión, fotos, polígonos y bitácora. | Misión descargada por HTTPS antes de salir. Transferencia dron–estación por USB o enlace local admitido por el equipo. Estación a S3 por HTTPS/TCP 443 con URL prefirmada, mediante 4G o wifi autorizado del acopio. | Memoria no volátil de la aeronave y copia en la estación de campo. El diseño integrado fija hasta 24 h para sincronización local; la capacidad real se dimensiona por tamaño de misión, no por número de lecturas de sensor. | La caída de internet no impide ejecutar una misión ya autorizada y precargada. La cuadrilla sincroniza al retornar a una zona con conexión, dentro de su operación de vuelo. Renueva las URLs vencidas. Sin bitácora persistida y evidencia exigida, el caso no pasa a cerrado. |
 | **Transportador.** Posición cada 5 min y eventos de custodia del saco. | Aplicación con 4G/LTE o wifi autorizado del acopio; HTTPS/TCP 443 hacia API Gateway y autenticación de aplicación mediante Cognito. | SQLite cifrada en el teléfono; cola de salida independiente de la memoria temporal de la aplicación. | Sigue capturando posiciones si hay ubicación disponible. Si falta GNSS, registra el fallo de ubicación; no inventa coordenadas. Al recuperar datos en cabecera, vía principal o acopio, envía lotes acotados, reintenta los fallidos y conserva los pendientes sin confirmar. |
 | **Centro de acopio.** Recepción, aceptación/rechazo, despacho y códigos. | WLAN segmentada y LAN; WAN de 100 Mbps simétricos compartidos. Tráfico privado por VPN IPsec hasta el Transit Gateway aprobado; objetos a S3 por HTTPS mediante el acceso privado diseñado. IKE UDP 500/4500 y ESP cuando corresponda a la configuración del túnel. | Cola cifrada de operaciones en los puestos de logística, como propuesta para concretar en #8. Los trabajos de impresión permanecen en el spooler local. | La LAN y el registro local pueden continuar si falla la WAN y hay energía. Las transacciones quedan pendientes; el usuario no ve una confirmación cloud ficticia. Reconexión: sincronizar con deduplicación y tratar conflictos. Si cae el puesto o su energía, no se promete continuidad de captura sin el respaldo que defina #8. |
 | **Buenaventura.** Entrega aceptada o rechazada del saco. | Aplicación del transportador o del responsable autorizado, teléfono con 4G/LTE; HTTPS/TCP 443 hacia la API. No se presupone wifi del puerto. | Cola cifrada del teléfono con el evento de entrega y sus evidencias, si aplican. | Registra el evento con hora original y estado pendiente; sincroniza cuando vuelve la conexión. Hasta recibir confirmación, se distingue entrega registrada localmente de entrega persistida en plataforma. No se instala LAN, gateway ni otro equipo de la Federación; tampoco se sigue al barco. |
 
-**Ninguna ruta usa ni necesita respaldo 2G o 3G.** La disponibilidad de LTE-M/NB-IoT se verifica por operador y sitio: una cobertura 4G en el mapa no demuestra que ambos servicios IoT estén habilitados. La finca que no supera esa validación entra en el perfil satelital.
+**Ninguna ruta usa ni necesita respaldo 2G o 3G.** La disponibilidad de LTE-M/NB-IoT se verifica por operador y sitio: una cobertura 4G en el mapa no demuestra que ambos servicios IoT estén habilitados. La finca que no supera esa validación se conecta mediante LoRaWAN compartido si tiene línea de vista hacia un gateway solar (`48` fincas estimadas, `80 %`), y solo si carece de ambas pasa a la excepción satelital Iridium SBD (`12` fincas estimadas, `20 %`).
 
 ![Conectividad de los cinco puntos](diagrams/conectividad-sin-senal.svg)
 
 Fuente editable: [Draw.io](diagrams/conectividad-sin-senal.drawio). El SVG se puede visualizar directamente en el repositorio.
 
-## 3. Finca sin cobertura: camino satelital completo
+## 3. Finca sin cobertura: perfil LoRaWAN compartido y excepción satelital
+
+### 3.1 Camino LoRaWAN compartido (48 fincas, 10 gateways solares LTE-M)
+
+1. El nodo sin cobertura celular con línea de vista (`80 %` de las 60 fincas sin señal) mantiene sin cambios su buffer local de 24 h y su elemento seguro, sustituyendo el tráfico celular por un transceptor **LoRaWAN US915/AU915** (`SX1262` / `RAK3172`) con alcance típico de **2 a 5 km con línea de vista**.
+2. Cada finca se aprovisiona con identidad OTAA independiente (`DevEUI`, `AppEUI` y `AppKey` AES-128) en **AWS IoT Core for LoRaWAN**. El cifrado LoRaWAN protege extremo a extremo desde el nodo hasta AWS, mientras el sobre de carga útil incluye `event_id`, secuencia e identidad verificable para `#12`.
+3. **10 gateways solares exteriores (`RAK7289CV2`, promedio ~5 fincas por gateway)** ubicados en cabecera municipal o vía principal con señal LTE-M reciben los uplinks y los reenvían por TLS (`CUPS`/`LNS`) hacia **AWS IoT Core for LoRaWAN**, que encamina la lectura a la misma regla de ingesta de `#12`.
+4. **Falla o caída del gateway compartido o su backhaul LTE-M:** dado que el gateway actúa únicamente como puente sin estado de negocio, la baja de un nodo (`DevEUI`) no afecta a las fincas vecinas y la caída temporal del gateway mantiene intactas las lecturas dentro de la cola flash de **24 horas** de cada finca (reintentos a `1`, `5` y `15` minutos con prioridad a los registros próximos a vencer). Al restablecerse el gateway o la señal LTE-M, los nodos drenan sus pendientes y retiran los registros únicamente al recibir el **ACK de aplicación** por downlink LoRaWAN Clase A.
+
+### 3.2 Excepción satelital Iridium SBD (12 fincas sin línea de vista)
 
 1. El nodo guarda la lectura, su identificador, hora UTC y secuencia. La codifica en un mensaje compacto y protege el contenido antes de entregarlo al módem.
 2. El módem transmite por **SBD**, no por MQTT ni por una sesión TLS directa a AWS. Se propone un sobre cifrado y autenticado por dispositivo (AEAD), con contador persistente para impedir repetición y reutilización de nonce. La provisión y custodia de claves se coordinan con #4/#5/#11; no se generan secretos dentro de Terraform ni se escriben en su estado.
@@ -41,11 +50,19 @@ El equipo requiere antena con vista al cielo, alimentación adecuada a los picos
 
 Los objetos de las fincas sin cobertura se separan por tamaño: fotos, mapas y bitácoras del dron viajan con la estación de la cuadrilla y se cargan al volver de cada misión; no por SBD ni mediante una visita semanal de recolección. Los eventos pequeños del saco se guardan en la aplicación y se sincronizan en cabecera o vía principal, conforme al supuesto del caso. Si se exigieran objetos pesados automáticos desde una finca permanentemente aislada, este canal de mensajes cortos no los resolvería y habría que ampliar el diseño.
 
-## 4. Costo de referencia de la excepción satelital
+## 4. Costo de referencia sin cobertura: LoRaWAN compartido y excepción satelital
 
-Fuentes consultadas el **6 de noviembre de 2026**, USD, sin conversión a COP. El costo se aplica a `N_sat`, número de fincas sin cobertura aún no determinado; no se multiplica automáticamente por las 200 fincas.
+Fuentes consultadas entre el **6 y el 9 de noviembre de 2026**, USD, sin conversión a COP. Con la decisión FinOps `#31` (`#71`), de las **60 fincas sin cobertura celular** del escenario base, **48 (`80 %`)** operan por LoRaWAN compartido mediante 10 gateways solares LTE-M y únicamente **`N_sat = 12` (`20 %`)** utilizan el canal satelital Iridium SBD.
 
-### 4.1 Inversión incremental por finca
+### 4.1 Comparativa de inversión y cuota mensual (`60` fincas sin cobertura)
+
+| Alternativa de conectividad sin cobertura (`60` fincas) | Inversión inicial hardware + activación (USD) | Cuota mensual conectividad (USD/mes) | Costo en reposo AWS | Veredicto FinOps |
+| --- | ---: | ---: | --- | --- |
+| **Alternativa descartada A:** 60 fincas con satélite Iridium SBD | 34.319 | 8.820 (`147 × 60`) | `$0,00 USD/mes` | Descartada por `#31` (`> 99 %` del OpEx de conectividad) |
+| **Alternativa descartada B:** Despliegue de radiobase celular privada o visita semanal | `> 100.000` (CapEx) | N/A | N/A | Descartada por inviabilidad técnica y económica en piloto |
+| **Alternativa adoptada (`#31` / `#71`):** `48` LoRaWAN (`10` gateways `RAK7289CV2` a `USD 900` lista + `48` módulos a `USD 25` lista) + `12` Iridium SBD | **20.216** | **1.774** (`12 × 147 + 48 × ~0,20`) | **`$0,00 USD/mes`** (`AWS IoT Core for LoRaWAN` por mensaje) | **Adoptada: evita `USD 14.104` de CapEx y `USD 7.046/mes` (`USD 84.552/año`)** |
+
+### 4.2 Inversión incremental por finca satelital (`N_sat = 12`)
 
 | Concepto | USD | Naturaleza |
 |---|---:|---|
@@ -53,9 +70,9 @@ Fuentes consultadas el **6 de noviembre de 2026**, USD, sin conversión a COP. E
 | Protección, adaptación eléctrica y montaje | 50–100 | Reserva de ingeniería, no cotización. |
 | Incremento de batería/panel por comunicaciones | 50–100 | Reserva de ingeniería; #11 debe justificarla con balance energético. |
 | Instalación y prueba del enlace | 30–80 | Reserva de ingeniería, no cotización. |
-| **Subtotal incremental estimado** | **432–582** | No incluye sensores, nodo base, impuestos, envío ni importación. |
+| **Subtotal incremental estimado** | **432–582** | Equivale a `USD 412,90` lista (`USD 571,99` puesto con logística/IVA y activación en `#28`). |
 
-### 4.2 Operación mensual calculada
+### 4.3 Operación mensual calculada (satélite `N_sat = 12` vs LoRaWAN `N_lora = 48`)
 
 Presupuesto de diseño: **200 bytes por envío completo**, incluida la protección del mensaje, y **50 bytes de retorno por lectura** para ACK y control. Es un supuesto de dimensionamiento por verificar con el formato definitivo; no una medición del firmware. Mes de 30 días y un terminal por finca.
 
@@ -72,7 +89,7 @@ Para tráfico recurrente, [S2] publica contratos representativos de 12 meses: pl
 
 Los reenvíos, mensajes adicionales, servicios del integrador y costos cloud del adaptador requieren presupuesto separado. La selección contractual debe considerar todo el año; no se supone que cambiar de plan sea gratis o inmediato. Si un mismo terminal tendrá secado activo durante el año y no hay cambio de plan pactado, se presupuesta **USD 147 por mes durante el contrato**, incluso fuera de cosecha. USD 70,35 es un escenario alternativo para un perfil de solo cultivo, no un ahorro estacional automático. Para el consolidado se usará `N_sat × tarifa_contratada`, más los extras reales.
 
-**Justificación:** se utiliza satélite solo en las fincas que no tienen alternativa celular validada, evita construir una radiobase y elimina la recolección periódica de lecturas. Se aprovechan el nodo y la instalación inicial, y los archivos grandes usan la logística de vuelo existente. Esto justifica su función, pero **no demuestra por sí solo una cuota moderada para el caficultor**: #28/#29 deben validar financiación o tarifa de volumen. La propuesta queda económicamente condicionada; no se declara que el satélite sea la opción más barata del mercado ni que su compra esté aprobada.
+**Justificación:** restringir el satélite exclusivamente a las `12` fincas sin línea de vista (`N_sat = 12`) mientras las `48` fincas con línea de vista comparten `10` gateways LoRaWAN (`USD 0,20/mes` por finca en lugar de `USD 147/mes`) evita construir radiobases y reduce el costo mensual de las 60 fincas sin cobertura en **USD 7.046/mes (USD 84.552/año)**. Así, la cuota mensual total del piloto (`140 × 0,30 + 1.774`) desciende de **USD 8.862/mes** a **USD 1.816/mes**.
 
 ## 5. Buffer, reintentos y límite de 24 horas
 
@@ -123,7 +140,7 @@ Sin ruta hacia el destinatario, la alerta permanece pendiente y debe emitirse al
 |---|---|
 | #8 Acopio | Patrón de conexión, uso de VLAN Logística para cuadrillas, necesidad de cola local, WAN y sincronización. Define equipos, capacidad y respaldo eléctrico. |
 | #9 Firewall | MQTT/TLS 8883, HTTPS 443 y túnel IPsec. Distingue endpoints administrados públicos de interfaces en VPC; no abre un puerto de subred suponiendo que IoT Core vive en ella. |
-| #11 Nodo | Perfil celular/satelital, retención, mensajes, protección ambiental y reintentos para dimensionar energía y BOM. |
+| #11 Nodo | Perfiles celular (`140`), LoRaWAN compartido (`48` fincas / `10` gateways) y satelital residual (`12`), retención, mensajes, protección ambiental y reintentos para dimensionar energía y BOM. |
 | #12 Ingesta | Sobre normalizado, deduplicación, ACK de persistencia y adaptación satelital. Define temas exactos, procesamiento y canal final de alertas. |
 | #15 Saco | Eventos offline de custodia/entrega, secuencia y tratamiento de conflictos. |
 | #18 Observabilidad | Edad del pendiente, lecturas vencidas, eventos sin ACK, ruta de alerta y fallos de sincronización. |

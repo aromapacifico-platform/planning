@@ -7,7 +7,7 @@
 
 Se revisó mediante GitHub MCP `planning/main` en `4c6fa27a31a5ac5c38c0da5711e36936024ba2cd`: [enunciado](../case-study/enunciado-original.md), [decisiones senior](../governance-and-decisions/briefing-inicial-juniors.md), propuesta junior y red integrada. La dependencia #6 está en la [PR #49](https://github.com/aromapacifico-platform/planning/pull/49), commit `af64c56128198c4978d23f5f1fc8cc699b6b1ff7`, todavía abierta al consultar. Se contrastó la identidad de dispositivos de la [PR #50](https://github.com/aromapacifico-platform/planning/pull/50), commit `e50838f23ec27818ff3497590811106b20e945ee`, también abierta. No se consideran cambios ya aprobados.
 
-Se conserva ESP32-S3, SIM7080G con LTE-M/NB-IoT donde el operador lo habilite, RS485, energía solar y cola local de máximo 24 h. Para fincas sin esa cobertura se conserva RockBLOCK 9603/Iridium SBD de #6. La recepción satelital requiere su adaptador de plataforma; no es una conexión MQTT directa del módem a AWS.
+Se conserva ESP32-S3, SIM7080G con LTE-M/NB-IoT donde el operador lo habilite, RS485, energía solar y cola local de máximo 24 h. Para fincas sin cobertura celular se incorpora la decisión FinOps #31 (#71): **48 fincas (80 % de las 60 sin señal) con enlace compartido LoRaWAN US915** (`SX1262` / `RAK3172`) hacia **10 gateways solares compartidos con salida LTE-M** (`RAK7289CV2`) registrados en **AWS IoT Core for LoRaWAN**, conservando **RockBLOCK 9603 / Iridium SBD** únicamente para las **12 fincas residuales (20 %)** sin línea de vista al gateway. La recepción satelital requiere su adaptador de plataforma; no es una conexión MQTT directa del módem a AWS.
 
 | Propuesta junior | Resultado de la revisión de #11 |
 |---|---|
@@ -60,16 +60,17 @@ Para NPK, pH y humedad de suelo también se documentan contrastes de banco, unid
 
 Se distinguen **punto de cultivo C** y **punto de secado S**. Se propone un solo controlador/comunicador por finca cuando ambos puntos admitan un cable RS485 de hasta 30 m, con ruta protegida y caída de tensión validada. Es un límite conservador del diseño, no la distancia real de todas las fincas. El controlador compartido se ubica junto a C: I²C del sensor de aire queda corto y protegido, sin extenderlo hasta el secadero ni medir su aire caliente como aire de cultivo.
 
-Si los puntos están más lejos o el tendido cruza zonas no protegibles, se instalan dos conjuntos autónomos C y S, sin inventar un enlace wifi/LoRa no definido. Cada controlador tiene identidad, energía y módem propios. La inspección previa decide esto; el presupuesto no asume automáticamente que una finca equivale a un solo gabinete.
+Si los puntos están más lejos o el tendido cruza zonas no protegibles, se instalan dos conjuntos autónomos C y S, sin inventar un enlace wifi privado entre C y S (el enlace LoRaWAN US915 se reserva exclusivamente como acceso WAN hacia el gateway solar compartido aprobado en `#71`). Cada controlador tiene identidad, energía y módem propios. La inspección previa decide esto; el presupuesto no asume automáticamente que una finca equivale a un solo gabinete.
 
 | Elemento | Especificación del patrón |
 |---|---|
 | Controlador | LilyGO T-SIM7080G-S3 H606, ESP32-S3, flash integrada de 16 MB; fijar revisión de placa. GNSS, wifi, BLE, LEDs y periféricos no utilizados apagados. No se usa la corriente de sueño del chip como consumo total de placa. |
-| Celular | SIM7080G + SIM/APN M2M comprobados en el predio, LTE-M o NB-IoT. Un mapa 4G no acredita estos servicios. No hay dependencia ni fallback 2G/3G. Si falla la habilitación IoT se asigna el perfil satelital de #6 antes de instalar. |
-| Satelital | RockBLOCK 9603 con supercondensadores conservados y antena patch con vista al cielo a través de ventana RF plástica; módem celular desenergizado en ese perfil. No se requiere que el agricultor viaje para subir las lecturas. |
-| Solar celular | Panel 15 W nominal 12 V, Vmp/Voc reales compatibles con el regulador. No es una salida directa de 12 V al ESP32. |
+| Celular (140 fincas) | SIM7080G + SIM/APN M2M comprobados en el predio, LTE-M o NB-IoT. Un mapa 4G no acredita estos servicios. No hay dependencia ni fallback 2G/3G. Si falla la habilitación IoT se asigna perfil LoRaWAN o satelital de #6/#71 antes de instalar. |
+| LoRaWAN compartido (48 fincas) | Transceptor LoRaWAN US915 (`SX1262` / `RAK3172`) + antena externa en el nodo, con módem celular desenergizado. Enlace de 2 a 5 km con línea de vista hacia **10 gateways solares exteriores compartidos** (`RAK7289CV2`, ~5 fincas/gateway) con salida LTE-M hacia `AWS IoT Core for LoRaWAN`. |
+| Satelital residual (12 fincas) | RockBLOCK 9603 con supercondensadores conservados y antena patch con vista al cielo a través de ventana RF plástica; módem celular desenergizado en ese perfil. Solo para fincas sin cobertura LTE-M ni línea de vista a un gateway LoRaWAN. No se requiere que el agricultor viaje para subir las lecturas. |
+| Solar celular / LoRaWAN | Panel 15 W nominal 12 V, Vmp/Voc reales compatibles con el regulador. No es una salida directa de 12 V al ESP32. |
 | Solar satelital | Dos paneles idénticos de 15 W en paralelo: 30 W totales. Verificar suma de Isc y Voc a temperatura mínima frente al controlador. |
-| Reserva celular | LiFePO4 4S comercial nominal 12 V, 6 Ah, con BMS/PCM y limitación térmica de carga. |
+| Reserva celular / LoRaWAN | LiFePO4 4S comercial nominal 12 V, 6 Ah, con BMS/PCM y limitación térmica de carga. |
 | Reserva satelital | LiFePO4 4S comercial nominal 12 V, 12 Ah. No es la celda de 3,2 V del borrador. |
 | Carga | Genasun GV-5-Li-14.2V de referencia, perfil de 4S LiFePO4 sin ecualización de plomo. Compatibilidad escrita batería/cargador antes de compra; si el fabricante exige otro perfil, usar versión configurada y actualizar costo. Se reserva reducción de capacidad por carga parcial. |
 | Distribución | Batería → fusible cercano y protección de polaridad → regulador 5 V → USB/alimentación 5 V autorizada de la placa. No se usa a la vez el cargador Li-ion integrado. Buck Pololu D24V22F5 de referencia, con capacidad de pico y disipación verificadas. |
@@ -86,7 +87,7 @@ Se instala medición de tensión y temperatura de batería y se bloquea carga fu
 
 ### 4.1 Supuestos explícitos del cálculo
 
-El dimensionamiento usa **límites de ingeniería por verificar en banco**, no consumos medidos: 5 mA a 5 V de reposo del conjunto electrónico; 2 mA adicionales a 12 V para consumo propio de conversión, cargador, BMS y protecciones; ventanas activas de hasta 120 s; 2 W medios en ventana celular y 3,5 W en satelital, incluyendo controlador y módem pero no sensores. La corriente instantánea puede superar esos promedios. La referencia LilyGO publica corrientes distintas por revisión [S1]; los valores de menos de 50 µA del chip no se trasladan a todo el nodo.
+El dimensionamiento usa **límites de ingeniería por verificar en banco**, no consumos medidos: 5 mA a 5 V de reposo del conjunto electrónico; 2 mA adicionales a 12 V para consumo propio de conversión, cargador, BMS y protecciones; ventanas activas de hasta 120 s; **0,8 W medios en ventana LoRaWAN** (transceptor SX1262 US915 + ESP32-S3 sin módem celular), 2 W medios en ventana celular y 3,5 W en satelital, incluyendo controlador y módem pero no sensores. La corriente instantánea puede superar esos promedios. La referencia LilyGO publica corrientes distintas por revisión [S1]; los valores de menos de 50 µA del chip no se trasladan a todo el nodo.
 
 Se energizan suelo/NPK hasta 60 s por muestra (1,2 W combinados, margen sobre fichas), aire hasta 60 s (0,06 W) y grano hasta 30 s (1 W). Lectura y comunicación se solapan dentro de la ventana activa; si el calentamiento/estabilización real necesita más, se recalcula. El contador de radio limita **128 ventanas totales en cualquier periodo móvil de 24 h**, incluidas sesiones con ACK, reintentos y comprobaciones. No son 128 por sensor. No hay OTA ni GNSS permanente incluidos en este presupuesto.
 
@@ -96,12 +97,12 @@ Sensores con cultivo y secado activo: `1,2 W × 60 s × 6 / 3600 + 0,06 W × 60 
 
 Se añade 25 % de margen: `E_día = (1,18 + E_sensores + N_ventanas × P_activa × 120/3600) × 1,25`.
 
-| Escenario | Ventanas/día | Celular, Wh/día | Satelital, Wh/día |
-|---|---:|---:|---:|
-| Solo cultivo | 6 | 2,13 | 2,51 |
-| Solo secado activo | 24 | 3,73 | 5,23 |
-| Cultivo y secado, un envío por registro | 30 | 4,38 | 6,26 |
-| Interrupción y reintentos, ambos puntos | 128 máximo | **12,55** | **20,55** |
+| Escenario | Ventanas/día | LoRaWAN, Wh/día | Celular, Wh/día | Satelital, Wh/día |
+|---|---:|---:|---:|---:|
+| Solo cultivo | 6 | 1,83 | 2,13 | 2,51 |
+| Solo secado activo | 24 | 2,52 | 3,73 | 5,23 |
+| Cultivo y secado, un envío por registro | 30 | 2,88 | 4,38 | 6,26 |
+| Interrupción y reintentos, ambos puntos | 128 máximo | **6,15** | **12,55** | **20,55** |
 
 Un día tiene 6 registros de cultivo y 24 de secado activo: **30**, no 24. El perfil combinado es el dimensionamiento conservador; las coincidencias horarias no se descuentan como ahorro garantizado.
 
@@ -113,6 +114,7 @@ Se usa 12 V nominal de ficha conservadoramente. Se aplican factores independient
 
 | Perfil | Batería | E nominal | E útil presupuestada | Autonomía sin aporte solar, operación normal combinada | Sin aporte solar, reintentos máximos |
 |---|---|---:|---:|---:|---:|
+| LoRaWAN | 12 V / 6 Ah | 72 Wh | **35,25 Wh** | 12,23 días | 5,73 días |
 | Celular | 12 V / 6 Ah | 72 Wh | **35,25 Wh** | 8,04 días | 2,81 días |
 | Satelital | 12 V / 12 Ah | 144 Wh | **70,50 Wh** | 11,27 días | 3,43 días |
 
@@ -126,6 +128,7 @@ Hipótesis de diseño para **tres días consecutivos nublados**: 0,5 horas solar
 
 | Perfil | Aporte por día nublado | Demanda extrema/día | Déficit en tres días | Reserva útil | Resultado del modelo |
 |---|---:|---:|---:|---:|---|
+| LoRaWAN, 15 W | 4,88 Wh | 6,15 Wh | 3,81 Wh | 35,25 Wh | Cabe holgadamente en la reserva inicial. |
 | Celular, 15 W | 4,88 Wh | 12,55 Wh | 23,02 Wh | 35,25 Wh | Cabe en la reserva inicial. |
 | Satelital, 30 W | 9,75 Wh | 20,55 Wh | 32,40 Wh | 70,50 Wh | Cabe en la reserva inicial. |
 
@@ -164,7 +167,9 @@ En taller se ensamblan, cargan y prueban los conjuntos, arneses, direcciones Mod
 4. Usar los temas propuestos en PR #50: `aromapacifico/fincas/{ThingName}/telemetria/cultivo`, `/telemetria/secado` y `/config` propio para recepción. #12 define el sobre de ACK; si viaja por `/config`, diferenciar explícitamente tipo `ack` y configuración. Si el contrato requiere otro tema, actualizar política antes del plan, sin comodines globales.
 5. Activar en la sesión autorizada de puesta en servicio; comprobar publicación y recepción del ACK, rechazo de identidad/tema ajenos y baja de un certificado de prueba. No revocar el certificado productivo solo para ensayar. Registrar serial, certificado público/fingerprint, finca y evidencia, sin llave privada ni secreto en logs.
 
-Para SBD no hay mTLS directo a AWS IoT. El sobre necesita autenticidad, protección contra repetición y cifrado de aplicación por dispositivo; el IMEI no autentica al productor. Se propone firma con la clave del elemento seguro más cifrado autenticado con material individual aprovisionado por el proceso seguro, fuera de Terraform. El adaptador comprueba identidad activa antes de persistir y enviar ACK. No se presume que desactivar el certificado IoT revoque automáticamente el webhook: #12 debe aplicar la misma baja en ese camino.
+Para LoRaWAN compartido (`48` fincas), cada nodo se aprovisiona mediante activación OTAA (`DevEUI`, `AppEUI` y `AppKey` AES-128 individuales custodiados en AWS IoT Core for LoRaWAN); el gateway solar compartido actúa únicamente como reenviador transparente sobre TLS (`CUPS`/`LNS`), por lo que la revocación de una finca se realiza de forma individual en AWS IoT Core sin interrumpir a las fincas vecinas. Ante caída del gateway o de su enlace LTE-M, el nodo conserva sus lecturas en el mismo buffer flash de hasta 24 h y solo elimina registros tras recibir el ACK de persistencia en downlink Clase A.
+
+Para SBD (`12` fincas residuales) no hay mTLS directo a AWS IoT. El sobre necesita autenticidad, protección contra repetición y cifrado de aplicación por dispositivo; el IMEI no autentica al productor. Se propone firma con la clave del elemento seguro más cifrado autenticado con material individual aprovisionado por el proceso seguro, fuera de Terraform. El adaptador comprueba identidad activa antes de persistir y enviar ACK. No se presume que desactivar el certificado IoT revoque automáticamente el webhook: #12 debe aplicar la misma baja en ese camino.
 
 Los presupuestos de #6 son 200 bytes MO y 50 bytes de ACK/control MT por lectura. Firma, nonce, etiqueta y metadatos **cuentan** dentro de ellos; se exige prueba de serialización, cifrado y retorno, o actualización del costo y energía si no caben. Los límites del transporte 9603 son 340 bytes MO y 270 MT [S9]; que un mensaje quepa no demuestra que cueste lo presupuestado.
 
@@ -233,7 +238,22 @@ Si B12 falla, no se mantiene artificialmente el total: se solicita oferta de una
 
 Se conserva B01 como controlador de referencia con su módem celular apagado; sustituirlo por una placa ESP32 sin módem puede reducir costo solo después de comprobar el resto de interfaces y recotizar. No se resta un ahorro sin compra alternativa identificada. Una antena externa SMA, si la ubicación la exige, requiere cotización adicional y no está incluida en el total patch.
 
-### 7.3 Cómo alimentar #28/#29 sin inventar el tamaño del piloto
+### 7.3 Perfil LoRaWAN compartido y Gateway solar LTE-M (Decisión #31 / #71)
+
+Para las **48 fincas sin cobertura celular con línea de vista** (80 % de las 60 sin señal), se conserva el conjunto base celular (panel de 15 W y batería LiFePO4 12 V / 6 Ah, manteniendo el módem celular desenergizado) y se añade únicamente el transceptor LoRaWAN US915 y la participación compartida en **10 gateways solares exteriores** (~5 fincas por gateway):
+
+| Ítem de perfil LoRaWAN | Cantidad piloto | USD unitario lista | USD puesto (logística 10 % + IVA 19 %) | Subtotal piloto (USD) | Fuente / condición |
+|---|---:|---:|---:|---:|---|
+| Módulo LoRaWAN US915 (`SX1262` / `RAK3172`) + antena en nodo | 48 | 25,00 | 32,73 | 1.570,80 | Reserva de ingeniería alineada con `#31` (`decisiones-ahorro.md`). |
+| Gateway exterior LoRaWAN/LTE (`RAK7289CV2`, 16 canales US915) | 10 | 435,00 | 569,42 | 5.694,15 | [Rokland](https://store.rokland.com/collections/gateways/products/rakwireless-wisgate-edge-pro-16-channel-outdoor-lorawan-gateway-rak7289cv2-us915-lte-eg95-na), consultado el 9 de noviembre de 2026. |
+| Antena, mástil, panel solar, batería e instalación del gateway | 10 | 465,00 | 608,69 | 6.086,85 | Reserva de ingeniería compartida (~5 fincas/gateway). |
+| **Subtotal incremento LoRaWAN + Gateways** | | | | **13.351,80** | Complementa las 12 fincas Iridium SBD (`USD 6.863,83`). |
+
+**Conciliación directa con `#28` (`costo-hardware-finca.md`) y `#31` (`decisiones-ahorro.md`):**
+- **Escenario sin cobertura combinado (`48 LoRaWAN + 12 SBD`):** `12 × USD 571,99 (SBD con activación)` + `48 × USD 32,73 (módulo LoRa)` + `10 × USD 1.178,10 (gateway solar)` = **USD 20.215,63 (`USD 20.216`)**, evitando **USD 14.104** frente a instalar 60 terminales satelitales (**USD 34.319**).
+- **Cuota mensual de las 60 fincas sin cobertura:** baja de **USD 8.820/mes** (`60 × USD 147`) a **USD 1.774/mes** (`12 × USD 147 + 10 SIMs × USD 1,00`, es decir, **~USD 0,20/mes por finca LoRaWAN**), evitando **USD 7.046/mes (USD 84.552/año)**.
+
+### 7.4 Cómo alimentar #28/#29/#31 sin inventar el tamaño del piloto
 
 El precio anterior es de **un conjunto C+S compartido**, no de cualquier finca. Para conjuntos separados se cotiza la base autónoma por controlador y el sensor correspondiente; no basta con sumar otra sonda. Los instrumentos de referencia y la cualificación de lote son costos compartidos identificables, no un supuesto costo cero.
 
@@ -241,7 +261,7 @@ El precio anterior es de **un conjunto C+S compartido**, no de cualquier finca. 
 
 200 fincas tienen zona de secado aunque solo unas 100 estén activas simultáneamente en cosecha; esa concurrencia no demuestra que solo se compren 100 sondas. #28 debe contar controladores físicos, puntos S y `N_sat` reales, sin multiplicar automáticamente el precio compartido por 200 ni duplicar ambos escenarios.
 
-El costo verificado es mayor que el borrador incompleto; no se sostiene su ahorro del 80 % ni su total por finca. Se conserva hardware de microcontrolador y se evita equipamiento fijo adicional cuando el cableado lo permite. El controlador MPPT es una referencia conservadora de bajo autoconsumo; una alternativa más barata requiere la misma compatibilidad de batería y consumo comprobado, no el cambio a un PWM sin recalcular energía.
+El costo verificado es mayor que el borrador incompleto; no se sostiene su ahorro del 80 % ni su total por finca. Se conserva hardware de microcontrolador y se adopta el criterio FinOps de enlace compartido LoRaWAN (`#31`/`#71`) frente a alternativas descartadas como satélite masivo en las 60 fincas (USD 34.319 CapEx incremental y USD 8.820/mes) o radiobases celulares privadas (> USD 100.000), manteniendo costo en reposo cloud `$0,00 USD/mes` para dispositivos inactivos en `AWS IoT Core for LoRaWAN`. `#28` debe contar controladores físicos, puntos S y la proporción real `48 LoRaWAN / 12 SBD` verificada en preinspección, sin multiplicar automáticamente el precio compartido por 200 ni duplicar ambos escenarios. El controlador MPPT es una referencia conservadora de bajo autoconsumo; una alternativa más barata requiere la misma compatibilidad de batería y consumo comprobado, no el cambio a un PWM sin recalcular energía.
 
 El servicio satelital sigue siendo una excepción económicamente condicionada de #6: allí se presupuestó USD 147/mes para el escenario con secado según la referencia contractual examinada, no como tarifa garantizada por esta HU. A 30 registros/día, 200 bytes MO y 50 MT, serían 225.000 bytes/mes antes de reintentos. El máximo energético de 128 ventanas no equivale a una cuota incluida: si todas repitieran tráfico facturable, `128 × 250 × 30 = 960.000 bytes/mes`, sujeto a reglas reales de facturación. #28/#29 deben añadir sobreconsumo y financiación; no se oculta con un tope de energía ni se suspende silenciosamente la telemetría para abaratar la cuenta.
 
