@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AromaPacífico - Muestras de Componentes Base y Reglas de Uso</title>
+  <link rel="stylesheet" href="tokens.css">
+  <style>
+    :root {
+      --ap-color-brand-primary: #135E34;
+      --ap-color-brand-primary-dark: #0D4A27;
+      --ap-color-brand-primary-light: #DCFCE7;
+      --ap-color-brand-cherry: #9E1B1B;
+      --ap-color-brand-cherry-dark: #7F1D1D;
+      --ap-color-brand-pacific: #0F4C81;
+      --ap-color-brand-pacific-vibrant: #1D4ED8;
+      --ap-color-neutral-carbon: #0F172A;
+      --ap-color-neutral-slate: #334155;
+      --ap-color-neutral-border: #CBD5E1;
+      --ap-color-neutral-parchment: #FAF8F5;
+      --ap-font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --ap-font-mono: 'Fira Code', 'Roboto Mono', monospace;
+      --ap-radius-sm: 6px;
+      --ap-radius-md: 8px;
+      --ap-radius-lg: 12px;
+      --ap-space-xxs: 4px;
+      --ap-space-xs: 8px;
+      --ap-space-sm: 12px;
+      --ap-space-md: 16px;
+      --ap-space-lg: 24px;
+      --ap-space-xl: 32px;
+      --ap-vehicular-touch-target: 56px;
+    }
+
+    body {
+      font-family: var(--ap-font-sans);
+      background-color: var(--ap-color-neutral-parchment);
+      color: var(--ap-color-neutral-carbon);
+      margin: 0;
+      padding: var(--ap-space-xl);
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: var(--ap-space-xl);
+      border-bottom: 2px solid var(--ap-color-neutral-border);
+      padding-bottom: var(--ap-space-md);
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--ap-color-neutral-carbon);
+      margin: 0 0 8px 0;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: var(--ap-color-neutral-slate);
+      margin: 0;
+    }
+
+    .section {
+      background: #FFFFFF;
+      border: 1.5px solid var(--ap-color-neutral-border);
+      border-radius: var(--ap-radius-lg);
+      padding: var(--ap-space-lg);
+      margin-bottom: var(--ap-space-xl);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--ap-color-brand-primary-dark);
+      margin-top: 0;
+      margin-bottom: var(--ap-space-md);
+      border-bottom: 1px solid var(--ap-color-neutral-border);
+      padding-bottom: var(--ap-space-xs);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: var(--ap-space-lg);
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--ap-space-md);
+    }
+
+    .component-box {
+      border: 1px dashed var(--ap-color-neutral-border);
+      border-radius: var(--ap-radius-md);
+      padding: var(--ap-space-md);
+      background: #FAFAFA;
+    }
+
+    .component-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ap-color-neutral-slate);
+      margin-bottom: var(--ap-space-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* 1. BOTONES */
+    .ap-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--ap-space-xs);
+      padding: 0 var(--ap-space-lg);
+      height: 48px;
+      border-radius: var(--ap-radius-md);
+      font-family: var(--ap-font-sans);
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 150ms ease;
+      border: 2px solid transparent;
+      box-sizing: border-box;
+      touch-action: manipulation;
+    }
+
+    .ap-btn--primary {
+      background-color: var(--ap-color-brand-primary);
+      color: #FFFFFF;
+    }
+    .ap-btn--primary:hover {
+      background-color: var(--ap-color-brand-primary-dark);
+    }
+    .ap-btn--primary:active {
+      transform: scale(0.98);
+    }
+
+    .ap-btn--vehicular {
+      height: var(--ap-vehicular-touch-target);
+      font-size: 18px;
+      letter-spacing: 0.02em;
+    }
+
+    .ap-btn--danger {
+      background-color: var(--ap-color-brand-cherry);
+      color: #FFFFFF;
+    }
+    .ap-btn--danger:hover {
+      background-color: var(--ap-color-brand-cherry-dark);
+    }
+
+    .ap-btn--secondary {
+      background-color: transparent;
+      border-color: var(--ap-color-neutral-carbon);
+      color: var(--ap-color-neutral-carbon);
+    }
+    .ap-btn--secondary:hover {
+      background-color: #F1F5F9;
+    }
+
+    .ap-btn:disabled {
+      background-color: #E2E8F0 !important;
+      color: #94A3B8 !important;
+      border-color: #CBD5E1 !important;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    /* 2. CAMPOS */
+    .ap-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ap-space-xxs);
+      margin-bottom: var(--ap-space-md);
+    }
+
+    .ap-form-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ap-color-neutral-carbon);
+    }
+
+    .ap-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .ap-input {
+      width: 100%;
+      height: 48px;
+      padding: 0 var(--ap-space-md);
+      border: 1.5px solid var(--ap-color-neutral-border);
+      border-radius: var(--ap-radius-md);
+      font-family: var(--ap-font-sans);
+      font-size: 16px;
+      color: var(--ap-color-neutral-carbon);
+      background-color: #FFFFFF;
+      box-sizing: border-box;
+    }
+    .ap-input:focus {
+      outline: none;
+      border-color: var(--ap-color-brand-primary);
+      box-shadow: 0 0 0 3px rgba(19, 94, 52, 0.2);
+    }
+
+    .ap-input--numeric {
+      font-size: 24px;
+      font-weight: 800;
+      padding-right: 60px;
+    }
+
+    .ap-input__suffix {
+      position: absolute;
+      right: 16px;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--ap-color-neutral-slate);
+    }
+
+    .ap-input--error {
+      border-color: var(--ap-color-brand-cherry);
+      background-color: #FFF5F5;
+    }
+
+    .ap-form-error {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ap-color-brand-cherry-dark);
+      margin: 4px 0 0 0;
+    }
+
+    /* 3. ALERTAS */
+    .ap-alert {
+      display: flex;
+      gap: var(--ap-space-md);
+      padding: var(--ap-space-md);
+      border-radius: var(--ap-radius-md);
+      border-left: 6px solid transparent;
+      margin-bottom: var(--ap-space-md);
+    }
+
+    .ap-alert--critical {
+      background-color: #FEE2E2;
+      border-left-color: var(--ap-color-brand-cherry);
+      color: var(--ap-color-brand-cherry-dark);
+    }
+
+    .ap-alert--warning {
+      background-color: #FEF3C7;
+      border-left-color: #D97706;
+      color: #78350F;
+    }
+
+    .ap-alert--success {
+      background-color: #DCFCE7;
+      border-left-color: #16A34A;
+      color: #14532D;
+    }
+
+    .ap-alert__title {
+      margin: 0 0 4px 0;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .ap-alert__description {
+      margin: 0 0 12px 0;
+      font-size: 14px;
+    }
+
+    /* 4. TARJETAS DE SACO */
+    .ap-card-saco {
+      background-color: #FFFFFF;
+      border: 1.5px solid var(--ap-color-neutral-border);
+      border-radius: var(--ap-radius-lg);
+      padding: var(--ap-space-lg);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .ap-card-saco__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: var(--ap-space-md);
+      padding-bottom: var(--ap-space-sm);
+      border-bottom: 1px solid var(--ap-color-neutral-border);
+    }
+
+    .ap-card-saco__type-label {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--ap-color-brand-primary);
+      letter-spacing: 0.5px;
+    }
+
+    .ap-card-saco__code {
+      font-family: var(--ap-font-mono);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--ap-color-neutral-carbon);
+      margin: 4px 0 0 0;
+    }
+
+    .ap-card-saco__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: var(--ap-space-md);
+      margin-bottom: var(--ap-space-md);
+    }
+
+    .ap-card-saco__item-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ap-color-neutral-slate);
+    }
+
+    .ap-card-saco__item-value {
+      display: block;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ap-color-neutral-carbon);
+    }
+
+    .ap-card-saco__item-value--highlight {
+      color: var(--ap-color-brand-primary);
+      font-size: 18px;
+    }
+
+    .ap-card-saco__footer {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-top: var(--ap-space-sm);
+      border-top: 1px solid var(--ap-color-neutral-border);
+      font-size: 12px;
+      color: var(--ap-color-neutral-slate);
+    }
+
+    /* 5. DISTINTIVOS DE ESTADO */
+    .ap-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--ap-space-xs);
+      height: 36px;
+      padding: 0 var(--ap-space-sm);
+      border-radius: var(--ap-radius-sm);
+      font-size: 13px;
+      font-weight: 800;
+      border: 1.5px solid transparent;
+      box-sizing: border-box;
+      letter-spacing: 0.5px;
+    }
+
+    .ap-badge--accepted {
+      background-color: #DCFCE7;
+      border-color: #16A34A;
+      color: #14532D;
+    }
+
+    .ap-badge--rejected {
+      background-color: #FEE2E2;
+      border-color: #DC2626;
+      color: #7F1D1D;
+    }
+
+    .ap-badge--travel {
+      background-color: #DBEAFE;
+      border-color: #2563EB;
+      color: #1E40AF;
+    }
+
+    .ap-badge--prep {
+      background-color: #FEF3C7;
+      border-color: #D97706;
+      color: #78350F;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>AromaPacífico - Muestras de Componentes Base (FNC 2026)</h1>
+      <p class="subtitle">Catálogo ejecutable de componentes: Botón, Campo, Alerta, Tarjeta de Saco y Distintivo de Estado</p>
+    </header>
+
+    <!-- 1. BOTONES -->
+    <section class="section">
+      <h2 class="section-title">1. Botones y Estados Interactivos</h2>
+      <div class="grid-2">
+        <div class="component-box">
+          <div class="component-label">Variante Vehicular / Campo (56px) - Primario</div>
+          <button type="button" class="ap-btn ap-btn--primary ap-btn--vehicular" style="width: 100%;">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
+              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm5-8H7V7h10v2z"/>
+            </svg>
+            REGISTRAR PESAJE
+          </button>
+        </div>
+        <div class="component-box">
+          <div class="component-label">Variante Peligro / Emergencia</div>
+          <button type="button" class="ap-btn ap-btn--danger ap-btn--vehicular" style="width: 100%;">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            DETENER DESPACHO
+          </button>
+        </div>
+        <div class="component-box">
+          <div class="component-label">Variante Secundaria y Deshabilitada</div>
+          <div style="display: flex; gap: 12px;">
+            <button type="button" class="ap-btn ap-btn--secondary" style="flex: 1;">VER HISTORIAL</button>
+            <button type="button" class="ap-btn ap-btn--primary" disabled style="flex: 1;">EN ESPERA</button>
+          </div>
+        </div>
+        <div class="component-box">
+          <div class="component-label">Regla de Separación de Guarda</div>
+          <p style="font-size: 13px; color: var(--ap-color-neutral-slate); margin-top: 0;">
+            Separación mínima de 12px entre controles para evitar toques accidentales con guantes o vibración de camión.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. CAMPOS DE ENTRADA -->
+    <section class="section">
+      <h2 class="section-title">2. Campos de Entrada (Form Fields)</h2>
+      <div class="grid-2">
+        <div class="component-box">
+          <div class="component-label">Campo Numérico con Sufijo Fijo (Báscula)</div>
+          <div class="ap-form-group">
+            <label class="ap-form-label" for="sample-kg">PESO EN BÁSCULA</label>
+            <div class="ap-input-wrapper">
+              <input type="text" id="sample-kg" class="ap-input ap-input--numeric" value="60.0">
+              <span class="ap-input__suffix">KG</span>
+            </div>
+          </div>
+        </div>
+        <div class="component-box">
+          <div class="component-label">Campo con Validación de Error</div>
+          <div class="ap-form-group">
+            <label class="ap-form-label" for="sample-hum">HUMEDAD REGISTRADA</label>
+            <div class="ap-input-wrapper">
+              <input type="text" id="sample-hum" class="ap-input ap-input--numeric ap-input--error" value="13.2">
+              <span class="ap-input__suffix">%</span>
+            </div>
+            <p class="ap-form-error">Humedad fuera de rango: excede el límite máximo de 12.5% FNC</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. ALERTAS DE CULTIVO -->
+    <section class="section">
+      <h2 class="section-title">3. Alertas con Doble Codificación Sensorial</h2>
+      <div class="ap-alert ap-alert--critical">
+        <div style="padding-top: 2px;">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="#9E1B1B" aria-hidden="true">
+            <path d="M15.73 3H8.27L3 8.27v7.46L8.27 21h7.46L21 15.73V8.27L15.73 3zM12 17.3c-.72 0-1.3-.58-1.3-1.3 0-.72.58-1.3 1.3-1.3.72 0 1.3.58 1.3 1.3 0 .72-.58 1.3-1.3 1.3zm1-4.3h-2V7h2v6z"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="ap-alert__title">ALERTA FITOSANITARIA: FOCO DE ROYA CONFIRMADO EN LOTE 2</h3>
+          <p class="ap-alert__description">Detección multimodal de alta severidad. Requiere fumigación focalizada.</p>
+          <button type="button" class="ap-btn ap-btn--danger" style="height: 40px; font-size: 14px;">VER RECOMENDACIÓN TÉCNICA</button>
+        </div>
+      </div>
+
+      <div class="ap-alert ap-alert--warning">
+        <div style="padding-top: 2px;">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="#D97706" aria-hidden="true">
+            <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="ap-alert__title">MODO SIN SEÑAL: BUFFER LOCAL ACTIVO</h3>
+          <p class="ap-alert__description">Sin cobertura celular. Guardando en memoria local (2 registros pendientes de sincronizar).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. TARJETA DE SACO DEL COMPRADOR (ANONIMIZADA LEY 1581) -->
+    <section class="section">
+      <h2 class="section-title">4. Tarjeta de Saco - Vista del Comprador Internacional (Ley 1581)</h2>
+      <article class="ap-card-saco">
+        <header class="ap-card-saco__header">
+          <div>
+            <span class="ap-card-saco__type-label">CERTIFICADO OFICIAL DE ORIGEN Y TRAZABILIDAD FNC</span>
+            <h3 class="ap-card-saco__code">SACO-2026-CAU-7F3A9C12</h3>
+          </div>
+          <div class="ap-badge ap-badge--accepted">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+              <path d="M12 2L3 6v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V6l-9-4z" fill="#16A34A" stroke="none"/>
+              <path d="M9 12l2 2 4-4" stroke="#FFFFFF"/>
+            </svg>
+            <span>ACEPTADO</span>
+          </div>
+        </header>
+
+        <div class="ap-card-saco__grid">
+          <div>
+            <span class="ap-card-saco__item-label">DEPARTAMENTO</span>
+            <strong class="ap-card-saco__item-value">Cauca</strong>
+          </div>
+          <div>
+            <span class="ap-card-saco__item-label">MUNICIPIO</span>
+            <strong class="ap-card-saco__item-value">Popayán</strong>
+          </div>
+          <div>
+            <span class="ap-card-saco__item-label">VARIEDAD</span>
+            <strong class="ap-card-saco__item-value">Castillo</strong>
+          </div>
+          <div>
+            <span class="ap-card-saco__item-label">CALIFICACIÓN SCA</span>
+            <strong class="ap-card-saco__item-value ap-card-saco__item-value--highlight">86.5 pts</strong>
+          </div>
+          <div>
+            <span class="ap-card-saco__item-label">HUMEDAD SECADO</span>
+            <strong class="ap-card-saco__item-value">11.8 %</strong>
+          </div>
+          <div>
+            <span class="ap-card-saco__item-label">TEMP. SECADO</span>
+            <strong class="ap-card-saco__item-value">21 grados C</strong>
+          </div>
+          <div>
+            <span class="ap-card-saco__item-label">PESO ESTÁNDAR</span>
+            <strong class="ap-card-saco__item-value">60.0 KG</strong>
+          </div>
+          <div>
+            <span class="ap-card-saco__item-label">DESTINO PUERTO</span>
+            <strong class="ap-card-saco__item-value">Buenaventura</strong>
+          </div>
+        </div>
+
+        <footer class="ap-card-saco__footer">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+          </svg>
+          <span>
+            Datos personales de caficultores, cédulas y coordenadas submétricas privadas protegidos por la Ley 1581 de 2012.
+          </span>
+        </footer>
+      </article>
+    </section>
+
+    <!-- 5. DISTINTIVOS DE ESTADO DEL SACO -->
+    <section class="section">
+      <h2 class="section-title">5. Distintivos de Estado del Saco (Triple Codificación)</h2>
+      <div class="grid-4">
+        <div class="component-box" style="text-align: center;">
+          <div class="component-label">En Preparación</div>
+          <div class="ap-badge ap-badge--prep">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+              <rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="#D97706" stroke-width="2"/>
+              <circle cx="12" cy="12" r="3" fill="#D97706"/>
+            </svg>
+            <span>EN PREPARACIÓN</span>
+          </div>
+        </div>
+        <div class="component-box" style="text-align: center;">
+          <div class="component-label">En Viaje</div>
+          <div class="ap-badge ap-badge--travel">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+              <path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-2 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+            </svg>
+            <span>EN VIAJE</span>
+          </div>
+        </div>
+        <div class="component-box" style="text-align: center;">
+          <div class="component-label">Aceptado</div>
+          <div class="ap-badge ap-badge--accepted">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M12 2L3 6v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V6l-9-4z" fill="#16A34A" stroke="none"/>
+              <path d="M9 12l2 2 4-4" stroke="#FFFFFF"/>
+            </svg>
+            <span>ACEPTADO</span>
+          </div>
+        </div>
+        <div class="component-box" style="text-align: center;">
+          <div class="component-label">Rechazado</div>
+          <div class="ap-badge ap-badge--rejected">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M7.86 2h8.28L22 7.86v8.28L16.14 22H7.86L2 16.14V7.86L7.86 2z" fill="#DC2626" stroke="none"/>
+              <path d="M15 9l-6 6m0-6l6 6" stroke="#FFFFFF"/>
+            </svg>
+            <span>RECHAZADO</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
