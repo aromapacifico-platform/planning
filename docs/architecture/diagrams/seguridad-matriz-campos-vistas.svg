@@ -1,194 +1,75 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1760 1260" width="100%" height="100%">
-  <defs>
-    <style>
-      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 22px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
-      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #5A6B7C; text-anchor: middle; }
-      .header-box { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #232F3E; }
-      .subhead-box { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #555555; }
-      .body-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
-      .mono-text { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; font-size: 12px; fill: #111111; }
-      .th-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #FFFFFF; text-anchor: middle; }
-      .badge-vis { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; text-anchor: middle; }
-    </style>
-    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%" filterUnits="userSpaceOnUse">
-      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.08" />
-    </filter>
-  </defs>
-
-  <!-- FONDO GENERAL -->
-  <rect width="1760" height="1260" fill="#F8F9FA" />
-
-  <!-- TITULO Y SUBTITULO -->
-  <text x="880" y="45" class="title">AromaPacífico - Matriz de Segregación de Campos del Saco y Vistas por Perfil</text>
-  <text x="880" y="75" class="subtitle">Protección de Datos Personales (Ley 1581 de 2012): Segregación de Atributos entre Comprador, Centro de Acopio y Caficultor</text>
-
-  <!-- PANELES SUPERIORES -->
-  <g transform="translate(50, 110)" filter="url(#shadow)">
-    <rect width="800" height="225" rx="8" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
-    <rect width="800" height="35" rx="8" fill="#EBF3FB" />
-    <text x="20" y="24" class="header-box" fill="#1D76DB">ESTRUCTURA Y TOKENIZACIÓN DEL CÓDIGO DE SACO (60 KG)</text>
-    <text x="20" y="55" class="subhead-box">Algoritmo Criptográfico Unidireccional sin Exposición de Cédula ni Finca</text>
-    <text x="20" y="80" class="body-text" font-weight="bold">Formato Canónico Oficial:</text>
-    <text x="35" y="100" class="mono-text" font-weight="bold" fill="#1D76DB">SACO-[AÑO]-[DEPTO]-[HASH8]  -->  Ejemplo: SACO-2026-CAU-7F3A9C12</text>
-    <text x="20" y="125" class="body-text" font-weight="bold">Fórmula Criptográfica HMAC:</text>
-    <text x="35" y="145" class="mono-text">Digest = HMAC-SHA-256( Salt_KMS, FincaID || LoteID || Timestamp || Nonce )</text>
-    <text x="35" y="165" class="mono-text">Hash8  = Substring( Hex(Digest), 0, 8 )</text>
-    <text x="20" y="190" class="body-text" font-weight="bold">Garantías Criptográficas:</text>
-    <text x="35" y="208" class="body-text">1. Irreversibilidad absoluta: Imposible deducir cédula o coordenadas a partir del hash.</text>
-  </g>
-
-  <g transform="translate(880, 110)" filter="url(#shadow)">
-    <rect width="830" height="225" rx="8" fill="#FFFFFF" stroke="#0E8A16" stroke-width="2" />
-    <rect width="830" height="35" rx="8" fill="#F0FFF4" />
-    <text x="20" y="24" class="header-box" fill="#0E8A16">PRINCIPIOS DE ACCESO SEGMENTADO (Privacy by Design)</text>
-    <text x="20" y="55" class="subhead-box">Garantía Legal de Privacidad bajo la Ley Estatutaria 1581 de 2012</text>
-    <text x="20" y="80" class="body-text" font-weight="bold">1. Vista del Comprador Internacional (Web Pública):</text>
-    <text x="35" y="98" class="body-text">- Exclusivo a calidad: variedad, humedad de secado, procedencia departamental.</text>
-    <text x="35" y="116" class="body-text" fill="#D93F0B" font-weight="bold">- Cero PII: ni cédula, ni nombre, ni coordenadas GPS, ni rutas de transporte.</text>
-    <text x="20" y="140" class="body-text" font-weight="bold">2. Vista del Centro de Acopio (LAN Operativa con MFA):</text>
-    <text x="35" y="158" class="body-text">- Acceso operativo a pesaje, viaje asignado, calidad de secado del lote.</text>
-    <text x="35" y="176" class="body-text">- Cédula enmascarada (solo últimos 4 dígitos visibles: CC *****4821).</text>
-    <text x="20" y="200" class="body-text" font-weight="bold">3. Vista del Caficultor: Visualización íntegra de sus fincas; cero acceso a fincas ajenas.</text>
-  </g>
-
-  <!-- CONTENEDOR PRINCIPAL: MATRIZ DE CAMPOS VS PERFILES -->
-  <g transform="translate(50, 360)" filter="url(#shadow)">
-    <rect width="1660" height="860" rx="8" fill="#FFFFFF" stroke="#545B64" stroke-width="2" />
-    <rect width="1660" height="35" rx="8" fill="#EAEDED" />
-    <text x="20" y="24" class="header-box">MATRIZ DETALLADA DE CAMPOS DEL EXPEDIENTE DEL SACO VS PERFILES AUTORIZADOS</text>
-
-    <!-- ENCABEZADOS -->
-    <g transform="translate(20, 50)">
-      <rect x="0" y="0" width="280" height="35" fill="#232F3E" />
-      <text x="140" y="22" class="th-title">Atributo / Campo de Datos</text>
-      <rect x="290" y="0" width="200" height="35" fill="#232F3E" />
-      <text x="390" y="22" class="th-title">Clasificación Legal</text>
-      <rect x="500" y="0" width="280" height="35" fill="#1D76DB" />
-      <text x="640" y="22" class="th-title">Comprador Internacional</text>
-      <rect x="790" y="0" width="280" height="35" fill="#D93F0B" />
-      <text x="930" y="22" class="th-title">Operario de Acopio (MFA)</text>
-      <rect x="1080" y="0" width="280" height="35" fill="#0E8A16" />
-      <text x="1220" y="22" class="th-title">Caficultor Propietario</text>
-      <rect x="1370" y="0" width="250" height="35" fill="#232F3E" />
-      <text x="1495" y="22" class="th-title">Regla de Control y Justificación</text>
-
-      <!-- FILA 1: CODIGO DE SACO -->
-      <rect x="0" y="35" width="280" height="50" fill="#FFFFFF" stroke="#EAEDED" />
-      <text x="15" y="65" class="body-text" font-weight="bold">codigo_saco (Token Canónico)</text>
-      <rect x="290" y="35" width="200" height="50" fill="#FFFFFF" stroke="#EAEDED" />
-      <text x="390" y="65" class="body-text" text-anchor="middle">Dato Público Industrial</text>
-      <rect x="500" y="35" width="280" height="50" fill="#EBF3FB" stroke="#EAEDED" />
-      <text x="640" y="60" class="badge-vis" fill="#1D76DB">VISIBLE</text>
-      <text x="640" y="75" class="mono-text" text-anchor="middle">SACO-2026-CAU-7F3A9C12</text>
-      <rect x="790" y="35" width="280" height="50" fill="#FFF5F5" stroke="#EAEDED" />
-      <text x="930" y="60" class="badge-vis" fill="#D93F0B">VISIBLE</text>
-      <text x="930" y="75" class="body-text" text-anchor="middle">Lectura código de barras</text>
-      <rect x="1080" y="35" width="280" height="50" fill="#F0FFF4" stroke="#EAEDED" />
-      <text x="1220" y="60" class="badge-vis" fill="#0E8A16">VISIBLE</text>
-      <text x="1220" y="75" class="body-text" text-anchor="middle">Sacos de su beneficiadero</text>
-      <rect x="1370" y="35" width="250" height="50" fill="#FFFFFF" stroke="#EAEDED" />
-      <text x="1380" y="65" class="body-text">Clave primaria universal</text>
-
-      <!-- FILA 2: ORIGEN REGIONAL -->
-      <rect x="0" y="85" width="280" height="50" fill="#F8F9FA" stroke="#EAEDED" />
-      <text x="15" y="115" class="body-text" font-weight="bold">departamento / municipio</text>
-      <rect x="290" y="85" width="200" height="50" fill="#F8F9FA" stroke="#EAEDED" />
-      <text x="390" y="115" class="body-text" text-anchor="middle">Dato Público de Origen</text>
-      <rect x="500" y="85" width="280" height="50" fill="#EBF3FB" stroke="#EAEDED" />
-      <text x="640" y="110" class="badge-vis" fill="#1D76DB">VISIBLE</text>
-      <text x="640" y="125" class="body-text" text-anchor="middle">Cauca / Popayán</text>
-      <rect x="790" y="85" width="280" height="50" fill="#FFF5F5" stroke="#EAEDED" />
-      <text x="930" y="110" class="badge-vis" fill="#D93F0B">VISIBLE</text>
-      <text x="930" y="125" class="body-text" text-anchor="middle">Asignación departamental</text>
-      <rect x="1080" y="85" width="280" height="50" fill="#F0FFF4" stroke="#EAEDED" />
-      <text x="1220" y="110" class="badge-vis" fill="#0E8A16">VISIBLE</text>
-      <text x="1220" y="125" class="body-text" text-anchor="middle">Municipio de su finca</text>
-      <rect x="1370" y="85" width="250" height="50" fill="#F8F9FA" stroke="#EAEDED" />
-      <text x="1380" y="115" class="body-text">Denominación de origen</text>
-
-      <!-- FILA 3: VARIABLES SECADO -->
-      <rect x="0" y="135" width="280" height="50" fill="#FFFFFF" stroke="#EAEDED" />
-      <text x="15" y="165" class="body-text" font-weight="bold">humedad_secado / temp_secado</text>
-      <rect x="290" y="135" width="200" height="50" fill="#FFFFFF" stroke="#EAEDED" />
-      <text x="390" y="165" class="body-text" text-anchor="middle">Dato Técnico Agronómico</text>
-      <rect x="500" y="135" width="280" height="50" fill="#EBF3FB" stroke="#EAEDED" />
-      <text x="640" y="160" class="badge-vis" fill="#1D76DB">VISIBLE</text>
-      <text x="640" y="175" class="body-text" text-anchor="middle">11.8% / 21 grados Celsius</text>
-      <rect x="790" y="135" width="280" height="50" fill="#FFF5F5" stroke="#EAEDED" />
-      <text x="930" y="160" class="badge-vis" fill="#D93F0B">VISIBLE</text>
-      <text x="930" y="175" class="body-text" text-anchor="middle">Control de calidad de lote</text>
-      <rect x="1080" y="135" width="280" height="50" fill="#F0FFF4" stroke="#EAEDED" />
-      <text x="1220" y="160" class="badge-vis" fill="#0E8A16">VISIBLE</text>
-      <text x="1220" y="175" class="body-text" text-anchor="middle">Curva de secado de lote</text>
-      <rect x="1370" y="135" width="250" height="50" fill="#FFFFFF" stroke="#EAEDED" />
-      <text x="1380" y="165" class="body-text">Certificación cerca del 12%</text>
-
-      <!-- FILA 4: ESTADOS DEL SACO -->
-      <rect x="0" y="185" width="280" height="50" fill="#F8F9FA" stroke="#EAEDED" />
-      <text x="15" y="215" class="body-text" font-weight="bold">estado_saco (5 Estados)</text>
-      <rect x="290" y="185" width="200" height="50" fill="#F8F9FA" stroke="#EAEDED" />
-      <text x="390" y="215" class="body-text" text-anchor="middle">Dato Operativo Público</text>
-      <rect x="500" y="185" width="280" height="50" fill="#EBF3FB" stroke="#EAEDED" />
-      <text x="640" y="210" class="badge-vis" fill="#1D76DB">VISIBLE</text>
-      <text x="640" y="225" class="body-text" text-anchor="middle">Entregado Puerto (Aceptado)</text>
-      <rect x="790" y="185" width="280" height="50" fill="#FFF5F5" stroke="#EAEDED" />
-      <text x="930" y="210" class="badge-vis" fill="#D93F0B">MUTABLE</text>
-      <text x="930" y="225" class="body-text" text-anchor="middle">Pesaje / Aceptado / Rechazado</text>
-      <rect x="1080" y="185" width="280" height="50" fill="#F0FFF4" stroke="#EAEDED" />
-      <text x="1220" y="210" class="badge-vis" fill="#0E8A16">VISIBLE</text>
-      <text x="1220" y="225" class="body-text" text-anchor="middle">Tracking de su café</text>
-      <rect x="1370" y="185" width="250" height="50" fill="#F8F9FA" stroke="#EAEDED" />
-      <text x="1380" y="215" class="body-text">Ciclo de vida del grano</text>
-
-      <!-- FILA 5: CEDULA CAFICULTOR -->
-      <rect x="0" y="235" width="280" height="50" fill="#FFF5F5" stroke="#EAEDED" />
-      <text x="15" y="265" class="body-text" font-weight="bold" fill="#D93F0B">cedula_caficultor (PII)</text>
-      <rect x="290" y="235" width="200" height="50" fill="#FFF5F5" stroke="#EAEDED" />
-      <text x="390" y="265" class="body-text" fill="#D93F0B" text-anchor="middle">Dato Personal (Ley 1581)</text>
-      <rect x="500" y="235" width="280" height="50" fill="#FFEBEE" stroke="#EAEDED" />
-      <text x="640" y="265" class="badge-vis" fill="#C62828">BLOQUEADO (Cero Visibilidad)</text>
-      <rect x="790" y="235" width="280" height="50" fill="#FFF3E0" stroke="#EAEDED" />
-      <text x="930" y="265" class="badge-vis" fill="#EF6C00">ENMASCARADO (CC *****4821)</text>
-      <rect x="1080" y="235" width="280" height="50" fill="#F0FFF4" stroke="#EAEDED" />
-      <text x="1220" y="265" class="badge-vis" fill="#0E8A16">VISIBLE (Cédula propia)</text>
-      <rect x="1370" y="235" width="250" height="50" fill="#FFF5F5" stroke="#EAEDED" />
-      <text x="1380" y="265" class="body-text" fill="#D93F0B">Protección legal absoluta</text>
-
-      <!-- FILA 6: FINCA_ID Y GPS -->
-      <rect x="0" y="285" width="280" height="50" fill="#FFF5F5" stroke="#EAEDED" />
-      <text x="15" y="315" class="body-text" font-weight="bold" fill="#D93F0B">finca_id / coordenadas_gps</text>
-      <rect x="290" y="285" width="200" height="50" fill="#FFF5F5" stroke="#EAEDED" />
-      <text x="390" y="315" class="body-text" fill="#D93F0B" text-anchor="middle">Dato Privado Ubicación</text>
-      <rect x="500" y="285" width="280" height="50" fill="#FFEBEE" stroke="#EAEDED" />
-      <text x="640" y="315" class="badge-vis" fill="#C62828">BLOQUEADO (Cero Visibilidad)</text>
-      <rect x="790" y="285" width="280" height="50" fill="#FFF3E0" stroke="#EAEDED" />
-      <text x="930" y="315" class="badge-vis" fill="#EF6C00">SEUDONIMIZADO (FINCA-012)</text>
-      <rect x="1080" y="285" width="280" height="50" fill="#F0FFF4" stroke="#EAEDED" />
-      <text x="1220" y="315" class="badge-vis" fill="#0E8A16">VISIBLE (Sus linderos)</text>
-      <rect x="1370" y="285" width="250" height="50" fill="#FFF5F5" stroke="#EAEDED" />
-      <text x="1380" y="315" class="body-text">Seguridad física del predio</text>
-
-      <!-- FILA 7: TRANSPORTE Y RUTA -->
-      <rect x="0" y="335" width="280" height="50" fill="#FFF5F5" stroke="#EAEDED" />
-      <text x="15" y="365" class="body-text" font-weight="bold" fill="#D93F0B">transportador_id / ruta_gps</text>
-      <rect x="290" y="335" width="200" height="50" fill="#FFF5F5" stroke="#EAEDED" />
-      <text x="390" y="365" class="body-text" fill="#D93F0B" text-anchor="middle">Dato Logístico Privado</text>
-      <rect x="500" y="335" width="280" height="50" fill="#FFEBEE" stroke="#EAEDED" />
-      <text x="640" y="365" class="badge-vis" fill="#C62828">BLOQUEADO (Cero Visibilidad)</text>
-      <rect x="790" y="335" width="280" height="50" fill="#FFF5F5" stroke="#EAEDED" />
-      <text x="930" y="365" class="badge-vis" fill="#D93F0B">VISIBLE (Viaje y camión)</text>
-      <rect x="1080" y="335" width="280" height="50" fill="#FFFFFF" stroke="#EAEDED" />
-      <text x="1220" y="365" class="body-text" fill="#555555" text-anchor="middle">BLOQUEADO (Solo ve en viaje)</text>
-      <rect x="1370" y="335" width="250" height="50" fill="#FFF5F5" stroke="#EAEDED" />
-      <text x="1380" y="365" class="body-text">Seguridad en carretera</text>
-    </g>
-
-    <!-- PANEL INFERIOR DE RESUMEN Y RETENCION -->
-    <g transform="translate(20, 470)">
-      <rect width="1620" height="75" rx="6" fill="#F8F9FA" stroke="#545B64" stroke-width="1.5" />
-      <text x="20" y="25" class="header-box">POLÍTICA DE RETENCIÓN Y AUDITORÍA INMUTABLE (Ley 1581 de 2012 y FNC):</text>
-      <text x="20" y="48" class="body-text">1. Retención Legal: 5 años (1.825 días) inmutables en DynamoDB y S3 Object Lock en cuenta Security.</text>
-      <text x="20" y="66" class="body-text">2. Separación Física de Almacenes: La tabla pública sacos_publicos jamás aloja PII; el modelo previene fugas por error de serialización.</text>
-    </g>
-  </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1640" height="840" viewBox="0 0 1640 840">
+<defs>
+<filter id="shadow" x="-6%" y="-6%" width="112%" height="118%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.08"/></filter>
+<marker id="arr-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#334155"/></marker>
+<marker id="arr-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#135E34"/></marker>
+<marker id="arr-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#DD344C"/></marker>
+<marker id="arr-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#0F4C81"/></marker>
+<marker id="arr-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#ED7100"/></marker>
+<marker id="arr-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#8C4FFF"/></marker>
+<style>text{font-family:'Segoe UI',Inter,Arial,sans-serif;}</style>
+</defs>
+<rect x="0" y="0" width="1640" height="840" fill="#FFFFFF"/>
+<rect x="0" y="0" width="1640" height="78" fill="#0A3D20"/>
+<rect x="0" y="75" width="1640" height="3" fill="#4ADE80"/>
+<text x="32" y="36" font-size="21" font-weight="700" fill="#FFFFFF">AromaPacifico - Segregacion de Campos del Saco por Perfil (Ley 1581)</text>
+<text x="32" y="60" font-size="13" font-weight="400" fill="#D1FAE5">Proyeccion disjunta: el comprador solo lee sacos_publicos y nunca accede a PII ni rutas privadas</text>
+<rect x="1444" y="22" width="168" height="30" rx="15" fill="#135E34" stroke="#FFFFFF" stroke-opacity="0.28"/><text x="1528" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">3 Vistas Disjuntas</text>
+<rect x="1266" y="22" width="168" height="30" rx="15" fill="#0F4C81" stroke="#FFFFFF" stroke-opacity="0.28"/><text x="1350" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Token HMAC-SHA-256</text>
+<rect x="1104" y="22" width="152" height="30" rx="15" fill="#DD344C" stroke="#FFFFFF" stroke-opacity="0.28"/><text x="1180" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Ley 1581 de 2012</text>
+<g id="z-tok"><rect x="24" y="100" width="1592" height="164" rx="12" fill="#F3F8FC" stroke="#0F4C81" stroke-width="2"/><path d="M36,100 H1604 Q1616,100 1616,112 V134 H24 V112 Q24,100 36,100 Z" fill="#0F4C81"/><text x="38" y="122" font-size="13.5" font-weight="700" fill="#FFFFFF">1. Tokenizacion Irreversible del Saco</text>
+</g>
+<g id="z-v1"><rect x="24" y="294" width="510" height="380" rx="12" fill="#F4FAF6" stroke="#135E34" stroke-width="2"/><path d="M36,294 H522 Q534,294 534,306 V328 H24 V306 Q24,294 36,294 Z" fill="#135E34"/><text x="38" y="316" font-size="13.5" font-weight="700" fill="#FFFFFF">Vista Comprador (Publica)</text>
+<rect x="394" y="300" width="130" height="22" rx="11" fill="#0F172A"/><text x="459" y="315" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">sacos_publicos</text>
+</g>
+<g id="z-v2"><rect x="565" y="294" width="510" height="380" rx="12" fill="#F3F8FC" stroke="#0F4C81" stroke-width="2"/><path d="M577,294 H1063 Q1075,294 1075,306 V328 H565 V306 Q565,294 577,294 Z" fill="#0F4C81"/><text x="579" y="316" font-size="13.5" font-weight="700" fill="#FFFFFF">Vista Acopio (Operativa)</text>
+<rect x="959" y="300" width="106" height="22" rx="11" fill="#0F172A"/><text x="1012" y="315" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Cognito MFA</text>
+</g>
+<g id="z-v3"><rect x="1106" y="294" width="510" height="380" rx="12" fill="#FFFBF5" stroke="#ED7100" stroke-width="2"/><path d="M1118,294 H1604 Q1616,294 1616,306 V328 H1106 V306 Q1106,294 1118,294 Z" fill="#ED7100"/><text x="1120" y="316" font-size="13.5" font-weight="700" fill="#FFFFFF">Vista Caficultor (Privada)</text>
+<rect x="1468" y="300" width="138" height="22" rx="11" fill="#0F172A"/><text x="1537" y="315" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Solo sus fincas</text>
+</g>
+<path id="edge-0" d="M496,196 L590,196" fill="none" stroke="#0F4C81" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-blue)"/>
+<path id="edge-1" d="M1050,196 L1140,196" fill="none" stroke="#DD344C" stroke-width="2" stroke-dasharray="6,4" stroke-linejoin="round" marker-end="url(#arr-red)"/>
+<g id="t-in" filter="url(#shadow)"><rect x="56" y="156" width="440" height="80" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="68" y="174" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(74,180) scale(1.333)"><circle cx="8.5" cy="12" r="3.6" fill="none" stroke="#FFF" stroke-width="1.9"/><path d="M12.1 12H20M16.5 12V15.5M19.5 12V14.8" stroke="#FFF" stroke-width="1.9" stroke-linecap="round"/></g>
+<text x="124" y="192" font-size="13.5" font-weight="700" fill="#0F172A">Saco 60 kg + Semilla KMS</text><text x="124" y="211" font-size="12" font-weight="400" fill="#475569">ID interno + FincaID</text>
+</g>
+<g id="t-hm" filter="url(#shadow)"><rect x="590" y="156" width="460" height="80" rx="10" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1.8"/><rect x="602" y="174" width="44" height="44" rx="8" fill="#0F4C81"/><g transform="translate(608,180) scale(1.333)"><path d="M12 5V19M7 19H17M5 9H19M5 9L3.5 14H6.5L5 9ZM19 9L17.5 14H20.5L19 9Z" fill="none" stroke="#FFF" stroke-width="1.6" stroke-linejoin="round"/></g>
+<text x="658" y="192" font-size="13.5" font-weight="700" fill="#0F172A">HMAC-SHA-256 (8 chars)</text><text x="658" y="211" font-size="12" font-weight="400" fill="#475569">SACO-2026-CAU-9F3A1C02</text>
+<rect x="944" y="146" width="98" height="20" rx="10" fill="#DD344C"/><text x="993" y="160" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Irreversible</text>
+</g>
+<g id="t-no" filter="url(#shadow)"><rect x="1140" y="156" width="444" height="80" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="1152" y="174" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(1158,180) scale(1.333)"><circle cx="12" cy="12" r="7.5" fill="none" stroke="#FFF" stroke-width="1.9"/><line x1="7" y1="7" x2="17" y2="17" stroke="#FFF" stroke-width="2"/></g>
+<text x="1208" y="192" font-size="13.5" font-weight="700" fill="#0F172A">Cedula y GPS Privado</text><text x="1208" y="211" font-size="12" font-weight="400" fill="#475569">Nunca entran a sacos_publicos</text>
+</g>
+<g id="b-ok1" filter="url(#shadow)"><rect x="50" y="356" width="458" height="76" rx="10" fill="#FFFFFF" stroke="#135E34" stroke-width="1.8"/><rect x="62" y="372" width="44" height="44" rx="8" fill="#135E34"/><g transform="translate(68,378) scale(1.333)"><circle cx="12" cy="12" r="7.5" fill="none" stroke="#FFF" stroke-width="1.8"/><path d="M8.5 12.2L10.8 14.5L15.8 9.5" fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="118" y="390" font-size="13.5" font-weight="700" fill="#0F172A">PERMITIDO: Origen y Variedad</text><text x="118" y="409" font-size="12" font-weight="400" fill="#475569">Departamento, municipio, variedad</text>
+</g>
+<g id="b-ok2" filter="url(#shadow)"><rect x="50" y="452" width="458" height="76" rx="10" fill="#FFFFFF" stroke="#135E34" stroke-width="1.8"/><rect x="62" y="468" width="44" height="44" rx="8" fill="#135E34"/><g transform="translate(68,474) scale(1.333)"><circle cx="12" cy="12" r="7.5" fill="none" stroke="#FFF" stroke-width="1.8"/><path d="M8.5 12.2L10.8 14.5L15.8 9.5" fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="118" y="486" font-size="13.5" font-weight="700" fill="#0F172A">PERMITIDO: Proceso y Secado</text><text x="118" y="505" font-size="12" font-weight="400" fill="#475569">Fechas, peso 60 kg, humedad, estado</text>
+</g>
+<g id="b-no" filter="url(#shadow)"><rect x="50" y="548" width="458" height="86" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="62" y="569" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(68,575) scale(1.333)"><circle cx="12" cy="12" r="7.5" fill="none" stroke="#FFF" stroke-width="1.9"/><line x1="7" y1="7" x2="17" y2="17" stroke="#FFF" stroke-width="2"/></g>
+<text x="118" y="587" font-size="13.5" font-weight="700" fill="#0F172A">BLOQUEADO: PII y Rutas</text><text x="118" y="606" font-size="12" font-weight="400" fill="#475569">0 cedula · 0 nombre · 0 GPS</text>
+<rect x="423" y="538" width="77" height="20" rx="10" fill="#DD344C"/><text x="461" y="552" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Prohibido</text>
+</g>
+<g id="a-ok1" filter="url(#shadow)"><rect x="591" y="356" width="458" height="76" rx="10" fill="#FFFFFF" stroke="#135E34" stroke-width="1.8"/><rect x="603" y="372" width="44" height="44" rx="8" fill="#135E34"/><g transform="translate(609,378) scale(1.333)"><rect x="3.5" y="7" width="11" height="9" rx="1" fill="none" stroke="#FFF" stroke-width="1.7"/><path d="M14.5 10H18.5L20.5 12.5V16H14.5V10Z" fill="none" stroke="#FFF" stroke-width="1.7" stroke-linejoin="round"/><circle cx="7.5" cy="17.5" r="1.8" fill="#FFF"/><circle cx="17.5" cy="17.5" r="1.8" fill="#FFF"/></g>
+<text x="659" y="390" font-size="13.5" font-weight="700" fill="#0F172A">PERMITIDO: Viaje y Transporte</text><text x="659" y="409" font-size="12" font-weight="400" fill="#475569">Conductor, tiempos, recepcion</text>
+</g>
+<g id="a-ok2" filter="url(#shadow)"><rect x="591" y="452" width="458" height="76" rx="10" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1.8"/><rect x="603" y="468" width="44" height="44" rx="8" fill="#0F4C81"/><g transform="translate(609,474) scale(1.333)"><path d="M4 19.5H20M5.5 19.5V9.5L12 5L18.5 9.5V19.5" fill="none" stroke="#FFF" stroke-width="1.8" stroke-linejoin="round"/><rect x="9.5" y="13.5" width="5" height="6" fill="none" stroke="#FFF" stroke-width="1.6"/></g>
+<text x="659" y="486" font-size="13.5" font-weight="700" fill="#0F172A">PERMITIDO: Calidad y Catacion</text><text x="659" y="505" font-size="12" font-weight="400" fill="#475569">Aceptado/rechazado + etiquetas</text>
+</g>
+<g id="a-no" filter="url(#shadow)"><rect x="591" y="548" width="458" height="86" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="603" y="569" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(609,575) scale(1.333)"><path d="M12 3.5L19 6.5V12C19 16.2 15.9 19.3 12 20.5C8.1 19.3 5 16.2 5 12V6.5L12 3.5Z" fill="none" stroke="#FFF" stroke-width="1.8"/><circle cx="12" cy="10.2" r="2" fill="#FFF"/><path d="M8.8 15.8C9.4 14 10.6 13.3 12 13.3C13.4 13.3 14.6 14 15.2 15.8" fill="none" stroke="#FFF" stroke-width="1.6" stroke-linecap="round"/></g>
+<text x="659" y="587" font-size="13.5" font-weight="700" fill="#0F172A">RESTRINGIDO: Otros Acopios</text><text x="659" y="606" font-size="12" font-weight="400" fill="#475569">Aislado por AcopioID + MFA</text>
+</g>
+<g id="f-ok1" filter="url(#shadow)"><rect x="1132" y="356" width="458" height="76" rx="10" fill="#FFFFFF" stroke="#135E34" stroke-width="1.8"/><rect x="1144" y="372" width="44" height="44" rx="8" fill="#135E34"/><g transform="translate(1150,378) scale(1.333)"><path d="M12 20V11M12 11C12 6.5 16 4.5 19.5 4.5C19.5 8.5 17 11.5 12 11Z" fill="none" stroke="#FFF" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 14C12 10.5 8.5 8.5 5 8.5C5 12 7.5 14.5 12 14Z" fill="none" stroke="#FFF" stroke-width="1.8" stroke-linejoin="round"/></g>
+<text x="1200" y="390" font-size="13.5" font-weight="700" fill="#0F172A">PERMITIDO: Sus Fincas y Lotes</text><text x="1200" y="409" font-size="12" font-weight="400" fill="#475569">Telemetria, alertas y drones</text>
+</g>
+<g id="f-ok2" filter="url(#shadow)"><rect x="1132" y="452" width="458" height="76" rx="10" fill="#FFFFFF" stroke="#135E34" stroke-width="1.8"/><rect x="1144" y="468" width="44" height="44" rx="8" fill="#135E34"/><g transform="translate(1150,474) scale(1.333)"><path d="M8 5L10 8H14L16 5M7 9.5C5.5 12 5.5 17 7.5 19C9 20 15 20 16.5 19C18.5 17 18.5 12 17 9.5L14.5 8H9.5L7 9.5Z" fill="none" stroke="#FFF" stroke-width="1.7" stroke-linejoin="round"/></g>
+<text x="1200" y="486" font-size="13.5" font-weight="700" fill="#0F172A">PERMITIDO: Sus Sacos</text><text x="1200" y="505" font-size="12" font-weight="400" fill="#475569">Estado desde finca hasta puerto</text>
+</g>
+<g id="f-no" filter="url(#shadow)"><rect x="1132" y="548" width="458" height="86" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="1144" y="569" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(1150,575) scale(1.333)"><path d="M12 3.5L19 6.5V12C19 16.2 15.9 19.3 12 20.5C8.1 19.3 5 16.2 5 12V6.5L12 3.5Z" fill="none" stroke="#FFF" stroke-width="1.8"/><circle cx="12" cy="10.2" r="2" fill="#FFF"/><path d="M8.8 15.8C9.4 14 10.6 13.3 12 13.3C13.4 13.3 14.6 14 15.2 15.8" fill="none" stroke="#FFF" stroke-width="1.6" stroke-linecap="round"/></g>
+<text x="1200" y="587" font-size="13.5" font-weight="700" fill="#0F172A">RESTRINGIDO: Otras Fincas</text><text x="1200" y="606" font-size="12" font-weight="400" fill="#475569">Aislado por sub Cognito</text>
+</g>
+<rect x="516" y="184" width="54" height="24" rx="12" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1.2"/><text x="543" y="200" text-anchor="middle" font-size="12" font-weight="600" fill="#0F4C81">Hash</text>
+<rect x="1066" y="184" width="58" height="24" rx="12" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.2"/><text x="1095" y="200" text-anchor="middle" font-size="12" font-weight="600" fill="#DD344C">Separa</text>
+<g><rect x="24" y="704" width="1592" height="104" rx="8" fill="#ECFDF5" stroke="#135E34" stroke-width="1.6"/><rect x="24" y="704" width="6" height="104" rx="3" fill="#135E34"/><text x="42" y="726" font-size="13" font-weight="700" fill="#135E34">Privacidad por Diseno (#5 / #37)</text><text x="42" y="746" font-size="12" font-weight="400" fill="#1E293B">La separacion fisica en dos tablas DynamoDB (sacos_eventos vs sacos_publicos) garantiza que un error de aplicacion jamas pueda filtrar datos personales al portal publico.</text></g>
 </svg>

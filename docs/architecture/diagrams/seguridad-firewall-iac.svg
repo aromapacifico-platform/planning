@@ -1,161 +1,75 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1100" width="1500" height="1100">
-  <defs>
-    <style>
-      .title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
-      .subtitle { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; fill: #5A6B7C; text-anchor: middle; }
-      .box-title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #232F3E; }
-      .card-title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; font-weight: bold; }
-      .card-text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; fill: #232F3E; }
-      .card-bold { font-weight: bold; }
-    </style>
-  </defs>
-
-  <!-- Background -->
-  <rect width="1500" height="1100" fill="#FFFFFF"/>
-
-  <!-- Header -->
-  <text x="750" y="45" class="title">AromaPacífico - Módulo de Seguridad IaC y Verificación de Firewall (Épica 6 · E6-04)</text>
-  <text x="750" y="75" class="subtitle">Mapeo Técnico de Llaves KMS, Roles IAM con Privilegio Mínimo y Catálogo Permanente de Firewall (C01–C20, N01–N16)</text>
-
-  <!-- Container 1: KMS Keys -->
-  <g transform="translate(50, 110)">
-    <rect width="440" height="420" rx="8" fill="#F2F3F3" stroke="#545B64" stroke-width="2"/>
-    <rect width="440" height="35" rx="8" fill="#EAEDED" stroke="#545B64" stroke-width="1"/>
-    <text x="15" y="23" class="box-title">1. Cifrado en Reposo: Customer Managed Keys (KMS)</text>
-
-    <!-- Key Data -->
-    <rect x="20" y="50" width="400" height="105" rx="6" fill="#FFFFFF" stroke="#0073BB" stroke-width="2"/>
-    <text x="35" y="72" class="card-title" fill="#0073BB">KMS Datos Agronómicos y Sacos (AES-256-GCM)</text>
-    <text x="35" y="90" class="card-text">Alias: alias/aromapacifico-dev-kms-data</text>
-    <text x="35" y="108" class="card-text">• Cifrado de tabla DynamoDB de Telemetría y Sacos (60 kg)</text>
-    <text x="35" y="126" class="card-text">• Rotación anual activa | prevent_destroy = true</text>
-    <text x="35" y="144" class="card-text">• Acceso restringido por condición kms:CallerAccount</text>
-
-    <!-- Key Objects -->
-    <rect x="20" y="170" width="400" height="105" rx="6" fill="#FFFFFF" stroke="#0073BB" stroke-width="2"/>
-    <text x="35" y="192" class="card-title" fill="#0073BB">KMS Objetos y Vuelos de Drones (SSE-KMS)</text>
-    <text x="35" y="210" class="card-text">Alias: alias/aromapacifico-dev-kms-objects</text>
-    <text x="35" y="228" class="card-text">• Cifrado de Bucket de Fotos de Foco y Vuelos (.bin)</text>
-    <text x="35" y="246" class="card-text">• Integración con Inferencia Rekognition | prevent_destroy</text>
-    <text x="35" y="264" class="card-text">• Zero-Cleartext en tránsito y en reposo</text>
-
-    <!-- Key Logs -->
-    <rect x="20" y="290" width="400" height="105" rx="6" fill="#FFFFFF" stroke="#0073BB" stroke-width="2"/>
-    <text x="35" y="312" class="card-title" fill="#0073BB">KMS Auditoría y Trazas Centralizadas (CloudWatch)</text>
-    <text x="35" y="330" class="card-text">Alias: alias/aromapacifico-dev-kms-logs</text>
-    <text x="35" y="348" class="card-text">• Cifrado de CloudWatch Logs y VPC Flow Logs</text>
-    <text x="35" y="366" class="card-text">• Protección de Estado Remoto S3 y DynamoDB Lock</text>
-    <text x="35" y="384" class="card-text">• Retención legal de 5 años | prevent_destroy = true</text>
-  </g>
-
-  <!-- Container 2: Platform IAM Roles -->
-  <g transform="translate(520, 110)">
-    <rect width="450" height="420" rx="8" fill="#F2F3F3" stroke="#545B64" stroke-width="2"/>
-    <rect width="450" height="35" rx="8" fill="#EAEDED" stroke="#545B64" stroke-width="1"/>
-    <text x="15" y="23" class="box-title">2. Identidades de Plataforma: Roles IAM Sin Comodines</text>
-
-    <!-- Role Ingest -->
-    <rect x="20" y="50" width="410" height="105" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="2"/>
-    <text x="35" y="72" class="card-title" fill="#D93F0B">Rol de Ingesta Telemetría (AWS IoT Core)</text>
-    <text x="35" y="90" class="card-text">Nombre: aromapacifico-dev-role-ingest</text>
-    <text x="35" y="108" class="card-text">• Entidad de Confianza: iot.amazonaws.com</text>
-    <text x="35" y="126" class="card-text">• dynamodb:PutItem acotado a tabla telemetría</text>
-    <text x="35" y="144" class="card-text">• sqs:SendMessage a cola ingesta | kms:Encrypt en Datos</text>
-
-    <!-- Role Function -->
-    <rect x="20" y="170" width="410" height="105" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="2"/>
-    <text x="35" y="192" class="card-title" fill="#D93F0B">Rol de Función de Foco (AWS Lambda)</text>
-    <text x="35" y="210" class="card-text">Nombre: aromapacifico-dev-role-focus-func</text>
-    <text x="35" y="228" class="card-text">• s3:GetObject en bucket de foco | rekognition:DetectLabels</text>
-    <text x="35" y="246" class="card-text">• dynamodb:PutItem en expediente | sqs:SendMessage a DLQ</text>
-    <text x="35" y="264" class="card-text">• Zero-Wildcard Policy: sin Action: * ni Resource: *</text>
-
-    <!-- Role Delivery -->
-    <rect x="20" y="290" width="410" height="105" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="2"/>
-    <text x="35" y="312" class="card-title" fill="#D93F0B">Rol de Entrega en Puerto Buenaventura</text>
-    <text x="35" y="330" class="card-text">Nombre: aromapacifico-dev-role-delivery</text>
-    <text x="35" y="348" class="card-text">• Transacción digital Buenaventura (cero infra FNC)</text>
-    <text x="35" y="366" class="card-text">• dynamodb:PutItem en master sacos | RPO 15 min</text>
-    <text x="35" y="384" class="card-text">• logs:CreateLogStream y PutLogEvents acotados</text>
-  </g>
-
-  <!-- Container 3: Security Groups -->
-  <g transform="translate(1000, 110)">
-    <rect width="460" height="420" rx="8" fill="#F2F3F3" stroke="#545B64" stroke-width="2"/>
-    <rect width="460" height="35" rx="8" fill="#EAEDED" stroke="#545B64" stroke-width="1"/>
-    <text x="15" y="23" class="box-title">3. Reglas de Firewall: Security Groups (C01–C20)</text>
-
-    <!-- SG Public -->
-    <rect x="20" y="50" width="420" height="105" rx="6" fill="#FFFFFF" stroke="#1D8102" stroke-width="2"/>
-    <text x="35" y="72" class="card-title" fill="#1D8102">Capa Consulta Pública (C01, C02, C03, C20)</text>
-    <text x="35" y="90" class="card-text">• SG-ALB-CONSULTA: Ingress 0.0.0.0/0:443 (C01)</text>
-    <text x="35" y="108" class="card-text">• SG-ALB-CONSULTA: Egress a SG-CONSULTA:443 (C02)</text>
-    <text x="35" y="126" class="card-text">• SG-CONSULTA: Ingress ALB (C03) y Egress PL-DDB (C20)</text>
-    <text x="35" y="144" class="card-text">• Ley 1581: Anonimización estricta sin cédula</text>
-
-    <!-- SG Private Endpoints -->
-    <rect x="20" y="170" width="420" height="105" rx="6" fill="#FFFFFF" stroke="#1D8102" stroke-width="2"/>
-    <text x="35" y="192" class="card-title" fill="#1D8102">Capa Interconexión Privada (C04, C05, C10, C11)</text>
-    <text x="35" y="210" class="card-text">• SG-VPCE-API: Ingress desde LOG-AUT-CIDR:443 (C04)</text>
-    <text x="35" y="228" class="card-text">• SG-VPCE-S3: Ingress desde DRON y BACKUP:443 (C05)</text>
-    <text x="35" y="246" class="card-text">• SG-FUNCION: Egress a SG-VPCE-REKOG:443 (C10)</text>
-    <text x="35" y="264" class="card-text">• SG-VPCE-REKOG: Ingress desde SG-FUNCION:443 (C11)</text>
-
-    <!-- SG Transversales -->
-    <rect x="20" y="290" width="420" height="105" rx="6" fill="#FFFFFF" stroke="#1D8102" stroke-width="2"/>
-    <text x="35" y="312" class="card-title" fill="#1D8102">Capa Transversal (C12–C19, Invariantes C21/C22)</text>
-    <text x="35" y="330" class="card-text">• SG-VPCE-LOGS: CloudWatch Logs Ingress:443 (C12, C13)</text>
-    <text x="35" y="348" class="card-text">• SG-VPCE-KMS: KMS PrivateLink Ingress:443 (C14, C15)</text>
-    <text x="35" y="366" class="card-text">• SG-RESOLVER: In/Out Route 53 Resolver:53 (C18, C19)</text>
-    <text x="35" y="384" class="card-text">• Invariantes C21 y C22: Cero salida 0.0.0.0/0 por defecto</text>
-  </g>
-
-  <!-- Container 4: Network ACLs -->
-  <g transform="translate(50, 560)">
-    <rect width="1410" height="490" rx="8" fill="#F2F3F3" stroke="#545B64" stroke-width="2"/>
-    <rect width="1410" height="35" rx="8" fill="#EAEDED" stroke="#545B64" stroke-width="1"/>
-    <text x="15" y="23" class="box-title">4. Perímetro de Subredes: Network Access Control Lists (NACLs Permanentes N01–N16)</text>
-
-    <!-- NACL Privada -->
-    <rect x="20" y="50" width="670" height="420" rx="6" fill="#FFFFFF" stroke="#314A5E" stroke-width="2"/>
-    <text x="35" y="75" class="card-title" fill="#314A5E">NACL Subredes Privadas del Ambiente (N01 a N11, N16)</text>
-    
-    <text x="35" y="105" class="card-bold" fill="#232F3E">Reglas de Ingreso (Ingress):</text>
-    <text x="35" y="125" class="card-text">• Regla 10 (N01): DENEGAR VLAN Visitantes (10.41.5.0/24) [Prioridad Máxima]</text>
-    <text x="35" y="145" class="card-text">• Regla 100 (N02): PERMITIR HTTPS TCP 443 desde CIDRs Privados (PRIV-AUT)</text>
-    <text x="35" y="165" class="card-text">• Regla 110 (N04): PERMITIR DNS TCP 53 desde PRIV-AUT</text>
-    <text x="35" y="185" class="card-text">• Regla 120 (N05): PERMITIR DNS UDP 53 desde PRIV-AUT</text>
-    <text x="35" y="205" class="card-text">• Regla 130 (N08): PERMITIR Puertos Efímeros TCP 1024-65535 (Retorno)</text>
-    <text x="35" y="225" class="card-text">• Regla 140 (N10): PERMITIR Puertos Efímeros UDP 1024-65535 (Respuestas DNS)</text>
-    <text x="35" y="245" class="card-text">• Regla * (N16): DENEGACIÓN implícita para cualquier otro tráfico</text>
-
-    <text x="35" y="275" class="card-bold" fill="#232F3E">Reglas de Egreso (Egress):</text>
-    <text x="35" y="295" class="card-text">• Regla 100 (N03): PERMITIR HTTPS TCP 443 hacia PRIV-AUT y endpoints de datos</text>
-    <text x="35" y="315" class="card-text">• Regla 110 (N06): PERMITIR DNS TCP 53 hacia PRIV-AUT</text>
-    <text x="35" y="335" class="card-text">• Regla 120 (N07): PERMITIR DNS UDP 53 hacia PRIV-AUT</text>
-    <text x="35" y="355" class="card-text">• Regla 130 (N09): PERMITIR Puertos Efímeros TCP 1024-65535 a clientes autorizados</text>
-    <text x="35" y="375" class="card-text">• Regla 140 (N11): PERMITIR Puertos Efímeros UDP 1024-65535 a clientes autorizados</text>
-    <text x="35" y="395" class="card-text">• Regla * (N16): DENEGACIÓN implícita para todo destino no autorizado</text>
-
-    <!-- NACL Publica -->
-    <rect x="720" y="50" width="670" height="420" rx="6" fill="#FFFFFF" stroke="#314A5E" stroke-width="2"/>
-    <text x="735" y="75" class="card-title" fill="#314A5E">NACL Subredes de Consulta Pública (N12 a N16)</text>
-
-    <text x="735" y="105" class="card-bold" fill="#232F3E">Reglas de Ingreso (Ingress):</text>
-    <text x="735" y="125" class="card-text">• Regla 100 (N12): PERMITIR HTTPS TCP 443 desde 0.0.0.0/0 hacia ALB</text>
-    <text x="735" y="145" class="card-text">• Regla 110 (N15): PERMITIR Retorno TCP 1024-65535 desde APP-CIDR</text>
-    <text x="735" y="165" class="card-text">• Regla * (N16): DENEGACIÓN implícita para cualquier origen no autorizado</text>
-
-    <text x="735" y="205" class="card-bold" fill="#232F3E">Reglas de Egreso (Egress):</text>
-    <text x="735" y="225" class="card-text">• Regla 100 (N13): PERMITIR Retorno TCP 1024-65535 hacia Internet (0.0.0.0/0)</text>
-    <text x="735" y="245" class="card-text">• Regla 110 (N14): PERMITIR Reenvío HTTPS TCP 443 hacia APP-CIDR</text>
-    <text x="735" y="265" class="card-text">• Regla * (N16): DENEGACIÓN implícita para cualquier salida no listada</text>
-
-    <text x="735" y="305" class="card-bold" fill="#232F3E">Garantías de Diseño y Confiabilidad:</text>
-    <text x="735" y="325" class="card-text">• Aislamiento total: la subred pública no tiene rutas hacia datos ni ingesta</text>
-    <text x="735" y="345" class="card-text">• Mitigación DoS/DDoS combinada con AWS WAF y AWS Shield Standard</text>
-    <text x="735" y="365" class="card-text">• Absorción de picos de cosecha de hasta 30 lecturas por minuto</text>
-    <text x="735" y="385" class="card-text">• RTO de 4 horas y RPO de 15 minutos asegurados multi-AZ en us-east-1</text>
-  </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1640" height="860" viewBox="0 0 1640 860">
+<defs>
+<filter id="shadow" x="-6%" y="-6%" width="112%" height="118%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.08"/></filter>
+<marker id="arr-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#334155"/></marker>
+<marker id="arr-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#135E34"/></marker>
+<marker id="arr-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#DD344C"/></marker>
+<marker id="arr-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#0F4C81"/></marker>
+<marker id="arr-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#ED7100"/></marker>
+<marker id="arr-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#8C4FFF"/></marker>
+<style>text{font-family:'Segoe UI',Inter,Arial,sans-serif;}</style>
+</defs>
+<rect x="0" y="0" width="1640" height="860" fill="#FFFFFF"/>
+<rect x="0" y="0" width="1640" height="78" fill="#0A3D20"/>
+<rect x="0" y="75" width="1640" height="3" fill="#4ADE80"/>
+<text x="32" y="36" font-size="21" font-weight="700" fill="#FFFFFF">AromaPacifico - Modulo Seguridad IaC (E6-04) y Catalogo de Firewall</text>
+<text x="32" y="60" font-size="13" font-weight="400" fill="#D1FAE5">45 recursos en terraform plan: 3 llaves KMS, 4 roles IAM sin comodines, 14 SGs y NACLs (#9 sin C19)</text>
+<rect x="1460" y="22" width="152" height="30" rx="15" fill="#DD344C" stroke="#FFFFFF" stroke-opacity="0.28"/><text x="1536" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Zero Wildcards *</text>
+<rect x="1282" y="22" width="168" height="30" rx="15" fill="#135E34" stroke="#FFFFFF" stroke-opacity="0.28"/><text x="1366" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Regla C19 Retirada</text>
+<rect x="1072" y="22" width="200" height="30" rx="15" fill="#0F172A" stroke="#FFFFFF" stroke-opacity="0.28"/><text x="1172" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Modulo E6-04 (45 rec.)</text>
+<g id="z-kms"><rect x="24" y="100" width="490" height="580" rx="12" fill="#FFF8F8" stroke="#DD344C" stroke-width="2"/><path d="M36,100 H502 Q514,100 514,112 V134 H24 V112 Q24,100 36,100 Z" fill="#DD344C"/><text x="38" y="122" font-size="13.5" font-weight="700" fill="#FFFFFF">1. Cifrado en Reposo (3 CMKs KMS)</text>
+</g>
+<g id="z-iam"><rect x="554" y="100" width="510" height="580" rx="12" fill="#F3F8FC" stroke="#0F4C81" stroke-width="2"/><path d="M566,100 H1052 Q1064,100 1064,112 V134 H554 V112 Q554,100 566,100 Z" fill="#0F4C81"/><text x="568" y="122" font-size="13.5" font-weight="700" fill="#FFFFFF">2. Identidades IAM (Minimo Privilegio)</text>
+</g>
+<g id="z-fw"><rect x="1104" y="100" width="512" height="580" rx="12" fill="#FAF7FF" stroke="#8C4FFF" stroke-width="2"/><path d="M1116,100 H1604 Q1616,100 1616,112 V134 H1104 V112 Q1104,100 1116,100 Z" fill="#8C4FFF"/><text x="1118" y="122" font-size="13.5" font-weight="700" fill="#FFFFFF">3. Filtrado de Red (Catalogo #9)</text>
+</g>
+<path id="edge-0" d="M490,211 L534,211 L534,209 L578,209" fill="none" stroke="#DD344C" stroke-width="2" stroke-dasharray="6,4" stroke-linejoin="round" marker-end="url(#arr-red)"/>
+<path id="edge-1" d="M490,347 L534,347 L534,327 L578,327" fill="none" stroke="#DD344C" stroke-width="2" stroke-dasharray="6,4" stroke-linejoin="round" marker-end="url(#arr-red)"/>
+<path id="edge-2" d="M1040,327 L1084,327 L1084,211 L1128,211" fill="none" stroke="#8C4FFF" stroke-width="2" stroke-dasharray="6,4" stroke-linejoin="round" marker-end="url(#arr-purple)"/>
+<path id="edge-3" d="M1360,254 L1360,304" fill="none" stroke="#8C4FFF" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-purple)"/>
+<g id="k-data" filter="url(#shadow)"><rect x="48" y="168" width="442" height="86" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="60" y="189" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(66,195) scale(1.333)"><circle cx="8.5" cy="12" r="3.6" fill="none" stroke="#FFF" stroke-width="1.9"/><path d="M12.1 12H20M16.5 12V15.5M19.5 12V14.8" stroke="#FFF" stroke-width="1.9" stroke-linecap="round"/></g>
+<text x="116" y="207" font-size="13.5" font-weight="700" fill="#0F172A">KMS Datos (kms-data)</text><text x="116" y="226" font-size="12" font-weight="400" fill="#475569">DynamoDB y SQS · Rotacion anual</text>
+</g>
+<g id="k-obj" filter="url(#shadow)"><rect x="48" y="304" width="442" height="86" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="60" y="325" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(66,331) scale(1.333)"><circle cx="8.5" cy="12" r="3.6" fill="none" stroke="#FFF" stroke-width="1.9"/><path d="M12.1 12H20M16.5 12V15.5M19.5 12V14.8" stroke="#FFF" stroke-width="1.9" stroke-linecap="round"/></g>
+<text x="116" y="343" font-size="13.5" font-weight="700" fill="#0F172A">KMS Objetos (kms-objects)</text><text x="116" y="362" font-size="12" font-weight="400" fill="#475569">S3 fotos dron y cuarentena PII</text>
+</g>
+<g id="k-log" filter="url(#shadow)"><rect x="48" y="440" width="442" height="86" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="60" y="461" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(66,467) scale(1.333)"><circle cx="8.5" cy="12" r="3.6" fill="none" stroke="#FFF" stroke-width="1.9"/><path d="M12.1 12H20M16.5 12V15.5M19.5 12V14.8" stroke="#FFF" stroke-width="1.9" stroke-linecap="round"/></g>
+<text x="116" y="479" font-size="13.5" font-weight="700" fill="#0F172A">KMS Logs (kms-logs)</text><text x="116" y="498" font-size="12" font-weight="400" fill="#475569">CloudWatch y auditoria WORM</text>
+</g>
+<g id="k-pol" filter="url(#shadow)"><rect x="48" y="574" width="442" height="76" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="60" y="590" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(66,596) scale(1.333)"><path d="M12 3.5L19 6.5V12C19 16.2 15.9 19.3 12 20.5C8.1 19.3 5 16.2 5 12V6.5L12 3.5Z" fill="none" stroke="#FFF" stroke-width="1.9"/></g>
+<text x="116" y="608" font-size="13.5" font-weight="700" fill="#0F172A">Politica TLS 1.2+ Obligatoria</text><text x="116" y="627" font-size="12" font-weight="400" fill="#475569">aws:SecureTransport en S3/SQS</text>
+</g>
+<g id="i-ing" filter="url(#shadow)"><rect x="578" y="168" width="462" height="82" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="590" y="187" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(596,193) scale(1.333)"><path d="M12 3.5L19 6.5V12C19 16.2 15.9 19.3 12 20.5C8.1 19.3 5 16.2 5 12V6.5L12 3.5Z" fill="none" stroke="#FFF" stroke-width="1.8"/><circle cx="12" cy="10.2" r="2" fill="#FFF"/><path d="M8.8 15.8C9.4 14 10.6 13.3 12 13.3C13.4 13.3 14.6 14 15.2 15.8" fill="none" stroke="#FFF" stroke-width="1.6" stroke-linecap="round"/></g>
+<text x="646" y="205" font-size="13.5" font-weight="700" fill="#0F172A">Rol Lambda Ingesta</text><text x="646" y="224" font-size="12" font-weight="400" fill="#475569">SQS + DynamoDB telemetria + SNS</text>
+</g>
+<g id="i-fn1" filter="url(#shadow)"><rect x="578" y="286" width="462" height="82" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="590" y="305" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(596,311) scale(1.333)"><path d="M12 3.5L19 6.5V12C19 16.2 15.9 19.3 12 20.5C8.1 19.3 5 16.2 5 12V6.5L12 3.5Z" fill="none" stroke="#FFF" stroke-width="1.8"/><circle cx="12" cy="10.2" r="2" fill="#FFF"/><path d="M8.8 15.8C9.4 14 10.6 13.3 12 13.3C13.4 13.3 14.6 14 15.2 15.8" fill="none" stroke="#FFF" stroke-width="1.6" stroke-linecap="round"/></g>
+<text x="646" y="323" font-size="13.5" font-weight="700" fill="#0F172A">Rol Lambda FN-01 Foco</text><text x="646" y="342" font-size="12" font-weight="400" fill="#475569">S3 Get + Rekognition/Bedrock + DDB</text>
+</g>
+<g id="i-iot" filter="url(#shadow)"><rect x="578" y="404" width="462" height="82" rx="10" fill="#FFFFFF" stroke="#3F8624" stroke-width="1.8"/><rect x="590" y="423" width="44" height="44" rx="8" fill="#3F8624"/><g transform="translate(596,429) scale(1.333)"><rect x="8" y="8" width="8" height="8" rx="1.5" fill="none" stroke="#FFF" stroke-width="1.8"/><circle cx="12" cy="12" r="2" fill="#FFF"/><path d="M10 4.5V8M14 4.5V8M10 16V19.5M14 16V19.5M4.5 10H8M4.5 14H8M16 10H19.5M16 14H19.5" stroke="#FFF" stroke-width="1.6" stroke-linecap="round"/></g>
+<text x="646" y="441" font-size="13.5" font-weight="700" fill="#0F172A">Rol AWS IoT Core</text><text x="646" y="460" font-size="12" font-weight="400" fill="#475569">Envia telemetria a SQS + auditoria</text>
+</g>
+<g id="i-pub" filter="url(#shadow)"><rect x="578" y="522" width="462" height="82" rx="10" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1.8"/><rect x="590" y="541" width="44" height="44" rx="8" fill="#0F4C81"/><g transform="translate(596,547) scale(1.333)"><path d="M12 5V19M7 19H17M5 9H19M5 9L3.5 14H6.5L5 9ZM19 9L17.5 14H20.5L19 9Z" fill="none" stroke="#FFF" stroke-width="1.6" stroke-linejoin="round"/></g>
+<text x="646" y="559" font-size="13.5" font-weight="700" fill="#0F172A">Rol Consulta Publica</text><text x="646" y="578" font-size="12" font-weight="400" fill="#475569">Solo lectura en sacos_publicos</text>
+<rect x="934" y="512" width="98" height="20" rx="10" fill="#DD344C"/><text x="983" y="526" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">0 acceso PII</text>
+</g>
+<g id="f-sg" filter="url(#shadow)"><rect x="1128" y="168" width="464" height="86" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="1140" y="189" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(1146,195) scale(1.333)"><rect x="4.5" y="5.5" width="15" height="13" rx="1.5" fill="none" stroke="#FFF" stroke-width="1.8"/><path d="M4.5 10H19.5M4.5 14.5H19.5M9.5 5.5V10M14.5 10V14.5M9.5 14.5V18.5" stroke="#FFF" stroke-width="1.5"/></g>
+<text x="1196" y="207" font-size="13.5" font-weight="700" fill="#0F172A">14 Security Groups (C01-C18)</text><text x="1196" y="226" font-size="12" font-weight="400" fill="#475569">for_each desde rule_catalog</text>
+<rect x="1493" y="158" width="91" height="20" rx="10" fill="#135E34"/><text x="1538" y="172" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Permanentes</text>
+</g>
+<g id="f-nacl" filter="url(#shadow)"><rect x="1128" y="304" width="464" height="86" rx="10" fill="#FFFFFF" stroke="#8C4FFF" stroke-width="1.8"/><rect x="1140" y="325" width="44" height="44" rx="8" fill="#8C4FFF"/><g transform="translate(1146,331) scale(1.333)"><rect x="5" y="4.5" width="14" height="15" rx="2" fill="none" stroke="#FFF" stroke-width="1.7"/><path d="M8.5 9H15.5M8.5 12H15.5M8.5 15H13" stroke="#FFF" stroke-width="1.7" stroke-linecap="round"/></g>
+<text x="1196" y="343" font-size="13.5" font-weight="700" fill="#0F172A">NACLs por Subred (N01-N16)</text><text x="1196" y="362" font-size="12" font-weight="400" fill="#475569">Defensa en profundidad sin estado</text>
+</g>
+<g id="f-c19" filter="url(#shadow)"><rect x="1128" y="440" width="464" height="86" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="1140" y="461" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(1146,467) scale(1.333)"><circle cx="12" cy="12" r="7.5" fill="none" stroke="#FFF" stroke-width="1.9"/><line x1="7" y1="7" x2="17" y2="17" stroke="#FFF" stroke-width="2"/></g>
+<text x="1196" y="479" font-size="13.5" font-weight="700" fill="#0F172A">Regla C19 Retirada (#70)</text><text x="1196" y="498" font-size="12" font-weight="400" fill="#475569">Sin Network Firewall (-USD 774/mes)</text>
+<rect x="1479" y="430" width="105" height="20" rx="10" fill="#135E34"/><text x="1531" y="444" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Ahorro FinOps</text>
+</g>
+<g id="f-zero" filter="url(#shadow)"><rect x="1128" y="574" width="464" height="76" rx="10" fill="#FFFFFF" stroke="#135E34" stroke-width="1.8"/><rect x="1140" y="590" width="44" height="44" rx="8" fill="#135E34"/><g transform="translate(1146,596) scale(1.333)"><circle cx="12" cy="12" r="7.5" fill="none" stroke="#FFF" stroke-width="1.8"/><path d="M8.5 12.2L10.8 14.5L15.8 9.5" fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="1196" y="608" font-size="13.5" font-weight="700" fill="#0F172A">Cero 0.0.0.0/0 Administrativo</text><text x="1196" y="627" font-size="12" font-weight="400" fill="#475569">Solo CloudFront (C01) e IoT (mTLS)</text>
+</g>
+<rect x="485" y="199" width="54" height="24" rx="12" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.2"/><text x="512" y="215" text-anchor="middle" font-size="12" font-weight="600" fill="#DD344C">Cifra</text>
+<rect x="485" y="335" width="54" height="24" rx="12" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.2"/><text x="512" y="351" text-anchor="middle" font-size="12" font-weight="600" fill="#DD344C">Cifra</text>
+<rect x="1041" y="257" width="86" height="24" rx="12" fill="#FFFFFF" stroke="#8C4FFF" stroke-width="1.2"/><text x="1084" y="273" text-anchor="middle" font-size="12" font-weight="600" fill="#8C4FFF">SG Privado</text>
+<rect x="1331" y="267" width="58" height="24" rx="12" fill="#FFFFFF" stroke="#8C4FFF" stroke-width="1.2"/><text x="1360" y="283" text-anchor="middle" font-size="12" font-weight="600" fill="#8C4FFF">Capa 2</text>
+<g><rect x="24" y="712" width="1592" height="104" rx="8" fill="#ECFDF5" stroke="#135E34" stroke-width="1.6"/><rect x="24" y="712" width="6" height="104" rx="3" fill="#135E34"/><text x="42" y="734" font-size="13" font-weight="700" fill="#135E34">Trazabilidad IaC vs Catalogo #9 (PC-IAC-020 / PC-IAC-022)</text><text x="42" y="754" font-size="12" font-weight="400" fill="#1E293B">Los modulos Workload (ingest, farm, function) consumen los ARNs de KMS, IAM y IDs de Security Groups generados por modules/security sin crear recursos de red ni seguridad.</text></g>
 </svg>
-

@@ -1,163 +1,133 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mxfile host="Electron" compressed="false">
-  <diagram id="congelamiento-cosecha" name="Compuerta de Congelamiento de Cosecha">
-    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1400" background="#FFFFFF">
+  <diagram id="flujo-congelamiento-cosecha" name="Flujo Congelamiento Cosecha">
+    <mxGraphModel dx="1422" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1640" pageHeight="860" background="#FFFFFF">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-
-        <!-- TITULO PRINCIPAL -->
-        <mxCell id="title" value="AromaPacífico - Compuerta de Congelamiento de Cosecha y Flujo CI/CD de Producción" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
-          <mxGeometry x="250" y="25" width="1300" height="40" as="geometry" />
+        <mxCell id="header-title" value="AromaPacifico - Pipeline CI/CD OIDC y Ventana de Cosecha (E6-08)&#10;Bloqueo automatico 05:00 a 18:00 COT en cosecha (Abr-Jun / Sep-Nov) · Excepcion auditada 'incident'" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0A3D20;strokeColor=#4ADE80;fontColor=#FFFFFF;fontSize=16;fontStyle=1;align=left;spacingLeft=24;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1640" height="76" as="geometry" />
         </mxCell>
-        <mxCell id="subtitle" value="Validación de Ventana Horaria (05:00 a 18:00 COT), Bloqueo del Pipeline en Cosecha y Auditoría de Casos #32 y #33" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
-          <mxGeometry x="250" y="65" width="1300" height="25" as="geometry" />
+        <mxCell id="z-ci" value="1. Pull Request (CI Automatico)" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#F6F5FF;strokeColor=#5C4EE5;strokeWidth=2;dashed=0;swimlaneFillColor=#F6F5FF;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="24" y="100" width="480" height="580" as="geometry" />
         </mxCell>
-
-        <!-- SECCIÓN 1: PIPELINE PREVIO -->
-        <mxCell id="sec1" value="1. Flujo de Promoción CI/CD Previo a Producción" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#1D76DB;strokeWidth=2;fontSize=13;fontStyle=1;fontColor=#1D76DB;" vertex="1" parent="1">
-          <mxGeometry x="50" y="110" width="340" height="520" as="geometry" />
+        <mxCell id="z-gate" value="2. Compuerta Horaria (CD)" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFBEB;strokeColor=#B45309;strokeWidth=2;dashed=0;swimlaneFillColor=#FFFBEB;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="544" y="100" width="530" height="580" as="geometry" />
         </mxCell>
-
-        <mxCell id="node-trigger" value="Disparador de Cambio&#xa;Push a 'main' / Workflow Dispatch&#xa;&#xa;- Cambio HCL o aplicación&#xa;- Commit auditado en Git&#xa;- Identidad autenticada OIDC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1;align=center;verticalAlign=middle;fontSize=12;fontColor=#232F3E;" vertex="1" parent="sec1">
-          <mxGeometry x="30" y="50" width="280" height="90" as="geometry" />
+        <mxCell id="z-env" value="3. Promocion y Evidencia" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#F4FAF6;strokeColor=#135E34;strokeWidth=2;dashed=0;swimlaneFillColor=#F4FAF6;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="1114" y="100" width="502" height="580" as="geometry" />
         </mxCell>
-
-        <mxCell id="node-dev-test" value="Validación en Ambientes Bajos&#xa;deploy-dev y deploy-test&#xa;&#xa;- terraform fmt y validate&#xa;- Análisis estático tflint / Trivy&#xa;- Verificación de sintaxis HCL&#xa;- Ejecución 100% exitosa" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EBF3FB;strokeColor=#1D76DB;strokeWidth=1;align=center;verticalAlign=middle;fontSize=12;fontColor=#232F3E;" vertex="1" parent="sec1">
-          <mxGeometry x="30" y="180" width="280" height="110" as="geometry" />
+        <mxCell id="pr" value="Pull Request en iac/&#10;Commit en ingles · 0 secretos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5C4EE5;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="48" y="164" width="432" height="78" as="geometry" />
         </mxCell>
-
-        <mxCell id="node-gatekeeper-call" value="Invocación de la Compuerta&#xa;Job: harvest-window-gate&#xa;&#xa;Ejecuta check_harvest_window.py&#xa;- Zona horaria: America/Bogota (COT)&#xa;- Evaluación contra calendario oficial&#xa;- Evaluación de parámetros y labels" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;align=center;verticalAlign=middle;fontSize=12;fontColor=#232F3E;fontStyle=1;" vertex="1" parent="sec1">
-          <mxGeometry x="30" y="330" width="280" height="130" as="geometry" />
+        <mxCell id="pr-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#5C4EE5;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.codepipeline;" vertex="1" parent="pr">
+          <mxGeometry x="10" y="19" width="40" height="40" as="geometry" />
         </mxCell>
-
-        <mxCell id="edge-1-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#545B64;strokeWidth=2;" edge="1" parent="sec1" source="node-trigger" target="node-dev-test">
+        <mxCell id="lint" value="fmt · validate · test · tflint&#10;26 reglas PC-IAC verificadas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5C4EE5;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="48" y="286" width="432" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="lint-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#5C4EE5;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cloudformation;" vertex="1" parent="lint">
+          <mxGeometry x="10" y="19" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="sec" value="Trivy + Gitleaks&#10;Escaneo IaC y cero credenciales" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DD344C;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="48" y="408" width="432" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="sec-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.security_hub;" vertex="1" parent="sec">
+          <mxGeometry x="10" y="19" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="oidc" value="Federacion AWS OIDC&#10;Token temporal · Sin AWS_KEY" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DD344C;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="48" y="530" width="432" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="oidc-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.identity_and_access_management;" vertex="1" parent="oidc">
+          <mxGeometry x="10" y="19" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="chk" value="[E6-08] check_harvest_window.py&#10;Evalua fecha y hora Colombia UTC-5" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B45309;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="574" y="164" width="470" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="chk-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#B45309;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.eventbridge;" vertex="1" parent="chk">
+          <mxGeometry x="10" y="22" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ok-win" value="[PERMITIDO] Fuera de 05:00-18:00 COT&#10;Ventana segura habilitada" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="574" y="304" width="470" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="ok-win-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#135E34;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.trusted_advisor;" vertex="1" parent="ok-win">
+          <mxGeometry x="10" y="19" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="blk-win" value="[BLOQUEADO] En Cosecha 05:00-18:00 COT&#10;Exit 1: Bloqueo automatico a Prod" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DD344C;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="574" y="432" width="470" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="blk-win-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.waf;" vertex="1" parent="blk-win">
+          <mxGeometry x="10" y="19" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="inc" value="[Emergencia] Excepcion: Etiqueta 'incident'&#10;Requiere ticket + aprobacion" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DD344C;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="574" y="558" width="470" height="76" as="geometry" />
+        </mxCell>
+        <mxCell id="inc-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.authenticated_user;" vertex="1" parent="inc">
+          <mxGeometry x="10" y="18" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e-dev" value="Ambiente Dev (10.50)&#10;terraform plan limpio (116 rec.)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8C4FFF;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1144" y="164" width="442" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="e-dev-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.vpc;" vertex="1" parent="e-dev">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e-test" value="Ambiente Test (10.60)&#10;terraform plan + validacion" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8C4FFF;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1144" y="294" width="442" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="e-test-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.vpc;" vertex="1" parent="e-test">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e-prod" value="[Revisor MFA] Ambiente Prod (10.70)&#10;Aprobacion humana + Release Note" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E7157B;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1144" y="424" width="442" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="e-prod-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.organizations_account;" vertex="1" parent="e-prod">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e-art" value="[Cero Apply] Artefacto tfplan (0 Apply)&#10;Evidencia auditable en GitHub" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3F8624;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1144" y="554" width="442" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="e-art-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3F8624;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3_glacier;" vertex="1" parent="e-art">
+          <mxGeometry x="10" y="19" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e-0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#5C4EE5;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#5C4EE5;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="pr" target="lint">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <mxCell id="edge-2-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#545B64;strokeWidth=2;" edge="1" parent="sec1" source="node-dev-test" target="node-gatekeeper-call">
+        <mxCell id="e-1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#5C4EE5;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#5C4EE5;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="lint" target="sec">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <!-- SECCIÓN 2: LÓGICA DE LA COMPUERTA -->
-        <mxCell id="sec2" value="2. Motor de Decisión del Gatekeeper (check_harvest_window.py)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#FF9900;strokeWidth=2;fontSize=13;fontStyle=1;fontColor=#D93F0B;" vertex="1" parent="1">
-          <mxGeometry x="430" y="110" width="600" height="520" as="geometry" />
-        </mxCell>
-
-        <mxCell id="gate-season" value="¿Mes o Semana de Cosecha?&#xa;Meses: 4, 5, 6, 9, 10, 11&#xa;(Cauca, Huila, Tolima)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#EAEDED;strokeColor=#545B64;strokeWidth=2;align=center;verticalAlign=middle;fontSize=12;fontColor=#232F3E;fontStyle=1;" vertex="1" parent="sec2">
-          <mxGeometry x="40" y="50" width="220" height="110" as="geometry" />
-        </mxCell>
-
-        <mxCell id="out-offseason" value="Fuera de Cosecha&#xa;Permitido en cualquier horario&#xa;Exit Code: 0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=1;align=center;verticalAlign=middle;fontSize=12;fontColor=#1B5E20;" vertex="1" parent="sec2">
-          <mxGeometry x="360" y="65" width="200" height="80" as="geometry" />
-        </mxCell>
-
-        <mxCell id="gate-hours" value="¿Horario Restringido?&#xa;05:00:00 a 18:00:00&#xa;(America/Bogota, COT)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=2;align=center;verticalAlign=middle;fontSize=12;fontColor=#232F3E;fontStyle=1;" vertex="1" parent="sec2">
-          <mxGeometry x="40" y="210" width="220" height="110" as="geometry" />
-        </mxCell>
-
-        <mxCell id="out-night" value="Ventana Nocturna Permitida&#xa;18:00:01 a 04:59:59 COT&#xa;Operación en acopios cerrada&#xa;Exit Code: 0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=2;align=center;verticalAlign=middle;fontSize=12;fontColor=#1B5E20;fontStyle=1;" vertex="1" parent="sec2">
-          <mxGeometry x="360" y="225" width="200" height="80" as="geometry" />
-        </mxCell>
-
-        <mxCell id="gate-bypass" value="¿Excepción de Incidente?&#xa;Flags: --emergency&#xa;Labels: incident, hotfix" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FBE9E7;strokeColor=#D84315;strokeWidth=2;align=center;verticalAlign=middle;fontSize=12;fontColor=#232F3E;fontStyle=1;" vertex="1" parent="sec2">
-          <mxGeometry x="40" y="370" width="220" height="110" as="geometry" />
-        </mxCell>
-
-        <mxCell id="out-emergency" value="Despliegue de Emergencia&#xa;Bypass autorizado con auditoría&#xa;Exit Code: 0 (bypassed=true)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFDE7;strokeColor=#FBC02D;strokeWidth=1;align=center;verticalAlign=middle;fontSize=12;fontColor=#F57F17;" vertex="1" parent="sec2">
-          <mxGeometry x="360" y="350" width="200" height="60" as="geometry" />
-        </mxCell>
-
-        <mxCell id="out-blocked" value="DESPLIEGUE BLOQUEADO&#xa;Exit Code: 1 (Pipeline Falla)&#xa;Protege básculas y recepción física&#xa;Notificación SNS a devops-fnc" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=3;align=center;verticalAlign=middle;fontSize=12;fontColor=#B71C1C;fontStyle=1;" vertex="1" parent="sec2">
-          <mxGeometry x="360" y="430" width="200" height="70" as="geometry" />
-        </mxCell>
-
-        <mxCell id="edge-call-season" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#545B64;strokeWidth=2;" edge="1" parent="1" source="node-gatekeeper-call" target="gate-season">
+        <mxCell id="e-2" value="OK" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#135E34;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#135E34;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="sec" target="oidc">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <mxCell id="edge-season-no" value="NO" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2E7D32;strokeWidth=2;fontSize=12;fontColor=#2E7D32;" edge="1" parent="sec2" source="gate-season" target="out-offseason">
+        <mxCell id="e-3" value="CD" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0F4C81;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#0F4C81;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="oidc" target="chk">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <mxCell id="edge-season-yes" value="SÍ" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D84315;strokeWidth=2;fontSize=12;fontColor=#D84315;" edge="1" parent="sec2" source="gate-season" target="gate-hours">
+        <mxCell id="e-4" value="Libre" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#135E34;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#135E34;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="chk" target="ok-win">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <mxCell id="edge-hours-no" value="NO (Noche)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2E7D32;strokeWidth=2;fontSize=12;fontColor=#2E7D32;" edge="1" parent="sec2" source="gate-hours" target="out-night">
+        <mxCell id="e-5" value="Cosecha" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#DD344C;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#DD344C;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="chk" target="blk-win">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <mxCell id="edge-hours-yes" value="SÍ (05:00-18:00)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#C62828;strokeWidth=2;fontSize=12;fontColor=#C62828;" edge="1" parent="sec2" source="gate-hours" target="gate-bypass">
+        <mxCell id="e-6" value="Si incidente" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#B45309;strokeWidth=2;dashed=1;fontSize=12;fontStyle=1;fontColor=#B45309;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="blk-win" target="inc">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <mxCell id="edge-bypass-yes" value="SÍ (Incidente)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FBC02D;strokeWidth=2;fontSize=12;fontColor=#F57F17;" edge="1" parent="sec2" source="gate-bypass" target="out-emergency">
+        <mxCell id="e-7" value="Promueve" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#135E34;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#135E34;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="ok-win" target="e-dev">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <mxCell id="edge-bypass-no" value="NO (Rutina)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#C62828;strokeWidth=3;fontSize=12;fontColor=#B71C1C;" edge="1" parent="sec2" source="gate-bypass" target="out-blocked">
+        <mxCell id="e-8" value="OK" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#135E34;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#135E34;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="e-dev" target="e-test">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <!-- SECCIÓN 3: VERIFICACIÓN DE LOS DOS EJEMPLOS -->
-        <mxCell id="sec3" value="3. Auditoría de Ejemplos Oficiales de Release Notes (Issues #32 y #33)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#2E7D32;strokeWidth=2;fontSize=13;fontStyle=1;fontColor=#2E7D32;" vertex="1" parent="1">
-          <mxGeometry x="1070" y="110" width="680" height="520" as="geometry" />
-        </mxCell>
-
-        <mxCell id="card-ex1" value="Ejemplo 1: Release Notes Aplicación (Issue #32)&#xa;ID: REL-APP-2026-004 | Componente: Caja E6-05 Consulta Pública del Saco&#xa;&#xa;* Fecha programada: 17 de noviembre de 2026&#xa;* Ventana de ejecución: 20:00 a 21:30 COT (01:00 a 02:30 UTC)&#xa;* Estado de cosecha: ACTIVA (Mes 11, Semana ISO 47, Huila y Cauca)&#xa;* Horario evaluado: 20:00 COT (2 horas después del cierre de 18:00 COT)&#xa;* Veredicto Gatekeeper: ALLOWED (allowed=true, blocked=false)&#xa;* Cumplimiento: CUMPLE PLENAMENTE FUERA DE HORARIO PROHIBIDO" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontSize=12;fontColor=#1B5E20;" vertex="1" parent="sec3">
-          <mxGeometry x="30" y="50" width="620" height="190" as="geometry" />
-        </mxCell>
-
-        <mxCell id="card-ex2" value="Ejemplo 2: Release Notes Infraestructura (Issue #33)&#xa;ID: REL-INFRA-2026-003 | Componente: Caja E6-04 Regla C05 SG VPCE S3&#xa;&#xa;* Fecha programada: 18 de noviembre de 2026&#xa;* Ventana de ejecución: 20:00 a 20:45 COT (01:00 a 01:45 UTC)&#xa;* Estado de cosecha: ACTIVA (Mes 11, Semana ISO 47, Cauca)&#xa;* Horario evaluado: 20:00 COT (2 horas después del cierre de 18:00 COT)&#xa;* Veredicto Gatekeeper: ALLOWED (allowed=true, blocked=false)&#xa;* Cumplimiento: CUMPLE PLENAMENTE FUERA DE HORARIO PROHIBIDO" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontSize=12;fontColor=#1B5E20;" vertex="1" parent="sec3">
-          <mxGeometry x="30" y="270" width="620" height="190" as="geometry" />
-        </mxCell>
-
-        <mxCell id="edge-out-night-ex1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2E7D32;strokeWidth=2;dashed=1;" edge="1" parent="1" source="out-night" target="card-ex1">
+        <mxCell id="e-9" value="Aprobado" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#DD344C;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#DD344C;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="e-test" target="e-prod">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <mxCell id="edge-out-night-ex2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2E7D32;strokeWidth=2;dashed=1;" edge="1" parent="1" source="out-night" target="card-ex2">
+        <mxCell id="e-10" value="Override auditado" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#B45309;strokeWidth=2;dashed=1;fontSize=12;fontStyle=1;fontColor=#B45309;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="inc" target="e-prod">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <!-- SECCIÓN 4: ETAPAS POSTERIORES Y GOBERNANZA -->
-        <mxCell id="sec4" value="4. Gobernanza de Despliegue en Producción (Cero Apply Mandatorio)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#545B64;strokeWidth=2;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
-          <mxGeometry x="50" y="670" width="1700" height="260" as="geometry" />
-        </mxCell>
-
-        <mxCell id="gov-plan" value="Etapa: deploy-prod (Generación del Plan)&#xa;&#xa;- terraform plan -out=tfplan&#xa;- Plan binario inmutable congelado&#xa;- Generación de hash SHA-256&#xa;- Artefacto subido a GitHub Actions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1;align=center;verticalAlign=middle;fontSize=12;fontColor=#232F3E;" vertex="1" parent="sec4">
-          <mxGeometry x="40" y="50" width="340" height="150" as="geometry" />
-        </mxCell>
-
-        <mxCell id="gov-mfa" value="Compuerta Humana Colegiada (Environment prod)&#xa;&#xa;- Revisión formal por 4 roles signatarios:&#xa;  * Líder de Operaciones / DevOps Senior&#xa;  * Arquitecto Cloud Principal&#xa;  * Director de Operaciones y Logística FNC&#xa;  * Oficial de Cumplimiento Legal (Ley 1581)&#xa;- Autenticación obligatoria con MFA FIDO2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;align=center;verticalAlign=middle;fontSize=12;fontColor=#232F3E;fontStyle=1;" vertex="1" parent="sec4">
-          <mxGeometry x="440" y="50" width="400" height="150" as="geometry" />
-        </mxCell>
-
-        <mxCell id="gov-apply-check" value="Etapa: apply-prod (Verificación Cero Apply)&#xa;&#xa;- Descarga del artefacto tfplan verificado&#xa;- Evaluación de flag ENABLE_TERRAFORM_APPLY&#xa;- En alcance académico: Demostración sin costo&#xa;- Innegociable: CERO APPLY REAL EN AWS&#xa;- Registro de auditoría emitido a CloudWatch" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EBF3FB;strokeColor=#1D76DB;strokeWidth=2;align=center;verticalAlign=middle;fontSize=12;fontColor=#232F3E;fontStyle=1;" vertex="1" parent="sec4">
-          <mxGeometry x="900" y="50" width="380" height="150" as="geometry" />
-        </mxCell>
-
-        <mxCell id="gov-finops" value="Respaldo FinOps y Ley 1581 de 2012&#xa;&#xa;- Costo en reposo: $0,00 USD / mes&#xa;- Cero cómputo esperando paquetes&#xa;- Tag Policy de 7 etiquetas obligatorias&#xa;- Presupuesto AWS Budgets: alerta al 80%&#xa;- Cédulas y predios aislados en Colombia" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=1;align=center;verticalAlign=middle;fontSize=12;fontColor=#1B5E20;" vertex="1" parent="sec4">
-          <mxGeometry x="1340" y="50" width="320" height="150" as="geometry" />
-        </mxCell>
-
-        <mxCell id="edge-gov-1-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#545B64;strokeWidth=2;" edge="1" parent="sec4" source="gov-plan" target="gov-mfa">
+        <mxCell id="e-11" value="Plan" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#135E34;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#135E34;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="e-prod" target="e-art">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <mxCell id="edge-gov-2-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#545B64;strokeWidth=2;" edge="1" parent="sec4" source="gov-mfa" target="gov-apply-check">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="note-0" value="Politica de Congelamiento en Cosecha (#34 / #69): Meses protegidos: abril-junio y septiembre-noviembre, de 05:00 a 18:00 hora Colombia (UTC-5). Workflows pinneados por SemVer (@v1.1.0) en aromapacifico-platform/.github." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;spacingLeft=14;" vertex="1" parent="1">
+          <mxGeometry x="24" y="712" width="1592" height="104" as="geometry" />
         </mxCell>
-
-        <mxCell id="edge-gov-3-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#545B64;strokeWidth=2;" edge="1" parent="sec4" source="gov-apply-check" target="gov-finops">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-
-        <mxCell id="edge-pass-to-prod" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2E7D32;strokeWidth=2;" edge="1" parent="1" source="out-night" target="gov-plan">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-
       </root>
     </mxGraphModel>
   </diagram>

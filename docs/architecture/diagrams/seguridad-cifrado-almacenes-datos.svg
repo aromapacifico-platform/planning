@@ -1,217 +1,79 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1760 1260" width="100%" height="100%">
-  <defs>
-    <style>
-      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 22px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
-      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #5A6B7C; text-anchor: middle; }
-      .header-box { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #232F3E; }
-      .subhead-box { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #555555; }
-      .body-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
-      .mono-text { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; font-size: 12px; fill: #111111; }
-      .th-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #FFFFFF; text-anchor: middle; }
-    </style>
-    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%" filterUnits="userSpaceOnUse">
-      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.08" />
-    </filter>
-  </defs>
-
-  <!-- FONDO GENERAL -->
-  <rect width="1760" height="1260" fill="#F8F9FA" />
-
-  <!-- TITULO Y SUBTITULO -->
-  <text x="880" y="45" class="title">AromaPacífico - Arquitectura de Cifrado en Reposo (KMS) y Cifrado en Tránsito (TLS/mTLS/IPsec)</text>
-  <text x="880" y="75" class="subtitle">Protección Criptográfica Integral de Telemetría IoT, Sacos de Café, Misiones de Drones y Auditoría Forense bajo Ley 1581 de 2012</text>
-
-  <!-- PANELES SUPERIORES -->
-  <g transform="translate(50, 110)" filter="url(#shadow)">
-    <rect width="800" height="225" rx="8" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
-    <rect width="800" height="35" rx="8" fill="#EBF3FB" />
-    <text x="20" y="24" class="header-box" fill="#1D76DB">GOBERNANZA DE CIFRADO EN REPOSO CON AWS KMS (Customer Managed Keys)</text>
-    <text x="20" y="55" class="subhead-box">Segregación Criptográfica de Llaves y Políticas de Mínimo Privilegio</text>
-    <text x="20" y="80" class="body-text" font-weight="bold">1. Llaves Administradas por el Cliente (KMS CMK):</text>
-    <text x="35" y="98" class="body-text">- Se descartan llaves por defecto (aws/s3, aws/dynamodb) por falta de auditoría y granularidad.</text>
-    <text x="35" y="116" class="body-text">- Rotación anual automática activada (EnableKeyRotation = true) sin corte operativo.</text>
-    <text x="35" y="134" class="body-text">- Key Policies acotadas: microservicios solo poseen kms:GenerateDataKey y kms:Decrypt.</text>
-    <text x="20" y="158" class="body-text" font-weight="bold">2. Segregación Criptográfica por Dominio de Carga:</text>
-    <text x="35" y="176" class="body-text">- CMK Telemetría: Cifra tablas NoSQL de suelo, secado y lecturas agronómicas.</text>
-    <text x="35" y="194" class="body-text">- CMK Trazabilidad Sacos: Cifra sacos_cafe y viajes_transporte (con PII protegida).</text>
-    <text x="35" y="212" class="body-text">- CMK Drones y CMK Multi-Región Auditoría: Buckets S3 con Object Lock a 5 años WORM.</text>
-  </g>
-
-  <g transform="translate(880, 110)" filter="url(#shadow)">
-    <rect width="830" height="225" rx="8" fill="#FFFFFF" stroke="#0E8A16" stroke-width="2" />
-    <rect width="830" height="35" rx="8" fill="#F0FFF4" />
-    <text x="20" y="24" class="header-box" fill="#0E8A16">PROTOCOLOS DE CIFRADO EN TRÁNSITO (Zero Cleartext Mandate)</text>
-    <text x="20" y="55" class="subhead-box">Garantía Absoluta de Cero Datos en Claro a Través de Toda la Red</text>
-    <text x="20" y="80" class="body-text" font-weight="bold">1. Telemetría de Borde IoT (Fincas y Drones hacia AWS IoT Core):</text>
-    <text x="35" y="98" class="body-text">- MQTT sobre mTLS bidireccional obligatorio en puerto 8883 (o puerto 443 vía ALPN).</text>
-    <text x="35" y="116" class="body-text">- Certificados X.509 únicos por hardware (ATECC608A / eFuse ESP32-S3); TLS 1.3 / 1.2.</text>
-    <text x="20" y="140" class="body-text" font-weight="bold">2. Enlaces WAN de Centros de Acopio (Cauca, Huila, Tolima -> Transit Gateway):</text>
-    <text x="35" y="158" class="body-text">- Túneles IPsec VPN redundantes basados en IKEv2 con AES-256-GCM y grupo Diffie-Hellman 19.</text>
-    <text x="35" y="176" class="body-text">- Tráfico operativo 100 Mbps simétricos encapsulado; visitantes sin ruta al túnel.</text>
-    <text x="20" y="200" class="body-text" font-weight="bold">3. Aplicaciones Móviles y Web Pública: HTTPS TLS 1.3 + HSTS estricto.</text>
-  </g>
-
-  <!-- CONTENEDOR PRINCIPAL: MATRIZ DE ALMACENES -->
-  <g transform="translate(50, 360)" filter="url(#shadow)">
-    <rect width="1660" height="860" rx="8" fill="#FFFFFF" stroke="#545B64" stroke-width="2" />
-    <rect width="1660" height="35" rx="8" fill="#EAEDED" />
-    <text x="20" y="24" class="header-box">MAPA INTEGRAL DE ALMACENES DE DATOS, LLAVES KMS Y MECANISMOS DE PROTECCIÓN</text>
-
-    <!-- 4 TARJETAS SUPERIORES -->
-    <!-- 1. DYNAMODB TELEMETRIA -->
-    <g transform="translate(20, 50)">
-      <rect width="380" height="230" rx="6" fill="#F8F9FA" stroke="#FF9900" stroke-width="2" />
-      <text x="15" y="24" class="header-box" fill="#FF9900">1. DynamoDB: Telemetría IoT</text>
-      <text x="15" y="44" class="mono-text">Prod us-east-1 | telemetria_cultivo</text>
-      <text x="15" y="68" class="body-text">- Cifrado en Reposo: AWS KMS CMK dedicada</text>
-      <text x="15" y="86" class="body-text">- Algoritmo: AES-256-GCM con rotación anual</text>
-      <text x="15" y="104" class="body-text">- Ingreso: Broker IoT Core mTLS (TLS 1.3)</text>
-      <text x="15" y="122" class="body-text">- Consulta: VPC Gateway Endpoint ($0/GB)</text>
-      <text x="15" y="140" class="body-text">- Retención: 5 años obligatorios (TTL)</text>
-      <text x="15" y="158" class="body-text">- Respaldo: Point-In-Time Recovery (PITR)</text>
-      <text x="15" y="176" class="body-text">- Clasificación: Confidencial Operativa</text>
-      <text x="15" y="196" class="body-text" font-weight="bold">Cero exposición a Internet directa.</text>
-    </g>
-
-    <!-- 2. DYNAMODB MASTER SACOS -->
-    <g transform="translate(425, 50)">
-      <rect width="385" height="230" rx="6" fill="#F8F9FA" stroke="#FF9900" stroke-width="2" />
-      <text x="15" y="24" class="header-box" fill="#FF9900">2. DynamoDB: Master de Sacos</text>
-      <text x="15" y="44" class="mono-text">Prod us-east-1 | sacos_cafe (60 kg)</text>
-      <text x="15" y="68" class="body-text">- Cifrado en Reposo: AWS KMS CMK dedicada</text>
-      <text x="15" y="86" class="body-text">- Algoritmo: AES-256-GCM simétrico</text>
-      <text x="15" y="104" class="body-text">- Protección de Datos Personales (Ley 1581):</text>
-      <text x="25" y="122" class="body-text">* Cédula caficultor enmascarada (4 dígitos)</text>
-      <text x="25" y="140" class="body-text">* FincaID seudonimizado con HMAC-SHA-256</text>
-      <text x="15" y="158" class="body-text">- Ingreso: API Gateway HTTPS TLS 1.3</text>
-      <text x="15" y="176" class="body-text">- Acopio: IPsec VPN túnel privado LAN</text>
-      <text x="15" y="196" class="body-text" font-weight="bold">Retención: 5 años para trazabilidad FNC.</text>
-    </g>
-
-    <!-- 3. S3 DRONES -->
-    <g transform="translate(835, 50)">
-      <rect width="395" height="230" rx="6" fill="#F8F9FA" stroke="#1D76DB" stroke-width="2" />
-      <text x="15" y="24" class="header-box" fill="#1D76DB">3. S3: Misiones y Fotos Drones</text>
-      <text x="15" y="44" class="mono-text">Prod us-east-1 | aromapacifico-drones</text>
-      <text x="15" y="68" class="body-text">- Cifrado: SSE-KMS con CMK dedicada</text>
-      <text x="15" y="86" class="body-text">- Retención: S3 Object Lock Compliance (5 años)</text>
-      <text x="15" y="104" class="body-text">- Filtro Perimetral Anti-PII: Detección de</text>
-      <text x="25" y="122" class="body-text">personas; fotos con transeúntes a cuarentena.</text>
-      <text x="15" y="140" class="body-text">- Subida: Pre-signed URLs HTTPS TLS 1.3</text>
-      <text x="15" y="158" class="body-text">- Bloqueo de Acceso Público: 100% activo</text>
-      <text x="15" y="176" class="body-text">- Tránsito Acopio: Interface VPC Endpoint</text>
-      <text x="15" y="196" class="body-text" font-weight="bold">Inmutabilidad estricta WORM probatoria.</text>
-    </g>
-
-    <!-- 4. S3 AUDITORIA SECURITY -->
-    <g transform="translate(1255, 50)">
-      <rect width="385" height="230" rx="6" fill="#F8F9FA" stroke="#D93F0B" stroke-width="2" />
-      <text x="15" y="24" class="header-box" fill="#D93F0B">4. S3: Auditoría Forense (WORM)</text>
-      <text x="15" y="44" class="mono-text">Security us-east-1 | audit-trail-bucket</text>
-      <text x="15" y="68" class="body-text">- Cifrado: SSE-KMS Multi-Region Key</text>
-      <text x="15" y="86" class="body-text">- Retención: S3 Object Lock Compliance 5 años</text>
-      <text x="15" y="104" class="body-text">- Ingesta: CloudTrail, VPC Flow Logs, IoT Logs</text>
-      <text x="15" y="122" class="body-text">- Gobernanza SCP: Bloqueo de DeleteBucket,</text>
-      <text x="25" y="140" class="body-text">PutBucketPolicy desde raíz de Organizations.</text>
-      <text x="15" y="158" class="body-text">- Réplica de contingencia en us-east-2 Ohio</text>
-      <text x="15" y="176" class="body-text">- Acceso: Solo lectura forense agrónomo FNC</text>
-      <text x="15" y="196" class="body-text" font-weight="bold">Ninguna cuenta productiva puede borrarlo.</text>
-    </g>
-
-    <!-- 2 PANELES MEDIOS: PROYECCION PUBLICA Y TRANSFERENCIA INTERNACIONAL -->
-    <g transform="translate(20, 300)">
-      <rect width="790" height="235" rx="6" fill="#F0FFF4" stroke="#0E8A16" stroke-width="2" />
-      <text x="20" y="24" class="header-box" fill="#0E8A16">5. DynamoDB: Proyección Pública del Saco (Vista Comprador)</text>
-      <text x="20" y="44" class="mono-text">Prod us-east-1 | sacos_publicos (Read-Only segregated table)</text>
-      <text x="20" y="68" class="body-text">- Poblamiento Asíncrono: DynamoDB Streams + Lambda Sanitizadora.</text>
-      <text x="20" y="86" class="body-text">- Cifrado en Reposo: KMS CMK acotada exclusivamente a microservicio de consulta.</text>
-      <text x="20" y="106" class="body-text" font-weight="bold">Campos Expuestos al Comprador Internacional (Ley 1581 de 2012):</text>
-      <text x="35" y="126" class="body-text">* Código de Saco Tokenizado (SACO-2026-CAU-7F3A9C12), Departamento y Municipio.</text>
-      <text x="35" y="144" class="body-text">* Variedad de Café (Castillo, Caturra), Humedad y Temperatura de Secado del Lote.</text>
-      <text x="35" y="162" class="body-text">* Fecha de Beneficiado, Estado de Recepción (Aceptado/Rechazado) en Puerto.</text>
-      <text x="20" y="184" class="body-text" font-weight="bold" fill="#D93F0B">CERO PII: Ni cédula del caficultor, ni coordenadas de finca, ni georutas del transportador.</text>
-      <text x="20" y="204" class="body-text">Tránsito Público: ALB multi-AZ con HTTPS TLS 1.3, AWS WAFv2 y rate-limiting (30 req/min).</text>
-    </g>
-
-    <g transform="translate(835, 300)">
-      <rect width="805" height="235" rx="6" fill="#EBF3FB" stroke="#1D76DB" stroke-width="2" />
-      <text x="20" y="24" class="header-box" fill="#1D76DB">6. Transferencia Internacional de Datos Personales (Ley 1581 de 2012)</text>
-      <text x="20" y="44" class="mono-text">Soberanía de Datos Colombia - Nube AWS us-east-1 (N. Virginia)</text>
-      <text x="20" y="68" class="body-text">- Justificación Económica: us-east-1 ofrece costos menores frente a São Paulo.</text>
-      <text x="20" y="88" class="body-text" font-weight="bold">Habilitación Legal Bajo el Régimen Colombiano (Artículo 26 Ley 1581):</text>
-      <text x="35" y="108" class="body-text">1. Autorización Previa, Expresa e Informada firmada en campo por el caficultor.</text>
-      <text x="35" y="126" class="body-text">2. Contrato de Transmisión Internacional de Datos Personales (CTIDP) FNC - AWS.</text>
-      <text x="20" y="148" class="body-text" font-weight="bold">Flujos Transfronterizos y Tratamiento:</text>
-      <text x="35" y="166" class="body-text">a. Datos Industriales: Telemetría NPK, humedad y sacos (Sin datos personales).</text>
-      <text x="35" y="184" class="body-text">b. Datos Personales: Encriptados en origen con KMS cuya llave controla solo la FNC.</text>
-      <text x="35" y="202" class="body-text">c. Inferencia de Drones: Detección facial previa excluye fotos con personas (Anti-PII).</text>
-    </g>
-
-    <!-- TABLA INFERIOR DE PARAMETROS CRIPTOGRAFICOS -->
-    <g transform="translate(20, 560)">
-      <rect x="0" y="0" width="1620" height="30" fill="#232F3E" />
-      <text x="120" y="20" class="th-title">Componente / Flujo</text>
-      <text x="320" y="20" class="th-title">Tipo Protección</text>
-      <text x="540" y="20" class="th-title">Protocolo / Algoritmo</text>
-      <text x="840" y="20" class="th-title">Administración de Llaves / Certificados</text>
-      <text x="1190" y="20" class="th-title">Verificación y Respaldo</text>
-      <text x="1480" y="20" class="th-title">Retención / SLA</text>
-
-      <!-- FILA 1 -->
-      <rect x="0" y="30" width="1620" height="60" fill="#FFFFFF" stroke="#EAEDED" />
-      <text x="15" y="55" class="body-text" font-weight="bold">Nodos Finca -> IoT Core</text>
-      <text x="15" y="73" class="mono-text">Borde IoT rural</text>
-      <text x="320" y="65" class="body-text" text-anchor="middle">Tránsito (mTLS)</text>
-      <text x="440" y="55" class="mono-text">TLS 1.3 / MQTT Puerto 8883</text>
-      <text x="440" y="73" class="body-text">Cipher: ECDHE-ECDSA-AES128-GCM</text>
-      <text x="700" y="55" class="body-text">Certificado X.509 único por hardware</text>
-      <text x="700" y="73" class="body-text">Clave privada en Secure Element ATECC608A</text>
-      <text x="1050" y="55" class="body-text">Rechazo en handshake si está INACTIVE</text>
-      <text x="1050" y="73" class="body-text">CloudWatch metric Connect.AuthError</text>
-      <text x="1380" y="55" class="body-text">Buffer Flash local 24 horas</text>
-      <text x="1380" y="73" class="body-text">Drenado por prioridad al reconectar</text>
-
-      <!-- FILA 2 -->
-      <rect x="0" y="90" width="1620" height="60" fill="#F8F9FA" stroke="#EAEDED" />
-      <text x="15" y="115" class="body-text" font-weight="bold">Acopios -> Transit Gateway</text>
-      <text x="15" y="133" class="mono-text">Cauca, Huila, Tolima</text>
-      <text x="320" y="125" class="body-text" text-anchor="middle">Tránsito (IPsec VPN)</text>
-      <text x="440" y="115" class="mono-text">IKEv2 AES-256-GCM DH Group 19</text>
-      <text x="440" y="133" class="body-text">Túneles duales activos para failover</text>
-      <text x="700" y="115" class="body-text">Pre-Shared Keys (PSK) gestionadas en</text>
-      <text x="700" y="133" class="body-text">AWS Secrets Manager con rotación cada 90d</text>
-      <text x="1050" y="115" class="body-text">Monitoreo BGP keepalive continuo</text>
-      <text x="1050" y="133" class="body-text">Aislamiento total de VLAN Visitantes</text>
-      <text x="1380" y="115" class="body-text">100 Mbps simétricos WAN</text>
-      <text x="1380" y="133" class="body-text">QoS: 2 Mbps down / 0.5 Mbps up</text>
-
-      <!-- FILA 3 -->
-      <rect x="0" y="150" width="1620" height="60" fill="#FFFFFF" stroke="#EAEDED" />
-      <text x="15" y="175" class="body-text" font-weight="bold">Tablas DynamoDB (Sacos/IoT)</text>
-      <text x="15" y="193" class="mono-text">telemetria_cultivo, sacos</text>
-      <text x="320" y="185" class="body-text" text-anchor="middle">Reposo (KMS CMK)</text>
-      <text x="440" y="175" class="mono-text">AES-256-GCM Envelope Encryption</text>
-      <text x="440" y="193" class="body-text">Cifrado granular a nivel de celda/tabla</text>
-      <text x="700" y="175" class="body-text">KMS CMK dedicada con rotación anual</text>
-      <text x="700" y="193" class="body-text">Key Policy restringida a roles de Prod</text>
-      <text x="1050" y="175" class="body-text">Point-In-Time Recovery (PITR) 35 días</text>
-      <text x="1050" y="193" class="body-text">Réplica de contingencia en us-east-2</text>
-      <text x="1380" y="175" class="body-text">Retención 5 años (1.825 días)</text>
-      <text x="1380" y="193" class="body-text">RPO 15 min | RTO 4 h</text>
-
-      <!-- FILA 4 -->
-      <rect x="0" y="210" width="1620" height="65" fill="#F8F9FA" stroke="#EAEDED" />
-      <text x="15" y="235" class="body-text" font-weight="bold">Buckets S3 Drones y Auditoría</text>
-      <text x="15" y="253" class="mono-text">drones-prod, audit-security</text>
-      <text x="320" y="245" class="body-text" text-anchor="middle">Reposo + WORM</text>
-      <text x="440" y="235" class="mono-text">SSE-KMS + S3 Object Lock Compliance</text>
-      <text x="440" y="253" class="body-text">Bloqueo inmutable WORM a 5 años</text>
-      <text x="700" y="235" class="body-text">KMS Multi-Region Key (us-east-1/2)</text>
-      <text x="700" y="253" class="body-text">SCP raíz: DenyDeleteBucket/Policy</text>
-      <text x="1050" y="235" class="body-text">CloudTrail Organization Trail forense</text>
-      <text x="1050" y="253" class="body-text">Verificación de checksum SHA-256 de fotos</text>
-      <text x="1380" y="235" class="body-text">Retención 1.825 días inmutables</text>
-      <text x="1380" y="253" class="body-text">Cumplimiento Ley 1581 y FNC</text>
-    </g>
-  </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1640" height="860" viewBox="0 0 1640 860">
+<defs>
+<filter id="shadow" x="-6%" y="-6%" width="112%" height="118%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.08"/></filter>
+<marker id="arr-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#334155"/></marker>
+<marker id="arr-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#135E34"/></marker>
+<marker id="arr-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#DD344C"/></marker>
+<marker id="arr-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#0F4C81"/></marker>
+<marker id="arr-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#ED7100"/></marker>
+<marker id="arr-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#8C4FFF"/></marker>
+<style>text{font-family:'Segoe UI',Inter,Arial,sans-serif;}</style>
+</defs>
+<rect x="0" y="0" width="1640" height="860" fill="#FFFFFF"/>
+<rect x="0" y="0" width="1640" height="78" fill="#0A3D20"/>
+<rect x="0" y="75" width="1640" height="3" fill="#4ADE80"/>
+<text x="32" y="36" font-size="21" font-weight="700" fill="#FFFFFF">AromaPacifico - Cifrado en Reposo (AWS KMS) y en Transito (TLS 1.2+ / IPsec)</text>
+<text x="32" y="60" font-size="13" font-weight="400" fill="#D1FAE5">Cero datos en claro · Llaves CMK segregadas por dominio con rotacion anual automatica</text>
+<rect x="1460" y="22" width="152" height="30" rx="15" fill="#135E34" stroke="#FFFFFF" stroke-opacity="0.28"/><text x="1536" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">TLS 1.2+ / IPsec</text>
+<rect x="1282" y="22" width="168" height="30" rx="15" fill="#0F4C81" stroke="#FFFFFF" stroke-opacity="0.28"/><text x="1366" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">KMS Rotacion Anual</text>
+<rect x="1136" y="22" width="136" height="30" rx="15" fill="#DD344C" stroke="#FFFFFF" stroke-opacity="0.28"/><text x="1204" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Zero Cleartext</text>
+<g id="z-tr"><rect x="24" y="100" width="490" height="580" rx="12" fill="#F3F8FC" stroke="#0F4C81" stroke-width="2"/><path d="M36,100 H502 Q514,100 514,112 V134 H24 V112 Q24,100 36,100 Z" fill="#0F4C81"/><text x="38" y="122" font-size="13.5" font-weight="700" fill="#FFFFFF">1. Cifrado en Transito (Borde -&gt; AWS)</text>
+</g>
+<g id="z-kms"><rect x="554" y="100" width="500" height="580" rx="12" fill="#FFF8F8" stroke="#DD344C" stroke-width="2"/><path d="M566,100 H1042 Q1054,100 1054,112 V134 H554 V112 Q554,100 566,100 Z" fill="#DD344C"/><text x="568" y="122" font-size="13.5" font-weight="700" fill="#FFFFFF">2. Gobierno de Llaves (AWS KMS CMK)</text>
+</g>
+<g id="z-st"><rect x="1094" y="100" width="522" height="580" rx="12" fill="#F4FAF6" stroke="#3F8624" stroke-width="2"/><path d="M1106,100 H1604 Q1616,100 1616,112 V134 H1094 V112 Q1094,100 1106,100 Z" fill="#3F8624"/><text x="1108" y="122" font-size="13.5" font-weight="700" fill="#FFFFFF">3. Almacenes Cifrados en Reposo</text>
+</g>
+<path id="edge-0" d="M490,215 L578,215" fill="none" stroke="#0F4C81" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-blue)"/>
+<path id="edge-1" d="M490,345 L578,345" fill="none" stroke="#0F4C81" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-blue)"/>
+<path id="edge-2" d="M490,475 L578,475" fill="none" stroke="#8C4FFF" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-purple)"/>
+<path id="edge-3" d="M1030,215 L1118,215" fill="none" stroke="#DD344C" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-red)"/>
+<path id="edge-4" d="M1030,345 L1118,345" fill="none" stroke="#DD344C" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-red)"/>
+<path id="edge-5" d="M1030,475 L1118,475" fill="none" stroke="#DD344C" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-red)"/>
+<path id="edge-6" d="M1030,603 L1074,603 L1074,215 L1118,215" fill="none" stroke="#135E34" stroke-width="2" stroke-dasharray="6,4" stroke-linejoin="round" marker-end="url(#arr-green)"/>
+<g id="tr-iot" filter="url(#shadow)"><rect x="48" y="174" width="442" height="82" rx="10" fill="#FFFFFF" stroke="#3F8624" stroke-width="1.8"/><rect x="60" y="193" width="44" height="44" rx="8" fill="#3F8624"/><g transform="translate(66,199) scale(1.333)"><rect x="8" y="8" width="8" height="8" rx="1.5" fill="none" stroke="#FFF" stroke-width="1.8"/><circle cx="12" cy="12" r="2" fill="#FFF"/><path d="M10 4.5V8M14 4.5V8M10 16V19.5M14 16V19.5M4.5 10H8M4.5 14H8M16 10H19.5M16 14H19.5" stroke="#FFF" stroke-width="1.6" stroke-linecap="round"/></g>
+<text x="116" y="211" font-size="13.5" font-weight="700" fill="#0F172A">Fincas y Drones -&gt; IoT Core</text><text x="116" y="230" font-size="12" font-weight="400" fill="#475569">MQTT sobre mTLS 8883 (X.509)</text>
+</g>
+<g id="tr-app" filter="url(#shadow)"><rect x="48" y="304" width="442" height="82" rx="10" fill="#FFFFFF" stroke="#8C4FFF" stroke-width="1.8"/><rect x="60" y="323" width="44" height="44" rx="8" fill="#8C4FFF"/><g transform="translate(66,329) scale(1.333)"><circle cx="12" cy="12" r="7.5" fill="none" stroke="#FFF" stroke-width="1.7"/><ellipse cx="12" cy="12" rx="3.4" ry="7.5" fill="none" stroke="#FFF" stroke-width="1.4"/><line x1="4.5" y1="12" x2="19.5" y2="12" stroke="#FFF" stroke-width="1.4"/></g>
+<text x="116" y="341" font-size="13.5" font-weight="700" fill="#0F172A">Apps Moviles y Comprador</text><text x="116" y="360" font-size="12" font-weight="400" fill="#475569">HTTPS TLS 1.3 (CloudFront/API)</text>
+</g>
+<g id="tr-vpn" filter="url(#shadow)"><rect x="48" y="434" width="442" height="82" rx="10" fill="#FFFFFF" stroke="#8C4FFF" stroke-width="1.8"/><rect x="60" y="453" width="44" height="44" rx="8" fill="#8C4FFF"/><g transform="translate(66,459) scale(1.333)"><rect x="4" y="9" width="16" height="6" rx="3" fill="none" stroke="#FFF" stroke-width="1.8"/><circle cx="12" cy="12" r="2" fill="#FFF"/><path d="M7 12H9.5M14.5 12H17" stroke="#FFF" stroke-width="1.6"/></g>
+<text x="116" y="471" font-size="13.5" font-weight="700" fill="#0F172A">3 Centros de Acopio -&gt; TGW</text><text x="116" y="490" font-size="12" font-weight="400" fill="#475569">VPN IPsec IKEv2 + AES-256</text>
+</g>
+<g id="tr-pol" filter="url(#shadow)"><rect x="48" y="564" width="442" height="78" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="60" y="581" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(66,587) scale(1.333)"><path d="M12 3.5L19 6.5V12C19 16.2 15.9 19.3 12 20.5C8.1 19.3 5 16.2 5 12V6.5L12 3.5Z" fill="none" stroke="#FFF" stroke-width="1.9"/></g>
+<text x="116" y="599" font-size="13.5" font-weight="700" fill="#0F172A">Politica aws:SecureTransport</text><text x="116" y="618" font-size="12" font-weight="400" fill="#475569">Deniega peticiones HTTP en claro</text>
+</g>
+<g id="k-dat" filter="url(#shadow)"><rect x="578" y="174" width="452" height="82" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="590" y="193" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(596,199) scale(1.333)"><circle cx="8.5" cy="12" r="3.6" fill="none" stroke="#FFF" stroke-width="1.9"/><path d="M12.1 12H20M16.5 12V15.5M19.5 12V14.8" stroke="#FFF" stroke-width="1.9" stroke-linecap="round"/></g>
+<text x="646" y="211" font-size="13.5" font-weight="700" fill="#0F172A">CMK Datos (kms-data)</text><text x="646" y="230" font-size="12" font-weight="400" fill="#475569">DynamoDB + SQS + SNS</text>
+<rect x="917" y="164" width="105" height="20" rx="10" fill="#DD344C"/><text x="969" y="178" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Rotacion 365d</text>
+</g>
+<g id="k-obj" filter="url(#shadow)"><rect x="578" y="304" width="452" height="82" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="590" y="323" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(596,329) scale(1.333)"><circle cx="8.5" cy="12" r="3.6" fill="none" stroke="#FFF" stroke-width="1.9"/><path d="M12.1 12H20M16.5 12V15.5M19.5 12V14.8" stroke="#FFF" stroke-width="1.9" stroke-linecap="round"/></g>
+<text x="646" y="341" font-size="13.5" font-weight="700" fill="#0F172A">CMK Objetos (kms-objects)</text><text x="646" y="360" font-size="12" font-weight="400" fill="#475569">S3 fotos dron + cuarentena PII</text>
+</g>
+<g id="k-log" filter="url(#shadow)"><rect x="578" y="434" width="452" height="82" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="590" y="453" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(596,459) scale(1.333)"><circle cx="8.5" cy="12" r="3.6" fill="none" stroke="#FFF" stroke-width="1.9"/><path d="M12.1 12H20M16.5 12V15.5M19.5 12V14.8" stroke="#FFF" stroke-width="1.9" stroke-linecap="round"/></g>
+<text x="646" y="471" font-size="13.5" font-weight="700" fill="#0F172A">CMK Logs (kms-logs)</text><text x="646" y="490" font-size="12" font-weight="400" fill="#475569">CloudWatch + Auditoria WORM</text>
+</g>
+<g id="k-hm" filter="url(#shadow)"><rect x="578" y="564" width="452" height="78" rx="10" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1.8"/><rect x="590" y="581" width="44" height="44" rx="8" fill="#0F4C81"/><g transform="translate(596,587) scale(1.333)"><path d="M12 5V19M7 19H17M5 9H19M5 9L3.5 14H6.5L5 9ZM19 9L17.5 14H20.5L19 9Z" fill="none" stroke="#FFF" stroke-width="1.6" stroke-linejoin="round"/></g>
+<text x="646" y="599" font-size="13.5" font-weight="700" fill="#0F172A">CMK Semilla HMAC</text><text x="646" y="618" font-size="12" font-weight="400" fill="#475569">Token irreversible del saco</text>
+</g>
+<g id="s-ddb" filter="url(#shadow)"><rect x="1118" y="174" width="474" height="82" rx="10" fill="#FFFFFF" stroke="#3B48CC" stroke-width="1.8"/><rect x="1130" y="193" width="44" height="44" rx="8" fill="#3B48CC"/><g transform="translate(1136,199) scale(1.333)"><ellipse cx="11" cy="6.5" rx="6.5" ry="2.3" fill="none" stroke="#FFF" stroke-width="1.7"/><path d="M4.5 6.5V17.5C4.5 18.8 7.4 19.8 11 19.8C14.6 19.8 17.5 18.8 17.5 17.5V6.5" fill="none" stroke="#FFF" stroke-width="1.7"/><path d="M4.5 12C4.5 13.3 7.4 14.3 11 14.3C14.6 14.3 17.5 13.3 17.5 12" fill="none" stroke="#FFF" stroke-width="1.4"/><polygon points="18,9 14.5,14 17.2,14 16,19.5 20.5,13 17.7,13" fill="#FFF"/></g>
+<text x="1186" y="211" font-size="13.5" font-weight="700" fill="#0F172A">Amazon DynamoDB</text><text x="1186" y="230" font-size="12" font-weight="400" fill="#475569">SSE-KMS · PITR 35 d · Global</text>
+</g>
+<g id="s-s3" filter="url(#shadow)"><rect x="1118" y="304" width="474" height="82" rx="10" fill="#FFFFFF" stroke="#3F8624" stroke-width="1.8"/><rect x="1130" y="323" width="44" height="44" rx="8" fill="#3F8624"/><g transform="translate(1136,329) scale(1.333)"><path d="M5 7L7 19C7.2 20 9.4 20.8 12 20.8C14.6 20.8 16.8 20 17 19L19 7" fill="none" stroke="#FFF" stroke-width="1.8"/><ellipse cx="12" cy="7" rx="7" ry="2.4" fill="none" stroke="#FFF" stroke-width="1.8"/><path d="M8.5 12.5C10.5 13.5 13.5 13.5 15.5 12.5" fill="none" stroke="#FFF" stroke-width="1.5"/></g>
+<text x="1186" y="341" font-size="13.5" font-weight="700" fill="#0F172A">Amazon S3 Objetos</text><text x="1186" y="360" font-size="12" font-weight="400" fill="#475569">SSE-KMS · Block Public Access</text>
+</g>
+<g id="s-aud" filter="url(#shadow)"><rect x="1118" y="434" width="474" height="82" rx="10" fill="#FFFFFF" stroke="#3F8624" stroke-width="1.8"/><rect x="1130" y="453" width="44" height="44" rx="8" fill="#3F8624"/><g transform="translate(1136,459) scale(1.333)"><path d="M5 7L6.8 18.5C7 19.5 9.2 20.3 12 20.3C14.8 20.3 17 19.5 17.2 18.5L19 7" fill="none" stroke="#FFF" stroke-width="1.6"/><ellipse cx="12" cy="7" rx="7" ry="2.2" fill="none" stroke="#FFF" stroke-width="1.6"/><rect x="9.5" y="12.5" width="5" height="4.2" rx="0.8" fill="#FFF"/><path d="M10.5 12.5V11C10.5 10.1 11.2 9.5 12 9.5C12.8 9.5 13.5 10.1 13.5 11V12.5" fill="none" stroke="#FFF" stroke-width="1.4"/></g>
+<text x="1186" y="471" font-size="13.5" font-weight="700" fill="#0F172A">S3 Auditoria WORM (5 anos)</text><text x="1186" y="490" font-size="12" font-weight="400" fill="#475569">Object Lock modo Compliance</text>
+</g>
+<g id="s-tf" filter="url(#shadow)"><rect x="1118" y="564" width="474" height="78" rx="10" fill="#FFFFFF" stroke="#5C4EE5" stroke-width="1.8"/><rect x="1130" y="581" width="44" height="44" rx="8" fill="#5C4EE5"/><g transform="translate(1136,587) scale(1.333)"><polygon points="4.5,5.5 10.5,9 10.5,15.5 4.5,12" fill="#FFF"/><polygon points="11.5,9 17.5,5.5 17.5,12 11.5,15.5" fill="#FFF" opacity="0.82"/><polygon points="11.5,16.5 17.5,13 17.5,19.5 11.5,23" fill="#FFF" opacity="0.68"/></g>
+<text x="1186" y="599" font-size="13.5" font-weight="700" fill="#0F172A">S3 Estado Terraform</text><text x="1186" y="618" font-size="12" font-weight="400" fill="#475569">SSE-KMS + use_lockfile</text>
+</g>
+<rect x="507" y="203" width="54" height="24" rx="12" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1.2"/><text x="534" y="219" text-anchor="middle" font-size="12" font-weight="600" fill="#0F4C81">mTLS</text>
+<rect x="502" y="333" width="65" height="24" rx="12" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1.2"/><text x="534" y="349" text-anchor="middle" font-size="12" font-weight="600" fill="#0F4C81">TLS 1.3</text>
+<rect x="507" y="463" width="54" height="24" rx="12" fill="#FFFFFF" stroke="#8C4FFF" stroke-width="1.2"/><text x="534" y="479" text-anchor="middle" font-size="12" font-weight="600" fill="#8C4FFF">IPsec</text>
+<rect x="1047" y="203" width="54" height="24" rx="12" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.2"/><text x="1074" y="219" text-anchor="middle" font-size="12" font-weight="600" fill="#DD344C">Cifra</text>
+<rect x="1047" y="333" width="54" height="24" rx="12" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.2"/><text x="1074" y="349" text-anchor="middle" font-size="12" font-weight="600" fill="#DD344C">Cifra</text>
+<rect x="1047" y="463" width="54" height="24" rx="12" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.2"/><text x="1074" y="479" text-anchor="middle" font-size="12" font-weight="600" fill="#DD344C">Cifra</text>
+<rect x="1047" y="397" width="54" height="24" rx="12" fill="#FFFFFF" stroke="#135E34" stroke-width="1.2"/><text x="1074" y="413" text-anchor="middle" font-size="12" font-weight="600" fill="#135E34">Token</text>
+<g><rect x="24" y="712" width="1592" height="104" rx="8" fill="#ECFDF5" stroke="#135E34" stroke-width="1.6"/><rect x="24" y="712" width="6" height="104" rx="3" fill="#135E34"/><text x="42" y="734" font-size="13" font-weight="700" fill="#135E34">Costo y Cumplimiento Criptografico (#5 / PC-IAC-020)</text><text x="42" y="754" font-size="12" font-weight="400" fill="#1E293B">9 llaves CMK dedicadas en plataforma suman USD 10/mes. En el borde, el telefono del transportador usa SQLite cifrado y el nodo ESP32 protege su llave privada en chip ATECC608.</text></g>
 </svg>

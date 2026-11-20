@@ -1,266 +1,143 @@
-<mxfile host="app.diagrams.net">
-  <diagram id="hu12-ingesta" name="Ingesta y alertas">
-    <mxGraphModel dx="2793" dy="1474" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1785" background="#F4F6F0" math="0" shadow="0">
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" compressed="false">
+  <diagram id="carga-a-ingesta-telemetria" name="Ingesta Telemetria y Alerta 245s">
+    <mxGraphModel dx="1422" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1680" pageHeight="880" background="#FFFFFF">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="title" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=34;fontStyle=1;" value="AromaPacífico · Ingesta y entrega de alertas" vertex="1">
-          <mxGeometry height="55" width="1670" x="65" y="25" as="geometry" />
+        <mxCell id="header-title" value="AromaPacifico - Carga A: Ingesta de Telemetria y Alerta en 245 s&#10;Presupuesto extremo a extremo de 245 s sobre limite SLO de 300 s (55 s de holgura) · Umbrales versionados" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0A3D20;strokeColor=#4ADE80;fontColor=#FFFFFF;fontSize=16;fontStyle=1;align=left;spacingLeft=24;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1680" height="76" as="geometry" />
         </mxCell>
-        <mxCell id="subtitle" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=23;" value="Lectura fuera de rango → recepción del caficultor · AWS us-east-1" vertex="1">
-          <mxGeometry height="35" width="1670" x="65" y="84" as="geometry" />
+        <mxCell id="z-1" value="1. Finca (2 s + 118 s subida)" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#F4FAF6;strokeColor=#135E34;strokeWidth=2;dashed=0;swimlaneFillColor=#F4FAF6;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="24" y="100" width="370" height="620" as="geometry" />
         </mxCell>
-        <mxCell id="node" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#FFFFFF;strokeColor=#43856F;strokeWidth=2;" value="" vertex="1">
-          <mxGeometry height="180" width="500" x="65" y="180" as="geometry" />
+        <mxCell id="z-2" value="2. Ingesta y Desacoplamiento (30 s)  [E6-05]" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFBF5;strokeColor=#ED7100;strokeWidth=2;dashed=0;swimlaneFillColor=#FFFBF5;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="424" y="100" width="410" height="620" as="geometry" />
         </mxCell>
-        <mxCell id="node_title" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=25;fontStyle=1;" value="T1 · Nodo de finca" vertex="1">
-          <mxGeometry height="40" width="454" x="88" y="193" as="geometry" />
+        <mxCell id="z-3" value="3. Evaluacion y Persistencia (30 s)" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F5FD;strokeColor=#3B48CC;strokeWidth=2;dashed=0;swimlaneFillColor=#F3F5FD;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="864" y="100" width="410" height="620" as="geometry" />
         </mxCell>
-        <mxCell id="node_line0" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="Medir y guardar antes de enviar" vertex="1">
-          <mxGeometry height="31" width="454" x="88" y="234" as="geometry" />
+        <mxCell id="z-4" value="4. Alerta y Acuse (65 s)" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#FDF2F8;strokeColor=#E7157B;strokeWidth=2;dashed=0;swimlaneFillColor=#FDF2F8;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="1304" y="100" width="352" height="620" as="geometry" />
         </mxCell>
-        <mxCell id="node_line1" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="Cultivo cada 4 h · secado cada 1 h" vertex="1">
-          <mxGeometry height="31" width="454" x="88" y="265" as="geometry" />
+        <mxCell id="sens" value="[E6-06] Sensores RS485 + SHT31&#10;pH, NPK, humedad, temp (2 s)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="44" y="168" width="330" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="node_line2" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="Escritura local: ≤2 s" vertex="1">
-          <mxGeometry height="31" width="454" x="88" y="296" as="geometry" />
+        <mxCell id="sens-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#135E34;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.iot_sensor;" vertex="1" parent="sens">
+          <mxGeometry x="10" y="20" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="iot" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#E8F3ED;strokeColor=#43856F;strokeWidth=2;" value="" vertex="1">
-          <mxGeometry height="180" width="500" x="650" y="180" as="geometry" />
+        <mxCell id="buf" value="Buffer Flash Local 24 h&#10;Store-and-Forward · Reintentos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B45309;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="44" y="304" width="330" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="iot_title" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=25;fontStyle=1;" value="T2–T3 · Entrada celular" vertex="1">
-          <mxGeometry height="40" width="454" x="673" y="193" as="geometry" />
+        <mxCell id="buf-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#B45309;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.eventbridge;" vertex="1" parent="buf">
+          <mxGeometry x="10" y="20" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="iot_line0" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="MQTT/TLS 8883 · Basic Ingest" vertex="1">
-          <mxGeometry height="31" width="454" x="673" y="234" as="geometry" />
+        <mxCell id="uplink" value="[118 s] Subida LTE-M / LoRa / Sat&#10;Hasta 118 s con reconexion" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="44" y="440" width="330" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="iot_line1" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="IoT Core → Lambda normalizador" vertex="1">
-          <mxGeometry height="31" width="454" x="673" y="265" as="geometry" />
+        <mxCell id="uplink-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#135E34;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.iot_gateway;" vertex="1" parent="uplink">
+          <mxGeometry x="10" y="20" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="iot_line2" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="Subida ≤118 s · entrada ≤10 s" vertex="1">
-          <mxGeometry height="31" width="454" x="673" y="296" as="geometry" />
+        <mxCell id="cad" value="Volumen Cosecha&#10;10.800 lecturas/dia (324k/mes)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E7157B;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="44" y="576" width="330" height="74" as="geometry" />
         </mxCell>
-        <mxCell id="queues" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#FFF3D8;strokeColor=#B28A39;strokeWidth=2;" value="" vertex="1">
-          <mxGeometry height="180" width="500" x="1235" y="180" as="geometry" />
+        <mxCell id="cad-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cloudwatch_2;" vertex="1" parent="cad">
+          <mxGeometry x="10" y="17" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="queues_title" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=25;fontStyle=1;" value="T4 · Colas de telemetría" vertex="1">
-          <mxGeometry height="40" width="454" x="1258" y="193" as="geometry" />
+        <mxCell id="iot" value="[10 s] AWS IoT Core + Regla SQL&#10;mTLS X.509 · 10 s" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3F8624;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="448" y="188" width="362" height="82" as="geometry" />
         </mxCell>
-        <mxCell id="queues_line0" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="SQS: actual y recuperación" vertex="1">
-          <mxGeometry height="31" width="454" x="1258" y="234" as="geometry" />
+        <mxCell id="iot-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3F8624;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.iot_core;" vertex="1" parent="iot">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="queues_line1" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="Capacidad para lecturas nuevas" vertex="1">
-          <mxGeometry height="31" width="454" x="1258" y="265" as="geometry" />
+        <mxCell id="sqs" value="[20 s] Amazon SQS live / replay&#10;Desacopla picos · 20 s" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E7157B;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="448" y="344" width="362" height="82" as="geometry" />
         </mxCell>
-        <mxCell id="queues_line2" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="Espera actual: ≤20 s" vertex="1">
-          <mxGeometry height="31" width="454" x="1258" y="296" as="geometry" />
+        <mxCell id="sqs-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.sqs;" vertex="1" parent="sqs">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="worker" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#E8F3ED;strokeColor=#43856F;strokeWidth=2;" value="" vertex="1">
-          <mxGeometry height="180" width="500" x="1235" y="500" as="geometry" />
+        <mxCell id="dlq" value="[Alarma CW] Amazon SQS DLQ&#10;Mensajes fallidos sin perdida" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DD344C;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="448" y="500" width="362" height="78" as="geometry" />
         </mxCell>
-        <mxCell id="worker_title" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=25;fontStyle=1;" value="T5 · Evaluar y persistir" vertex="1">
-          <mxGeometry height="40" width="454" x="1258" y="513" as="geometry" />
+        <mxCell id="dlq-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.waf;" vertex="1" parent="dlq">
+          <mxGeometry x="10" y="19" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="worker_line0" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="Identidad y versión activa del umbral" vertex="1">
-          <mxGeometry height="31" width="454" x="1258" y="554" as="geometry" />
+        <mxCell id="lam-eval" value="[10 s] Lambda Normalizador&#10;Deduplica + evalua umbral (10 s)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#ED7100;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="888" y="188" width="362" height="82" as="geometry" />
         </mxCell>
-        <mxCell id="worker_line1" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="Validación y transacción: ≤10 s" vertex="1">
-          <mxGeometry height="31" width="454" x="1258" y="585" as="geometry" />
+        <mxCell id="lam-eval-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;" vertex="1" parent="lam-eval">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="worker_line2" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="Misma lógica para celular y satélite" vertex="1">
-          <mxGeometry height="31" width="454" x="1258" y="616" as="geometry" />
+        <mxCell id="ddb-tel" value="DynamoDB Telemetria&#10;On-Demand · KMS · ACK al nodo" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B48CC;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="888" y="344" width="362" height="82" as="geometry" />
         </mxCell>
-        <mxCell id="database" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#E7EFF9;strokeColor=#4C77A4;strokeWidth=2;" value="" vertex="1">
-          <mxGeometry height="180" width="500" x="650" y="500" as="geometry" />
+        <mxCell id="ddb-tel-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3B48CC;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.dynamodb;" vertex="1" parent="ddb-tel">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="database_title" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=25;fontStyle=1;" value="DynamoDB · Commit" vertex="1">
-          <mxGeometry height="40" width="454" x="673" y="513" as="geometry" />
+        <mxCell id="ddb-umb" value="Tabla Umbrales FNC&#10;Versionados · Auditoria autor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E7157B;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="888" y="500" width="362" height="78" as="geometry" />
         </mxCell>
-        <mxCell id="database_line0" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="Lectura y trabajo durable, juntos" vertex="1">
-          <mxGeometry height="31" width="454" x="673" y="554" as="geometry" />
+        <mxCell id="ddb-umb-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.config;" vertex="1" parent="ddb-umb">
+          <mxGeometry x="10" y="19" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="database_line1" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="Cifrado · ID estable · deduplicación" vertex="1">
-          <mxGeometry height="31" width="454" x="673" y="585" as="geometry" />
+        <mxCell id="lam-al" value="[20 s] Lambda Despacho Alerta&#10;Arma mensaje agronomico (20 s)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#ED7100;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1324" y="188" width="312" height="82" as="geometry" />
         </mxCell>
-        <mxCell id="database_line2" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="Solo aquí nace el ACK de persistencia" vertex="1">
-          <mxGeometry height="31" width="454" x="673" y="616" as="geometry" />
+        <mxCell id="lam-al-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;" vertex="1" parent="lam-al">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="dispatcher" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#E8F3ED;strokeColor=#43856F;strokeWidth=2;" value="" vertex="1">
-          <mxGeometry height="180" width="500" x="65" y="500" as="geometry" />
+        <mxCell id="sns" value="[60 s] Amazon SNS (Push + SMS)&#10;Entrega movil rural (60 s)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E7157B;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1324" y="344" width="312" height="82" as="geometry" />
         </mxCell>
-        <mxCell id="dispatcher_title" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=25;fontStyle=1;" value="T6 · Despachador" vertex="1">
-          <mxGeometry height="40" width="454" x="88" y="513" as="geometry" />
+        <mxCell id="sns-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.sns;" vertex="1" parent="sns">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="dispatcher_line0" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="Streams y recuperación de pendientes" vertex="1">
-          <mxGeometry height="31" width="454" x="88" y="554" as="geometry" />
+        <mxCell id="app-ack" value="[245 s total] App Caficultor (ACK)&#10;Confirma recibo (5 s)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#232F3E;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1324" y="500" width="312" height="82" as="geometry" />
         </mxCell>
-        <mxCell id="dispatcher_line1" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="ACK y alerta tienen estados distintos" vertex="1">
-          <mxGeometry height="31" width="454" x="88" y="585" as="geometry" />
+        <mxCell id="app-ack-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3E;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.mobile_client;" vertex="1" parent="app-ack">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="dispatcher_line2" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="Activación y despacho: ≤20 s" vertex="1">
-          <mxGeometry height="31" width="454" x="88" y="616" as="geometry" />
-        </mxCell>
-        <mxCell id="sns" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#FFF3D8;strokeColor=#B28A39;strokeWidth=2;" value="" vertex="1">
-          <mxGeometry height="180" width="500" x="65" y="820" as="geometry" />
-        </mxCell>
-        <mxCell id="sns_title" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=25;fontStyle=1;" value="T7 · Amazon SNS" vertex="1">
-          <mxGeometry height="40" width="454" x="88" y="833" as="geometry" />
-        </mxCell>
-        <mxCell id="sns_line0" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="SMS al número verificado" vertex="1">
-          <mxGeometry height="31" width="454" x="88" y="874" as="geometry" />
-        </mxCell>
-        <mxCell id="sns_line1" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="Push adicional si hay app registrada" vertex="1">
-          <mxGeometry height="31" width="454" x="88" y="905" as="geometry" />
-        </mxCell>
-        <mxCell id="sns_line2" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="Salida no equivale a recepción" vertex="1">
-          <mxGeometry height="31" width="454" x="88" y="936" as="geometry" />
-        </mxCell>
-        <mxCell id="phone" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#E8F3ED;strokeColor=#43856F;strokeWidth=2;" value="" vertex="1">
-          <mxGeometry height="180" width="500" x="650" y="820" as="geometry" />
-        </mxCell>
-        <mxCell id="phone_title" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=25;fontStyle=1;" value="Caficultor · Teléfono" vertex="1">
-          <mxGeometry height="40" width="454" x="673" y="833" as="geometry" />
-        </mxCell>
-        <mxCell id="phone_line0" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="Aviso por SMS / aplicación" vertex="1">
-          <mxGeometry height="31" width="454" x="673" y="874" as="geometry" />
-        </mxCell>
-        <mxCell id="phone_line1" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="Objetivo de última milla: ≤60 s" vertex="1">
-          <mxGeometry height="31" width="454" x="673" y="905" as="geometry" />
-        </mxCell>
-        <mxCell id="phone_line2" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="Sin ruta: pendiente, no entregada" vertex="1">
-          <mxGeometry height="31" width="454" x="673" y="936" as="geometry" />
-        </mxCell>
-        <mxCell id="receipt" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#E7EFF9;strokeColor=#4C77A4;strokeWidth=2;" value="" vertex="1">
-          <mxGeometry height="180" width="500" x="1235" y="820" as="geometry" />
-        </mxCell>
-        <mxCell id="receipt_title" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=25;fontStyle=1;" value="T8 · Evidencia de recepción" vertex="1">
-          <mxGeometry height="40" width="454" x="1258" y="833" as="geometry" />
-        </mxCell>
-        <mxCell id="receipt_line0" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="App → API HTTPS: ≤5 s" vertex="1">
-          <mxGeometry height="31" width="454" x="1258" y="874" as="geometry" />
-        </mxCell>
-        <mxCell id="receipt_line1" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="Persistir recibo autenticado propio" vertex="1">
-          <mxGeometry height="31" width="454" x="1258" y="905" as="geometry" />
-        </mxCell>
-        <mxCell id="receipt_line2" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="SMS: exigir evidencia final del operador" vertex="1">
-          <mxGeometry height="31" width="454" x="1258" y="936" as="geometry" />
-        </mxCell>
-        <mxCell id="retention" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#FFFFFF;strokeColor=#B4C3BA;strokeWidth=2;" value="" vertex="1">
-          <mxGeometry height="105" width="1670" x="65" y="1045" as="geometry" />
-        </mxCell>
-        <mxCell id="retention_title" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=25;fontStyle=1;" value="Historial y archivo" vertex="1">
-          <mxGeometry height="40" width="1624" x="88" y="1058" as="geometry" />
-        </mxCell>
-        <mxCell id="retention_line0" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="DynamoDB: 90 días online · S3: cinco años con archivo verificado antes de habilitar TTL." vertex="1">
-          <mxGeometry height="31" width="1624" x="88" y="1099" as="geometry" />
-        </mxCell>
-        <mxCell id="satellite" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#F0ECF7;strokeColor=#8D77AA;strokeWidth=2;" value="" vertex="1">
-          <mxGeometry height="180" width="800" x="65" y="1190" as="geometry" />
-        </mxCell>
-        <mxCell id="satellite_title" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=25;fontStyle=1;" value="Entrada satelital de #6" vertex="1">
-          <mxGeometry height="40" width="754" x="88" y="1203" as="geometry" />
-        </mxCell>
-        <mxCell id="satellite_line0" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="SBD → adaptador HTTPS → mismas colas" vertex="1">
-          <mxGeometry height="31" width="754" x="88" y="1244" as="geometry" />
-        </mxCell>
-        <mxCell id="satellite_line1" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="200 bytes MO / 50 bytes MT de ACK" vertex="1">
-          <mxGeometry height="31" width="754" x="88" y="1275" as="geometry" />
-        </mxCell>
-        <mxCell id="satellite_line2" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="Objetivo de prueba: 260 s · no garantía comercial" vertex="1">
-          <mxGeometry height="31" width="754" x="88" y="1306" as="geometry" />
-        </mxCell>
-        <mxCell id="position" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#F0ECF7;strokeColor=#8D77AA;strokeWidth=2;" value="" vertex="1">
-          <mxGeometry height="180" width="800" x="935" y="1190" as="geometry" />
-        </mxCell>
-        <mxCell id="position_title" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=25;fontStyle=1;" value="Posición del transportador" vertex="1">
-          <mxGeometry height="40" width="754" x="958" y="1203" as="geometry" />
-        </mxCell>
-        <mxCell id="position_line0" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="App → API Cognito → persistencia idempotente" vertex="1">
-          <mxGeometry height="31" width="754" x="958" y="1244" as="geometry" />
-        </mxCell>
-        <mxCell id="position_line1" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="Cada 5 min · 7.200 posiciones/día" vertex="1">
-          <mxGeometry height="31" width="754" x="958" y="1275" as="geometry" />
-        </mxCell>
-        <mxCell id="position_line2" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="GPS no genera alertas agronómicas" vertex="1">
-          <mxGeometry height="31" width="754" x="958" y="1306" as="geometry" />
-        </mxCell>
-        <mxCell id="thresholds" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#FFF3D8;strokeColor=#B28A39;strokeWidth=2;" value="" vertex="1">
-          <mxGeometry height="145" width="1670" x="65" y="1410" as="geometry" />
-        </mxCell>
-        <mxCell id="thresholds_title" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=25;fontStyle=1;" value="Cambio de umbrales sin tocar el nodo" vertex="1">
-          <mxGeometry height="40" width="1624" x="88" y="1423" as="geometry" />
-        </mxCell>
-        <mxCell id="thresholds_line0" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="Federación con MFA → UpdateThresholds → versión inmutable + auditoría + puntero activo." vertex="1">
-          <mxGeometry height="31" width="1624" x="88" y="1464" as="geometry" />
-        </mxCell>
-        <mxCell id="thresholds_line1" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=22;fontColor=#344E43;" value="Una transacción publica el cambio; cada evaluación guarda la versión que realmente utilizó." vertex="1">
-          <mxGeometry height="31" width="1624" x="88" y="1495" as="geometry" />
-        </mxCell>
-        <mxCell id="conditions" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#FFFFFF;strokeColor=#B4C3BA;strokeWidth=2;" value="" vertex="1">
-          <mxGeometry height="140" width="1670" x="65" y="1595" as="geometry" />
-        </mxCell>
-        <mxCell id="conditions_title" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=25;fontStyle=1;" value="Cómo interpretar los tiempos" vertex="1">
-          <mxGeometry height="40" width="1624" x="88" y="1608" as="geometry" />
-        </mxCell>
-        <mxCell id="conditions_line0" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=20;fontColor=#344E43;" value="Celular: 245 s hasta recibo de app · objetivo estricto &lt;300 s · presupuesto por validar, no prueba ejecutada." vertex="1">
-          <mxGeometry height="31" width="1624" x="88" y="1643" as="geometry" />
-        </mxCell>
-        <mxCell id="conditions_line1" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=20;fontColor=#344E43;" value="MessageId de SNS no acredita recepción; ver una alerta es distinto de recibirla." vertex="1">
-          <mxGeometry height="31" width="1624" x="88" y="1670" as="geometry" />
-        </mxCell>
-        <mxCell id="conditions_line2" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=20;fontColor=#344E43;" value="Sin ruta: pendientes y deadline de 24 h; un vencimiento es incumplimiento, no entrega exitosa." vertex="1">
-          <mxGeometry height="31" width="1624" x="88" y="1697" as="geometry" />
-        </mxCell>
-        <mxCell id="e1" edge="1" parent="1" source="node" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;strokeColor=#235747;strokeWidth=3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="iot" value="">
+        <mxCell id="e-0" value="2 s" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#135E34;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#135E34;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="sens" target="buf">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e1_label" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=18;align=center;fontColor=#235747;" value="≤118 s" vertex="1">
-          <mxGeometry height="29" width="80" x="567.5" y="225" as="geometry" />
-        </mxCell>
-        <mxCell id="e2" edge="1" parent="1" source="iot" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;strokeColor=#235747;strokeWidth=3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="queues" value="">
+        <mxCell id="e-1" value="Sin ACK" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#135E34;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#135E34;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="buf" target="uplink">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e2_label" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=18;align=center;fontColor=#235747;" value="≤10 s" vertex="1">
-          <mxGeometry height="29" width="80" x="1152.5" y="225" as="geometry" />
-        </mxCell>
-        <mxCell id="e3" edge="1" parent="1" source="queues" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;strokeColor=#235747;strokeWidth=3;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="worker" value="">
+        <mxCell id="e-2" value="MQTT/TLS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0F4C81;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#0F4C81;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="uplink" target="iot">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e3_label" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=18;align=center;fontColor=#235747;" value="≤20 s" vertex="1">
-          <mxGeometry height="29" width="80" x="1500" y="411" as="geometry" />
-        </mxCell>
-        <mxCell id="e4" edge="1" parent="1" source="worker" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;strokeColor=#235747;strokeWidth=3;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="database" value="">
+        <mxCell id="e-3" value="Regla" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3F8624;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#3F8624;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="iot" target="sqs">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e4_label" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=18;align=center;fontColor=#235747;" value="≤10 s" vertex="1">
-          <mxGeometry height="29" width="80" x="1152.5" y="544" as="geometry" />
-        </mxCell>
-        <mxCell id="e5" edge="1" parent="1" source="database" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;strokeColor=#235747;strokeWidth=3;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="dispatcher" value="">
+        <mxCell id="e-4" value="3 fallos" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#DD344C;strokeWidth=2;dashed=1;fontSize=12;fontStyle=1;fontColor=#DD344C;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="sqs" target="dlq">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e5_label" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=18;align=center;fontColor=#235747;" value="Streams" vertex="1">
-          <mxGeometry height="29" width="80" x="567.5" y="544" as="geometry" />
-        </mxCell>
-        <mxCell id="e6" edge="1" parent="1" source="dispatcher" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;strokeColor=#235747;strokeWidth=3;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="sns" value="">
+        <mxCell id="e-5" value="Trigger" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ED7100;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#ED7100;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="sqs" target="lam-eval">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e6_label" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=18;align=center;fontColor=#235747;" value="≤20 s" vertex="1">
-          <mxGeometry height="29" width="80" x="330" y="729" as="geometry" />
-        </mxCell>
-        <mxCell id="e7" edge="1" parent="1" source="sns" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;strokeColor=#235747;strokeWidth=3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="phone" value="">
+        <mxCell id="e-6" value="Escribe" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3B48CC;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#3B48CC;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="lam-eval" target="ddb-tel">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e7_label" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=18;align=center;fontColor=#235747;" value="≤60 s" vertex="1">
-          <mxGeometry height="29" width="80" x="567.5" y="865" as="geometry" />
+        <mxCell id="e-7" value="Reglas" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0F4C81;strokeWidth=2;dashed=1;fontSize=12;fontStyle=1;fontColor=#0F4C81;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="ddb-umb" target="lam-eval">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1262" y="539" />
+              <mxPoint x="1262" y="246" />
+            </Array>
+          </mxGeometry>
         </mxCell>
-        <mxCell id="e8" edge="1" parent="1" source="phone" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;strokeColor=#235747;strokeWidth=3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="receipt" value="">
+        <mxCell id="e-8" value="Fuera rango" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#DD344C;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#DD344C;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="lam-eval" target="lam-al">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e8_label" parent="1" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=DejaVu Sans;fontColor=#163B30;fontSize=18;align=center;fontColor=#235747;" value="≤5 s" vertex="1">
-          <mxGeometry height="29" width="80" x="1152.5" y="865" as="geometry" />
-        </mxCell>
-        <mxCell id="ack" edge="1" parent="1" source="dispatcher" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;strokeColor=#2F6CBB;strokeWidth=3;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;dashed=1;dashPattern=11 7;" target="node" value="">
+        <mxCell id="e-9" value="Publica" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#E7157B;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#E7157B;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="lam-al" target="sns">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-10" value="Push/SMS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#B45309;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#B45309;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="sns" target="app-ack">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="note-0" value="Desglose Verificable del Presupuesto de 245 s (Limite 300 s) · Costo &lt; USD 5/mes: 1. Sensor (2 s) + 2. Subida LTE-M/LoRa (118 s) + 3. IoT Core (10 s) + 4. SQS (20 s) + 5. Evaluacion DynamoDB (10 s) + 6. Lambda Alerta (20 s) + 7. SNS (60 s) + 8. ACK App (5 s) = 245 s (55 s holgura)." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;spacingLeft=14;" vertex="1" parent="1">
+          <mxGeometry x="24" y="748" width="1632" height="104" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

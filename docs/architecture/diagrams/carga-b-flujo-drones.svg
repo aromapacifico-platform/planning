@@ -1,169 +1,82 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 860" width="100%" height="100%">
-  <defs>
-    <style>
-      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 22px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
-      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; fill: #5A6B7C; text-anchor: middle; }
-      .header-box { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; }
-      .body-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
-      .footer-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-style: italic; fill: #5A6B7C; text-anchor: middle; }
-      .label-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: bold; }
-    </style>
-    <filter id="shadow" x="-3%" y="-3%" width="106%" height="106%" filterUnits="userSpaceOnUse">
-      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.08" />
-    </filter>
-    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1D76DB" />
-    </marker>
-    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0E8A16" />
-    </marker>
-    <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#D93F0B" />
-    </marker>
-    <marker id="arrow-gray" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#545B64" />
-    </marker>
-  </defs>
-
-  <rect width="1600" height="860" fill="#F8F9FA" />
-
-  <text x="800" y="45" class="title">AromaPacífico - Arquitectura de Flujo Operativo de los 5 Servicios de Drones</text>
-  <text x="800" y="75" class="subtitle">Transición de Estados, Modo Combinado (Áreas y Precisión), Compuerta Humana Mandatoria y Cierre de Expediente</text>
-
-  <!-- SERVICIO 1 -->
-  <g transform="translate(60, 120)" filter="url(#shadow)">
-    <rect width="320" height="190" rx="8" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
-    <rect width="320" height="35" rx="8" fill="#F4F8FD" />
-    <text x="15" y="24" class="header-box" fill="#1D76DB">SERVICIO 1: Delimitar Lote (Áreas)</text>
-    <text x="15" y="58" class="body-text">- Vuelo inicial ortomosaico de la finca.</text>
-    <text x="15" y="78" class="body-text">- Genera geometría poligonal GeoJSON.</text>
-    <text x="15" y="98" class="body-text">- Identifica y persiste Zonas No-Fly:</text>
-    <text x="25" y="118" class="body-text">* Casas, beneficiadero, vías, fuentes hídricas.</text>
-    <text x="15" y="142" class="body-text" fill="#D93F0B">- Condición bloqueante de negocio:</text>
-    <text x="25" y="162" class="body-text" fill="#D93F0B">Sin polígono NO se autoriza fumigación.</text>
-  </g>
-
-  <!-- VALIDACION DELIMITACION -->
-  <g transform="translate(430, 145)" filter="url(#shadow)">
-    <polygon points="120,0 240,70 120,140 0,70" fill="#EAEDED" stroke="#545B64" stroke-width="2" />
-    <text x="120" y="65" class="header-box" fill="#232F3E" font-size="12px" text-anchor="middle">Validación de Lote</text>
-    <text x="120" y="85" class="body-text" text-anchor="middle">¿Existe Polígono y No-Fly?</text>
-  </g>
-
-  <!-- DISPARADOR SENSOR -->
-  <g transform="translate(60, 360)" filter="url(#shadow)">
-    <rect width="320" height="130" rx="8" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" />
-    <text x="160" y="30" class="header-box" fill="#D93F0B" text-anchor="middle">Disparador IoT de Campo</text>
-    <text x="160" y="52" class="body-text" text-anchor="middle" font-weight="bold">Sensor de Suelo / Clima</text>
-    <text x="160" y="75" class="body-text" text-anchor="middle">Lectura anómala fuera de umbral (NPK, humedad, temp).</text>
-    <text x="160" y="95" class="body-text" text-anchor="middle">Genera coordenada GPS del foco detectado.</text>
-    <text x="160" y="115" class="body-text" text-anchor="middle" fill="#D93F0B">Latencia menor a 5 min hacia acopio/nube.</text>
-  </g>
-
-  <!-- SERVICIO 2 -->
-  <g transform="translate(430, 350)" filter="url(#shadow)">
-    <rect width="320" height="160" rx="8" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
-    <rect width="320" height="35" rx="8" fill="#F4F8FD" />
-    <text x="15" y="24" class="header-box" fill="#1D76DB">SERVICIO 2: Confirmar Alerta (Precisión)</text>
-    <text x="15" y="58" class="body-text">- Vuelo táctico directo al foco del sensor.</text>
-    <text x="15" y="78" class="body-text">- No recorre toda la finca (ahorro batería/costo).</text>
-    <text x="15" y="98" class="body-text">- Captura foto de alta resolución del follaje.</text>
-    <text x="15" y="118" class="body-text">- S3 -> Lambda -> Rekognition (Inferencia IA).</text>
-    <text x="15" y="138" class="body-text">- Persiste probabilidad de plaga en expediente.</text>
-  </g>
-
-  <!-- COMPUERTA HUMANA -->
-  <g transform="translate(800, 330)" filter="url(#shadow)">
-    <polygon points="160,0 320,100 160,200 0,100" fill="#FFF8E1" stroke="#FF9900" stroke-width="3" />
-    <text x="160" y="75" class="header-box" fill="#B08800" text-anchor="middle">COMPUERTA HUMANA</text>
-    <text x="160" y="95" class="header-box" fill="#232F3E" font-size="12px" text-anchor="middle">Agrónomo Registrado FNC</text>
-    <text x="160" y="115" class="body-text" text-anchor="middle">Firma digital obligatoria (MFA)</text>
-    <text x="160" y="132" class="body-text" text-anchor="middle">Valida Lote Insumo ICA</text>
-    <text x="160" y="148" class="body-text" text-anchor="middle" fill="#D93F0B" font-weight="bold">Ninguna IA autoriza aspersiones</text>
-  </g>
-
-  <!-- RECHAZO / FALSA ALARMA -->
-  <g transform="translate(840, 180)" filter="url(#shadow)">
-    <rect width="240" height="70" rx="6" fill="#EAEDED" stroke="#545B64" stroke-width="1" />
-    <text x="120" y="30" class="header-box" fill="#545B64" font-size="12px" text-anchor="middle">Caso Desestimado / Falsa Alarma</text>
-    <text x="120" y="50" class="body-text" text-anchor="middle">Expediente archivado (Retención 5 años)</text>
-  </g>
-
-  <!-- SERVICIO 3 -->
-  <g transform="translate(1180, 350)" filter="url(#shadow)">
-    <rect width="340" height="160" rx="8" fill="#FFFFFF" stroke="#0E8A16" stroke-width="2" />
-    <rect width="340" height="35" rx="8" fill="#F4FBF5" />
-    <text x="15" y="24" class="header-box" fill="#0E8A16">SERVICIO 3: Fumigación de Precisión</text>
-    <text x="15" y="58" class="body-text">- Dron aspersor bajo marco RAC 100 Aerocivil.</text>
-    <text x="15" y="78" class="body-text">- Misión precargada offline en cabecera/acopio.</text>
-    <text x="15" y="98" class="body-text">- Aspersión ultra-focalizada en foco aprobado.</text>
-    <text x="15" y="118" class="body-text">- Respeta buffer perimetral en Zonas No-Fly.</text>
-    <text x="15" y="138" class="body-text">- Bitácora en buffer: 'Pendiente Verificación'.</text>
-  </g>
-
-  <!-- SERVICIO 4 -->
-  <g transform="translate(1180, 560)" filter="url(#shadow)">
-    <rect width="340" height="160" rx="8" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
-    <rect width="340" height="35" rx="8" fill="#F4F8FD" />
-    <text x="15" y="24" class="header-box" fill="#1D76DB">SERVICIO 4: Verificar Post-Fumigar</text>
-    <text x="15" y="58" class="body-text">- Vuelo táctico a los 7-10 días del tratamiento.</text>
-    <text x="15" y="78" class="body-text">- Captura foto o video de recuperación vegetal.</text>
-    <text x="15" y="98" class="body-text">- Inferencia IA confirma evolución del follaje.</text>
-    <text x="15" y="118" class="body-text" fill="#D93F0B">- Si el archivo no llega: caso sigue ABIERTO.</text>
-    <text x="15" y="138" class="body-text">- Descarga de telemetría al conectar en acopio.</text>
-  </g>
-
-  <!-- CIERRE EXPEDIENTE -->
-  <g transform="translate(800, 600)" filter="url(#shadow)">
-    <rect width="320" height="90" rx="8" fill="#E8F5E9" stroke="#0E8A16" stroke-width="2" />
-    <text x="160" y="32" class="header-box" fill="#0E8A16" text-anchor="middle">CIERRE FORMAL DEL EXPEDIENTE</text>
-    <text x="160" y="52" class="body-text" text-anchor="middle" font-weight="bold">Estado: CERRADO</text>
-    <text x="160" y="72" class="body-text" text-anchor="middle">Evidencia fotográfica y bitácora de vuelo WORM</text>
-  </g>
-
-  <!-- SERVICIO 5 -->
-  <g transform="translate(60, 560)" filter="url(#shadow)">
-    <rect width="690" height="160" rx="8" fill="#FFFFFF" stroke="#5319E7" stroke-width="2" />
-    <rect width="690" height="35" rx="8" fill="#F8F6FE" />
-    <text x="15" y="24" class="header-box" fill="#5319E7">SERVICIO 5: Estimar Cosecha (Áreas - Independiente de Plagas)</text>
-    <text x="15" y="58" class="body-text">- Vuelo de área fotogramétrico ejecutado 1 vez por ciclo de cosecha sobre las 200 fincas.</text>
-    <text x="15" y="78" class="body-text">- Conteo volumétrico y densidad de grano maduro en cafetales mediante visión artificial.</text>
-    <text x="15" y="98" class="body-text">- Inferencia IA: calcula proyección de sacos de 60 kg esperados para la temporada.</text>
-    <text x="15" y="118" class="body-text">- Notificación logística anticipada a centros de acopio (Cauca, Huila, Tolima).</text>
-    <text x="15" y="138" class="body-text" fill="#D93F0B">- Prohibición estricta de diseño: Este servicio NO transporta ni aplica agroquímicos.</text>
-  </g>
-
-  <!-- FLECHAS Y CONEXIONES -->
-  <!-- Srv1 a Validacion -->
-  <path d="M 380 215 L 430 215" fill="none" stroke="#1D76DB" stroke-width="2" marker-end="url(#arrow-blue)" />
-
-  <!-- Validacion a Srv2 -->
-  <path d="M 550 285 L 550 350" fill="none" stroke="#0E8A16" stroke-width="2" marker-end="url(#arrow-green)" />
-  <text x="560" y="320" class="label-text" fill="#0E8A16">Polígono Activo</text>
-
-  <!-- Sensor a Srv2 -->
-  <path d="M 380 425 L 430 425" fill="none" stroke="#D93F0B" stroke-width="2" marker-end="url(#arrow-red)" />
-  <text x="385" y="415" class="label-text" fill="#D93F0B">Foco GPS</text>
-
-  <!-- Srv2 a Compuerta -->
-  <path d="M 750 430 L 800 430" fill="none" stroke="#1D76DB" stroke-width="2" marker-end="url(#arrow-blue)" />
-  <text x="755" y="420" class="label-text" fill="#1D76DB">Evidencia IA</text>
-
-  <!-- Compuerta a Rechazo -->
-  <path d="M 960 330 L 960 250" fill="none" stroke="#545B64" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrow-gray)" />
-  <text x="965" y="295" class="label-text" fill="#545B64">No Autorizada</text>
-
-  <!-- Compuerta a Srv3 -->
-  <path d="M 1120 430 L 1180 430" fill="none" stroke="#0E8A16" stroke-width="3" marker-end="url(#arrow-green)" />
-  <text x="1125" y="420" class="label-text" fill="#0E8A16">AUTORIZADA</text>
-
-  <!-- Srv3 a Srv4 -->
-  <path d="M 1350 510 L 1350 560" fill="none" stroke="#1D76DB" stroke-width="2" marker-end="url(#arrow-blue)" />
-  <text x="1355" y="538" class="label-text" fill="#1D76DB">Fumigado (7-10d)</text>
-
-  <!-- Srv4 a Cierre -->
-  <path d="M 1180 645 L 1120 645" fill="none" stroke="#0E8A16" stroke-width="2" marker-end="url(#arrow-green)" />
-  <text x="1125" y="635" class="label-text" fill="#0E8A16">Foto Válida</text>
-
-  <text x="800" y="790" class="footer-text">Invariantes Clave: Ningún servicio sustituye a otro | Sin autorización humana no hay aspersión | Misiones offline en cabecera/acopio | Buffer 24h garantizado</text>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1640" height="880" viewBox="0 0 1640 880">
+<defs>
+<filter id="shadow" x="-6%" y="-6%" width="112%" height="118%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.08"/></filter>
+<marker id="arr-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#334155"/></marker>
+<marker id="arr-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#135E34"/></marker>
+<marker id="arr-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#DD344C"/></marker>
+<marker id="arr-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#0F4C81"/></marker>
+<marker id="arr-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#ED7100"/></marker>
+<marker id="arr-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#8C4FFF"/></marker>
+<style>text{font-family:'Segoe UI',Inter,Arial,sans-serif;}</style>
+</defs>
+<rect x="0" y="0" width="1640" height="880" fill="#FFFFFF"/>
+<rect x="0" y="0" width="1640" height="78" fill="#0A3D20"/>
+<rect x="0" y="75" width="1640" height="3" fill="#4ADE80"/>
+<text x="32" y="36" font-size="21" font-weight="700" fill="#FFFFFF">AromaPacifico - Flujo Operativo de los 5 Servicios de Drones (RAC 100)</text>
+<text x="32" y="60" font-size="13" font-weight="400" fill="#D1FAE5">Modo combinado: Agricultura de Areas (S1, S5) + Precision (S2, S3, S4) · 1.300 vuelos/ano</text>
+<rect x="1436" y="22" width="176" height="30" rx="15" fill="#ED7100" stroke="#FFFFFF" stroke-opacity="0.28"/><text x="1524" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Ahorro USD 195k/ano</text>
+<rect x="1266" y="22" width="160" height="30" rx="15" fill="#0F4C81" stroke="#FFFFFF" stroke-opacity="0.28"/><text x="1346" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Prestador RAC 100</text>
+<rect x="1040" y="22" width="216" height="30" rx="15" fill="#135E34" stroke="#FFFFFF" stroke-opacity="0.28"/><text x="1148" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">5 Servicios Obligatorios</text>
+<g id="z-area"><rect x="24" y="100" width="1592" height="220" rx="12" fill="#F3F8FC" stroke="#0F4C81" stroke-width="2"/><path d="M36,100 H1604 Q1616,100 1616,112 V134 H24 V112 Q24,100 36,100 Z" fill="#0F4C81"/><text x="38" y="122" font-size="13.5" font-weight="700" fill="#FFFFFF">Modo Agricultura de Areas (600 vuelos/ano)</text>
+</g>
+<g id="z-prec"><rect x="24" y="344" width="1592" height="376" rx="12" fill="#F4FAF6" stroke="#135E34" stroke-width="2"/><path d="M36,344 H1604 Q1616,344 1616,356 V378 H24 V356 Q24,344 36,344 Z" fill="#135E34"/><text x="38" y="366" font-size="13.5" font-weight="700" fill="#FFFFFF">Modo Agricultura de Precision (700 vuelos/ano · Foco 0,2 - 0,5 ha)</text>
+</g>
+<path id="edge-0" d="M414,209 L520,209" fill="none" stroke="#0F4C81" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-blue)"/>
+<path id="edge-1" d="M880,209 L1000,209" fill="none" stroke="#0F4C81" stroke-width="2" stroke-dasharray="6,4" stroke-linejoin="round" marker-end="url(#arr-blue)"/>
+<path id="edge-2" d="M1360,209 L1400,209" fill="none" stroke="#ED7100" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-orange)"/>
+<path id="edge-3" d="M324,453 L374,453" fill="none" stroke="#135E34" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-green)"/>
+<path id="edge-4" d="M684,453 L734,453" fill="none" stroke="#01A88D" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-slate)"/>
+<path id="edge-5" d="M1034,453 L1084,453" fill="none" stroke="#DD344C" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-red)"/>
+<path id="edge-6" d="M1334,453 L1380,453" fill="none" stroke="#135E34" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-green)"/>
+<path id="edge-7" d="M700,252 L700,332 L1209,332 L1209,412" fill="none" stroke="#0F4C81" stroke-width="2" stroke-dasharray="6,4" stroke-linejoin="round" marker-end="url(#arr-blue)"/>
+<g id="s1" filter="url(#shadow)"><rect x="54" y="166" width="360" height="86" rx="10" fill="#FFFFFF" stroke="#135E34" stroke-width="1.8"/><rect x="66" y="187" width="44" height="44" rx="8" fill="#135E34"/><g transform="translate(72,193) scale(1.333)"><circle cx="6.5" cy="7.5" r="2.5" fill="none" stroke="#FFF" stroke-width="1.7"/><circle cx="17.5" cy="7.5" r="2.5" fill="none" stroke="#FFF" stroke-width="1.7"/><circle cx="6.5" cy="16.5" r="2.5" fill="none" stroke="#FFF" stroke-width="1.7"/><circle cx="17.5" cy="16.5" r="2.5" fill="none" stroke="#FFF" stroke-width="1.7"/><path d="M8.5 9.5L15.5 14.5M15.5 9.5L8.5 14.5" stroke="#FFF" stroke-width="1.8"/><rect x="10" y="10" width="4" height="4" rx="1" fill="#FFF"/></g>
+<text x="122" y="205" font-size="13.5" font-weight="700" fill="#0F172A">S1: Delimitar Lote (200/ano)</text><text x="122" y="224" font-size="12" font-weight="400" fill="#475569">Poligono + Zonas No-Fly (casas/agua)</text>
+<rect x="308" y="156" width="98" height="20" rx="10" fill="#0F4C81"/><text x="357" y="170" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Requisito S3</text>
+</g>
+<g id="s3-map" filter="url(#shadow)"><rect x="520" y="166" width="360" height="86" rx="10" fill="#FFFFFF" stroke="#3F8624" stroke-width="1.8"/><rect x="532" y="187" width="44" height="44" rx="8" fill="#3F8624"/><g transform="translate(538,193) scale(1.333)"><path d="M5 7L7 19C7.2 20 9.4 20.8 12 20.8C14.6 20.8 16.8 20 17 19L19 7" fill="none" stroke="#FFF" stroke-width="1.8"/><ellipse cx="12" cy="7" rx="7" ry="2.4" fill="none" stroke="#FFF" stroke-width="1.8"/><path d="M8.5 12.5C10.5 13.5 13.5 13.5 15.5 12.5" fill="none" stroke="#FFF" stroke-width="1.5"/></g>
+<text x="588" y="205" font-size="13.5" font-weight="700" fill="#0F172A">Amazon S3 + DynamoDB</text><text x="588" y="224" font-size="12" font-weight="400" fill="#475569">Guarda GeoJSON y geocercas</text>
+</g>
+<g id="s5" filter="url(#shadow)"><rect x="1000" y="166" width="360" height="86" rx="10" fill="#FFFFFF" stroke="#135E34" stroke-width="1.8"/><rect x="1012" y="187" width="44" height="44" rx="8" fill="#135E34"/><g transform="translate(1018,193) scale(1.333)"><circle cx="6.5" cy="7.5" r="2.5" fill="none" stroke="#FFF" stroke-width="1.7"/><circle cx="17.5" cy="7.5" r="2.5" fill="none" stroke="#FFF" stroke-width="1.7"/><circle cx="6.5" cy="16.5" r="2.5" fill="none" stroke="#FFF" stroke-width="1.7"/><circle cx="17.5" cy="16.5" r="2.5" fill="none" stroke="#FFF" stroke-width="1.7"/><path d="M8.5 9.5L15.5 14.5M15.5 9.5L8.5 14.5" stroke="#FFF" stroke-width="1.8"/><rect x="10" y="10" width="4" height="4" rx="1" fill="#FFF"/></g>
+<text x="1068" y="205" font-size="13.5" font-weight="700" fill="#0F172A">S5: Estimar Cosecha (400/ano)</text><text x="1068" y="224" font-size="12" font-weight="400" fill="#475569">Vuelo de area 1x cosecha · No fumiga</text>
+</g>
+<g id="ac-est" filter="url(#shadow)"><rect x="1400" y="166" width="196" height="86" rx="10" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1.8"/><rect x="1412" y="187" width="44" height="44" rx="8" fill="#0F4C81"/><g transform="translate(1418,193) scale(1.333)"><path d="M4 19.5H20M5.5 19.5V9.5L12 5L18.5 9.5V19.5" fill="none" stroke="#FFF" stroke-width="1.8" stroke-linejoin="round"/><rect x="9.5" y="13.5" width="5" height="6" fill="none" stroke="#FFF" stroke-width="1.6"/></g>
+<text x="1468" y="205" font-size="13.5" font-weight="700" fill="#0F172A">Acopio (Proyeccion Sacos)</text><text x="1468" y="224" font-size="12" font-weight="400" fill="#475569">Planea recepcion y transporte</text>
+</g>
+<g id="alert" filter="url(#shadow)"><rect x="54" y="412" width="270" height="82" rx="10" fill="#FFFFFF" stroke="#135E34" stroke-width="1.8"/><rect x="66" y="431" width="44" height="44" rx="8" fill="#135E34"/><g transform="translate(72,437) scale(1.333)"><path d="M12 20V11M12 11C12 6.5 16 4.5 19.5 4.5C19.5 8.5 17 11.5 12 11Z" fill="none" stroke="#FFF" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 14C12 10.5 8.5 8.5 5 8.5C5 12 7.5 14.5 12 14Z" fill="none" stroke="#FFF" stroke-width="1.8" stroke-linejoin="round"/></g>
+<text x="122" y="449" font-size="13.5" font-weight="700" fill="#0F172A">Alerta Sensor Finca</text><text x="122" y="468" font-size="12" font-weight="400" fill="#475569">Lectura fuera de rango (&lt; 245 s)</text>
+</g>
+<g id="s2" filter="url(#shadow)"><rect x="374" y="412" width="310" height="82" rx="10" fill="#FFFFFF" stroke="#01A88D" stroke-width="1.8"/><rect x="386" y="431" width="44" height="44" rx="8" fill="#01A88D"/><g transform="translate(392,437) scale(1.333)"><path d="M4 12C6 8 8.8 6.5 12 6.5C15.2 6.5 18 8 20 12C18 16 15.2 17.5 12 17.5C8.8 17.5 6 16 4 12Z" fill="none" stroke="#FFF" stroke-width="1.8"/><circle cx="12" cy="12" r="2.6" fill="#FFF"/></g>
+<text x="442" y="449" font-size="13.5" font-weight="700" fill="#0F172A">S2: Confirmar Foco (280)</text><text x="442" y="468" font-size="12" font-weight="400" fill="#475569">Foto localizada -&gt; Rekognition/Bedrock</text>
+</g>
+<g id="mfa" filter="url(#shadow)"><rect x="734" y="412" width="300" height="82" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="746" y="431" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(752,437) scale(1.333)"><circle cx="10.5" cy="8.2" r="3" fill="none" stroke="#FFF" stroke-width="1.8"/><path d="M5 18.8C5.6 15.2 7.6 13.8 10.5 13.8C12.2 13.8 13.6 14.3 14.5 15.3" fill="none" stroke="#FFF" stroke-width="1.8" stroke-linecap="round"/><path d="M14.5 17.5L16.5 19.5L20.5 15" fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="802" y="449" font-size="13.5" font-weight="700" fill="#0F172A">Agronomo FNC (MFA)</text><text x="802" y="468" font-size="12" font-weight="400" fill="#475569">Autoriza orden (Unica identidad)</text>
+<rect x="949" y="402" width="77" height="20" rx="10" fill="#DD344C"/><text x="987" y="416" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Compuerta</text>
+</g>
+<g id="s3-fum" filter="url(#shadow)"><rect x="1084" y="412" width="250" height="82" rx="10" fill="#FFFFFF" stroke="#135E34" stroke-width="1.8"/><rect x="1096" y="431" width="44" height="44" rx="8" fill="#135E34"/><g transform="translate(1102,437) scale(1.333)"><circle cx="6.5" cy="7.5" r="2.5" fill="none" stroke="#FFF" stroke-width="1.7"/><circle cx="17.5" cy="7.5" r="2.5" fill="none" stroke="#FFF" stroke-width="1.7"/><circle cx="6.5" cy="16.5" r="2.5" fill="none" stroke="#FFF" stroke-width="1.7"/><circle cx="17.5" cy="16.5" r="2.5" fill="none" stroke="#FFF" stroke-width="1.7"/><path d="M8.5 9.5L15.5 14.5M15.5 9.5L8.5 14.5" stroke="#FFF" stroke-width="1.8"/><rect x="10" y="10" width="4" height="4" rx="1" fill="#FFF"/></g>
+<text x="1152" y="449" font-size="13.5" font-weight="700" fill="#0F172A">S3: Fumigar Foco (210)</text><text x="1152" y="468" font-size="12" font-weight="400" fill="#475569">Token offline 48 h · Bitacora S3</text>
+</g>
+<g id="s4" filter="url(#shadow)"><rect x="1380" y="412" width="216" height="82" rx="10" fill="#FFFFFF" stroke="#135E34" stroke-width="1.8"/><rect x="1392" y="431" width="44" height="44" rx="8" fill="#135E34"/><g transform="translate(1398,437) scale(1.333)"><circle cx="12" cy="12" r="7.5" fill="none" stroke="#FFF" stroke-width="1.8"/><path d="M8.5 12.2L10.8 14.5L15.8 9.5" fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="1448" y="449" font-size="13.5" font-weight="700" fill="#0F172A">S4: Verificar (210)</text><text x="1448" y="468" font-size="12" font-weight="400" fill="#475569">Foto 7-10 dias -&gt; Cierra caso</text>
+<rect x="1532" y="402" width="56" height="20" rx="10" fill="#135E34"/><text x="1560" y="416" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Cierre</text>
+</g>
+<g id="gate-nofly" filter="url(#shadow)"><rect x="374" y="574" width="340" height="76" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="386" y="590" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(392,596) scale(1.333)"><circle cx="12" cy="12" r="7.5" fill="none" stroke="#FFF" stroke-width="1.9"/><line x1="7" y1="7" x2="17" y2="17" stroke="#FFF" stroke-width="2"/></g>
+<text x="442" y="608" font-size="13.5" font-weight="700" fill="#0F172A">Regla Bloqueante 1</text><text x="442" y="627" font-size="12" font-weight="400" fill="#475569">Sin poligono S1 no sale orden S3</text>
+</g>
+<g id="gate-log" filter="url(#shadow)"><rect x="774" y="574" width="340" height="76" rx="10" fill="#FFFFFF" stroke="#3F8624" stroke-width="1.8"/><rect x="786" y="590" width="44" height="44" rx="8" fill="#3F8624"/><g transform="translate(792,596) scale(1.333)"><path d="M5 7L6.8 18.5C7 19.5 9.2 20.3 12 20.3C14.8 20.3 17 19.5 17.2 18.5L19 7" fill="none" stroke="#FFF" stroke-width="1.6"/><ellipse cx="12" cy="7" rx="7" ry="2.2" fill="none" stroke="#FFF" stroke-width="1.6"/><rect x="9.5" y="12.5" width="5" height="4.2" rx="0.8" fill="#FFF"/><path d="M10.5 12.5V11C10.5 10.1 11.2 9.5 12 9.5C12.8 9.5 13.5 10.1 13.5 11V12.5" fill="none" stroke="#FFF" stroke-width="1.4"/></g>
+<text x="842" y="608" font-size="13.5" font-weight="700" fill="#0F172A">Regla Bloqueante 2</text><text x="842" y="627" font-size="12" font-weight="400" fill="#475569">Sin bitacora en S3 no se cierra S3</text>
+</g>
+<g id="gate-fin" filter="url(#shadow)"><rect x="1174" y="574" width="422" height="76" rx="10" fill="#FFFFFF" stroke="#135E34" stroke-width="1.8"/><rect x="1186" y="590" width="44" height="44" rx="8" fill="#135E34"/><g transform="translate(1192,596) scale(1.333)"><circle cx="12" cy="12" r="7.5" fill="none" stroke="#FFF" stroke-width="1.8"/><path d="M12 7V17M14.3 9.5C14.3 8.5 13.3 8 12 8C10.7 8 9.7 8.6 9.7 9.6C9.7 10.6 10.7 11.2 12 11.6C13.3 12 14.3 12.6 14.3 13.8C14.3 15 13.3 15.8 12 15.8C10.6 15.8 9.7 15.1 9.7 14.1" fill="none" stroke="#FFF" stroke-width="1.7" stroke-linecap="round"/></g>
+<text x="1242" y="608" font-size="13.5" font-weight="700" fill="#0F172A">Contrato RAC 100</text><text x="1242" y="627" font-size="12" font-weight="400" fill="#475569">USD 67.082/ano vs USD 262.435 propios</text>
+<rect x="1511" y="564" width="77" height="20" rx="10" fill="#135E34"/><text x="1549" y="578" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">-USD 195k</text>
+</g>
+<rect x="435" y="197" width="65" height="24" rx="12" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1.2"/><text x="467" y="213" text-anchor="middle" font-size="12" font-weight="600" fill="#0F4C81">GeoJSON</text>
+<rect x="908" y="197" width="65" height="24" rx="12" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1.2"/><text x="940" y="213" text-anchor="middle" font-size="12" font-weight="600" fill="#0F4C81">Limites</text>
+<rect x="1353" y="197" width="54" height="24" rx="12" fill="#FFFFFF" stroke="#ED7100" stroke-width="1.2"/><text x="1380" y="213" text-anchor="middle" font-size="12" font-weight="600" fill="#ED7100">FN-03</text>
+<rect x="317" y="441" width="65" height="24" rx="12" fill="#FFFFFF" stroke="#135E34" stroke-width="1.2"/><text x="349" y="457" text-anchor="middle" font-size="12" font-weight="600" fill="#135E34">Dispara</text>
+<rect x="682" y="441" width="54" height="24" rx="12" fill="#FFFFFF" stroke="#01A88D" stroke-width="1.2"/><text x="709" y="457" text-anchor="middle" font-size="12" font-weight="600" fill="#01A88D">FN-01</text>
+<rect x="1020" y="441" width="79" height="24" rx="12" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.2"/><text x="1059" y="457" text-anchor="middle" font-size="12" font-weight="600" fill="#DD344C">Orden MFA</text>
+<rect x="1318" y="441" width="79" height="24" rx="12" fill="#FFFFFF" stroke="#135E34" stroke-width="1.2"/><text x="1357" y="457" text-anchor="middle" font-size="12" font-weight="600" fill="#135E34">7-10 dias</text>
+<rect x="918" y="320" width="72" height="24" rx="12" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1.2"/><text x="954" y="336" text-anchor="middle" font-size="12" font-weight="600" fill="#0F4C81">Geocerca</text>
+<g><rect x="24" y="748" width="1592" height="100" rx="8" fill="#ECFDF5" stroke="#135E34" stroke-width="1.6"/><rect x="24" y="748" width="6" height="100" rx="3" fill="#135E34"/><text x="42" y="770" font-size="13" font-weight="700" fill="#135E34">Invariante de Control y FinOps (#13 / #30)</text><text x="42" y="790" font-size="12" font-weight="400" fill="#1E293B">Los 5 servicios operan con un prestador certificado por acopio bajo RAC 100, evitando USD 105.486 de CapEx y USD 195.353/ano en cuadrillas propias sin perder control Zero Trust.</text></g>
 </svg>

@@ -1,106 +1,152 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mxfile host="Electron" compressed="false">
-  <diagram id="saco-consulta-dr" name="Consulta Publica y Estrategia DR">
-    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1300" background="#FFFFFF">
+  <diagram id="carga-c-saco-consulta-dr" name="Consulta Publica Saco y DR">
+    <mxGraphModel dx="1422" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1680" pageHeight="900" background="#FFFFFF">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-
-        <!-- TITULO PRINCIPAL -->
-        <mxCell id="title-dr" value="AromaPacífico - Arquitectura de Consulta Pública del Saco y Recuperación ante Desastres (DR)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
-          <mxGeometry x="250" y="25" width="1300" height="40" as="geometry" />
+        <mxCell id="header-title" value="AromaPacifico - Carga C: Consulta Publica del Saco y DR Multi-Region&#10;Unico punto abierto a Internet · RPO 15 min · RTO 4 h (conmutacion Route 53 &lt; 60 s) · Ley 1581" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0A3D20;strokeColor=#4ADE80;fontColor=#FFFFFF;fontSize=16;fontStyle=1;align=left;spacingLeft=24;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1680" height="76" as="geometry" />
         </mxCell>
-        <mxCell id="subtitle-dr" value="Único Punto Abierto a Internet, Protección Perimetral CloudFront/WAF y Cumplimiento Estricto de RPO 15 min y RTO 4 h" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
-          <mxGeometry x="250" y="65" width="1300" height="25" as="geometry" />
+        <mxCell id="z-ext" value="1. Comprador y Perimetro Global" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF7FF;strokeColor=#8C4FFF;strokeWidth=2;dashed=0;swimlaneFillColor=#FAF7FF;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="24" y="100" width="390" height="640" as="geometry" />
         </mxCell>
-
-        <!-- PANEL IZQUIERDO: EL UNICO PUNTO ABIERTO A INTERNET -->
-        <mxCell id="box-public-entry" value="ARQUITECTURA DEL ÚNICO PUNTO ABIERTO A INTERNET: CONSULTA PÚBLICA DEL COMPRADOR" style="swimlane;startSize=30;horizontal=1;fillColor=#EAEDED;strokeColor=#1D76DB;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
-          <mxGeometry x="40" y="105" width="830" height="725" as="geometry" />
+        <mxCell id="z-pri" value="2. Region Primaria: AWS us-east-1 (10.70.0.0/16)  [Activa]" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#F4FAF6;strokeColor=#135E34;strokeWidth=2;dashed=0;swimlaneFillColor=#F4FAF6;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="450" y="100" width="580" height="640" as="geometry" />
         </mxCell>
-
-        <!-- ACTOR Y CLIENTE -->
-        <mxCell id="client-buyer" value="Comprador Internacional&#xa;(Web Browser / App Móvil Externa)&#xa;Origen: Tokio, Berlín, Nueva York, etc.&#xa;Carga: Picos de hasta 30 consultas/min" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;align=center;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="box-public-entry">
-          <mxGeometry x="25" y="45" width="780" height="65" as="geometry" />
+        <mxCell id="z-dr" value="3. Region Contingencia: AWS us-east-2 (10.71.0.0/16)  [Standby]" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F8FC;strokeColor=#0F4C81;strokeWidth=2;dashed=1;swimlaneFillColor=#F3F8FC;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="1066" y="100" width="590" height="640" as="geometry" />
         </mxCell>
-
-        <!-- DNS ROUTE 53 -->
-        <mxCell id="edge-dns" value="1. Amazon Route 53 (DNS Global de Alta Disponibilidad)&#xa;- Enrutamiento por Latencia (Latency-based Routing) hacia la región óptima&#xa;- Application Recovery Controller (ARC): Health Checks continuos sobre us-east-1&#xa;- DNS Failover Automático hacia us-east-2 (Ohio) en menos de 60 segundos si falla N. Virginia" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-public-entry">
-          <mxGeometry x="25" y="125" width="780" height="85" as="geometry" />
+        <mxCell id="buyer" value="Comprador Internacional&#10;Solo lectura · Sin cuenta" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#232F3E;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="46" y="174" width="346" height="78" as="geometry" />
         </mxCell>
-
-        <!-- CLOUDFRONT CDN -->
-        <mxCell id="edge-cdn" value="2. Amazon CloudFront (CDN Perimetral con 600+ Puntos de Presencia Globales)&#xa;- Protocolo Cifrado Obligatorio: HTTPS con TLS 1.3 estricto y certificado ACM público&#xa;- Edge Caching Inteligente: Cache TTL de 60 segundos por código de saco&#xa;  * Absorbe completamente los picos de 30 lecturas por minuto sin tocar el cómputo backend&#xa;  * Reduce la latencia global a menos de 45 milisegundos para compradores en el exterior&#xa;- Compresión Automática Brotli / Gzip para respuestas ultraligeras (payload &lt; 2 KB)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FF9900;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-public-entry">
-          <mxGeometry x="25" y="225" width="780" height="115" as="geometry" />
+        <mxCell id="buyer-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3E;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.client;" vertex="1" parent="buyer">
+          <mxGeometry x="10" y="19" width="40" height="40" as="geometry" />
         </mxCell>
-
-        <!-- AWS WAFV2 -->
-        <mxCell id="edge-waf" value="3. AWS WAFv2 (Web Application Firewall Perimetral en el Edge de CloudFront)&#xa;- Rate Limiting Estricto por IP: Máximo 60 peticiones por minuto por dirección IP origen;&#xa;  bloquea automáticamente scrapers o ataques de fuerza bruta sobre códigos de sacos&#xa;- Reglas Gestionadas de AWS (AWS Managed Rules):&#xa;  * Core Rule Set (CRS): Mitigación de OWASP Top 10 (SQLi, XSS, Path Traversal)&#xa;  * Known Bad Inputs &amp; Amazon IP Reputation List: Bloqueo de botnets y proxys anónimos&#xa;- Inspección y Validación de Parámetros: Validación por regex del formato del código:&#xa;  Patrón estricto: ^SACO-202[6-9]-(CAU|HUI|TOL)-[A-F0-9]{8}$ (Rechaza payloads maliciosos)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-public-entry">
-          <mxGeometry x="25" y="355" width="780" height="135" as="geometry" />
+        <mxCell id="r53" value="[USD 1/mes] Amazon Route 53&#10;Health Checks · Failover &lt; 60 s" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8C4FFF;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="46" y="314" width="346" height="82" as="geometry" />
         </mxCell>
-
-        <!-- API GATEWAY Y LAMBDA PUBLICA -->
-        <mxCell id="edge-api" value="4. Amazon API Gateway Público y AWS Lambda Resolver (Consulta Sanitizada)&#xa;- API Gateway Regional protegido: Solo acepta invocaciones con cabecera secreta de CloudFront&#xa;- AWS Lambda Resolver Público: Función Python 3.12 con timeout de 3 segundos;&#xa;  carece de permisos sobre la VPC privada y solo tiene lectura IAM sobre la tabla sacos_publicos&#xa;- Aislamiento Perimetral Total: La consulta pública NO tiene conexión de red hacia la red privada&#xa;  ni hacia la tabla maestra sacos_cafe. Es imposible extraer datos personales de caficultores" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-public-entry">
-          <mxGeometry x="25" y="505" width="780" height="105" as="geometry" />
+        <mxCell id="r53-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.route_53;" vertex="1" parent="r53">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
         </mxCell>
-
-        <!-- VISTA DEL COMPRADOR RETORNADA -->
-        <mxCell id="buyer-payload" value="5. Contenido de la Vista del Comprador (JSON Seguro):&#xa;{ SacoID: 'SACO-2026-CAU-7F3A9C12', Origen: 'Cauca - Meseta de Popayan', AlturaAprox: '1750 msnm', Variedad: 'Castillo',&#xa;  ProcesoSecado: { Metodo: 'Lavado', HumedadFinal: 11.2, TempMedia: 21 }, CalificacionTazaSCA: 84.5, Estado: 'ENTREGADO_PUERTO',&#xa;  PuertoDestino: 'Buenaventura', Fechas: { Cosecha: '2026-05-10', Secado: '2026-05-18', Despacho: '2026-05-22' } }&#xa;CERO CÉDULAS, CERO NOMBRES, CERO COORDENADAS EXACTAS, CERO RUTAS DE TRANSPORTADORES" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FFF4;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=12;fontColor=#1B5E20;fontStyle=1;" vertex="1" parent="box-public-entry">
-          <mxGeometry x="25" y="625" width="780" height="80" as="geometry" />
+        <mxCell id="cf" value="[Unico ingreso] CloudFront + AWS WAF&#10;TLS 1.3 · Rate limit · Anti-bot" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8C4FFF;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="46" y="460" width="346" height="82" as="geometry" />
         </mxCell>
-
-        <!-- PANEL DERECHO: DISASTER RECOVERY RPO 15 MIN Y RTO 4 H -->
-        <mxCell id="box-dr-strategy" value="ESTRATEGIA DE RECUPERACIÓN ANTE DESASTRES (DR): us-east-1 (N. Virginia) Y us-east-2 (Ohio)" style="swimlane;startSize=30;horizontal=1;fillColor=#EAEDED;strokeColor=#7B1FA2;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
-          <mxGeometry x="890" y="105" width="870" height="725" as="geometry" />
+        <mxCell id="cf-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cloudfront;" vertex="1" parent="cf">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
         </mxCell>
-
-        <!-- REGION PRIMARIA: US-EAST-1 -->
-        <mxCell id="region-primary" value="REGIÓN PRIMARIA: us-east-1 (N. Virginia)&#xa;Operación Normal de Producción" style="swimlane;startSize=25;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#1D76DB;" vertex="1" parent="box-dr-strategy">
-          <mxGeometry x="20" y="45" width="400" height="425" as="geometry" />
+        <mxCell id="token" value="Codigo SACO-2026-DEP-HASH8&#10;HMAC-SHA-256 · Sin cedula/GPS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0F4C81;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="46" y="604" width="346" height="78" as="geometry" />
         </mxCell>
-        <mxCell id="primary-dynamo" value="Amazon DynamoDB Global Tables:&#xa;- sacos_publicos (Read Model Público)&#xa;- sacos_eventos (Event Store Inmutable)&#xa;- sacos_cafe (Maestro Transaccional)&#xa;&#xa;Capacidad: On-Demand automática&#xa;Cifrado: KMS CMK us-east-1&#xa;Respaldo Continuo: PITR (Point-in-Time Recovery)&#xa;habilitado a nivel de segundo (ventana 35 días)&#xa;&#xa;Replicación Global Activa hacia us-east-2:&#xa;Latencia típica de replicación: &lt; 2 segundos&#xa;RPO CUMPLIDO: &lt; 2 segundos (&lt;&lt; 15 min)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EBF3FB;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="region-primary">
-          <mxGeometry x="15" y="35" width="370" height="195" as="geometry" />
+        <mxCell id="token-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#0F4C81;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.artifact;" vertex="1" parent="token">
+          <mxGeometry x="10" y="19" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="primary-compute" value="Cómputo e Ingesta Privada:&#xa;- Ingesta Eventos Lambda + SQS FIFO&#xa;- VPC Producción privada (10.70.0.0/16)&#xa;- Túneles IPsec VPN hacia 3 Acopios&#xa;- S3 Bucket Misiones y Auditoría&#xa;  con S3 Cross-Region Replication (CRR)&#xa;  hacia us-east-2 con RTC (SLA &lt; 15 min)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="region-primary">
-          <mxGeometry x="15" y="245" width="370" height="165" as="geometry" />
+        <mxCell id="p-alb" value="ALB Publico (us-east-1)&#10;Solo prefijos CloudFront (C01)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8C4FFF;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="474" y="174" width="255" height="82" as="geometry" />
         </mxCell>
-
-        <!-- REGION CONTINGENCIA: US-EAST-2 -->
-        <mxCell id="region-dr" value="REGIÓN DE CONTINGENCIA: us-east-2 (Ohio)&#xa;Warm Standby / Pilot Light DR" style="swimlane;startSize=25;fillColor=#FFFFFF;strokeColor=#7B1FA2;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#7B1FA2;" vertex="1" parent="box-dr-strategy">
-          <mxGeometry x="450" y="45" width="400" height="425" as="geometry" />
+        <mxCell id="p-alb-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.application_load_balancer;" vertex="1" parent="p-alb">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="dr-dynamo" value="Amazon DynamoDB Global Tables Réplica:&#xa;- sacos_publicos (Copia sincronizada)&#xa;- sacos_eventos (Copia sincronizada)&#xa;- sacos_cafe (Copia sincronizada)&#xa;&#xa;Estado: Permanentemente caliente y lista&#xa;para recibir tráfico de lectura y escritura&#xa;Cifrado: KMS CMK Multi-Región us-east-2&#xa;PITR: Habilitado localmente en Ohio&#xa;&#xa;Pérdida Máxima de Datos ante Falla Total:&#xa;Menos de 2 segundos de transacciones&#xa;RPO VERIFICADO: &lt; 2 min (&lt;&lt; 15 min)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="region-dr">
-          <mxGeometry x="15" y="35" width="370" height="195" as="geometry" />
+        <mxCell id="p-lam" value="Lambda Lectura Saco&#10;Subred .50/.150 · Read-only" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#ED7100;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="752" y="174" width="255" height="82" as="geometry" />
         </mxCell>
-        <mxCell id="dr-compute" value="Cómputo en Reposo (IaC Warm Standby):&#xa;- Terraform IaC pre-compilado en Git&#xa;- API Gateway y Lambdas Públicas desplegadas&#xa;- VPC Secundaria lista (10.71.0.0/16)&#xa;- Route 53 DNS Failover conmuta en &lt; 60 s&#xa;Tiempo Total de Recuperación Completa:&#xa;RTO CUMPLIDO: &lt; 45 minutos (&lt;&lt; 4 horas)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#545B64;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#232F3E;" vertex="1" parent="region-dr">
-          <mxGeometry x="15" y="245" width="370" height="165" as="geometry" />
+        <mxCell id="p-lam-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;" vertex="1" parent="p-lam">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
         </mxCell>
-
-        <!-- SUBPANEL DETALLE CUMPLIMIENTO RPO / RTO -->
-        <mxCell id="box-metrics-proof" value="MATRIZ DE CUMPLIMIENTO RIGUROSO DE OBJETIVOS DE CONTINUIDAD (RPO 15 MIN / RTO 4 H)&#xa;&#xa;1. Mecanismo de Cumplimiento RPO = 15 minutos:&#xa;   - DynamoDB Global Tables: Replicación activa multi-región a nivel de motor de almacenamiento con latencia sub-segundo (RPO real &lt; 2 segundos).&#xa;   - Amazon S3 Cross-Region Replication (CRR) con RTC (Replication Time Control): SLA garantizado de replicación de objetos en menos de 15 minutos.&#xa;   - Point-in-Time Recovery (PITR): Ventana de recuperación granular segundo a segundo ante corrupción lógica de datos o fallas de aplicación.&#xa;&#xa;2. Mecanismo de Cumplimiento RTO = 4 horas:&#xa;   - Consulta Pública: RTO &lt; 60 segundos gracias a que la tabla sacos_publicos ya reside en Ohio y Route 53 conmuta el DNS de inmediato.&#xa;   - Ingesta de Acopios y Apps Móviles: RTO &lt; 45 minutos mediante ejecución automatizada de pipeline Terraform IaC (código validado en CI/CD).&#xa;   - Túneles VPN de Contingencia: Pre-configurados en Transit Gateway de us-east-2 con activación BGP de respaldo." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;align=left;spacingLeft=15;spacingTop=10;fontColor=#232F3E;" vertex="1" parent="box-dr-strategy">
-          <mxGeometry x="20" y="485" width="830" height="225" as="geometry" />
+        <mxCell id="p-s3" value="Amazon S3 (CRR + RTC)&#10;Certificados y evidencia saco" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3F8624;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="474" y="340" width="255" height="84" as="geometry" />
         </mxCell>
-
-        <!-- PANEL INFERIOR: GESTIÓN DE ERRORES, DETECCIÓN Y RECUPERACIÓN AUTOMÁTICA -->
-        <mxCell id="box-error-mgmt" value="GESTIÓN INTEGRAL DE ERRORES, OBSERVABILIDAD Y AUTO-RECUPERACIÓN (Self-Healing Architecture)" style="swimlane;startSize=30;horizontal=1;fillColor=#F8F9FA;strokeColor=#545B64;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
-          <mxGeometry x="40" y="850" width="1720" height="410" as="geometry" />
+        <mxCell id="p-s3-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3F8624;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3;" vertex="1" parent="p-s3">
+          <mxGeometry x="10" y="22" width="40" height="40" as="geometry" />
         </mxCell>
-
-        <!-- ERROR PILAR 1: DETECCION -->
-        <mxCell id="err-col-1" value="1. Detección Automática de Fallas (Observabilidad Proactiva)&#xa;&#xa;- Alarmas CloudWatch de Ingesta:&#xa;  * Tasa de errores 5xx &gt; 1% durante 3 minutos consecutivos&#xa;  * Profundidad de cola DLQ &gt; 0 mensajes activa alerta crítica P1&#xa;  * Latencia de API Gateway p99 &gt; 800 ms dispara escalado&#xa;- Health Checks Compuestos en Route 53 ARC:&#xa;  * Monitoreo sintético HTTP 200 cada 10 s desde 8 regiones globales&#xa;  * Tres fallos consecutivos marcan la región us-east-1 como degradada&#xa;- Trazabilidad Distribuida AWS X-Ray: Correlación de trazas por TraceID&#xa;  a través de API Gateway, Lambdas, DynamoDB y llamadas a KMS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D76DB;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-error-mgmt">
-          <mxGeometry x="25" y="45" width="530" height="340" as="geometry" />
+        <mxCell id="p-ddb" value="[Sin PII] DynamoDB sacos_publicos&#10;Global Tables · PITR 35 dias" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B48CC;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="752" y="340" width="255" height="84" as="geometry" />
         </mxCell>
-
-        <!-- ERROR PILAR 2: AISLAMIENTO -->
-        <mxCell id="err-col-2" value="2. Contención y Tolerancia a Fallos (Fault Isolation &amp; Circuit Breakers)&#xa;&#xa;- Circuit Breaker Perimetral: Si DynamoDB experimenta degradación,&#xa;  la Lambda pública responde con datos cacheados en CloudFront o status 429&#xa;  evitando saturar el pool de conexiones con reintentos descontrolados&#xa;- Exponential Backoff con Full Jitter: Todos los clientes móviles y nodos&#xa;  de acopio implementan el algoritmo de espera exponencial aleatoria&#xa;  (t = min(t_max, t_base * 2^intento) * rand(0,1)) para mitigar avalanchas&#xa;- Aislamiento por Blast Radius: La caída del punto de consulta pública&#xa;  jamás impacta la ingesta de pesaje en fincas ni la operación de acopios&#xa;- Asincronismo Desacoplado: SQS amortigua hasta 14 días de mensajes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FF9900;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-error-mgmt">
-          <mxGeometry x="585" y="45" width="540" height="340" as="geometry" />
+        <mxCell id="p-ddb-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3B48CC;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.dynamodb;" vertex="1" parent="p-ddb">
+          <mxGeometry x="10" y="22" width="40" height="40" as="geometry" />
         </mxCell>
-
-        <!-- ERROR PILAR 3: RECUPERACION -->
-        <mxCell id="err-col-3" value="3. Auto-Recuperación y Replay de Información (Self-Healing &amp; Replay)&#xa;&#xa;- Replay Automatizado de Eventos desde DLQ: Una vez superada una&#xa;  falla de infraestructura o despliegue, una Lambda Redrive consume&#xa;  los eventos encolados en la DLQ y los reinyecta a sacos_eventos&#xa;- Idempotencia Nativa: El uso de EventoID (UUID v4) como clave garantiza&#xa;  que el replay de un mensaje jamás duplique un evento ni altere estados&#xa;- Reconstrucción Determinista del Estado: Si una proyección se corrompe,&#xa;  se reconstruye leyendo el log inmutable de eventos desde el origen&#xa;- Buffer Local de 24 Horas en Fincas: Los dispositivos retienen hasta&#xa;  24 h de pesajes y drenan ordenadamente por prioridad al reconectar" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8A16;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=12;fontColor=#232F3E;" vertex="1" parent="box-error-mgmt">
-          <mxGeometry x="1155" y="45" width="540" height="340" as="geometry" />
+        <mxCell id="p-priv" value="[Bloqueada al publico] DynamoDB sacos_eventos&#10;Tabla privada aislada (KMS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DD344C;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="474" y="514" width="533" height="80" as="geometry" />
         </mxCell>
-
+        <mxCell id="p-priv-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.key_management_service;" vertex="1" parent="p-priv">
+          <mxGeometry x="10" y="20" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="d-alb" value="ALB Standby (us-east-2)&#10;Pre-provisionado en 10.71" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8C4FFF;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1090" y="174" width="260" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="d-alb-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.application_load_balancer;" vertex="1" parent="d-alb">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="d-lam" value="Lambda Lectura (Ohio)&#10;Responde &lt; 60 s en failover" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#ED7100;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1372" y="174" width="260" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="d-lam-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;" vertex="1" parent="d-lam">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="d-ddb" value="[RPO &lt; 1 min] DynamoDB Replica (Ohio)&#10;Replicacion continua en seg." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B48CC;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1090" y="340" width="260" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="d-ddb-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3B48CC;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.dynamodb;" vertex="1" parent="d-ddb">
+          <mxGeometry x="10" y="22" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="d-s3" value="S3 Replica (Ohio)&#10;CRR con RTC &lt;= 15 min" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3F8624;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1372" y="340" width="260" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="d-s3-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3F8624;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3;" vertex="1" parent="d-s3">
+          <mxGeometry x="10" y="22" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="d-az" value="[Sin construir] Microsoft Azure (10.90)&#10;Plan multi-cloud preparado ($0)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0078D4;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1090" y="514" width="542" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="d-az-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#0078D4;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cloud;" vertex="1" parent="d-az">
+          <mxGeometry x="10" y="20" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e-0" value="DNS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0F4C81;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#0F4C81;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="buyer" target="r53">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-1" value="HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8C4FFF;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#8C4FFF;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="r53" target="cf">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-2" value="Primaria" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#135E34;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#135E34;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="cf" target="p-alb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-3" value="Failover &lt; 60s" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0F4C81;strokeWidth=2;dashed=1;fontSize=12;fontStyle=1;fontColor=#0F4C81;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="cf" target="d-alb">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="219" y="136" />
+              <mxPoint x="1220" y="136" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-4" value="REST" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ED7100;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#ED7100;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="p-alb" target="p-lam">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-5" value="GetItem" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3B48CC;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#3B48CC;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="p-lam" target="p-ddb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-6" value="Proyeccion sin PII" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#135E34;strokeWidth=2;dashed=1;fontSize=12;fontStyle=1;fontColor=#135E34;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="p-priv" target="p-ddb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-7" value="REST" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ED7100;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#ED7100;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="d-alb" target="d-lam">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-8" value="GetItem" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3B48CC;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#3B48CC;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="d-lam" target="d-ddb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-9" value="Global" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8C4FFF;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#8C4FFF;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="p-ddb" target="d-ddb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-10" value="S3 CRR (RTC &lt;= 15m)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3F8624;strokeWidth=2;dashed=1;fontSize=12;fontStyle=1;fontColor=#3F8624;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="p-s3" target="d-s3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="601" y="462" />
+              <mxPoint x="1502" y="462" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="note-0" value="Ahorro FinOps en Recuperacion ante Desastres (#15 / #31): Usar Route 53 Health Checks (USD 1/mes) en lugar de AWS Application Recovery Controller (USD 1.825/mes) ahorra USD 1.824/mes cumpliendo RTO de 4 horas en menos de 1 minuto." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;spacingLeft=14;" vertex="1" parent="1">
+          <mxGeometry x="24" y="768" width="1632" height="100" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>

@@ -1,111 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mxfile host="Electron" compressed="false">
-  <diagram id="inferencia-serverless" name="Inferencia Serverless y Privacidad">
-    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="950" background="#FFFFFF">
+  <diagram id="carga-b-inferencia-serverless" name="Inferencia Serverless Drones">
+    <mxGraphModel dx="1422" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="820" background="#FFFFFF">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-
-        <!-- TITULO Y SUBTITULO -->
-        <mxCell id="title" value="AromaPacífico - Inferencia Serverless y Protección de Privacidad (Ley 1581 de 2012)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
-          <mxGeometry x="250" y="25" width="1100" height="35" as="geometry" />
+        <mxCell id="header-title" value="AromaPacifico - Inferencia Serverless para Drones y Privacidad (Ley 1581)&#10;Cero GPUs ociosas · Filtro preventivo Rekognition (anti-PII) + Bedrock Multimodal bajo demanda" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0A3D20;strokeColor=#4ADE80;fontColor=#FFFFFF;fontSize=16;fontStyle=1;align=left;spacingLeft=24;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1600" height="76" as="geometry" />
         </mxCell>
-        <mxCell id="subtitle" value="Pipeline Serverless Desacoplado: Ingesta de Imágenes, Filtro Ético Anti-PII, Detección de Plagas y Expediente Fitosanitario" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
-          <mxGeometry x="250" y="60" width="1100" height="25" as="geometry" />
+        <mxCell id="z-cap" value="1. Captura y Almacenamiento" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#F4FAF6;strokeColor=#3F8624;strokeWidth=2;dashed=0;swimlaneFillColor=#F4FAF6;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="24" y="100" width="390" height="560" as="geometry" />
         </mxCell>
-
-        <!-- 1. DRON / CUADRILLA UAS -->
-        <mxCell id="box-dron" value="Dron / Cuadrilla UAS&#xa;Estación de Campo / Tableta&#xa;&#xa;• Captura fotográfica RGB / Multiespectral.&#xa;• Buffer local store-and-forward (hasta 24h).&#xa;• Drenado vía Wi-Fi seguro al acopio." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#232F3E;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#FFFFFF;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
-          <mxGeometry x="50" y="140" width="230" height="150" as="geometry" />
+        <mxCell id="z-pipe" value="2. Pipeline Event-Driven (AWS Lambda)" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#F2FBF9;strokeColor=#01A88D;strokeWidth=2;dashed=0;swimlaneFillColor=#F2FBF9;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="450" y="100" width="680" height="560" as="geometry" />
         </mxCell>
-
-        <!-- 2. AMAZON S3 RAW -->
-        <mxCell id="box-s3" value="Amazon S3&#xa;Bucket: aromapacifico-raw-images&#xa;&#xa;• Carga de imagen fotográfica del foco.&#xa;• Cifrado en reposo SSE-KMS obligatorio.&#xa;• Dispara evento: s3:ObjectCreated." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5F5;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
-          <mxGeometry x="340" y="140" width="240" height="150" as="geometry" />
+        <mxCell id="z-dec" value="3. Expediente y Decision Humana" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8F8;strokeColor=#DD344C;strokeWidth=2;dashed=0;swimlaneFillColor=#FFF8F8;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="1166" y="100" width="410" height="560" as="geometry" />
         </mxCell>
-
-        <!-- 3. AWS LAMBDA FILTRO -->
-        <mxCell id="box-lambda" value="AWS Lambda&#xa;Función: ProcessDroneImage&#xa;&#xa;• Ejecución serverless Pay-As-You-Go.&#xa;• Extrae metadatos EXIF (GPS, fecha, dron).&#xa;• Orquesta validación ética de privacidad." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
-          <mxGeometry x="640" y="140" width="250" height="150" as="geometry" />
+        <mxCell id="dron" value="Estacion Dron (S2/S4/S5)&#10;Sube fotos RGB por HTTPS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="48" y="180" width="342" height="82" as="geometry" />
         </mxCell>
-
-        <!-- 4. REKOGNITION FILTRO PERSONAS -->
-        <mxCell id="box-detect-faces" value="Amazon Rekognition&#xa;Filtro Ético Anti-PII (DetectFaces)&#xa;&#xa;• Escaneo de rostros y personas en la toma.&#xa;• Cumplimiento estricto Ley 1581 de 2012.&#xa;• Previene almacenamiento de datos sensibles." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F7FF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
-          <mxGeometry x="950" y="140" width="260" height="150" as="geometry" />
+        <mxCell id="dron-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#135E34;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.robotics;" vertex="1" parent="dron">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
         </mxCell>
-
-        <!-- 5. COMPUERTA ÉTICA -->
-        <mxCell id="gate-pii" value="¿Persona Identificable&#xa;Detectada?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#EAEDED;strokeColor=#545B64;strokeWidth=2;align=center;verticalAlign=middle;fontSize=12;fontColor=#232F3E;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="1270" y="130" width="220" height="170" as="geometry" />
+        <mxCell id="s3" value="Amazon S3 Objetos&#10;SSE-KMS · Evento PutObject" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3F8624;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="48" y="340" width="342" height="82" as="geometry" />
         </mxCell>
-
-        <!-- 6. CUARENTENA PII (RAMA SÍ) -->
-        <mxCell id="box-quarantine" value="Cuarentena de Privacidad&#xa;Bucket S3: aromapacifico-quarantine-pii&#xa;&#xa;• Acceso restringido exclusivo a Oficial de Seguridad.&#xa;• Imagen EXCLUIDA de inferencia agrícola.&#xa;• Registro de evento de auditoría en CloudTrail.&#xa;• Cero exposición en expedientes públicos." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5F5;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
-          <mxGeometry x="1210" y="380" width="340" height="160" as="geometry" />
+        <mxCell id="s3-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3F8624;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3;" vertex="1" parent="s3">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
         </mxCell>
-
-        <!-- 7. REKOGNITION CUSTOM LABELS (RAMA NO) -->
-        <mxCell id="box-infer" value="Amazon Rekognition: Custom Labels&#xa;Modelo de Diagnóstico Fitosanitario&#xa;&#xa;• Clasificación de patologías foliares:&#xa;  - Roya del café (Hemileia vastatrix)&#xa;  - Broca del fruto (Hypothenemus hampei)&#xa;  - Mancha de hierro (Cercospora coffeicola)&#xa;• Reporta porcentaje de confianza y mapa de calor." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4FBF5;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
-          <mxGeometry x="780" y="380" width="350" height="160" as="geometry" />
+        <mxCell id="s3-q" value="[Bloqueo] S3 Cuarentena PII&#10;Object Lock si detecta rostro" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3F8624;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="48" y="500" width="342" height="82" as="geometry" />
         </mxCell>
-
-        <!-- 8. DYNAMODB EXPEDIENTE -->
-        <mxCell id="box-dynamo" value="Amazon DynamoDB&#xa;Tabla: ExpedienteFitosanitario&#xa;&#xa;• Registro inmutable del foco fitosanitario.&#xa;• Atributos: FincaID, LoteID, Confianza, Fecha.&#xa;• Estado inicial: PENDIENTE_EVALUACION.&#xa;• Almacena URL segura de la imagen aprobada." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F7FF;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
-          <mxGeometry x="380" y="380" width="320" height="160" as="geometry" />
+        <mxCell id="s3-q-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3F8624;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3_glacier;" vertex="1" parent="s3-q">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
         </mxCell>
-
-        <!-- 9. NOTIFICACIÓN Y COMPUERTA HUMANA -->
-        <mxCell id="box-sns" value="Notificación al Agrónomo FNC&#xa;Amazon SNS + Panel de Gestión&#xa;&#xa;• Despacho de alerta agronómica con evidencia.&#xa;• PROHIBIDO autorizar fumigación por IA.&#xa;• Requiere firma humana con MFA para Servicio 3." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;fontColor=#232F3E;align=left;spacingLeft=12;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
-          <mxGeometry x="50" y="380" width="280" height="160" as="geometry" />
+        <mxCell id="lam" value="AWS Lambda (ARM64)&#10;Lee objeto · Sin estado" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#ED7100;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="480" y="200" width="280" height="82" as="geometry" />
         </mxCell>
-
-        <!-- PANEL DE INVARIANTES Y DIRECTIVAS -->
-        <mxCell id="panel-invariants" value="Directivas e Invariantes de Arquitectura Serverless y Privacidad:&#xa;1. Protección de Datos (Ley 1581 de 2012): Ninguna fotografía con personas identificables entra a la canalización de inferencia agrícola ni a registros públicos.&#xa;2. Cero Cómputo Ocioso FinOps: Arquitectura 100% serverless Pay-As-You-Go. Costo mensual en AWS Rekognition menor a $2,00 USD en cosecha pico.&#xa;3. Trazabilidad Inmutable: Registros y expedientes archivados con retención WORM de 5 años en Amazon S3 Object Lock y DynamoDB." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#232F3E;strokeWidth=1;fontSize=12;align=left;spacingLeft=15;spacingTop=10;fontColor=#232F3E;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="50" y="580" width="1500" height="90" as="geometry" />
+        <mxCell id="lam-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;" vertex="1" parent="lam">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
         </mxCell>
-
-        <!-- CONECTORES Y FLECHAS -->
-        <mxCell id="edge-dron-s3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#232F3E;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="box-dron" target="box-s3">
+        <mxCell id="rek" value="[Paso 1] Amazon Rekognition&#10;DetectFaces / Person" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#01A88D;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="814" y="200" width="286" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="rek-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#01A88D;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.rekognition;" vertex="1" parent="rek">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="bed" value="[Paso 2] Amazon Bedrock&#10;Diagnostico foliar multimodal" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#01A88D;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="814" y="380" width="286" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="bed-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#01A88D;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.bedrock;" vertex="1" parent="bed">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="dlq" value="Amazon SQS DLQ&#10;Fallo sin mutar foto en S3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E7157B;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="480" y="500" width="280" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="dlq-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.sqs;" vertex="1" parent="dlq">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ddb" value="DynamoDB Expediente&#10;Confianza + ID objeto S3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B48CC;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1194" y="220" width="354" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="ddb-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3B48CC;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.dynamodb;" vertex="1" parent="ddb">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="agro" value="[MFA] Agronomo FNC (MFA)&#10;Aprueba fumigacion (humano)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DD344C;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1194" y="380" width="354" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="agro-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.authenticated_user;" vertex="1" parent="agro">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="audit" value="Auditoria Seguridad&#10;CloudTrail + S3 Data Events" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E7157B;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1194" y="520" width="354" height="76" as="geometry" />
+        </mxCell>
+        <mxCell id="audit-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cloudtrail;" vertex="1" parent="audit">
+          <mxGeometry x="10" y="18" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e-0" value="Presigned" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3F8624;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#3F8624;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="dron" target="s3">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <mxCell id="edge-s3-lambda" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="box-s3" target="box-lambda">
+        <mxCell id="e-1" value="Trigger" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ED7100;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#ED7100;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="s3" target="lam">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <mxCell id="edge-lambda-detect" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FF9900;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="box-lambda" target="box-detect-faces">
+        <mxCell id="e-2" value="Filtro PII" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#01A88D;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#01A88D;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="lam" target="rek">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <mxCell id="edge-detect-gate" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="box-detect-faces" target="gate-pii">
+        <mxCell id="e-3" value="Error" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#DD344C;strokeWidth=2;dashed=1;fontSize=12;fontStyle=1;fontColor=#DD344C;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="lam" target="dlq">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <!-- Rama Sí a Cuarentena -->
-        <mxCell id="edge-gate-quarantine" value="SÍ (Persona Detectada)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D93F0B;strokeWidth=2;fontColor=#D93F0B;fontSize=12;fontStyle=1;" edge="1" parent="1" source="gate-pii" target="box-quarantine">
+        <mxCell id="e-4" value="Rostro" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#DD344C;strokeWidth=2;dashed=1;fontSize=12;fontStyle=1;fontColor=#DD344C;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="rek" target="s3-q">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <!-- Rama No a Custom Labels -->
-        <mxCell id="edge-gate-infer" value="NO (Solo Cultivo)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0E8A16;strokeWidth=2;fontColor=#0E8A16;fontSize=12;fontStyle=1;" edge="1" parent="1" source="gate-pii" target="box-infer">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="1380" y="340" />
-              <mxPoint x="955" y="340" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-
-        <!-- Custom Labels a DynamoDB -->
-        <mxCell id="edge-infer-dynamo" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="box-infer" target="box-dynamo">
+        <mxCell id="e-5" value="Limpia" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#01A88D;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#01A88D;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="rek" target="bed">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <!-- DynamoDB a SNS -->
-        <mxCell id="edge-dynamo-sns" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="box-dynamo" target="box-sns">
+        <mxCell id="e-6" value="Resultado" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3B48CC;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#3B48CC;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="bed" target="ddb">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
+        <mxCell id="e-7" value="Revision" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#135E34;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#135E34;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="ddb" target="agro">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="note-0" value="Soberania y FinOps de Inferencia (#17): Solo salen fotos de cultivo a us-east-1 (Art. 26 Ley 1581). Costo: USD 3,11 / 1.000 fotos (USD 0,47 en cosecha), ahorrando ~USD 351/mes frente a Rekognition Custom Labels." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;spacingLeft=14;" vertex="1" parent="1">
+          <mxGeometry x="24" y="692" width="1552" height="96" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>

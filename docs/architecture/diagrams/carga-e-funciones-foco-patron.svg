@@ -1,256 +1,91 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1650 1080" width="100%" height="100%">
-  <defs>
-    <style>
-      .main-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
-      .sub-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #5A6B7C; text-anchor: middle; }
-      .swimlane-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
-      .card-header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
-      .card-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: bold; fill: #555555; }
-      .card-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
-      .code-body { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 11px; fill: #232F3E; }
-      .badge-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 10px; font-weight: bold; fill: #FFFFFF; }
-      .flow-line { stroke: #545B64; stroke-width: 2; fill: none; }
-      .flow-line-accent { stroke: #1D76DB; stroke-width: 2.5; fill: none; }
-      .flow-line-danger { stroke: #D93F0B; stroke-width: 2.5; fill: none; }
-      .flow-line-success { stroke: #0E8A16; stroke-width: 2.5; fill: none; }
-      .flow-line-warning { stroke: #FF9900; stroke-width: 2.5; fill: none; }
-      .flow-dashed { stroke-dasharray: 6,4; }
-      .decision-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
-      .edge-label-danger { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: bold; fill: #D93F0B; }
-      .edge-label-success { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: bold; fill: #0E8A16; }
-      .edge-label-neutral { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: bold; fill: #545B64; }
-    </style>
-    <filter id="box-shadow" x="-2%" y="-2%" width="104%" height="106%" filterUnits="userSpaceOnUse">
-      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.08" />
-    </filter>
-    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#545B64" />
-    </marker>
-    <marker id="arrow-danger" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#D93F0B" />
-    </marker>
-    <marker id="arrow-success" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0E8A16" />
-    </marker>
-    <marker id="arrow-accent" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1D76DB" />
-    </marker>
-    <marker id="arrow-warning" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#FF9900" />
-    </marker>
-  </defs>
-
-  <!-- FONDO -->
-  <rect width="1650" height="1080" fill="#FFFFFF" />
-
-  <!-- ENCABEZADO -->
-  <text x="825" y="38" class="main-title">AromaPacífico - Patrón Arquitectónico de la Función de Confirmación del Foco (Épica 6)</text>
-  <text x="825" y="62" class="sub-title">Especificación de Implementación en Terraform (IaC): Disparador, Permisos Mínimos, Inferencia y Resiliencia sin Mutación Destructiva</text>
-
-  <!-- ==================== COLUMNA IZQUIERDA: ORIGEN E IAM ==================== -->
-  <!-- 1. ORIGEN S3 -->
-  <g transform="translate(40, 120)">
-    <rect width="340" height="240" rx="8" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" filter="url(#box-shadow)" />
-    <rect x="0" y="0" width="340" height="35" rx="8" fill="#FADBD8" />
-    <text x="15" y="23" class="card-header">1. Amazon S3 (Bucket de Objetos)</text>
-    <text x="15" y="55" class="code-body">s3://aromapacifico-objetos-prod/</text>
-    <text x="15" y="73" class="code-body">raw-images/focos/{FincaID}/{LoteID}/</text>
-    <text x="15" y="100" class="card-body">• Carga de imagen con URL prefirmada (PUT)</text>
-    <text x="15" y="120" class="card-body">• Cifrado en reposo SSE-KMS obligatorio</text>
-    <text x="15" y="140" class="card-body">• Emite evento s3:ObjectCreated:Put</text>
-    <text x="15" y="160" class="card-body">• Metadatos EXIF: GPS, fecha UTC, dron ID</text>
-    <text x="15" y="185" class="card-sub" fill="#D93F0B">INVARIANTE: EL OBJETO EN S3 NUNCA SE MODIFICA</text>
-    <text x="15" y="205" class="card-body">Permanece como evidencia inmutable a 5 años</text>
-  </g>
-
-  <!-- 2. IAM EXECUTION ROLE -->
-  <g transform="translate(40, 390)">
-    <rect width="340" height="300" rx="8" fill="#F0F7FF" stroke="#1D76DB" stroke-width="2" filter="url(#box-shadow)" />
-    <rect x="0" y="0" width="340" height="35" rx="8" fill="#D4E6F1" />
-    <text x="15" y="23" class="card-header">2. Rol IAM Mínimo Privilegio (IaC)</text>
-    <text x="15" y="55" class="card-sub">FocusConfirmationExecutionRole</text>
-    <text x="15" y="78" class="card-body">• Permiso 1: Lectura de imagen en S3</text>
-    <text x="25" y="96" class="code-body">s3:GetObject, kms:Decrypt (objeto foco)</text>
-    <text x="15" y="118" class="card-body">• Permiso 2: Filtro PII e Inferencia Multimodal</text>
-    <text x="25" y="136" class="code-body">rekognition:DetectFaces, bedrock:InvokeModel</text>
-    <text x="15" y="158" class="card-body">• Permiso 3: Escritura de expediente</text>
-    <text x="25" y="176" class="code-body">dynamodb:UpdateItem (ExpedienteFitosanitario)</text>
-    <text x="15" y="198" class="card-body">• Permiso 4: Aislamiento de fallas</text>
-    <text x="25" y="216" class="code-body">sqs:SendMessage (dlq-confirmacion-foco)</text>
-    <text x="15" y="240" class="card-sub" fill="#1D76DB">POLÍTICA ZERO TRUST:</text>
-    <text x="15" y="260" class="card-body">• Sin comodines Resource: * o Action: *</text>
-    <text x="15" y="280" class="card-body">• Cero entrenamiento y cero cómputo en espera</text>
-  </g>
-
-  <!-- ==================== CONTENEDOR CENTRAL: AWS LAMBDA ==================== -->
-  <g transform="translate(415, 110)">
-    <rect width="810" height="920" rx="8" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" />
-    <rect x="0" y="0" width="810" height="40" rx="8" fill="#FDEBD0" />
-    <rect x="670" y="10" width="125" height="20" rx="4" fill="#D93F0B" />
-    <text x="732" y="24" class="badge-text" text-anchor="middle">PATRÓN ÉPICA 6</text>
-    <text x="20" y="26" class="swimlane-title">AWS LAMBDA: ProcessFocusConfirmation (Graviton2 arm64, 512 MB, Timeout: 30s)</text>
-  </g>
-
-  <!-- PASO 1 -->
-  <g transform="translate(440, 170)">
-    <rect width="760" height="95" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" filter="url(#box-shadow)" />
-    <text x="15" y="25" class="card-header">Paso 1: Lectura, Extracción EXIF y Verificación de Integridad</text>
-    <text x="15" y="48" class="card-body">• Lee objeto S3 mediante s3:GetObject en streaming (sin buffering completo en disco)</text>
-    <text x="15" y="68" class="card-body">• Calcula hash criptográfico SHA-256 del contenido binario y valida metadatos</text>
-    <text x="15" y="88" class="card-body">• Extrae metadatos de vuelo: FincaID, LoteID, Altitud, Coordenadas GPS y Hora UTC</text>
-  </g>
-
-  <!-- PASO 2 -->
-  <g transform="translate(440, 295)">
-    <rect width="760" height="85" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" filter="url(#box-shadow)" />
-    <text x="15" y="25" class="card-header">Paso 2: Filtro Ético y Protección de Privacidad (Ley 1581 de 2012)</text>
-    <text x="15" y="48" class="card-body">• Invoca Amazon Rekognition: DetectFaces y DetectLabels (categoría humana)</text>
-    <text x="15" y="68" class="card-body">• ¿Se detectan rostros, personas o jornaleros en la toma aérea del cultivo?</text>
-  </g>
-
-  <!-- DECISIÓN PII -->
-  <g transform="translate(700, 405)">
-    <polygon points="120,0 240,40 120,80 0,40" fill="#EAEDED" stroke="#545B64" stroke-width="2" />
-    <text x="120" y="38" class="decision-text">¿Persona</text>
-    <text x="120" y="52" class="decision-text">Detectada?</text>
-  </g>
-
-  <!-- ACCIÓN CUARENTENA PII -->
-  <g transform="translate(960, 515)">
-    <rect width="240" height="135" rx="6" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" filter="url(#box-shadow)" />
-    <text x="15" y="22" class="card-header" fill="#D93F0B">Cuarentena de Privacidad</text>
-    <text x="15" y="42" class="card-body">• Copia a s3://...-quarantine-pii/</text>
-    <text x="15" y="62" class="card-body">• Bloquea inferencia foliar</text>
-    <text x="15" y="82" class="card-body">• Notifica al Oficial de Seguridad</text>
-    <text x="15" y="102" class="card-body">• CERO mutación en DynamoDB</text>
-    <text x="15" y="122" class="card-sub" fill="#D93F0B">Expediente no altera su estado</text>
-  </g>
-
-  <!-- PASO 3: INFERENCIA FITOSANITARIA -->
-  <g transform="translate(440, 515)">
-    <rect width="480" height="135" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" filter="url(#box-shadow)" />
-    <text x="15" y="22" class="card-header">Paso 3: Inferencia Fitosanitaria Multimodal (Amazon Bedrock)</text>
-    <text x="15" y="42" class="card-sub">bedrock-runtime:InvokeModel en us-east-1 (Sin Entrenamiento)</text>
-    <text x="15" y="65" class="card-body">• Modelo fundacional multimodal de visión (ej. Claude 3 Haiku / Nova)</text>
-    <text x="15" y="85" class="card-body">• Diagnóstico foliar especializado: Roya (Hemileia) o Broca (Hypothenemus)</text>
-    <text x="15" y="105" class="card-body">• Devuelve vector de confianza C ∈ [0, 100%] y severidad foliar</text>
-    <text x="15" y="125" class="card-body">• Cero cómputo ocioso en espera | Pago por token/invocación puro</text>
-  </g>
-
-  <!-- DECISIÓN UMBRAL -->
-  <g transform="translate(560, 680)">
-    <polygon points="120,0 240,40 120,80 0,40" fill="#EAEDED" stroke="#545B64" stroke-width="2" />
-    <text x="120" y="38" class="decision-text">¿Confianza</text>
-    <text x="120" y="52" class="decision-text">≥ 80% en Foco?</text>
-  </g>
-
-  <!-- ACCIÓN BAJA CONFIANZA -->
-  <g transform="translate(840, 685)">
-    <rect width="240" height="70" rx="6" fill="#F8F9FA" stroke="#545B64" stroke-width="1.5" />
-    <text x="15" y="22" class="card-header">Baja Confianza (&lt; 80%)</text>
-    <text x="15" y="42" class="card-body">• Registra foco como descartado</text>
-    <text x="15" y="62" class="card-body">• NO se emite alerta crítica ni orden</text>
-  </g>
-
-  <!-- PASO 5: PERSISTENCIA IDEMPOTENTE -->
-  <g transform="translate(440, 790)">
-    <rect width="760" height="160" rx="6" fill="#F4FBF5" stroke="#0E8A16" stroke-width="2" filter="url(#box-shadow)" />
-    <text x="15" y="25" class="card-header">Paso 5: Persistencia Idempotente en Expediente Digital (Amazon DynamoDB)</text>
-    <text x="15" y="48" class="card-body">• Inserción condicional atómica con ConditionExpression (garantiza cero duplicados ante reintentos de red)</text>
-    <text x="15" y="70" class="code-body">TimestampUTC: "2026-11-08T15:00:00Z" | ConfidenceScore: 92.4% | DiagnosticLabel: "ROYA_NIVEL_3"</text>
-    <text x="15" y="90" class="code-body">SourceObjectID: "raw-images/focos/FINCA-CAUCA-012/foto_foco_9412.jpg" | EvaluatorID: "arn:aws:rekognition:..."</text>
-    <text x="15" y="112" class="card-body">• Estado del foco en expediente: FOCO_CONFIRMADO</text>
-    <text x="15" y="132" class="card-body">• Despacha notificación a agrónomo FNC vía Amazon SNS con el expediente digital adjunto</text>
-    <text x="15" y="152" class="card-sub" fill="#0E8A16">INVARIANTE ZERO TRUST: NINGUNA FUNCIÓN SERVERLESS AUTORIZA FUMIGACIÓN</text>
-  </g>
-
-  <!-- ==================== COLUMNA DERECHA: EXPEDIENTES Y DLQ ==================== -->
-  <!-- 4. DYNAMODB EXPEDIENTE -->
-  <g transform="translate(1260, 120)">
-    <rect width="350" height="240" rx="8" fill="#F4FBF5" stroke="#0E8A16" stroke-width="2" filter="url(#box-shadow)" />
-    <rect x="0" y="0" width="350" height="35" rx="8" fill="#D5F5E3" />
-    <text x="15" y="23" class="card-header">4. Amazon DynamoDB: Expediente</text>
-    <text x="15" y="55" class="code-body">Tabla: ExpedienteFitosanitario (Prod)</text>
-    <text x="15" y="75" class="card-body">• PK: FincaID (String) | SK: FocoID#Fecha</text>
-    <text x="15" y="95" class="card-body">• Atributos inmutables de auditoría:</text>
-    <text x="25" y="115" class="code-body">TimestampUTC, Confidence, SourceObjectID, ETag</text>
-    <text x="15" y="135" class="card-body">• Estado: PENDIENTE_AUTORIZACION_FUMIGACION</text>
-    <text x="15" y="155" class="card-body">• Replicación global multi-región a us-east-2</text>
-    <text x="15" y="180" class="card-sub" fill="#0E8A16">COMPUERTA DE SEGURIDAD OPERACIONAL:</text>
-    <text x="15" y="200" class="card-body">Sin firma humana formal, el caso permanece en espera</text>
-  </g>
-
-  <!-- 5. COMPUERTA HUMANA -->
-  <g transform="translate(1260, 390)">
-    <rect width="350" height="240" rx="8" fill="#FFF8E1" stroke="#FF9900" stroke-width="2" filter="url(#box-shadow)" />
-    <rect x="0" y="0" width="350" height="35" rx="8" fill="#FCF3CF" />
-    <text x="15" y="23" class="card-header">5. Compuerta Humana Mandatoria</text>
-    <text x="15" y="55" class="card-sub">Agrónomo Titular FNC (Firma MFA)</text>
-    <text x="15" y="78" class="card-body">• Recibe alerta en App con imagen y confianza</text>
-    <text x="15" y="98" class="card-body">• Evalúa condiciones meteorológicas y fenología</text>
-    <text x="15" y="118" class="card-body">• Si aprueba fumigación: firma con MFA TOTP</text>
-    <text x="15" y="138" class="card-body">• La plataforma genera la orden formal (Servicio 3)</text>
-    <text x="15" y="163" class="card-sub" fill="#FF9900">REGLA ESTRICTA DEL CASO:</text>
-    <text x="15" y="185" class="card-body">La IA asiste el diagnóstico foliar; la decisión de</text>
-    <text x="15" y="205" class="card-body">aplicar agroquímicos es 100% atribuible a un humano</text>
-  </g>
-
-  <!-- 6. RESILIENCIA DLQ -->
-  <g transform="translate(1260, 660)">
-    <rect width="350" height="320" rx="8" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2" filter="url(#box-shadow)" />
-    <rect x="0" y="0" width="350" height="35" rx="8" fill="#FADBD8" />
-    <text x="15" y="23" class="card-header">6. Resiliencia: Amazon SQS DLQ</text>
-    <text x="15" y="55" class="code-body">dlq-confirmacion-foco (Dead Letter Queue)</text>
-    <text x="15" y="78" class="card-body">• Activación: tras 2 reintentos fallidos en Lambda</text>
-    <text x="15" y="98" class="card-body">• Retención: 14 días con cifrado KMS</text>
-    <text x="15" y="118" class="card-body">• Payload en DLQ: SourceS3Key, ErrorCode, TraceID</text>
-    <text x="15" y="145" class="card-sub" fill="#D93F0B">GARANTÍA DE NO-MUTACIÓN EN FALLAS:</text>
-    <text x="15" y="165" class="card-body">1. El objeto en S3 PERMANECE 100% INTACTO</text>
-    <text x="15" y="185" class="card-body">2. DynamoDB NO registra ningún estado falso</text>
-    <text x="15" y="205" class="card-body">3. La orden no cambia de estado en la máquina</text>
-    <text x="15" y="225" class="card-body">4. Alarma CloudWatch P1 notifica a ingeniería</text>
-    <text x="15" y="250" class="card-sub" fill="#545B64">PROCEDIMIENTO DE RECUPERACIÓN:</text>
-    <text x="15" y="270" class="card-body">Reprocesamiento manual con redrive hacia Lambda</text>
-    <text x="15" y="290" class="card-body">sin necesidad de volver a volar el dron a campo</text>
-  </g>
-
-  <!-- ==================== CONECTORES Y FLECHAS ==================== -->
-  <!-- S3 a Step 1 -->
-  <path d="M 380 217 L 440 217" class="flow-line-danger" marker-end="url(#arrow-danger)" />
-
-  <!-- Step 1 a Step 2 -->
-  <path d="M 820 265 L 820 295" class="flow-line" marker-end="url(#arrow)" />
-
-  <!-- Step 2 a Dec PII -->
-  <path d="M 820 380 L 820 405" class="flow-line" marker-end="url(#arrow)" />
-
-  <!-- Dec PII a Cuarentena (Rama Sí) -->
-  <path d="M 940 445 L 1080 445 L 1080 515" class="flow-line-danger" marker-end="url(#arrow-danger)" />
-  <text x="960" y="435" class="edge-label-danger">SÍ (Persona detectada)</text>
-
-  <!-- Dec PII a Step 3 (Rama No) -->
-  <path d="M 700 445 L 680 445 L 680 515" class="flow-line-success" marker-end="url(#arrow-success)" />
-  <text x="600" y="435" class="edge-label-success">NO (Solo cultivo)</text>
-
-  <!-- Step 3 a Dec Umbral -->
-  <path d="M 680 650 L 680 680" class="flow-line" marker-end="url(#arrow)" />
-
-  <!-- Dec Umbral a Baja Confianza -->
-  <path d="M 800 720 L 840 720" class="flow-line" marker-end="url(#arrow)" />
-  <text x="805" y="710" class="edge-label-neutral">NO (&lt; 80%)</text>
-
-  <!-- Dec Umbral a Step 5 -->
-  <path d="M 680 760 L 680 790" class="flow-line-success" marker-end="url(#arrow-success)" />
-  <text x="690" y="778" class="edge-label-success">SÍ (≥ 80%)</text>
-
-  <!-- Step 5 a DynamoDB -->
-  <path d="M 1200 870 L 1235 870 L 1235 240 L 1260 240" class="flow-line-success" marker-end="url(#arrow-success)" />
-
-  <!-- DynamoDB a Compuerta Humana -->
-  <path d="M 1435 360 L 1435 390" class="flow-line-warning" marker-end="url(#arrow-warning)" />
-
-  <!-- Fallas / Agotamiento a DLQ -->
-  <path d="M 1200 217 L 1245 217 L 1245 820 L 1260 820" class="flow-line-danger flow-dashed" marker-end="url(#arrow-danger)" />
-  <text x="1255" y="640" class="edge-label-danger">Falla o Agotamiento Retries</text>
-
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1680" height="880" viewBox="0 0 1680 880">
+<defs>
+<filter id="shadow" x="-6%" y="-6%" width="112%" height="118%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.08"/></filter>
+<marker id="arr-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#334155"/></marker>
+<marker id="arr-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#135E34"/></marker>
+<marker id="arr-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#DD344C"/></marker>
+<marker id="arr-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#0F4C81"/></marker>
+<marker id="arr-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#ED7100"/></marker>
+<marker id="arr-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#8C4FFF"/></marker>
+<style>text{font-family:'Segoe UI',Inter,Arial,sans-serif;}</style>
+</defs>
+<rect x="0" y="0" width="1680" height="880" fill="#FFFFFF"/>
+<rect x="0" y="0" width="1680" height="78" fill="#0A3D20"/>
+<rect x="0" y="75" width="1680" height="3" fill="#4ADE80"/>
+<text x="32" y="36" font-size="21" font-weight="700" fill="#FFFFFF">AromaPacifico - Patron FN-01: Confirmacion del Foco e Inferencia (E6-07)</text>
+<text x="32" y="60" font-size="13" font-weight="400" fill="#D1FAE5">Codificado en Terraform (modules/function) · Filtro anti-PII Rekognition + Bedrock Multimodal · Cero autorizacion automatica</text>
+<rect x="1516" y="22" width="136" height="30" rx="15" fill="#DD344C" stroke="#FFFFFF" stroke-opacity="0.28"/><text x="1584" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Zero Trust MFA</text>
+<rect x="1306" y="22" width="200" height="30" rx="15" fill="#135E34" stroke="#FFFFFF" stroke-opacity="0.28"/><text x="1406" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">USD 3,11 / 1.000 fotos</text>
+<rect x="1096" y="22" width="200" height="30" rx="15" fill="#0F172A" stroke="#FFFFFF" stroke-opacity="0.28"/><text x="1196" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Modulo E6-07 (12 rec.)</text>
+<g id="z-in"><rect x="24" y="100" width="350" height="620" rx="12" fill="#F4FAF6" stroke="#3F8624" stroke-width="2"/><path d="M36,100 H362 Q374,100 374,112 V134 H24 V112 Q24,100 36,100 Z" fill="#3F8624"/><text x="38" y="122" font-size="13.5" font-weight="700" fill="#FFFFFF">1. Disparo S3 (Sin Mutacion)</text>
+</g>
+<g id="z-fn"><rect x="408" y="100" width="420" height="620" rx="12" fill="#FFFBF5" stroke="#ED7100" stroke-width="2"/><path d="M420,100 H816 Q828,100 828,112 V134 H408 V112 Q408,100 420,100 Z" fill="#ED7100"/><text x="422" y="122" font-size="13.5" font-weight="700" fill="#FFFFFF">2. Funcion Patron FN-01 (Terraform)</text>
+<rect x="760" y="106" width="58" height="22" rx="11" fill="#0F172A"/><text x="789" y="121" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">E6-07</text>
+</g>
+<g id="z-ai"><rect x="862" y="100" width="390" height="620" rx="12" fill="#F2FBF9" stroke="#01A88D" stroke-width="2"/><path d="M874,100 H1240 Q1252,100 1252,112 V134 H862 V112 Q862,100 874,100 Z" fill="#01A88D"/><text x="876" y="122" font-size="13.5" font-weight="700" fill="#FFFFFF">3. Inferencia Administrada ($0 reposo)</text>
+</g>
+<g id="z-out"><rect x="1286" y="100" width="370" height="620" rx="12" fill="#FFF8F8" stroke="#DD344C" stroke-width="2"/><path d="M1298,100 H1644 Q1656,100 1656,112 V134 H1286 V112 Q1286,100 1298,100 Z" fill="#DD344C"/><text x="1300" y="122" font-size="13.5" font-weight="700" fill="#FFFFFF">4. Expediente y Compuerta Humana</text>
+</g>
+<path id="edge-0" d="M199,254 L199,330" fill="none" stroke="#3F8624" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-slate)"/>
+<path id="edge-1" d="M354,372 L393,372 L393,243 L432,243" fill="none" stroke="#ED7100" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-orange)"/>
+<path id="edge-2" d="M618,286 L618,384" fill="none" stroke="#DD344C" stroke-width="2" stroke-dasharray="6,4" stroke-linejoin="round" marker-end="url(#arr-red)"/>
+<path id="edge-3" d="M804,243 L844,243 L844,242 L884,242" fill="none" stroke="#01A88D" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-slate)"/>
+<path id="edge-4" d="M1057,200 L1057,152 L200,152 L200,490 L200,514 L199,514" fill="none" stroke="#DD344C" stroke-width="2" stroke-dasharray="6,4" stroke-linejoin="round" marker-end="url(#arr-red)"/>
+<path id="edge-5" d="M1057,284 L1057,384" fill="none" stroke="#01A88D" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-slate)"/>
+<path id="edge-6" d="M1230,426 L1269,426 L1269,242 L1308,242" fill="none" stroke="#3B48CC" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-slate)"/>
+<path id="edge-7" d="M1471,284 L1471,384" fill="none" stroke="#135E34" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-green)"/>
+<g id="dron-s2" filter="url(#shadow)"><rect x="44" y="174" width="310" height="80" rx="10" fill="#FFFFFF" stroke="#135E34" stroke-width="1.8"/><rect x="56" y="192" width="44" height="44" rx="8" fill="#135E34"/><g transform="translate(62,198) scale(1.333)"><circle cx="6.5" cy="7.5" r="2.5" fill="none" stroke="#FFF" stroke-width="1.7"/><circle cx="17.5" cy="7.5" r="2.5" fill="none" stroke="#FFF" stroke-width="1.7"/><circle cx="6.5" cy="16.5" r="2.5" fill="none" stroke="#FFF" stroke-width="1.7"/><circle cx="17.5" cy="16.5" r="2.5" fill="none" stroke="#FFF" stroke-width="1.7"/><path d="M8.5 9.5L15.5 14.5M15.5 9.5L8.5 14.5" stroke="#FFF" stroke-width="1.8"/><rect x="10" y="10" width="4" height="4" rx="1" fill="#FFF"/></g>
+<text x="112" y="210" font-size="13.5" font-weight="700" fill="#0F172A">Dron (Servicio S2)</text><text x="112" y="229" font-size="12" font-weight="400" fill="#475569">Captura foto RGB del foco</text>
+</g>
+<g id="s3-raw" filter="url(#shadow)"><rect x="44" y="330" width="310" height="84" rx="10" fill="#FFFFFF" stroke="#3F8624" stroke-width="1.8"/><rect x="56" y="350" width="44" height="44" rx="8" fill="#3F8624"/><g transform="translate(62,356) scale(1.333)"><path d="M5 7L7 19C7.2 20 9.4 20.8 12 20.8C14.6 20.8 16.8 20 17 19L19 7" fill="none" stroke="#FFF" stroke-width="1.8"/><ellipse cx="12" cy="7" rx="7" ry="2.4" fill="none" stroke="#FFF" stroke-width="1.8"/><path d="M8.5 12.5C10.5 13.5 13.5 13.5 15.5 12.5" fill="none" stroke="#FFF" stroke-width="1.5"/></g>
+<text x="112" y="368" font-size="13.5" font-weight="700" fill="#0F172A">Amazon S3 Objetos</text><text x="112" y="387" font-size="12" font-weight="400" fill="#475569">SSE-KMS · TLS 1.2+ · Versionado</text>
+<rect x="269" y="320" width="77" height="20" rx="10" fill="#3F8624"/><text x="307" y="334" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Inmutable</text>
+</g>
+<g id="s3-quar" filter="url(#shadow)"><rect x="44" y="514" width="310" height="80" rx="10" fill="#FFFFFF" stroke="#3F8624" stroke-width="1.8"/><rect x="56" y="532" width="44" height="44" rx="8" fill="#3F8624"/><g transform="translate(62,538) scale(1.333)"><path d="M5 7L6.8 18.5C7 19.5 9.2 20.3 12 20.3C14.8 20.3 17 19.5 17.2 18.5L19 7" fill="none" stroke="#FFF" stroke-width="1.6"/><ellipse cx="12" cy="7" rx="7" ry="2.2" fill="none" stroke="#FFF" stroke-width="1.6"/><rect x="9.5" y="12.5" width="5" height="4.2" rx="0.8" fill="#FFF"/><path d="M10.5 12.5V11C10.5 10.1 11.2 9.5 12 9.5C12.8 9.5 13.5 10.1 13.5 11V12.5" fill="none" stroke="#FFF" stroke-width="1.4"/></g>
+<text x="112" y="550" font-size="13.5" font-weight="700" fill="#0F172A">S3 Cuarentena PII</text><text x="112" y="569" font-size="12" font-weight="400" fill="#475569">Object Lock 5 anos si hay persona</text>
+<rect x="276" y="504" width="70" height="20" rx="10" fill="#DD344C"/><text x="311" y="518" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Ley 1581</text>
+</g>
+<g id="fn01" filter="url(#shadow)"><rect x="432" y="200" width="372" height="86" rx="10" fill="#FFFFFF" stroke="#ED7100" stroke-width="1.8"/><rect x="444" y="221" width="44" height="44" rx="8" fill="#ED7100"/><g transform="translate(450,227) scale(1.333)"><path d="M6 19L11.2 9.5L8.5 5H6.5V3.5H10L16.5 19H18.5V20.5H14.8L12.3 14.3L8.8 20.5H6V19Z" fill="#FFF"/></g>
+<text x="500" y="239" font-size="13.5" font-weight="700" fill="#0F172A">Lambda FN-01 (ARM64)</text><text x="500" y="258" font-size="12" font-weight="400" fill="#475569">Subred privada .2/.102 · Python</text>
+<rect x="684" y="190" width="112" height="20" rx="10" fill="#ED7100"/><text x="740" y="204" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">3 Permisos IAM</text>
+</g>
+<g id="dlq" filter="url(#shadow)"><rect x="432" y="384" width="372" height="82" rx="10" fill="#FFFFFF" stroke="#E7157B" stroke-width="1.8"/><rect x="444" y="403" width="44" height="44" rx="8" fill="#E7157B"/><g transform="translate(450,409) scale(1.333)"><rect x="4" y="6" width="16" height="12" rx="2" fill="none" stroke="#FFF" stroke-width="1.7"/><line x1="8" y1="9" x2="8" y2="15" stroke="#FFF" stroke-width="2"/><line x1="12" y1="9" x2="12" y2="15" stroke="#FFF" stroke-width="2"/><path d="M15.5 9.5L18.5 12L15.5 14.5" fill="none" stroke="#FFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="500" y="421" font-size="13.5" font-weight="700" fill="#0F172A">Amazon SQS DLQ + CW</text><text x="500" y="440" font-size="12" font-weight="400" fill="#475569">Si falla, la foto S3 queda intacta</text>
+</g>
+<g id="iam-min" filter="url(#shadow)"><rect x="432" y="540" width="372" height="76" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="444" y="556" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(450,562) scale(1.333)"><path d="M12 3.5L19 6.5V12C19 16.2 15.9 19.3 12 20.5C8.1 19.3 5 16.2 5 12V6.5L12 3.5Z" fill="none" stroke="#FFF" stroke-width="1.8"/><circle cx="12" cy="10.2" r="2" fill="#FFF"/><path d="M8.8 15.8C9.4 14 10.6 13.3 12 13.3C13.4 13.3 14.6 14 15.2 15.8" fill="none" stroke="#FFF" stroke-width="1.6" stroke-linecap="round"/></g>
+<text x="500" y="574" font-size="13.5" font-weight="700" fill="#0F172A">Rol IAM Minimo Privilegio</text><text x="500" y="593" font-size="12" font-weight="400" fill="#475569">Solo s3:Get, ai:Invoke, ddb:Put</text>
+<rect x="691" y="530" width="105" height="20" rx="10" fill="#DD344C"/><text x="743" y="544" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">0 comodines *</text>
+</g>
+<g id="rekog" filter="url(#shadow)"><rect x="884" y="200" width="346" height="84" rx="10" fill="#FFFFFF" stroke="#01A88D" stroke-width="1.8"/><rect x="896" y="220" width="44" height="44" rx="8" fill="#01A88D"/><g transform="translate(902,226) scale(1.333)"><path d="M4 12C6 8 8.8 6.5 12 6.5C15.2 6.5 18 8 20 12C18 16 15.2 17.5 12 17.5C8.8 17.5 6 16 4 12Z" fill="none" stroke="#FFF" stroke-width="1.8"/><circle cx="12" cy="12" r="2.6" fill="#FFF"/></g>
+<text x="952" y="238" font-size="13.5" font-weight="700" fill="#0F172A">Amazon Rekognition</text><text x="952" y="257" font-size="12" font-weight="400" fill="#475569">DetectFaces / Person (Anti-PII)</text>
+<rect x="1152" y="190" width="70" height="20" rx="10" fill="#01A88D"/><text x="1187" y="204" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Filtro 1</text>
+</g>
+<g id="bedrock" filter="url(#shadow)"><rect x="884" y="384" width="346" height="84" rx="10" fill="#FFFFFF" stroke="#01A88D" stroke-width="1.8"/><rect x="896" y="404" width="44" height="44" rx="8" fill="#01A88D"/><g transform="translate(902,410) scale(1.333)"><polygon points="12,4 19,8 12,12 5,8" fill="none" stroke="#FFF" stroke-width="1.8" stroke-linejoin="round"/><polyline points="5,12 12,16 19,12" fill="none" stroke="#FFF" stroke-width="1.8" stroke-linejoin="round"/><polyline points="5,16 12,20 19,16" fill="none" stroke="#FFF" stroke-width="1.8" stroke-linejoin="round"/></g>
+<text x="952" y="422" font-size="13.5" font-weight="700" fill="#0F172A">Amazon Bedrock Multimodal</text><text x="952" y="441" font-size="12" font-weight="400" fill="#475569">Diagnostico roya/broca por token</text>
+<rect x="1152" y="374" width="70" height="20" rx="10" fill="#01A88D"/><text x="1187" y="388" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Filtro 2</text>
+</g>
+<g id="cost" filter="url(#shadow)"><rect x="884" y="540" width="346" height="76" rx="10" fill="#FFFFFF" stroke="#135E34" stroke-width="1.8"/><rect x="896" y="556" width="44" height="44" rx="8" fill="#135E34"/><g transform="translate(902,562) scale(1.333)"><circle cx="12" cy="12" r="7.5" fill="none" stroke="#FFF" stroke-width="1.8"/><path d="M12 7V17M14.3 9.5C14.3 8.5 13.3 8 12 8C10.7 8 9.7 8.6 9.7 9.6C9.7 10.6 10.7 11.2 12 11.6C13.3 12 14.3 12.6 14.3 13.8C14.3 15 13.3 15.8 12 15.8C10.6 15.8 9.7 15.1 9.7 14.1" fill="none" stroke="#FFF" stroke-width="1.7" stroke-linecap="round"/></g>
+<text x="952" y="574" font-size="13.5" font-weight="700" fill="#0F172A">Costo Inferencia Cosecha</text><text x="952" y="593" font-size="12" font-weight="400" fill="#475569">USD 0,47/mes pico (sin GPU 24/7)</text>
+</g>
+<g id="ddb-exp" filter="url(#shadow)"><rect x="1308" y="200" width="326" height="84" rx="10" fill="#FFFFFF" stroke="#3B48CC" stroke-width="1.8"/><rect x="1320" y="220" width="44" height="44" rx="8" fill="#3B48CC"/><g transform="translate(1326,226) scale(1.333)"><ellipse cx="11" cy="6.5" rx="6.5" ry="2.3" fill="none" stroke="#FFF" stroke-width="1.7"/><path d="M4.5 6.5V17.5C4.5 18.8 7.4 19.8 11 19.8C14.6 19.8 17.5 18.8 17.5 17.5V6.5" fill="none" stroke="#FFF" stroke-width="1.7"/><path d="M4.5 12C4.5 13.3 7.4 14.3 11 14.3C14.6 14.3 17.5 13.3 17.5 12" fill="none" stroke="#FFF" stroke-width="1.4"/><polygon points="18,9 14.5,14 17.2,14 16,19.5 20.5,13 17.7,13" fill="#FFF"/></g>
+<text x="1376" y="238" font-size="13.5" font-weight="700" fill="#0F172A">DynamoDB Expediente</text><text x="1376" y="257" font-size="12" font-weight="400" fill="#475569">Confianza, timestamp y objeto S3</text>
+</g>
+<g id="agro" filter="url(#shadow)"><rect x="1308" y="384" width="326" height="84" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="1320" y="404" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(1326,410) scale(1.333)"><circle cx="10.5" cy="8.2" r="3" fill="none" stroke="#FFF" stroke-width="1.8"/><path d="M5 18.8C5.6 15.2 7.6 13.8 10.5 13.8C12.2 13.8 13.6 14.3 14.5 15.3" fill="none" stroke="#FFF" stroke-width="1.8" stroke-linecap="round"/><path d="M14.5 17.5L16.5 19.5L20.5 15" fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="1376" y="422" font-size="13.5" font-weight="700" fill="#0F172A">Agronomo FNC (MFA)</text><text x="1376" y="441" font-size="12" font-weight="400" fill="#475569">Aprueba orden de fumigacion</text>
+<rect x="1570" y="374" width="56" height="20" rx="10" fill="#135E34"/><text x="1598" y="388" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Humano</text>
+</g>
+<g id="no-auto" filter="url(#shadow)"><rect x="1308" y="540" width="326" height="76" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="1320" y="556" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(1326,562) scale(1.333)"><circle cx="12" cy="12" r="7.5" fill="none" stroke="#FFF" stroke-width="1.9"/><line x1="7" y1="7" x2="17" y2="17" stroke="#FFF" stroke-width="2"/></g>
+<text x="1376" y="574" font-size="13.5" font-weight="700" fill="#0F172A">Bloqueo Zero Trust</text><text x="1376" y="593" font-size="12" font-weight="400" fill="#475569">Lambda NO puede autorizar vuelo</text>
+<rect x="1549" y="530" width="77" height="20" rx="10" fill="#DD344C"/><text x="1587" y="544" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">PROHIBIDO</text>
+</g>
+<rect x="142" y="280" width="114" height="24" rx="12" fill="#FFFFFF" stroke="#3F8624" stroke-width="1.2"/><text x="199" y="296" text-anchor="middle" font-size="12" font-weight="600" fill="#3F8624">URL Prefirmada</text>
+<rect x="354" y="295" width="79" height="24" rx="12" fill="#FFFFFF" stroke="#ED7100" stroke-width="1.2"/><text x="393" y="311" text-anchor="middle" font-size="12" font-weight="600" fill="#ED7100">Evento S3</text>
+<rect x="565" y="323" width="107" height="24" rx="12" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.2"/><text x="618" y="339" text-anchor="middle" font-size="12" font-weight="600" fill="#DD344C">Error / Retry</text>
+<rect x="778" y="231" width="93" height="24" rx="12" fill="#FFFFFF" stroke="#01A88D" stroke-width="1.2"/><text x="824" y="247" text-anchor="middle" font-size="12" font-weight="600" fill="#01A88D">1. Escanear</text>
+<rect x="561" y="140" width="135" height="24" rx="12" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.2"/><text x="628" y="156" text-anchor="middle" font-size="12" font-weight="600" fill="#DD344C">Si detecta rostro</text>
+<rect x="1007" y="322" width="100" height="24" rx="12" fill="#FFFFFF" stroke="#01A88D" stroke-width="1.2"/><text x="1057" y="338" text-anchor="middle" font-size="12" font-weight="600" fill="#01A88D">Sin personas</text>
+<rect x="1223" y="322" width="93" height="24" rx="12" fill="#FFFFFF" stroke="#3B48CC" stroke-width="1.2"/><text x="1269" y="338" text-anchor="middle" font-size="12" font-weight="600" fill="#3B48CC">Diagnostico</text>
+<rect x="1411" y="322" width="121" height="24" rx="12" fill="#FFFFFF" stroke="#135E34" stroke-width="1.2"/><text x="1471" y="338" text-anchor="middle" font-size="12" font-weight="600" fill="#135E34">Revision humana</text>
+<g><rect x="24" y="748" width="1632" height="100" rx="8" fill="#ECFDF5" stroke="#135E34" stroke-width="1.6"/><rect x="24" y="748" width="6" height="100" rx="3" fill="#135E34"/><text x="42" y="770" font-size="13" font-weight="700" fill="#135E34">Invariantes de Seguridad y Resiliencia (#16 / #17)</text><text x="42" y="790" font-size="12" font-weight="400" fill="#1E293B">1) Si Rekognition detecta una persona, la foto NO se envia a Bedrock y pasa a cuarentena (Ley 1581). 2) Si la inferencia falla, el estado del caso no muta y la foto original en S3 permanece intacta.</text></g>
 </svg>

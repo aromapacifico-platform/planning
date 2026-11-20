@@ -1,261 +1,79 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1760 1280" width="100%" height="100%">
-  <defs>
-    <style>
-      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 22px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
-      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #5A6B7C; text-anchor: middle; }
-      .swim-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
-      .phase-head { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #1D76DB; }
-      .box-head { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
-      .subhead { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #555555; }
-      .body-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
-      .bold-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #232F3E; }
-      .accent-green { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #1B5E20; }
-      .accent-red { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #B71C1C; }
-    </style>
-    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%" filterUnits="userSpaceOnUse">
-      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.08" />
-    </filter>
-  </defs>
-
-  <!-- FONDO GENERAL -->
-  <rect width="1760" height="1280" fill="#F8F9FA" />
-
-  <!-- TITULO Y SUBTITULO -->
-  <text x="880" y="40" class="title">AromaPacífico - Máquina de Estados del Saco de Café (60 kg) y Event Sourcing Transaccional</text>
-  <text x="880" y="68" class="subtitle">Ciclo de Vida Operativo, Responsables Atribuibles, Invariantes de Calidad y Base Transaccional de Cero Pérdida</text>
-
-  <!-- CONTENEDOR 1: CICLO DE VIDA DE CINCO ESTADOS -->
-  <g transform="translate(35, 95)" filter="url(#shadow)">
-    <rect width="1690" height="575" rx="8" fill="#FFFFFF" stroke="#545B64" stroke-width="2" />
-    <rect width="1690" height="35" rx="8" fill="#EAEDED" />
-    <text x="20" y="23" class="swim-title">CICLO DE VIDA DEL SACO DE CAFÉ: CINCO ESTADOS NOMINALES Y ACTORES RESPONSABLES</text>
-
-    <!-- FASE 1: FINCA CAFETERA -->
-    <g transform="translate(20, 50)">
-      <rect width="310" height="505" rx="6" fill="#F4F8FD" stroke="#1D76DB" stroke-width="1.5" />
-      <rect width="310" height="30" rx="6" fill="#EBF3FB" />
-      <text x="12" y="20" class="phase-head" fill="#1D76DB">FASE 1: FINCA CAFETERA</text>
-      <text x="12" y="46" class="subhead">Actor: Caficultor (App Móvil / Cognito)</text>
-
-      <!-- Estado 1 -->
-      <rect x="12" y="60" width="286" height="275" rx="5" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
-      <text x="22" y="82" class="bold-txt" fill="#1D76DB">ESTADO 1: EN_PREPARACION</text>
-      <text x="22" y="104" class="body-txt">- Ubicación: Finca (Cauca, Huila, Tolima)</text>
-      <text x="22" y="124" class="body-txt">- Ensacado: Saco de fique estándar 60.0 kg</text>
-      <text x="22" y="144" class="body-txt">- Pesaje verificado en balanza de finca</text>
-      <text x="22" y="164" class="body-txt">- Variables de Secado Registradas:</text>
-      <text x="32" y="184" class="body-txt">* Humedad final: 10.0% a 12.0%</text>
-      <text x="32" y="204" class="body-txt">* Método: Lavado / Honey / Natural</text>
-      <text x="32" y="224" class="body-txt">* Temperatura media en secadero (C)</text>
-      <text x="32" y="244" class="body-txt">* Fecha y hora fin de secado (UTC)</text>
-      <text x="22" y="268" class="bold-txt">- Código Canónico HMAC-SHA-256:</text>
-      <text x="22" y="288" class="body-txt">  SACO-2026-[DEPTO]-[HASH8] (Sin PII)</text>
-      <text x="22" y="310" class="body-txt">  Ejemplo: SACO-2026-CAU-7F3A9C12</text>
-
-      <!-- Evento 1 -->
-      <rect x="12" y="350" width="286" height="135" rx="5" fill="#D5E8D4" stroke="#82B366" stroke-width="1.5" />
-      <text x="22" y="375" class="bold-txt" fill="#274E13">EVENTO: EVENTO_ALTA_FINCA</text>
-      <text x="22" y="398" class="body-txt">- Atribuible a: Caficultor (JWT Cognito sub)</text>
-      <text x="22" y="418" class="body-txt">- Criptografía: Hash firmado localmente</text>
-      <text x="22" y="438" class="body-txt">- Buffer: Store-and-forward en celular</text>
-      <text x="22" y="458" class="body-txt">  si la vereda carece de cobertura móvil</text>
-    </g>
-
-    <!-- FASE 2: TRANSPORTE RURAL -->
-    <g transform="translate(350, 50)">
-      <rect width="310" height="505" rx="6" fill="#FDFBF4" stroke="#D99B00" stroke-width="1.5" />
-      <rect width="310" height="30" rx="6" fill="#FDF6E2" />
-      <text x="12" y="20" class="phase-head" fill="#B27B00">FASE 2: TRANSPORTE RURAL</text>
-      <text x="12" y="46" class="subhead">Actor: Transportador Rural (App Móvil)</text>
-
-      <!-- Estado 2 -->
-      <rect x="12" y="60" width="286" height="275" rx="5" fill="#FFFFFF" stroke="#D99B00" stroke-width="2" />
-      <text x="22" y="82" class="bold-txt" fill="#B27B00">ESTADO 2: EN_VIAJE_ACOPIO</text>
-      <text x="22" y="104" class="body-txt">- Ubicación: Vía terciaria veredal</text>
-      <text x="22" y="124" class="body-txt">- Handshake Digital en Finca:</text>
-      <text x="32" y="144" class="body-txt">* Escaneo de código QR en saco</text>
-      <text x="32" y="164" class="body-txt">* Confirmación mutua caficultor/chofer</text>
-      <text x="22" y="188" class="body-txt">- Asignación Viaje: VIAJE-RURAL-XXX</text>
-      <text x="22" y="208" class="body-txt">- Vehículo: Campero rural veredal</text>
-      <text x="22" y="228" class="body-txt">- Resiliencia sin Cobertura:</text>
-      <text x="32" y="248" class="body-txt">* Cola SQLite cifrada en app móvil</text>
-      <text x="32" y="268" class="body-txt">* Reenvío automático al captar señal</text>
-      <text x="22" y="295" class="bold-txt">- Invariante: Bloqueado sin alta previa</text>
-      <text x="22" y="315" class="body-txt">  en finca para evitar café no registrado</text>
-
-      <!-- Evento 2 -->
-      <rect x="12" y="350" width="286" height="135" rx="5" fill="#D5E8D4" stroke="#82B366" stroke-width="1.5" />
-      <text x="22" y="375" class="bold-txt" fill="#274E13">EVENTO: EVENTO_DESPACHO_RURAL</text>
-      <text x="22" y="398" class="body-txt">- Atribuible a: Caficultor + Transportador</text>
-      <text x="22" y="418" class="body-txt">- Payload: Placa, ConductorID, HoraSalida</text>
-      <text x="22" y="438" class="body-txt">- Privacidad: Trayecto no visible fuera</text>
-      <text x="22" y="458" class="body-txt">  del acopio ni expuesto a compradores</text>
-    </g>
-
-    <!-- FASE 3: CENTRO DE ACOPIO -->
-    <g transform="translate(680, 50)">
-      <rect width="360" height="505" rx="6" fill="#FAF5FB" stroke="#7B1FA2" stroke-width="1.5" />
-      <rect width="360" height="30" rx="6" fill="#F3E5F5" />
-      <text x="12" y="20" class="phase-head" fill="#7B1FA2">FASE 3: CENTRO DE ACOPIO</text>
-      <text x="12" y="46" class="subhead">Actor: Operario Acopio (LAN Acopio / MFA TOTP)</text>
-
-      <!-- Estado 3 Base -->
-      <rect x="12" y="60" width="336" height="155" rx="5" fill="#FFFFFF" stroke="#7B1FA2" stroke-width="2" />
-      <text x="22" y="82" class="bold-txt" fill="#7B1FA2">ESTADO 3: EN_ACOPIO (Inspección Técnica)</text>
-      <text x="22" y="104" class="body-txt">- Entrada: Báscula certificada (60.0 kg +/- 0.2 kg)</text>
-      <text x="22" y="124" class="body-txt">- Laboratorio de Calidad del Acopio:</text>
-      <text x="32" y="144" class="body-txt">* Prueba Humedad: 10.5% - 11.5% estándar</text>
-      <text x="32" y="164" class="body-txt">* Catación SCA: Registro de puntaje sensorial</text>
-      <text x="32" y="184" class="body-txt">* Verificación de broca y defectos físicos</text>
-
-      <!-- Subestado Aceptado -->
-      <rect x="12" y="225" width="336" height="125" rx="5" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2" />
-      <text x="22" y="247" class="accent-green">SUB-ESTADO: EN_ACOPIO (ACEPTADO)</text>
-      <text x="22" y="267" class="body-txt">- Evento: EVENTO_RECEPCION_ACEPTADA</text>
-      <text x="22" y="287" class="body-txt">- Condición: Humedad &lt;= 12.0% y SCA &gt;= 80 pts</text>
-      <text x="22" y="307" class="body-txt">- Destino: Ingresa a lote consolidado exportable</text>
-      <text x="22" y="327" class="body-txt">- Atribuible a: Catador Certificado FNC (MFA)</text>
-
-      <!-- Subestado Rechazado -->
-      <rect x="12" y="360" width="336" height="125" rx="5" fill="#FFEBEE" stroke="#C62828" stroke-width="2" />
-      <text x="22" y="382" class="accent-red">SUB-ESTADO: EN_ACOPIO (RECHAZADO)</text>
-      <text x="22" y="402" class="body-txt">- Evento: EVENTO_RECEPCION_RECHAZADA</text>
-      <text x="22" y="422" class="body-txt">- Causa: Humedad &gt; 12.5% o defectos primarios</text>
-      <text x="22" y="442" class="body-txt">- Acción: Devolución a finca o venta pasilla local</text>
-      <text x="22" y="462" class="body-txt">- Estado terminal disyuntivo para exportación</text>
-    </g>
-
-    <!-- FASE 4: TRANSPORTE TRONCAL -->
-    <g transform="translate(1060, 50)">
-      <rect width="300" height="505" rx="6" fill="#FFF9F4" stroke="#E65100" stroke-width="1.5" />
-      <rect width="300" height="30" rx="6" fill="#FFF3E0" />
-      <text x="12" y="20" class="phase-head" fill="#BF360C">FASE 4: TRANSPORTE TRONCAL</text>
-      <text x="12" y="46" class="subhead">Actor: Transportador Troncal (App)</text>
-
-      <!-- Estado 4 -->
-      <rect x="12" y="60" width="276" height="275" rx="5" fill="#FFFFFF" stroke="#E65100" stroke-width="2" />
-      <text x="22" y="82" class="bold-txt" fill="#BF360C">ESTADO 4: EN_VIAJE_PUERTO</text>
-      <text x="22" y="104" class="body-txt">- Ubicación: Corredor vial al Pacífico</text>
-      <text x="22" y="124" class="body-txt">- Carga Consolidada: Hasta 200 sacos</text>
-      <text x="22" y="144" class="body-txt">- Precinto de Seguridad Electrónico</text>
-      <text x="22" y="164" class="body-txt">- Viaje Troncal: VIAJE-TRONCAL-XXX</text>
-      <text x="22" y="184" class="body-txt">- Telemetría Satelital y Celular:</text>
-      <text x="32" y="204" class="body-txt">* Reporte GPS periódico cada 5 min</text>
-      <text x="32" y="224" class="body-txt">* Alertas ante desvío de ruta</text>
-      <text x="22" y="248" class="bold-txt">- Protección de Privacidad:</text>
-      <text x="22" y="268" class="body-txt">  Los datos telemáticos de la ruta</text>
-      <text x="22" y="288" class="body-txt">  se confinan en acopio; el comprador</text>
-      <text x="22" y="308" class="body-txt">  solo ve destino Buenaventura</text>
-
-      <!-- Evento 4 -->
-      <rect x="12" y="350" width="276" height="135" rx="5" fill="#D5E8D4" stroke="#82B366" stroke-width="1.5" />
-      <text x="22" y="375" class="bold-txt" fill="#274E13">EVENTO: DESPACHO_PUERTO</text>
-      <text x="22" y="398" class="body-txt">- Atribuible a: Operario + Chofer</text>
-      <text x="22" y="418" class="body-txt">- Condición: Saco ACEPTADO en acopio</text>
-      <text x="22" y="438" class="body-txt">- Hash de precinto electrónico</text>
-      <text x="22" y="458" class="body-txt">  asociado al expediente digital</text>
-    </g>
-
-    <!-- FASE 5: PUERTO DE BUENAVENTURA -->
-    <g transform="translate(1380, 50)">
-      <rect width="290" height="505" rx="6" fill="#F2FBF9" stroke="#00796B" stroke-width="1.5" />
-      <rect width="290" height="30" rx="6" fill="#E0F2F1" />
-      <text x="12" y="20" class="phase-head" fill="#004D40">FASE 5: BUENAVENTURA</text>
-      <text x="12" y="46" class="subhead">Actor: Agente Portuario FNC (MFA)</text>
-
-      <!-- Estado 5 Base -->
-      <rect x="12" y="60" width="266" height="155" rx="5" fill="#FFFFFF" stroke="#00796B" stroke-width="2" />
-      <text x="22" y="82" class="bold-txt" fill="#004D40">ESTADO 5: ENTREGADO_PUERTO</text>
-      <text x="22" y="104" class="body-txt">- Terminal: SPRB / Aguadulce</text>
-      <text x="22" y="124" class="body-txt">- Sin predio propio de la FNC</text>
-      <text x="22" y="144" class="body-txt">- Recepción en bodega portuaria</text>
-      <text x="22" y="164" class="body-txt">- Verificación de precinto digital</text>
-      <text x="22" y="184" class="body-txt">- Inspección aduanera Dian e ICA</text>
-
-      <!-- Subestado Aceptado -->
-      <rect x="12" y="225" width="266" height="125" rx="5" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2" />
-      <text x="22" y="247" class="accent-green">SUB-ESTADO: PUERTO (ACEPTADO)</text>
-      <text x="22" y="267" class="body-txt">- Evento: EVENTO_ENTREGA_ACEPTADA</text>
-      <text x="22" y="287" class="body-txt">- Aprobado para exportación</text>
-      <text x="22" y="307" class="body-txt">- Estiba en contenedor marítimo</text>
-      <text x="22" y="327" class="body-txt">- Cierre de trazabilidad FNC</text>
-
-      <!-- Subestado Rechazado -->
-      <rect x="12" y="360" width="266" height="125" rx="5" fill="#FFEBEE" stroke="#C62828" stroke-width="2" />
-      <text x="22" y="382" class="accent-red">SUB-ESTADO: PUERTO (RECHAZADO)</text>
-      <text x="22" y="402" class="body-txt">- Evento: EVENTO_ENTREGA_RECHAZADA</text>
-      <text x="22" y="422" class="body-txt">- Causa: Saco rasgado o mojado</text>
-      <text x="22" y="442" class="body-txt">- Reclamación a seguro de carga</text>
-      <text x="22" y="462" class="body-txt">- Registro inmutable de siniestro</text>
-    </g>
-  </g>
-
-  <!-- CONTENEDOR 2: BASE TRANSACCIONAL EVENT SOURCING (CERO PERDIDA) -->
-  <g transform="translate(35, 695)" filter="url(#shadow)">
-    <rect width="1690" height="555" rx="8" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
-    <rect width="1690" height="35" rx="8" fill="#EBF3FB" />
-    <text x="20" y="23" class="swim-title" fill="#1D76DB">BASE TRANSACCIONAL DE EVENT SOURCING Y PROYECCIÓN ASÍNCRONA (Cero Pérdida de Eventos en Despliegues)</text>
-
-    <!-- SUBPANEL 1: INGESTA Y DLQ -->
-    <g transform="translate(20, 50)">
-      <rect width="520" height="235" rx="6" fill="#FFFFFF" stroke="#FF9900" stroke-width="2" />
-      <rect width="520" height="32" rx="6" fill="#FFF8EE" />
-      <text x="15" y="21" class="box-head" fill="#FF9900">1. Ingesta Transaccional y Cola de Amortiguación (SQS DLQ)</text>
-      <text x="15" y="55" class="body-txt">- API Gateway HTTPS TLS 1.3 con validación de schema OpenAPI 3.0</text>
-      <text x="15" y="75" class="body-txt">- Autenticación estricta: Cognito JWT (móvil) o IAM SigV4 (acopios)</text>
-      <text x="15" y="95" class="body-txt">- Amazon SQS FIFO Buffer: Absorbe picos de hasta 1.200 sacos/día</text>
-      <text x="15" y="115" class="body-txt">  y previene saturación ante ráfagas de cosecha simultáneas</text>
-      <text x="15" y="135" class="body-txt">- AWS Lambda Ingesta: Micro-lotes con reintentos exponenciales</text>
-      <text x="15" y="155" class="body-txt">- Amazon SQS Dead Letter Queue (DLQ): Mensajes fallidos retenidos</text>
-      <text x="15" y="175" class="body-txt">  por 14 días con alarma CloudWatch inmediata (DLQ &gt; 0)</text>
-      <text x="15" y="195" class="bold-txt" fill="#B71C1C">- Cero Eventos Perdidos: Durante despliegues de software o fallas</text>
-      <text x="15" y="215" class="body-txt">  de red, los eventos se retienen en cola hasta ser procesados</text>
-    </g>
-
-    <!-- SUBPANEL 2: EVENT STORE DYNAMODB -->
-    <g transform="translate(560, 50)">
-      <rect width="540" height="235" rx="6" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
-      <rect width="520" height="32" rx="6" fill="#EBF3FB" />
-      <text x="15" y="21" class="box-head" fill="#1D76DB">2. Almacén Inmutable de Eventos (Event Store): sacos_eventos</text>
-      <text x="15" y="55" class="body-txt">- Clave de Partición (PK): SacoID (Token SACO-2026-CAU-7F3A9C12)</text>
-      <text x="15" y="75" class="body-txt">- Clave de Ordenamiento (SK): TimestampISO#Version (2026-11-06T...#001)</text>
-      <text x="15" y="95" class="body-txt">- Modelo Append-Only Estricto: Prohibidas las modificaciones</text>
-      <text x="15" y="115" class="body-txt">  de registros; cada transición genera un nuevo ítem inmutable</text>
-      <text x="15" y="135" class="body-txt">- Atributos: EventoID, TipoEvento, ActorID, RolActor, UbicacionID,</text>
-      <text x="15" y="155" class="body-txt">  DatosEvento (cifrado KMS CMK), HashPrevio, FirmaDigital</text>
-      <text x="15" y="175" class="body-txt">- Point-in-Time Recovery (PITR): Activado para RPO sub-segundo</text>
-      <text x="15" y="195" class="bold-txt" fill="#1D76DB">- Retención Legal WORM: Atributo TTL a 1.825 días (5 años)</text>
-      <text x="15" y="215" class="body-txt">  garantizando cumplimiento de auditoría forense bajo Ley 1581</text>
-    </g>
-
-    <!-- SUBPANEL 3: PROYECCIONES DESACOPLADAS -->
-    <g transform="translate(1120, 50)">
-      <rect width="550" height="235" rx="6" fill="#FFFFFF" stroke="#0E8A16" stroke-width="2" />
-      <rect width="520" height="32" rx="6" fill="#F0FFF4" />
-      <text x="15" y="21" class="box-head" fill="#0E8A16">3. Proyecciones Asíncronas (DynamoDB Streams + Lambda)</text>
-      <text x="15" y="55" class="body-txt">- DynamoDB Streams en sacos_eventos: Emite evento NEW_IMAGE</text>
-      <text x="15" y="75" class="body-txt">- Lambda Proyector (VPC Producción): Materializa dos vistas:</text>
-      <text x="25" y="95" class="bold-txt">* sacos_cafe (Maestro Interno): Estado actual consolidado</text>
-      <text x="35" y="115" class="body-txt">  para acopio, pesajes, catación, liquidación y auditoría</text>
-      <text x="25" y="135" class="bold-txt">* sacos_publicos (Vista Sanitizada): Tabla proyectada</text>
-      <text x="35" y="155" class="body-txt">  sin columnas de cédula, nombres ni rutas intermedias</text>
-      <text x="15" y="175" class="body-txt">- Replay Determinista: Si una vista se corrompe o requiere cambio</text>
-      <text x="15" y="195" class="body-txt">  de esquema, se reprocesan todos los eventos históricos desde cero</text>
-      <text x="15" y="215" class="bold-txt" fill="#0E8A16">- Idempotencia Nativa: Cero duplicaciones ante reintentos de red</text>
-    </g>
-
-    <!-- SUBPANEL INFERIOR: RESILIENCIA EN DESPLIEGUES Y POLÍTICAS -->
-    <g transform="translate(20, 305)">
-      <rect width="1650" height="225" rx="6" fill="#F8F9FA" stroke="#545B64" stroke-width="1.5" />
-      <text x="20" y="28" class="box-head">POLÍTICA DE DESPLIEGUES INMUTABLES, TOLERANCIA A FALLOS Y GOBERNANZA</text>
-      <text x="20" y="56" class="bold-txt">1. Despliegues Canary Progresivos (CodeDeploy):</text>
-      <text x="35" y="76" class="body-txt">Toda actualización de Lambdas de ingesta o proyección se efectúa mediante despliegues progresivos Canary10Percent5Minutes.</text>
-      <text x="35" y="96" class="body-txt">Si las alarmas de CloudWatch registran errores 5xx &gt; 1% o fallos en tests sintéticos, el tráfico revierte de inmediato en &lt; 30 segundos.</text>
-      <text x="20" y="122" class="bold-txt">2. Ventana de Congelamiento Operativo en Cosecha (05:00 - 18:00):</text>
-      <text x="35" y="142" class="body-txt">Queda terminantemente prohibido ejecutar despliegues no emergentes a producción durante la jornada diurna de cosecha cafetera.</text>
-      <text x="35" y="162" class="body-txt">Cualquier cambio debe liberarse en la ventana nocturna aprobada (19:00 - 04:00) previa verificación de respaldo PITR.</text>
-      <text x="20" y="188" class="bold-txt">3. Resiliencia Store-and-Forward de 24 Horas:</text>
-      <text x="35" y="208" class="body-txt">Las aplicaciones de caficultores y transportistas operan de forma desconectada reteniendo eventos con firma digital local hasta 24 horas.</text>
-    </g>
-  </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1680" height="860" viewBox="0 0 1680 860">
+<defs>
+<filter id="shadow" x="-6%" y="-6%" width="112%" height="118%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.08"/></filter>
+<marker id="arr-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#334155"/></marker>
+<marker id="arr-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#135E34"/></marker>
+<marker id="arr-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#DD344C"/></marker>
+<marker id="arr-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#0F4C81"/></marker>
+<marker id="arr-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#ED7100"/></marker>
+<marker id="arr-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#8C4FFF"/></marker>
+<style>text{font-family:'Segoe UI',Inter,Arial,sans-serif;}</style>
+</defs>
+<rect x="0" y="0" width="1680" height="860" fill="#FFFFFF"/>
+<rect x="0" y="0" width="1680" height="78" fill="#0A3D20"/>
+<rect x="0" y="75" width="1680" height="3" fill="#4ADE80"/>
+<text x="32" y="36" font-size="21" font-weight="700" fill="#FFFFFF">AromaPacifico - Ciclo de Vida del Saco (60 kg) y Event Sourcing</text>
+<text x="32" y="60" font-size="13" font-weight="400" fill="#D1FAE5">Cinco estados inmutables con actor atribuible · Token HMAC-SHA-256 · Proyeccion publica sin PII</text>
+<rect x="1508" y="22" width="144" height="30" rx="15" fill="#DD344C" stroke="#FFFFFF" stroke-opacity="0.28"/><text x="1580" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Ley 1581 (HMAC)</text>
+<rect x="1314" y="22" width="184" height="30" rx="15" fill="#0F4C81" stroke="#FFFFFF" stroke-opacity="0.28"/><text x="1406" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">400 sacos/dia acopio</text>
+<rect x="1200" y="22" width="104" height="30" rx="15" fill="#135E34" stroke="#FFFFFF" stroke-opacity="0.28"/><text x="1252" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Saco 60 kg</text>
+<g id="z-life"><rect x="24" y="100" width="1632" height="340" rx="12" fill="#F4FAF6" stroke="#135E34" stroke-width="2"/><path d="M36,100 H1644 Q1656,100 1656,112 V134 H24 V112 Q24,100 36,100 Z" fill="#135E34"/><text x="38" y="122" font-size="13.5" font-weight="700" fill="#FFFFFF">1. Flujo Fisico y Estados del Saco (Append-Only Event Store)</text>
+</g>
+<g id="z-data"><rect x="24" y="466" width="1632" height="240" rx="12" fill="#F3F5FD" stroke="#3B48CC" stroke-width="2"/><path d="M36,466 H1644 Q1656,466 1656,478 V500 H24 V478 Q24,466 36,466 Z" fill="#3B48CC"/><text x="38" y="488" font-size="13.5" font-weight="700" fill="#FFFFFF">2. Persistencia, Tokenizacion y Vista Publica (CQRS)</text>
+</g>
+<path id="edge-0" d="M334,221 L374,221" fill="none" stroke="#135E34" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-green)"/>
+<path id="edge-1" d="M660,221 L700,221" fill="none" stroke="#135E34" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-green)"/>
+<path id="edge-2" d="M986,221 L1026,221" fill="none" stroke="#135E34" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-green)"/>
+<path id="edge-3" d="M1312,221 L1352,221" fill="none" stroke="#135E34" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-green)"/>
+<path id="edge-4" d="M843,264 L843,289 L840,289 L840,314" fill="none" stroke="#DD344C" stroke-width="2" stroke-dasharray="6,4" stroke-linejoin="round" marker-end="url(#arr-red)"/>
+<path id="edge-5" d="M1492,264 L1492,351 L1180,351" fill="none" stroke="#DD344C" stroke-width="2" stroke-dasharray="6,4" stroke-linejoin="round" marker-end="url(#arr-red)"/>
+<path id="edge-6" d="M191,264 L191,400 L231,400 L231,536" fill="none" stroke="#3B48CC" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-slate)"/>
+<path id="edge-7" d="M406,579 L476,579" fill="none" stroke="#ED7100" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-orange)"/>
+<path id="edge-8" d="M826,579 L896,579" fill="none" stroke="#135E34" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-green)"/>
+<path id="edge-9" d="M1246,579 L1316,579" fill="none" stroke="#8C4FFF" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-purple)"/>
+<g id="st1" filter="url(#shadow)"><rect x="48" y="178" width="286" height="86" rx="10" fill="#FFFFFF" stroke="#135E34" stroke-width="1.8"/><rect x="60" y="199" width="44" height="44" rx="8" fill="#135E34"/><g transform="translate(66,205) scale(1.333)"><path d="M12 20V11M12 11C12 6.5 16 4.5 19.5 4.5C19.5 8.5 17 11.5 12 11Z" fill="none" stroke="#FFF" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 14C12 10.5 8.5 8.5 5 8.5C5 12 7.5 14.5 12 14Z" fill="none" stroke="#FFF" stroke-width="1.8" stroke-linejoin="round"/></g>
+<text x="116" y="217" font-size="13.5" font-weight="700" fill="#0F172A">1. EN_PREPARACION</text><text x="116" y="236" font-size="12" font-weight="400" fill="#475569">Finca · Pesaje 60 kg (Caficultor)</text>
+<rect x="278" y="168" width="48" height="20" rx="10" fill="#B45309"/><text x="302" y="182" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Alta</text>
+</g>
+<g id="st2" filter="url(#shadow)"><rect x="374" y="178" width="286" height="86" rx="10" fill="#FFFFFF" stroke="#135E34" stroke-width="1.8"/><rect x="386" y="199" width="44" height="44" rx="8" fill="#135E34"/><g transform="translate(392,205) scale(1.333)"><rect x="3.5" y="7" width="11" height="9" rx="1" fill="none" stroke="#FFF" stroke-width="1.7"/><path d="M14.5 10H18.5L20.5 12.5V16H14.5V10Z" fill="none" stroke="#FFF" stroke-width="1.7" stroke-linejoin="round"/><circle cx="7.5" cy="17.5" r="1.8" fill="#FFF"/><circle cx="17.5" cy="17.5" r="1.8" fill="#FFF"/></g>
+<text x="442" y="217" font-size="13.5" font-weight="700" fill="#0F172A">2. EN_VIAJE_ACOPIO</text><text x="442" y="236" font-size="12" font-weight="400" fill="#475569">Transportador · GPS cada 5 min</text>
+<rect x="604" y="168" width="48" height="20" rx="10" fill="#0F4C81"/><text x="628" y="182" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Ruta</text>
+</g>
+<g id="st3" filter="url(#shadow)"><rect x="700" y="178" width="286" height="86" rx="10" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1.8"/><rect x="712" y="199" width="44" height="44" rx="8" fill="#0F4C81"/><g transform="translate(718,205) scale(1.333)"><path d="M4 19.5H20M5.5 19.5V9.5L12 5L18.5 9.5V19.5" fill="none" stroke="#FFF" stroke-width="1.8" stroke-linejoin="round"/><rect x="9.5" y="13.5" width="5" height="6" fill="none" stroke="#FFF" stroke-width="1.6"/></g>
+<text x="768" y="217" font-size="13.5" font-weight="700" fill="#0F172A">3. EN_ACOPIO</text><text x="768" y="236" font-size="12" font-weight="400" fill="#475569">Aceptado / Rechazado + Catacion</text>
+<rect x="915" y="168" width="63" height="20" rx="10" fill="#135E34"/><text x="946" y="182" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Calidad</text>
+</g>
+<g id="st4" filter="url(#shadow)"><rect x="1026" y="178" width="286" height="86" rx="10" fill="#FFFFFF" stroke="#135E34" stroke-width="1.8"/><rect x="1038" y="199" width="44" height="44" rx="8" fill="#135E34"/><g transform="translate(1044,205) scale(1.333)"><rect x="3.5" y="7" width="11" height="9" rx="1" fill="none" stroke="#FFF" stroke-width="1.7"/><path d="M14.5 10H18.5L20.5 12.5V16H14.5V10Z" fill="none" stroke="#FFF" stroke-width="1.7" stroke-linejoin="round"/><circle cx="7.5" cy="17.5" r="1.8" fill="#FFF"/><circle cx="17.5" cy="17.5" r="1.8" fill="#FFF"/></g>
+<text x="1094" y="217" font-size="13.5" font-weight="700" fill="#0F172A">4. EN_VIAJE_PUERTO</text><text x="1094" y="236" font-size="12" font-weight="400" fill="#475569">Despacho hacia Buenaventura</text>
+</g>
+<g id="st5" filter="url(#shadow)"><rect x="1352" y="178" width="280" height="86" rx="10" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1.8"/><rect x="1364" y="199" width="44" height="44" rx="8" fill="#0F4C81"/><g transform="translate(1370,205) scale(1.333)"><path d="M4 15L6 19H18L20 15L12 11.5L4 15Z" fill="none" stroke="#FFF" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 5V11.5M9 7.5H15" stroke="#FFF" stroke-width="1.8" stroke-linecap="round"/></g>
+<text x="1420" y="217" font-size="13.5" font-weight="700" fill="#0F172A">5. ENTREGADO_PUERTO</text><text x="1420" y="236" font-size="12" font-weight="400" fill="#475569">Aceptado / Rechazado (Sin FNC)</text>
+<rect x="1575" y="168" width="49" height="20" rx="10" fill="#135E34"/><text x="1599" y="182" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Final</text>
+</g>
+<g id="st-rej" filter="url(#shadow)"><rect x="500" y="314" width="680" height="74" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="512" y="329" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(518,335) scale(1.333)"><circle cx="12" cy="12" r="7.5" fill="none" stroke="#FFF" stroke-width="1.9"/><line x1="7" y1="7" x2="17" y2="17" stroke="#FFF" stroke-width="2"/></g>
+<text x="568" y="347" font-size="13.5" font-weight="700" fill="#0F172A">Estado RECHAZADO (Acopio o Puerto)</text><text x="568" y="366" font-size="12" font-weight="400" fill="#475569">Queda auditado con motivo, fecha y responsable (inmutable)</text>
+<rect x="1102" y="304" width="70" height="20" rx="10" fill="#DD344C"/><text x="1137" y="318" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Trazable</text>
+</g>
+<g id="ddb-ev" filter="url(#shadow)"><rect x="56" y="536" width="350" height="86" rx="10" fill="#FFFFFF" stroke="#3B48CC" stroke-width="1.8"/><rect x="68" y="557" width="44" height="44" rx="8" fill="#3B48CC"/><g transform="translate(74,563) scale(1.333)"><ellipse cx="11" cy="6.5" rx="6.5" ry="2.3" fill="none" stroke="#FFF" stroke-width="1.7"/><path d="M4.5 6.5V17.5C4.5 18.8 7.4 19.8 11 19.8C14.6 19.8 17.5 18.8 17.5 17.5V6.5" fill="none" stroke="#FFF" stroke-width="1.7"/><path d="M4.5 12C4.5 13.3 7.4 14.3 11 14.3C14.6 14.3 17.5 13.3 17.5 12" fill="none" stroke="#FFF" stroke-width="1.4"/><polygon points="18,9 14.5,14 17.2,14 16,19.5 20.5,13 17.7,13" fill="#FFF"/></g>
+<text x="124" y="575" font-size="13.5" font-weight="700" fill="#0F172A">DynamoDB sacos_eventos</text><text x="124" y="594" font-size="12" font-weight="400" fill="#475569">Solo agregar · Fecha + sub Cognito</text>
+</g>
+<g id="kms-hm" filter="url(#shadow)"><rect x="476" y="536" width="350" height="86" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="488" y="557" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(494,563) scale(1.333)"><circle cx="8.5" cy="12" r="3.6" fill="none" stroke="#FFF" stroke-width="1.9"/><path d="M12.1 12H20M16.5 12V15.5M19.5 12V14.8" stroke="#FFF" stroke-width="1.9" stroke-linecap="round"/></g>
+<text x="544" y="575" font-size="13.5" font-weight="700" fill="#0F172A">Lambda + KMS HMAC-SHA-256</text><text x="544" y="594" font-size="12" font-weight="400" fill="#475569">Genera SACO-2026-DEP-HASH8</text>
+<rect x="720" y="526" width="98" height="20" rx="10" fill="#DD344C"/><text x="769" y="540" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Irreversible</text>
+</g>
+<g id="ddb-pub" filter="url(#shadow)"><rect x="896" y="536" width="350" height="86" rx="10" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1.8"/><rect x="908" y="557" width="44" height="44" rx="8" fill="#0F4C81"/><g transform="translate(914,563) scale(1.333)"><path d="M12 5V19M7 19H17M5 9H19M5 9L3.5 14H6.5L5 9ZM19 9L17.5 14H20.5L19 9Z" fill="none" stroke="#FFF" stroke-width="1.6" stroke-linejoin="round"/></g>
+<text x="964" y="575" font-size="13.5" font-weight="700" fill="#0F172A">DynamoDB sacos_publicos</text><text x="964" y="594" font-size="12" font-weight="400" fill="#475569">Sin cedula, nombre ni GPS privado</text>
+<rect x="1168" y="526" width="70" height="20" rx="10" fill="#135E34"/><text x="1203" y="540" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Ley 1581</text>
+</g>
+<g id="web-buy" filter="url(#shadow)"><rect x="1316" y="536" width="316" height="86" rx="10" fill="#FFFFFF" stroke="#232F3E" stroke-width="1.8"/><rect x="1328" y="557" width="44" height="44" rx="8" fill="#232F3E"/><g transform="translate(1334,563) scale(1.333)"><rect x="4" y="5" width="16" height="14" rx="2" fill="none" stroke="#FFF" stroke-width="1.8"/><line x1="4" y1="9" x2="20" y2="9" stroke="#FFF" stroke-width="1.6"/></g>
+<text x="1384" y="575" font-size="13.5" font-weight="700" fill="#0F172A">Portal Web Comprador</text><text x="1384" y="594" font-size="12" font-weight="400" fill="#475569">30 lecturas/min · 99,9 % SLA</text>
+</g>
+<rect x="811" y="264" width="65" height="24" rx="12" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.2"/><text x="843" y="280" text-anchor="middle" font-size="12" font-weight="600" fill="#DD344C">Rechazo</text>
+<rect x="1304" y="339" width="65" height="24" rx="12" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.2"/><text x="1336" y="355" text-anchor="middle" font-size="12" font-weight="600" fill="#DD344C">Rechazo</text>
+<rect x="162" y="320" width="58" height="24" rx="12" fill="#FFFFFF" stroke="#3B48CC" stroke-width="1.2"/><text x="191" y="336" text-anchor="middle" font-size="12" font-weight="600" fill="#3B48CC">Evento</text>
+<rect x="412" y="567" width="58" height="24" rx="12" fill="#FFFFFF" stroke="#ED7100" stroke-width="1.2"/><text x="441" y="583" text-anchor="middle" font-size="12" font-weight="600" fill="#ED7100">Stream</text>
+<rect x="818" y="567" width="86" height="24" rx="12" fill="#FFFFFF" stroke="#135E34" stroke-width="1.2"/><text x="861" y="583" text-anchor="middle" font-size="12" font-weight="600" fill="#135E34">Proyeccion</text>
+<rect x="1238" y="567" width="86" height="24" rx="12" fill="#FFFFFF" stroke="#8C4FFF" stroke-width="1.2"/><text x="1281" y="583" text-anchor="middle" font-size="12" font-weight="600" fill="#8C4FFF">CloudFront</text>
+<g><rect x="24" y="734" width="1632" height="94" rx="8" fill="#ECFDF5" stroke="#135E34" stroke-width="1.6"/><rect x="24" y="734" width="6" height="94" rx="3" fill="#135E34"/><text x="42" y="756" font-size="13" font-weight="700" fill="#135E34">Retencion y Recuperacion (#15)</text><text x="42" y="776" font-size="12" font-weight="400" fill="#1E293B">Historia completa del saco retenida 5 anos. DynamoDB Global Tables + PITR aseguran RPO de 15 minutos y cero perdida de eventos durante despliegues.</text></g>
 </svg>

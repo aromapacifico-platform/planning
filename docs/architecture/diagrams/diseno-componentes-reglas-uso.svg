@@ -304,7 +304,7 @@
       <rect width="580" height="100" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5" />
       <text x="15" y="22" class="bold-txt" fill="#14532D">SOLUCIÓN ADOPTADA: Sistema Propio Basado en Tokens DTCG</text>
       <text x="15" y="42" class="body-txt" fill="#14532D">- Costo valle: $0,00 USD / mes (Principio de cero cómputo en espera).</text>
-      <text x="15" y="62" class="body-txt" fill="#14532D">- Peso: < 28 KB CSS puro + SVG | Carga rural: < 1.8 s instantánea.</text>
+      <text x="15" y="62" class="body-txt" fill="#14532D">- Peso: &lt; 28 KB CSS puro + SVG | Carga rural: &lt; 1.8 s instantánea.</text>
       <text x="15" y="82" class="bold-txt" fill="#14532D">- Decisión: SELECCIONADA COMO ESTÁNDAR CANÓNICO.</text>
     </g>
 

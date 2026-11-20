@@ -1,115 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mxfile host="Electron" compressed="false">
-  <diagram id="flujo-drones" name="Flujo de los 5 Servicios de Drones">
-    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1300" background="#FFFFFF">
+  <diagram id="carga-b-flujo-drones" name="Flujo 5 Servicios Drones">
+    <mxGraphModel dx="1422" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1640" pageHeight="880" background="#FFFFFF">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-
-        <!-- TITULO -->
-        <mxCell id="title" value="AromaPacífico - Arquitectura de Flujo Operativo de los 5 Servicios de Drones" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
-          <mxGeometry x="350" y="30" width="900" height="40" as="geometry" />
+        <mxCell id="header-title" value="AromaPacifico - Flujo Operativo de los 5 Servicios de Drones (RAC 100)&#10;Modo combinado: Agricultura de Areas (S1, S5) + Precision (S2, S3, S4) · 1.300 vuelos/ano" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0A3D20;strokeColor=#4ADE80;fontColor=#FFFFFF;fontSize=16;fontStyle=1;align=left;spacingLeft=24;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1640" height="76" as="geometry" />
         </mxCell>
-        <mxCell id="subtitle" value="Transición de Estados, Modo Combinado (Áreas y Precisión), Compuerta Humana Mandatoria y Cierre de Expediente" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
-          <mxGeometry x="350" y="70" width="900" height="25" as="geometry" />
+        <mxCell id="z-area" value="Modo Agricultura de Areas (600 vuelos/ano)" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F8FC;strokeColor=#0F4C81;strokeWidth=2;dashed=0;swimlaneFillColor=#F3F8FC;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="24" y="100" width="1592" height="220" as="geometry" />
         </mxCell>
-
-        <!-- SERVICIO 1: DELIMITAR LOTE -->
-        <mxCell id="srv1" value="SERVICIO 1: Delimitar Lote&#xa;(Modo Agricultura de Áreas)&#xa;&#xa;- Vuelo inicial ortomosaico de la finca.&#xa;- Genera geometría poligonal GeoJSON.&#xa;- Identifica y persiste Zonas No-Fly:&#xa;  * Casas y beneficiaderos&#xa;  * Fuentes hídricas y vías públicas.&#xa;- Condición bloqueante de plataforma:&#xa;  Sin polígono NO se autoriza fumigación." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#1D76DB;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
-          <mxGeometry x="60" y="130" width="310" height="190" as="geometry" />
+        <mxCell id="z-prec" value="Modo Agricultura de Precision (700 vuelos/ano · Foco 0,2 - 0,5 ha)" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#F4FAF6;strokeColor=#135E34;strokeWidth=2;dashed=0;swimlaneFillColor=#F4FAF6;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="24" y="344" width="1592" height="376" as="geometry" />
         </mxCell>
-
-        <!-- COMPUERTA BLOQUEANTE DELIMITACIÓN -->
-        <mxCell id="gate-delim" value="Validación de Delimitación&#xa;¿Existe Polígono y No-Fly Zones?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#EAEDED;strokeColor=#545B64;strokeWidth=2;align=center;verticalAlign=middle;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
-          <mxGeometry x="420" y="155" width="220" height="140" as="geometry" />
+        <mxCell id="s1" value="[Requisito S3] S1: Delimitar Lote (200/ano)&#10;Poligono + Zonas No-Fly (casas/agua)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="54" y="166" width="360" height="86" as="geometry" />
         </mxCell>
-
-        <!-- EVENTO DISPARADOR SENSOR -->
-        <mxCell id="trig-sensor" value="Disparador IoT de Campo&#xa;Sensor de Suelo / Clima&#xa;&#xa;Lectura anómala fuera de umbral&#xa;(pH, humedad suelo, temp o NPK).&#xa;Genera coordenada GPS del foco." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5F5;strokeColor=#D93F0B;strokeWidth=2;align=center;verticalAlign=middle;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
-          <mxGeometry x="60" y="380" width="310" height="120" as="geometry" />
+        <mxCell id="s1-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#135E34;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.robotics;" vertex="1" parent="s1">
+          <mxGeometry x="10" y="23" width="40" height="40" as="geometry" />
         </mxCell>
-
-        <!-- SERVICIO 2: CONFIRMAR ALERTA -->
-        <mxCell id="srv2" value="SERVICIO 2: Confirmar Alerta&#xa;(Modo Agricultura de Precisión)&#xa;&#xa;- Vuelo táctico directo al foco del sensor.&#xa;- No recorre toda la finca (ahorro batería).&#xa;- Captura fotográfica de alta resolución.&#xa;- Descarga local o enlace celular.&#xa;- Inferencia IA: S3 -> Lambda -> Rekognition.&#xa;- Persiste probabilidad de plaga en expediente." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#1D76DB;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
-          <mxGeometry x="420" y="360" width="310" height="160" as="geometry" />
+        <mxCell id="s3-map" value="Amazon S3 + DynamoDB&#10;Guarda GeoJSON y geocercas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3F8624;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="520" y="166" width="360" height="86" as="geometry" />
         </mxCell>
-
-        <!-- COMPUERTA HUMANA OBLIGATORIA (ZERO TRUST) -->
-        <mxCell id="gate-human" value="COMPUERTA HUMANA MANDATORIA&#xa;Agrónomo Registrado Federación&#xa;&#xa;Evaluación técnica de evidencia IA:&#xa;- Ningún trigger de IA autoriza aspersiones.&#xa;- Firma digital con MFA obligatorio.&#xa;- Asigna Finca, Lote, Ventana horaria,&#xa;  Lote de agroquímico ICA y Operador UAS." style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9900;strokeWidth=3;align=center;verticalAlign=middle;fontSize=12;fontColor=#232F3E;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="800" y="340" width="300" height="200" as="geometry" />
+        <mxCell id="s3-map-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3F8624;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3;" vertex="1" parent="s3-map">
+          <mxGeometry x="10" y="23" width="40" height="40" as="geometry" />
         </mxCell>
-
-        <!-- RECHAZO / FALSA ALARMA -->
-        <mxCell id="case-dismiss" value="Caso Desestimado / Falsa Alarma&#xa;Expediente archivado en DynamoDB&#xa;con trazabilidad completa de 5 años." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAEDED;strokeColor=#545B64;strokeWidth=1;align=center;verticalAlign=middle;fontSize=12;fontColor=#555555;" vertex="1" parent="1">
-          <mxGeometry x="830" y="180" width="240" height="70" as="geometry" />
+        <mxCell id="s5" value="S5: Estimar Cosecha (400/ano)&#10;Vuelo de area 1x cosecha · No fumiga" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="166" width="360" height="86" as="geometry" />
         </mxCell>
-
-        <!-- SERVICIO 3: FUMIGACION -->
-        <mxCell id="srv3" value="SERVICIO 3: Fumigación de Precisión&#xa;(Modo Agricultura de Precisión)&#xa;&#xa;- Dron aspersor con carga útil de agroquímico.&#xa;- Misión precargada offline en cabecera/acopio.&#xa;- Aspersión focalizada únicamente en el lote.&#xa;- Exclusión estricta de zonas No-Fly.&#xa;- Almacena bitácora de vuelo en buffer interno.&#xa;- Estado: 'En Fumigación / Pendiente Cierre'." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#0E8A16;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
-          <mxGeometry x="1170" y="360" width="310" height="160" as="geometry" />
+        <mxCell id="s5-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#135E34;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.robotics;" vertex="1" parent="s5">
+          <mxGeometry x="10" y="23" width="40" height="40" as="geometry" />
         </mxCell>
-
-        <!-- SERVICIO 4: VERIFICAR POST-FUMIGACIÓN -->
-        <mxCell id="srv4" value="SERVICIO 4: Verificar Post-Fumigar&#xa;(Modo Agricultura de Precisión)&#xa;&#xa;- Vuelo táctico a los 7-10 días del tratamiento.&#xa;- Captura fotografía o video corto del foco.&#xa;- Inferencia IA confirma recuperación foliar.&#xa;- Si el archivo no llega: caso sigue ABIERTO.&#xa;- Sube bitácora de vuelo final al acopio." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#1D76DB;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
-          <mxGeometry x="1170" y="580" width="310" height="160" as="geometry" />
+        <mxCell id="ac-est" value="Acopio (Proyeccion Sacos)&#10;Planea recepcion y transporte" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0F4C81;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1400" y="166" width="196" height="86" as="geometry" />
         </mxCell>
-
-        <!-- CIERRE DEL EXPEDIENTE -->
-        <mxCell id="case-closed" value="CIERRE FORMAL DEL EXPEDIENTE&#xa;Estado: CERRADO&#xa;&#xa;- Evidencia fotográfica y de vuelo persistida.&#xa;- Auditoría completa registrada en CloudTrail/S3.&#xa;- Registro de retención asegurado por 5 años." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#0E8A16;strokeWidth=2;align=center;verticalAlign=middle;fontSize=12;fontColor=#0E8A16;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="800" y="615" width="300" height="90" as="geometry" />
+        <mxCell id="ac-est-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#0F4C81;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.corporate_data_center;" vertex="1" parent="ac-est">
+          <mxGeometry x="10" y="23" width="40" height="40" as="geometry" />
         </mxCell>
-
-        <!-- SERVICIO 5: ESTIMAR COSECHA -->
-        <mxCell id="srv5" value="SERVICIO 5: Estimar Cosecha&#xa;(Modo Agricultura de Áreas - Independiente de Plagas)&#xa;&#xa;- Vuelo de área fotogramétrico ejecutado 1 vez por ciclo de cosecha.&#xa;- Conteo volumétrico y densidad de grano en cafetales.&#xa;- Inferencia IA: calcula proyección de sacos de 60 kg esperados.&#xa;- Notificación logística anticipada al Centro de Acopio departamental.&#xa;- Prohibición estricta: Este servicio NO transporta ni aplica agroquímicos." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#5319E7;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontSize=12;fontColor=#232F3E;" vertex="1" parent="1">
-          <mxGeometry x="60" y="580" width="670" height="160" as="geometry" />
+        <mxCell id="alert" value="Alerta Sensor Finca&#10;Lectura fuera de rango (&lt; 245 s)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="54" y="412" width="270" height="82" as="geometry" />
         </mxCell>
-
-        <!-- CONECTORES -->
-        <!-- Srv1 a Gate Delim -->
-        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="srv1" target="gate-delim">
+        <mxCell id="alert-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#135E34;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.iot_sensor;" vertex="1" parent="alert">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s2" value="S2: Confirmar Foco (280)&#10;Foto localizada -&gt; Rekognition/Bedrock" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#01A88D;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="374" y="412" width="310" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="s2-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#01A88D;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.rekognition;" vertex="1" parent="s2">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="mfa" value="[Compuerta] Agronomo FNC (MFA)&#10;Autoriza orden (Unica identidad)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DD344C;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="734" y="412" width="300" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="mfa-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.authenticated_user;" vertex="1" parent="mfa">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s3-fum" value="S3: Fumigar Foco (210)&#10;Token offline 48 h · Bitacora S3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1084" y="412" width="250" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="s3-fum-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#135E34;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.robotics;" vertex="1" parent="s3-fum">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s4" value="[Cierre] S4: Verificar (210)&#10;Foto 7-10 dias -&gt; Cierra caso" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="412" width="216" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="s4-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#135E34;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.trusted_advisor;" vertex="1" parent="s4">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="gate-nofly" value="Regla Bloqueante 1&#10;Sin poligono S1 no sale orden S3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DD344C;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="374" y="574" width="340" height="76" as="geometry" />
+        </mxCell>
+        <mxCell id="gate-nofly-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.waf;" vertex="1" parent="gate-nofly">
+          <mxGeometry x="10" y="18" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="gate-log" value="Regla Bloqueante 2&#10;Sin bitacora en S3 no se cierra S3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3F8624;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="774" y="574" width="340" height="76" as="geometry" />
+        </mxCell>
+        <mxCell id="gate-log-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3F8624;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3_glacier;" vertex="1" parent="gate-log">
+          <mxGeometry x="10" y="18" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="gate-fin" value="[-USD 195k] Contrato RAC 100&#10;USD 67.082/ano vs USD 262.435 propios" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1174" y="574" width="422" height="76" as="geometry" />
+        </mxCell>
+        <mxCell id="gate-fin-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#135E34;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cost_explorer;" vertex="1" parent="gate-fin">
+          <mxGeometry x="10" y="18" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e-0" value="GeoJSON" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0F4C81;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#0F4C81;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="s1" target="s3-map">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <!-- Gate Delim a Srv2 (Requisito cumplido) -->
-        <mxCell id="e2" value="Polígono Activo" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#0E8A16;" edge="1" parent="1" source="gate-delim" target="srv2">
+        <mxCell id="e-1" value="Limites" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0F4C81;strokeWidth=2;dashed=1;fontSize=12;fontStyle=1;fontColor=#0F4C81;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="s3-map" target="s5">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <!-- Sensor a Srv2 -->
-        <mxCell id="e3" value="Alerta Foco GPS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;fontColor=#D93F0B;" edge="1" parent="1" source="trig-sensor" target="srv2">
+        <mxCell id="e-2" value="FN-03" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ED7100;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#ED7100;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="s5" target="ac-est">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <!-- Srv2 a Gate Humana -->
-        <mxCell id="e4" value="Evidencia IA" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="srv2" target="gate-human">
+        <mxCell id="e-3" value="Dispara" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#135E34;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#135E34;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="alert" target="s2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <!-- Gate Humana a Rechazo -->
-        <mxCell id="e5" value="No Autorizada" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#545B64;strokeWidth=2;dashed=1;fontSize=12;fontColor=#545B64;" edge="1" parent="1" source="gate-human" target="case-dismiss">
+        <mxCell id="e-4" value="FN-01" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#01A88D;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#01A88D;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="s2" target="mfa">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <!-- Gate Humana a Srv3 -->
-        <mxCell id="e6" value="AUTORIZADA con Firma Digital" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0E8A16;strokeWidth=3;fontSize=12;fontColor=#0E8A16;fontStyle=1;" edge="1" parent="1" source="gate-human" target="srv3">
+        <mxCell id="e-5" value="Orden MFA" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#DD344C;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#DD344C;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="mfa" target="s3-fum">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <!-- Srv3 a Srv4 -->
-        <mxCell id="e7" value="Fumigación Ejecutada&#xa;(7-10 días ventana)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D76DB;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="srv3" target="srv4">
+        <mxCell id="e-6" value="7-10 dias" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#135E34;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#135E34;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="s3-fum" target="s4">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <!-- Srv4 a Cierre -->
-        <mxCell id="e8" value="Foto Verificada + Bitácora Persistida" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0E8A16;strokeWidth=2;fontSize=12;fontColor=#0E8A16;" edge="1" parent="1" source="srv4" target="case-closed">
+        <mxCell id="e-7" value="Geocerca" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0F4C81;strokeWidth=2;dashed=1;fontSize=12;fontStyle=1;fontColor=#0F4C81;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="s3-map" target="s3-fum">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <!-- PIE DE NOTA -->
-        <mxCell id="footer" value="Invariantes Clave: Ningún servicio sustituye a otro | Sin autorización humana no hay aspersión | Misiones offline en cabecera/acopio | Store-and-forward garantizado" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=2;fontColor=#5A6B7C;" vertex="1" parent="1">
-          <mxGeometry x="350" y="780" width="900" height="30" as="geometry" />
+        <mxCell id="note-0" value="Invariante de Control y FinOps (#13 / #30): Los 5 servicios operan con un prestador certificado por acopio bajo RAC 100, evitando USD 105.486 de CapEx y USD 195.353/ano en cuadrillas propias sin perder control Zero Trust." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;spacingLeft=14;" vertex="1" parent="1">
+          <mxGeometry x="24" y="748" width="1592" height="100" as="geometry" />
         </mxCell>
-
       </root>
     </mxGraphModel>
   </diagram>

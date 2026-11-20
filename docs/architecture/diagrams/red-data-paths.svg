@@ -1,373 +1,99 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 1450" width="100%" height="100%">
-  <defs>
-    <style>
-      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
-      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; fill: #5A6B7C; text-anchor: middle; }
-      .lane-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #FFFFFF; }
-      .card-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
-      .card-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #555555; }
-      .body-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
-      .mono-text { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; font-size: 12px; fill: #111111; }
-    </style>
-    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%" filterUnits="userSpaceOnUse">
-      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.08" />
-    </filter>
-    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#1D76DB" />
-    </marker>
-    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0E8A16" />
-    </marker>
-    <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#D93F0B" />
-    </marker>
-  </defs>
-
-  <!-- FONDO -->
-  <rect width="2400" height="1450" fill="#FFFFFF" />
-
-  <!-- TITULO -->
-  <text x="1200" y="45" class="title">AromaPacífico - Arquitectura de Rutas de Datos Desacopladas (Data Paths)</text>
-  <text x="1200" y="75" class="subtitle">Flujos Independientes de Telemetría de Finca, Posición de Transportadores y Carga Multimedia de Drones con Políticas Offline y Seguridad</text>
-
-  <!-- ==================== RUTA 1: TELEMETRÍA DE CULTIVO Y SECADO ==================== -->
-  <g transform="translate(40, 110)" filter="url(#shadow)">
-    <rect width="2320" height="350" rx="8" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
-    <rect width="2320" height="40" rx="8" fill="#1D76DB" />
-    <text x="20" y="26" class="lane-title">RUTA 1: TELEMETRÍA DE CULTIVO Y SECADO EN FINCAS (Cadencia 4h y 1h / Buffer 24h)</text>
-
-    <!-- Caja 1: Nodo Finca -->
-    <g transform="translate(30, 60)">
-      <rect width="320" height="260" rx="6" fill="#FFFFFF" stroke="#1D76DB" stroke-width="2" />
-      <text x="15" y="25" class="card-title">Nodo IoT en Finca (200 Fincas)</text>
-      <text x="15" y="45" class="card-sub">ESP32-S3 + SIM7080G</text>
-      <text x="15" y="75" class="body-text">• Sensor RS485 Modbus: NPK, pH, T, Humedad</text>
-      <text x="15" y="95" class="body-text">• Sensor SHT35 en Secadero: T y Humedad grano</text>
-      <text x="15" y="115" class="body-text">• Panel Solar 15W + Batería LiFePO4 6.000 mAh</text>
-      <text x="15" y="135" class="body-text">• Deep Sleep: consumo &lt; 50 µA (&gt; 30 días sin sol)</text>
-      <text x="15" y="155" class="body-text">• Buffer Flash SPI 16 MB: retiene hasta 24h</text>
-      <text x="15" y="185" class="mono-text" font-weight="bold" fill="#1D76DB">Store-and-Forward activo sin señal</text>
-      <text x="15" y="205" class="body-text" fill="#555555">Drena automáticamente al reconectar</text>
-    </g>
-
-    <!-- Flecha 1 -->
-    <line x1="350" y1="190" x2="410" y2="190" stroke="#1D76DB" stroke-width="3" marker-end="url(#arrow-blue)" />
-
-    <!-- Caja 2: Red Acceso -->
-    <g transform="translate(410, 60)">
-      <rect width="320" height="260" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" />
-      <text x="15" y="25" class="card-title">Acceso Celular / Satelital</text>
-      <text x="15" y="45" class="card-sub">LTE-M / NB-IoT (Bandas 4, 5, 28)</text>
-      <text x="15" y="75" class="body-text">• Paquete binario CBOR / JSON ~180 bytes</text>
-      <text x="15" y="95" class="body-text">• Conexión efímera de 15 a 25 segundos</text>
-      <text x="15" y="115" class="body-text">• Cero dependencia de redes 2G o 3G apagadas</text>
-      <text x="15" y="135" class="body-text">• Fincas sin cobertura: enlace satelital IoT</text>
-      <text x="15" y="155" class="body-text">  directo o puente LoRaWAN a punto con señal</text>
-      <text x="15" y="185" class="mono-text" fill="#555555">Cifrado: TLS 1.3 de extremo a extremo</text>
-    </g>
-
-    <!-- Flecha 2 -->
-    <line x1="730" y1="190" x2="790" y2="190" stroke="#1D76DB" stroke-width="3" marker-end="url(#arrow-blue)" />
-
-    <!-- Caja 3: Ingesta Cloud IoT Core -->
-    <g transform="translate(790, 60)">
-      <rect width="340" height="260" rx="6" fill="#FFFFFF" stroke="#FF9900" stroke-width="2" />
-      <text x="15" y="25" class="card-title" fill="#232F3E">AWS IoT Core (us-east-1)</text>
-      <text x="15" y="45" class="card-sub" fill="#FF9900">Punto de Ingesta Centralizado</text>
-      <text x="15" y="75" class="body-text" fill="#232F3E">• Certificado X.509 individual por nodo sensor</text>
-      <text x="15" y="95" class="body-text" fill="#232F3E">• Broker MQTT sobre TLS 1.3 (Puerto 8883)</text>
-      <text x="15" y="115" class="body-text" fill="#232F3E">• Topic: $aws/rules/finca_telemetry_rule</text>
-      <text x="15" y="135" class="body-text" fill="#232F3E">• Basic Ingest: bypass de cargos de broker</text>
-      <text x="15" y="155" class="body-text" fill="#232F3E">• Reglas IoT evalúan umbrales dinámicos</text>
-      <text x="15" y="185" class="mono-text" fill="#0E8A16">Latencia de Alerta: &lt; 5 min con señal</text>
-      <text x="15" y="205" class="body-text" fill="#555555">Revocación instantánea ante robo de nodo</text>
-    </g>
-
-    <!-- Flecha 3 -->
-    <line x1="1130" y1="190" x2="1190" y2="190" stroke="#1D76DB" stroke-width="3" marker-end="url(#arrow-blue)" />
-
-    <!-- Caja 4: Lambda Ingest -->
-    <g transform="translate(1190, 60)">
-      <rect width="340" height="260" rx="6" fill="#FFFFFF" stroke="#0E8A16" stroke-width="1.5" />
-      <text x="15" y="25" class="card-title">Lambda Evaluación Serverless</text>
-      <text x="15" y="45" class="card-sub">VPC Subred Ingesta: 10.70.1.0/24</text>
-      <text x="15" y="75" class="body-text">• Filtro de umbrales federativos configurables</text>
-      <text x="15" y="95" class="body-text">• Alerta crítica si secado supera 40 C</text>
-      <text x="15" y="115" class="body-text">• Alerta de pH fuera de rango [4.5 - 6.0]</text>
-      <text x="15" y="135" class="body-text">• Despacho de notificación SNS al caficultor</text>
-      <text x="15" y="155" class="body-text">• SQS Dead-Letter Queue para reintentos</text>
-      <text x="15" y="185" class="mono-text" fill="#0E8A16">Arquitectura Graviton2 (64-bit Arm)</text>
-      <text x="15" y="205" class="body-text" fill="#555555">Cero cómputo ocioso en espera de lecturas</text>
-    </g>
-
-    <!-- Flecha 4 -->
-    <line x1="1530" y1="190" x2="1590" y2="190" stroke="#1D76DB" stroke-width="3" marker-end="url(#arrow-blue)" />
-
-    <!-- Caja 5: DynamoDB Hot Tier -->
-    <g transform="translate(1590, 60)">
-      <rect width="330" height="260" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="1.5" />
-      <text x="15" y="25" class="card-title">Amazon DynamoDB (Hot Tier)</text>
-      <text x="15" y="45" class="card-sub">VPC Subred Datos: 10.70.20.0/24</text>
-      <text x="15" y="75" class="body-text">• Capacidad On-Demand (pago por escritura)</text>
-      <text x="15" y="95" class="body-text">• Partition Key: FincaID | Sort Key: Timestamp</text>
-      <text x="15" y="115" class="body-text">• Acceso vía Gateway VPC Endpoint ($0 USD/GB)</text>
-      <text x="15" y="135" class="body-text">• Atributo TTL activo (expiración a 90 días)</text>
-      <text x="15" y="155" class="body-text">• Cifrado KMS con llaves de cliente</text>
-      <text x="15" y="185" class="mono-text" fill="#D93F0B">Costo Ingesta: ~$0,40 USD / mes</text>
-      <text x="15" y="205" class="body-text" fill="#555555">Rendimiento sub-milisegundo</text>
-    </g>
-
-    <!-- Flecha 5 -->
-    <line x1="1920" y1="190" x2="1970" y2="190" stroke="#1D76DB" stroke-width="3" marker-end="url(#arrow-blue)" />
-
-    <!-- Caja 6: Glacier Cold Tier -->
-    <g transform="translate(1970, 60)">
-      <rect width="320" height="260" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" />
-      <text x="15" y="25" class="card-title">S3 Glacier Deep Archive</text>
-      <text x="15" y="45" class="card-sub">Retención Legal 5 Años (Cold Tier)</text>
-      <text x="15" y="75" class="body-text">• DynamoDB Streams captura items expirados</text>
-      <text x="15" y="95" class="body-text">• Lotes compactados en Apache Parquet</text>
-      <text x="15" y="115" class="body-text">• S3 Lifecycle transfiere a Deep Archive</text>
-      <text x="15" y="135" class="body-text">• Costo: $0,00099 USD/GB-mes</text>
-      <text x="15" y="155" class="body-text">• S3 Object Lock (Cumplimiento WORM)</text>
-      <text x="15" y="185" class="mono-text" fill="#0E8A16">Costo 5 años: &lt; $0,02 USD / mes</text>
-      <text x="15" y="205" class="body-text" fill="#555555">Protección inmutable probatoria</text>
-    </g>
-  </g>
-
-  <!-- ==================== RUTA 2: SEGUIMIENTO DE TRANSPORTADORES ==================== -->
-  <g transform="translate(40, 490)" filter="url(#shadow)">
-    <rect width="2320" height="350" rx="8" fill="#FFFFFF" stroke="#0E8A16" stroke-width="2" />
-    <rect width="2320" height="40" rx="8" fill="#0E8A16" />
-    <text x="20" y="26" class="lane-title">RUTA 2: SEGUIMIENTO EN RUTA DE TRANSPORTADORES (Cadencia 5 min / Persistencia Móvil)</text>
-
-    <!-- Caja 1: Móvil -->
-    <g transform="translate(30, 60)">
-      <rect width="320" height="260" rx="6" fill="#FFFFFF" stroke="#0E8A16" stroke-width="2" />
-      <text x="15" y="25" class="card-title">Flota de Transporte (60 Camiones)</text>
-      <text x="15" y="45" class="card-sub">App Conductor en Smartphone</text>
-      <text x="15" y="75" class="body-text">• GPS emite coordenadas cada 5 minutos</text>
-      <text x="15" y="95" class="body-text">• Jornada de 10 horas en carretera montañosa</text>
-      <text x="15" y="115" class="body-text">• Paquete: Lat, Lon, Vel, Timestamp, SacoIDs</text>
-      <text x="15" y="135" class="body-text">• Almacenamiento local SQLite en el teléfono</text>
-      <text x="15" y="155" class="body-text">• Sin cobertura celular: acumulación local</text>
-      <text x="15" y="185" class="mono-text" font-weight="bold" fill="#0E8A16">Drenado en ráfaga en cabecera</text>
-      <text x="15" y="205" class="body-text" fill="#555555">Cero pérdida de eventos de viaje</text>
-    </g>
-
-    <!-- Flecha 1 -->
-    <line x1="350" y1="190" x2="410" y2="190" stroke="#0E8A16" stroke-width="3" marker-end="url(#arrow-green)" />
-
-    <!-- Caja 2: Red Móvil -->
-    <g transform="translate(410, 60)">
-      <rect width="320" height="260" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" />
-      <text x="15" y="25" class="card-title">Red Celular 4G Comercial</text>
-      <text x="15" y="45" class="card-sub">Vías Principales / Municipios</text>
-      <text x="15" y="75" class="body-text">• Enlace HTTPS seguro con TLS 1.3</text>
-      <text x="15" y="95" class="body-text">• Autenticación OAuth2 / JWT (Cognito)</text>
-      <text x="15" y="115" class="body-text">• Token efímero sin credenciales estáticas</text>
-      <text x="15" y="135" class="body-text">• Vaciado ordenado por marca de tiempo</text>
-      <text x="15" y="155" class="body-text">• Consumo de datos móvil: &lt; 5 MB/mes</text>
-      <text x="15" y="185" class="mono-text" fill="#555555">Ahorro de plan de datos del conductor</text>
-    </g>
-
-    <!-- Flecha 2 -->
-    <line x1="730" y1="190" x2="790" y2="190" stroke="#0E8A16" stroke-width="3" marker-end="url(#arrow-green)" />
-
-    <!-- Caja 3: API Gateway -->
-    <g transform="translate(790, 60)">
-      <rect width="340" height="260" rx="6" fill="#FFFFFF" stroke="#FF9900" stroke-width="2" />
-      <text x="15" y="25" class="card-title" fill="#232F3E">Amazon API Gateway / NLB</text>
-      <text x="15" y="45" class="card-sub" fill="#FF9900">VPC Subred App: 10.70.10.0/24</text>
-      <text x="15" y="75" class="body-text" fill="#232F3E">• Endpoint REST privado y público protegido</text>
-      <text x="15" y="95" class="body-text" fill="#232F3E">• AWS WAFv2 con filtrado de anomalías</text>
-      <text x="15" y="115" class="body-text" fill="#232F3E">• Validación estricta de esquema JSON</text>
-      <text x="15" y="135" class="body-text" fill="#232F3E">• Enmascaramiento de cédula de conductor</text>
-      <text x="15" y="155" class="body-text" fill="#232F3E">• Ruteo interno hacia microservicio de tracking</text>
-      <text x="15" y="185" class="mono-text" fill="#0E8A16">Protección estricta Ley 1581 de 2012</text>
-    </g>
-
-    <!-- Flecha 3 -->
-    <line x1="1130" y1="190" x2="1190" y2="190" stroke="#0E8A16" stroke-width="3" marker-end="url(#arrow-green)" />
-
-    <!-- Caja 4: Lambda Tracking -->
-    <g transform="translate(1190, 60)">
-      <rect width="340" height="260" rx="6" fill="#FFFFFF" stroke="#0E8A16" stroke-width="1.5" />
-      <text x="15" y="25" class="card-title">Lambda Tracking y Logística</text>
-      <text x="15" y="45" class="card-sub">VPC Subred App: 10.70.10.0/24</text>
-      <text x="15" y="75" class="body-text">• Cálculo de geocercas en acopio y puerto</text>
-      <text x="15" y="95" class="body-text">• Mutación de estado del saco: 'En viaje'</text>
-      <text x="15" y="115" class="body-text">• Notificación anticipada a patio de acopio</text>
-      <text x="15" y="135" class="body-text">• Registro de cambio de custodia y pesaje</text>
-      <text x="15" y="155" class="body-text">• Separación de vistas para compradores</text>
-      <text x="15" y="185" class="mono-text" fill="#0E8A16">RPO estricto: 15 minutos en eventos</text>
-      <text x="15" y="205" class="body-text" fill="#555555">Procesamiento serverless eficiente</text>
-    </g>
-
-    <!-- Flecha 4 -->
-    <line x1="1530" y1="190" x2="1590" y2="190" stroke="#0E8A16" stroke-width="3" marker-end="url(#arrow-green)" />
-
-    <!-- Caja 5: DynamoDB Tracking -->
-    <g transform="translate(1590, 60)">
-      <rect width="330" height="260" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="1.5" />
-      <text x="15" y="25" class="card-title">DynamoDB (Tabla de Viajes)</text>
-      <text x="15" y="45" class="card-sub">VPC Subred Datos: 10.70.20.0/24</text>
-      <text x="15" y="75" class="body-text">• Partition Key: ViajeID | Sort Key: Timestamp</text>
-      <text x="15" y="95" class="body-text">• Vista de Acopio: solo visualiza viaje activo</text>
-      <text x="15" y="115" class="body-text" font-weight="bold" fill="#D93F0B">• Vista Comprador: RUTA ANONIMIZADA</text>
-      <text x="15" y="135" class="body-text">  (Comprador solo ve origen y estado final)</text>
-      <text x="15" y="155" class="body-text">• Replicación Global Tables a us-east-2</text>
-      <text x="15" y="185" class="mono-text" fill="#D93F0B">RTO de Consulta: 4 horas ante desastre</text>
-    </g>
-
-    <!-- Flecha 5 -->
-    <line x1="1920" y1="190" x2="1970" y2="190" stroke="#0E8A16" stroke-width="3" marker-end="url(#arrow-green)" />
-
-    <!-- Caja 6: Puerto Buenaventura -->
-    <g transform="translate(1970, 60)">
-      <rect width="320" height="260" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" />
-      <text x="15" y="25" class="card-title">Entrega en Buenaventura</text>
-      <text x="15" y="45" class="card-sub">Cero Infraestructura de la FNC</text>
-      <text x="15" y="75" class="body-text">• La naviera conserva su propia telemetría</text>
-      <text x="15" y="95" class="body-text">• Plataforma solo registra evento de entrega</text>
-      <text x="15" y="115" class="body-text">• Cambio de estado: 'Entregado en puerto'</text>
-      <text x="15" y="135" class="body-text">• Aceptación o rechazo de sacos de 60 kg</text>
-      <text x="15" y="155" class="body-text">• Cierre de la cadena de custodia logística</text>
-      <text x="15" y="185" class="mono-text" fill="#0E8A16">Retención de trazabilidad: 5 años</text>
-    </g>
-  </g>
-
-  <!-- ==================== RUTA 3: OBJETOS DE DRONES E INFERENCIA ==================== -->
-  <g transform="translate(40, 870)" filter="url(#shadow)">
-    <rect width="2320" height="490" rx="8" fill="#FFFFFF" stroke="#D93F0B" stroke-width="2" />
-    <rect width="2320" height="40" rx="8" fill="#D93F0B" />
-    <text x="20" y="26" class="lane-title">RUTA 3: OBJETOS MULTIMEDIA DE DRONES, INFERENCIA IA Y COMPUERTA HUMANA (5 Servicios)</text>
-
-    <!-- Caja 1: Dron Agricola -->
-    <g transform="translate(30, 60)">
-      <rect width="320" height="400" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="2" />
-      <text x="15" y="25" class="card-title">Servicio de Drones Agrícolas</text>
-      <text x="15" y="45" class="card-sub">Cinco Servicios Obligatorios</text>
-      <text x="15" y="75" class="body-text" font-weight="bold">1. Delimitar lote (Polígono GeoJSON)</text>
-      <text x="15" y="95" class="body-text" font-weight="bold">2. Confirmar alerta de sensor de suelo</text>
-      <text x="15" y="115" class="body-text" font-weight="bold">3. Fumigación de precisión (con firma)</text>
-      <text x="15" y="135" class="body-text" font-weight="bold">4. Verificar post-fumigación (foto)</text>
-      <text x="15" y="155" class="body-text" font-weight="bold">5. Estimar cosecha (área 1 vez/cosecha)</text>
-      <text x="15" y="185" class="subhead-box">Operación Offline:</text>
-      <text x="15" y="205" class="body-text">• Misión precargada en cabecera o acopio</text>
-      <text x="15" y="225" class="body-text">• No-Fly Zones: casas, vías, fuentes de agua</text>
-      <text x="15" y="245" class="body-text">• Buffer interno retiene ortomosaicos y logs</text>
-      <text x="15" y="275" class="mono-text" font-weight="bold" fill="#D93F0B">Sin señal: vuelo autónomo preposicionado</text>
-      <text x="15" y="295" class="body-text" fill="#555555">Bitácora protegida hasta descarga formal</text>
-    </g>
-
-    <!-- Flecha 1 -->
-    <line x1="350" y1="260" x2="410" y2="260" stroke="#D93F0B" stroke-width="3" marker-end="url(#arrow-red)" />
-
-    <!-- Caja 2: Descarga en Acopio -->
-    <g transform="translate(410, 60)">
-      <rect width="320" height="400" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" />
-      <text x="15" y="25" class="card-title">Descarga en Acopio / Estación</text>
-      <text x="15" y="45" class="card-sub">Wi-Fi LAN / Salida WAN 100 Mbps</text>
-      <text x="15" y="75" class="body-text">• Cuadrilla aterriza y conecta en LAN acopio</text>
-      <text x="15" y="95" class="body-text">• Subred Logística / Borde (10.4X.3.0/24)</text>
-      <text x="15" y="115" class="body-text">• Solicitud de URL prefirmada (Presigned S3)</text>
-      <text x="15" y="135" class="body-text">• Carga por partes (Multipart Upload) HTTPS</text>
-      <text x="15" y="155" class="body-text">• Cifrado KMS con llaves por departamento</text>
-      <text x="15" y="185" class="subhead-box">Validación Previa:</text>
-      <text x="15" y="205" class="body-text">• Cierre formal de bitácora de vuelo</text>
-      <text x="15" y="225" class="body-text">• Registro de operador de drones con MFA</text>
-      <text x="15" y="255" class="mono-text" fill="#555555">Velocidad WAN: 100 Mbps simétricos</text>
-    </g>
-
-    <!-- Flecha 2 -->
-    <line x1="730" y1="260" x2="790" y2="260" stroke="#D93F0B" stroke-width="3" marker-end="url(#arrow-red)" />
-
-    <!-- Caja 3: S3 Bucket -->
-    <g transform="translate(790, 60)">
-      <rect width="340" height="400" rx="6" fill="#FFFFFF" stroke="#FF9900" stroke-width="2" />
-      <text x="15" y="25" class="card-title" fill="#232F3E">Amazon S3 (Drone Objects Bucket)</text>
-      <text x="15" y="45" class="card-sub" fill="#FF9900">VPC Subred Object Storage: 10.70.30.0/24</text>
-      <text x="15" y="75" class="body-text" fill="#232F3E">• Bucket inmutable con S3 Object Lock activo</text>
-      <text x="15" y="95" class="body-text" fill="#232F3E">• Acceso exclusivo vía VPC Gateway Endpoint</text>
-      <text x="15" y="115" class="body-text" fill="#232F3E">• Cero costo de transferencia ($0 USD/GB)</text>
-      <text x="15" y="135" class="body-text" fill="#232F3E">• Bloqueo absoluto de acceso público (SCP 4)</text>
-      <text x="15" y="155" class="body-text" fill="#232F3E">• EventBridge dispara procesamiento automático</text>
-      <text x="15" y="185" class="mono-text" fill="#0E8A16">Retención de fotos: 5 años</text>
-      <text x="15" y="205" class="body-text" fill="#555555">Transición a Glacier Flexible a los 90 días</text>
-    </g>
-
-    <!-- Flecha 3 -->
-    <line x1="1130" y1="260" x2="1190" y2="260" stroke="#D93F0B" stroke-width="3" marker-end="url(#arrow-red)" />
-
-    <!-- Caja 4: Lambda Inferencia -->
-    <g transform="translate(1190, 60)">
-      <rect width="340" height="400" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="1.5" />
-      <text x="15" y="25" class="card-title">Lambda Inferencia y Filtro Ético</text>
-      <text x="15" y="45" class="card-sub">VPC Subred Dron: 10.70.2.0/24</text>
-      <text x="15" y="75" class="body-text">• Disparada por evento PutObject de S3</text>
-      <text x="15" y="95" class="body-text" font-weight="bold" fill="#D93F0B">• PROTOCOLO ÉTICO (LEY 1581 DE 2012):</text>
-      <text x="25" y="115" class="body-text">Invoca DetectFaces de Rekognition.</text>
-      <text x="25" y="135" class="body-text">Si detecta persona (&gt; 80% confianza):</text>
-      <text x="25" y="155" class="body-text" font-weight="bold">ABORTA INFERENCIA AGRONÓMICA.</text>
-      <text x="25" y="175" class="body-text">Cifra objeto con KMS de Privacidad.</text>
-      <text x="25" y="195" class="body-text">Emite log de auditoría en CloudTrail.</text>
-      <text x="15" y="225" class="body-text">• Si es cultivo limpio: invoca modelo de visión</text>
-      <text x="15" y="245" class="body-text">• Clasifica roya y deficiencias foliares</text>
-      <text x="15" y="275" class="mono-text" fill="#0E8A16">Si falla: objeto permanece intacto en S3</text>
-      <text x="15" y="295" class="body-text" fill="#555555">El estado del caso no muta sin éxito</text>
-    </g>
-
-    <!-- Flecha 4 -->
-    <line x1="1530" y1="180" x2="1590" y2="180" stroke="#D93F0B" stroke-width="3" marker-end="url(#arrow-red)" />
-
-    <!-- Caja 5: Rekognition -->
-    <g transform="translate(1590, 60)">
-      <rect width="330" height="175" rx="6" fill="#FFFFFF" stroke="#FF9900" stroke-width="2" />
-      <text x="15" y="25" class="card-title" fill="#232F3E">Amazon Rekognition Managed AI</text>
-      <text x="15" y="45" class="card-sub" fill="#FF9900">Inferencia Serverless en us-east-1</text>
-      <text x="15" y="70" class="body-text" fill="#232F3E">• Detección de plagas y focos de roya</text>
-      <text x="15" y="90" class="body-text" fill="#232F3E">• Retorna porcentaje de confianza y foco</text>
-      <text x="15" y="110" class="body-text" fill="#232F3E">• Costo: $1,00 USD / 1.000 imágenes</text>
-      <text x="15" y="130" class="mono-text" fill="#0E8A16">Cero modelos propios que entrenar</text>
-      <text x="15" y="150" class="body-text" fill="#555555">Uso de API administrada por evento</text>
-    </g>
-
-    <!-- Flecha hacia compuerta -->
-    <line x1="1755" y1="235" x2="1755" y2="265" stroke="#D93F0B" stroke-width="3" marker-end="url(#arrow-red)" />
-
-    <!-- Caja 6: Compuerta Humana -->
-    <g transform="translate(1590, 265)">
-      <rect width="330" height="195" rx="6" fill="#FFF5F5" stroke="#D93F0B" stroke-width="2.5" />
-      <text x="15" y="25" class="card-title" fill="#D93F0B">COMPUERTA HUMANA INNEGOCIABLE</text>
-      <text x="15" y="45" class="card-sub" fill="#D93F0B">Autorización Mandatoria de Fumigación</text>
-      <text x="15" y="70" class="body-text">• NINGUNA IA NI TRIGGER AUTORIZA FUMIGAR</text>
-      <text x="15" y="90" class="body-text">• Agrónomo humano revisa foco confirmado</text>
-      <text x="15" y="110" class="body-text">• Autenticación con MFA obligatorio</text>
-      <text x="15" y="130" class="body-text">• Firma con ID lote producto y ventana</text>
-      <text x="15" y="155" class="mono-text" font-weight="bold" fill="#D93F0B">Sin firma humana: ORDEN BLOQUEADA</text>
-      <text x="15" y="175" class="body-text" fill="#555555">Sin polígono o bitácora: no se puede emitir</text>
-    </g>
-
-    <!-- Flecha final -->
-    <line x1="1920" y1="360" x2="1970" y2="360" stroke="#0E8A16" stroke-width="3" marker-end="url(#arrow-green)" />
-
-    <!-- Caja 7: Expediente Agronómico -->
-    <g transform="translate(1970, 60)">
-      <rect width="320" height="400" rx="6" fill="#FFFFFF" stroke="#0E8A16" stroke-width="2" />
-      <text x="15" y="25" class="card-title">Expediente Agronómico</text>
-      <text x="15" y="45" class="card-sub">DynamoDB (VPC Subred Datos)</text>
-      <text x="15" y="75" class="body-text">• Historial consolidado del lote de café</text>
-      <text x="15" y="95" class="body-text">• Estado de fumigación: 'Abierto' / 'Cerrado'</text>
-      <text x="15" y="115" class="body-text" font-weight="bold" fill="#0E8A16">• CONDICIÓN DE CIERRE FORMAL:</text>
-      <text x="25" y="135" class="body-text">El estado no pasa a 'Cerrado' hasta</text>
-      <text x="25" y="155" class="body-text">que llegue la foto del vuelo de</text>
-      <text x="25" y="175" class="body-text">verificación post-fumigación.</text>
-      <text x="15" y="205" class="body-text">• Estimación de cosecha: número de sacos</text>
-      <text x="15" y="225" class="body-text">  notificado al centro de acopio</text>
-      <text x="15" y="255" class="mono-text" fill="#0E8A16">Retención probatoria: 5 años</text>
-      <text x="15" y="275" class="body-text" fill="#555555">Auditoría inmutable de todas las mutaciones</text>
-    </g>
-  </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1680" height="920" viewBox="0 0 1680 920">
+<defs>
+<filter id="shadow" x="-6%" y="-6%" width="112%" height="118%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.08"/></filter>
+<marker id="arr-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#334155"/></marker>
+<marker id="arr-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#135E34"/></marker>
+<marker id="arr-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#DD344C"/></marker>
+<marker id="arr-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#0F4C81"/></marker>
+<marker id="arr-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#ED7100"/></marker>
+<marker id="arr-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#8C4FFF"/></marker>
+<style>text{font-family:'Segoe UI',Inter,Arial,sans-serif;}</style>
+</defs>
+<rect x="0" y="0" width="1680" height="920" fill="#FFFFFF"/>
+<rect x="0" y="0" width="1680" height="78" fill="#0A3D20"/>
+<rect x="0" y="75" width="1680" height="3" fill="#4ADE80"/>
+<text x="32" y="36" font-size="21" font-weight="700" fill="#FFFFFF">AromaPacifico - Tres Rutas de Datos (Data Paths) y Plan CIDR</text>
+<text x="32" y="60" font-size="13" font-weight="400" fill="#D1FAE5">Flujos independientes sin solapamiento RFC 1918 (10.41 a 10.90) · Escalable de 200 a 1.000 fincas</text>
+<rect x="1468" y="22" width="184" height="30" rx="15" fill="#135E34" stroke="#FFFFFF" stroke-opacity="0.28"/><text x="1560" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Gateway Endpoints $0</text>
+<rect x="1282" y="22" width="176" height="30" rx="15" fill="#8C4FFF" stroke="#FFFFFF" stroke-opacity="0.28"/><text x="1370" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">CIDRs 10.41 - 10.90</text>
+<rect x="1120" y="22" width="152" height="30" rx="15" fill="#0F4C81" stroke="#FFFFFF" stroke-opacity="0.28"/><text x="1196" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">3 Rutas Aisladas</text>
+<g id="z-r1"><rect x="24" y="100" width="1632" height="210" rx="12" fill="#F4FAF6" stroke="#135E34" stroke-width="2"/><path d="M36,100 H1644 Q1656,100 1656,112 V134 H24 V112 Q24,100 36,100 Z" fill="#135E34"/><text x="38" y="122" font-size="13.5" font-weight="700" fill="#FFFFFF">Ruta 1: Telemetria de Finca (Cultivo 4 h · Secado 1 h · Buffer 24 h)</text>
+</g>
+<g id="z-r2"><rect x="24" y="330" width="1632" height="210" rx="12" fill="#F3F8FC" stroke="#0F4C81" stroke-width="2"/><path d="M36,330 H1644 Q1656,330 1656,342 V364 H24 V342 Q24,330 36,330 Z" fill="#0F4C81"/><text x="38" y="352" font-size="13.5" font-weight="700" fill="#FFFFFF">Ruta 2: Posicion de Transportadores y Eventos del Saco (GPS cada 5 min)</text>
+</g>
+<g id="z-r3"><rect x="24" y="560" width="1632" height="224" rx="12" fill="#FAF7FF" stroke="#8C4FFF" stroke-width="2"/><path d="M36,560 H1644 Q1656,560 1656,572 V594 H24 V572 Q24,560 36,560 Z" fill="#8C4FFF"/><text x="38" y="582" font-size="13.5" font-weight="700" fill="#FFFFFF">Ruta 3: Objetos de Dron y Consulta Publica del Saco (Ley 1581)</text>
+</g>
+<path id="edge-0" d="M320,207 L400,207" fill="none" stroke="#135E34" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-green)"/>
+<path id="edge-1" d="M670,207 L750,207" fill="none" stroke="#3F8624" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-slate)"/>
+<path id="edge-2" d="M1020,207 L1090,207" fill="none" stroke="#ED7100" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-orange)"/>
+<path id="edge-3" d="M1340,207 L1400,207" fill="none" stroke="#3B48CC" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-slate)"/>
+<path id="edge-4" d="M320,437 L400,437" fill="none" stroke="#0F4C81" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-blue)"/>
+<path id="edge-5" d="M670,437 L750,437" fill="none" stroke="#E7157B" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-slate)"/>
+<path id="edge-6" d="M1020,437 L1090,437" fill="none" stroke="#3B48CC" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-slate)"/>
+<path id="edge-7" d="M1340,437 L1400,437" fill="none" stroke="#0F4C81" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-blue)"/>
+<path id="edge-8" d="M320,669 L400,669" fill="none" stroke="#3F8624" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-slate)"/>
+<path id="edge-9" d="M670,669 L750,669" fill="none" stroke="#ED7100" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-orange)"/>
+<path id="edge-10" d="M1020,669 L1090,669" fill="none" stroke="#01A88D" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-slate)"/>
+<path id="edge-11" d="M1516,478 L1516,628" fill="none" stroke="#8C4FFF" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-purple)"/>
+<g id="r1-edge" filter="url(#shadow)"><rect x="50" y="166" width="270" height="82" rx="10" fill="#FFFFFF" stroke="#135E34" stroke-width="1.8"/><rect x="62" y="185" width="44" height="44" rx="8" fill="#135E34"/><g transform="translate(68,191) scale(1.333)"><path d="M12 20V11M12 11C12 6.5 16 4.5 19.5 4.5C19.5 8.5 17 11.5 12 11Z" fill="none" stroke="#FFF" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 14C12 10.5 8.5 8.5 5 8.5C5 12 7.5 14.5 12 14Z" fill="none" stroke="#FFF" stroke-width="1.8" stroke-linejoin="round"/></g>
+<text x="118" y="203" font-size="13.5" font-weight="700" fill="#0F172A">200 Fincas</text><text x="118" y="222" font-size="12" font-weight="400" fill="#475569">140 LTE-M · 48 LoRa · 12 Sat</text>
+</g>
+<g id="r1-iot" filter="url(#shadow)"><rect x="400" y="166" width="270" height="82" rx="10" fill="#FFFFFF" stroke="#3F8624" stroke-width="1.8"/><rect x="412" y="185" width="44" height="44" rx="8" fill="#3F8624"/><g transform="translate(418,191) scale(1.333)"><rect x="8" y="8" width="8" height="8" rx="1.5" fill="none" stroke="#FFF" stroke-width="1.8"/><circle cx="12" cy="12" r="2" fill="#FFF"/><path d="M10 4.5V8M14 4.5V8M10 16V19.5M14 16V19.5M4.5 10H8M4.5 14H8M16 10H19.5M16 14H19.5" stroke="#FFF" stroke-width="1.6" stroke-linecap="round"/></g>
+<text x="468" y="203" font-size="13.5" font-weight="700" fill="#0F172A">AWS IoT Core / LoRa</text><text x="468" y="222" font-size="12" font-weight="400" fill="#475569">MQTT mTLS 8883 · X.509</text>
+</g>
+<g id="r1-sqs" filter="url(#shadow)"><rect x="750" y="166" width="270" height="82" rx="10" fill="#FFFFFF" stroke="#E7157B" stroke-width="1.8"/><rect x="762" y="185" width="44" height="44" rx="8" fill="#E7157B"/><g transform="translate(768,191) scale(1.333)"><rect x="4" y="6" width="16" height="12" rx="2" fill="none" stroke="#FFF" stroke-width="1.7"/><line x1="8" y1="9" x2="8" y2="15" stroke="#FFF" stroke-width="2"/><line x1="12" y1="9" x2="12" y2="15" stroke="#FFF" stroke-width="2"/><path d="M15.5 9.5L18.5 12L15.5 14.5" fill="none" stroke="#FFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="818" y="203" font-size="13.5" font-weight="700" fill="#0F172A">Amazon SQS + DLQ</text><text x="818" y="222" font-size="12" font-weight="400" fill="#475569">Subred Telemetria .1 / .101</text>
+<rect x="963" y="156" width="49" height="20" rx="10" fill="#0F172A"/><text x="987" y="170" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">E6-05</text>
+</g>
+<g id="r1-lam" filter="url(#shadow)"><rect x="1090" y="166" width="250" height="82" rx="10" fill="#FFFFFF" stroke="#ED7100" stroke-width="1.8"/><rect x="1102" y="185" width="44" height="44" rx="8" fill="#ED7100"/><g transform="translate(1108,191) scale(1.333)"><path d="M6 19L11.2 9.5L8.5 5H6.5V3.5H10L16.5 19H18.5V20.5H14.8L12.3 14.3L8.8 20.5H6V19Z" fill="#FFF"/></g>
+<text x="1158" y="203" font-size="13.5" font-weight="700" fill="#0F172A">Lambda Normalizador</text><text x="1158" y="222" font-size="12" font-weight="400" fill="#475569">Umbrales + ACK persistencia</text>
+</g>
+<g id="r1-ddb" filter="url(#shadow)"><rect x="1400" y="166" width="232" height="82" rx="10" fill="#FFFFFF" stroke="#3B48CC" stroke-width="1.8"/><rect x="1412" y="185" width="44" height="44" rx="8" fill="#3B48CC"/><g transform="translate(1418,191) scale(1.333)"><ellipse cx="11" cy="6.5" rx="6.5" ry="2.3" fill="none" stroke="#FFF" stroke-width="1.7"/><path d="M4.5 6.5V17.5C4.5 18.8 7.4 19.8 11 19.8C14.6 19.8 17.5 18.8 17.5 17.5V6.5" fill="none" stroke="#FFF" stroke-width="1.7"/><path d="M4.5 12C4.5 13.3 7.4 14.3 11 14.3C14.6 14.3 17.5 13.3 17.5 12" fill="none" stroke="#FFF" stroke-width="1.4"/><polygon points="18,9 14.5,14 17.2,14 16,19.5 20.5,13 17.7,13" fill="#FFF"/></g>
+<text x="1468" y="203" font-size="13.5" font-weight="700" fill="#0F172A">DynamoDB + SNS</text><text x="1468" y="222" font-size="12" font-weight="400" fill="#475569">Alerta &lt; 245 s · VPCE $0</text>
+</g>
+<g id="r2-app" filter="url(#shadow)"><rect x="50" y="396" width="270" height="82" rx="10" fill="#FFFFFF" stroke="#135E34" stroke-width="1.8"/><rect x="62" y="415" width="44" height="44" rx="8" fill="#135E34"/><g transform="translate(68,421) scale(1.333)"><rect x="3.5" y="7" width="11" height="9" rx="1" fill="none" stroke="#FFF" stroke-width="1.7"/><path d="M14.5 10H18.5L20.5 12.5V16H14.5V10Z" fill="none" stroke="#FFF" stroke-width="1.7" stroke-linejoin="round"/><circle cx="7.5" cy="17.5" r="1.8" fill="#FFF"/><circle cx="17.5" cy="17.5" r="1.8" fill="#FFF"/></g>
+<text x="118" y="433" font-size="13.5" font-weight="700" fill="#0F172A">60 Transportadores</text><text x="118" y="452" font-size="12" font-weight="400" fill="#475569">App 4G · SQLite cifrado</text>
+</g>
+<g id="r2-api" filter="url(#shadow)"><rect x="400" y="396" width="270" height="82" rx="10" fill="#FFFFFF" stroke="#E7157B" stroke-width="1.8"/><rect x="412" y="415" width="44" height="44" rx="8" fill="#E7157B"/><g transform="translate(418,421) scale(1.333)"><path d="M8 5L4 12L8 19M16 5L20 12L16 19" fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="9" y1="12" x2="15" y2="12" stroke="#FFF" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="1.8" fill="#FFF"/></g>
+<text x="468" y="433" font-size="13.5" font-weight="700" fill="#0F172A">API Gateway + Cognito</text><text x="468" y="452" font-size="12" font-weight="400" fill="#475569">JWT + lotes idempotentes</text>
+</g>
+<g id="r2-lam" filter="url(#shadow)"><rect x="750" y="396" width="270" height="82" rx="10" fill="#FFFFFF" stroke="#ED7100" stroke-width="1.8"/><rect x="762" y="415" width="44" height="44" rx="8" fill="#ED7100"/><g transform="translate(768,421) scale(1.333)"><path d="M6 19L11.2 9.5L8.5 5H6.5V3.5H10L16.5 19H18.5V20.5H14.8L12.3 14.3L8.8 20.5H6V19Z" fill="#FFF"/></g>
+<text x="818" y="433" font-size="13.5" font-weight="700" fill="#0F172A">Lambda Viaje / Saco</text><text x="818" y="452" font-size="12" font-weight="400" fill="#475569">Subred App .10 / .110</text>
+</g>
+<g id="r2-ddb" filter="url(#shadow)"><rect x="1090" y="396" width="250" height="82" rx="10" fill="#FFFFFF" stroke="#3B48CC" stroke-width="1.8"/><rect x="1102" y="415" width="44" height="44" rx="8" fill="#3B48CC"/><g transform="translate(1108,421) scale(1.333)"><ellipse cx="11" cy="6.5" rx="6.5" ry="2.3" fill="none" stroke="#FFF" stroke-width="1.7"/><path d="M4.5 6.5V17.5C4.5 18.8 7.4 19.8 11 19.8C14.6 19.8 17.5 18.8 17.5 17.5V6.5" fill="none" stroke="#FFF" stroke-width="1.7"/><path d="M4.5 12C4.5 13.3 7.4 14.3 11 14.3C14.6 14.3 17.5 13.3 17.5 12" fill="none" stroke="#FFF" stroke-width="1.4"/><polygon points="18,9 14.5,14 17.2,14 16,19.5 20.5,13 17.7,13" fill="#FFF"/></g>
+<text x="1158" y="433" font-size="13.5" font-weight="700" fill="#0F172A">DynamoDB Eventos</text><text x="1158" y="452" font-size="12" font-weight="400" fill="#475569">sacos_eventos + HMAC-SHA256</text>
+</g>
+<g id="r2-pub" filter="url(#shadow)"><rect x="1400" y="396" width="232" height="82" rx="10" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1.8"/><rect x="1412" y="415" width="44" height="44" rx="8" fill="#0F4C81"/><g transform="translate(1418,421) scale(1.333)"><path d="M12 5V19M7 19H17M5 9H19M5 9L3.5 14H6.5L5 9ZM19 9L17.5 14H20.5L19 9Z" fill="none" stroke="#FFF" stroke-width="1.6" stroke-linejoin="round"/></g>
+<text x="1468" y="433" font-size="13.5" font-weight="700" fill="#0F172A">Tabla sacos_publicos</text><text x="1468" y="452" font-size="12" font-weight="400" fill="#475569">Proyeccion sin PII (L1581)</text>
+</g>
+<g id="r3-dron" filter="url(#shadow)"><rect x="50" y="628" width="270" height="82" rx="10" fill="#FFFFFF" stroke="#135E34" stroke-width="1.8"/><rect x="62" y="647" width="44" height="44" rx="8" fill="#135E34"/><g transform="translate(68,653) scale(1.333)"><circle cx="6.5" cy="7.5" r="2.5" fill="none" stroke="#FFF" stroke-width="1.7"/><circle cx="17.5" cy="7.5" r="2.5" fill="none" stroke="#FFF" stroke-width="1.7"/><circle cx="6.5" cy="16.5" r="2.5" fill="none" stroke="#FFF" stroke-width="1.7"/><circle cx="17.5" cy="16.5" r="2.5" fill="none" stroke="#FFF" stroke-width="1.7"/><path d="M8.5 9.5L15.5 14.5M15.5 9.5L8.5 14.5" stroke="#FFF" stroke-width="1.8"/><rect x="10" y="10" width="4" height="4" rx="1" fill="#FFF"/></g>
+<text x="118" y="665" font-size="13.5" font-weight="700" fill="#0F172A">Estacion Dron / Acopio</text><text x="118" y="684" font-size="12" font-weight="400" fill="#475569">Wi-Fi Acopio (VPN) o 4G</text>
+</g>
+<g id="r3-s3" filter="url(#shadow)"><rect x="400" y="628" width="270" height="82" rx="10" fill="#FFFFFF" stroke="#3F8624" stroke-width="1.8"/><rect x="412" y="647" width="44" height="44" rx="8" fill="#3F8624"/><g transform="translate(418,653) scale(1.333)"><path d="M5 7L7 19C7.2 20 9.4 20.8 12 20.8C14.6 20.8 16.8 20 17 19L19 7" fill="none" stroke="#FFF" stroke-width="1.8"/><ellipse cx="12" cy="7" rx="7" ry="2.4" fill="none" stroke="#FFF" stroke-width="1.8"/><path d="M8.5 12.5C10.5 13.5 13.5 13.5 15.5 12.5" fill="none" stroke="#FFF" stroke-width="1.5"/></g>
+<text x="468" y="665" font-size="13.5" font-weight="700" fill="#0F172A">Amazon S3 (KMS)</text><text x="468" y="684" font-size="12" font-weight="400" fill="#475569">Subred Storage .30 / .130</text>
+</g>
+<g id="r3-fn1" filter="url(#shadow)"><rect x="750" y="628" width="270" height="82" rx="10" fill="#FFFFFF" stroke="#ED7100" stroke-width="1.8"/><rect x="762" y="647" width="44" height="44" rx="8" fill="#ED7100"/><g transform="translate(768,653) scale(1.333)"><path d="M6 19L11.2 9.5L8.5 5H6.5V3.5H10L16.5 19H18.5V20.5H14.8L12.3 14.3L8.8 20.5H6V19Z" fill="#FFF"/></g>
+<text x="818" y="665" font-size="13.5" font-weight="700" fill="#0F172A">Lambda FN-01 Foco</text><text x="818" y="684" font-size="12" font-weight="400" fill="#475569">Subred Drones .2 / .102</text>
+<rect x="963" y="618" width="49" height="20" rx="10" fill="#0F172A"/><text x="987" y="632" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">E6-07</text>
+</g>
+<g id="r3-ai" filter="url(#shadow)"><rect x="1090" y="628" width="250" height="82" rx="10" fill="#FFFFFF" stroke="#01A88D" stroke-width="1.8"/><rect x="1102" y="647" width="44" height="44" rx="8" fill="#01A88D"/><g transform="translate(1108,653) scale(1.333)"><polygon points="12,4 19,8 12,12 5,8" fill="none" stroke="#FFF" stroke-width="1.8" stroke-linejoin="round"/><polyline points="5,12 12,16 19,12" fill="none" stroke="#FFF" stroke-width="1.8" stroke-linejoin="round"/><polyline points="5,16 12,20 19,16" fill="none" stroke="#FFF" stroke-width="1.8" stroke-linejoin="round"/></g>
+<text x="1158" y="665" font-size="13.5" font-weight="700" fill="#0F172A">Rekognition + Bedrock</text><text x="1158" y="684" font-size="12" font-weight="400" fill="#475569">Filtro PII + vision foliar</text>
+</g>
+<g id="r3-cf" filter="url(#shadow)"><rect x="1400" y="628" width="232" height="82" rx="10" fill="#FFFFFF" stroke="#8C4FFF" stroke-width="1.8"/><rect x="1412" y="647" width="44" height="44" rx="8" fill="#8C4FFF"/><g transform="translate(1418,653) scale(1.333)"><circle cx="12" cy="12" r="7.5" fill="none" stroke="#FFF" stroke-width="1.7"/><ellipse cx="12" cy="12" rx="3.4" ry="7.5" fill="none" stroke="#FFF" stroke-width="1.4"/><line x1="4.5" y1="12" x2="19.5" y2="12" stroke="#FFF" stroke-width="1.4"/></g>
+<text x="1468" y="665" font-size="13.5" font-weight="700" fill="#0F172A">CloudFront + WAF</text><text x="1468" y="684" font-size="12" font-weight="400" fill="#475569">Subred Publica .50 / .150</text>
+</g>
+<rect x="333" y="195" width="54" height="24" rx="12" fill="#FFFFFF" stroke="#135E34" stroke-width="1.2"/><text x="360" y="211" text-anchor="middle" font-size="12" font-weight="600" fill="#135E34">TLS</text>
+<rect x="683" y="195" width="54" height="24" rx="12" fill="#FFFFFF" stroke="#3F8624" stroke-width="1.2"/><text x="710" y="211" text-anchor="middle" font-size="12" font-weight="600" fill="#3F8624">Regla</text>
+<rect x="1028" y="195" width="54" height="24" rx="12" fill="#FFFFFF" stroke="#ED7100" stroke-width="1.2"/><text x="1055" y="211" text-anchor="middle" font-size="12" font-weight="600" fill="#ED7100">Batch</text>
+<rect x="1343" y="195" width="54" height="24" rx="12" fill="#FFFFFF" stroke="#3B48CC" stroke-width="1.2"/><text x="1370" y="211" text-anchor="middle" font-size="12" font-weight="600" fill="#3B48CC">VPCE</text>
+<rect x="333" y="425" width="54" height="24" rx="12" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1.2"/><text x="360" y="441" text-anchor="middle" font-size="12" font-weight="600" fill="#0F4C81">HTTPS</text>
+<rect x="683" y="425" width="54" height="24" rx="12" fill="#FFFFFF" stroke="#E7157B" stroke-width="1.2"/><text x="710" y="441" text-anchor="middle" font-size="12" font-weight="600" fill="#E7157B">REST</text>
+<rect x="1028" y="425" width="54" height="24" rx="12" fill="#FFFFFF" stroke="#3B48CC" stroke-width="1.2"/><text x="1055" y="441" text-anchor="middle" font-size="12" font-weight="600" fill="#3B48CC">VPCE</text>
+<rect x="1341" y="425" width="58" height="24" rx="12" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1.2"/><text x="1370" y="441" text-anchor="middle" font-size="12" font-weight="600" fill="#0F4C81">Stream</text>
+<rect x="321" y="657" width="79" height="24" rx="12" fill="#FFFFFF" stroke="#3F8624" stroke-width="1.2"/><text x="360" y="673" text-anchor="middle" font-size="12" font-weight="600" fill="#3F8624">Presigned</text>
+<rect x="681" y="657" width="58" height="24" rx="12" fill="#FFFFFF" stroke="#ED7100" stroke-width="1.2"/><text x="710" y="673" text-anchor="middle" font-size="12" font-weight="600" fill="#ED7100">Evento</text>
+<rect x="1028" y="657" width="54" height="24" rx="12" fill="#FFFFFF" stroke="#01A88D" stroke-width="1.2"/><text x="1055" y="673" text-anchor="middle" font-size="12" font-weight="600" fill="#01A88D">API</text>
+<rect x="1466" y="541" width="100" height="24" rx="12" fill="#FFFFFF" stroke="#8C4FFF" stroke-width="1.2"/><text x="1516" y="557" text-anchor="middle" font-size="12" font-weight="600" fill="#8C4FFF">Solo lectura</text>
+<g><rect x="24" y="812" width="1632" height="82" rx="8" fill="#ECFDF5" stroke="#135E34" stroke-width="1.6"/><rect x="24" y="812" width="6" height="82" rx="3" fill="#135E34"/><text x="42" y="834" font-size="13" font-weight="700" fill="#135E34">Plan de Direccionamiento Sin Solapamiento (RFC 1918 · #7)</text><text x="42" y="854" font-size="12" font-weight="400" fill="#1E293B">Acopios: Cauca 10.41 · Huila 10.42 · Tolima 10.43  |  AWS: Dev 10.50 · Test 10.60 · Prod 10.70 · DR 10.71 · Network Hub 10.80  |  Azure (reservado): 10.90.0.0/16.</text></g>
 </svg>
-

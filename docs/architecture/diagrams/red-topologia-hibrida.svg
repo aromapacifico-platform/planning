@@ -1,228 +1,87 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 1500" width="100%" height="100%">
-  <defs>
-    <style>
-      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #232F3E; text-anchor: middle; }
-      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; fill: #5A6B7C; text-anchor: middle; }
-      .lane-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #FFFFFF; }
-      .card-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #232F3E; }
-      .card-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #555555; }
-      .body-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #232F3E; }
-      .mono-text { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; font-size: 12px; fill: #111111; }
-    </style>
-    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%" filterUnits="userSpaceOnUse">
-      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.08" />
-    </filter>
-  </defs>
-
-  <!-- FONDO -->
-  <rect width="2400" height="1500" fill="#FFFFFF" />
-
-  <!-- TITULO -->
-  <text x="1200" y="45" class="title">AromaPacífico - Topología de Interconexión Híbrida y Enrutamiento (Hub-and-Spoke con AWS Transit Gateway)</text>
-  <text x="1200" y="75" class="subtitle">Tablas de Rutas TGW, Túneles IPsec VPN Duales con BGP, Aislamiento de VLAN de Visitantes y Políticas de Inspección Perimetral</text>
-
-  <!-- ==================== COLUMNA IZQUIERDA: CENTROS DE ACOPIO ==================== -->
-  <g transform="translate(40, 110)" filter="url(#shadow)">
-    <rect width="600" height="1340" rx="8" fill="#FFFFFF" stroke="#D93F0B" stroke-width="2" />
-    <rect width="600" height="40" rx="8" fill="#D93F0B" />
-    <text x="15" y="26" class="lane-title">CENTROS DE ACOPIO (ON-PREMISES) - SEGMENTACIÓN Y RUTAS LOCALES</text>
-
-    <!-- Matriz de VLANs -->
-    <g transform="translate(20, 55)">
-      <rect width="560" height="310" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="1.5" />
-      <text x="15" y="25" class="card-title">POLÍTICA DE SEGMENTACIÓN 802.1Q (CAUCA, HUILA, TOLIMA)</text>
-      <text x="15" y="50" class="mono-text">VLAN ID | Nombre       | Subred Cauca  | Enrutamiento Permitido</text>
-      <text x="15" y="70" class="mono-text">---------------------------------------------------------------</text>
-      <text x="15" y="90" class="mono-text">VLAN 10 | Gerencia     | 10.41.1.0/24  | WAN Internet, Servidores, Cloud</text>
-      <text x="15" y="110" class="mono-text">VLAN 20 | Soporte      | 10.41.2.0/24  | WAN Internet, Gestión de Red</text>
-      <text x="15" y="130" class="mono-text">VLAN 30 | Logística    | 10.41.3.0/24  | Servidores, App Cloud Pesaje</text>
-      <text x="15" y="150" class="mono-text">VLAN 40 | Transporte   | 10.41.4.0/24  | Solo API Recepción Sacos</text>
-      <text x="15" y="170" class="mono-text" font-weight="bold" fill="#D93F0B">VLAN 50 | Visitantes   | 10.41.5.0/24  | AISLADA: Solo Salida Internet</text>
-      <text x="15" y="190" class="mono-text">VLAN 60 | Servidores   | 10.41.10.0/24 | Impresión etiquetas, DNS local</text>
-      <text x="15" y="210" class="mono-text">VLAN 70 | Borde WAN    | 10.41.20.0/24 | Terminación IPsec VPN con AWS</text>
-
-      <text x="15" y="245" class="subhead-box" fill="#D93F0B">REGLA DE AISLAMIENTO INQUEBRANTABLE:</text>
-      <text x="15" y="265" class="body-text">VLAN 50 (Visitantes) NO tiene ruta hacia Logística (VLAN 30),</text>
-      <text x="15" y="285" class="body-text">ni Gerencia (VLAN 10), ni servidores locales, ni túneles hacia la nube.</text>
-    </g>
-
-    <!-- Equipamiento Hardware -->
-    <g transform="translate(20, 385)">
-      <rect width="560" height="260" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" />
-      <text x="15" y="25" class="card-title">EQUIPAMIENTO DE RED POR CENTRO DE ACOPIO (PATRÓN ÚNICO)</text>
-      <text x="15" y="50" class="body-text" font-weight="bold">1. Firewall de Borde: FortiGate 40F / pfSense Plus</text>
-      <text x="25" y="70" class="body-text">• 2 Túneles IPsec activos/pasivos hacia AWS TGW.</text>
-      <text x="25" y="90" class="body-text">• BGP Dinámico con ASN propio por departamento:</text>
-      <text x="35" y="110" class="mono-text">Cauca: ASN 65041 | Huila: ASN 65042 | Tolima: ASN 65043</text>
-      <text x="25" y="130" class="body-text">• QoS perimetral: 2 Mbps bajada / 0,5 Mbps subida por cliente.</text>
-      <text x="25" y="150" class="body-text">• Bloqueo de Capa 7 contra tráfico recreativo (P2P, streaming).</text>
-
-      <text x="15" y="180" class="body-text" font-weight="bold">2. Conmutación: Switch Gestionado PoE+ de 24 Puertos (Aruba / UniFi)</text>
-      <text x="25" y="200" class="body-text">• Trunk 802.1Q con las 7 VLANs etiquetadas hacia APs y puestos.</text>
-
-      <text x="15" y="230" class="body-text" font-weight="bold">3. Acceso Inalámbrico: Access Points Wi-Fi 6 (UniFi U6-Pro / Aruba AP22)</text>
-      <text x="25" y="250" class="body-text">• SSIDs dedicados mapeados a cada VLAN (WPA3 Enterprise).</text>
-    </g>
-
-    <!-- Tabla Rutas Local Acopio -->
-    <g transform="translate(20, 665)">
-      <rect width="560" height="210" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="1.5" />
-      <text x="15" y="25" class="card-title">TABLA DE ENRUTAMIENTO LOCAL (ROUTER / FIREWALL ACOPIO CAUCA)</text>
-      <text x="15" y="50" class="mono-text">Destino           | Próximo Salto (Next Hop) | Interfaz / Comentario</text>
-      <text x="15" y="70" class="mono-text">----------------------------------------------------------------</text>
-      <text x="15" y="90" class="mono-text">10.41.0.0/16      | Local                    | Inter-VLAN Routing local</text>
-      <text x="15" y="110" class="mono-text">10.70.0.0/16 (Prod)| Túnel VPN 1 / VPN 2      | IPsec hacia AWS Transit Gateway</text>
-      <text x="15" y="130" class="mono-text">10.80.0.0/16 (Hub) | Túnel VPN 1 / VPN 2      | IPsec hacia Inspection VPC</text>
-      <text x="15" y="150" class="mono-text">0.0.0.0/0         | WAN ISP (100 Mbps)       | Salida Internet directa (NAT)</text>
-
-      <text x="15" y="185" class="body-text" fill="#555555">Nota para Huila y Tolima: Sustituir 10.41.0.0/16 por 10.42 o 10.43.</text>
-    </g>
-
-    <!-- WAN y Cables Submarinos -->
-    <g transform="translate(20, 895)">
-      <rect width="560" height="200" rx="6" fill="#FFFFFF" stroke="#0E8A16" stroke-width="1.5" />
-      <text x="15" y="25" class="card-title">ENLACE WAN Y LATENCIA HACIA NUBE (COLOMBIA -&gt; US-EAST-1)</text>
-      <text x="15" y="50" class="body-text">• Salida Internacional: Cables submarinos del Caribe (Miami -&gt; Virginia).</text>
-      <text x="15" y="70" class="body-text">• Latencia de Tránsito p50: ~58 ms desde Cali/Popayán hasta us-east-1.</text>
-      <text x="15" y="90" class="body-text">• Ancho de Banda WAN: 100 Mbps simétricos garantizados por centro.</text>
-      <text x="15" y="110" class="body-text">• Capacidad de Recepción: Hasta 400 sacos/día (menos de 20 Kbps promedio).</text>
-      <text x="15" y="130" class="body-text">• Resiliencia: Failover automático entre túnel IPsec primario y secundario.</text>
-      <text x="15" y="160" class="mono-text" fill="#0E8A16">Disponibilidad del enlace WAN híbrido: &gt; 99,8%</text>
-    </g>
-  </g>
-
-  <!-- ==================== COLUMNA CENTRAL: AWS TRANSIT GATEWAY HUB ==================== -->
-  <g transform="translate(680, 110)" filter="url(#shadow)">
-    <rect width="700" height="1340" rx="8" fill="#FFFFFF" stroke="#232F3E" stroke-width="2.5" />
-    <rect width="700" height="40" rx="8" fill="#F0F4F8" />
-    <text x="15" y="26" class="lane-title" fill="#232F3E">AWS TRANSIT GATEWAY HUB (AromaPacifico-Network) - ASN 64512</text>
-
-    <!-- Nucleo TGW -->
-    <g transform="translate(25, 55)">
-      <rect width="650" height="120" rx="6" fill="#FFFFFF" stroke="#FF9900" stroke-width="2" />
-      <text x="20" y="30" class="card-title" fill="#232F3E">NÚCLEO TGW (AWS TRANSIT GATEWAY)</text>
-      <text x="20" y="55" class="body-text" fill="#232F3E">• Enrutador Centralizado Multi-Cuenta y Multi-VPC</text>
-      <text x="20" y="75" class="body-text" fill="#232F3E">• Soporta hasta 50 Gbps de rendimiento por VPC Attachment</text>
-      <text x="20" y="95" class="body-text" fill="#232F3E">• Opera con 3 Tablas de Rutas Segregadas para evitar fugas de tráfico</text>
-    </g>
-
-    <!-- TGW RT 1: On-Premises Route Table -->
-    <g transform="translate(25, 195)">
-      <rect width="650" height="175" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="1.5" />
-      <text x="15" y="25" class="card-title">1. TGW ROUTE TABLE: ON-PREMISES (Asociada a VPNs de Acopio)</text>
-      <text x="15" y="50" class="mono-text">Ruta CIDR Destino  | Attachment Próximo Salto | Propósito</text>
-      <text x="15" y="70" class="mono-text">----------------------------------------------------------------</text>
-      <text x="15" y="90" class="mono-text">10.70.0.0/16 (Prod)| vpc-attach-prod          | Tráfico hacia Backend Producción</text>
-      <text x="15" y="110" class="mono-text">10.80.0.0/16 (Hub) | vpc-attach-hub           | Tráfico hacia Servicios Centrales</text>
-      <text x="15" y="130" class="mono-text" fill="#D93F0B">10.60.0.0/16 (Test)| Blackhole (Denegado)     | Acopios NO acceden a ambiente Test</text>
-      <text x="15" y="150" class="mono-text" fill="#D93F0B">10.50.0.0/16 (Dev) | Blackhole (Denegado)     | Acopios NO acceden a ambiente Dev</text>
-    </g>
-
-    <!-- TGW RT 2: Production Spoke Route Table -->
-    <g transform="translate(25, 390)">
-      <rect width="650" height="200" rx="6" fill="#FFFFFF" stroke="#FF9900" stroke-width="1.5" />
-      <text x="15" y="25" class="card-title">2. TGW ROUTE TABLE: PRODUCCIÓN (Asociada a VPC Producción)</text>
-      <text x="15" y="50" class="mono-text">Ruta CIDR Destino  | Attachment Próximo Salto | Propósito</text>
-      <text x="15" y="70" class="mono-text">----------------------------------------------------------------</text>
-      <text x="15" y="90" class="mono-text">10.41.0.0/16       | vpn-attach-cauca         | Retorno hacia Acopio Cauca</text>
-      <text x="15" y="110" class="mono-text">10.42.0.0/16       | vpn-attach-huila         | Retorno hacia Acopio Huila</text>
-      <text x="15" y="130" class="mono-text">10.43.0.0/16       | vpn-attach-tolima        | Retorno hacia Acopio Tolima</text>
-      <text x="15" y="150" class="mono-text">10.80.0.0/16 (Hub) | vpc-attach-hub           | Salida a inspección y endpoints</text>
-      <text x="15" y="170" class="mono-text" fill="#D93F0B">10.50.0.0/16 (Dev) | Blackhole (Denegado)     | Producción aislada de Desarrollo</text>
-      <text x="15" y="190" class="mono-text" fill="#D93F0B">10.60.0.0/16 (Test)| Blackhole (Denegado)     | Producción aislada de Pruebas</text>
-    </g>
-
-    <!-- TGW RT 3: Non-Production Route Table -->
-    <g transform="translate(25, 610)">
-      <rect width="650" height="200" rx="6" fill="#FFFFFF" stroke="#1D76DB" stroke-width="1.5" />
-      <text x="15" y="25" class="card-title">3. TGW ROUTE TABLE: NO-PRODUCCIÓN (Asociada a VPCs Dev y Test)</text>
-      <text x="15" y="50" class="mono-text">Ruta CIDR Destino  | Attachment Próximo Salto | Propósito</text>
-      <text x="15" y="70" class="mono-text">----------------------------------------------------------------</text>
-      <text x="15" y="90" class="mono-text">10.80.0.0/16 (Hub) | vpc-attach-hub           | Endpoints compartidos y DNS</text>
-      <text x="15" y="110" class="mono-text" fill="#D93F0B">10.70.0.0/16 (Prod)| Blackhole (Denegado)     | Dev/Test NO acceden a Producción</text>
-      <text x="15" y="130" class="mono-text" fill="#D93F0B">10.4X.0.0/16 (Acop)| Blackhole (Denegado)     | Dev/Test NO tocan Acopios físicos</text>
-
-      <text x="15" y="165" class="subhead-box">Regla de Seguridad:</text>
-      <text x="15" y="185" class="body-text">Los entornos de prueba no pueden enviar paquetes a los firewalls</text>
-      <text x="15" y="200" class="body-text">ni a las impresoras de etiquetas de los centros de acopio reales.</text>
-    </g>
-
-    <!-- VPC Hub Inspection & PrivateLink -->
-    <g transform="translate(25, 830)">
-      <rect width="650" height="180" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" />
-      <text x="15" y="25" class="card-title">VPC HUB Y SERVICIOS COMPARTIDOS (10.80.0.0/16)</text>
-      <text x="15" y="55" class="body-text">• PrivateLink Interface Endpoints Compartidos para servicios AWS (KMS, CloudWatch, SSM).</text>
-      <text x="15" y="75" class="body-text">• Route 53 Inbound Resolver para resolución split-horizon de acopios hacia nube.</text>
-      <text x="15" y="95" class="body-text">• Ahorro FinOps #31: Network Firewall y Resolver de salida retirados para el piloto ($760 USD/mes).</text>
-      <text x="15" y="125" class="mono-text" fill="#0E8A16">Ahorro FinOps: 1 solo par de Interface Endpoints compartido por todas las cuentas</text>
-      <text x="15" y="145" class="body-text" fill="#555555">Ahorra más de $180 USD al mes frente a desplegar endpoints redundantes por VPC</text>
-    </g>
-  </g>
-
-  <!-- ==================== COLUMNA DERECHA: VPC PRODUCCIÓN Y REGLAS ==================== -->
-  <g transform="translate(1420, 110)" filter="url(#shadow)">
-    <rect width="940" height="1340" rx="8" fill="#FFFFFF" stroke="#FF9900" stroke-width="2.5" />
-    <rect width="940" height="40" rx="8" fill="#FF9900" />
-    <text x="15" y="26" class="lane-title" fill="#232F3E">CUENTA PRODUCCIÓN (AromaPacifico-Prod) - VPC PRODUCCIÓN (10.70.0.0/16)</text>
-
-    <!-- Tablas de Rutas Subredes VPC Prod -->
-    <g transform="translate(25, 55)">
-      <rect width="890" height="170" rx="6" fill="#FFFFFF" stroke="#FBCA04" stroke-width="1.5" />
-      <text x="15" y="25" class="card-title">1. TABLA DE RUTAS: SUBREDES CONSULTA PÚBLICA (10.70.50.0/24 y 10.70.150.0/24)</text>
-      <text x="15" y="50" class="mono-text">Destino           | Próximo Salto (Target)   | Propósito</text>
-      <text x="15" y="70" class="mono-text">----------------------------------------------------------------</text>
-      <text x="15" y="90" class="mono-text">10.70.0.0/16      | Local                    | Comunicación intra-VPC</text>
-      <text x="15" y="110" class="mono-text">0.0.0.0/0         | Internet Gateway (igw)   | Salida directa para compradores web</text>
-      <text x="15" y="145" class="body-text" fill="#555555">Seguridad: Protegido por AWS WAFv2 con reglas de rate-limiting (pico 30 req/min).</text>
-    </g>
-
-    <g transform="translate(25, 245)">
-      <rect width="890" height="230" rx="6" fill="#FFFFFF" stroke="#0E8A16" stroke-width="1.5" />
-      <text x="15" y="25" class="card-title">2. TABLA DE RUTAS: SUBREDES PRIVADAS (Ingesta, Drones, Aplicación, Datos)</text>
-      <text x="15" y="50" class="mono-text">Destino           | Próximo Salto (Target)   | Propósito</text>
-      <text x="15" y="70" class="mono-text">----------------------------------------------------------------</text>
-      <text x="15" y="90" class="mono-text">10.70.0.0/16      | Local                    | Tráfico interno de la aplicación</text>
-      <text x="15" y="110" class="mono-text">10.41.0.0/16      | Transit Gateway (tgw)    | Ruta hacia Acopio Cauca</text>
-      <text x="15" y="130" class="mono-text">10.42.0.0/16      | Transit Gateway (tgw)    | Ruta hacia Acopio Huila</text>
-      <text x="15" y="150" class="mono-text">10.43.0.0/16      | Transit Gateway (tgw)    | Ruta hacia Acopio Tolima</text>
-      <text x="15" y="170" class="mono-text">10.80.0.0/16      | Transit Gateway (tgw)    | Ruta hacia VPC Hub e inspección</text>
-      <text x="15" y="190" class="mono-text" fill="#0E8A16">pl-s3-endpoint    | vpce-gateway-s3          | Tráfico directo S3 ($0 USD/GB)</text>
-      <text x="15" y="210" class="mono-text" fill="#0E8A16">pl-dynamo-endpoint| vpce-gateway-dynamodb    | Tráfico directo DynamoDB ($0 USD/GB)</text>
-    </g>
-
-    <!-- Network ACLs -->
-    <g transform="translate(25, 495)">
-      <rect width="890" height="210" rx="6" fill="#FFFFFF" stroke="#545B64" stroke-width="1.5" />
-      <text x="15" y="25" class="card-title">MATRIZ DE NETWORK ACLs (DEFENSA EN PROFUNDIDAD STATELESS)</text>
-      <text x="15" y="50" class="mono-text">Subred            | Regla Entrada Permitida      | Regla Salida Permitida</text>
-      <text x="15" y="70" class="mono-text">----------------------------------------------------------------</text>
-      <text x="15" y="90" class="mono-text">Ingesta Telemetría| TCP 443, 8883 desde IoT      | Efímeros (1024-65535) a Backend</text>
-      <text x="15" y="110" class="mono-text">Ingesta Drones    | HTTPS 443 desde Acopios/S3   | TCP 443 hacia Rekognition / S3</text>
-      <text x="15" y="130" class="mono-text">Aplicación        | TCP 8080/443 desde Ingesta   | TCP 443 hacia Datos y TGW</text>
-      <text x="15" y="150" class="mono-text">Capa de Datos     | TCP 443 hacia Endpoints DB   | Solo retorno autorizado</text>
-      <text x="15" y="170" class="mono-text">Consulta Pública  | HTTP 80 / HTTPS 443 público  | TCP 8080 hacia Subred Aplicación</text>
-      <text x="15" y="190" class="mono-text">Administración    | SSH/HTTPS solo desde Red Hub | Denegado hacia internet público</text>
-    </g>
-
-    <!-- Security Groups -->
-    <g transform="translate(25, 725)">
-      <rect width="890" height="150" rx="6" fill="#FFFFFF" stroke="#1D76DB" stroke-width="1.5" />
-      <text x="15" y="25" class="card-title">SECURITY GROUPS STATEFUL POR CAPA Y MÍNIMO PRIVILEGIO</text>
-      <text x="15" y="55" class="body-text">• sg-alb-public: Ingress 443/80 desde 0.0.0.0/0 | Egress hacia sg-app-backend en puerto 8080.</text>
-      <text x="15" y="75" class="body-text">• sg-app-backend: Ingress 8080 solo desde sg-alb-public | Egress hacia sg-data en puerto 443.</text>
-      <text x="15" y="95" class="body-text">• sg-iot-lambda: Ingress denegado | Egress solo hacia S3/DynamoDB Gateway Endpoints.</text>
-      <text x="15" y="115" class="body-text">• sg-dron-inference: Ingress denegado | Egress solo hacia Amazon Rekognition vía Endpoint.</text>
-    </g>
-
-    <!-- DR us-east-2 -->
-    <g transform="translate(25, 895)">
-      <rect width="890" height="150" rx="6" fill="#FFFFFF" stroke="#D93F0B" stroke-width="1.5" />
-      <text x="15" y="25" class="card-title">CONTINGENCIA MULTIRREGIÓN EN US-EAST-2 (OHIO) - RTO 4H / RPO 15 MIN</text>
-      <text x="15" y="55" class="body-text">• VPC Contingencia: 10.71.0.0/16 en us-east-2 (sin colisión con us-east-1 ni acopios).</text>
-      <text x="15" y="75" class="body-text">• DynamoDB Global Tables: Replicación asíncrona multirregión con RPO &lt; 1 segundo.</text>
-      <text x="15" y="95" class="body-text">• Route 53 DNS Failover: Redirección automática de la Consulta Pública del Saco.</text>
-      <text x="15" y="115" class="mono-text" fill="#0E8A16">Infraestructura en reposo: $0 USD en cómputo (escalado a cero hasta activación)</text>
-    </g>
-  </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1640" height="880" viewBox="0 0 1640 880">
+<defs>
+<filter id="shadow" x="-6%" y="-6%" width="112%" height="118%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.08"/></filter>
+<marker id="arr-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#334155"/></marker>
+<marker id="arr-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#135E34"/></marker>
+<marker id="arr-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#DD344C"/></marker>
+<marker id="arr-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#0F4C81"/></marker>
+<marker id="arr-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#ED7100"/></marker>
+<marker id="arr-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1.5 L9,5 L0,8.5 z" fill="#8C4FFF"/></marker>
+<style>text{font-family:'Segoe UI',Inter,Arial,sans-serif;}</style>
+</defs>
+<rect x="0" y="0" width="1640" height="880" fill="#FFFFFF"/>
+<rect x="0" y="0" width="1640" height="78" fill="#0A3D20"/>
+<rect x="0" y="75" width="1640" height="3" fill="#4ADE80"/>
+<text x="32" y="36" font-size="21" font-weight="700" fill="#FFFFFF">AromaPacifico - Topologia Hibrida Hub-and-Spoke (TGW + VPN + Azure)</text>
+<text x="32" y="60" font-size="13" font-weight="400" fill="#D1FAE5">Enrutamiento BGP sobre 2 tuneles IPsec por acopio · Sin AWS Network Firewall (#70) · Aislamiento Visitantes</text>
+<rect x="1452" y="22" width="160" height="30" rx="15" fill="#0078D4" stroke="#FFFFFF" stroke-opacity="0.28"/><text x="1532" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Azure 10.90 Listo</text>
+<rect x="1282" y="22" width="160" height="30" rx="15" fill="#0F4C81" stroke="#FFFFFF" stroke-opacity="0.28"/><text x="1362" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">3 VPNs Duales BGP</text>
+<rect x="1144" y="22" width="128" height="30" rx="15" fill="#8C4FFF" stroke="#FFFFFF" stroke-opacity="0.28"/><text x="1208" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">TGW Hub 10.80</text>
+<g id="z-ac"><rect x="24" y="100" width="390" height="620" rx="12" fill="#F3F8FC" stroke="#0F4C81" stroke-width="2"/><path d="M36,100 H402 Q414,100 414,112 V134 H24 V112 Q24,100 36,100 Z" fill="#0F4C81"/><text x="38" y="122" font-size="13.5" font-weight="700" fill="#FFFFFF">Centros de Acopio (WAN 100M)</text>
+</g>
+<g id="z-hub"><rect x="464" y="100" width="420" height="620" rx="12" fill="#FAF7FF" stroke="#8C4FFF" stroke-width="2"/><path d="M476,100 H872 Q884,100 884,112 V134 H464 V112 Q464,100 476,100 Z" fill="#8C4FFF"/><text x="478" y="122" font-size="13.5" font-weight="700" fill="#FFFFFF">Cuenta Network · Hub 10.80.0.0/16</text>
+</g>
+<g id="z-spokes"><rect x="934" y="100" width="682" height="620" rx="12" fill="#F4FAF6" stroke="#135E34" stroke-width="2"/><path d="M946,100 H1604 Q1616,100 1616,112 V134 H934 V112 Q934,100 946,100 Z" fill="#135E34"/><text x="948" y="122" font-size="13.5" font-weight="700" fill="#FFFFFF">Spokes Cloud y Segunda Nube</text>
+</g>
+<path id="edge-0" d="M394,209 L441,209 L441,240 L488,240" fill="none" stroke="#0F4C81" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-blue)"/>
+<path id="edge-1" d="M394,345 L441,345 L441,240 L488,240" fill="none" stroke="#0F4C81" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-blue)"/>
+<path id="edge-2" d="M394,481 L441,481 L441,240 L488,240" fill="none" stroke="#0F4C81" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-blue)"/>
+<path id="edge-3" d="M674,282 L674,344" fill="none" stroke="#8C4FFF" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-purple)"/>
+<path id="edge-4" d="M674,430 L674,496" fill="none" stroke="#0F4C81" stroke-width="2" stroke-dasharray="6,4" stroke-linejoin="round" marker-end="url(#arr-blue)"/>
+<path id="edge-5" d="M860,387 L912,387 L912,200 L964,200" fill="none" stroke="#135E34" stroke-width="2" stroke-linejoin="round" marker-end="url(#arr-green)"/>
+<path id="edge-6" d="M860,387 L912,387 L912,314 L964,314" fill="none" stroke="#B45309" stroke-width="2" stroke-dasharray="6,4" stroke-linejoin="round" marker-end="url(#arr-orange)"/>
+<path id="edge-7" d="M860,387 L912,387 L912,538 L964,538" fill="none" stroke="#8C4FFF" stroke-width="2" stroke-dasharray="6,4" stroke-linejoin="round" marker-end="url(#arr-purple)"/>
+<path id="edge-8" d="M860,387 L912,387 L912,648 L964,648" fill="none" stroke="#0078D4" stroke-width="2" stroke-dasharray="6,4" stroke-linejoin="round" marker-end="url(#arr-slate)"/>
+<g id="a-cau" filter="url(#shadow)"><rect x="44" y="168" width="350" height="82" rx="10" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1.8"/><rect x="56" y="187" width="44" height="44" rx="8" fill="#0F4C81"/><g transform="translate(62,193) scale(1.333)"><path d="M4 19.5H20M5.5 19.5V9.5L12 5L18.5 9.5V19.5" fill="none" stroke="#FFF" stroke-width="1.8" stroke-linejoin="round"/><rect x="9.5" y="13.5" width="5" height="6" fill="none" stroke="#FFF" stroke-width="1.6"/></g>
+<text x="112" y="205" font-size="13.5" font-weight="700" fill="#0F172A">Cauca · 10.41.0.0/16</text><text x="112" y="224" font-size="12" font-weight="400" fill="#475569">FW L01-L30 · ASN 65041</text>
+</g>
+<g id="a-hui" filter="url(#shadow)"><rect x="44" y="304" width="350" height="82" rx="10" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1.8"/><rect x="56" y="323" width="44" height="44" rx="8" fill="#0F4C81"/><g transform="translate(62,329) scale(1.333)"><path d="M4 19.5H20M5.5 19.5V9.5L12 5L18.5 9.5V19.5" fill="none" stroke="#FFF" stroke-width="1.8" stroke-linejoin="round"/><rect x="9.5" y="13.5" width="5" height="6" fill="none" stroke="#FFF" stroke-width="1.6"/></g>
+<text x="112" y="341" font-size="13.5" font-weight="700" fill="#0F172A">Huila · 10.42.0.0/16</text><text x="112" y="360" font-size="12" font-weight="400" fill="#475569">FW L01-L30 · ASN 65042</text>
+</g>
+<g id="a-tol" filter="url(#shadow)"><rect x="44" y="440" width="350" height="82" rx="10" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1.8"/><rect x="56" y="459" width="44" height="44" rx="8" fill="#0F4C81"/><g transform="translate(62,465) scale(1.333)"><path d="M4 19.5H20M5.5 19.5V9.5L12 5L18.5 9.5V19.5" fill="none" stroke="#FFF" stroke-width="1.8" stroke-linejoin="round"/><rect x="9.5" y="13.5" width="5" height="6" fill="none" stroke="#FFF" stroke-width="1.6"/></g>
+<text x="112" y="477" font-size="13.5" font-weight="700" fill="#0F172A">Tolima · 10.43.0.0/16</text><text x="112" y="496" font-size="12" font-weight="400" fill="#475569">FW L01-L30 · ASN 65043</text>
+</g>
+<g id="a-vis" filter="url(#shadow)"><rect x="44" y="576" width="350" height="76" rx="10" fill="#FFFFFF" stroke="#DD344C" stroke-width="1.8"/><rect x="56" y="592" width="44" height="44" rx="8" fill="#DD344C"/><g transform="translate(62,598) scale(1.333)"><circle cx="12" cy="12" r="7.5" fill="none" stroke="#FFF" stroke-width="1.9"/><line x1="7" y1="7" x2="17" y2="17" stroke="#FFF" stroke-width="2"/></g>
+<text x="112" y="610" font-size="13.5" font-weight="700" fill="#0F172A">VLAN 105 Visitantes</text><text x="112" y="629" font-size="12" font-weight="400" fill="#475569">Bloqueada hacia VPN / TGW</text>
+<rect x="323" y="566" width="63" height="20" rx="10" fill="#DD344C"/><text x="354" y="580" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Aislada</text>
+</g>
+<g id="vpn-gw" filter="url(#shadow)"><rect x="488" y="198" width="372" height="84" rx="10" fill="#FFFFFF" stroke="#8C4FFF" stroke-width="1.8"/><rect x="500" y="218" width="44" height="44" rx="8" fill="#8C4FFF"/><g transform="translate(506,224) scale(1.333)"><rect x="4" y="9" width="16" height="6" rx="3" fill="none" stroke="#FFF" stroke-width="1.8"/><circle cx="12" cy="12" r="2" fill="#FFF"/><path d="M7 12H9.5M14.5 12H17" stroke="#FFF" stroke-width="1.6"/></g>
+<text x="556" y="236" font-size="13.5" font-weight="700" fill="#0F172A">VPN Site-to-Site (2x)</text><text x="556" y="255" font-size="12" font-weight="400" fill="#475569">6 tuneles IPsec activos (BGP)</text>
+<rect x="803" y="188" width="49" height="20" rx="10" fill="#0F172A"/><text x="827" y="202" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">E6-03</text>
+</g>
+<g id="tgw" filter="url(#shadow)"><rect x="488" y="344" width="372" height="86" rx="10" fill="#FFFFFF" stroke="#8C4FFF" stroke-width="1.8"/><rect x="500" y="365" width="44" height="44" rx="8" fill="#8C4FFF"/><g transform="translate(506,371) scale(1.333)"><circle cx="12" cy="12" r="3.2" fill="none" stroke="#FFF" stroke-width="1.9"/><path d="M12 3.5V8.5M12 15.5V20.5M3.5 12H8.5M15.5 12H20.5" stroke="#FFF" stroke-width="1.9" stroke-linecap="round"/><circle cx="12" cy="3.5" r="1.5" fill="#FFF"/><circle cx="12" cy="20.5" r="1.5" fill="#FFF"/><circle cx="3.5" cy="12" r="1.5" fill="#FFF"/><circle cx="20.5" cy="12" r="1.5" fill="#FFF"/></g>
+<text x="556" y="383" font-size="13.5" font-weight="700" fill="#0F172A">AWS Transit Gateway</text><text x="556" y="402" font-size="12" font-weight="400" fill="#475569">ASN 64512 · Tablas por dominio</text>
+</g>
+<g id="r53" filter="url(#shadow)"><rect x="488" y="496" width="372" height="82" rx="10" fill="#FFFFFF" stroke="#8C4FFF" stroke-width="1.8"/><rect x="500" y="515" width="44" height="44" rx="8" fill="#8C4FFF"/><g transform="translate(506,521) scale(1.333)"><circle cx="12" cy="12" r="7.5" fill="none" stroke="#FFF" stroke-width="1.7"/><path d="M8.5 15.5L15.5 8.5M11 8.5H15.5V13" fill="none" stroke="#FFF" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="556" y="533" font-size="13.5" font-weight="700" fill="#0F172A">Route 53 Inbound Resolver</text><text x="556" y="552" font-size="12" font-weight="400" fill="#475569">DNS privado acopio -&gt; AWS</text>
+<rect x="754" y="486" width="98" height="20" rx="10" fill="#135E34"/><text x="803" y="500" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Sin Outbound</text>
+</g>
+<g id="s-prod" filter="url(#shadow)"><rect x="964" y="158" width="622" height="84" rx="10" fill="#FFFFFF" stroke="#8C4FFF" stroke-width="1.8"/><rect x="976" y="178" width="44" height="44" rx="8" fill="#8C4FFF"/><g transform="translate(982,184) scale(1.333)"><path d="M6.5 17.5H17.5A4 4 0 0 0 18 9.6A5.5 5.5 0 0 0 7.3 8.2A3.8 3.8 0 0 0 6.5 17.5Z" fill="none" stroke="#FFF" stroke-width="1.8"/><circle cx="12" cy="13" r="1.8" fill="#FFF"/></g>
+<text x="1032" y="196" font-size="13.5" font-weight="700" fill="#0F172A">VPC Produccion (10.70)</text><text x="1032" y="215" font-size="12" font-weight="400" fill="#475569">SGs/NACLs #9 · Gateway Endpoints</text>
+<rect x="1529" y="148" width="49" height="20" rx="10" fill="#0F172A"/><text x="1553" y="162" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">E6-02</text>
+</g>
+<g id="s-test" filter="url(#shadow)"><rect x="964" y="274" width="622" height="80" rx="10" fill="#FFFFFF" stroke="#8C4FFF" stroke-width="1.8"/><rect x="976" y="292" width="44" height="44" rx="8" fill="#8C4FFF"/><g transform="translate(982,298) scale(1.333)"><path d="M6.5 17.5H17.5A4 4 0 0 0 18 9.6A5.5 5.5 0 0 0 7.3 8.2A3.8 3.8 0 0 0 6.5 17.5Z" fill="none" stroke="#FFF" stroke-width="1.8"/><circle cx="12" cy="13" r="1.8" fill="#FFF"/></g>
+<text x="1032" y="310" font-size="13.5" font-weight="700" fill="#0F172A">VPC Pruebas (10.60)</text><text x="1032" y="329" font-size="12" font-weight="400" fill="#475569">Aislada de Prod por tabla TGW</text>
+</g>
+<g id="s-dev" filter="url(#shadow)"><rect x="964" y="386" width="622" height="80" rx="10" fill="#FFFFFF" stroke="#8C4FFF" stroke-width="1.8"/><rect x="976" y="404" width="44" height="44" rx="8" fill="#8C4FFF"/><g transform="translate(982,410) scale(1.333)"><path d="M6.5 17.5H17.5A4 4 0 0 0 18 9.6A5.5 5.5 0 0 0 7.3 8.2A3.8 3.8 0 0 0 6.5 17.5Z" fill="none" stroke="#FFF" stroke-width="1.8"/><circle cx="12" cy="13" r="1.8" fill="#FFF"/></g>
+<text x="1032" y="422" font-size="13.5" font-weight="700" fill="#0F172A">VPC Desarrollo (10.50)</text><text x="1032" y="441" font-size="12" font-weight="400" fill="#475569">Sin ruta hacia acopios fisicos</text>
+</g>
+<g id="s-dr" filter="url(#shadow)"><rect x="964" y="498" width="622" height="80" rx="10" fill="#FFFFFF" stroke="#8C4FFF" stroke-width="1.8"/><rect x="976" y="516" width="44" height="44" rx="8" fill="#8C4FFF"/><g transform="translate(982,522) scale(1.333)"><circle cx="12" cy="12" r="7.5" fill="none" stroke="#FFF" stroke-width="1.7"/><path d="M8.5 15.5L15.5 8.5M11 8.5H15.5V13" fill="none" stroke="#FFF" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="1032" y="534" font-size="13.5" font-weight="700" fill="#0F172A">DR us-east-2 (10.71)</text><text x="1032" y="553" font-size="12" font-weight="400" fill="#475569">Peering inter-region consulta</text>
+</g>
+<g id="s-az" filter="url(#shadow)"><rect x="964" y="608" width="622" height="80" rx="10" fill="#FFFFFF" stroke="#0078D4" stroke-width="1.8"/><rect x="976" y="626" width="44" height="44" rx="8" fill="#0078D4"/><g transform="translate(982,632) scale(1.333)"><polygon points="10.5,4.5 4.5,18.5 9.2,18.5 13.2,9.2" fill="#FFF"/><polygon points="13.5,10.5 11.2,15.8 15.8,15.8 12.5,18.5 19.5,18.5 14.8,6.8" fill="#FFF" opacity="0.88"/></g>
+<text x="1032" y="644" font-size="13.5" font-weight="700" fill="#0F172A">Azure VNet Hub (10.90)</text><text x="1032" y="663" font-size="12" font-weight="400" fill="#475569">VPN BGP disenada · USD 0/mes</text>
+<rect x="1501" y="598" width="77" height="20" rx="10" fill="#0078D4"/><text x="1539" y="612" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Preparada</text>
+</g>
+<rect x="381" y="197" width="72" height="24" rx="12" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1.2"/><text x="417" y="213" text-anchor="middle" font-size="12" font-weight="600" fill="#0F4C81">2x IPsec</text>
+<rect x="405" y="280" width="72" height="24" rx="12" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1.2"/><text x="441" y="296" text-anchor="middle" font-size="12" font-weight="600" fill="#0F4C81">2x IPsec</text>
+<rect x="405" y="348" width="72" height="24" rx="12" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1.2"/><text x="441" y="364" text-anchor="middle" font-size="12" font-weight="600" fill="#0F4C81">2x IPsec</text>
+<rect x="647" y="301" width="54" height="24" rx="12" fill="#FFFFFF" stroke="#8C4FFF" stroke-width="1.2"/><text x="674" y="317" text-anchor="middle" font-size="12" font-weight="600" fill="#8C4FFF">BGP</text>
+<rect x="647" y="451" width="54" height="24" rx="12" fill="#FFFFFF" stroke="#0F4C81" stroke-width="1.2"/><text x="674" y="467" text-anchor="middle" font-size="12" font-weight="600" fill="#0F4C81">DNS</text>
+<rect x="873" y="281" width="79" height="24" rx="12" fill="#FFFFFF" stroke="#135E34" stroke-width="1.2"/><text x="912" y="297" text-anchor="middle" font-size="12" font-weight="600" fill="#135E34">Permitido</text>
+<rect x="873" y="338" width="79" height="24" rx="12" fill="#FFFFFF" stroke="#B45309" stroke-width="1.2"/><text x="912" y="354" text-anchor="middle" font-size="12" font-weight="600" fill="#B45309">Permitido</text>
+<rect x="885" y="450" width="54" height="24" rx="12" fill="#FFFFFF" stroke="#8C4FFF" stroke-width="1.2"/><text x="912" y="466" text-anchor="middle" font-size="12" font-weight="600" fill="#8C4FFF">DR</text>
+<rect x="869" y="505" width="86" height="24" rx="12" fill="#FFFFFF" stroke="#0078D4" stroke-width="1.2"/><text x="912" y="521" text-anchor="middle" font-size="12" font-weight="600" fill="#0078D4">Futuro BGP</text>
+<g><rect x="24" y="748" width="1592" height="96" rx="8" fill="#ECFDF5" stroke="#135E34" stroke-width="1.6"/><rect x="24" y="748" width="6" height="96" rx="3" fill="#135E34"/><text x="42" y="770" font-size="13" font-weight="700" fill="#135E34">Optimizacion de Red Piloto (#70)</text><text x="42" y="790" font-size="12" font-weight="400" fill="#1E293B">AWS Network Firewall y Route 53 Outbound Resolver fueron retirados del piloto (-USD 774,78/mes). La inspeccion se aplica con SGs, NACLs (#9) y firewalls locales de acopio.</text></g>
 </svg>
-

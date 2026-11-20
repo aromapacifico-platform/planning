@@ -1,85 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mxfile host="Electron" compressed="false">
-  <diagram id="seguridad-firewall-iac" name="Arquitectura de Seguridad IaC y Matriz de Firewall">
-    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="1100" background="#FFFFFF">
+  <diagram id="seguridad-firewall-iac" name="Modulo Seguridad IaC y Firewall">
+    <mxGraphModel dx="1422" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1640" pageHeight="860" background="#FFFFFF">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-
-        <!-- TITULO Y ENCABEZADO -->
-        <mxCell id="title" value="AromaPacífico - Módulo de Seguridad IaC y Verificación de Firewall (Épica 6 · E6-04)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
-          <mxGeometry x="250" y="25" width="1000" height="35" as="geometry" />
+        <mxCell id="header-title" value="AromaPacifico - Modulo Seguridad IaC (E6-04) y Catalogo de Firewall&#10;45 recursos en terraform plan: 3 llaves KMS, 4 roles IAM sin comodines, 14 SGs y NACLs (#9 sin C19)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0A3D20;strokeColor=#4ADE80;fontColor=#FFFFFF;fontSize=16;fontStyle=1;align=left;spacingLeft=24;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1640" height="76" as="geometry" />
         </mxCell>
-        <mxCell id="subtitle" value="Mapeo Técnico de Llaves KMS, Roles IAM con Privilegio Mínimo y Catálogo Permanente de Firewall (C01–C20, N01–N16)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=0;fontColor=#5A6B7C;" vertex="1" parent="1">
-          <mxGeometry x="250" y="60" width="1000" height="25" as="geometry" />
+        <mxCell id="z-kms" value="1. Cifrado en Reposo (3 CMKs KMS)" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8F8;strokeColor=#DD344C;strokeWidth=2;dashed=0;swimlaneFillColor=#FFF8F8;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="24" y="100" width="490" height="580" as="geometry" />
         </mxCell>
-
-        <!-- CONTENEDOR 1: LLAVES KMS CUSTOMER MANAGED (CMK) -->
-        <mxCell id="box-kms" value="1. Cifrado en Reposo: Customer Managed Keys (AWS KMS con Rotación Anual Automática)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F2F3F3;strokeColor=#545B64;strokeWidth=2;fontColor=#232F3E;fontSize=14;fontStyle=1;startSize=35;" vertex="1" parent="1">
-          <mxGeometry x="50" y="110" width="440" height="420" as="geometry" />
+        <mxCell id="z-iam" value="2. Identidades IAM (Minimo Privilegio)" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F8FC;strokeColor=#0F4C81;strokeWidth=2;dashed=0;swimlaneFillColor=#F3F8FC;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="554" y="100" width="510" height="580" as="geometry" />
         </mxCell>
-
-        <mxCell id="kms-data" value="KMS Datos Agronómicos y Sacos&#xa;Alias: alias/aromapacifico-dev-kms-data&#xa;&#xa;• Cifrado de tabla DynamoDB de Telemetría&#xa;• Cifrado de tabla Master de Sacos (60 kg)&#xa;• Algoritmo AES-256-GCM Envelope&#xa;• Lifecycle: prevent_destroy = true&#xa;• Acceso restringido por CallerAccount" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0073BB;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="box-kms">
-          <mxGeometry x="20" y="50" width="400" height="105" as="geometry" />
+        <mxCell id="z-fw" value="3. Filtrado de Red (Catalogo #9)" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF7FF;strokeColor=#8C4FFF;strokeWidth=2;dashed=0;swimlaneFillColor=#FAF7FF;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="1104" y="100" width="512" height="580" as="geometry" />
         </mxCell>
-
-        <mxCell id="kms-objects" value="KMS Objetos y Vuelos de Drones&#xa;Alias: alias/aromapacifico-dev-kms-objects&#xa;&#xa;• Cifrado SSE-KMS de Bucket de Fotos de Foco&#xa;• Protección de Bitácoras de Vuelo (.bin)&#xa;• Integración con Inferencia Rekognition&#xa;• Lifecycle: prevent_destroy = true&#xa;• Zero-Cleartext en almacenamiento" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0073BB;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="box-kms">
-          <mxGeometry x="20" y="170" width="400" height="105" as="geometry" />
+        <mxCell id="k-data" value="KMS Datos (kms-data)&#10;DynamoDB y SQS · Rotacion anual" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DD344C;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="48" y="168" width="442" height="86" as="geometry" />
         </mxCell>
-
-        <mxCell id="kms-logs" value="KMS Auditoría y Trazas Centralizadas&#xa;Alias: alias/aromapacifico-dev-kms-logs&#xa;&#xa;• Cifrado de CloudWatch Logs y VPC Flow Logs&#xa;• Cifrado de Estado Remoto S3 y DynamoDB Lock&#xa;• Retención Probatoria de 5 Años&#xa;• Lifecycle: prevent_destroy = true&#xa;• Acceso exclusivo para el servicio de logs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0073BB;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="box-kms">
-          <mxGeometry x="20" y="290" width="400" height="105" as="geometry" />
+        <mxCell id="k-data-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.key_management_service;" vertex="1" parent="k-data">
+          <mxGeometry x="10" y="23" width="40" height="40" as="geometry" />
         </mxCell>
-
-        <!-- CONTENEDOR 2: ROLES IAM DE PLATAFORMA -->
-        <mxCell id="box-iam" value="2. Identidades de Plataforma: Roles IAM con Privilegio Mínimo (Zero-Wildcards en Datos)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F2F3F3;strokeColor=#545B64;strokeWidth=2;fontColor=#232F3E;fontSize=14;fontStyle=1;startSize=35;" vertex="1" parent="1">
-          <mxGeometry x="520" y="110" width="450" height="420" as="geometry" />
+        <mxCell id="k-obj" value="KMS Objetos (kms-objects)&#10;S3 fotos dron y cuarentena PII" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DD344C;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="48" y="304" width="442" height="86" as="geometry" />
         </mxCell>
-
-        <mxCell id="iam-ingest" value="Rol de Ingesta Telemetría (IoT Core)&#xa;Nombre: aromapacifico-dev-role-ingest&#xa;&#xa;• Entidad de Confianza: iot.amazonaws.com&#xa;• Permiso: dynamodb:PutItem en tabla telemetría&#xa;• Permiso: sqs:SendMessage en cola telemetría&#xa;• Permiso: kms:Encrypt en llave KMS Datos&#xa;• Sin comodines (*) en recursos o acciones" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="box-iam">
-          <mxGeometry x="20" y="50" width="410" height="105" as="geometry" />
+        <mxCell id="k-obj-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.key_management_service;" vertex="1" parent="k-obj">
+          <mxGeometry x="10" y="23" width="40" height="40" as="geometry" />
         </mxCell>
-
-        <mxCell id="iam-function" value="Rol de Función de Foco (AWS Lambda)&#xa;Nombre: aromapacifico-dev-role-focus-func&#xa;&#xa;• Entidad de Confianza: lambda.amazonaws.com&#xa;• Permiso 1: s3:GetObject en bucket de foco&#xa;• Permiso 2: rekognition:DetectLabels en inferencia&#xa;• Permiso 3: dynamodb:PutItem en expediente&#xa;• Permiso Auxiliar: sqs:SendMessage a DLQ de fallos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="box-iam">
-          <mxGeometry x="20" y="170" width="410" height="105" as="geometry" />
+        <mxCell id="k-log" value="KMS Logs (kms-logs)&#10;CloudWatch y auditoria WORM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DD344C;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="48" y="440" width="442" height="86" as="geometry" />
         </mxCell>
-
-        <mxCell id="iam-delivery" value="Rol de Entrega en Puerto y Eventos&#xa;Nombre: aromapacifico-dev-role-delivery&#xa;&#xa;• Entidad de Confianza: lambda.amazonaws.com&#xa;• Permiso: dynamodb:PutItem en ledger de sacos&#xa;• Permiso: kms:Encrypt en llave KMS Datos&#xa;• Transacción digital Buenaventura (cero infra FNC)&#xa;• Trazabilidad inmutable con RPO de 15 minutos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D93F0B;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="box-iam">
-          <mxGeometry x="20" y="290" width="410" height="105" as="geometry" />
+        <mxCell id="k-log-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.key_management_service;" vertex="1" parent="k-log">
+          <mxGeometry x="10" y="23" width="40" height="40" as="geometry" />
         </mxCell>
-
-        <!-- CONTENEDOR 3: SECURITY GROUPS DE FIREWALL PERMANENTE -->
-        <mxCell id="box-sg" value="3. Reglas Permanentes de Firewall: Security Groups por Capa y Servicio (C01–C20)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F2F3F3;strokeColor=#545B64;strokeWidth=2;fontColor=#232F3E;fontSize=14;fontStyle=1;startSize=35;" vertex="1" parent="1">
-          <mxGeometry x="1000" y="110" width="460" height="420" as="geometry" />
+        <mxCell id="k-pol" value="Politica TLS 1.2+ Obligatoria&#10;aws:SecureTransport en S3/SQS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DD344C;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="48" y="574" width="442" height="76" as="geometry" />
         </mxCell>
-
-        <mxCell id="sg-public" value="Capa Consulta Pública (C01, C02, C03, C20)&#xa;• SG-ALB-CONSULTA: Ingress 0.0.0.0/0:443 (C01)&#xa;• SG-ALB-CONSULTA: Egress hacia SG-CONSULTA:443 (C02)&#xa;• SG-CONSULTA: Ingress desde SG-ALB-CONSULTA:443 (C03)&#xa;• SG-CONSULTA: Egress hacia Prefix List DynamoDB:443 (C20)&#xa;• Restricción: Sin exposición de cédula ni traza interna" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D8102;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="box-sg">
-          <mxGeometry x="20" y="50" width="420" height="105" as="geometry" />
+        <mxCell id="k-pol-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.shield;" vertex="1" parent="k-pol">
+          <mxGeometry x="10" y="18" width="40" height="40" as="geometry" />
         </mxCell>
-
-        <mxCell id="sg-endpoints" value="Capa Interconexión Privada (C04, C05, C10, C11)&#xa;• SG-VPCE-API: Ingress desde LOG-AUT-CIDR:443 (C04)&#xa;• SG-VPCE-S3: Ingress desde DRON y BACKUP CIDR:443 (C05)&#xa;• SG-FUNCION: Egress hacia SG-VPCE-REKOG:443 (C10)&#xa;• SG-VPCE-REKOG: Ingress desde SG-FUNCION:443 (C11)&#xa;• Tráfico enrutado por túneles VPN IPsec sin solape" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D8102;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="box-sg">
-          <mxGeometry x="20" y="170" width="420" height="105" as="geometry" />
+        <mxCell id="i-ing" value="Rol Lambda Ingesta&#10;SQS + DynamoDB telemetria + SNS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DD344C;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="578" y="168" width="462" height="82" as="geometry" />
         </mxCell>
-
-        <mxCell id="sg-shared" value="Capa Servicios Transversales (C12–C19)&#xa;• SG-VPCE-LOGS: Ingress CloudWatch Logs:443 (C12, C13)&#xa;• SG-VPCE-KMS: Ingress AWS KMS PrivateLink:443 (C14, C15)&#xa;• SG-VPCE-SSM: Ingress Administración SSM:443 (C16, C17)&#xa;• SG-RESOLVER: In/Out Route 53 Resolver:53 (C18, C19)&#xa;• Invariantes C21 y C22: Cero salida 0.0.0.0/0 por defecto" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D8102;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="box-sg">
-          <mxGeometry x="20" y="290" width="420" height="105" as="geometry" />
+        <mxCell id="i-ing-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.identity_and_access_management;" vertex="1" parent="i-ing">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
         </mxCell>
-
-        <!-- CONTENEDOR 4: LISTAS DE CONTROL DE ACCESO DE RED (NACLs) -->
-        <mxCell id="box-nacl" value="4. Perímetro de Subredes: Network Access Control Lists (NACLs Permanentes N01–N16)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F2F3F3;strokeColor=#545B64;strokeWidth=2;fontColor=#232F3E;fontSize=14;fontStyle=1;startSize=35;" vertex="1" parent="1">
-          <mxGeometry x="50" y="560" width="1410" height="480" as="geometry" />
+        <mxCell id="i-fn1" value="Rol Lambda FN-01 Foco&#10;S3 Get + Rekognition/Bedrock + DDB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DD344C;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="578" y="286" width="462" height="82" as="geometry" />
         </mxCell>
-
-        <mxCell id="nacl-priv" value="NACL Subredes Privadas del Ambiente (N01 a N11, N16)&#xa;&#xa;Ingreso (Ingress):&#xa;• Regla 10 (N01): DENEGAR tráfico proveniente de VLAN Visitantes (10.41.5.0/24) [Prioridad Alta]&#xa;• Regla 100 (N02): PERMITIR HTTPS TCP 443 desde CIDRs Privados Autorizados (PRIV-AUT)&#xa;• Regla 110 (N04): PERMITIR DNS TCP 53 desde PRIV-AUT&#xa;• Regla 120 (N05): PERMITIR DNS UDP 53 desde PRIV-AUT&#xa;• Regla 130 (N08): PERMITIR Puertos Efímeros TCP 1024-65535 para retorno de conexiones&#xa;• Regla 140 (N10): PERMITIR Puertos Efímeros UDP 1024-65535 para respuestas DNS&#xa;• Regla * (N16): DENEGACIÓN implícita por defecto para cualquier otro tráfico&#xa;&#xa;Egreso (Egress):&#xa;• Regla 100 (N03): PERMITIR HTTPS TCP 443 hacia PRIV-AUT y endpoints privados de datos&#xa;• Regla 110 (N06): PERMITIR DNS TCP 53 hacia PRIV-AUT&#xa;• Regla 120 (N07): PERMITIR DNS UDP 53 hacia PRIV-AUT&#xa;• Regla 130 (N09): PERMITIR Puertos Efímeros TCP 1024-65535 hacia clientes autorizados&#xa;• Regla 140 (N11): PERMITIR Puertos Efímeros UDP 1024-65535 hacia clientes autorizados" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#314A5E;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;verticalAlign=middle;" vertex="1" parent="box-nacl">
-          <mxGeometry x="20" y="50" width="670" height="400" as="geometry" />
+        <mxCell id="i-fn1-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.identity_and_access_management;" vertex="1" parent="i-fn1">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
         </mxCell>
-
-        <mxCell id="nacl-pub" value="NACL Subredes de Consulta Pública (N12 a N16)&#xa;&#xa;Ingreso (Ingress):&#xa;• Regla 100 (N12): PERMITIR HTTPS TCP 443 desde cualquier origen (0.0.0.0/0) hacia el Application Load Balancer&#xa;• Regla 110 (N15): PERMITIR Puertos Efímeros TCP 1024-65535 desde la subred de aplicación (APP-CIDR) para retorno de peticiones&#xa;• Regla * (N16): DENEGACIÓN implícita para todo origen no previsto&#xa;&#xa;Egreso (Egress):&#xa;• Regla 100 (N13): PERMITIR Puertos Efímeros TCP 1024-65535 hacia Internet (0.0.0.0/0) para retorno de respuestas HTTP a compradores&#xa;• Regla 110 (N14): PERMITIR HTTPS TCP 443 hacia la subred de aplicación interna (APP-CIDR) para reenvío del balanceador&#xa;• Regla * (N16): DENEGACIÓN implícita para cualquier salida no listada&#xa;&#xa;Garantías de Diseño:&#xa;• Aislamiento estricto: la subred pública no posee enrutamiento directo hacia la subred de datos ni ingesta&#xa;• RTO de 4 horas y RPO de 15 minutos asegurados mediante réplicas multi-AZ en us-east-1a y us-east-1b" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#314A5E;strokeWidth=2;fontSize=12;align=left;spacingLeft=12;verticalAlign=middle;" vertex="1" parent="box-nacl">
-          <mxGeometry x="720" y="50" width="670" height="400" as="geometry" />
+        <mxCell id="i-iot" value="Rol AWS IoT Core&#10;Envia telemetria a SQS + auditoria" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3F8624;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="578" y="404" width="462" height="82" as="geometry" />
         </mxCell>
-
+        <mxCell id="i-iot-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3F8624;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.iot_core;" vertex="1" parent="i-iot">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="i-pub" value="[0 acceso PII] Rol Consulta Publica&#10;Solo lectura en sacos_publicos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0F4C81;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="578" y="522" width="462" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="i-pub-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#0F4C81;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.artifact;" vertex="1" parent="i-pub">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f-sg" value="[Permanentes] 14 Security Groups (C01-C18)&#10;for_each desde rule_catalog" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DD344C;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1128" y="168" width="464" height="86" as="geometry" />
+        </mxCell>
+        <mxCell id="f-sg-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.network_firewall;" vertex="1" parent="f-sg">
+          <mxGeometry x="10" y="23" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f-nacl" value="NACLs por Subred (N01-N16)&#10;Defensa en profundidad sin estado" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8C4FFF;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1128" y="304" width="464" height="86" as="geometry" />
+        </mxCell>
+        <mxCell id="f-nacl-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.network_access_control_list;" vertex="1" parent="f-nacl">
+          <mxGeometry x="10" y="23" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f-c19" value="[Ahorro FinOps] Regla C19 Retirada (#70)&#10;Sin Network Firewall (-USD 774/mes)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DD344C;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1128" y="440" width="464" height="86" as="geometry" />
+        </mxCell>
+        <mxCell id="f-c19-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.waf;" vertex="1" parent="f-c19">
+          <mxGeometry x="10" y="23" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f-zero" value="Cero 0.0.0.0/0 Administrativo&#10;Solo CloudFront (C01) e IoT (mTLS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1128" y="574" width="464" height="76" as="geometry" />
+        </mxCell>
+        <mxCell id="f-zero-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#135E34;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.trusted_advisor;" vertex="1" parent="f-zero">
+          <mxGeometry x="10" y="18" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e-0" value="Cifra" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#DD344C;strokeWidth=2;dashed=1;fontSize=12;fontStyle=1;fontColor=#DD344C;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="k-data" target="i-ing">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-1" value="Cifra" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#DD344C;strokeWidth=2;dashed=1;fontSize=12;fontStyle=1;fontColor=#DD344C;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="k-obj" target="i-fn1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-2" value="SG Privado" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8C4FFF;strokeWidth=2;dashed=1;fontSize=12;fontStyle=1;fontColor=#8C4FFF;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="i-fn1" target="f-sg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-3" value="Capa 2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8C4FFF;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#8C4FFF;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="f-sg" target="f-nacl">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="note-0" value="Trazabilidad IaC vs Catalogo #9 (PC-IAC-020 / PC-IAC-022): Los modulos Workload (ingest, farm, function) consumen los ARNs de KMS, IAM y IDs de Security Groups generados por modules/security sin crear recursos de red ni seguridad." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;spacingLeft=14;" vertex="1" parent="1">
+          <mxGeometry x="24" y="712" width="1592" height="104" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
 </mxfile>
-

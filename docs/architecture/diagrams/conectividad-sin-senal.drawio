@@ -1,119 +1,227 @@
-<mxfile host="app.diagrams.net">
-  <diagram name="Conectividad sin señal" id="hu6">
-    <mxGraphModel dx="3008" dy="1587" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1650" math="0" shadow="0">
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" compressed="false">
+  <diagram id="conectividad-sin-senal" name="Conectividad 5 Puntos Sin Senal">
+    <mxGraphModel dx="1422" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1680" pageHeight="960" background="#FFFFFF">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="title" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f3f6f9;strokeColor=#f3f6f9;fontColor=#19324b;fontSize=26;fontStyle=1;align=left;verticalAlign=middle;spacing=18;" value="AromaPacífico · HU #6 · Conectividad sin señal" vertex="1">
-          <mxGeometry height="125" width="1705" x="45" y="20" as="geometry" />
+        <mxCell id="header-title" value="AromaPacifico - Conectividad de los 5 Puntos y Operacion Sin Senal&#10;Cero 2G/3G · Store-and-Forward 24 h con ACK · Hibrido 140 LTE-M + 48 LoRaWAN + 12 Iridium SBD" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0A3D20;strokeColor=#4ADE80;fontColor=#FFFFFF;fontSize=16;fontStyle=1;align=left;spacingLeft=24;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1680" height="76" as="geometry" />
         </mxCell>
-        <mxCell id="r0c0" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcefe5;strokeColor=#3c8060;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="01 · Finca y beneficiadero&#xa;&#xa;Cultivo: cada 4 horas&#xa;Secado activo: cada hora&#xa;Ruta asignada por cobertura" vertex="1">
-          <mxGeometry height="162" width="345" x="45" y="220" as="geometry" />
+        <mxCell id="z-edge" value="1. Cinco Puntos de Operacion en Campo" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#F4FAF6;strokeColor=#135E34;strokeWidth=2;dashed=0;swimlaneFillColor=#F4FAF6;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="24" y="100" width="440" height="760" as="geometry" />
         </mxCell>
-        <mxCell id="e0_0" edge="1" parent="1" source="r0c0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r0c1">
+        <mxCell id="z-link" value="2. Enlaces Resilientes (Sin 2G/3G)" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F8FC;strokeColor=#0F4C81;strokeWidth=2;dashed=0;swimlaneFillColor=#F3F8FC;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="500" y="100" width="420" height="760" as="geometry" />
+        </mxCell>
+        <mxCell id="z-cloud" value="3. Recepcion y Persistencia en AWS (us-east-1)" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFBF5;strokeColor=#ED7100;strokeWidth=2;dashed=0;swimlaneFillColor=#FFFBF5;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
+          <mxGeometry x="956" y="100" width="700" height="760" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-lte" value="[70 %] 1a. Fincas con Senal (140)&#10;ESP32-S3 + SIM7080G · Flash 24 h" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="44" y="152" width="400" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-lte-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#135E34;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.iot_sensor;" vertex="1" parent="p1-lte">
+          <mxGeometry x="10" y="17" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-lora" value="[USD 0,20/mes] 1b. Fincas Sin Senal (48)&#10;Modulo LoRa · 5 fincas/gateway" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3F8624;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="44" y="244" width="400" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-lora-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3F8624;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.iot_greengrass;" vertex="1" parent="p1-lora">
+          <mxGeometry x="10" y="17" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-sat" value="[6 %] 1c. Fincas Remotas (12)&#10;Iridium SBD · Sin linea de vista" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B45309;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="44" y="336" width="400" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-sat-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#B45309;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ground_station;" vertex="1" parent="p1-sat">
+          <mxGeometry x="10" y="17" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-dron" value="2. Drones Agricolas (RAC 100)&#10;Mision precargada · Token 48 h" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="44" y="444" width="400" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-dron-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#135E34;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.robotics;" vertex="1" parent="p2-dron">
+          <mxGeometry x="10" y="17" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-trans" value="3. 60 Transportadores&#10;GPS cada 5 min · SQLite cifrado" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="44" y="544" width="400" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-trans-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#135E34;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.iot_car;" vertex="1" parent="p3-trans">
+          <mxGeometry x="10" y="17" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p4-acopio" value="4. 3 Centros de Acopio&#10;Bascula e impresion offline local" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0F4C81;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="44" y="644" width="400" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="p4-acopio-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#0F4C81;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.corporate_data_center;" vertex="1" parent="p4-acopio">
+          <mxGeometry x="10" y="17" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p5-puerto" value="5. Puerto Buenaventura&#10;App 4G · Cero servidores FNC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0F4C81;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="44" y="744" width="400" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="p5-puerto-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#0F4C81;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.internet_alt2;" vertex="1" parent="p5-puerto">
+          <mxGeometry x="10" y="17" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="l-lte" value="Celular LTE-M / NB-IoT&#10;MQTT sobre mTLS 8883" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0F4C81;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="520" y="152" width="380" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="l-lte-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#0F4C81;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.iot_wifi;" vertex="1" parent="l-lte">
+          <mxGeometry x="10" y="17" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="l-lora" value="[FinOps #71] 10 Gateways Solares LoRaWAN&#10;En cabecera/via con salida LTE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="520" y="244" width="380" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="l-lora-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#135E34;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.iot_gateway;" vertex="1" parent="l-lora">
+          <mxGeometry x="10" y="17" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="l-sat" value="Enlace Satelital Iridium SBD&#10;Bloques cortos · Reintento auto" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B45309;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="520" y="336" width="380" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="l-sat-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#B45309;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ground_station;" vertex="1" parent="l-sat">
+          <mxGeometry x="10" y="17" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="l-dron" value="Sincronizacion Estacion UAS&#10;Wi-Fi Acopio o 4G al aterrizar" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0F4C81;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="520" y="444" width="380" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="l-dron-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#0F4C81;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.iot_wifi;" vertex="1" parent="l-dron">
+          <mxGeometry x="10" y="17" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="l-trans" value="Lotes Idempotentes 4G&#10;Drena al cruzar cabecera" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#232F3E;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="520" y="544" width="380" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="l-trans-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3E;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.mobile_client;" vertex="1" parent="l-trans">
+          <mxGeometry x="10" y="17" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="l-wan" value="WAN 100 Mbps + VPN IPsec&#10;2 tuneles BGP · QoS 90 Mbps" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8C4FFF;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="520" y="644" width="380" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="l-wan-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.site_to_site_vpn;" vertex="1" parent="l-wan">
+          <mxGeometry x="10" y="17" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="l-puerto" value="HTTPS Movil + Cola Cifrada&#10;Solo evento entrega del saco" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#232F3E;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="520" y="744" width="380" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="l-puerto-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3E;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.mobile_client;" vertex="1" parent="l-puerto">
+          <mxGeometry x="10" y="17" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c-iot" value="AWS IoT Core (X.509)&#10;Certificado revocable por nodo" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3F8624;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="980" y="152" width="300" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="c-iot-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3F8624;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.iot_core;" vertex="1" parent="c-iot">
+          <mxGeometry x="10" y="19" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c-iot-lora" value="AWS IoT Core for LoRaWAN&#10;Identidad por nodo · TLS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3F8624;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="980" y="244" width="300" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="c-iot-lora-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3F8624;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.iot_greengrass;" vertex="1" parent="c-iot-lora">
+          <mxGeometry x="10" y="19" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c-sat" value="Webhook Satelital + SQS&#10;Firma HMAC + antireplay" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E7157B;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="980" y="336" width="300" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="c-sat-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.api_gateway;" vertex="1" parent="c-sat">
+          <mxGeometry x="10" y="19" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c-s3" value="Amazon S3 (URL Prefirmada)&#10;Fotos, mapas y bitacoras" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3F8624;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="980" y="444" width="300" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="c-s3-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3F8624;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3;" vertex="1" parent="c-s3">
+          <mxGeometry x="10" y="19" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c-tgw" value="AWS Transit Gateway&#10;Enrutamiento privado acopios" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8C4FFF;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="980" y="644" width="300" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="c-tgw-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.transit_gateway;" vertex="1" parent="c-tgw">
+          <mxGeometry x="10" y="17" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c-api" value="API Gateway + Cognito&#10;Apps campo, transporte, puerto" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DD344C;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="980" y="544" width="300" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="c-api-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cognito;" vertex="1" parent="c-api">
+          <mxGeometry x="10" y="17" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c-sqs" value="Amazon SQS + DLQ&#10;Deduplicacion y ACK" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E7157B;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1326" y="224" width="304" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="c-sqs-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.sqs;" vertex="1" parent="c-sqs">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c-ddb" value="Amazon DynamoDB&#10;Telemetria, viajes y sacos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B48CC;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1326" y="404" width="304" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="c-ddb-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3B48CC;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.dynamodb;" vertex="1" parent="c-ddb">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c-sns" value="Amazon SNS (&lt; 245 s)&#10;Alerta con acuse ACK" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E7157B;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1326" y="584" width="304" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="c-sns-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.sns;" vertex="1" parent="c-sns">
+          <mxGeometry x="10" y="21" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e-0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#135E34;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#135E34;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="p1-lte" target="l-lte">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="r0c1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="Flash del nodo&#xa;&#xa;Escribir antes de enviar&#xa;Retención máxima: 24 h&#xa;Retirar tras ACK persistido" vertex="1">
-          <mxGeometry height="162" width="355" x="450" y="220" as="geometry" />
-        </mxCell>
-        <mxCell id="e0_1" edge="1" parent="1" source="r0c1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r0c2">
+        <mxCell id="e-1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#135E34;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#135E34;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="p1-lora" target="l-lora">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="r0c2" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="Celular o satélite&#xa;&#xa;LTE-M/NB-IoT: MQTT/TLS 8883&#xa;Sin cobertura: Iridium SBD&#xa;Proveedor → HTTPS 443" vertex="1">
-          <mxGeometry height="162" width="425" x="865" y="220" as="geometry" />
-        </mxCell>
-        <mxCell id="e0_2" edge="1" parent="1" source="r0c2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r0c3">
+        <mxCell id="e-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#135E34;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#135E34;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="p1-sat" target="l-sat">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="r0c3" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="IoT Core / ingesta&#xa;&#xa;Celular: entrada existente&#xa;Satélite: adaptador + cola&#xa;Normalizar y persistir" vertex="1">
-          <mxGeometry height="162" width="400" x="1350" y="220" as="geometry" />
-        </mxCell>
-        <mxCell id="r1c0" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5eafb;strokeColor=#5d74b3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="02 · Dron y cuadrilla&#xa;&#xa;Misión precargada&#xa;Autorización humana previa&#xa;Fotos, mapas y bitácora" vertex="1">
-          <mxGeometry height="162" width="345" x="45" y="440" as="geometry" />
-        </mxCell>
-        <mxCell id="e1_0" edge="1" parent="1" source="r1c0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r1c1">
+        <mxCell id="e-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#135E34;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#135E34;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="p2-dron" target="l-dron">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="r1c1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="Dron + estación de campo&#xa;&#xa;Memoria no volátil y copia&#xa;Sin internet: conservar misión&#xa;No cerrar sin evidencias" vertex="1">
-          <mxGeometry height="162" width="355" x="450" y="440" as="geometry" />
-        </mxCell>
-        <mxCell id="e1_1" edge="1" parent="1" source="r1c1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r1c2">
+        <mxCell id="e-4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#135E34;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#135E34;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="p3-trans" target="l-trans">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="r1c2" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="Estación → nube&#xa;&#xa;USB / enlace local del equipo&#xa;Luego 4G o wifi del acopio&#xa;HTTPS 443 · URL prefirmada" vertex="1">
-          <mxGeometry height="162" width="425" x="865" y="440" as="geometry" />
-        </mxCell>
-        <mxCell id="e1_2" edge="1" parent="1" source="r1c2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r1c3">
+        <mxCell id="e-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#135E34;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#135E34;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="p4-acopio" target="l-wan">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="r1c3" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="S3 + expediente&#xa;&#xa;Carga al volver de la misión&#xa;Validar objeto y registro&#xa;No transmitir fotos por SBD" vertex="1">
-          <mxGeometry height="162" width="400" x="1350" y="440" as="geometry" />
-        </mxCell>
-        <mxCell id="r2c0" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d8;strokeColor=#bd8832;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="03 · Transportador&#xa;&#xa;Posición cada 5 minutos&#xa;Eventos de custodia aparte&#xa;Hora original y responsable" vertex="1">
-          <mxGeometry height="162" width="345" x="45" y="660" as="geometry" />
-        </mxCell>
-        <mxCell id="e2_0" edge="1" parent="1" source="r2c0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r2c1">
+        <mxCell id="e-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#135E34;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#135E34;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="p5-puerto" target="l-puerto">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="r2c1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="SQLite cifrada&#xa;&#xa;Cola persistente del teléfono&#xa;Conservar tras reinicio&#xa;No inventar una posición" vertex="1">
-          <mxGeometry height="162" width="355" x="450" y="660" as="geometry" />
-        </mxCell>
-        <mxCell id="e2_1" edge="1" parent="1" source="r2c1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r2c2">
+        <mxCell id="e-7" value="8883" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0F4C81;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#0F4C81;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="l-lte" target="c-iot">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="r2c2" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="4G/LTE o wifi autorizado&#xa;&#xa;HTTPS 443 hacia API Gateway&#xa;Recuperar sesión y enviar lotes&#xa;Reintentar sin cambiar event_id" vertex="1">
-          <mxGeometry height="162" width="425" x="865" y="660" as="geometry" />
-        </mxCell>
-        <mxCell id="e2_2" edge="1" parent="1" source="r2c2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r2c3">
+        <mxCell id="e-8" value="TLS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0F4C81;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#0F4C81;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="l-lora" target="c-iot-lora">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="r2c3" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="API + registros&#xa;&#xa;Deduplicar por event_id&#xa;Confirmar cada resultado&#xa;Separar captura y recepción" vertex="1">
-          <mxGeometry height="162" width="400" x="1350" y="660" as="geometry" />
-        </mxCell>
-        <mxCell id="r3c0" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e0eff5;strokeColor=#48859c;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="04 · Centro de acopio&#xa;&#xa;Recepción y despacho&#xa;VLAN y SSID por zona&#xa;Patrón: Cauca, Huila, Tolima" vertex="1">
-          <mxGeometry height="162" width="345" x="45" y="880" as="geometry" />
-        </mxCell>
-        <mxCell id="e3_0" edge="1" parent="1" source="r3c0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r3c1">
+        <mxCell id="e-9" value="HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#B45309;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#B45309;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="l-sat" target="c-sat">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="r3c1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="Cola local + impresión&#xa;&#xa;Transacciones pendientes&#xa;Spooler de códigos local&#xa;Energía: concretar en #8" vertex="1">
-          <mxGeometry height="162" width="355" x="450" y="880" as="geometry" />
-        </mxCell>
-        <mxCell id="e3_1" edge="1" parent="1" source="r3c1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r3c2">
+        <mxCell id="e-10" value="HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3F8624;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#3F8624;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="l-dron" target="c-s3">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="r3c2" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="WAN compartida 100 Mbps&#xa;&#xa;VPN IPsec → Transit Gateway&#xa;HTTPS 443 para objetos&#xa;LAN operativa si solo cae WAN" vertex="1">
-          <mxGeometry height="162" width="425" x="865" y="880" as="geometry" />
-        </mxCell>
-        <mxCell id="e3_2" edge="1" parent="1" source="r3c2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r3c3">
+        <mxCell id="e-11" value="HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#E7157B;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#E7157B;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="l-trans" target="c-api">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="r3c3" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="Servicios privados / S3&#xa;&#xa;Mantener topología de #7&#xa;Sincronizar tras recuperar WAN&#xa;Resolver conflictos de estado" vertex="1">
-          <mxGeometry height="162" width="400" x="1350" y="880" as="geometry" />
-        </mxCell>
-        <mxCell id="r4c0" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f0e5f5;strokeColor=#9462a9;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="05 · Buenaventura&#xa;&#xa;Entrega del saco&#xa;Aceptada o rechazada&#xa;Sin seguimiento del barco" vertex="1">
-          <mxGeometry height="162" width="345" x="45" y="1100" as="geometry" />
-        </mxCell>
-        <mxCell id="e4_0" edge="1" parent="1" source="r4c0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r4c1">
+        <mxCell id="e-12" value="IPsec" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8C4FFF;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#8C4FFF;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="l-wan" target="c-tgw">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="r4c1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="Cola cifrada del teléfono&#xa;&#xa;Evento con saco y responsable&#xa;Hora original de la entrega&#xa;Pendiente hasta confirmación" vertex="1">
-          <mxGeometry height="162" width="355" x="450" y="1100" as="geometry" />
+        <mxCell id="e-13" value="Entrega" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#E7157B;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#E7157B;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="l-puerto" target="c-api">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="938" y="781" />
+              <mxPoint x="938" y="598" />
+            </Array>
+          </mxGeometry>
         </mxCell>
-        <mxCell id="e4_1" edge="1" parent="1" source="r4c1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r4c2">
+        <mxCell id="e-14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3F8624;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#3F8624;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="c-iot" target="c-sqs">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="r4c2" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="Teléfono con 4G/LTE&#xa;&#xa;HTTPS 443 hacia la API&#xa;Sin datos: guardar y reenviar&#xa;No presuponer wifi portuario" vertex="1">
-          <mxGeometry height="162" width="425" x="865" y="1100" as="geometry" />
-        </mxCell>
-        <mxCell id="e4_2" edge="1" parent="1" source="r4c2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=open;strokeColor=#516274;strokeWidth=2;" target="r4c3">
+        <mxCell id="e-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3F8624;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#3F8624;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="c-iot-lora" target="c-sqs">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="r4c3" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffffff;strokeColor=#cfdae3;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="Historia del saco&#xa;&#xa;Persistir entrega idempotente&#xa;No instalar infraestructura&#xa;de la Federación en el puerto" vertex="1">
-          <mxGeometry height="162" width="400" x="1350" y="1100" as="geometry" />
+        <mxCell id="e-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#B45309;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#B45309;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="c-sat" target="c-sqs">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="rules" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e8edf2;strokeColor=#19324b;fontColor=#19324b;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=18;" value="REGLAS TRANSVERSALES&#xa;1. El ACK de transporte no prueba persistencia: confirmar la escritura antes de retirar un pendiente.&#xa;2. Finca: entregar antes de 24 h. Si vence sin ACK, registrar incidente y conciliar una posible pérdida.&#xa;3. Satélite: novedad de #6; equipo, energía, tarifa y enlace necesitan validación. Se limita a fincas aisladas.&#xa;4. Alerta al caficultor: conservar SNS; #12 concreta canal y tiempos. Llegar al módem no es llegar al usuario.&#xa;5. Objetivo &lt; 5 min con ruta completa disponible; recuperación dentro de 24 h. No es un SLA ya probado." vertex="1">
-          <mxGeometry height="250" width="1705" x="45" y="1340" as="geometry" />
+        <mxCell id="e-17" value="ACK" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3B48CC;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#3B48CC;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="c-sqs" target="c-ddb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-18" value="Eventos" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3B48CC;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#3B48CC;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="c-api" target="c-ddb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-19" value="Umbral" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ED7100;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#ED7100;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="c-ddb" target="c-sns">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="note-0" value="Regla de Persistencia y Ahorro (#71): Ningun nodo borra su buffer local de 24 h sin ACK de AWS. Cambiar 48 de las 60 fincas sin cobertura a LoRaWAN compartido reduce su cuota de USD 147 a USD 0,20/mes (-USD 84.552/ano)." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;spacingLeft=14;" vertex="1" parent="1">
+          <mxGeometry x="24" y="884" width="1632" height="54" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
