@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" compressed="false">
+  <diagram id="lamina-portal-comprador" name="Lámina Portal Comprador">
+    <mxGraphModel dx="1422" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1680" pageHeight="980" background="#FAF8F5">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="header" value="AromaPacífico · Lámina 3/3: Portal Web del Comprador Internacional" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0A3D20;strokeColor=#4ADE80;fontColor=#FFFFFF;fontSize=16;fontStyle=1;align=left;spacingLeft=24;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1680" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="m3" value="Mockup Portal Web Comprador&#10;Consulta SACO-2026-CAU-7F3A9C12 + Certificado SCA + Bloqueo PII Ley 1581" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0F172A;strokeWidth=2;fontColor=#0F172A;fontSize=12;fontStyle=1;align=left;verticalAlign=top;spacingLeft=14;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="760" height="680" as="geometry" />
+        </mxCell>
+        <mxCell id="s3" value="Privacidad y Disponibilidad&#10;Tabla sacos_publicos | HMAC-SHA-256 | CloudFront + WAF + DR us-east-2 | Auditoría WORM 5 años" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF8F5;strokeColor=#9E1B1B;strokeWidth=2;fontColor=#0F172A;fontSize=12;fontStyle=1;align=left;verticalAlign=top;spacingLeft=14;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="840" y="100" width="800" height="680" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

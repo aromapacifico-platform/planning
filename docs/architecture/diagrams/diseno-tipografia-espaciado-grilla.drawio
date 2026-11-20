@@ -1,225 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mxfile host="Electron" compressed="false">
-  <diagram id="diseno-tipografia-espaciado-grilla" name="Sistema de Diseno Tipografia Grilla y Espaciado">
-    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1450" background="#FFFFFF">
+  <diagram id="diseno-tipografia-espaciado-grilla" name="Tipografía Espaciado Grilla">
+    <mxGraphModel dx="1422" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1680" pageHeight="980" background="#FAF8F5">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-
-        <!-- ENCABEZADO Y TITULOS DEL DIAGRAMA -->
-        <mxCell id="main-title" value="AromaPacífico - Sistema de Diseño: Tipografía, Grilla, Espaciado y Radios de Borde" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#0F172A;" vertex="1" parent="1">
-          <mxGeometry x="100" y="20" width="1600" height="40" as="geometry" />
+        <mxCell id="header" value="AromaPacífico · HU #36: Escalas Tipográficas Duales, Espaciado 8pt/4pt y Grillas" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0A3D20;strokeColor=#4ADE80;fontColor=#FFFFFF;fontSize=16;fontStyle=1;align=left;spacingLeft=24;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1680" height="72" as="geometry" />
         </mxCell>
-        <mxCell id="main-subtitle" value="Especificación ilustrativa · Base: 1rem = 16px · Supuestos de entorno sin medir · Registro con vehículo detenido" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=0;fontColor=#475569;" vertex="1" parent="1">
-          <mxGeometry x="100" y="60" width="1600" height="25" as="geometry" />
+        <mxCell id="t1" value="1. Escala Vehicular (Cabina 65 cm)&#10;Display 40px | Métrica 32px | Título 24px | Cuerpo 18px | Mínimo absoluto 14px" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0F4C81;strokeWidth=2;fontColor=#0F172A;fontSize=12;fontStyle=1;align=left;verticalAlign=top;spacingLeft=14;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="30" y="100" width="790" height="380" as="geometry" />
         </mxCell>
-
-        <!-- SECCION 1: ESCALAS TIPOGRAFICAS DUALES -->
-        <mxCell id="box-typography" value="1. ESCALAS TIPOGRÁFICAS DUALES: TELÉFONO EN CABINA (VEHICULAR) VS. CONSULTA WEB (ESCRITORIO)" style="swimlane;startSize=30;horizontal=1;fillColor=#F8FAFC;strokeColor=#475569;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#0F172A;" vertex="1" parent="1">
-          <mxGeometry x="40" y="100" width="1720" height="420" as="geometry" />
+        <mxCell id="t2" value="2. Escala Web Analítica (300 lux)&#10;H1 32px | H2 24px | Body 16px | Fira Code Mono (SACO-2026) | Legal 12px" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;fontColor=#0F172A;fontSize=12;fontStyle=1;align=left;verticalAlign=top;spacingLeft=14;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="850" y="100" width="800" height="380" as="geometry" />
         </mxCell>
-
-        <!-- CONTEXTO A: VEHICULAR / MOVIL -->
-        <mxCell id="card-phone-scale" value="TELÉFONO / CAMPO · REGISTRO DETENIDO&#xa;Supuestos: soporte a 50-80 cm, vibración 4-16 Hz, iluminación 5.000-15.000 lux en cabina" style="swimlane;startSize=35;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#135E34;" vertex="1" parent="box-typography">
-          <mxGeometry x="25" y="45" width="820" height="355" as="geometry" />
+        <mxCell id="t3" value="3. Espaciado 8pt/4pt&#10;4px, 8px, 12px (guarda táctil), 16px, 24px, 48px, 56px (botón vehicular)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF8F5;strokeColor=#9E1B1B;strokeWidth=2;fontColor=#0F172A;fontSize=12;fontStyle=1;align=left;verticalAlign=top;spacingLeft=14;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="30" y="510" width="790" height="340" as="geometry" />
         </mxCell>
-
-        <mxCell id="phone-display" value="Display Alerta: 40px (2.500rem) / Line-height: 48px / Heavy (800)&#xa;Uso: Avisos de detención o confirmación de entrega exitosa" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#135E34;strokeWidth=1.5;fontSize=13;align=left;spacingLeft=15;fontColor=#0F172A;fontStyle=0;" vertex="1" parent="card-phone-scale">
-          <mxGeometry x="15" y="45" width="790" height="38" as="geometry" />
+        <mxCell id="t4" value="4. Grillas Responsivas&#10;4 col Móvil | 8 col Tableta Acopio | 12 col Portal Web" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF8F5;strokeColor=#4A2E1B;strokeWidth=2;fontColor=#0F172A;fontSize=12;fontStyle=1;align=left;verticalAlign=top;spacingLeft=14;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="850" y="510" width="800" height="340" as="geometry" />
         </mxCell>
-        <mxCell id="phone-metric" value="Métrica de Impacto: 32px (2.000rem) / Line-height: 38px / Heavy (800)&#xa;Uso: Número de sacos (ej. 45 SACOS) y peso bruto en báscula (2.700 KG)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1;fontSize=13;align=left;spacingLeft=15;fontColor=#0F172A;fontStyle=0;" vertex="1" parent="card-phone-scale">
-          <mxGeometry x="15" y="90" width="790" height="38" as="geometry" />
-        </mxCell>
-        <mxCell id="phone-title" value="Título de Tarjeta: 24px (1.500rem) / Line-height: 32px / Bold (700)&#xa;Uso: Destino de viaje, cabecera de lote y código de saco" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1;fontSize=13;align=left;spacingLeft=15;fontColor=#0F172A;fontStyle=0;" vertex="1" parent="card-phone-scale">
-          <mxGeometry x="15" y="135" width="790" height="38" as="geometry" />
-        </mxCell>
-        <mxCell id="phone-subtitle" value="Subtítulo y Etiquetas: 20px (1.250rem) / Line-height: 28px / SemiBold (600)&#xa;Uso: Indicador de centro de acopio (Cauca, Huila, Tolima) y placas del vehículo" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1;fontSize=13;align=left;spacingLeft=15;fontColor=#0F172A;fontStyle=0;" vertex="1" parent="card-phone-scale">
-          <mxGeometry x="15" y="180" width="790" height="38" as="geometry" />
-        </mxCell>
-        <mxCell id="phone-body" value="Cuerpo Vehicular Base: 18px (1.125rem) / Line-height: 26px / SemiBold (600)&#xa;Uso: Instrucciones y datos de entrega; lectura en campo pendiente de prueba" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1;fontSize=13;align=left;spacingLeft=15;fontColor=#0F172A;fontStyle=0;" vertex="1" parent="card-phone-scale">
-          <mxGeometry x="15" y="225" width="790" height="38" as="geometry" />
-        </mxCell>
-        <mxCell id="phone-button" value="Botón de Acción en Cabina: 18px (1.125rem) / Line-height: 24px / Bold (700)&#xa;Decisión: altura mínima 56px; registro con vehículo detenido" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#135E34;strokeWidth=1.5;fontSize=13;align=left;spacingLeft=15;fontColor=#135E34;fontStyle=1;" vertex="1" parent="card-phone-scale">
-          <mxGeometry x="15" y="270" width="790" height="38" as="geometry" />
-        </mxCell>
-        <mxCell id="phone-caption" value="Mínimo Interno en Cabina: 14px (0.875rem) / Line-height: 20px / SemiBold (600)&#xa;Decisión de diseño, no requisito legal; marcas de tiempo UTC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF2F2;strokeColor=#B91C1C;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=15;fontColor=#7F1D1D;fontStyle=1;" vertex="1" parent="card-phone-scale">
-          <mxGeometry x="15" y="312" width="790" height="35" as="geometry" />
-        </mxCell>
-
-        <!-- CONTEXTO B: WEB COMPRADOR -->
-        <mxCell id="card-web-scale" value="CONSULTA WEB DEL COMPRADOR&#xa;Supuestos: distancia 45-60 cm, iluminación 300-500 lux · Datos públicos según seguridad §5.1" style="swimlane;startSize=35;fillColor=#FFFFFF;strokeColor=#0F4C81;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#0F4C81;" vertex="1" parent="box-typography">
-          <mxGeometry x="875" y="45" width="820" height="355" as="geometry" />
-        </mxCell>
-
-        <mxCell id="web-hero" value="Hero Bienvenida: 48px (3.000rem) / Line-height: 56px / Heavy (800)&#xa;Uso: Titular de portada en portal internacional de consulta de origen y calidad" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;strokeWidth=1;fontSize=13;align=left;spacingLeft=15;fontColor=#0F172A;fontStyle=0;" vertex="1" parent="card-web-scale">
-          <mxGeometry x="15" y="40" width="790" height="34" as="geometry" />
-        </mxCell>
-        <mxCell id="web-h1" value="H1 Título Principal: 32px (2.000rem) / Line-height: 40px / Heavy (800)&#xa;Uso: Certificado de Trazabilidad del Saco y Verificación Criptográfica HMAC-SHA-256" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#0F4C81;strokeWidth=1.5;fontSize=13;align=left;spacingLeft=15;fontColor=#0F4C81;fontStyle=0;" vertex="1" parent="card-web-scale">
-          <mxGeometry x="15" y="79" width="790" height="34" as="geometry" />
-        </mxCell>
-        <mxCell id="web-h2" value="H2 Encabezado de Sección: 24px (1.500rem) / Line-height: 32px / Bold (700)&#xa;Uso: Bloques de secado, origen y datos de puerto" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1;fontSize=13;align=left;spacingLeft=15;fontColor=#0F172A;fontStyle=0;" vertex="1" parent="card-web-scale">
-          <mxGeometry x="15" y="118" width="790" height="34" as="geometry" />
-        </mxCell>
-        <mxCell id="web-h3" value="H3 Título de Módulo: 20px (1.250rem) / Line-height: 28px / SemiBold (600)&#xa;Uso: Variedad de café y municipio de origen" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1;fontSize=13;align=left;spacingLeft=15;fontColor=#0F172A;fontStyle=0;" vertex="1" parent="card-web-scale">
-          <mxGeometry x="15" y="157" width="790" height="34" as="geometry" />
-        </mxCell>
-        <mxCell id="web-h4" value="H4 Subtítulo: 18px (1.125rem) / Line-height: 24px / SemiBold (600)&#xa;Uso: Encabezados de subsección" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1;fontSize=13;align=left;spacingLeft=15;fontColor=#0F172A;fontStyle=0;" vertex="1" parent="card-web-scale">
-          <mxGeometry x="15" y="196" width="790" height="34" as="geometry" />
-        </mxCell>
-        <mxCell id="web-body" value="Cuerpo Web Estándar: 16px (1.000rem) / Line-height: 24px / Regular (400)&#xa;Uso: Descripciones de origen municipal y variedad" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1;fontSize=13;align=left;spacingLeft=15;fontColor=#0F172A;fontStyle=0;" vertex="1" parent="card-web-scale">
-          <mxGeometry x="15" y="235" width="790" height="34" as="geometry" />
-        </mxCell>
-        <mxCell id="web-table" value="Tabla de Datos: 14px (0.875rem) / Line-height: 20px / Regular (400)&#xa;Uso: Humedad, temperatura, peso y fechas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1;fontSize=13;align=left;spacingLeft=15;fontColor=#0F172A;fontStyle=0;" vertex="1" parent="card-web-scale">
-          <mxGeometry x="15" y="274" width="790" height="34" as="geometry" />
-        </mxCell>
-        <mxCell id="web-legal" value="Notas Legales y Descargos: 12px (0.750rem) / Line-height: 16px / Regular (400)&#xa;Uso: Cumplimiento Ley 1581 de 2012 (protección de datos personales) y licencias FNC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;strokeWidth=1;fontSize=12;align=left;spacingLeft=15;fontColor=#475569;fontStyle=0;" vertex="1" parent="card-web-scale">
-          <mxGeometry x="15" y="313" width="790" height="34" as="geometry" />
-        </mxCell>
-
-
-        <!-- SECCION 2: SISTEMA DE ESPACIADO 8PT / 4PT, GRILLAS Y RADIOS -->
-        <mxCell id="box-spacing-grid" value="2. SISTEMA MODULAR DE ESPACIADO 8PT / 4PT, GRILLAS RESPONSIVAS Y RADIOS DE BORDE" style="swimlane;startSize=30;horizontal=1;fillColor=#F8FAFC;strokeColor=#475569;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#0F172A;" vertex="1" parent="1">
-          <mxGeometry x="40" y="540" width="1720" height="380" as="geometry" />
-        </mxCell>
-
-        <!-- ESPACIADO 8PT / 4PT -->
-        <mxCell id="card-spacing" value="ESCALA DE ESPACIADO ATÓMICO (BASE 8PT / 4PT)&#xa;Valores en múltiplos directos para armonía visual y consistencia de layout" style="swimlane;startSize=30;fillColor=#FFFFFF;strokeColor=#475569;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#0F172A;" vertex="1" parent="box-spacing-grid">
-          <mxGeometry x="25" y="45" width="530" height="315" as="geometry" />
-        </mxCell>
-        <mxCell id="sp-xxs" value="--ap-space-xxs: 4px (0.25rem) | Micro-ajustes y separaciones internas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#CBD5E1;fontSize=12;align=left;spacingLeft=10;fontColor=#0F172A;" vertex="1" parent="card-spacing">
-          <mxGeometry x="15" y="35" width="500" height="24" as="geometry" />
-        </mxCell>
-        <mxCell id="sp-xs" value="--ap-space-xs: 8px (0.50rem) | Padding interno de badges e insignias" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontSize=12;align=left;spacingLeft=10;fontColor=#0F172A;" vertex="1" parent="card-spacing">
-          <mxGeometry x="15" y="59" width="500" height="24" as="geometry" />
-        </mxCell>
-        <mxCell id="sp-sm" value="--ap-space-sm: 12px (0.75rem) | Separación obligatoria entre botones vehiculares" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#135E34;fontSize=12;align=left;spacingLeft=10;fontColor=#135E34;fontStyle=1;" vertex="1" parent="card-spacing">
-          <mxGeometry x="15" y="83" width="500" height="24" as="geometry" />
-        </mxCell>
-        <mxCell id="sp-md" value="--ap-space-md: 16px (1.00rem) | Padding estándar móvil y canaleta de teléfono" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontSize=12;align=left;spacingLeft=10;fontColor=#0F172A;" vertex="1" parent="card-spacing">
-          <mxGeometry x="15" y="107" width="500" height="24" as="geometry" />
-        </mxCell>
-        <mxCell id="sp-lg" value="--ap-space-lg: 24px (1.50rem) | Padding vehicular en cabina y canaleta web" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#135E34;fontSize=12;align=left;spacingLeft=10;fontColor=#135E34;fontStyle=1;" vertex="1" parent="card-spacing">
-          <mxGeometry x="15" y="131" width="500" height="24" as="geometry" />
-        </mxCell>
-        <mxCell id="sp-xl" value="--ap-space-xl: 32px (2.00rem) | Separación entre bloques mayores de pantalla" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontSize=12;align=left;spacingLeft=10;fontColor=#0F172A;" vertex="1" parent="card-spacing">
-          <mxGeometry x="15" y="155" width="500" height="24" as="geometry" />
-        </mxCell>
-        <mxCell id="sp-2xl" value="--ap-space-2xl: 40px (2.50rem) | Separación de paneles amplios" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontSize=12;align=left;spacingLeft=10;fontColor=#0F172A;" vertex="1" parent="card-spacing">
-          <mxGeometry x="15" y="179" width="500" height="24" as="geometry" />
-        </mxCell>
-        <mxCell id="sp-3xl" value="--ap-space-3xl: 48px (3.00rem) | Separación de secciones" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontSize=12;align=left;spacingLeft=10;fontColor=#0F172A;" vertex="1" parent="card-spacing">
-          <mxGeometry x="15" y="203" width="500" height="24" as="geometry" />
-        </mxCell>
-        <mxCell id="sp-4xl" value="--ap-space-4xl: 64px (4.00rem) | Separación de secciones" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontSize=12;align=left;spacingLeft=10;fontColor=#0F172A;" vertex="1" parent="card-spacing">
-          <mxGeometry x="15" y="227" width="500" height="24" as="geometry" />
-        </mxCell>
-        <mxCell id="sp-5xl" value="--ap-space-5xl: 80px (5.00rem) | Separación de secciones" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontSize=12;align=left;spacingLeft=10;fontColor=#0F172A;" vertex="1" parent="card-spacing">
-          <mxGeometry x="15" y="251" width="500" height="24" as="geometry" />
-        </mxCell>
-        <mxCell id="sp-veh" value="--ap-vehicular-touch-target: 56px | Altura mínima interna en cabina" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#135E34;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;fontColor=#135E34;fontStyle=1;" vertex="1" parent="card-spacing">
-          <mxGeometry x="15" y="275" width="500" height="24" as="geometry" />
-        </mxCell>
-
-        <!-- GRILLAS RESPONSIVAS -->
-        <mxCell id="card-grids" value="SISTEMA DE GRILLAS RESPONSIVAS&#xa;Estructuración según viewport y entorno de despliegue" style="swimlane;startSize=30;fillColor=#FFFFFF;strokeColor=#475569;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#0F172A;" vertex="1" parent="box-spacing-grid">
-          <mxGeometry x="595" y="45" width="530" height="315" as="geometry" />
-        </mxCell>
-        <mxCell id="gr-phone" value="GRILLA TELÉFONO / VEHÍCULO:&#xa;• Columnas: 4 columnas fluidas&#xa;• Canaleta (Gutter): 16px&#xa;• Margen Exterior: 16px (20px en cabina para fundas rugerizadas)&#xa;• Comportamiento: Tarjetas en ancho completo (4 cols) para lectura clara" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#135E34;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=15;fontColor=#0F172A;fontStyle=0;" vertex="1" parent="card-grids">
-          <mxGeometry x="15" y="40" width="500" height="75" as="geometry" />
-        </mxCell>
-        <mxCell id="gr-tablet" value="GRILLA TABLETA (CENTROS DE ACOPIO):&#xa;• Columnas: 8 columnas simétricas&#xa;• Canaleta (Gutter): 20px&#xa;• Margen Exterior: 24px&#xa;• Comportamiento: Doble panel (lista de sacos 3 cols / detalle de pesaje 5 cols)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontSize=12;align=left;spacingLeft=15;fontColor=#0F172A;fontStyle=0;" vertex="1" parent="card-grids">
-          <mxGeometry x="15" y="125" width="500" height="75" as="geometry" />
-        </mxCell>
-        <mxCell id="gr-web" value="GRILLA WEB COMPRADOR (ESCRITORIO):&#xa;• Columnas: 12 columnas modulares&#xa;• Canaleta (Gutter): 24px&#xa;• Ancho Máximo Contenedor: 1280px con centrado automático&#xa;• Comportamiento: Distribución 4-4-4 para métricas o 8-4 para reporte y mapa" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#0F4C81;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=15;fontColor=#0F172A;fontStyle=0;" vertex="1" parent="card-grids">
-          <mxGeometry x="15" y="210" width="500" height="85" as="geometry" />
-        </mxCell>
-
-        <!-- RADIOS DE BORDE -->
-        <mxCell id="card-radii" value="TOKENS DE RADIOS DE BORDE (BORDER-RADIUS)&#xa;Estética sobria, robusta e industrial conforme a FNC" style="swimlane;startSize=30;fillColor=#FFFFFF;strokeColor=#475569;strokeWidth=1.5;rounded=1;fontSize=12;fontStyle=1;fontColor=#0F172A;" vertex="1" parent="box-spacing-grid">
-          <mxGeometry x="1165" y="45" width="530" height="315" as="geometry" />
-        </mxCell>
-        <mxCell id="rd-none" value="--ap-radius-none: 0px | Bordes rectos para divisores y tablas de datos" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontSize=12;align=left;spacingLeft=10;fontColor=#0F172A;" vertex="1" parent="card-radii">
-          <mxGeometry x="15" y="40" width="500" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="rd-sm" value="--ap-radius-sm: 4px | Micro-radios para tooltips y selectores compactos" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;fontSize=12;align=left;spacingLeft=10;fontColor=#0F172A;" vertex="1" parent="card-radii">
-          <mxGeometry x="15" y="80" width="500" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="rd-md" value="--ap-radius-md: 8px | Estándar de botones móviles y badges de estado" style="rounded=1;arcSize=16;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#135E34;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#135E34;fontStyle=1;" vertex="1" parent="card-radii">
-          <mxGeometry x="15" y="120" width="500" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="rd-lg" value="--ap-radius-lg: 12px | Tarjetas móviles de entrega y paneles de alerta" style="rounded=1;arcSize=24;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#135E34;strokeWidth=1.5;fontSize=12;align=left;spacingLeft=10;fontColor=#135E34;fontStyle=1;" vertex="1" parent="card-radii">
-          <mxGeometry x="15" y="160" width="500" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="rd-xl" value="--ap-radius-xl: 16px | Diálogos modales y hojas de confirmación inferior" style="rounded=1;arcSize=32;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontSize=12;align=left;spacingLeft=10;fontColor=#0F172A;" vertex="1" parent="card-radii">
-          <mxGeometry x="15" y="200" width="500" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="rd-2xl" value="--ap-radius-2xl: 24px | Tarjetas destacadas en el portal web del comprador" style="rounded=1;arcSize=40;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#0F4C81;fontSize=12;align=left;spacingLeft=10;fontColor=#0F4C81;" vertex="1" parent="card-radii">
-          <mxGeometry x="15" y="240" width="500" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="rd-full" value="--ap-radius-full: 9999px | Pastillas circulares de filtro y botones FAB" style="rounded=1;arcSize=50;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#475569;fontSize=12;align=left;spacingLeft=10;fontColor=#0F172A;" vertex="1" parent="card-radii">
-          <mxGeometry x="15" y="280" width="500" height="25" as="geometry" />
-        </mxCell>
-
-
-        <!-- SECCION 3: ANATOMIA COMPARATIVA DE COMPONENTES DE INTERFAZ -->
-        <mxCell id="box-components" value="3. ANATOMÍA Y COMPARATIVA DE COMPONENTES: CABINA VEHICULAR VS. CONSULTA WEB DEL COMPRADOR" style="swimlane;startSize=30;horizontal=1;fillColor=#F8FAFC;strokeColor=#475569;strokeWidth=2;rounded=1;fontSize=13;fontStyle=1;fontColor=#0F172A;" vertex="1" parent="1">
-          <mxGeometry x="40" y="940" width="1720" height="470" as="geometry" />
-        </mxCell>
-
-        <!-- TARJETA VEHICULAR DEL TRANSPORTADOR -->
-        <mxCell id="card-vehicular-ui" value="EJEMPLO TIPOGRÁFICO: REGISTRO CON VEHÍCULO DETENIDO&#xa;Esquema ilustrativo; legibilidad en campo pendiente de prueba" style="swimlane;startSize=30;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;rounded=1;fontSize=12;fontStyle=1;fontColor=#135E34;" vertex="1" parent="box-components">
-          <mxGeometry x="25" y="45" width="820" height="405" as="geometry" />
-        </mxCell>
-
-        <mxCell id="v-badge" value="INSIGNIA DE ESTADO: [ CAMIÓN ] EN VIAJE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=2;fontSize=14;fontStyle=1;fontColor=#1E40AF;align=center;" vertex="1" parent="card-vehicular-ui">
-          <mxGeometry x="25" y="45" width="340" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="v-route" value="RUTA: CAUCA &gt; ACOPIO POPAYAN (VIAJE-2026-CAU-084)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;fontSize=12;fontStyle=1;fontColor=#334155;align=center;" vertex="1" parent="card-vehicular-ui">
-          <mxGeometry x="385" y="45" width="410" height="40" as="geometry" />
-        </mxCell>
-
-        <mxCell id="v-metric-box" value="CARGA TOTAL DEL CAMIÓN (MÉTRICA PRIMARIA)&#xa;&#xa;45 SACOS DE 60 KG (2.700 KG NETO)&#xa;Font: 32px / 800 | Legibilidad en campo pendiente" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#135E34;strokeWidth=2;fontSize=15;fontStyle=1;fontColor=#0D4A27;align=center;" vertex="1" parent="card-vehicular-ui">
-          <mxGeometry x="25" y="100" width="770" height="85" as="geometry" />
-        </mxCell>
-
-        <mxCell id="v-code-box" value="LOTE ACTIVO A ENTREGAR: SACO-2026-CAU-7F3A9C12&#xa;Pila mono local (24px / 700); la fuente efectiva depende del sistema&#xa;Ejemplo sin cédula ni coordenadas de finca" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0F172A;strokeWidth=1.5;fontSize=13;fontStyle=1;fontColor=#0F172A;align=center;" vertex="1" parent="card-vehicular-ui">
-          <mxGeometry x="25" y="200" width="770" height="65" as="geometry" />
-        </mxCell>
-
-        <mxCell id="v-btn-primary" value="CONFIRMAR ENTREGA CON EL VEHÍCULO DETENIDO (ALTURA: 56PX)&#xa;Font: 18px / 700 | Ejemplo de jerarquía; sin funcionalidad implementada" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#135E34;strokeColor=#0D4A27;strokeWidth=2;fontSize=15;fontStyle=1;fontColor=#FFFFFF;align=center;" vertex="1" parent="card-vehicular-ui">
-          <mxGeometry x="25" y="280" width="770" height="56" as="geometry" />
-        </mxCell>
-
-        <mxCell id="v-footer-note" value="Mínimo interno: 14px / 600 | Margen exterior: 20px | Padding tarjeta: 24px | Gap: 12px&#xa;Registro detenido; sincronización sin conexión fuera del alcance de esta HU" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontColor=#475569;" vertex="1" parent="card-vehicular-ui">
-          <mxGeometry x="25" y="345" width="770" height="40" as="geometry" />
-        </mxCell>
-
-        <!-- TARJETA WEB DEL COMPRADOR INTERNACIONAL -->
-        <mxCell id="card-web-ui" value="EJEMPLO TIPOGRÁFICO: CONSULTA PÚBLICA DEL SACO&#xa;Solo campos permitidos por seguridad-datos-saco.md §5.1; sin implementar HU #37/#38" style="swimlane;startSize=30;fillColor=#FFFFFF;strokeColor=#0F4C81;strokeWidth=2;rounded=1;fontSize=12;fontStyle=1;fontColor=#0F4C81;" vertex="1" parent="box-components">
-          <mxGeometry x="875" y="45" width="820" height="405" as="geometry" />
-        </mxCell>
-
-        <mxCell id="w-badge" value="ESTADO: [ ESCUDO ] ACEPTADO" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=1.5;fontSize=13;fontStyle=1;fontColor=#14532D;align=center;" vertex="1" parent="card-web-ui">
-          <mxGeometry x="25" y="45" width="380" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="w-code" value="CÓDIGO: SACO-2026-CAU-7F3A9C12" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#0F4C81;fontSize=12;fontStyle=1;fontColor=#0F4C81;align=center;" vertex="1" parent="card-web-ui">
-          <mxGeometry x="425" y="45" width="370" height="40" as="geometry" />
-        </mxCell>
-
-        <mxCell id="w-grid-3cols" value="ESQUEMA DE 3 BLOQUES SOBRE GRILLA WEB DE 12 COLUMNAS&#xa;COSECHA Y ENTREGA&#xa;Cosecha: 2026-10-01 | Entrega a puerto: 2026-10-10&#xa;ORIGEN MUNICIPAL&#xa;Departamento: Cauca | Municipio: Popayán&#xa;Variedad: Castillo y Colombia&#xa;METROLOGÍA Y SECADO&#xa;Humedad: 11.2 % | Temperatura: 21 °C | Peso: 60 kg" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;fontSize=12;fontStyle=0;fontColor=#0F172A;align=left;spacingLeft=15;" vertex="1" parent="card-web-ui">
-          <mxGeometry x="25" y="100" width="770" height="175" as="geometry" />
-        </mxCell>
-
-        <mxCell id="w-btn-export" value="CONSULTA PÚBLICA · SOLO CAMPOS AUTORIZADOS (SEGURIDAD §5.1)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F4C81;strokeColor=#0B375D;strokeWidth=1.5;fontSize=13;fontStyle=1;fontColor=#FFFFFF;align=center;" vertex="1" parent="card-web-ui">
-          <mxGeometry x="25" y="290" width="770" height="42" as="geometry" />
-        </mxCell>
-
-        <mxCell id="w-footer-legal" value="Ejemplo ilustrativo de jerarquía tipográfica; datos ficticios dentro de la lista pública autorizada.&#xa;Excluye identidad, finca, coordenadas y georrutas; no es una certificación de privacidad." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontColor=#475569;" vertex="1" parent="card-web-ui">
-          <mxGeometry x="25" y="345" width="770" height="40" as="geometry" />
-        </mxCell>
-
       </root>
     </mxGraphModel>
   </diagram>
 </mxfile>
-

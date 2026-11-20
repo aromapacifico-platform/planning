@@ -1,156 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mxfile host="Electron" compressed="false">
-  <diagram id="seguridad-secuencia-proteccion-datos" name="Secuencia Proteccion Datos">
-    <mxGraphModel dx="1422" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1424" pageHeight="800" background="#FFFFFF">
+  <diagram id="seguridad-secuencia-proteccion-datos" name="Secuencia Protección de Datos Ley 1581">
+    <mxGraphModel dx="1422" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="984" background="#FFFFFF">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="header-title" value="AromaPacifico - Secuencia de Proteccion de Datos y Consulta del Saco&#10;Alta en finca -&gt; Token HMAC-SHA-256 (KMS) -&gt; Tabla disjunta sacos_publicos -&gt; Consulta sin PII" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0A3D20;strokeColor=#4ADE80;fontColor=#FFFFFF;fontSize=16;fontStyle=1;align=left;spacingLeft=24;" vertex="1" parent="1">
-          <mxGeometry x="0" y="0" width="1424" height="76" as="geometry" />
+        <mxCell id="title" value="AromaPacífico · Secuencia de Protección de Datos y Consulta del Saco&#10;Tokenización irreversible HMAC-SHA-256 en AWS KMS · Proyección disjunta sin PII · Auditoría WORM 5 años" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=16;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="28" y="14" width="1544" height="56" as="geometry" />
         </mxCell>
-        <mxCell id="lane-caf" value="Caficultor" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#232F3E;strokeWidth=2;dashed=1;swimlaneFillColor=#F8FAFC;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="104" width="240" height="612" as="geometry" />
+        <mxCell id="caf" value="Caficultor&#10;App Móvil (Cognito)" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#135E34;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.iot_sensor;" vertex="1" parent="1">
+          <mxGeometry x="133" y="121" width="54" height="54" as="geometry" />
         </mxCell>
-        <mxCell id="lane-api" value="API + Lambda" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#ED7100;strokeWidth=2;dashed=1;swimlaneFillColor=#F8FAFC;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
-          <mxGeometry x="316" y="104" width="240" height="612" as="geometry" />
+        <mxCell id="api" value="API Gateway + Lambda&#10;Subred App .10" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;" vertex="1" parent="1">
+          <mxGeometry x="453" y="121" width="54" height="54" as="geometry" />
         </mxCell>
-        <mxCell id="lane-kms" value="AWS KMS" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#DD344C;strokeWidth=2;dashed=1;swimlaneFillColor=#F8FAFC;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
-          <mxGeometry x="592" y="104" width="240" height="612" as="geometry" />
+        <mxCell id="kms" value="AWS KMS&#10;Semilla HMAC-SHA-256" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.key_management_service;" vertex="1" parent="1">
+          <mxGeometry x="773" y="121" width="54" height="54" as="geometry" />
         </mxCell>
-        <mxCell id="lane-ddb" value="DynamoDB" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#3B48CC;strokeWidth=2;dashed=1;swimlaneFillColor=#F8FAFC;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
-          <mxGeometry x="868" y="104" width="240" height="612" as="geometry" />
+        <mxCell id="ddb" value="Amazon DynamoDB&#10;Privada vs Pública" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3B48CC;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.dynamodb;" vertex="1" parent="1">
+          <mxGeometry x="1093" y="121" width="54" height="54" as="geometry" />
         </mxCell>
-        <mxCell id="lane-buy" value="Comprador" style="swimlane;startSize=32;horizontal=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#232F3E;strokeWidth=2;dashed=1;swimlaneFillColor=#F8FAFC;fontColor=#0F172A;fontSize=13;fontStyle=1;align=left;spacingLeft=12;" vertex="1" parent="1">
-          <mxGeometry x="1144" y="104" width="240" height="612" as="geometry" />
+        <mxCell id="buy" value="Comprador Global&#10;CloudFront + WAF" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3E;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.users;" vertex="1" parent="1">
+          <mxGeometry x="1413" y="121" width="54" height="54" as="geometry" />
         </mxCell>
-        <mxCell id="caf" value="Caficultor&#10;App Movil (Cognito)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#232F3E;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
-          <mxGeometry x="50" y="146" width="220" height="66" as="geometry" />
+        <mxCell id="act-1-s" value="" style="rounded=1;fillColor=#135E34;strokeColor=#135E34;opacity=40;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="154" y="252" width="12" height="24" as="geometry" />
         </mxCell>
-        <mxCell id="caf-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3E;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.user;" vertex="1" parent="caf">
-          <mxGeometry x="10" y="13" width="40" height="40" as="geometry" />
+        <mxCell id="act-1-t" value="" style="rounded=1;fillColor=#135E34;strokeColor=#135E34;opacity=40;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="474" y="252" width="12" height="24" as="geometry" />
         </mxCell>
-        <mxCell id="api" value="API + Lambda&#10;Subred App .10" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#ED7100;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
-          <mxGeometry x="326" y="146" width="220" height="66" as="geometry" />
-        </mxCell>
-        <mxCell id="api-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;" vertex="1" parent="api">
-          <mxGeometry x="10" y="13" width="40" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="kms" value="AWS KMS&#10;Semilla HMAC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DD344C;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
-          <mxGeometry x="602" y="146" width="220" height="66" as="geometry" />
-        </mxCell>
-        <mxCell id="kms-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.key_management_service;" vertex="1" parent="kms">
-          <mxGeometry x="10" y="13" width="40" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="ddb" value="DynamoDB&#10;Privada vs Publica" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B48CC;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
-          <mxGeometry x="878" y="146" width="220" height="66" as="geometry" />
-        </mxCell>
-        <mxCell id="ddb-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3B48CC;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.dynamodb;" vertex="1" parent="ddb">
-          <mxGeometry x="10" y="13" width="40" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="buy" value="Comprador&#10;Web (CloudFront)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#232F3E;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
-          <mxGeometry x="1154" y="146" width="220" height="66" as="geometry" />
-        </mxCell>
-        <mxCell id="buy-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3E;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.client;" vertex="1" parent="buy">
-          <mxGeometry x="10" y="13" width="40" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="st-1-s" value="Paso 1&#10;Emite evento" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
-          <mxGeometry x="50" y="232" width="220" height="56" as="geometry" />
-        </mxCell>
-        <mxCell id="st-1-s-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3E;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.user;" vertex="1" parent="st-1-s">
-          <mxGeometry x="10" y="8" width="40" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="st-1-t" value="Recibe (1)&#10;1. Alta de saco 60 kg (HTTPS +" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
-          <mxGeometry x="326" y="232" width="220" height="56" as="geometry" />
-        </mxCell>
-        <mxCell id="st-1-t-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;" vertex="1" parent="st-1-t">
-          <mxGeometry x="10" y="8" width="40" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="st-2-s" value="Paso 2&#10;Emite evento" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DD344C;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
-          <mxGeometry x="326" y="306" width="220" height="56" as="geometry" />
-        </mxCell>
-        <mxCell id="st-2-s-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;" vertex="1" parent="st-2-s">
-          <mxGeometry x="10" y="8" width="40" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="st-2-t" value="Recibe (2)&#10;2. Genera token HMAC-SHA-256 i" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DD344C;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
-          <mxGeometry x="602" y="306" width="220" height="56" as="geometry" />
-        </mxCell>
-        <mxCell id="st-2-t-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.key_management_service;" vertex="1" parent="st-2-t">
-          <mxGeometry x="10" y="8" width="40" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="st-3-s" value="Paso 3&#10;Emite evento" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B48CC;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
-          <mxGeometry x="326" y="380" width="220" height="56" as="geometry" />
-        </mxCell>
-        <mxCell id="st-3-s-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;" vertex="1" parent="st-3-s">
-          <mxGeometry x="10" y="8" width="40" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="st-3-t" value="Recibe (3)&#10;3. Escribe evento completo en " style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B48CC;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
-          <mxGeometry x="878" y="380" width="220" height="56" as="geometry" />
-        </mxCell>
-        <mxCell id="st-3-t-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3B48CC;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.dynamodb;" vertex="1" parent="st-3-t">
-          <mxGeometry x="10" y="8" width="40" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="st-4-s" value="Paso 4&#10;4. Proyeccion filtra PII -&gt; sacos_publicos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
-          <mxGeometry x="878" y="454" width="220" height="56" as="geometry" />
-        </mxCell>
-        <mxCell id="st-4-s-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3B48CC;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.dynamodb;" vertex="1" parent="st-4-s">
-          <mxGeometry x="10" y="8" width="40" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="st-5-s" value="Paso 5&#10;Emite evento" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8C4FFF;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
-          <mxGeometry x="1154" y="528" width="220" height="56" as="geometry" />
-        </mxCell>
-        <mxCell id="st-5-s-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3E;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.client;" vertex="1" parent="st-5-s">
-          <mxGeometry x="10" y="8" width="40" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="st-5-t" value="Recibe (5)&#10;5. Consulta codigo SACO-2026-D" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8C4FFF;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
-          <mxGeometry x="326" y="528" width="220" height="56" as="geometry" />
-        </mxCell>
-        <mxCell id="st-5-t-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;" vertex="1" parent="st-5-t">
-          <mxGeometry x="10" y="8" width="40" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="st-6-s" value="Paso 6&#10;Emite evento" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0F4C81;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
-          <mxGeometry x="326" y="602" width="220" height="56" as="geometry" />
-        </mxCell>
-        <mxCell id="st-6-s-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;" vertex="1" parent="st-6-s">
-          <mxGeometry x="10" y="8" width="40" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="st-6-t" value="Recibe (6)&#10;6. Lee exclusivamente tabla sa" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0F4C81;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
-          <mxGeometry x="878" y="602" width="220" height="56" as="geometry" />
-        </mxCell>
-        <mxCell id="st-6-t-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3B48CC;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.dynamodb;" vertex="1" parent="st-6-t">
-          <mxGeometry x="10" y="8" width="40" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="st-7-s" value="Paso 7&#10;Emite evento" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
-          <mxGeometry x="326" y="676" width="220" height="56" as="geometry" />
-        </mxCell>
-        <mxCell id="st-7-s-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;" vertex="1" parent="st-7-s">
-          <mxGeometry x="10" y="8" width="40" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="st-7-t" value="Recibe (7)&#10;7. Devuelve origen, secado y e" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=56;spacingRight=8;" vertex="1" parent="1">
-          <mxGeometry x="1154" y="676" width="220" height="56" as="geometry" />
-        </mxCell>
-        <mxCell id="st-7-t-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3E;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.client;" vertex="1" parent="st-7-t">
-          <mxGeometry x="10" y="8" width="40" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="e-0" value="1. Alta de saco 60 kg (HTTPS + JWT)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#135E34;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#135E34;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="st-1-s" target="st-1-t">
+        <mxCell id="msg-1" value="1. Alta de saco 60 kg (HTTPS + JWT Cognito)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#135E34;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#135E34;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="act-1-s" target="act-1-t">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e-1" value="2. Genera token HMAC-SHA-256 irreversible" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#DD344C;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#DD344C;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="st-2-s" target="st-2-t">
+        <mxCell id="act-2-s" value="" style="rounded=1;fillColor=#DD344C;strokeColor=#DD344C;opacity=40;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="474" y="346" width="12" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="act-2-t" value="" style="rounded=1;fillColor=#DD344C;strokeColor=#DD344C;opacity=40;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="794" y="346" width="12" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="msg-2" value="2. Genera token irreversible SACO-2026-DEP-HASH8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#DD344C;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#DD344C;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="act-2-s" target="act-2-t">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e-2" value="3. Escribe evento completo en sacos_eventos" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3B48CC;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#3B48CC;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="st-3-s" target="st-3-t">
+        <mxCell id="act-3-s" value="" style="rounded=1;fillColor=#3B48CC;strokeColor=#3B48CC;opacity=40;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="474" y="440" width="12" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="act-3-t" value="" style="rounded=1;fillColor=#3B48CC;strokeColor=#3B48CC;opacity=40;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1114" y="440" width="12" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="msg-3" value="3. Escribe evento completo cifrado en sacos_eventos" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#3B48CC;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#3B48CC;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="act-3-s" target="act-3-t">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e-3" value="5. Consulta codigo SACO-2026-DEP-HASH8 (WAF)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8C4FFF;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#8C4FFF;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="st-5-s" target="st-5-t">
+        <mxCell id="act-4-s" value="" style="rounded=1;fillColor=#135E34;strokeColor=#135E34;opacity=40;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1114" y="534" width="12" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="msg-4" value="4. Proyección filtra PII -&gt; tabla sacos_publicos" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#135E34;strokeWidth=2;dashed=1;fontSize=12;fontStyle=1;fontColor=#135E34;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="act-4-s" target="act-4-s">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e-4" value="6. Lee exclusivamente tabla sacos_publicos" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0F4C81;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#0F4C81;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="st-6-s" target="st-6-t">
+        <mxCell id="act-5-s" value="" style="rounded=1;fillColor=#8C4FFF;strokeColor=#8C4FFF;opacity=40;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1434" y="628" width="12" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="act-5-t" value="" style="rounded=1;fillColor=#8C4FFF;strokeColor=#8C4FFF;opacity=40;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="474" y="628" width="12" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="msg-5" value="5. Consulta pública por código vía CloudFront + WAF" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8C4FFF;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#8C4FFF;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="act-5-s" target="act-5-t">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e-5" value="7. Devuelve origen, secado y estado (0 PII)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#135E34;strokeWidth=2;dashed=1;fontSize=12;fontStyle=1;fontColor=#135E34;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="st-7-s" target="st-7-t">
+        <mxCell id="act-6-s" value="" style="rounded=1;fillColor=#0F4C81;strokeColor=#0F4C81;opacity=40;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="474" y="722" width="12" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="act-6-t" value="" style="rounded=1;fillColor=#0F4C81;strokeColor=#0F4C81;opacity=40;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1114" y="722" width="12" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="msg-6" value="6. Lectura exclusiva de sacos_publicos (sin cédula/GPS)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#0F4C81;strokeWidth=2;dashed=0;fontSize=12;fontStyle=1;fontColor=#0F4C81;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="act-6-s" target="act-6-t">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="note-0" value="Auditoria Inmutable (#2 / #5): Cada consulta del Paso 5 queda registrada en logs de acceso hacia el bucket aromapacifico-audit-logs-security (Object Lock Compliance 5 anos)." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#135E34;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#0F172A;align=left;spacingLeft=14;" vertex="1" parent="1">
-          <mxGeometry x="40" y="732" width="1344" height="54" as="geometry" />
+        <mxCell id="act-7-s" value="" style="rounded=1;fillColor=#135E34;strokeColor=#135E34;opacity=40;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="474" y="816" width="12" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="act-7-t" value="" style="rounded=1;fillColor=#135E34;strokeColor=#135E34;opacity=40;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1434" y="816" width="12" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="msg-7" value="7. Respuesta certificada: origen, secado y estado (0 PII)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#135E34;strokeWidth=2;dashed=1;fontSize=12;fontStyle=1;fontColor=#135E34;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" edge="1" parent="1" source="act-7-s" target="act-7-t">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

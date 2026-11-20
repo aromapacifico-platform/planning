@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" compressed="false">
+  <diagram id="lamina-app-caficultor" name="Lámina App Caficultor">
+    <mxGraphModel dx="1422" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1680" pageHeight="980" background="#FAF8F5">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="header" value="AromaPacífico · Lámina 1/3: App Móvil del Caficultor" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0A3D20;strokeColor=#4ADE80;fontColor=#FFFFFF;fontSize=16;fontStyle=1;align=left;spacingLeft=24;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1680" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="m1" value="Mockup App Caficultor&#10;Alerta Roya + Báscula 60.0 kg + Humedad 11.8 % + Buffer 24 h" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#135E34;strokeWidth=2;fontColor=#0F172A;fontSize=12;fontStyle=1;align=left;verticalAlign=top;spacingLeft=14;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="480" height="680" as="geometry" />
+        </mxCell>
+        <mxCell id="s1" value="Especificaciones UX Campo&#10;Contraste AAA &gt; 7:1 | Botones 56 px | 0 menús complejos | Offline 24 h | Cognito aislado" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF8F5;strokeColor=#135E34;strokeWidth=2;fontColor=#0F172A;fontSize=12;fontStyle=1;align=left;verticalAlign=top;spacingLeft=14;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="560" y="100" width="1060" height="680" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
